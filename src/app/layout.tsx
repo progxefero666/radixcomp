@@ -1,37 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import "@radix-ui/themes/styles.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AppThemeWrapper } from "@/components/AppThemeWrapper";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// Global styles
+import "./globals.css";
+import "@radix-ui/themes/styles.css";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
+// metadata for the application
 export const metadata: Metadata = {
-  title: "Radix UI Sandbox",
-  description: "A sandbox for Radix UI Primitives",
+    title: "Radix UI Sandbox",
+    description: "A sandbox for Radix UI Primitives",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider>
-          <AppThemeWrapper>{children}</AppThemeWrapper>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body className={"antialiased"}>
+                <ThemeProvider>
+                    <AppThemeWrapper>{children}</AppThemeWrapper>
+                </ThemeProvider>
+            </body>
+        </html>
+    );
 }
