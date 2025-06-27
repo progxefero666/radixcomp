@@ -6,24 +6,25 @@ import { Button, Box, Text } from "@radix-ui/themes";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 interface CollapsibleProps {
-    defaultOpen?: boolean;
-    disabled?: boolean;
+    opened?: boolean;    
     children?: React.ReactNode;
-    trigger?: React.ReactNode;
 }
-
-export default function CollapsibleComponent({defaultOpen,disabled,children,trigger}:CollapsibleProps) {
+/**
+ * radix-ui/themes
+ * jsx Collapsible Component
+ */
+export default function CollapsibleComponent({opened,children}:CollapsibleProps) {
 
     return (
-        <Collapsible.Root defaultOpen={defaultOpen} disabled={disabled}>
+        <Collapsible.Root defaultOpen={opened} >
+
             <Collapsible.Trigger asChild>
-                {trigger || (
-                    <Button variant="ghost">
-                        Toggle content
-                        <ChevronDownIcon />
-                    </Button>
-                )}
+                <Button variant="ghost">
+                    Toggle content
+                    <ChevronDownIcon />
+                </Button>              
             </Collapsible.Trigger>
+
             <Collapsible.Content>
                 {children || (
                     <Box p="3" style={{ backgroundColor: "var(--gray-a3)" }}>
@@ -31,7 +32,15 @@ export default function CollapsibleComponent({defaultOpen,disabled,children,trig
                     </Box>
                 )}
             </Collapsible.Content>
+
         </Collapsible.Root>
     );
 
 }//end component
+
+
+/*
+    trigger?: React.ReactNode;
+disabled?: boolean;
+disabled={disabled}
+*/

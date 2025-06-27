@@ -118,7 +118,7 @@ export default function NavigationPage() {
         button,
         a {
           all: unset;
-        }
+        // }
 
         .NavigationMenuRoot {
           position: relative;

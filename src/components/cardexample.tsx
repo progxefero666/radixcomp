@@ -6,7 +6,7 @@ interface CardExampleProps {
     children: React.ReactNode;
     id: string;
 }
-export default function CardExample({ title, children, id }: CardExampleProps) {
+export default function CardExample({title,children,id }: CardExampleProps) {
     return (
         <Card id={id} mb="5" variant="surface" size="2">
             <Box p="3">
@@ -18,4 +18,5 @@ export default function CardExample({ title, children, id }: CardExampleProps) {
             </Box>
         </Card>
     );
-}
+
+}//end component
