@@ -12,7 +12,7 @@ interface InputTextProps {
   size?: "1" | "2" | "3";
   color?: "gray" | "gold" | "bronze" | "brown" | "yellow" | "amber" | "orange" | "tomato" | "red" | "ruby" | "crimson" | "pink" | "plum" | "purple" | "violet" | "iris" | "indigo" | "blue" | "cyan" | "teal" | "jade" | "green" | "grass" | "lime" | "mint" | "sky";
   radius?: "none" | "small" | "medium" | "large" | "full";
-  type?: "text" | "email" | "password" | "search" | "url" | "tel" | "number";
+  type?: "text" | "email" | "password" | "search" | "url" | "tel";
   icon?: "search" | "person" | "lock" | null;
   showExample?: boolean;
 }
@@ -139,7 +139,6 @@ export default function InputText({
               <LockClosedIcon height="16" width="16" />
             </TextField.Slot>
           </TextField.Root>
-          <TextField.Root variant="surface" size="2" type="number" placeholder="Enter number" />
           <TextField.Root variant="surface" size="2" type="tel" placeholder="Phone number" />
           <TextField.Root variant="surface" size="2" type="url" placeholder="https://example.com" />
         </Flex>

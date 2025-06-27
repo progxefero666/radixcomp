@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
-import { Heading, Flex, Text, Checkbox, RadioGroup, Slider, Switch, Button, TextField, Select } from "@radix-ui/themes";
+import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup, Slider, Switch as RadixSwitch, Button, TextField, Select as RadixSelect } from "@radix-ui/themes";
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { CheckIcon, FontBoldIcon, FontItalicIcon, UnderlineIcon, TextAlignLeftIcon, TextAlignCenterIcon, TextAlignRightIcon } from "@radix-ui/react-icons";
-import InputText from "@/components/inputs/InputText";
-import CheckboxComponent from "@/components/inputs/CheckboxComponent";
-import SelectComponent from "@/components/inputs/SelectComponent";
-import SwitchComponent from "@/components/inputs/SwitchComponent";
+import InputText from "@/components/inputs/inputtext";
+import InputNumber from "@/components/inputs/inputnumber";
+import Checkbox from "@/components/inputs/checkbox";
+import Select from "@/components/inputs/select";
+import Switch from "@/components/inputs/switch";
 
 export default function InputsPage() {
   const [radioValue, setRadioValue] = useState("option1");
@@ -22,19 +23,24 @@ export default function InputsPage() {
     <Layout>
       <Heading size="7" mb="5" trim="start">Inputs</Heading>
 
-      {/* TextField Example */}
+      {/* Text Field Example */}
       <ComponentExample title="Text Field" id="textfield">
         <InputText />
       </ComponentExample>
 
+      {/* Number Field Example */}
+      <ComponentExample title="Number Field" id="numberfield">
+        <InputNumber />
+      </ComponentExample>
+
       {/* Checkbox Example */}
       <ComponentExample title="Checkbox" id="checkbox">
-        <CheckboxComponent />
+        <Checkbox />
       </ComponentExample>
 
       {/* Select Example */}
       <ComponentExample title="Select" id="select">
-        <SelectComponent />
+        <Select />
       </ComponentExample>
 
       {/* RadioGroup Example */}
@@ -75,7 +81,7 @@ export default function InputsPage() {
 
       {/* Switch Example */}
       <ComponentExample title="Switch" id="switch">
-        <SwitchComponent />
+        <Switch />
       </ComponentExample>
 
       {/* ToggleGroup Example */}
