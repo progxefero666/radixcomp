@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import Layout from "@/components/layout/Layout";
-import CardExample from "@/components/cardexample";
+import Layout from "@/app_front/comp/layout";
+import CardExample from "@/components/cards/cardexample";
 import { Heading } from "@radix-ui/themes";
 import ScrollAreaComponent from "@/components/common/scrollarea";
-import SeparatorComponent from "@/components/layout/separator";
-import TabsComponent from "@/components/layout/tabs";
+import SeparatorComponent from "@/components/common/separator";
+import TabsComponent from "@/components/common/tabs";
 import ToolbarComponent from "@/components/bars/toolbar";
 
 export default function LayoutComponentsPage() {

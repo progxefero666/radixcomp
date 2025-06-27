@@ -1,8 +1,8 @@
 "use client"; // Required for useState and event handlers
 
 import React from "react";
-import Layout from "@/components/layout/Layout";
-import CardExample from "@/components/cardexample";
+import Layout from "@/app_front/comp/layout";
+import CardExample from "@/components/cards/cardexample";
 import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup, Slider as RadixSlider, Switch as RadixSwitch, Button, TextField, Select as RadixSelect } from "@radix-ui/themes";
 import InputText from "@/components/inputs/inputtext";
 import InputNumber from "@/components/inputs/inputnumber";

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Layout from "@/components/layout/Layout";
-import CardExample from "@/components/cardexample";
+import Layout from "@/app_front/comp/layout";
+import CardExample from "@/components/cards/cardexample";
 import { Heading, Flex, Text, Box, IconButton, Button, TextField } from "@radix-ui/themes";
 import * as AspectRatioPrimitive from '@radix-ui/react-aspect-ratio';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';

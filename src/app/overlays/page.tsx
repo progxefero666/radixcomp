@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Layout from "@/components/layout/Layout";
-import CardExample from "@/components/cardexample";
+import Layout from "@/app_front/comp/layout";
+import CardExample from "@/components/cards/cardexample";
 import { Heading } from "@radix-ui/themes";
 import DialogComponent from "@/components/overlays/dialog";
-import HoverCardComponent from "@/components/overlays/hovercard";
+import HoverCardComponent from "@/components/cards/hovercard";
 import PopoverComponent from "@/components/overlays/popover";
 import TooltipComponent from "@/components/common/tooltip";
 
