@@ -9,6 +9,7 @@ import * as RadixAccordion from '@radix-ui/react-accordion';
 import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import classNames from 'classnames';
 import AccordionComponent from "@/components/navigation/accordion";
+import CollapsibleComponent from "@/components/navigation/collapsible";
 
 
 const NavListItem = React.forwardRef<HTMLAnchorElement, { children: React.ReactNode, title: string, className?: string, href: string }>(
@@ -103,6 +104,11 @@ export default function NavigationPage() {
       {/* Accordion Example */}
       <ComponentExample title="Accordion" id="accordion">
         <AccordionComponent />
+      </ComponentExample>
+
+      {/* Collapsible Example */}
+      <ComponentExample title="Collapsible" id="collapsible">
+        <CollapsibleComponent />
       </ComponentExample>
 
       <style>{`
