@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import ComponentExample from "@/components/ComponentExample";
+import CardExample from "@/components/cardexample";
 import { Heading, Flex, Text, VisuallyHidden as RadixVisuallyHidden,
          Button, TextField, Box, IconButton } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
@@ -14,7 +14,7 @@ export default function AccessibilityPage() {
       <Heading as="h1" size="7" mb="5" trim="start">Accessibility</Heading>
 
       {/* VisuallyHidden Example */}
-      <ComponentExample title="Visually Hidden" id="visuallyhidden">
+      <CardExample title="Visually Hidden" id="visuallyhidden">
         <Flex direction="column" gap="3">
           <Text size="2" as="p">
             Makes content visually hidden but still accessible to screen readers. Useful for icons, labels, or messages that should only be announced by assistive technologies.
@@ -48,16 +48,16 @@ export default function AccessibilityPage() {
             </Text>
           </Box>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
       {/* FocusScope is not available in Radix UI Themes */}
-      <ComponentExample title="Focus Scope" id="focusscope">
+      <CardExample title="Focus Scope" id="focusscope">
         <Flex direction="column" gap="3">
           <Text size="2" as="p">
             FocusScope is not available in Radix UI Themes. For focus management, use Dialog, Popover, or other overlay components that have built-in focus management.
           </Text>
         </Flex>
-      </ComponentExample>
+      </CardExample>
     </Layout>
   );
 }

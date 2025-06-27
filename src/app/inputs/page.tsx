@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import ComponentExample from "@/components/ComponentExample";
+import CardExample from "@/components/cardexample";
 import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup, Slider as RadixSlider, Switch as RadixSwitch, Button, TextField, Select as RadixSelect } from "@radix-ui/themes";
 import InputText from "@/components/inputs/inputtext";
 import InputNumber from "@/components/inputs/inputnumber";
@@ -20,44 +20,44 @@ export default function InputsPage() {
       <Heading size="7" mb="5" trim="start">Inputs</Heading>
 
       {/* Text Field Example */}
-      <ComponentExample title="Text Field" id="textfield">
+      <CardExample title="Text Field" id="textfield">
         <InputText />
-      </ComponentExample>
+      </CardExample>
 
       {/* Number Field Example */}
-      <ComponentExample title="Number Field" id="numberfield">
+      <CardExample title="Number Field" id="numberfield">
         <InputNumber />
-      </ComponentExample>
+      </CardExample>
 
       {/* Checkbox Example */}
-      <ComponentExample title="Checkbox" id="checkbox">
+      <CardExample title="Checkbox" id="checkbox">
         <Checkbox />
-      </ComponentExample>
+      </CardExample>
 
       {/* Select Example */}
-      <ComponentExample title="Select" id="select">
+      <CardExample title="Select" id="select">
         <Select />
-      </ComponentExample>
+      </CardExample>
 
       {/* RadioGroup Example */}
-      <ComponentExample title="Radio Group" id="radiogroup">
+      <CardExample title="Radio Group" id="radiogroup">
         <RadioGroupComponent />
-      </ComponentExample>
+      </CardExample>
 
       {/* Slider Example */}
-      <ComponentExample title="Slider" id="slider">
+      <CardExample title="Slider" id="slider">
         <Slider />
-      </ComponentExample>
+      </CardExample>
 
       {/* Switch Example */}
-      <ComponentExample title="Switch" id="switch">
+      <CardExample title="Switch" id="switch">
         <Switch />
-      </ComponentExample>
+      </CardExample>
 
       {/* ToggleGroup Example */}
-      <ComponentExample title="Toggle Group" id="togglegroup">
+      <CardExample title="Toggle Group" id="togglegroup">
         <ToggleGroupComponent />
-      </ComponentExample>
+      </CardExample>
     </Layout>
   );
 }

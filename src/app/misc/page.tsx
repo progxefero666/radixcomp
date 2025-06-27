@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import ComponentExample from "@/components/ComponentExample";
+import CardExample from "@/components/cardexample";
 import { Heading, Flex, Text, Box, IconButton, Button, TextField } from "@radix-ui/themes";
 import * as AspectRatioPrimitive from '@radix-ui/react-aspect-ratio';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
@@ -46,7 +46,7 @@ export default function MiscPage() {
       <Heading size="7" mb="5" trim="start">Miscellaneous</Heading>
 
       {/* AspectRatio Example */}
-      <ComponentExample title="Aspect Ratio" id="aspectratio">
+      <CardExample title="Aspect Ratio" id="aspectratio">
         <Flex direction="column" gap="3">
           <Text size="2" as="p">
             A container that maintains a specific aspect ratio. Useful for images, videos, or embeds.
@@ -69,10 +69,10 @@ export default function MiscPage() {
             </AspectRatioPrimitive.Root>
           </Box>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
       {/* Avatar Example */}
-      <ComponentExample title="Avatar" id="avatar">
+      <CardExample title="Avatar" id="avatar">
         <Flex direction="column" gap="3">
           <Text size="2" as="p">
             An image element with a fallback for representing the user.
@@ -102,10 +102,10 @@ export default function MiscPage() {
             </AvatarPrimitive.Root>
           </Flex>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
       {/* Collapsible Example */}
-      <ComponentExample title="Collapsible" id="collapsible">
+      <CardExample title="Collapsible" id="collapsible">
         <Flex direction="column" gap="3" align="start">
           <Text size="2" as="p">
             An interactive component which expands/collapses a content section.
@@ -137,10 +137,10 @@ export default function MiscPage() {
             </Button>
           </CollapsiblePrimitive.Root>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
       {/* Label Example */}
-      <ComponentExample title="Label" id="labelprimitive">
+      <CardExample title="Label" id="labelprimitive">
         <Flex direction="column" gap="3" align="start">
           <Text size="2" as="p">
             Renders an accessible label associated with a form control.
@@ -154,10 +154,10 @@ export default function MiscPage() {
             <TextField.Root id="lastName" defaultValue="Duarte" size="2"/>
           </Flex>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
       {/* Progress Example */}
-      <ComponentExample title="Progress" id="progress">
+      <CardExample title="Progress" id="progress">
         <Flex direction="column" gap="3" align="start">
           <Text size="2" as="p">
             Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
@@ -173,10 +173,10 @@ export default function MiscPage() {
                 Randomize Progress
             </Button>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
        {/* Select Example */}
-      <ComponentExample title="Select" id="select">
+      <CardExample title="Select" id="select">
         <Flex direction="column" gap="3" align="start">
           <Text size="2" as="p">
             Displays a list of options for the user to pick from—triggered by a button.
@@ -220,10 +220,10 @@ export default function MiscPage() {
           </SelectPrimitive.Root>
           <Text size="1" color="gray" mt="1">Selected: {selectValue}</Text>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
       {/* Toggle Example */}
-      <ComponentExample title="Toggle" id="toggle">
+      <CardExample title="Toggle" id="toggle">
         <Flex direction="column" gap="3" align="start">
           <Text size="2" as="p">
             A two-state button that can be either on or off.
@@ -243,7 +243,7 @@ export default function MiscPage() {
           </TogglePrimitive.Root>
            <Text size="1" color="gray">(Disabled Toggle)</Text>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
 
       <style>{`

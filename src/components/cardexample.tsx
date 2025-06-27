@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Card, Text, Heading, Separator } from "@radix-ui/themes";
 
-interface ComponentExampleProps {
+interface CardExampleProps {
     title: string;
     children: React.ReactNode;
     id: string;
 }
-export default function ComponentExample({ title, children, id }: ComponentExampleProps) {
+export default function CardExample({ title, children, id }: CardExampleProps) {
     return (
         <Card id={id} mb="5" variant="surface" size="2">
             <Box p="3">

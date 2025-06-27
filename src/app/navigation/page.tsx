@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import ComponentExample from "@/components/ComponentExample";
+import CardExample from "@/components/cardexample";
 import { Heading, Flex, Text, Link as RadixLink, Box, IconButton } from "@radix-ui/themes";
 import * as RadixNavigationMenu from '@radix-ui/react-navigation-menu';
 import * as RadixAccordion from '@radix-ui/react-accordion';
@@ -38,7 +38,7 @@ export default function NavigationPage() {
       <Heading size="7" mb="5" trim="start">Navigation</Heading>
 
       {/* NavigationMenu Example */}
-      <ComponentExample title="Navigation Menu" id="navigationmenu">
+      <CardExample title="Navigation Menu" id="navigationmenu">
         <Flex direction="column" gap="3" align="start">
           <Text size="2" as="p">
             A collection of links for navigating websites. It includes support for nested links and screen reader accessibility.
@@ -99,12 +99,12 @@ export default function NavigationPage() {
             </div>
           </RadixNavigationMenu.Root>
         </Flex>
-      </ComponentExample>
+      </CardExample>
 
       {/* Collapsible Example */}
-      <ComponentExample title="Collapsible" id="collapsible">
+      <CardExample title="Collapsible" id="collapsible">
         <CollapsibleComponent />
-      </ComponentExample>
+      </CardExample>
 
       <style>{`
         /* reset */

@@ -2,33 +2,33 @@
 
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import ComponentExample from "@/components/ComponentExample";
+import CardExample from "@/components/cardexample";
 import { Heading } from "@radix-ui/themes";
 import DialogComponent from "@/components/overlays/dialog";
 import HoverCardComponent from "@/components/overlays/hovercard";
 import PopoverComponent from "@/components/overlays/popover";
-import TooltipComponent from "@/components/overlays/tooltip";
+import TooltipComponent from "@/components/common/tooltip";
 
 export default function OverlaysPage() {
   return (
     <Layout>
       <Heading size="7" mb="5" trim="start">Overlays</Heading>
 
-      <ComponentExample title="Dialog" id="dialog">
+      <CardExample title="Dialog" id="dialog">
         <DialogComponent />
-      </ComponentExample>
+      </CardExample>
 
-      <ComponentExample title="Hover Card" id="hovercard">
+      <CardExample title="Hover Card" id="hovercard">
         <HoverCardComponent />
-      </ComponentExample>
+      </CardExample>
 
-      <ComponentExample title="Popover" id="popover">
+      <CardExample title="Popover" id="popover">
         <PopoverComponent />
-      </ComponentExample>
+      </CardExample>
 
-      <ComponentExample title="Tooltip" id="tooltip">
+      <CardExample title="Tooltip" id="tooltip">
         <TooltipComponent />
-      </ComponentExample>
+      </CardExample>
     </Layout>
   );
 }
