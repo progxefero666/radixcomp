@@ -3,7 +3,8 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
-import { Heading, Flex, Text, ContextMenu, DropdownMenu, Box, Button, IconButton } from "@radix-ui/themes";
+import DropdownMenuComponent from "@/components/menus/dropdownmenu";
+import { Heading, Flex, Text, ContextMenu, Box, Button, IconButton } from "@radix-ui/themes";
 import { ChevronDownIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 const RADIO_ITEMS = ['Pedro Duarte', 'Colm Tuite'];
@@ -95,70 +96,7 @@ export default function MenusPage() {
 
       {/* DropdownMenu Example */}
       <ComponentExample title="Dropdown Menu" id="dropdownmenu">
-        <Flex direction="column" gap="3" align="start">
-          <Text size="2" as="p">
-            Displays a menu to the user —such as a set of actions or functions— triggered by a button.
-          </Text>
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
-              <Button variant="soft" size="2">
-                Options <ChevronDownIcon />
-              </Button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content size="1">
-              <DropdownMenu.Item shortcut="⌘ E">Edit</DropdownMenu.Item>
-              <DropdownMenu.Item shortcut="⌘ D">Duplicate</DropdownMenu.Item>
-              <DropdownMenu.Separator />
-              <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
-
-              <DropdownMenu.Sub>
-                <DropdownMenu.SubTrigger>More</DropdownMenu.SubTrigger>
-                <DropdownMenu.SubContent>
-                  <DropdownMenu.Item>Move to project…</DropdownMenu.Item>
-                  <DropdownMenu.Item>Move to folder…</DropdownMenu.Item>
-                  <DropdownMenu.Separator />
-                  <DropdownMenu.Item>Advanced options…</DropdownMenu.Item>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Sub>
-
-              <DropdownMenu.Separator />
-              <DropdownMenu.CheckboxItem checked={bookmarksCheckedDd} onCheckedChange={setBookmarksCheckedDd}>
-                Show Bookmarks <div style={{ marginLeft: 'auto', color: 'var(--gray-a10)' }}>⌘ B</div>
-              </DropdownMenu.CheckboxItem>
-              <DropdownMenu.CheckboxItem checked={urlsCheckedDd} onCheckedChange={setUrlsCheckedDd}>
-                Show Full URLs
-              </DropdownMenu.CheckboxItem>
-              <DropdownMenu.Separator />
-
-              <DropdownMenu.Label>People</DropdownMenu.Label>
-              <DropdownMenu.RadioGroup value={personDd} onValueChange={setPersonDd}>
-                <DropdownMenu.RadioItem value={RADIO_ITEMS[0]}>
-                  {RADIO_ITEMS[0]}
-                </DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value={RADIO_ITEMS[1]}>
-                  {RADIO_ITEMS[1]}
-                </DropdownMenu.RadioItem>
-              </DropdownMenu.RadioGroup>
-
-              <DropdownMenu.Separator />
-              <DropdownMenu.Item color="red" shortcut="⌘ 딜리트">
-                Delete
-              </DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
-
-           <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
-              <IconButton variant="soft" size="2" mt="2">
-                <HamburgerMenuIcon />
-              </IconButton>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content size="1">
-              <DropdownMenu.Item>New Tab</DropdownMenu.Item>
-              <DropdownMenu.Item>New Window</DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
-        </Flex>
+        <DropdownMenuComponent />
       </ComponentExample>
 
       {/* Menubar is not available in Radix UI Themes */}
