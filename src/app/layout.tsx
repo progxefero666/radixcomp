@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/context/ThemeContext";
+import { ThemeProvider } from "@/app_front/context/themecontext";
 import { AppThemeWrapper } from "@/app_front/comp/themewrapper";
 
 // Global styles

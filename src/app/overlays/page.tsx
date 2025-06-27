@@ -4,10 +4,10 @@ import React from "react";
 import Layout from "@/app_front/comp/layout";
 import CardExample from "@/app_front/comp/cardexample";
 import { Heading } from "@radix-ui/themes";
-import DialogComponent from "@/components/common/dialog";
-import HoverCardComponent from "@/components/common/hovercard";
-import PopoverComponent from "@/components/common/popover";
-import TooltipComponent from "@/components/common/tooltip";
+import DialogComponent from "@/components/dialog";
+import HoverCardComponent from "@/components/hovercard";
+import PopoverComponent from "@/components/popover";
+import TooltipComponent from "@/components/tooltip";
 
 export default function OverlaysPage() {
   return (

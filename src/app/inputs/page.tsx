@@ -4,14 +4,14 @@ import React from "react";
 import Layout from "@/app_front/comp/layout";
 import CardExample from "@/app_front/comp/cardexample";
 import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup, Slider as RadixSlider, Switch as RadixSwitch, Button, TextField, Select as RadixSelect } from "@radix-ui/themes";
-import InputText from "@/components/inputs/inputtext";
-import InputNumber from "@/components/inputs/inputnumber";
-import Checkbox from "@/components/inputs/checkbox";
-import Select from "@/components/inputs/select";
-import Switch from "@/components/inputs/switch";
-import Slider from "@/components/inputs/slider";
-import RadioGroupComponent from "@/components/inputs/radiogroup";
-import ToggleGroupComponent from "@/components/inputs/togglegroup";
+import InputText from "@/components/inputtext";
+import InputNumber from "@/components/inputnumber";
+import Checkbox from "@/components/checkbox";
+import Select from "@/components/select";
+import Switch from "@/components/switch";
+import Slider from "@/components/slider";
+import RadioGroupComponent from "@/components/radiogroup";
+import ToggleGroupComponent from "@/components/togglegroup";
 
 export default function InputsPage() {
 
