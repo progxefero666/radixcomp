@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/app_front/comp/cardexample";
+import CardExample from "@/components/cardexample";
 import { Heading } from "@radix-ui/themes";
 import DialogComponent from "@/components/dialog";
 import HoverCardComponent from "@/components/hovercard";

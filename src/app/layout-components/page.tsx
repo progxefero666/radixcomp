@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/app_front/comp/cardexample";
+import CardExample from "@/components/cardexample";
 import { Heading } from "@radix-ui/themes";
 import ScrollAreaComponent from "@/components/scrollarea";
 import SeparatorComponent from "@/components/separator";

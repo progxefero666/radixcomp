@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/app_front/comp/cardexample";
+import CardExample from "@/components/cardexample";
 import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup, Slider as RadixSlider, Switch as RadixSwitch, Button, TextField, Select as RadixSelect } from "@radix-ui/themes";
 import InputText from "@/components/inputtext";
 import InputNumber from "@/components/inputnumber";

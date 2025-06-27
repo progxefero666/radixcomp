@@ -3,7 +3,7 @@
 import React from "react";
 import { Button, Flex, Text } from "@radix-ui/themes";
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
-import { useTheme } from "@/app_front/context/themecontext";
+import { useTheme } from "@/app_front/theme/themecontext";
 
 export default function ThemeSwitcher() {
     const { theme, toggleTheme } = useTheme();
