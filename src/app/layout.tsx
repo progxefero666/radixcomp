@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { AppThemeWrapper } from "@/components/AppThemeWrapper";
+import { AppThemeWrapper } from "@/components/themewrapper";
 
 // Global styles
 import "./globals.css";

@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, Flex, Text } from "@radix-ui/themes";
-import ThemeSwitcher from "../ThemeSwitcher";
+
 import PrimaryBar from "../primarybar"; // Import PrimaryBar
+import ThemeSwitcher from "../themeswitcher";
 
 interface LayoutProps {
   children: React.ReactNode;
