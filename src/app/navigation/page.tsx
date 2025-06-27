@@ -8,6 +8,7 @@ import * as RadixNavigationMenu from '@radix-ui/react-navigation-menu';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import classNames from 'classnames';
+import AccordionComponent from "@/components/navigation/accordion";
 
 
 const NavListItem = React.forwardRef<HTMLAnchorElement, { children: React.ReactNode, title: string, className?: string, href: string }>(
@@ -29,34 +30,6 @@ const NavListItem = React.forwardRef<HTMLAnchorElement, { children: React.ReactN
   )
 );
 NavListItem.displayName = "NavListItem";
-
-const AccordionTrigger = React.forwardRef<HTMLButtonElement, { children: React.ReactNode, className?: string }>(
-    ({ children, className, ...props }, forwardedRef) => (
-    <RadixAccordion.Header className="AccordionHeader">
-      <RadixAccordion.Trigger
-        className={classNames('AccordionTrigger_ButtonLook', className)}
-        {...props}
-        ref={forwardedRef}
-      >
-        {children}
-        <ChevronDownIcon className="AccordionChevron" aria-hidden />
-      </RadixAccordion.Trigger>
-    </RadixAccordion.Header>
-));
-AccordionTrigger.displayName = "AccordionTrigger";
-
-const AccordionContent = React.forwardRef<HTMLDivElement, { children: React.ReactNode, className?: string }>(
-    ({ children, className, ...props }, forwardedRef) => (
-    <RadixAccordion.Content
-        className={classNames('AccordionContent', className)}
-        {...props}
-        ref={forwardedRef}
-    >
-        <div className="AccordionContentText">{children}</div>
-    </RadixAccordion.Content>
-));
-AccordionContent.displayName = "AccordionContent";
-
 
 export default function NavigationPage() {
   return (
@@ -129,43 +102,7 @@ export default function NavigationPage() {
 
       {/* Accordion Example */}
       <ComponentExample title="Accordion" id="accordion">
-        <Flex direction="column" gap="3" align="stretch" style={{maxWidth: 400}}>
-           <Text size="2" as="p">
-            A vertically stacked set of interactive headings that each reveal a section of content.
-          </Text>
-          <RadixAccordion.Root className="AccordionRoot" type="single" defaultValue="item-1" collapsible>
-            <RadixAccordion.Item className="AccordionItem" value="item-1">
-              <AccordionTrigger>Is it accessible?</AccordionTrigger>
-              <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
-            </RadixAccordion.Item>
-
-            <RadixAccordion.Item className="AccordionItem" value="item-2">
-              <AccordionTrigger>Is it unstyled?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It's unstyled by default, giving you freedom over the look and feel.
-              </AccordionContent>
-            </RadixAccordion.Item>
-
-            <RadixAccordion.Item className="AccordionItem" value="item-3">
-              <AccordionTrigger>Can it be animated?</AccordionTrigger>
-              <AccordionContent>
-                Yes! You can animate the Accordion with CSS or JavaScript.
-              </AccordionContent>
-            </RadixAccordion.Item>
-          </RadixAccordion.Root>
-
-           <Text size="2" as="p" mt="3">Multiple items open (type="multiple"):</Text>
-           <RadixAccordion.Root className="AccordionRoot" type="multiple" defaultValue={['item-1a']} >
-            <RadixAccordion.Item className="AccordionItem" value="item-1a">
-              <AccordionTrigger>Question 1</AccordionTrigger>
-              <AccordionContent>Answer to question 1.</AccordionContent>
-            </RadixAccordion.Item>
-             <RadixAccordion.Item className="AccordionItem" value="item-2a">
-              <AccordionTrigger>Question 2</AccordionTrigger>
-              <AccordionContent>Answer to question 2.</AccordionContent>
-            </RadixAccordion.Item>
-          </RadixAccordion.Root>
-        </Flex>
+        <AccordionComponent />
       </ComponentExample>
 
       <style>{`
@@ -355,95 +292,6 @@ export default function NavigationPage() {
         .NavigationMenuViewport[data-state='closed'] {
           animation: scaleOut 200ms ease;
         }
-
-        .AccordionRoot {
-          border-radius: 6px;
-          width: 100%;
-          background-color: var(--gray-a3);
-          box-shadow: 0 2px 10px var(--black-a4);
-        }
-
-        .AccordionItem {
-          overflow: hidden;
-          margin-top: 1px;
-        }
-        .AccordionItem:first-child {
-          margin-top: 0;
-          border-top-left-radius: 4px;
-          border-top-right-radius: 4px;
-        }
-        .AccordionItem:last-child {
-          border-bottom-left-radius: 4px;
-          border-bottom-right-radius: 4px;
-        }
-        .AccordionItem:focus-within {
-          position: relative;
-          z-index: 1;
-          box-shadow: 0 0 0 2px var(--gray-a8);
-        }
-
-        .AccordionHeader {
-          display: flex;
-        }
-
-        .AccordionTrigger_ButtonLook {
-          font-family: inherit;
-          background-color: transparent;
-          padding: 0 20px;
-          height: 45px;
-          flex: 1;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          font-size: 14px;
-          line-height: 1;
-          color: var(--accent-11);
-          box-shadow: 0 1px 0 var(--gray-6);
-          cursor: default;
-        }
-        .AccordionTrigger_ButtonLook:hover {
-          background-color: var(--gray-a4);
-        }
-        .AccordionItem:first-child > .AccordionHeader > .AccordionTrigger_ButtonLook {
-             box-shadow: none; /* Remove top shadow for first item if it's at the very top of the root */
-        }
-
-
-        .AccordionContent {
-          overflow: hidden;
-          font-size: 14px;
-          color: var(--gray-11);
-          background-color: var(--gray-a2);
-        }
-        .AccordionContent[data-state='open'] {
-          animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
-        }
-        .AccordionContent[data-state='closed'] {
-          animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
-        }
-        .AccordionContentText {
-          padding: 15px 20px;
-        }
-
-        .AccordionChevron {
-          color: var(--accent-10);
-          transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
-        }
-        .AccordionTrigger_ButtonLook[data-state='open'] > .AccordionChevron {
-          transform: rotate(180deg);
-        }
-
-
-        @keyframes slideDown {
-          from { height: 0; opacity: 0; }
-          to { height: var(--radix-accordion-content-height); opacity: 1; }
-        }
-
-        @keyframes slideUp {
-          from { height: var(--radix-accordion-content-height); opacity: 1; }
-          to { height: 0; opacity: 0; }
-        }
-
 
         @keyframes enterFromRight {
           from { opacity: 0; transform: translateX(200px); }
