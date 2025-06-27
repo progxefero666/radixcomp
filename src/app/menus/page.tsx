@@ -3,7 +3,7 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import CardExample from "@/components/cardexample";
-import DropdownMenuComponent from "@/components/inputs/dropdownmenu";
+import DropdownMenuComponent from "@/components/inputs/dropdown";
 import ContextMenuComponent from "@/components/inputs/contextmenu";
 import { Heading, Flex, Text } from "@radix-ui/themes";
 
