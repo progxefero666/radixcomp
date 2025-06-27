@@ -32,8 +32,7 @@ export default function SelectComponent({
             value={value}
             onValueChange={onValueChange}
             disabled={disabled}
-            size={size}
-        >
+            size={size}  >
             <Select.Trigger variant={variant} color={color} placeholder={placeholder} />
             <Select.Content>
                 {children}

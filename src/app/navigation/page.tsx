@@ -11,7 +11,12 @@ import classNames from 'classnames';
 import CollapsibleComponent from "@/components/collapsible";
 
 
-const NavListItem = React.forwardRef<HTMLAnchorElement, { children: React.ReactNode, title: string, className?: string, href: string }>(
+/**
+ * NavListItem
+ */
+const NavListItem = React.forwardRef<HTMLAnchorElement, 
+                                   {children:React.ReactNode,title:string,className?:string,href:string}>(
+
     ({ className, children, title, href, ...props }, forwardedRef) => (
         <li>
             <RadixNavigationMenu.Link asChild>
@@ -20,8 +25,7 @@ const NavListItem = React.forwardRef<HTMLAnchorElement, { children: React.ReactN
                     className={classNames('ListItemLink', className)}
                     {...props}
                     ref={forwardedRef}
-                    size="2"
-                >
+                    size="2" >
                     <div className="ListItemHeading">{title}</div>
                     <Text as="p" className="ListItemText">{children}</Text>
                 </RadixLink>
