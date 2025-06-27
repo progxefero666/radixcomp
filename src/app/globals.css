@@ -24,3 +24,116 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Fix cursor for interactive elements */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+[type="button"]:not(:disabled),
+[type="submit"]:not(:disabled),
+[type="reset"]:not(:disabled),
+a[href],
+label[for],
+input[type="checkbox"]:not(:disabled),
+input[type="radio"]:not(:disabled),
+select:not(:disabled),
+textarea:not(:disabled),
+.rt-Button:not([data-disabled="true"]),
+.rt-IconButton:not([data-disabled="true"]),
+.rt-Link[href],
+.rt-Checkbox:not([data-disabled="true"]),
+.rt-RadioGroupItem:not([data-disabled="true"]),
+.rt-Switch:not([data-disabled="true"]),
+.rt-SelectTrigger:not([data-disabled="true"]),
+.rt-Slider:not([data-disabled="true"]),
+.rt-TabsTrigger:not([data-disabled="true"]),
+.rt-AccordionTrigger:not([data-disabled="true"]),
+.rt-DialogTrigger:not([data-disabled="true"]),
+.rt-PopoverTrigger:not([data-disabled="true"]),
+.rt-HoverCardTrigger:not([data-disabled="true"]),
+.rt-TooltipTrigger:not([data-disabled="true"]),
+.rt-DropdownMenuTrigger:not([data-disabled="true"]),
+.rt-ContextMenuTrigger:not([data-disabled="true"]),
+.rt-ToggleGroupItem:not([data-disabled="true"]),
+.rt-SegmentedControlItem:not([data-disabled="true"]),
+.rt-MenubarTrigger:not([data-disabled="true"]),
+.rt-NavigationMenuTrigger:not([data-disabled="true"]),
+.rt-Card[role="button"]:not([data-disabled="true"]),
+.rt-CheckboxCards .rt-CheckboxCardsItem:not([data-disabled="true"]),
+.rt-RadioCards .rt-RadioCardsItem:not([data-disabled="true"]),
+[data-radix-collection-item]:not([data-disabled="true"]),
+.rt-BaseButton:not([data-disabled="true"]),
+.rt-BaseMenuTrigger:not([data-disabled="true"]),
+.rt-BaseMenuItem:not([data-disabled="true"]),
+.rt-BaseTabListTrigger:not([data-disabled="true"]) {
+  cursor: pointer !important;
+}
+
+/* Fix cursor for disabled elements */
+button:disabled,
+[role="button"][aria-disabled="true"],
+[type="button"]:disabled,
+[type="submit"]:disabled,
+[type="reset"]:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled,
+.rt-Button[data-disabled="true"],
+.rt-IconButton[data-disabled="true"],
+.rt-Checkbox[data-disabled="true"],
+.rt-RadioGroupItem[data-disabled="true"],
+.rt-Switch[data-disabled="true"],
+.rt-SelectTrigger[data-disabled="true"],
+.rt-Slider[data-disabled="true"],
+.rt-TabsTrigger[data-disabled="true"],
+.rt-AccordionTrigger[data-disabled="true"],
+.rt-DialogTrigger[data-disabled="true"],
+.rt-PopoverTrigger[data-disabled="true"],
+.rt-HoverCardTrigger[data-disabled="true"],
+.rt-TooltipTrigger[data-disabled="true"],
+.rt-DropdownMenuTrigger[data-disabled="true"],
+.rt-ContextMenuTrigger[data-disabled="true"],
+.rt-ToggleGroupItem[data-disabled="true"],
+.rt-SegmentedControlItem[data-disabled="true"],
+.rt-MenubarTrigger[data-disabled="true"],
+.rt-NavigationMenuTrigger[data-disabled="true"],
+.rt-Card[data-disabled="true"],
+.rt-CheckboxCards .rt-CheckboxCardsItem[data-disabled="true"],
+.rt-RadioCards .rt-RadioCardsItem[data-disabled="true"],
+[data-radix-collection-item][data-disabled="true"],
+.rt-BaseButton[data-disabled="true"],
+.rt-BaseMenuTrigger[data-disabled="true"],
+.rt-BaseMenuItem[data-disabled="true"],
+.rt-BaseTabListTrigger[data-disabled="true"] {
+  cursor: not-allowed !important;
+}
+
+/* Special handling for sliders and range inputs */
+.rt-Slider:not([data-disabled="true"]) .rt-SliderThumb,
+.rt-Slider:not([data-disabled="true"]) .rt-SliderTrack,
+input[type="range"]:not(:disabled) {
+  cursor: grab !important;
+}
+
+.rt-Slider:not([data-disabled="true"]) .rt-SliderThumb:active,
+input[type="range"]:not(:disabled):active {
+  cursor: grabbing !important;
+}
+
+/* Links should have pointer cursor */
+a, .rt-Link {
+  cursor: pointer !important;
+}
+
+/* Text cursor for text inputs */
+input[type="text"]:not(:disabled),
+input[type="email"]:not(:disabled),
+input[type="password"]:not(:disabled),
+input[type="search"]:not(:disabled),
+input[type="url"]:not(:disabled),
+input[type="tel"]:not(:disabled),
+input[type="number"]:not(:disabled),
+textarea:not(:disabled),
+.rt-TextField:not([data-disabled="true"]) input,
+.rt-TextArea:not([data-disabled="true"]) textarea {
+  cursor: text !important;
+}
