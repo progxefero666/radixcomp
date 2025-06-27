@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Flex, Text, Button, Separator } from "@radix-ui/themes";
 import { usePathname } from "next/navigation"; // To highlight active link
-import PanelMenu from "../../components/panelmenu";
+import PanelMenu from "@/components/panelmenu";
 
 export default function PrimaryBar() {
     const pathname = usePathname();
@@ -16,8 +16,7 @@ export default function PrimaryBar() {
                     variant={pathname === "/" ? "solid" : "soft"}
                     color="gray"
                     className="w-full justify-start"
-                    size="2"
-                >
+                    size="2" >
                     Home
                 </Button>
             </Link>

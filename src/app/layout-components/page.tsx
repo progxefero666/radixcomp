@@ -10,25 +10,25 @@ import TabsComponent from "@/components/tabs";
 import ToolbarComponent from "@/components/toolbar";
 
 export default function LayoutComponentsPage() {
-  return (
-    <Layout>
-      <Heading size="7" mb="5" trim="start">Content Layout</Heading>
+    return (
+        <Layout>
+            <Heading size="7" mb="5" trim="start">Content Layout</Heading>
 
-      <CardExample title="Scroll Area" id="scrollarea">
-        <ScrollAreaComponent />
-      </CardExample>
+            <CardExample title="Scroll Area" id="scrollarea">
+                <ScrollAreaComponent />
+            </CardExample>
 
-      <CardExample title="Separator" id="separator">
-        <SeparatorComponent />
-      </CardExample>
+            <CardExample title="Separator" id="separator">
+                <SeparatorComponent />
+            </CardExample>
 
-      <CardExample title="Tabs" id="tabs">
-        <TabsComponent />
-      </CardExample>
+            <CardExample title="Tabs" id="tabs">
+                <TabsComponent />
+            </CardExample>
 
-      <CardExample title="Toolbar" id="toolbar">
-        <ToolbarComponent />
-      </CardExample>
-    </Layout>
-  );
+            <CardExample title="Toolbar" id="toolbar">
+                <ToolbarComponent />
+            </CardExample>
+        </Layout>
+    );
 }

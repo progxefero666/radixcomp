@@ -17,236 +17,236 @@ import classNames from 'classnames';
 
 const SelectItem = React.forwardRef<HTMLDivElement, { children: React.ReactNode, className?: string, value: string }>(
     ({ children, className, ...props }, forwardedRef) => {
-    return (
-        <SelectPrimitive.Item className={classNames('SelectItem', className)} {...props} ref={forwardedRef}>
-        <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-        <SelectPrimitive.ItemIndicator className="SelectItemIndicator">
-            <CheckIcon />
-        </SelectPrimitive.ItemIndicator>
-        </SelectPrimitive.Item>
-    );
-});
+        return (
+            <SelectPrimitive.Item className={classNames('SelectItem', className)} {...props} ref={forwardedRef}>
+                <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+                <SelectPrimitive.ItemIndicator className="SelectItemIndicator">
+                    <CheckIcon />
+                </SelectPrimitive.ItemIndicator>
+            </SelectPrimitive.Item>
+        );
+    });
 SelectItem.displayName = "SelectItem";
 
 
 export default function MiscPage() {
-  const [openCollapsible, setOpenCollapsible] = React.useState(false);
-  const [progress, setProgress] = React.useState(13);
-  const [selectValue, setSelectValue] = React.useState("apple");
-  const [togglePressed, setTogglePressed] = React.useState(false);
+    const [openCollapsible, setOpenCollapsible] = React.useState(false);
+    const [progress, setProgress] = React.useState(13);
+    const [selectValue, setSelectValue] = React.useState("apple");
+    const [togglePressed, setTogglePressed] = React.useState(false);
 
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 500);
-    return () => clearTimeout(timer);
-  }, []);
+    React.useEffect(() => {
+        const timer = setTimeout(() => setProgress(66), 500);
+        return () => clearTimeout(timer);
+    }, []);
 
-  return (
-    <Layout>
-      <Heading size="7" mb="5" trim="start">Miscellaneous</Heading>
+    return (
+        <Layout>
+            <Heading size="7" mb="5" trim="start">Miscellaneous</Heading>
 
-      {/* AspectRatio Example */}
-      <CardExample title="Aspect Ratio" id="aspectratio">
-        <Flex direction="column" gap="3">
-          <Text size="2" as="p">
-            A container that maintains a specific aspect ratio. Useful for images, videos, or embeds.
-          </Text>
-          <Box style={{ width: 300 }}>
-            <AspectRatioPrimitive.Root ratio={16 / 9}>
-              <img
-                src="https://images.unsplash.com/photo-1535025183041-0991a977e25b?w=300&dpr=2&q=80"
-                alt="Landscape photo by Tobias Tullius"
-                style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: 'var(--radius-2)' }}
-              />
-            </AspectRatioPrimitive.Root>
-          </Box>
-           <Box style={{ width: 200, marginTop: 'var(--space-3)' }}>
-            <Text size="1" mb="1" color="gray">1:1 Ratio</Text>
-            <AspectRatioPrimitive.Root ratio={1}>
-               <Box style={{ width: '100%', height: '100%', backgroundColor: 'var(--accent-a5)', borderRadius: 'var(--radius-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Text size="5" weight="bold" color="blue">1:1</Text>
-              </Box>
-            </AspectRatioPrimitive.Root>
-          </Box>
-        </Flex>
-      </CardExample>
+            {/* AspectRatio Example */}
+            <CardExample title="Aspect Ratio" id="aspectratio">
+                <Flex direction="column" gap="3">
+                    <Text size="2" as="p">
+                        A container that maintains a specific aspect ratio. Useful for images, videos, or embeds.
+                    </Text>
+                    <Box style={{ width: 300 }}>
+                        <AspectRatioPrimitive.Root ratio={16 / 9}>
+                            <img
+                                src="https://images.unsplash.com/photo-1535025183041-0991a977e25b?w=300&dpr=2&q=80"
+                                alt="Landscape photo by Tobias Tullius"
+                                style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: 'var(--radius-2)' }}
+                            />
+                        </AspectRatioPrimitive.Root>
+                    </Box>
+                    <Box style={{ width: 200, marginTop: 'var(--space-3)' }}>
+                        <Text size="1" mb="1" color="gray">1:1 Ratio</Text>
+                        <AspectRatioPrimitive.Root ratio={1}>
+                            <Box style={{ width: '100%', height: '100%', backgroundColor: 'var(--accent-a5)', borderRadius: 'var(--radius-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <Text size="5" weight="bold" color="blue">1:1</Text>
+                            </Box>
+                        </AspectRatioPrimitive.Root>
+                    </Box>
+                </Flex>
+            </CardExample>
 
-      {/* Avatar Example */}
-      <CardExample title="Avatar" id="avatar">
-        <Flex direction="column" gap="3">
-          <Text size="2" as="p">
-            An image element with a fallback for representing the user.
-          </Text>
-          <Flex gap="4" align="center">
-            <AvatarPrimitive.Root className="AvatarRoot">
-              <AvatarPrimitive.Image
-                className="AvatarImage"
-                src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
-                alt="Colm Tuite"
-              />
-              <AvatarPrimitive.Fallback className="AvatarFallback" delayMs={600}>CT</AvatarPrimitive.Fallback>
-            </AvatarPrimitive.Root>
-            <AvatarPrimitive.Root className="AvatarRoot">
-              <AvatarPrimitive.Image
-                className="AvatarImage"
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-                alt="Pedro Duarte"
-              />
-              <AvatarPrimitive.Fallback className="AvatarFallback" delayMs={600}>PD</AvatarPrimitive.Fallback>
-            </AvatarPrimitive.Root>
-            <AvatarPrimitive.Root className="AvatarRoot">
-              <AvatarPrimitive.Fallback className="AvatarFallback">JD</AvatarPrimitive.Fallback>
-            </AvatarPrimitive.Root>
-             <AvatarPrimitive.Root className="AvatarRoot" style={{backgroundColor: 'var(--red-9)'}}>
-              <AvatarPrimitive.Fallback className="AvatarFallback" style={{color: 'white'}}>Err</AvatarPrimitive.Fallback>
-            </AvatarPrimitive.Root>
-          </Flex>
-        </Flex>
-      </CardExample>
+            {/* Avatar Example */}
+            <CardExample title="Avatar" id="avatar">
+                <Flex direction="column" gap="3">
+                    <Text size="2" as="p">
+                        An image element with a fallback for representing the user.
+                    </Text>
+                    <Flex gap="4" align="center">
+                        <AvatarPrimitive.Root className="AvatarRoot">
+                            <AvatarPrimitive.Image
+                                className="AvatarImage"
+                                src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+                                alt="Colm Tuite"
+                            />
+                            <AvatarPrimitive.Fallback className="AvatarFallback" delayMs={600}>CT</AvatarPrimitive.Fallback>
+                        </AvatarPrimitive.Root>
+                        <AvatarPrimitive.Root className="AvatarRoot">
+                            <AvatarPrimitive.Image
+                                className="AvatarImage"
+                                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+                                alt="Pedro Duarte"
+                            />
+                            <AvatarPrimitive.Fallback className="AvatarFallback" delayMs={600}>PD</AvatarPrimitive.Fallback>
+                        </AvatarPrimitive.Root>
+                        <AvatarPrimitive.Root className="AvatarRoot">
+                            <AvatarPrimitive.Fallback className="AvatarFallback">JD</AvatarPrimitive.Fallback>
+                        </AvatarPrimitive.Root>
+                        <AvatarPrimitive.Root className="AvatarRoot" style={{ backgroundColor: 'var(--red-9)' }}>
+                            <AvatarPrimitive.Fallback className="AvatarFallback" style={{ color: 'white' }}>Err</AvatarPrimitive.Fallback>
+                        </AvatarPrimitive.Root>
+                    </Flex>
+                </Flex>
+            </CardExample>
 
-      {/* Collapsible Example */}
-      <CardExample title="Collapsible" id="collapsible">
-        <Flex direction="column" gap="3" align="start">
-          <Text size="2" as="p">
-            An interactive component which expands/collapses a content section.
-          </Text>
-          <CollapsiblePrimitive.Root className="CollapsibleRoot" open={openCollapsible} onOpenChange={setOpenCollapsible}>
-            <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-              <Text size="2" style={{ color: 'var(--violet-11)' }}>@peduarte starred 3 repositories</Text>
-              <CollapsiblePrimitive.Trigger asChild>
-                <IconButton variant="ghost" size="2" color="gray">
-                  {openCollapsible ? <Cross2Icon /> : <RowSpacingIcon />}
-                </IconButton>
-              </CollapsiblePrimitive.Trigger>
-            </Flex>
+            {/* Collapsible Example */}
+            <CardExample title="Collapsible" id="collapsible">
+                <Flex direction="column" gap="3" align="start">
+                    <Text size="2" as="p">
+                        An interactive component which expands/collapses a content section.
+                    </Text>
+                    <CollapsiblePrimitive.Root className="CollapsibleRoot" open={openCollapsible} onOpenChange={setOpenCollapsible}>
+                        <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Text size="2" style={{ color: 'var(--violet-11)' }}>@peduarte starred 3 repositories</Text>
+                            <CollapsiblePrimitive.Trigger asChild>
+                                <IconButton variant="ghost" size="2" color="gray">
+                                    {openCollapsible ? <Cross2Icon /> : <RowSpacingIcon />}
+                                </IconButton>
+                            </CollapsiblePrimitive.Trigger>
+                        </Flex>
 
-            <Box className="Repository">
-              <Text size="2">@radix-ui/primitives</Text>
-            </Box>
+                        <Box className="Repository">
+                            <Text size="2">@radix-ui/primitives</Text>
+                        </Box>
 
-            <CollapsiblePrimitive.Content className="CollapsibleContent">
-              <Box className="Repository">
-                <Text size="2">@radix-ui/colors</Text>
-              </Box>
-              <Box className="Repository">
-                <Text size="2">@stitches/react</Text>
-              </Box>
-            </CollapsiblePrimitive.Content>
-             <Button size="1" variant="soft" mt="2" onClick={() => setOpenCollapsible(!openCollapsible)}>
-                Toggle manually
-            </Button>
-          </CollapsiblePrimitive.Root>
-        </Flex>
-      </CardExample>
+                        <CollapsiblePrimitive.Content className="CollapsibleContent">
+                            <Box className="Repository">
+                                <Text size="2">@radix-ui/colors</Text>
+                            </Box>
+                            <Box className="Repository">
+                                <Text size="2">@stitches/react</Text>
+                            </Box>
+                        </CollapsiblePrimitive.Content>
+                        <Button size="1" variant="soft" mt="2" onClick={() => setOpenCollapsible(!openCollapsible)}>
+                            Toggle manually
+                        </Button>
+                    </CollapsiblePrimitive.Root>
+                </Flex>
+            </CardExample>
 
-      {/* Label Example */}
-      <CardExample title="Label" id="labelprimitive">
-        <Flex direction="column" gap="3" align="start">
-          <Text size="2" as="p">
-            Renders an accessible label associated with a form control.
-          </Text>
-          <Flex direction="column" gap="1" style={{width: 200}}>
-            <LabelPrimitive.Root htmlFor="firstName" className="LabelPrimitive">First Name</LabelPrimitive.Root>
-            <TextField.Root id="firstName" defaultValue="Pedro" size="2"/>
-          </Flex>
-           <Flex direction="column" gap="1" style={{width: 200}} mt="2">
-            <LabelPrimitive.Root htmlFor="lastName" className="LabelPrimitive">Last Name</LabelPrimitive.Root>
-            <TextField.Root id="lastName" defaultValue="Duarte" size="2"/>
-          </Flex>
-        </Flex>
-      </CardExample>
+            {/* Label Example */}
+            <CardExample title="Label" id="labelprimitive">
+                <Flex direction="column" gap="3" align="start">
+                    <Text size="2" as="p">
+                        Renders an accessible label associated with a form control.
+                    </Text>
+                    <Flex direction="column" gap="1" style={{ width: 200 }}>
+                        <LabelPrimitive.Root htmlFor="firstName" className="LabelPrimitive">First Name</LabelPrimitive.Root>
+                        <TextField.Root id="firstName" defaultValue="Pedro" size="2" />
+                    </Flex>
+                    <Flex direction="column" gap="1" style={{ width: 200 }} mt="2">
+                        <LabelPrimitive.Root htmlFor="lastName" className="LabelPrimitive">Last Name</LabelPrimitive.Root>
+                        <TextField.Root id="lastName" defaultValue="Duarte" size="2" />
+                    </Flex>
+                </Flex>
+            </CardExample>
 
-      {/* Progress Example */}
-      <CardExample title="Progress" id="progress">
-        <Flex direction="column" gap="3" align="start">
-          <Text size="2" as="p">
-            Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
-          </Text>
-          <ProgressPrimitive.Root className="ProgressRoot" value={progress}>
-            <ProgressPrimitive.Indicator
-              className="ProgressIndicator"
-              style={{ transform: `translateX(-${100 - progress}%)` }}
-            />
-          </ProgressPrimitive.Root>
-           <Text size="1" color="gray" mt="1">Current progress: {progress}%</Text>
-           <Button size="1" variant="outline" mt="2" onClick={() => setProgress(Math.floor(Math.random() * 100))}>
-                Randomize Progress
-            </Button>
-        </Flex>
-      </CardExample>
+            {/* Progress Example */}
+            <CardExample title="Progress" id="progress">
+                <Flex direction="column" gap="3" align="start">
+                    <Text size="2" as="p">
+                        Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+                    </Text>
+                    <ProgressPrimitive.Root className="ProgressRoot" value={progress}>
+                        <ProgressPrimitive.Indicator
+                            className="ProgressIndicator"
+                            style={{ transform: `translateX(-${100 - progress}%)` }}
+                        />
+                    </ProgressPrimitive.Root>
+                    <Text size="1" color="gray" mt="1">Current progress: {progress}%</Text>
+                    <Button size="1" variant="outline" mt="2" onClick={() => setProgress(Math.floor(Math.random() * 100))}>
+                        Randomize Progress
+                    </Button>
+                </Flex>
+            </CardExample>
 
-       {/* Select Example */}
-      <CardExample title="Select" id="select">
-        <Flex direction="column" gap="3" align="start">
-          <Text size="2" as="p">
-            Displays a list of options for the user to pick from—triggered by a button.
-          </Text>
-          <SelectPrimitive.Root value={selectValue} onValueChange={setSelectValue}>
-            <SelectPrimitive.Trigger className="SelectTrigger" aria-label="Food">
-              <SelectPrimitive.Value placeholder="Select a fruit…" />
-              <SelectPrimitive.Icon className="SelectIcon">
-                <ChevronDownIcon />
-              </SelectPrimitive.Icon>
-            </SelectPrimitive.Trigger>
-            <SelectPrimitive.Portal>
-              <SelectPrimitive.Content className="SelectContent">
-                <SelectPrimitive.ScrollUpButton className="SelectScrollButton">
-                  <ChevronUpIcon />
-                </SelectPrimitive.ScrollUpButton>
-                <SelectPrimitive.Viewport className="SelectViewport">
-                  <SelectPrimitive.Group>
-                    <SelectPrimitive.Label className="SelectLabel">Fruits</SelectPrimitive.Label>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                    <SelectItem value="blueberry">Blueberry</SelectItem>
-                    <SelectItem value="grapes">Grapes</SelectItem>
-                    <SelectItem value="pineapple">Pineapple</SelectItem>
-                  </SelectPrimitive.Group>
-                  <SelectPrimitive.Separator className="SelectSeparator" />
-                  <SelectPrimitive.Group>
-                    <SelectPrimitive.Label className="SelectLabel">Vegetables</SelectPrimitive.Label>
-                    <SelectItem value="aubergine">Aubergine</SelectItem>
-                    <SelectItem value="broccoli">Broccoli</SelectItem>
-                    <SelectItem value="carrot">Carrot</SelectItem>
-                    <SelectItem value="courgette">Courgette</SelectItem>
-                    <SelectItem value="leek">Leek</SelectItem>
-                  </SelectPrimitive.Group>
-                </SelectPrimitive.Viewport>
-                <SelectPrimitive.ScrollDownButton className="SelectScrollButton">
-                  <ChevronDownIcon />
-                </SelectPrimitive.ScrollDownButton>
-              </SelectPrimitive.Content>
-            </SelectPrimitive.Portal>
-          </SelectPrimitive.Root>
-          <Text size="1" color="gray" mt="1">Selected: {selectValue}</Text>
-        </Flex>
-      </CardExample>
+            {/* Select Example */}
+            <CardExample title="Select" id="select">
+                <Flex direction="column" gap="3" align="start">
+                    <Text size="2" as="p">
+                        Displays a list of options for the user to pick from—triggered by a button.
+                    </Text>
+                    <SelectPrimitive.Root value={selectValue} onValueChange={setSelectValue}>
+                        <SelectPrimitive.Trigger className="SelectTrigger" aria-label="Food">
+                            <SelectPrimitive.Value placeholder="Select a fruit…" />
+                            <SelectPrimitive.Icon className="SelectIcon">
+                                <ChevronDownIcon />
+                            </SelectPrimitive.Icon>
+                        </SelectPrimitive.Trigger>
+                        <SelectPrimitive.Portal>
+                            <SelectPrimitive.Content className="SelectContent">
+                                <SelectPrimitive.ScrollUpButton className="SelectScrollButton">
+                                    <ChevronUpIcon />
+                                </SelectPrimitive.ScrollUpButton>
+                                <SelectPrimitive.Viewport className="SelectViewport">
+                                    <SelectPrimitive.Group>
+                                        <SelectPrimitive.Label className="SelectLabel">Fruits</SelectPrimitive.Label>
+                                        <SelectItem value="apple">Apple</SelectItem>
+                                        <SelectItem value="banana">Banana</SelectItem>
+                                        <SelectItem value="blueberry">Blueberry</SelectItem>
+                                        <SelectItem value="grapes">Grapes</SelectItem>
+                                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                                    </SelectPrimitive.Group>
+                                    <SelectPrimitive.Separator className="SelectSeparator" />
+                                    <SelectPrimitive.Group>
+                                        <SelectPrimitive.Label className="SelectLabel">Vegetables</SelectPrimitive.Label>
+                                        <SelectItem value="aubergine">Aubergine</SelectItem>
+                                        <SelectItem value="broccoli">Broccoli</SelectItem>
+                                        <SelectItem value="carrot">Carrot</SelectItem>
+                                        <SelectItem value="courgette">Courgette</SelectItem>
+                                        <SelectItem value="leek">Leek</SelectItem>
+                                    </SelectPrimitive.Group>
+                                </SelectPrimitive.Viewport>
+                                <SelectPrimitive.ScrollDownButton className="SelectScrollButton">
+                                    <ChevronDownIcon />
+                                </SelectPrimitive.ScrollDownButton>
+                            </SelectPrimitive.Content>
+                        </SelectPrimitive.Portal>
+                    </SelectPrimitive.Root>
+                    <Text size="1" color="gray" mt="1">Selected: {selectValue}</Text>
+                </Flex>
+            </CardExample>
 
-      {/* Toggle Example */}
-      <CardExample title="Toggle" id="toggle">
-        <Flex direction="column" gap="3" align="start">
-          <Text size="2" as="p">
-            A two-state button that can be either on or off.
-          </Text>
-          <TogglePrimitive.Root
-            className="Toggle"
-            aria-label="Toggle italic"
-            pressed={togglePressed}
-            onPressedChange={setTogglePressed}
-          >
-            <FontBoldIcon />
-          </TogglePrimitive.Root>
-          <Text size="1" color="gray">Pressed: {togglePressed ? 'Yes' : 'No'}</Text>
+            {/* Toggle Example */}
+            <CardExample title="Toggle" id="toggle">
+                <Flex direction="column" gap="3" align="start">
+                    <Text size="2" as="p">
+                        A two-state button that can be either on or off.
+                    </Text>
+                    <TogglePrimitive.Root
+                        className="Toggle"
+                        aria-label="Toggle italic"
+                        pressed={togglePressed}
+                        onPressedChange={setTogglePressed}
+                    >
+                        <FontBoldIcon />
+                    </TogglePrimitive.Root>
+                    <Text size="1" color="gray">Pressed: {togglePressed ? 'Yes' : 'No'}</Text>
 
-          <TogglePrimitive.Root className="Toggle" aria-label="Toggle strikethrough" disabled defaultPressed>
-            <Cross2Icon />
-          </TogglePrimitive.Root>
-           <Text size="1" color="gray">(Disabled Toggle)</Text>
-        </Flex>
-      </CardExample>
+                    <TogglePrimitive.Root className="Toggle" aria-label="Toggle strikethrough" disabled defaultPressed>
+                        <Cross2Icon />
+                    </TogglePrimitive.Root>
+                    <Text size="1" color="gray">(Disabled Toggle)</Text>
+                </Flex>
+            </CardExample>
 
 
-      <style>{`
+            <style>{`
         .AvatarRoot {
           display: inline-flex;
           align-items: center;
@@ -431,6 +431,6 @@ export default function MiscPage() {
             pointer-events: none;
         }
       `}</style>
-    </Layout>
-  );
+        </Layout>
+    );
 }
