@@ -4,7 +4,7 @@ import React from "react";
 import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
 import { Heading } from "@radix-ui/themes";
-import ScrollAreaComponent from "@/components/layout/scrollarea";
+import ScrollAreaComponent from "@/components/common/scrollarea";
 import SeparatorComponent from "@/components/layout/separator";
 import TabsComponent from "@/components/layout/tabs";
 import ToolbarComponent from "@/components/layout/toolbar";

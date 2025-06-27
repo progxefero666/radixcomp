@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Flex, Text } from "@radix-ui/themes";
 import ThemeSwitcher from "../ThemeSwitcher";
-import PrimaryNav from "../PrimaryNav"; // Import PrimaryNav
+import PrimaryBar from "../primarybar"; // Import PrimaryBar
 
 interface LayoutProps {
   children: React.ReactNode;
-  // primaryBarContent is now handled internally by PrimaryNav
+  // primaryBarContent is now handled internally by PrimaryBar
 }
 
 export default function Layout({ children }: LayoutProps) {
@@ -18,7 +18,7 @@ export default function Layout({ children }: LayoutProps) {
       </Box>
       <Flex className="flex-1 overflow-hidden">
         <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
-          <PrimaryNav />
+          <PrimaryBar />
         </Box>
         <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
           {children}
