@@ -8,8 +8,8 @@ import * as RadixNavigationMenu from '@radix-ui/react-navigation-menu';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import classNames from 'classnames';
-import AccordionComponent from "@/components/navigation/accordion";
-import CollapsibleComponent from "@/components/navigation/collapsible";
+
+import CollapsibleComponent from "@/components/common/collapsible";
 
 
 const NavListItem = React.forwardRef<HTMLAnchorElement, { children: React.ReactNode, title: string, className?: string, href: string }>(

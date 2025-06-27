@@ -14,15 +14,6 @@ import {
 } from "@radix-ui/react-icons";
 import classNames from 'classnames';
 
-interface AccordionProps {
-  type?: "single" | "multiple";
-  defaultValue?: string | string[];
-  collapsible?: boolean;
-  disabled?: boolean;
-  orientation?: "horizontal" | "vertical";
-  showExample?: boolean;
-}
-
 const AccordionTrigger = React.forwardRef<
   HTMLButtonElement,
   { children: React.ReactNode; className?: string; icon?: React.ReactNode }
@@ -57,59 +48,9 @@ const AccordionContent = React.forwardRef<
 ));
 AccordionContent.displayName = "AccordionContent";
 
-export default function AccordionComponent({
-  type = "single",
-  defaultValue,
-  collapsible = true,
-  disabled = false,
-  orientation = "vertical",
-  showExample = true
-}: AccordionProps) {
+export default function AccordionExamples() {
   const [faqValue, setFaqValue] = useState<string>("item-1");
   const [settingsValue, setSettingsValue] = useState<string[]>(["general"]);
-
-  if (!showExample) {
-    if (type === "single") {
-      return (
-        <Accordion.Root
-          type="single"
-          defaultValue={defaultValue as string}
-          collapsible={collapsible}
-          disabled={disabled}
-          orientation={orientation}
-          className="AccordionRoot"
-        >
-          <Accordion.Item className="AccordionItem" value="item-1">
-            <AccordionTrigger>Item 1</AccordionTrigger>
-            <AccordionContent>Content for item 1</AccordionContent>
-          </Accordion.Item>
-          <Accordion.Item className="AccordionItem" value="item-2">
-            <AccordionTrigger>Item 2</AccordionTrigger>
-            <AccordionContent>Content for item 2</AccordionContent>
-          </Accordion.Item>
-        </Accordion.Root>
-      );
-    } else {
-      return (
-        <Accordion.Root
-          type="multiple"
-          defaultValue={defaultValue as string[]}
-          disabled={disabled}
-          orientation={orientation}
-          className="AccordionRoot"
-        >
-          <Accordion.Item className="AccordionItem" value="item-1">
-            <AccordionTrigger>Item 1</AccordionTrigger>
-            <AccordionContent>Content for item 1</AccordionContent>
-          </Accordion.Item>
-          <Accordion.Item className="AccordionItem" value="item-2">
-            <AccordionTrigger>Item 2</AccordionTrigger>
-            <AccordionContent>Content for item 2</AccordionContent>
-          </Accordion.Item>
-        </Accordion.Root>
-      );
-    }
-  }
 
   return (
     <Flex direction="column" gap="4">
@@ -442,7 +383,7 @@ export default function AccordionComponent({
         </Accordion.Root>
       </Box>
 
-      <style jsx>{`
+      <style>{`
         .AccordionRoot {
           border-radius: 6px;
           width: 100%;

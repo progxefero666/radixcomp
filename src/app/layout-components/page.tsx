@@ -7,7 +7,7 @@ import { Heading } from "@radix-ui/themes";
 import ScrollAreaComponent from "@/components/common/scrollarea";
 import SeparatorComponent from "@/components/layout/separator";
 import TabsComponent from "@/components/layout/tabs";
-import ToolbarComponent from "@/components/layout/toolbar";
+import ToolbarComponent from "@/components/bars/toolbar";
 
 export default function LayoutComponentsPage() {
   return (

@@ -3,8 +3,8 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
-import DropdownMenuComponent from "@/components/menus/dropdownmenu";
-import ContextMenuComponent from "@/components/menus/contextmenu";
+import DropdownMenuComponent from "@/components/inputs/dropdownmenu";
+import ContextMenuComponent from "@/components/inputs/contextmenu";
 import { Heading, Flex, Text } from "@radix-ui/themes";
 
 export default function MenusPage() {
