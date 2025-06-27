@@ -2,10 +2,10 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/components/cards/cardexample";
+import CardExample from "@/app_front/comp/cardexample";
 import { Heading } from "@radix-ui/themes";
 import DialogComponent from "@/components/common/dialog";
-import HoverCardComponent from "@/components/cards/hovercard";
+import HoverCardComponent from "@/components/common/hovercard";
 import PopoverComponent from "@/components/common/popover";
 import TooltipComponent from "@/components/common/tooltip";
 

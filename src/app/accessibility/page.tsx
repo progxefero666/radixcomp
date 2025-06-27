@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/components/cards/cardexample";
+import CardExample from "@/app_front/comp/cardexample";
 import { Heading, Flex, Text, VisuallyHidden as RadixVisuallyHidden,
          Button, TextField, Box, IconButton } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
