@@ -3,14 +3,15 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
-import { Heading, Flex, Text, VisuallyHidden as RadixVisuallyHidden, Button, TextField, Box, IconButton } from "@radix-ui/themes";
+import { Heading, Flex, Text, VisuallyHidden as RadixVisuallyHidden,
+         Button, TextField, Box, IconButton } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export default function AccessibilityPage() {
 
   return (
     <Layout>
-      <Heading size="7" mb="5" trim="start">Accessibility</Heading>
+      <Heading as="h1" size="7" mb="5" trim="start">Accessibility</Heading>
 
       {/* VisuallyHidden Example */}
       <ComponentExample title="Visually Hidden" id="visuallyhidden">
