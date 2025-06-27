@@ -12,12 +12,8 @@ interface CollapsibleProps {
     trigger?: React.ReactNode;
 }
 
-export default function CollapsibleComponent({
-    defaultOpen = false,
-    disabled = false,
-    children,
-    trigger
-}: CollapsibleProps) {
+export default function CollapsibleComponent({defaultOpen,disabled,children,trigger}:CollapsibleProps) {
+
     return (
         <Collapsible.Root defaultOpen={defaultOpen} disabled={disabled}>
             <Collapsible.Trigger asChild>
@@ -37,4 +33,5 @@ export default function CollapsibleComponent({
             </Collapsible.Content>
         </Collapsible.Root>
     );
-}
+
+}//end component

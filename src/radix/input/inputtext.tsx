@@ -2,6 +2,7 @@
 
 import React from "react";
 import { TextField } from "@radix-ui/themes";
+
 import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react-icons";
 
 interface InputTextProps {
@@ -27,8 +28,8 @@ export default function InputTextComponent({
     type = "text",
     icon = null,
     value,
-    onChange
-}: InputTextProps) {
+    onChange}: InputTextProps) {
+
     const getIcon = () => {
         switch (icon) {
             case "search":
@@ -52,9 +53,9 @@ export default function InputTextComponent({
             type={type}
             placeholder={placeholder}
             value={value}
-            onChange={onChange}
-        >
+            onChange={onChange} >
             {icon && <TextField.Slot>{getIcon()}</TextField.Slot>}
         </TextField.Root>
     );
-}
+
+}//end 

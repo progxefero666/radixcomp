@@ -3,6 +3,10 @@
 import Layout from "@/app_front/comp/layout";
 import { Text } from "@radix-ui/themes";
 
+/**
+ * Application Main page --> Radix Primitives Sandbox
+ * 
+ */
 export default function Home() {
     return (
         <Layout>
@@ -12,4 +16,5 @@ export default function Home() {
             </Text>
         </Layout>
     );
-}
+
+}//end class
