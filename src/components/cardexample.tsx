@@ -4,7 +4,7 @@ import { Box, Card, Text, Heading, Separator } from "@radix-ui/themes";
 interface CardExampleProps {
     title: string;
     children: React.ReactNode;
-    id: string;
+    id?: string;
 }
 export default function CardExample({title,children,id }: CardExampleProps) {
     return (
