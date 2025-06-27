@@ -101,11 +101,6 @@ export default function NavigationPage() {
         </Flex>
       </ComponentExample>
 
-      {/* Accordion Example */}
-      <ComponentExample title="Accordion" id="accordion">
-        <AccordionComponent />
-      </ComponentExample>
-
       {/* Collapsible Example */}
       <ComponentExample title="Collapsible" id="collapsible">
         <CollapsibleComponent />
