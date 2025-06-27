@@ -349,6 +349,7 @@ export default function TabsComponent() {
           </Box>
         </Flex>
       </Box>
+      
     </Flex>
   );
 }
