@@ -16,6 +16,7 @@ const navItems: NavItem[] = [
   { href: "/menus", label: "Menus" },
   { href: "/layout-components", label: "Content Layout" },
   { href: "/navigation", label: "Navigation" },
+  { href: "/simple-accordion", label: "Simple Accordion" },
   { href: "/accessibility", label: "Accessibility" },
   { href: "/misc", label: "Miscellaneous" },
 ];
