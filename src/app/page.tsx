@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import { Text } from "@radix-ui/themes";
 
 export default function Home() {

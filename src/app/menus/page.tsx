@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
 import { Heading, Flex, Text, ContextMenu, DropdownMenu, Box, Button, IconButton } from "@radix-ui/themes";
 import { ChevronDownIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";

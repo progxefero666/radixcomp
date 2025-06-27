@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
 import { Heading, Flex, Text, ScrollArea as RadixScrollArea, Box, Separator as RadixSeparator, Tabs as RadixTabs, Button } from "@radix-ui/themes";
 import { StitchesLogoIcon } from '@radix-ui/react-icons';

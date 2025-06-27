@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex, Text } from "@radix-ui/themes";
-import ThemeSwitcher from "./ThemeSwitcher";
-import PrimaryNav from "./PrimaryNav"; // Import PrimaryNav
+import ThemeSwitcher from "../ThemeSwitcher";
+import PrimaryNav from "../PrimaryNav"; // Import PrimaryNav
 
 interface LayoutProps {
   children: React.ReactNode;

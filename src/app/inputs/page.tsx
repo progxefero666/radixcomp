@@ -1,17 +1,19 @@
 "use client"; // Required for useState and event handlers
 
 import React, { useState } from "react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
-import { Heading, Flex, Text, Checkbox, RadioGroup, Slider, Switch, Button } from "@radix-ui/themes";
+import { Heading, Flex, Text, Checkbox, RadioGroup, Slider, Switch, Button, TextField, Select } from "@radix-ui/themes";
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { CheckIcon, FontBoldIcon, FontItalicIcon, UnderlineIcon, TextAlignLeftIcon, TextAlignCenterIcon, TextAlignRightIcon } from "@radix-ui/react-icons";
+import InputText from "@/components/inputs/InputText";
+import CheckboxComponent from "@/components/inputs/CheckboxComponent";
+import SelectComponent from "@/components/inputs/SelectComponent";
+import SwitchComponent from "@/components/inputs/SwitchComponent";
 
 export default function InputsPage() {
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [radioValue, setRadioValue] = useState("option1");
   const [sliderValue, setSliderValue] = useState<number[]>([50]);
-  const [switchChecked, setSwitchChecked] = useState(true);
   const [toggleGroupValue, setToggleGroupValue] = useState<string[]>(["bold"]);
   const [singleToggleValue, setSingleToggleValue] = useState<string>("center");
 
@@ -20,30 +22,19 @@ export default function InputsPage() {
     <Layout>
       <Heading size="7" mb="5" trim="start">Inputs</Heading>
 
+      {/* TextField Example */}
+      <ComponentExample title="Text Field" id="textfield">
+        <InputText />
+      </ComponentExample>
+
       {/* Checkbox Example */}
       <ComponentExample title="Checkbox" id="checkbox">
-        <Flex direction="column" gap="3">
-          <Text size="2" as="p">
-            A control that allows the user to toggle between checked and not checked.
-          </Text>
-          <Text as="label" size="2">
-            <Flex gap="2" align="center">
-              <Checkbox
-                checked={checkboxChecked}
-                onCheckedChange={() => setCheckboxChecked(!checkboxChecked)}
-              />
-              Accept terms and conditions
-            </Flex>
-          </Text>
-          <Text size="1">Current state: {checkboxChecked ? "Checked" : "Unchecked"}</Text>
+        <CheckboxComponent />
+      </ComponentExample>
 
-          <Text as="label" size="2" color="gray">
-            <Flex gap="2" align="center">
-              <Checkbox defaultChecked disabled />
-              Disabled Checkbox
-            </Flex>
-          </Text>
-        </Flex>
+      {/* Select Example */}
+      <ComponentExample title="Select" id="select">
+        <SelectComponent />
       </ComponentExample>
 
       {/* RadioGroup Example */}
@@ -84,28 +75,7 @@ export default function InputsPage() {
 
       {/* Switch Example */}
       <ComponentExample title="Switch" id="switch">
-        <Flex direction="column" gap="3">
-          <Text size="2" as="p">
-            A control that allows the user to toggle between checked and not checked.
-          </Text>
-          <Text as="label" size="2">
-            <Flex gap="2" align="center">
-              <Switch
-                checked={switchChecked}
-                onCheckedChange={setSwitchChecked}
-              />
-              Airplane mode
-            </Flex>
-          </Text>
-          <Text size="1">Current state: {switchChecked ? "On" : "Off"}</Text>
-
-          <Text as="label" size="2" color="gray">
-            <Flex gap="2" align="center">
-              <Switch defaultChecked disabled />
-              Disabled Switch
-            </Flex>
-          </Text>
-        </Flex>
+        <SwitchComponent />
       </ComponentExample>
 
       {/* ToggleGroup Example */}

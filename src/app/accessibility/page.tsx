@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import ComponentExample from "@/components/ComponentExample";
 import { Heading, Flex, Text, VisuallyHidden as RadixVisuallyHidden, Button, TextField, Box, IconButton } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
