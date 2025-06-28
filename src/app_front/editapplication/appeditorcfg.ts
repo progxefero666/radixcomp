@@ -1,40 +1,29 @@
-//src\app_front\editapplication\editapplication.ts
+//src\app_front\manapplications\manappsacfg.ts
 
-
-/**
- * class AppEditor
- */
-export class AppEditor {
-
-}//end class
+import { Option } from "@/common/model/option";
 
 /**
- * class AppDef {
-
+ * class ManAppsCfg
  */
-export class AppDef {
-    //creationdate?: string;
-    //updatedate?: string;
+export class AppEditorCfg {
 
-    public static readonly NAME_MAXLEN = 50;
-    public static readonly REFERENCE_MAXLEN = 50;
-    public static readonly AUTHOR_MAXLEN = 100;
-    public static readonly OSSYSTEM_MAXLEN = 100;
-    public static readonly URL_MAXLEN = 500;
-    public static readonly PATH_MAXLEN = 500;
-    public static readonly DESCRIPTION_MAXLEN = 255;
+    public static readonly SECTION_MAIN: Option = new Option
+        ("main", "Main", null,null,null);
 
-    public static readonly fdef_localdev:boolean   = false;
-    public static readonly fdef_usedocker:boolean   = false;
-    public static readonly fdef_controlusers:boolean= false;
-    public static readonly fdef_useui:boolean       = false;
-    public static readonly fdef_useagents:boolean   = false;
-    public static readonly fdef_consumedb:boolean   = false;
-    public static readonly fdef_consumeapi:boolean  = false;
-    public static readonly fdef_consumeai:boolean   = false;
-    public static readonly fdef_exposedb:boolean    = false;
-    public static readonly fdef_exposeapi:boolean   = false;
-    
+    public static readonly SECTION_DOCS: Option = new Option
+        ("docs", "Documents",  null,null,null);
+
+    public static readonly SECTION_TASKS: Option
+        = new Option("task", "Tasks",  null,null,null);
+
+    public static readonly SECTIONS: Option[]=[
+        AppEditorCfg.SECTION_MAIN,
+        AppEditorCfg.SECTION_DOCS,
+        AppEditorCfg.SECTION_TASKS
+    ];
+
+    public static readonly ACTIVE_SECTION: Option = AppEditorCfg.SECTIONS[0];
+
 }//end class
 
 
