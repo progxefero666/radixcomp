@@ -11,6 +11,7 @@ import { AppConfig } from "@/app_front/appconfig";
 import SecondBar from "./index/secondbar";
 
 
+
 /**
  * Application Main page 
  */
@@ -72,6 +73,8 @@ interface IndexMainContentProps {
     actsection: string;
 }
 function IndexMainContent({actsection}: IndexMainContentProps) {
+
+    //AppForm
 
     return (
         <Grid columns="3" gap="4" className="h-full">

@@ -9,6 +9,8 @@ import { ManAppsCfg } from "@/app_front/manapplications/manappsacfg";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { RadixColors } from "@/radix/radixtheme";
 
+import {AppForm} from "@/app/applications/form/appform";
+import { Application } from "@/client/models/Application";
 
 /**
  * Application Main page 

@@ -30,7 +30,7 @@ interface InputTextProps {
 }
 
 
-export const InputTextComponent = forwardRef<HTMLInputElement, InputTextProps>(({
+export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                 type, inline, label, placeholder, value, onChange, icon, readonly, disabled }, ref) => {        
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
