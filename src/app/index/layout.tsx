@@ -3,18 +3,24 @@ import { Box, Flex, Text } from "@radix-ui/themes";
 
 
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
+import PrimaryBar from "@/app_front/comp/primarybar";
 
 interface LayoutProps {
     children: React.ReactNode;
     // primaryBarContent is now handled internally by PrimaryBar
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function IndexLayout({ children }: LayoutProps) {
+
+    const onSelection = (sectionId: string) => {
+        alert("Home: onselection: " + sectionId);
+    }
+
     return (
         <Flex direction="column" className="h-screen">
 
-            <Flex 
-                align="center" 
+            <Flex
+                align="center"
                 className="bg-gray-2 dark:bg-gray-3 h-[60px] px-4 border-b border-gray-6" >
                 <Text size="5" weight="bold" className="text-gray-12">
                     Radix UI Primitives Sandbox
@@ -23,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
 
             <Flex className="flex-1 overflow-hidden">
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
-                    <p>adad</p>
+                    <PrimaryBar onselection={onSelection} />
                 </Box>
                 <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
                     {children}
@@ -32,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
                     <ThemeSwitcher />
                 </Box>
             </Flex>
-            
+
         </Flex>
     );
 }

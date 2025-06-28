@@ -12,12 +12,17 @@ export class ThemeStyle {
 
 
 /**
- * class ThemeButtonsStyle.BTN_DEF_VAR
+ * class ThemeButtonsStyle.BTN_HOME_STYLE
  */
 export class ThemeButtonsStyle {
+
     public static readonly BTN_DEF_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly BTN_DEF_VAR: any = RadixConf.VARIANTS.soft;
-      
+    public static readonly BTN_DEF_RADIUS: any = RadixConf.RADIUS.medium;
+    public static readonly BTN_DEF_COLOR: any = "gray";
+
+    public static readonly BTN_HOME_COLOR: any = "gray";
+    public static readonly BTN_HOME_STYLE: any = "w-full justify-start";
 }
 
 /**

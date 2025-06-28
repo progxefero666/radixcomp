@@ -10,18 +10,18 @@ import { ThemeButtonsStyle } from "../radixtheme";
 export interface MenuButtonsProp {
     optcolor: any;
     optactcolor: any;
-    optactname: string;
+    optactid: string;
     options: Option[]
     onselection: (name: string) => void;
 }
 export default function MenuButtons
-        ({options,optcolor,optactcolor,onselection,optactname}: MenuButtonsProp) {
+        ({options,optcolor,optactcolor,onselection,optactid}: MenuButtonsProp) {
 
     const size: any = ThemeButtonsStyle.BTN_DEF_SIZE;
 
     const renderButton = (key:string,option:Option) => {
         let color = optcolor;
-        if(optactname === option.id){color = optactcolor;}
+        if(optactid === option.id){color = optactcolor;}
 
         return (
             <Button key     = {key}
@@ -37,7 +37,7 @@ export default function MenuButtons
     return (
         <Box >
             <Flex direction="column" gap="6">
-                
+
                 <Section size="2" >
                     <Text size="2" as="p">
                         A window overlaid on either the primary window or another

@@ -4,35 +4,44 @@ import React from "react";
 import Link from "next/link";
 import { Flex, Text, Button, Separator } from "@radix-ui/themes";
 import { usePathname } from "next/navigation"; // To highlight active link
-import PanelMenu from "@/components/panelmenu";
-import MenuButtons from "@/radix/cbars/btmenu";
 
-export default function PrimaryBar() {
+import MenuButtons from "@/radix/cbars/btmenu";
+import { RadixColors, ThemeButtonsStyle } from "@/radix/radixtheme";
+import { RadixConf } from "@/radix/radixconf";
+import { AppConfig } from "../appconfig";
+
+interface PrimaryBarProps {
+     onselection: (sectionId:string) => void;
+}
+export default function PrimaryBar({ onselection }: PrimaryBarProps) {
+
     const pathname = usePathname();
 
-   
-    const onselection = (name: string) => { 
-    
+    const renderHomeButton = () => { 
+        return (
+            <Link href="/" passHref>
+                <Button
+                    variant=    {pathname === "/" ? RadixConf.VARIANTS.solid :
+                                                    RadixConf.VARIANTS.soft}
+                    color=      {ThemeButtonsStyle.BTN_HOME_COLOR}
+                    className = {ThemeButtonsStyle.BTN_HOME_STYLE}
+                    size      = {ThemeButtonsStyle.BTN_DEF_SIZE} >
+                    Home
+                </Button>
+            </Link>            
+        )
     }
 
     return (
         <Flex direction="column" gap="2">
-            <Link href="/" passHref>
-                <Button
-                    variant={pathname === "/" ? "solid" : "soft"}
-                    color="gray"
-                    className="w-full justify-start"
-                    size="2" >
-                    Home
-                </Button>
-            </Link>
-            <Separator size="4" my="2" />
-			
-			{/*!!! NUEVO COMPONENTE PANEL MENU !!!
-            <MenuButtons onselection={onselection} />*/}
-            
-            <PanelMenu  />
-			
+            {renderHomeButton()}
+            <Separator size="4" my="2" />			
+            <MenuButtons options={AppConfig.MODULES}
+                onselection={onselection} 
+                optactcolor={RadixColors.colors.indigo}
+                optcolor={RadixColors.colors.plum}
+                optactid={AppConfig.ACT_MODULE.id} />			
         </Flex>
     );
-}
+
+}//end PrimaryBar

@@ -31,6 +31,7 @@ export class AppConfig {
         AppConfig.MOD_COMP_TOOLS
     ]
 
+    public static readonly ACT_MODULE: Option = AppConfig.MODULES[1];
 
 
     
