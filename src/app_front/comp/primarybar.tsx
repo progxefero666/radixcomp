@@ -18,7 +18,7 @@ export default function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
 
 
     return (
-        <Flex direction="column" gap="2">		
+        <Flex direction="column" >		
             <MenuButtons options={AppConfig.MODULES}
                 onselection={onselection} 
                 optactcolor={RadixColors.colors.indigo}

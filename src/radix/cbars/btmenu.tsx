@@ -35,7 +35,7 @@ export default function MenuButtons
     }
 
     return (
-        <Box p="2">
+        <Box >
             <Flex direction="column" gap="2">
                 {options.map((section, index) => (
                     renderButton(section)

@@ -38,17 +38,26 @@ export default function IndexHeader({ onselection }: IndexHeaderProps) {
     }
 
     return (
-        <Flex className="w-full h-auto bg-gray-2 dark:bg-gray-3  px-4 border-b border-gray-6" >
+        <Flex className="w-full h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
 
-            <Box className="h-auto w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6">
-                {renderHomeButton()}
-            </Box>
-            <Box className="h-auto w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
+            <Flex direction="row" gap="2" justify="between" 
+                 className="full h-auto w-[16%] bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6">
                 <Text size="5" weight="bold" className="text-gray-12">
-                    Radix UI Primitives Sandbox
+                    Radix UI
+                </Text>   
+                <Box>
+                 {renderHomeButton()}  
+                </Box>  
+                         
+            </Flex>
+
+            <Box className="h-auto w-[68%] bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto">
+                <Text size="5" weight="bold" className="text-gray-12">
+                    Primitives Sandbox
                 </Text>
             </Box>
-            <Box className="h-auto w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6">
+
+            <Box className="h-auto w-[16%] bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
                 <p>header-left</p>
             </Box>
 
