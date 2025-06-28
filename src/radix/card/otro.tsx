@@ -68,6 +68,15 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
             )            
         }
         
+        const renderColSimpleContent = () => {
+            return (            
+                <div className={ThemeCompStyle.C_CELL_STYLE}>
+                    {isReadOnly ? renderReadComp() : 
+                                  renderEditComp() }                        
+                </div>
+            )             
+        }
+
         const renderRowLabelContent = () => { 
             return (
                 <div className={ThemeCompStyle.C_INCLABEL_ROW_STYLE}>
@@ -77,15 +86,6 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(({
                     {renderRowSimpleContent()}
                 </div>
             )        
-        }
- 
-        const renderColSimpleContent = () => {
-            return (            
-                <div className={ThemeCompStyle.C_CELL_STYLE}>
-                    {isReadOnly ? renderReadComp() : 
-                                  renderEditComp() }                        
-                </div>
-            )             
         }
 
         const renderColLabelContent = () => {
