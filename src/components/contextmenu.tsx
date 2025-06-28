@@ -379,6 +379,7 @@ export default function ContextMenuComponent() {
                     Algunas opciones pueden estar deshabilitadas según el contexto o permisos.
                 </Text>
             </Box>
+            
         </Flex>
     );
 }

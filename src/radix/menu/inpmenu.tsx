@@ -10,7 +10,7 @@ import { TextField } from "@radix-ui/themes";
 import { RadixColors, ThemeCompStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
-interface InputSelectProps {
+interface InputMenuProps {
     children?: React.ReactNode;
     name: string;
     inline?: boolean;
@@ -24,7 +24,7 @@ interface InputSelectProps {
     autofocus?: boolean;
     onchange?: (value: string) => void;
 }
-export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
+export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
     name, collection, label, placeholder, defaultvalue,
     inline, readonly, disabled,children,
     maxlen, autofocus, onchange }, ref) => {

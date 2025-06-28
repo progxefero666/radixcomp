@@ -6,14 +6,14 @@ import { Text, Button } from "@radix-ui/themes";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-    { href: "/inputs", label: "Inputs" },
-    { href: "/overlays", label: "Overlays" },
-    { href: "/menus", label: "Menus" },
-    { href: "/layout-components", label: "Content Layout" },
-    { href: "/navigation", label: "Navigation" },
-    { href: "/simple-accordion", label: "Simple Accordion" },
-    { href: "/accessibility", label: "Accessibility" },
-    { href: "/misc", label: "Miscellaneous" },
+    { href: "/examples/inputs", label: "Inputs" },
+    { href: "/examples/overlays", label: "Overlays" },
+    { href: "/examples/menus", label: "Menus" },
+    { href: "/examples/layout-components", label: "Content Layout" },
+    { href: "/examples/navigation", label: "Navigation" },
+    { href: "/examples/simple-accordion", label: "Simple Accordion" },
+    { href: "/examples/accessibility", label: "Accessibility" },
+    { href: "/examples/misc", label: "Miscellaneous" },
 ];
 
 export default function PanelMenu() {
