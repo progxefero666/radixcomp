@@ -5,11 +5,9 @@ import Link from "next/link";
 import { Flex, Text, Button, Box } from "@radix-ui/themes";
 import { usePathname } from "next/navigation";
 
-import MenuButtons from "@/radix/cbars/btmenu";
 import { RadixColors, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { AppConfig } from "@/app_front/appconfig";
-import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 
 interface IndexHeaderProps {
     onselection: (sectionId: string) => void;
