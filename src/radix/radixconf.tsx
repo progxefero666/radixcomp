@@ -11,7 +11,7 @@ import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react
 | "4"  | XL (solo en algunos) | \~18px+ font                  |*/
 
 /**
- * RadixConf.SIZES
+ * RadixConf.VARIANTS
  */
 export class RadixConf {
 
@@ -22,13 +22,15 @@ export class RadixConf {
         size_4: "4" as any,
     };
 
-    public static readonly variants = {
+    public static readonly VARIANTS = {
+        classic: "classic" as any, 
         solid: "solid" as any,
         soft: "soft" as any,
+        surface: "surface" as any,
         ghost: "ghost" as any,
     };
 
-    public static readonly radius = {
+    public static readonly RADIUS = {
         none: "none" as any,
         small: "small" as any,
         medium: "medium" as any,
@@ -36,11 +38,7 @@ export class RadixConf {
         full: "full" as any,
     };
 
-    public static readonly variant = {
-        classic: "classic" as any, 
-        surface: "surface" as any,
-        soft: "soft" as any
-    };
+
 
     //placeholder = "Enter text..." 
     public static readonly INPUT_TEXT_TYPES = {

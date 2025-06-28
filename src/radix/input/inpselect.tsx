@@ -30,7 +30,7 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
     maxlen, autofocus, onchange }, ref) => {
 
     const size = RadixConf.SIZES.size_2;
-    const variant = RadixConf.variant.surface;
+    const variant = RadixConf.VARIANTS.surface;
     const color = RadixColors.colors.gray;
 
     const showInline: boolean = inline ?? false;
