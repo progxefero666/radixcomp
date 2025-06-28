@@ -1,11 +1,9 @@
 "use client";
 
-import Layout from "@/app_front/comp/layout";
-
 import { Box, Flex, Text } from "@radix-ui/themes";
 
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
-import IndexLayout from "@/app/index/layout";
+import PrimaryBar from "@/app_front/comp/primarybar";
 
 /**
  * Application Main page --> Radix Primitives Sandbox
@@ -13,7 +11,7 @@ import IndexLayout from "@/app/index/layout";
  */
 export default function Home() {
 
-    const onselection = (sectionId: string) => {
+    const onSelection = (sectionId: string) => {
         alert("Home: onselection: " + sectionId);
     }
 
@@ -30,7 +28,7 @@ export default function Home() {
 
             <Flex className="flex-1 overflow-hidden">
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
-                    <p>adad</p>
+                    <PrimaryBar onselection={onSelection} />
                 </Box>
                 <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
                     <p>Main Content</p>

@@ -39,13 +39,6 @@ export default function MenuButtons
             <Flex direction="column" gap="6">
 
                 <Section size="2" >
-                    <Text size="2" as="p">
-                        A window overlaid on either the primary window or another
-                        dialog window, rendering the content underneath inert.
-                    </Text>
-                </Section>
-
-                <Section size="2" >
                     {options.map((section, index) => (
                         renderButton(index.toString(),section)
                     ))}
