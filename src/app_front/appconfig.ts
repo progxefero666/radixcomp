@@ -11,23 +11,23 @@ export class AppConfig {
     public static readonly INDEX: Option 
         = new Option("./","Home",null,null,null);
 
-    public static readonly MOD_DBMODEL_TOOLS: Option 
-        = new Option("./dbmodeltools","Db Model Tools",null,null,null);
-
     public static readonly MOD_APPLICATIONS_TOOLS: Option 
-        = new Option("./applications","App. Generator",null,null,null);
+        = new Option("./applications","Applications",null,null,null);
 
-    public static readonly MOD_MOTORS_TOOLS: Option 
-        = new Option("./motors","create_motors",null,null,null);
+    public static readonly MOD_SERVICES: Option 
+        = new Option("./services","Services",null,null,null);
 
-    public static readonly MOD_COMP_TOOLS: Option 
-        = new Option("./components","Comp. Creator",null,null,null);
-  
+    public static readonly MOD_SERVERS: Option 
+        = new Option("./servers","Servers",null,null,null);
+
+      public static readonly MOD_AGENTS: Option 
+        = new Option("./agents","Agents",null,null,null);
+
     public static readonly MODULES: Option[] = [
-        AppConfig.MOD_DBMODEL_TOOLS,
         AppConfig.MOD_APPLICATIONS_TOOLS,
-        AppConfig.MOD_MOTORS_TOOLS,
-        AppConfig.MOD_COMP_TOOLS
+        AppConfig.MOD_SERVICES,
+        AppConfig.MOD_SERVERS,
+        AppConfig.MOD_AGENTS,
     ]
 
     
