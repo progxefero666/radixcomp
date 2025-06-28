@@ -9,10 +9,10 @@ import { AppEditorCfg } from "@/app_front/editapplication/appeditorcfg";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { RadixColors, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { usePathname } from "next/navigation";
-import {AppForm} from "@/app/applications/appeditor/appform";
+import {AppForm} from "@/app/appeditor/appform";
 import { Application } from "@/client/models/Application";
 import { RadixConf } from "@/radix/radixconf";
-import { ManApplicationsCfg } from "@/app_front/manapplications/manappscfg";
+import { ManApplicationsCfg } from "@/app_front/appindex";
 
 /**
  * Application Main page 

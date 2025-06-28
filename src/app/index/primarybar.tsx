@@ -8,10 +8,10 @@ import { RadixColors } from "@/radix/radixtheme";
 import { AppConfig } from "@/app_front/appconfig";
 
 interface PrimaryBarProps {
-    actsection: string;
+    section: string;
     onselection: (sectionId:string) => void;
 }
-export default function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
+export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
     return (
         <Flex direction="column" >
@@ -20,7 +20,7 @@ export default function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
                 onselection={onselection} 
                 optactcolor={RadixColors.colors.indigo}
                 optcolor={RadixColors.colors.plum}
-                optactid={actsection} />	
+                optactid={section} />	
 
         </Flex>
     );

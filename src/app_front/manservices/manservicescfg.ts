@@ -1,1 +1,0 @@
-//src\app_front\manservices\manservicescfg.ts

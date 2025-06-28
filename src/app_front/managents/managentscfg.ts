@@ -1,1 +1,0 @@
-//src\app_front\managents\managentscfg.ts

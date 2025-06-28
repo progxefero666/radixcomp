@@ -14,7 +14,7 @@ export class AgentsService {
      * @returns Agent Successful Response
      * @throws ApiError
      */
-    public static getall(): CancelablePromise<Array<Agent>> {
+    public static getAll(): CancelablePromise<Array<Agent>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/agents/',

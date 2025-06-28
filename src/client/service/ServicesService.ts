@@ -6,13 +6,14 @@ import type { Service } from '../models/Service';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
+
 export class ServicesService {
     /**
      * Getall
      * @returns Service Successful Response
      * @throws ApiError
      */
-    public static getallApiServicesGet(): CancelablePromise<Array<Service>> {
+    public static getAll(): CancelablePromise<Array<Service>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/services/',
