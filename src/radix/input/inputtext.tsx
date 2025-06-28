@@ -2,59 +2,68 @@
 
 import React from "react";
 import { TextField } from "@radix-ui/themes";
+import { ThemeCompStyle } from "@/radix/radixtheme";
+import { RadixConf } from "@/radix/radixconf";
 
-import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react-icons";
 
+const mainColor: any = "gray"; 
+
+
+/**
+ * InputTextComponent
+ */
+
+/*
+interface InputTextProps {
+    name: string;
+    inline?: boolean;
+    readonly?: boolean;
+    disabled?: boolean;
+    label?: string;
+    placeholder?: string;
+    defaultvalue?: string;
+    maxlen?: number;
+    autofocus?: boolean; 
+    onchange?: (value: string) => void;
+}
+*/
 interface InputTextProps {
     placeholder?: string;
     disabled?: boolean;
-    variant?: "classic" | "surface" | "soft";
     size?: "1" | "2" | "3";
-    color?: "gray" | "gold" | "bronze" | "brown" | "yellow" | "amber" | "orange" | "tomato" | "red" | "ruby" | "crimson" | "pink" | "plum" | "purple" | "violet" | "iris" | "indigo" | "blue" | "cyan" | "teal" | "jade" | "green" | "grass" | "lime" | "mint" | "sky";
-    radius?: "none" | "small" | "medium" | "large" | "full";
-    type?: "text" | "email" | "password" | "search" | "url" | "tel";
-    icon?: "search" | "person" | "lock" | null;
+    color?: any;
+    type?: any;
+    icon?: any | null;
     value?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+export default function InputTextComponent({placeholder,disabled,size,color,type,icon,
+                                            value,onChange}: InputTextProps) {
+                                                   
+    if(!color) {color = mainColor;}  
 
-export default function InputTextComponent({
-    placeholder = "Enter text...",
-    disabled = false,
-    variant = "surface",
-    size = "2",
-    color = "gray",
-    radius = "medium",
-    type = "text",
-    icon = null,
-    value,
-    onChange}: InputTextProps) {
+    let input_type = RadixConf.INPUT_TEXT_TYPES.text;     
+    if(type) {input_type = type;};
+    
+    let input_icon = null;
+    if(icon){input_icon = icon;}     
 
-    const getIcon = () => {
-        switch (icon) {
-            case "search":
-                return <MagnifyingGlassIcon height="16" width="16" />;
-            case "person":
-                return <PersonIcon height="16" width="16" />;
-            case "lock":
-                return <LockClosedIcon height="16" width="16" />;
-            default:
-                return null;
-        }
-    };
+    const input_disabled = disabled ?? true;
+    const comp_size = size ?? RadixConf.SIZES.size_2;
+    const radius = ThemeCompStyle.COMP_CONT_RADIUS;    
+    const variant = RadixConf.variant.surface;
 
     return (
-        <TextField.Root
-            variant={variant}
-            size={size}
-            color={color}
-            radius={radius}
-            disabled={disabled}
-            type={type}
-            placeholder={placeholder}
-            value={value}
-            onChange={onChange} >
-            {icon && <TextField.Slot>{getIcon()}</TextField.Slot>}
+        <TextField.Root type={input_type}
+                        value={value}
+                        placeholder={placeholder}
+                        onChange={onChange}
+                        variant={variant} 
+                        size={comp_size} color={color} radius={radius}            
+                        disabled={input_disabled} >
+
+            {icon?<TextField.Slot>{icon}</TextField.Slot>:null}
+
         </TextField.Root>
     );
 
