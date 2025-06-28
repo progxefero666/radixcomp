@@ -1,6 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Box,Grid, Flex } from "@radix-ui/themes";
+import { Option } from "@/common/model/option";
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 import PrimaryBar from "@/app/index/primarybar";
 import IndexHeader from "./index/header";
@@ -13,6 +15,7 @@ import SecondBar from "./index/secondbar";
  * Application Main page 
  */
 export default function Home() {
+    const router = useRouter();
 
     const [section, setSection] = useState<string>(AppConfig.INDEX.id);
     
@@ -20,6 +23,24 @@ export default function Home() {
         alert("sectionId: " + sectionId);
         setSection(sectionId);
     }
+
+    const onModuleSelected = (name: string) => {
+        if (name === AppConfig.INDEX.id) {
+            router.push("./");
+        }
+        else if (name === AppConfig.MOD_APPLICATIONS.id) {
+            router.push("./applications"); 
+        }
+        else if (name === AppConfig.MOD_SERVICES.id) {
+            router.push("./services"); 
+        }
+        else if (name === AppConfig.MOD_SERVERS.id ) {
+            router.push("./servers"); 
+        }
+        else if (name === AppConfig.MOD_AGENTS.id ) {
+            router.push("./agents"); 
+        }
+    };
 
     return (
         <Flex direction="column" className="h-screen">

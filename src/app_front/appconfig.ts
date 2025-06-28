@@ -11,7 +11,7 @@ export class AppConfig {
     public static readonly INDEX: Option 
         = new Option("./","Home",null,null,null);
 
-    public static readonly MOD_APPLICATIONS_TOOLS: Option 
+    public static readonly MOD_APPLICATIONS: Option 
         = new Option("./applications","Applications",null,null,null);
 
     public static readonly MOD_SERVICES: Option 
@@ -24,7 +24,7 @@ export class AppConfig {
         = new Option("./agents","Agents",null,null,null);
 
     public static readonly MODULES: Option[] = [
-        AppConfig.MOD_APPLICATIONS_TOOLS,
+        AppConfig.MOD_APPLICATIONS,
         AppConfig.MOD_SERVICES,
         AppConfig.MOD_SERVERS,
         AppConfig.MOD_AGENTS,
