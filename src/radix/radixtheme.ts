@@ -1,5 +1,7 @@
 //src\radix\radixcolors.ts
 
+import { RadixConf } from "./radixconf";
+
 /**
  * class 
  */
@@ -8,11 +10,18 @@ export class ThemeStyle {
 
 }//end class
 
+
+/**
+ * class ThemeButtonsStyle.BTN_SIZE_DEF
+ */
+export class ThemeButtonsStyle {
+      public static readonly BTN_SIZE_DEF: any = RadixConf.SIZES.size_2;
+}
+
 /**
  * class 
  */
 export class ThemeCompStyle {
-
 
     public static readonly COMP_CONT_RADIUS: any = "medium";
     public static readonly COMP_CONT_VARIANT: any = "soft";
