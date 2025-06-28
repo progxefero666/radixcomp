@@ -44,9 +44,6 @@ export class ApplicationDef {
 
 /**
  * Class Application
- * Represents a Application entity with various properties and methods.
- * 
- * @class Application
  */
 export class Application {
 

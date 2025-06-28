@@ -2,7 +2,6 @@
 
 import { Option } from "@/common/model/option";
 
-
 /**
  * class ManAppsCfg
  */

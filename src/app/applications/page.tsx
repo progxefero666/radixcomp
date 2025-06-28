@@ -25,8 +25,7 @@ export default function PageApplications() {
     return (
         <Flex direction="column" className="h-screen">
 
-          
-
+    
             <Flex className="flex-1 overflow-hidden">
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
                     <PagePrimaryBar actsection={section} onselection={onSelection} />
