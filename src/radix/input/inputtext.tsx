@@ -13,34 +13,25 @@ const mainColor: any = "gray";
  * InputTextComponent
  */
 
-/*
 interface InputTextProps {
-    name: string;
-    inline?: boolean;
-    readonly?: boolean;
-    disabled?: boolean;
-    label?: string;
-    placeholder?: string;
-    defaultvalue?: string;
-    maxlen?: number;
-    autofocus?: boolean; 
-    onchange?: (value: string) => void;
-}
-*/
-interface InputTextProps {
-    placeholder?: string;
-    disabled?: boolean;
-    size?: "1" | "2" | "3";
-    color?: any;
-    type?: any;
-    icon?: any | null;
-    value?: string;
+    inline?:    boolean;
+    name?:      string;
+    label?:     string;
+    readonly?:  boolean;
+    disabled?:  boolean           
+    value?:     string;       
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    type?:      any; 
+    placeholder?: string;
+    icon?:      any|null; 
+    autofocus?: boolean; 
+    minlen?:    number;
+    maxlen?:    number;
 }
-export default function InputTextComponent({placeholder,disabled,size,color,type,icon,
-                                            value,onChange}: InputTextProps) {
+export default function InputTextComponent
+        ({type,placeholder,value,onChange,icon,disabled}: InputTextProps) {
                                                    
-    if(!color) {color = mainColor;}  
+    const color = "gray"; 
 
     let input_type = RadixConf.INPUT_TEXT_TYPES.text;     
     if(type) {input_type = type;};
@@ -49,7 +40,7 @@ export default function InputTextComponent({placeholder,disabled,size,color,type
     if(icon){input_icon = icon;}     
 
     const input_disabled = disabled ?? true;
-    const comp_size = size ?? RadixConf.SIZES.size_2;
+    const size =  RadixConf.SIZES.size_2;
     const radius = ThemeCompStyle.COMP_CONT_RADIUS;    
     const variant = RadixConf.variant.surface;
 
@@ -59,7 +50,7 @@ export default function InputTextComponent({placeholder,disabled,size,color,type
                         placeholder={placeholder}
                         onChange={onChange}
                         variant={variant} 
-                        size={comp_size} color={color} radius={radius}            
+                        size={size} color={color} radius={radius}            
                         disabled={input_disabled} >
 
             {icon?<TextField.Slot>{icon}</TextField.Slot>:null}
