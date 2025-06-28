@@ -1,0 +1,200 @@
+import { ModelField } from "@/common/dbmodel/dbfield";
+
+/**
+ * Table definition class for application
+ * Generated from database schema
+ */
+export class ApplicationDef {
+
+    public name: string = "application";
+    public fields: ModelField[] = [];
+
+    constructor() {
+        this.fields.push(new ModelField("id", "numeric", true, false, true, null, null));
+        this.fields.push(new ModelField("name", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("reference", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("author", "text", false, false, true, null, 100));
+        this.fields.push(new ModelField("apptype", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("proglanguage", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("osystem", "text", false, false, true, null, 100));
+        this.fields.push(new ModelField("appurl", "text", false, false, true, null, 500));
+        this.fields.push(new ModelField("apppath", "text", false, false, true, null, 500));
+        this.fields.push(new ModelField("localdev", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("usedocker", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("creationdate", "date", false, false, true, null, null));
+        this.fields.push(new ModelField("updatedate", "date", false, false, true, null, null));
+        this.fields.push(new ModelField("description", "text", false, false, true, null, 255));
+        this.fields.push(new ModelField("controlusers", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("useui", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("useagents", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("consumedb", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("consumeapi", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("consumeai", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("exposedb", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("exposeapi", "boolean", false, false, true, null, null));
+    }
+
+    public toJsonString(): string {
+        return JSON.stringify(this, null, 4);
+    }
+
+}//end class
+
+//table_application.ts
+
+/**
+ * Class Application
+ * Represents a Application entity with various properties and methods.
+ * 
+ * @class Application
+ */
+export class Application {
+
+    public id: number | null = null;
+    public name: string = "undefined";
+    public reference: string = "undefined";
+    public author: string = "undefined";
+    public apptype: string = "undefined";
+    public proglanguage: string = "undefined";
+    public osystem: string = "undefined";
+    public appurl: string = "undefined";
+    public apppath: string = "undefined";
+    public localdev: boolean = false;
+    public usedocker: boolean = false;
+    public creationdate: Date = new Date();
+    public updatedate: Date = new Date();
+    public description: string = "undefined";
+    public controlusers: boolean = false;
+    public useui: boolean = false;
+    public useagents: boolean = false;
+    public consumedb: boolean = false;
+    public consumeapi: boolean = false;
+    public consumeai: boolean = false;
+    public exposedb: boolean = false;
+    public exposeapi: boolean = false;
+
+    constructor(id: number | null,
+                name: string,
+                reference: string,
+                author: string,
+                apptype: string,
+                proglanguage: string,
+                osystem: string,
+                appurl: string,
+                apppath: string,
+                localdev: boolean,
+                usedocker: boolean,
+                creationdate: Date,
+                updatedate: Date,
+                description: string,
+                controlusers: boolean,
+                useui: boolean,
+                useagents: boolean,
+                consumedb: boolean,
+                consumeapi: boolean,
+                consumeai: boolean,
+                exposedb: boolean,
+                exposeapi: boolean) {
+
+        this.id = id;
+        this.name = name;
+        this.reference = reference;
+        this.author = author;
+        this.apptype = apptype;
+        this.proglanguage = proglanguage;
+        this.osystem = osystem;
+        this.appurl = appurl;
+        this.apppath = apppath;
+        this.localdev = localdev;
+        this.usedocker = usedocker;
+        this.creationdate = creationdate;
+        this.updatedate = updatedate;
+        this.description = description;
+        this.controlusers = controlusers;
+        this.useui = useui;
+        this.useagents = useagents;
+        this.consumedb = consumedb;
+        this.consumeapi = consumeapi;
+        this.consumeai = consumeai;
+        this.exposedb = exposedb;
+        this.exposeapi = exposeapi;
+    }
+
+    /**
+     * Returns the minimum length of the field.
+     * @param fieldName The name of the field.
+     * @returns The minimum length of the field or null if not applicable.
+     */
+    public minlen(fieldName: string): number | null {
+        return 0;
+    }
+
+    /**
+     * Returns the max length of the field.
+     * Returns -1 if has unlimited length.
+     * @param fieldName The name of the field.
+     * @returns The maximum length of the field or null if not applicable.
+     */
+    public maxlen(fieldName: string): number | null {
+        if (fieldName === "id") {
+            return 15; // max digits for numeric
+        }
+        if (fieldName === "name") {
+            return 50;
+        }
+        if (fieldName === "reference") {
+            return 50;
+        }
+        if (fieldName === "author") {
+            return 100;
+        }
+        if (fieldName === "apptype") {
+            return 50;
+        }
+        if (fieldName === "proglanguage") {
+            return 50;
+        }
+        if (fieldName === "osystem") {
+            return 100;
+        }
+        if (fieldName === "appurl") {
+            return 500;
+        }
+        if (fieldName === "apppath") {
+            return 500;
+        }
+        if (fieldName === "description") {
+            return 255;
+        }
+        return 0;
+    }
+
+}//end class
+
+/**
+ * Type definition for Application entity
+ */
+export type TypeApplication = {
+    id: number | null;
+    name: string;
+    reference: string;
+    author: string;
+    apptype: string;
+    proglanguage: string;
+    osystem: string;
+    appurl: string;
+    apppath: string;
+    localdev: boolean;
+    usedocker: boolean;
+    creationdate: Date;
+    updatedate: Date;
+    description: string;
+    controlusers: boolean;
+    useui: boolean;
+    useagents: boolean;
+    consumedb: boolean;
+    consumeapi: boolean;
+    consumeai: boolean;
+    exposedb: boolean;
+    exposeapi: boolean;
+};
