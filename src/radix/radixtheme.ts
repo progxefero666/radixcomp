@@ -12,7 +12,7 @@ export class ThemeStyle {
 
 
 /**
- * class ThemeButtonsStyle.BTN_HOME_STYLE
+ * class ThemeButtonsStyle.BTN_DEF_VAR
  */
 export class ThemeButtonsStyle {
 
