@@ -2,7 +2,7 @@
 
 
 /**
- * 
+ * class DbCollections 
  */
 export class DbCollections {
 

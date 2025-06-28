@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { forwardRef, useEffect, useState } from "react";
+
 import { Box, Flex,TextField } from "@radix-ui/themes";
 import { ThemeCompStyle } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
@@ -26,9 +28,10 @@ interface InputTextProps {
     minlen?: number;
     maxlen?: number;
 }
-export default function InputTextComponent
-    ({ type, inline, label, placeholder, value, onChange, icon, readonly, disabled }: InputTextProps) {
 
+
+export const InputTextComponent = forwardRef<HTMLInputElement, InputTextProps>(({
+                type, inline, label, placeholder, value, onChange, icon, readonly, disabled }, ref) => {        
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
     const radius = ThemeCompStyle.COMP_CONT_RADIUS;
@@ -119,19 +122,5 @@ export default function InputTextComponent
         </>
     )
 
-}//end 
+})//end component
 
-/*
-
-    return (
-        <TextField.Root type={input_type}
-            value={value}
-            placeholder={placeholder}
-            onChange={onChange}
-            variant={variant}
-            size={size} color={color} radius={radius}
-            disabled={input_disabled} >
-            {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
-        </TextField.Root>
-    );
-*/

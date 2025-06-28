@@ -19,13 +19,13 @@ interface InputSelectProps {
     collection: string[];
     label?: string;
     placeholder?: string;
-    defaultvalue?: string;
+    value?: string;
     maxlen?: number;
     autofocus?: boolean;
     onchange?: (value: string) => void;
-}
-export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
-    name, collection, label, placeholder, defaultvalue,
+}                  
+export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({    
+    name, collection, label, placeholder, value: defaultvalue,
     inline, readonly, disabled,children,
     maxlen, autofocus, onchange }, ref) => {
 
