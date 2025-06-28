@@ -10,6 +10,39 @@ import { TextField } from "@radix-ui/themes";
 import { RadixColors, ThemeCompStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
+/*
+<Flex direction="column" gap="4">
+    <Box>
+        <Text size="2" weight="medium" as="p" mb="2">
+            Basic Dropdown Menu:
+        </Text>
+        <DropdownMenu.Root>
+        
+            <DropdownMenu.Trigger>
+                <Button variant="soft" size="2">
+                    File <ChevronDownIcon />
+                </Button>
+            </DropdownMenu.Trigger>
+
+            <DropdownMenu.Content size="1">
+
+                <DropdownMenu.Item shortcut="⌘ N">
+                    <FileTextIcon /> New Document
+                </DropdownMenu.Item>
+                <DropdownMenu.Item shortcut="⌘ S">
+                    <CheckIcon /> Save
+                </DropdownMenu.Item>
+                <DropdownMenu.Separator />
+                <DropdownMenu.Item shortcut="⌘ P">
+                    Print
+                </DropdownMenu.Item>
+
+            </DropdownMenu.Content>
+        </DropdownMenu.Root>
+    </Box>
+</Flex>
+*/
+
 interface InputMenuProps {
     children?: React.ReactNode;
     name: string;
