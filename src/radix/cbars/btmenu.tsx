@@ -1,12 +1,13 @@
-//src\twdaisy\twdaisymenu.tsx
-
+//src\radix\cbars\btmenu.tsx
 
 import { Option } from "@/common/model/option";
-import { Flex, Text, Button, Section, Box, Card } from "@radix-ui/themes";
-import { GearIcon, InfoCircledIcon } from "@radix-ui/react-icons";
+import { Flex, Button, } from "@radix-ui/themes";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { ThemeButtonsStyle } from "../radixtheme";
 
-
+/**
+ * MenuButtons Column menu
+ */
 export interface MenuButtonsProp {
     optcolor: any;
     optactcolor: any;
@@ -22,7 +23,6 @@ export default function MenuButtons
     const renderButton = (option: Option) => {
         let color = optcolor;
         if (optactid === option.id) { color = optactcolor; }
-
         return (
             <Button key={option.id}
                 variant={ThemeButtonsStyle.BTN_DEF_VAR}
@@ -34,14 +34,12 @@ export default function MenuButtons
         )
     }
 
-    return (
-        <Box >
-            <Flex direction="column" gap="2">
-                {options.map((section, index) => (
-                    renderButton(section)
-                ))}
-            </Flex>
-        </Box>
+    return (    
+        <Flex direction="column" gap="2">
+            {options.map((section, index) => (
+                renderButton(section)
+            ))}
+        </Flex>
     )
 
 }//end

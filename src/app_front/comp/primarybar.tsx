@@ -1,14 +1,11 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { Flex, Text, Button, Separator } from "@radix-ui/themes";
-import { usePathname } from "next/navigation"; // To highlight active link
+import { Flex, Separator } from "@radix-ui/themes";
 
 import MenuButtons from "@/radix/cbars/btmenu";
-import { RadixColors, ThemeButtonsStyle } from "@/radix/radixtheme";
-import { RadixConf } from "@/radix/radixconf";
-import { AppConfig } from "../appconfig";
+import { RadixColors } from "@/radix/radixtheme";
+import { AppConfig } from "@/app_front/appconfig";
 
 interface PrimaryBarProps {
     actsection: string;
@@ -16,14 +13,15 @@ interface PrimaryBarProps {
 }
 export default function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
 
-
     return (
-        <Flex direction="column" >		
+        <Flex direction="column" >
+
             <MenuButtons options={AppConfig.MODULES}
                 onselection={onselection} 
                 optactcolor={RadixColors.colors.indigo}
                 optcolor={RadixColors.colors.plum}
-                optactid={actsection} />			
+                optactid={actsection} />	
+
         </Flex>
     );
 
