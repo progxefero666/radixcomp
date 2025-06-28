@@ -9,13 +9,13 @@ import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup,
 import Layout from "@/app_front/comp/layout";
 import CardExample from "@/components/cardexample";
 import InputText from "@/radix/input/inptext";
-import InputNumber from "@/components/inputnumber";
+import InputNumber from "@/radix/notready/inputnumber";
 import Checkbox from "@/components/checkbox";
 import Select from "@/components/select";
-import Switch from "@/components/switch";
-import Slider from "@/components/slider";
-import RadioGroupComponent from "@/components/radiogroup";
-import ToggleGroupComponent from "@/components/togglegroup";
+import Switch from "@/radix/notready/switch";
+import Slider from "@/radix/notready/slider";
+import RadioGroupComponent from "@/radix/notready/radiogroup";
+import ToggleGroupComponent from "@/radix/notready/togglegroup";
 
 export default function InputsPage() {
 
