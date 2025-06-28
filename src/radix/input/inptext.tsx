@@ -1,18 +1,16 @@
 "use client";
 
 import React from "react";
-import { TextField } from "@radix-ui/themes";
+import { Box, Flex,TextField } from "@radix-ui/themes";
 import { ThemeCompStyle } from "@/radix/radixtheme";
+import { Label } from "radix-ui";
+
 import { RadixConf } from "@/radix/radixconf";
-
-
-const mainColor: any = "gray";
 
 
 /**
  * InputTextComponent
  */
-
 interface InputTextProps {
     inline?: boolean;
     name?: string;
@@ -34,7 +32,7 @@ export default function InputTextComponent
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
     const radius = ThemeCompStyle.COMP_CONT_RADIUS;
-    const variant = RadixConf.variant.surface;
+    const variant = RadixConf.VARIANTS.surface;
     const showInline: boolean = inline ?? false;
 
     const input_type = type ?? RadixConf.INPUT_TEXT_TYPES.text;
@@ -74,43 +72,40 @@ export default function InputTextComponent
 
     const renderRowSimpleContent = () => {
         return (
-            <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <Box className={ThemeCompStyle.C_CELL_STYLE}>
                 {input_readonly ? renderReadComp() :
                     renderEditComp()}
-            </div>
+            </Box>
         )
     }
 
     const renderColSimpleContent = () => {
         return (
-            <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <Box>
                 {input_readonly ? renderReadComp() :
                     renderEditComp()}
-            </div>
+            </Box>
         )
     }
 
-
     const renderRowLabelContent = () => {
         return (
-            <div className={ThemeCompStyle.C_INCLABEL_ROW_STYLE}>
-                <div className={ThemeCompStyle.C_CELL_STYLE}>
-                    {label}
-                </div>
+            <Flex  gap="1"> 
+                <Label.Root>{label}</Label.Root> 
                 {renderRowSimpleContent()}
-            </div>
+             </Flex>
         )
     }
 
     const renderColLabelContent = () => {
+        //className="LabelRoot"
         return (
-            <div className={ThemeCompStyle.C_INCLABEL_COL_STYLE}>
-                {label}
+            <Flex direction="column" gap="1">    
+                <Label.Root>{label}</Label.Root>                              
                 {renderColSimpleContent()}
-            </div>
+            </Flex>
         )
     }
-
 
     return (
         <>

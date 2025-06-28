@@ -22,7 +22,7 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
     inline, readonly, disabled, autofocus, onchange }, ref) => {
 
     const size = RadixConf.SIZES.size_2;
-    const variant = RadixConf.variant.surface;
+    const variant = RadixConf.VARIANTS.surface;
     const color = RadixColors.colors.gray;
             
     const showInline: boolean = inline ?? false;
@@ -54,8 +54,8 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
 
     const renderEditComp = () => {
         let cell_style: string = "";
-        if (isDisabled) { cell_style = ThemeCompStyle.INPUT_CHECK_DISABLED_STYLE }
-        else { cell_style = ThemeCompStyle.INPUT_CHECK_STYLE }
+        if (isDisabled) { cell_style = ThemeCompStyle.C_CHECK_DISABLED_STYLE }
+        else { cell_style = ThemeCompStyle.C_CHECK_STYLE }
 
         return (
             <Box>

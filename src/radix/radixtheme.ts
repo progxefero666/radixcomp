@@ -42,9 +42,8 @@ export class ThemeCompStyle {
     public static readonly C_SELECT_EDIT_STYLE: string = "gray"
     public static readonly C_SELECT_DISABLED_STYLE: string = "indigo"
     public static readonly C_SELECT_READONLY_STYLE: string = "plum"
-
-    public static readonly INPUT_CHECK_STYLE: string = "gray"
-    public static readonly INPUT_CHECK_DISABLED_STYLE: string = "indigo"
+    public static readonly C_CHECK_STYLE: string = "gray"
+    public static readonly C_CHECK_DISABLED_STYLE: string = "indigo"
 
 }//end class
 
