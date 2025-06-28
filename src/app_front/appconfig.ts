@@ -24,15 +24,11 @@ export class AppConfig {
         = new Option("./components","Comp. Creator",null,null,null);
   
     public static readonly MODULES: Option[] = [
-        AppConfig.INDEX,
         AppConfig.MOD_DBMODEL_TOOLS,
         AppConfig.MOD_APPLICATIONS_TOOLS,
         AppConfig.MOD_MOTORS_TOOLS,
         AppConfig.MOD_COMP_TOOLS
     ]
-
-    public static readonly ACT_MODULE: Option = AppConfig.MODULES[1];
-
 
     
 }//export class AppConfig

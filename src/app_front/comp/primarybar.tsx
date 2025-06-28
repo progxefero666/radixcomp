@@ -11,36 +11,19 @@ import { RadixConf } from "@/radix/radixconf";
 import { AppConfig } from "../appconfig";
 
 interface PrimaryBarProps {
-     onselection: (sectionId:string) => void;
+    actsection: string;
+    onselection: (sectionId:string) => void;
 }
-export default function PrimaryBar({ onselection }: PrimaryBarProps) {
+export default function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
 
-    const pathname = usePathname();
-
-    const renderHomeButton = () => { 
-        return (
-            <Link href="/" passHref>
-                <Button
-                    variant=    {pathname === "/" ? RadixConf.VARIANTS.solid :
-                                                    RadixConf.VARIANTS.soft}
-                    color=      {ThemeButtonsStyle.BTN_HOME_COLOR}
-                    className = {ThemeButtonsStyle.BTN_HOME_STYLE}
-                    size      = {ThemeButtonsStyle.BTN_DEF_SIZE} >
-                    Home
-                </Button>
-            </Link>            
-        )
-    }
 
     return (
-        <Flex direction="column" gap="2">
-            {renderHomeButton()}
-            <Separator size="4" my="2" />			
+        <Flex direction="column" gap="2">		
             <MenuButtons options={AppConfig.MODULES}
                 onselection={onselection} 
                 optactcolor={RadixColors.colors.indigo}
                 optcolor={RadixColors.colors.plum}
-                optactid={AppConfig.ACT_MODULE.id} />			
+                optactid={actsection} />			
         </Flex>
     );
 

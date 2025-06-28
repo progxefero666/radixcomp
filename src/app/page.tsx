@@ -1,9 +1,11 @@
 "use client";
 
-import { Box, Flex, Text } from "@radix-ui/themes";
-
+import { Box, Flex } from "@radix-ui/themes";
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 import PrimaryBar from "@/app_front/comp/primarybar";
+import IndexHeader from "./index/header";
+import { useState } from "react";
+import { AppConfig } from "@/app_front/appconfig";
 
 /**
  * Application Main page --> Radix Primitives Sandbox
@@ -11,24 +13,20 @@ import PrimaryBar from "@/app_front/comp/primarybar";
  */
 export default function Home() {
 
+    const [section, setSection] = useState<string>(AppConfig.INDEX.id);
+    
     const onSelection = (sectionId: string) => {
-        alert("Home: onselection: " + sectionId);
+        alert("sectionId: " + sectionId);
     }
 
     return (
         <Flex direction="column" className="h-screen">
 
-            <Flex
-                align="center"
-                className="bg-gray-2 dark:bg-gray-3 h-[60px] px-4 border-b border-gray-6" >
-                <Text size="5" weight="bold" className="text-gray-12">
-                    Radix UI Primitives Sandbox
-                </Text>
-            </Flex>
+            <IndexHeader onselection={onSelection}/>
 
             <Flex className="flex-1 overflow-hidden">
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
-                    <PrimaryBar onselection={onSelection} />
+                    <PrimaryBar actsection={section} onselection={onSelection} />
                 </Box>
                 <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
                     <p>Main Content</p>
