@@ -5,11 +5,11 @@ import { Heading } from "@radix-ui/themes";
 
 
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/components/cardexample";
-import DialogComponent from "@/components/dialog";
-import HoverCardComponent from "@/components/hovercard";
-import PopoverComponent from "@/components/popover";
-import TooltipComponent from "@/components/tooltip";
+import CardExample from "../../../components/cardexample";
+import DialogComponent from "../../../components/dialog";
+import HoverCardComponent from "../../../components/hovercard";
+import PopoverComponent from "../../../components/popover";
+import TooltipComponent from "../../../components/tooltip";
 
 export default function OverlaysPage() {
     return (

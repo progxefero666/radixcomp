@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/components/cardexample";
+import CardExample from "../../../components/cardexample";
 import { Heading, Flex, Text, Link as RadixLink, Box, IconButton } from "@radix-ui/themes";
 import * as RadixNavigationMenu from '@radix-ui/react-navigation-menu';
 import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";

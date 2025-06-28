@@ -2,12 +2,12 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/components/cardexample";
+import CardExample from "../../../components/cardexample";
 import { Heading } from "@radix-ui/themes";
-import ScrollAreaComponent from "@/components/scrollarea";
-import SeparatorComponent from "@/components/separator";
-import TabsComponent from "@/components/tabs";
-import ToolbarComponent from "@/components/toolbar";
+import ScrollAreaComponent from "../../../components/scrollarea";
+import SeparatorComponent from "../../../components/separator";
+import TabsComponent from "../../../components/tabs";
+import ToolbarComponent from "../../../components/toolbar";
 
 export default function LayoutComponentsPage() {
     return (

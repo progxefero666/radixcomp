@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Flex, Text, Box } from "@radix-ui/themes";
-import SimpleAccordion, { AccordionItem } from "@/components/accordion";
+import SimpleAccordion, { AccordionItem } from "../components/accordion";
 
 export default function AccordionExamples() {
   const faqItems = [

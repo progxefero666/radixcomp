@@ -7,11 +7,11 @@ import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup,
          TextField, Select as RadixSelect } from "@radix-ui/themes";
 
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/components/cardexample";
+import CardExample from "../../../components/cardexample";
 import InputText from "@/radix/input/inptext";
 import InputNumber from "@/radix/notready/inputnumber";
-import Checkbox from "@/components/checkbox";
-import Select from "@/components/select";
+import Checkbox from "../../../components/checkbox";
+import Select from "../../../components/select";
 import Switch from "@/radix/notready/switch";
 import Slider from "@/radix/notready/slider";
 import RadioGroupComponent from "@/radix/notready/radiogroup";

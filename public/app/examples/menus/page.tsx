@@ -2,9 +2,9 @@
 
 import React from "react";
 import Layout from "@/app_front/comp/layout";
-import CardExample from "@/components/cardexample";
-import DropdownMenuComponent from "@/components/dropdown";
-import ContextMenuComponent from "@/components/contextmenu";
+import CardExample from "../../../components/cardexample";
+import DropdownMenuComponent from "../../../components/dropdown";
+import ContextMenuComponent from "../../../components/contextmenu";
 import { Heading, Flex, Text } from "@radix-ui/themes";
 
 export default function MenusPage() {
