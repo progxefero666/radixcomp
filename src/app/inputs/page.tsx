@@ -8,7 +8,7 @@ import { Heading, Flex, Text, Checkbox as RadixCheckbox, RadioGroup,
 
 import Layout from "@/app_front/comp/layout";
 import CardExample from "@/components/cardexample";
-import InputText from "@/radix/input/inputtext";
+import InputText from "@/radix/input/inptext";
 import InputNumber from "@/components/inputnumber";
 import Checkbox from "@/components/checkbox";
 import Select from "@/components/select";

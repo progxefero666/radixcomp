@@ -40,7 +40,7 @@ export default function InputTextComponent
     const input_type = type ?? RadixConf.INPUT_TEXT_TYPES.text;
     //const input_icon     = icon ?? null;       
     const input_readonly = readonly ?? false;
-    const input_disabled = disabled ?? true;
+    const input_disabled = disabled ?? false;
 
     const renderReadComp = () => {
         return (

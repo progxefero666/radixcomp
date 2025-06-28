@@ -16,16 +16,9 @@ interface SelectProps {
 }
 
 export default function SelectComponent({
-    placeholder = "Select an option...",
-    defaultValue,
-    value,
-    onValueChange,
-    disabled = false,
-    size = "2",
-    variant = "surface",
-    color = "gray",
-    children
-}: SelectProps) {
+    placeholder,defaultValue,value,onValueChange,disabled = false,
+    size = "2",variant = "surface",color = "gray",children}: SelectProps) {
+
     return (
         <Select.Root
             defaultValue={defaultValue}
@@ -39,4 +32,5 @@ export default function SelectComponent({
             </Select.Content>
         </Select.Root>
     );
+    
 }
