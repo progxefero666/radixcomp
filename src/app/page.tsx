@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex } from "@radix-ui/themes";
+import { Box,Grid, Flex } from "@radix-ui/themes";
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 import PrimaryBar from "@/app/index/primarybar";
 import IndexHeader from "./index/header";
@@ -53,9 +53,12 @@ interface IndexMainContentProps {
 function IndexMainContent({actsection}: IndexMainContentProps) {
 
     return (
-        <Flex direction="column" >
+        <Grid columns="3" gap="4" className="h-full">
+
            <p>Main content</p>	
-        </Flex>
+           
+        </Grid>
+       
     );
 
 }//end PrimaryBar
