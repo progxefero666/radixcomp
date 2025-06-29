@@ -34,7 +34,7 @@ export default function ContCollapsible({ id, barbuttonscfg, title, intro, child
         width: 'var(--size-4)',
         backgroundColor: 'var(--gray-a2)',
         borderRadius: 'var(--radius-3)',
-        border: '2px solid var(--sky-7)',
+        border: '2px solid var(--golden-7)',
         padding: 'var(--space-2)',
         boxShadow: '0px 0px 5px rgba(233, 62, 20, 0.9)' 
 
