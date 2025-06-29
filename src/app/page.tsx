@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Box, Grid, Flex } from "@radix-ui/themes";
+import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 import PrimaryBar from "@/app/index/primarybar";
@@ -14,6 +14,7 @@ import { Application } from "@/client/models/Application";
 import { Agent } from "@/client/models/Agent";
 import { Service } from "@/client/models/Service";
 import { Server } from "@/client/models/Server";
+import ContCollapsible from "@/radix/container/collapsible";
 
 
 
@@ -28,15 +29,14 @@ export default function Home() {
 
     useEffect(() => {
         const init = async () => {
-           appRef.current = new AppIndex();
-           const res:boolean = await appRef.current.loadInitCollections(); 
-           setInitialized(true);
+            appRef.current = new AppIndex();
+            const res: boolean = await appRef.current.loadInitCollections();
+            setInitialized(true);
         };
         init();
     }, []);
-        
-    const onSelection = (sectionId: string) => {
-        alert("sectionId: " + sectionId);
+
+    const onSelection = (sectionId: string) => {    
         setSection(sectionId);
     }
 
@@ -49,14 +49,14 @@ export default function Home() {
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
                     <PrimaryBar section={section} onselection={onSelection} />
                 </Box>
-                <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
-                    {initialized ? 
-                        <IndexMainContent section={section} 
-                                          applications={appRef.current?.applications!} 
-                                          services={appRef.current?.services!} 
-                                          servers={appRef.current?.servers!} 
-                                          agents={[]} />
-                        :null}
+                <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-4 overflow-y-auto">
+                    {initialized ?
+                        <IndexMainContent section={section}
+                            applications={appRef.current?.applications!}
+                            services={appRef.current?.services!}
+                            servers={appRef.current?.servers!}
+                            agents={[]} />
+                        : null}
                 </Box>
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6 overflow-y-auto">
                     <SecondBar actsection={section} />
@@ -76,34 +76,73 @@ interface IndexMainContentProps {
     section: string;
     applications: Application[];
     services: Service[];
-    servers:  Server[]
-    agents:   Agent[] 
+    servers: Server[]
+    agents: Agent[]
 }
-function IndexMainContent({ section,applications,services,servers,agents }: IndexMainContentProps) {
+function IndexMainContent({ section, applications, services, servers, agents }: IndexMainContentProps) {
 
     useEffect(() => {
-        alert(applications.length);
-        alert(services.length);
-        alert(servers.length);
+
     }, []);
+
+
+    const renderServices = () => {
+        console.log("renderServices");
+        return (
+            <div>services</div>
+        )
+    }
+
+    const renderServers = () => {
+        console.log("renderServers");
+        return (
+            <div>servers</div>
+        )
+    }
+
+    const renderAgents = () => {
+         console.log("renderAgents");
+        return (
+            <div>agents</div>
+        )
+    }
+
+    const renderApplications = () => {
+        console.log("renderApplications");
+        return (
+            <>
+                {applications.map((app, index) => (
+                   <ContCollapsible id={index} key={index.toString()}
+                        title  = {app.name} 
+                        intro  = {app.reference!}  
+                        opened = {false}>
+                        <Text size="2">
+                             {app.description} 
+                        </Text>    
+                                  
+                    </ContCollapsible>        
+                ))}
+            </>
+        )
+    }
 
     const renderMainContent = () => {
         if (section === AppConfig.MOD_APPLICATIONS.id) {
-            return (<div>p</div>);
+            return (renderApplications());
         }
         else if (section === AppConfig.MOD_SERVICES.id) {
-            return (<div>p</div>);
+            return (renderServices());
         }
         else if (section === AppConfig.MOD_SERVERS.id) {
-            return (<div>p</div>);
+            return (renderServers());
         }
         else if (section === AppConfig.MOD_AGENTS.id) {
-            return (<div>p</div>);
-        }                
+            return (renderAgents());
+        }
     };
 
     return (
-        <Flex direction="column" className="h-full">
+        <Flex direction="column" gapY="4" className="h-full">
             {renderMainContent()}
         </Flex>
     );

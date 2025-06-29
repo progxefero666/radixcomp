@@ -2,8 +2,8 @@
 
 import React from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { Button, Box, Text, Flex } from "@radix-ui/themes";
-import { ChevronDownIcon, Cross2Icon, RowSpacingIcon } from "@radix-ui/react-icons";
+import { Button, Box, Text, Flex, Separator } from "@radix-ui/themes";
+import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 
 /**
  * https://github.com/progxefero666/radixcomp
@@ -11,44 +11,61 @@ import { ChevronDownIcon, Cross2Icon, RowSpacingIcon } from "@radix-ui/react-ico
  * jsx Collapsible Component
  */
 interface ContCollapsibleProps {
-    title:string;
-    intro:string;
-    opened?: boolean;    
+    id: number;
+    title: string;
+    intro: string;
+    opened?: boolean;
     children?: React.ReactNode;
 }
 
-export default function ContCollapsible({title,intro,children,opened}:ContCollapsibleProps) {
+export default function ContCollapsible({ id, title, intro, children, opened }: ContCollapsibleProps) {
     const [open, setOpen] = React.useState(opened);
 
     return (
-		<Collapsible.Root
-			className="CollapsibleRoot"
-			open={open}
-			onOpenChange={setOpen}>
-			
-            <Flex justify="between" align="center" >
-                <Text size="2" >
-                   {title}
-                </Text>
-	
-				<Collapsible.Trigger asChild>
-					<button className="IconButton">
-						{open ? <Cross2Icon /> : <RowSpacingIcon />}
-					</button>
-				</Collapsible.Trigger>
-			</Flex>
+        <Box as="div" px="4"py="2" width={"100%"} 
+            style={{
+                backgroundColor: 'var(--gray-a2)',
+                borderRadius: 'var(--radius-3)',
+                border: '1px solid var(--red-a6)',
+                overflow: 'hidden'
+            }}  >
 
-            <Box >
-                <Text size="3" >
-                    {intro}   
-                </Text>                
-            </Box>
+            <Collapsible.Root
+                className="CollapsibleRoot"
+                open={open}
+                onOpenChange={setOpen}>
 
-            <Collapsible.Content>
-                {children}
-            </Collapsible.Content>
-			
-		</Collapsible.Root>
+                <Flex align="start"  width={"100%"} gapX={"2"} >
+                    <Collapsible.Trigger asChild>
+                        <button className="IconButton">
+                            {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                        </button>
+                    </Collapsible.Trigger>       
+
+                    <Flex  width={"100%"} justify="between" align="start" >
+                        <Text size="2" align="left" >
+                            {title}
+                        </Text>            
+                        <Box>
+                            Buttons
+                        </Box>
+                    </Flex>                 
+
+                </Flex>
+                <Separator orientation="horizontal" size="4" mb="2"/>
+                <Box >
+                    <Text size="3" >
+                        {intro}
+                    </Text>
+                </Box>
+
+                <Collapsible.Content>
+                    {children}
+                </Collapsible.Content>
+
+            </Collapsible.Root>
+
+        </Box>
     );
 
 }//end component
