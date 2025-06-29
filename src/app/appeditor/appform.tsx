@@ -14,28 +14,29 @@ export class ApplicationDef {
     public name: string = "application";
     public fields: ModelField[] = [];
 
+    this.fields.push(new ModelField("id", "numeric", true, false, true, null, null));
+    this.fields.push(new ModelField("author", "text", false, false, true, null, 100));    
+    this.fields.push(new ModelField("creationdate", "date", false, false, true, null, null));
+    this.fields.push(new ModelField("updatedate", "date", false, false, true, null, null));
+    this.fields.push(new ModelField("osystem", "text", false, false, true, null, 100));
+    this.fields.push(new ModelField("description", "text", false, false, true, null, 255));
+    this.fields.push(new ModelField("controlusers", "boolean", false, false, true, null, null));
+     this.fields.push(new ModelField("localdev", "boolean", false, false, true, null, null));
+    this.fields.push(new ModelField("usedocker", "boolean", false, false, true, null, null));
+    this.fields.push(new ModelField("consumeai", "boolean", false, false, true, null, null));
+    this.fields.push(new ModelField("useagents", "boolean", false, false, true, null, null));     
+    this.fields.push(new ModelField("appurl", "text", false, false, true, null, 500));
+    this.fields.push(new ModelField("reference", "text", false, false, true, null, 50));
+    this.fields.push(new ModelField("useui",     "boolean", false, false, true, null, null));
+
     constructor() {
-        this.fields.push(new ModelField("id", "numeric", true, false, true, null, null));
-        this.fields.push(new ModelField("name", "text", false, false, true, null, 50));
-        this.fields.push(new ModelField("reference", "text", false, false, true, null, 50));
-        this.fields.push(new ModelField("author", "text", false, false, true, null, 100));
-        this.fields.push(new ModelField("apptype", "text", false, false, true, null, 50));
-        this.fields.push(new ModelField("proglanguage", "text", false, false, true, null, 50));
-        this.fields.push(new ModelField("osystem", "text", false, false, true, null, 100));
-        this.fields.push(new ModelField("appurl", "text", false, false, true, null, 500));
-        this.fields.push(new ModelField("apppath", "text", false, false, true, null, 500));
-        this.fields.push(new ModelField("localdev", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("usedocker", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("creationdate", "date", false, false, true, null, null));
-        this.fields.push(new ModelField("updatedate", "date", false, false, true, null, null));
-        this.fields.push(new ModelField("description", "text", false, false, true, null, 255));
-        this.fields.push(new ModelField("controlusers", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("useui", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("useagents", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("name",         "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("apptype",      "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("proglanguage", "text", false, false, true, null, 50));         
+        this.fields.push(new ModelField("apppath",      "text", false, false, true, null, 500));    
         this.fields.push(new ModelField("consumedb", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("consumeapi", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("consumeai", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("exposedb", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("consumeapi","boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("exposedb",  "boolean", false, false, true, null, null));
         this.fields.push(new ModelField("exposeapi", "boolean", false, false, true, null, null));
     }
 
@@ -58,17 +59,17 @@ export class AppDef {
     public static readonly PATH_MAXLEN = 500;
     public static readonly DESCRIPTION_MAXLEN = 255;
 
-    public static readonly fdef_localdev:boolean   = false;
-    public static readonly fdef_usedocker:boolean   = false;
-    public static readonly fdef_controlusers:boolean= false;
-    public static readonly fdef_useui:boolean       = false;
-    public static readonly fdef_useagents:boolean   = false;
-    public static readonly fdef_consumedb:boolean   = false;
-    public static readonly fdef_consumeapi:boolean  = false;
-    public static readonly fdef_consumeai:boolean   = false;
-    public static readonly fdef_exposedb:boolean    = false;
-    public static readonly fdef_exposeapi:boolean   = false;
-    
+    public static readonly fdef_localdev: boolean = false;
+    public static readonly fdef_usedocker: boolean = false;
+    public static readonly fdef_controlusers: boolean = false;
+    public static readonly fdef_useui: boolean = false;
+    public static readonly fdef_useagents: boolean = false;
+    public static readonly fdef_consumedb: boolean = false;
+    public static readonly fdef_consumeapi: boolean = false;
+    public static readonly fdef_consumeai: boolean = false;
+    public static readonly fdef_exposedb: boolean = false;
+    public static readonly fdef_exposeapi: boolean = false;
+
 }//end class
 
 

@@ -5,6 +5,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { Button, Box, Text, Flex, Separator, IconButton } from "@radix-ui/themes";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import BarButtons from "../cbars/btbar";
 
 /**
  * https://github.com/progxefero666/radixcomp
@@ -22,6 +23,10 @@ interface ContCollapsibleProps {
 
 export default function ContCollapsible({ id, barbuttonscfg, title, intro, children, opened }: ContCollapsibleProps) {
     const [open, setOpen] = React.useState(opened);
+
+    const onClick = (operation: string) => {
+
+    }
 
     return (
         <Box as="div" px="4"py="2" width={"100%"} 
@@ -46,10 +51,10 @@ export default function ContCollapsible({ id, barbuttonscfg, title, intro, child
                     </Collapsible.Trigger>   
 
                     <Flex  width={"100%"} justify="between" align="start" >
-                        <Text size="4" align="left">{title}</Text>            
-                        <Box>
-                            Buttons
-                        </Box>
+                        <Text size="4" align="left">{title}</Text>     
+                        {barbuttonscfg? <
+                            BarButtons  barconfig={barbuttonscfg} onclick={onClick}/>
+                        : null}       
                     </Flex>                 
                 </Flex>
                 

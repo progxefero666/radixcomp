@@ -28,7 +28,14 @@ export class AppEditorCfg {
 
 
 /*
-
+"name",         "text"
+"apptype",      "text"
+"proglanguage", "text" 
+"apppath",      "text"
+"consumedb",    "boolean"
+"consumeapi",   "boolean"
+"exposedb",     "boolean"
+"exposeapi",    "boolean"
 
 export class Application {
 
