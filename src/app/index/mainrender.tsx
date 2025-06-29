@@ -10,7 +10,7 @@ import ContCollapsible from "@/radix/container/collapsible";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { BARCFG_DELETE_OPEN } from "@/app_front/ui/appbars";
 
-export const renderServices = (servs: Service[]) => {
+export const renderListServices = (servs: Service[]) => {
     const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
     return (
         <>
@@ -28,9 +28,9 @@ export const renderServices = (servs: Service[]) => {
             ))}
         </>
     )
-}
+}//end jsx render
 
-export const renderServers = (servs: Server[]) => {
+export const renderListServers = (servs: Server[]) => {
     const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
     return (
         <>
@@ -48,9 +48,9 @@ export const renderServers = (servs: Server[]) => {
             ))}
         </>
     )
-}
+}//end jsx render
 
-export const renderAgents = (ags: Agent[]) => {
+export const renderListAgents = (ags: Agent[]) => {
     console.log("renderAgents");
     const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
     return (
@@ -69,9 +69,9 @@ export const renderAgents = (ags: Agent[]) => {
             ))}
         </>
     )
-}
+}//end jsx render
 
-export const renderApplications = (apps: Application[]) => {
+export const renderListApplications = (apps: Application[]) => {
     const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
     return (
         <>
@@ -89,4 +89,22 @@ export const renderApplications = (apps: Application[]) => {
             ))}
         </>
     )
-}
+}//end jsx render
+
+/**
+ * 
+ * @param apps 
+ * @returns 
+ */
+export const renderTableApplications = (apps: Application[]) => {
+    const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
+    return (
+        <>
+            {apps.map((app, index) => (
+                <div key={index.toString()}>
+                  
+                </div>
+            ))}
+        </>
+    )
+}//end jsx render

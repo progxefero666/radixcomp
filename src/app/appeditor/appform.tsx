@@ -8,6 +8,44 @@ import { Application } from "@/client";
 import { InputSelect } from "@/radix/input/inpselect";
 import { InputCheck } from "@/radix/input/inputcheck";
 
+/*
+export class ApplicationDef {
+
+    public name: string = "application";
+    public fields: ModelField[] = [];
+
+    constructor() {
+        this.fields.push(new ModelField("id", "numeric", true, false, true, null, null));
+        this.fields.push(new ModelField("name", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("reference", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("author", "text", false, false, true, null, 100));
+        this.fields.push(new ModelField("apptype", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("proglanguage", "text", false, false, true, null, 50));
+        this.fields.push(new ModelField("osystem", "text", false, false, true, null, 100));
+        this.fields.push(new ModelField("appurl", "text", false, false, true, null, 500));
+        this.fields.push(new ModelField("apppath", "text", false, false, true, null, 500));
+        this.fields.push(new ModelField("localdev", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("usedocker", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("creationdate", "date", false, false, true, null, null));
+        this.fields.push(new ModelField("updatedate", "date", false, false, true, null, null));
+        this.fields.push(new ModelField("description", "text", false, false, true, null, 255));
+        this.fields.push(new ModelField("controlusers", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("useui", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("useagents", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("consumedb", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("consumeapi", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("consumeai", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("exposedb", "boolean", false, false, true, null, null));
+        this.fields.push(new ModelField("exposeapi", "boolean", false, false, true, null, null));
+    }
+
+    public toJsonString(): string {
+        return JSON.stringify(this, null, 4);
+    }
+
+}//end class
+*/
+
 export class AppDef {
     //creationdate?: string;
     //updatedate?: string;

@@ -14,7 +14,7 @@ import { Application } from "@/client/models/Application";
 import { Agent } from "@/client/models/Agent";
 import { Service } from "@/client/models/Service";
 import { Server } from "@/client/models/Server";
-import { renderAgents, renderApplications, renderServers, renderServices } from "./index/mainrender";
+import { renderListAgents, renderListApplications, renderListServers, renderListServices } from "./index/mainrender";
 
 
 
@@ -85,16 +85,16 @@ function IndexMainContent({ section, applications, services, servers, agents }: 
 
     const renderMainContent = () => {
         if (section === AppConfig.MOD_APPLICATIONS.id) {
-            return (renderApplications(applications));
+            return (renderListApplications(applications));
         }
         else if (section === AppConfig.MOD_SERVICES.id) {
-            return (renderServices(services));
+            return (renderListServices(services));
         }
         else if (section === AppConfig.MOD_SERVERS.id) {
-            return (renderServers(servers));
+            return (renderListServers(servers));
         }
         else if (section === AppConfig.MOD_AGENTS.id) {
-            return (renderAgents(agents));
+            return (renderListAgents(agents));
         }
     };
 

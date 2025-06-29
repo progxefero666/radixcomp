@@ -53,6 +53,15 @@ export class ThemeCompStyle {
 }//end class
 
 /**
+ * class ThemeDataStyle.TABLE_DEF_SIZE
+ */
+export class ThemeDataStyle {
+
+    public static readonly TABLE_DEF_SIZE: any = RadixConf.SIZES.size_2;
+
+}
+
+/**
  * class RadixColors
  */
 export class RadixColors {
