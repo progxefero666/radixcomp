@@ -8,7 +8,7 @@ import * as RadixNavigationMenu from '@radix-ui/react-navigation-menu';
 import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import classNames from 'classnames';
 
-import CollapsibleComponent from "@/radix/container/collapsible";
+import ContCollapsible from "@/radix/container/collapsible";
 
 
 /**
@@ -123,7 +123,7 @@ export default function NavigationPage() {
 
             {/* Collapsible Example */}
             <CardExample title="Collapsible" id="collapsible">
-                <CollapsibleComponent />
+                <ContCollapsible />
             </CardExample>
             
         </Layout>

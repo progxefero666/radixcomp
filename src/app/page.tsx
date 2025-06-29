@@ -10,6 +10,10 @@ import { useEffect, useRef, useState } from "react";
 import { AppConfig } from "@/app_front/appconfig";
 import SecondBar from "./index/secondbar";
 import { AppIndex } from "@/app_front/appindex";
+import { Application } from "@/client/models/Application";
+import { Agent } from "@/client/models/Agent";
+import { Service } from "@/client/models/Service";
+import { Server } from "@/client/models/Server";
 
 
 
@@ -20,13 +24,13 @@ export default function Home() {
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);
     const [section, setSection] = useState<string>(AppConfig.INDEX.id);
-
+    const [initialized, setInitialized] = useState<boolean>(false);
 
     useEffect(() => {
         const init = async () => {
            appRef.current = new AppIndex();
-           const res:boolean = await appRef.current.loadApplications(); 
-           alert(res);
+           const res:boolean = await appRef.current.loadInitCollections(); 
+           setInitialized(true);
         };
         init();
     }, []);
@@ -46,7 +50,13 @@ export default function Home() {
                     <PrimaryBar section={section} onselection={onSelection} />
                 </Box>
                 <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
-                    <IndexMainContent section={section} />
+                    {!initialized ? 
+                        <IndexMainContent section={section} 
+                                          applications={appRef.current?.applications!} 
+                                          services={appRef.current?.services!} 
+                                          servers={appRef.current?.servers!} 
+                                          agents={[]} />
+                        :null}
                 </Box>
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6 overflow-y-auto">
                     <SecondBar actsection={section} />
@@ -64,8 +74,18 @@ export default function Home() {
  */
 interface IndexMainContentProps {
     section: string;
+    applications: Application[];
+    services: Service[];
+    servers:  Server[]
+    agents:   Agent[] 
 }
-function IndexMainContent({ section }: IndexMainContentProps) {
+function IndexMainContent({ section,applications,services,servers,agents }: IndexMainContentProps) {
+
+    useEffect(() => {
+        alert(applications.length);
+        alert(services.length);
+        alert(servers.length);
+    }, []);
 
     const renderMainContent = () => {
         if (section === AppConfig.MOD_APPLICATIONS.id) {

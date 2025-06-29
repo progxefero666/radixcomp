@@ -31,48 +31,22 @@ export class AppIndex {
         //this.loadAgents();     
     }
 
-    public async loadApplications(): Promise<boolean> {
+    public async loadInitCollections(): Promise<boolean> {
         try {
            this.applications = await ApplicationsService.getAll();
+           this.services = await ServicesService.getAll();
+           this.servers = await ServersService.getAll();
+           //this.agents = await AgentsService.getAll();
         }
         catch (error) {
             alert('List app loaded error: ' + error);
-            console.error('List app loaded error:', error);
+            //console.error('List app loaded error:', error);
             return false;
         }        
         finally {
             return true
-        }
+        } 
     }
-
-    public async loadServices() {
-        try {
-           this.services = await ServicesService.getAll();
-        }
-        catch (error) {
-            alert('List services loaded error: ' + error);
-            console.error('List app loaded error:', error);
-        }        
-    }    
-
-    public async loadServers() {
-        try {
-           this.servers = await ServersService.getAll();
-        }
-        catch (error) {
-            alert('List servers loaded error: ' + error);
-            console.error('List app loaded error:', error);
-        }        
-    }    
-
-    public async loadAgents() {
-        try {
-           this.agents = await AgentsService.getAll();
-        }
-        catch (error) {
-            console.error('List agents loaded error:', error);
-        }        
-    }    
 
     public outputConsole() {
         console.log(this.applications);

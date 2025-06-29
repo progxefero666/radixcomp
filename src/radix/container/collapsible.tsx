@@ -2,38 +2,52 @@
 
 import React from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { Button, Box, Text } from "@radix-ui/themes";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { Button, Box, Text, Flex } from "@radix-ui/themes";
+import { ChevronDownIcon, Cross2Icon, RowSpacingIcon } from "@radix-ui/react-icons";
 
-interface CollapsibleProps {
+interface ContCollapsibleProps {
+    title:string;
+    intro:string;
     opened?: boolean;    
     children?: React.ReactNode;
 }
 /**
+ * https://github.com/progxefero666/radixcomp
  * radix-ui/themes
  * jsx Collapsible Component
  */
-export default function CollapsibleComponent({opened,children}:CollapsibleProps) {
+export default function ContCollapsible({title,intro,children,opened}:ContCollapsibleProps) {
+    const [open, setOpen] = React.useState(opened);
 
     return (
-        <Collapsible.Root defaultOpen={opened} >
+		<Collapsible.Root
+			className="CollapsibleRoot"
+			open={open}
+			onOpenChange={setOpen}>
+			
+            <Flex justify="between" align="center" >
+                <Text size="2" >
+                   {title}
+                </Text>
+	
+				<Collapsible.Trigger asChild>
+					<button className="IconButton">
+						{open ? <Cross2Icon /> : <RowSpacingIcon />}
+					</button>
+				</Collapsible.Trigger>
+			</Flex>
 
-            <Collapsible.Trigger asChild>
-                <Button variant="ghost">
-                    Toggle content
-                    <ChevronDownIcon />
-                </Button>              
-            </Collapsible.Trigger>
+            <Box >
+                <Text size="3" >
+                    {intro}   
+                </Text>                
+            </Box>
 
             <Collapsible.Content>
-                {children || (
-                    <Box p="3" style={{ backgroundColor: "var(--gray-a3)" }}>
-                        <Text>This is the collapsible content.</Text>
-                    </Box>
-                )}
+                {children}
             </Collapsible.Content>
-
-        </Collapsible.Root>
+			
+		</Collapsible.Root>
     );
 
 }//end component
