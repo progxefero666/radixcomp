@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
-import { Option } from "@/common/model/option";
+
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 import PrimaryBar from "@/app/index/primarybar";
 import IndexHeader from "./index/header";
@@ -14,7 +14,7 @@ import { Application } from "@/client/models/Application";
 import { Agent } from "@/client/models/Agent";
 import { Service } from "@/client/models/Service";
 import { Server } from "@/client/models/Server";
-import ContCollapsible from "@/radix/container/collapsible";
+import { renderAgents, renderApplications, renderServers, renderServices } from "./index/mainrender";
 
 
 
@@ -81,63 +81,20 @@ interface IndexMainContentProps {
 }
 function IndexMainContent({ section, applications, services, servers, agents }: IndexMainContentProps) {
 
-    useEffect(() => {
-
-    }, []);
-
-
-    const renderServices = () => {
-        console.log("renderServices");
-        return (
-            <div>services</div>
-        )
-    }
-
-    const renderServers = () => {
-        console.log("renderServers");
-        return (
-            <div>servers</div>
-        )
-    }
-
-    const renderAgents = () => {
-         console.log("renderAgents");
-        return (
-            <div>agents</div>
-        )
-    }
-
-    const renderApplications = () => {
-        console.log("renderApplications");
-        return (
-            <>
-                {applications.map((app, index) => (
-                   <ContCollapsible id={index} key={index.toString()}
-                        title  = {app.name} 
-                        intro  = {app.reference!}  
-                        opened = {false}>
-                        <Text size="2">
-                             {app.description} 
-                        </Text>    
-                                  
-                    </ContCollapsible>        
-                ))}
-            </>
-        )
-    }
+    //useEffect(() => { }, []);
 
     const renderMainContent = () => {
         if (section === AppConfig.MOD_APPLICATIONS.id) {
-            return (renderApplications());
+            return (renderApplications(applications));
         }
         else if (section === AppConfig.MOD_SERVICES.id) {
-            return (renderServices());
+            return (renderServices(services));
         }
         else if (section === AppConfig.MOD_SERVERS.id) {
-            return (renderServers());
+            return (renderServers(servers));
         }
         else if (section === AppConfig.MOD_AGENTS.id) {
-            return (renderAgents());
+            return (renderAgents(agents));
         }
     };
 
