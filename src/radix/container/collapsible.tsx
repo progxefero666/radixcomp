@@ -26,22 +26,18 @@ export default function ContCollapsible({ id, barbuttonscfg, title, intro, child
     const [open, setOpen] = React.useState(opened);
 
     const onClick = (operation: string) => {
-
     }
 
-    //         boxShadow: 'var(--shadow-2)',
     const boxStyle = {
-        width: 'var(--size-4)',
         backgroundColor: 'var(--gray-a2)',
         borderRadius: 'var(--radius-3)',
-        border: '2px solid var(--golden-7)',
+        border: '2px solid var(--blue-7)',
         padding: 'var(--space-2)',
-        boxShadow: '0px 0px 5px rgba(233, 62, 20, 0.9)' 
-
+        boxShadow: '0px 0px 5px rgba(222, 251, 137, 0.9)' 
     };
+
     return (
-        <Box as="div"   px="4"py="2" width="var(--size-4)" 
-            style={boxStyle}  >
+        <Box as="div" px="4" py="2" width="var(--size-4)" style={boxStyle}  >
        
             <Collapsible.Root
                 className="CollapsibleRoot"

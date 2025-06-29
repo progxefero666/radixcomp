@@ -42,8 +42,6 @@ export class RadixConf {
         full: "full" as any,
     };
 
-
-
     //placeholder = "Enter text..." 
     public static readonly INPUT_TEXT_TYPES = {
         text: "text" as any,

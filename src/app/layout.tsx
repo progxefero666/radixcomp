@@ -5,7 +5,7 @@ import { AppThemeWrapper } from "@/app_front/theme/themewrapper";
 // Global styles
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
-
+import "@/style/smalls.css"
 
 // metadata for the application
 export const metadata: Metadata = {

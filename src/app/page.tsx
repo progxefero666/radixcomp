@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
 
+import Image from 'next/image'
+
 import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 import PrimaryBar from "@/app/index/primarybar";
 import IndexHeader from "./index/header";
@@ -16,7 +18,22 @@ import { Service } from "@/client/models/Service";
 import { Server } from "@/client/models/Server";
 import { renderListAgents, renderListApplications, renderListServers, renderListServices } from "./index/mainrender";
 
-
+/*
+import ProfileImage from './profile.png'
+ 
+export default function Page() {
+  return (
+    <Image
+      src={ProfileImage}
+      alt="Picture of the author"
+      // width={500} automatically provided
+      // height={500} automatically provided
+      // blurDataURL="data:..." automatically provided
+      // placeholder="blur" // Optional blur-up while loading
+    />
+  )
+}
+*/
 
 /**
  * Application Main page 
@@ -99,7 +116,7 @@ function IndexMainContent({ section, applications, services, servers, agents }: 
     };
 
     return (
-        <Flex direction="column" gapY="4" className="h-full">
+        <Flex direction="column" gapY="5" className="h-full">
             {renderMainContent()}
         </Flex>
     );
