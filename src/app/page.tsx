@@ -50,7 +50,7 @@ export default function Home() {
                     <PrimaryBar section={section} onselection={onSelection} />
                 </Box>
                 <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-6 overflow-y-auto">
-                    {!initialized ? 
+                    {initialized ? 
                         <IndexMainContent section={section} 
                                           applications={appRef.current?.applications!} 
                                           services={appRef.current?.services!} 
