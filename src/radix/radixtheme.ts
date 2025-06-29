@@ -68,20 +68,36 @@ export class RadixColors {
 
     static readonly colors = {
         gray: "gray" as any,
+        mauve: "mauve" as any,
+        slate: "slate" as any,
+        sage: "sage" as any,
+        olive: "olive" as any,
+        sand: "sand" as any,
+
+        tomato: "tomato" as any,
         red: "red" as any,
-        blue: "blue" as any,
-        green: "green" as any,
-        orange: "orange" as any,
-        purple: "purple" as any,
+        ruby: "ruby" as any,
+        crimson: "crimson" as any,
         pink: "pink" as any,
-        sky: "sky" as any,
-        lime: "lime" as any,
         plum: "plum" as any,
-        gold: "gold" as any,
-        yellow: "yellow" as any,
+        purple: "purple" as any,
+        violet: "violet" as any,
+        iris: "iris" as any,
         indigo: "indigo" as any,
-        teal: "teal" as any,        
+        blue: "blue" as any,
+        cyan: "cyan" as any,
+        teal: "teal" as any,
+        jade: "jade" as any,
+        green: "green" as any,
+        grass: "grass" as any,
+        lime: "lime" as any,
+        yellow: "yellow" as any,
+        amber: "amber" as any,
+        orange: "orange" as any,
+        brown: "brown" as any,
+        sky: "sky" as any, // experimental
     };
+
 
 }//end class
 

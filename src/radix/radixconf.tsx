@@ -22,12 +22,16 @@ export class RadixConf {
         size_4: "4" as any,
     };
 
+    //variant="plain"
     public static readonly VARIANTS = {
-        classic: "classic" as any, 
+        plain: "plain" as any,
+        classic: "classic" as any,
         solid: "solid" as any,
         soft: "soft" as any,
         surface: "surface" as any,
         ghost: "ghost" as any,
+        outlined: "outlined" as any,
+        subtle: "subtle" as any,
     };
 
     public static readonly RADIUS = {
@@ -49,7 +53,7 @@ export class RadixConf {
         url: "url" as any,
         tel: "tel" as any,
     };
-   
+
     public static readonly INPUT_TEXT_ICONS = {
         search: "search" as any,
         person: "person" as any,
@@ -59,7 +63,7 @@ export class RadixConf {
     public static readonly ALERT_SUCCESS_STYLE: string
         = "alert alert-success w-auto flex justify-center fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50";
 
-    
+
     public static getIcon = (inputType: any) => {
         switch (inputType) {
             case "search":
@@ -71,6 +75,6 @@ export class RadixConf {
             default:
                 return null;
         }
-    }; 
+    };
 
 }//end class
