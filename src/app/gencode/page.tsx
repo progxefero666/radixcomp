@@ -1,62 +1,125 @@
-//src\app\gencode\page.tsx
+"use client";
 
+import { Option } from "@/common/model/option";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Box, Grid, Flex ,Text, Button, Link} from "@radix-ui/themes";
+import { Box, Grid, Flex, Text, Button, Link } from "@radix-ui/themes";
 
+import Image from 'next/image'
+
+import ThemeSwitcher from "@/app_front/theme/themeswitcher";
+
+
+import { useEffect, useRef, useState } from "react";
 import { AppConfig } from "@/app_front/appconfig";
 
 import { AppIndex } from "@/app_front/appindex";
+import { Application } from "@/client/models/Application";
+import { Agent } from "@/client/models/Agent";
+import { Service } from "@/client/models/Service";
+import { Server } from "@/client/models/Server";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { RadixColors, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
+import { ModuleConfig } from "./config";
 
 
-const BODY_STYLE: string = "w-full h-auto grid grid-cols-[14%_41%_41%_4%]";
+
+const boxStyle = {
+    background: 'rgb(35, 35, 39)',
+    border: '1px solid rgb(93, 92, 93)',
+    padding: '8px',
+};
+
 
 /**
- * Page GenCode
+ * Application Main page 
  */
 export default function PageGenCode() {
     const router = useRouter();
-    const [section, setSection] = useState<string>("undefined");
+    const appRef = useRef<AppIndex>(null);
+    const [section, setSection] = useState<string>(AppConfig.INDEX.id);
+    const [initialized, setInitialized] = useState<boolean>(false);
 
+   
 
     useEffect(() => {
         const init = async () => {
-           
+            appRef.current = new AppIndex();
+            const res: boolean = await appRef.current.loadInitCollections();
+            setInitialized(true);
         };
         init();
     }, []);
 
-    const onSelection = (sectionId: string) => {    
+    const onSelection = (sectionId: string) => {
         setSection(sectionId);
     }
 
- 
-
     return (
         <Flex direction="column" className="h-screen">
-             <PageHeader onselection={onSelection} />
 
-            <Box className="w-[14%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
-                <PagePrimaryBar section={section} onselection={onSelection} />
-            </Box>
-            <Box className="w-[41%] bg-gray-3 p-4">
+            <PageHeader onselection={onSelection} />
+            
+            <Flex className="flex-1 overflow-hidden">
+                <Box width={"14%"} className="h-screen p-4">
+                    <PrimaryBar sections={ModuleConfig.SECTIONS} 
+                                onselection={onSelection}
+                                actsection={section}  />
+                </Box>
+                <Box width={"41%"} style={boxStyle}>
+                    defs
+                </Box>
 
-            </Box>
-            <Box className="w-[41%] bg-gray-10 p-4">
-
-            </Box>
-            <Box className="w-[4%] bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6 overflow-y-auto">
-                <PageSecondBar actsection={section} />
-            </Box>
+                <Box width={"41%"} >
+                    sdf
+                </Box>
+                <Box width={"4%"} className="h-screen">
+                    <SecondBar actsection={section} />
+                </Box>
+            </Flex>
 
         </Flex>
-    )
+    );
 
 }//end page
 
+interface InputEditorProps {
+    section: string;
+}
+function InputEditor({ section }: InputEditorProps) {
+
+    const renderMainContent = () => {
+
+    };
+
+    return (
+        <Flex direction="column" gapY="5" className="h-full">
+
+        </Flex>
+    );
+
+}//end InputEditor
+
+interface OutputMonitorProps {
+    section: string;
+}
+function OutputMonitor({ section }: OutputMonitorProps) {
+
+    const renderMainContent = () => {
+
+    };
+
+    return (
+        <Flex direction="column" gapY="5" className="h-full">
+
+        </Flex>
+    );
+
+}//end InputEditor
+
+/**
+ * Page Heade
+ */
 interface PageHeaderProps {
     onselection: (sectionId: string) => void;
 }
@@ -113,39 +176,42 @@ function PageHeader({ onselection }: PageHeaderProps) {
 }//end PrimaryBar
 
 
-interface PagePrimaryBarProps {
-    section: string;
+/**
+ * Page Primary Bar
+ */
+interface PrimaryBarProps {
+    sections: Option[];
+    actsection: string;
     onselection: (sectionId:string) => void;
 }
-function PagePrimaryBar({onselection,section}: PagePrimaryBarProps) {
-
+function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
     return (
         <Flex direction="column" >
-
-            <MenuButtons options={AppConfig.MODULES}
+            <MenuButtons options={ModuleConfig.SECTIONS}
                 onselection={onselection} 
                 optactcolor={RadixColors.colors.indigo}
                 optcolor={RadixColors.colors.plum}
-                optactid={section} />	
-
+                optactid={actsection} />	
         </Flex>
     );
 
 }//end PrimaryBar
 
-interface PageSecondBarProps {
+
+/**
+ * Page Second Bar
+ */
+interface SecondBarProps {
     actsection: string;
 }
-function PageSecondBar({actsection}: PageSecondBarProps) {
+function SecondBar({actsection}: SecondBarProps) {
 
     const onSelection = (sectionId: string) => {
         //not implemented yet
     }
-
     return (
         <Flex direction="column" >
             <p>Second Bar</p>
-       
         </Flex>
     );
 

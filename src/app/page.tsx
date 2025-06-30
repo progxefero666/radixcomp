@@ -8,6 +8,7 @@ import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
 import Home from "./index/page";
 import PageGenCode from "./gencode/page";
 
+
 /**
  * Main app view page component
  * 
@@ -20,10 +21,10 @@ export default function Desktop() {
     }, []);
   
     const render = () => {
-        const mode: number = 0;
+        const mode: number = 1;
         switch (mode) {
             case 0: return <Home />
-            case 1: return <PageGenCode />;
+           case 1: return <PageGenCode />
         }
     };
     return (
