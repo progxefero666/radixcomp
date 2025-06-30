@@ -15,7 +15,7 @@ export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
 
     const auto: boolean = autocommit ?? false;    
     const def_value:string = value || options[0].id;
-    //const compDirection: radixTypeDirection = direction ?? "row";
+    const compDirection: radixTypeDirection = direction ?? "row";
 
     const compStyle: radixTypeComp = {
         color: RadixConf.COLORS.gray,
@@ -47,7 +47,7 @@ export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
             size         = {compStyle.size} 
             defaultValue = {def_value}  
             onValueChange= {onSelect}>
-            <Flex direction="row" gap="2">
+            <Flex direction = {compDirection} gap="2">
                 {options.map((opt, index) => (
                     renderItem(index.toString(),opt.id, opt.text)         
                 ))}                    

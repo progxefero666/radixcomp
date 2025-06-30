@@ -3,18 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
-import { Separator } from "radix-ui";
-import { Box,Grid, Flex, Text, Button, Link } from "@radix-ui/themes";
-
+import { Box, Separator,Flex, Text, Button, Link } from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
 import { AppConfig } from "@/app_front/appconfig";
-
 import { AppIndex } from "@/app_front/appindex";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { EditorConfig, ModuleConfig } from "./config";
-import { XRadioGroup } from "@/radix/group/grpradio";
+import { ModuleConfig } from "./config";
+import { InputEditor } from "@/app/gencode/panelinput";
 
 
 
@@ -91,37 +88,6 @@ function OutputMonitor({section:string}:OutputMonitorProps) {
 
 }//end InputEditor
 
-interface InputEditorProps {section?:string;}
-function InputEditor({}:InputEditorProps) {
-
-    const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
-    const onSelect = (value: string,compname?:string) => {setSection(value);};
-
-    const renderSectionA = () => {
-        return (
-            <Text size="5" weight="bold" className="text-gray-12">
-                Section A Content
-            </Text>
-        );
-    }
-
-    const renderSectionB = () => {
-        return (
-            <Text size="5" weight="bold" className="text-gray-12">
-                Section B Content
-            </Text>
-        );
-    };
-
-    return (
-        <Flex direction="column" gapY="5" className="h-full">
-            <XRadioGroup autocommit = {true} onselect={onSelect} options={EditorConfig.SECTIONS}  value = {section} />
-            {section === EditorConfig.TABLES.id && renderSectionA()}
-            {section === EditorConfig.SERVICES.id && renderSectionB()}
-        </Flex>
-    );
-
-}//end InputEditor
 
 /**
  * Page Heade
@@ -194,7 +160,7 @@ function PrimaryBar({sections,onselection,actsection}: PrimaryBarProps) {
             <MenuButtons options={sections}
                 onselection={onselection} 
                 optactid={actsection} />	
-            <Separator.Root className="SeparatorRoot" style={{ margin: "15px 0" }} />  
+            <Separator orientation="horizontal" size="4"  />
         </Flex>
     );
 
