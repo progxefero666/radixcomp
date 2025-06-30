@@ -16,7 +16,8 @@ import { AppIndex } from "@/app_front/appindex";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { ModuleConfig } from "./config";
+import { EditorConfig, ModuleConfig } from "./config";
+import { XRadioGroup } from "@/radix/group/grpradio";
 
 
 
@@ -77,8 +78,8 @@ export default function PageGenCode() {
 
 }//end page
 
-interface InputEditorProps {section:string;}
-function InputEditor({section:string}:InputEditorProps) {
+interface OutputMonitorProps {section:string;}
+function OutputMonitor({section:string}:OutputMonitorProps) {
 
     const renderMainContent = () => {
 
@@ -92,15 +93,47 @@ function InputEditor({section:string}:InputEditorProps) {
 
 }//end InputEditor
 
-interface OutputMonitorProps {section:string;}
-function OutputMonitor({section}:OutputMonitorProps) {
+interface InputEditorProps {section?:string;}
+function InputEditor({}:InputEditorProps) {
+
+    const SECTION_A: Option = new Option("section_a","Section A",null,null,null);
+    const SECTION_B: Option = new Option("section_b","Section B",null,null,null);
+    const sections: Option[] = [SECTION_A,SECTION_B];
+
+    const [section, setSection] = useState<string>(SECTION_A.id);
+
+    const onSelect = (value: string,compname?:string) => {
+    };
+
+    const renderSectionA = () => {
+        return (
+            <Text size="5" weight="bold" className="text-gray-12">
+                Section A Content
+            </Text>
+        );
+    }
+
+    const renderSectionB = () => {
+        return (
+            <Text size="5" weight="bold" className="text-gray-12">
+                Section B Content
+            </Text>
+        );
+    };
 
     const renderMainContent = () => {
+        if(section === SECTION_A.id) {
+            return renderSectionA();
+        }
+        else if(section === SECTION_B.id) {
+            return renderSectionB();
+        }        
     };
 
     return (
         <Flex direction="column" gapY="5" className="h-full">
-
+            <XRadioGroup onselect={onSelect} options={EditorConfig.SECTIONS}  value="1" />
+            {renderMainContent()}
         </Flex>
     );
 

@@ -1,43 +1,38 @@
 //src\radix\group\grpradio.tsx
 
-import { Option } from "@/common/model/option";
-
-
 import { forwardRef } from "react";
-import { Checkbox, Flex, Text, Box, RadioGroup, Button } from "@radix-ui/themes";
-
+import { Flex, Text, Box, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { ThemeButtonsStyle, ThemeCompStyle } from "@/radix/radixtheme";
+import { GroupCompProps, radixTypeComp, radixTypeDirection } from "@/radix/radixmodels";
 
-interface CompProps {
-    autocommit?: boolean;
-    name: string;
-    options: Option[];
-    label?: string;
-    inline?: boolean;
-    value?: boolean;
-    onselect: (operation: string) => void;
-    autofocus?: boolean;
-}
-export const XRadioGoup = forwardRef<HTMLInputElement, CompProps>(({
-    autocommit,options, name, label, value, inline, autofocus, onselect }, ref) => {
+
+/**
+ * XRadioGroup
+ */
+
+export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
+    autocommit,options, name, label, value, direction, autofocus, onselect }, ref) => {
 
     const auto: boolean = autocommit ?? false;    
-    const showInline: boolean = inline ?? false;
-    const direction: "row" | "column" = showInline ? "row" : "column";
-    const size = RadixConf.SIZES.size_2;
-    const variant = RadixConf.VARIANTS.surface;
-    const color = RadixConf.COLORS.gray;
+    const compDirection: radixTypeDirection = direction || "row";
+
+    const compStyle: radixTypeComp = {
+        color: RadixConf.COLORS.gray,
+        size: RadixConf.SIZES.size_2,
+        variant: RadixConf.VARIANTS.surface,
+        radius: RadixConf.RADIUS.medium
+    }
 
     const onSelect = (value:string) => {
         if(auto) {
-            onselect(value);
-            return
+            if(name){onselect(value,name);}
+            else    {onselect(value);}           
+            return;
         }
         console.log('Value:', value);
     }
 
-    const renderItem = (key: string, value: string, text: string) => {
+    const renderItem = (key:string,value:string,text:string) => {
         return (
             <RadioGroup.Item key={key} value={value}  >
                 {text}
@@ -46,10 +41,11 @@ export const XRadioGoup = forwardRef<HTMLInputElement, CompProps>(({
     }
 
     return (
-        <Flex direction = {direction} gap="2" >
+        <Flex direction = {compDirection} gap="2" >
             <RadioGroup.Root 
-                color = {color} variant={variant}
-                size={size}
+                color = {compStyle.color}
+                variant={compStyle.variant}
+                size={compStyle.size} 
                 defaultValue="1"  
                 onValueChange={onSelect}>
 
@@ -62,33 +58,3 @@ export const XRadioGoup = forwardRef<HTMLInputElement, CompProps>(({
     )
 
 })//end component
-
-/*
-import { RadioGroup, Flex, Text } from '@radix-ui/themes';
-
-function MyRadioGroup() {
-  const handleSelectionChange = (value: string) => {
-    console.log('Valor seleccionado:', value);
-    // Tu lógica aquí
-  };
-
-  return (
-    <RadioGroup.Root 
-      defaultValue="1" 
-      onValueChange={handleSelectionChange}
-    >
-      <Flex direction="column" gap="2">
-        <Text as="label" size="2">
-          <RadioGroup.Item value="1" /> Opción 1
-        </Text>
-        <Text as="label" size="2">
-          <RadioGroup.Item value="2" /> Opción 2
-        </Text>
-        <Text as="label" size="2">
-          <RadioGroup.Item value="3" /> Opción 3
-        </Text>
-      </Flex>
-    </RadioGroup.Root>
-  );
-}
-*/

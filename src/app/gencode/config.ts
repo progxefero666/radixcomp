@@ -21,3 +21,20 @@ export class ModuleConfig {
     public static readonly ACTIVE_SECTION: Option = ModuleConfig.SECTION_SQUEMA;
 
 }//export class AppConfig
+
+export class EditorConfig {
+    
+    public static readonly TABLES: Option 
+        = new Option("table","Tables",null,null,null);
+
+    public static readonly SERVICES: Option 
+        = new Option("services","Services",null,null,null);
+
+    public static readonly SECTIONS: Option[] = [
+        EditorConfig.TABLES,
+        EditorConfig.SERVICES
+    ]
+    
+    public static readonly ACTIVE_SECTION: Option = EditorConfig.TABLES;
+
+}//export class AppConfig
