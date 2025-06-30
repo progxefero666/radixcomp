@@ -3,9 +3,26 @@
 import { RadixConf } from "./radixconf";
 
 /**
- * class 
+ * class  ThemeStyle.SEPARATOR_V_STYLE
  */
 export class ThemeStyle {
+
+    public static SEPARATOR_V_STYLE = {
+        height: '2px'
+    };
+
+    public static SEPARATOR_H_STYLE = {
+        height: '2px'
+    };
+
+    public static boxStyle = {
+        margin: '20px',
+        background: '#00ff00',
+        borderRadius: 20,
+        border: '2px solid #ff00ff',
+        padding: 'var(--space-2)',
+        boxShadow: '0px 0px 10px #ffff00' 
+    };
 
 
 }//end class
