@@ -8,10 +8,10 @@ export class ModuleConfig {
         = new Option("./","Home",null,null,null);
 
     public static readonly SECTION_SQUEMA: Option 
-        = new Option("dbschema","Db Squema",null,null,null);
+        = new Option("front","Front",null,null,null);
 
     public static readonly SECTION_FORMS: Option 
-        = new Option("forms","Forms",null,null,null);
+        = new Option("server","Server",null,null,null);
 
     public static readonly SECTIONS: Option[] = [
         ModuleConfig.SECTION_SQUEMA,
@@ -29,6 +29,9 @@ export class EditorConfig {
 
     public static readonly SERVICES: Option 
         = new Option("services","Services",null,null,null);
+
+    public static readonly ALL_SQUEMA: Option 
+        = new Option("fullsquema","Full Squema",null,null,null);
 
     public static readonly SECTIONS: Option[] = [
         EditorConfig.TABLES,

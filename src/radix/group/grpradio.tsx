@@ -1,7 +1,7 @@
 //src\radix\group\grpradio.tsx
 
 import { forwardRef } from "react";
-import { Flex, Text, Box, RadioGroup } from "@radix-ui/themes";
+import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
 import { GroupCompProps, radixTypeComp, radixTypeDirection } from "@/radix/radixmodels";
 
@@ -14,11 +14,12 @@ export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
     autocommit,options, name, label, value, direction, autofocus, onselect }, ref) => {
 
     const auto: boolean = autocommit ?? false;    
-    const compDirection: radixTypeDirection = direction || "row";
+    const def_value:string = value || options[0].id;
+    //const compDirection: radixTypeDirection = direction ?? "row";
 
     const compStyle: radixTypeComp = {
         color: RadixConf.COLORS.gray,
-        size: RadixConf.SIZES.size_2,
+        size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
         radius: RadixConf.RADIUS.medium
     }
@@ -28,8 +29,7 @@ export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
             if(name){onselect(value,name);}
             else    {onselect(value);}           
             return;
-        }
-        console.log('Value:', value);
+        }        
     }
 
     const renderItem = (key:string,value:string,text:string) => {
@@ -41,20 +41,18 @@ export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
     }
 
     return (
-        <Flex direction = {compDirection} gap="2" >
-            <RadioGroup.Root 
-                color = {compStyle.color}
-                variant={compStyle.variant}
-                size={compStyle.size} 
-                defaultValue="1"  
-                onValueChange={onSelect}>
-
+        <RadioGroup.Root 
+            color        = {compStyle.color}
+            variant      = {compStyle.variant}
+            size         = {compStyle.size} 
+            defaultValue = {def_value}  
+            onValueChange= {onSelect}>
+            <Flex direction="row" gap="2">
                 {options.map((opt, index) => (
-                    renderItem(index.toString(),(index + 1).toString(), opt.text)         
-                ))}
-
-            </RadioGroup.Root>
-        </Flex>
+                    renderItem(index.toString(),opt.id, opt.text)         
+                ))}                    
+            </Flex>
+        </RadioGroup.Root>
     )
 
 })//end component

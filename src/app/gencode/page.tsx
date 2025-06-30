@@ -1,15 +1,12 @@
 "use client";
 
-import { Option } from "@/common/model/option";
-import { usePathname, useRouter } from "next/navigation";
-import { Box, Grid, Flex, Text, Button, Link } from "@radix-ui/themes";
-
-import Image from 'next/image'
-
-import ThemeSwitcher from "@/app_front/theme/themeswitcher";
-
-
 import { useEffect, useRef, useState } from "react";
+
+import { usePathname, useRouter } from "next/navigation";
+import { Separator } from "radix-ui";
+import { Box,Grid, Flex, Text, Button, Link } from "@radix-ui/themes";
+
+import { Option } from "@/common/model/option";
 import { AppConfig } from "@/app_front/appconfig";
 
 import { AppIndex } from "@/app_front/appindex";
@@ -18,6 +15,7 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { EditorConfig, ModuleConfig } from "./config";
 import { XRadioGroup } from "@/radix/group/grpradio";
+
 
 
 
@@ -96,14 +94,8 @@ function OutputMonitor({section:string}:OutputMonitorProps) {
 interface InputEditorProps {section?:string;}
 function InputEditor({}:InputEditorProps) {
 
-    const SECTION_A: Option = new Option("section_a","Section A",null,null,null);
-    const SECTION_B: Option = new Option("section_b","Section B",null,null,null);
-    const sections: Option[] = [SECTION_A,SECTION_B];
-
-    const [section, setSection] = useState<string>(SECTION_A.id);
-
-    const onSelect = (value: string,compname?:string) => {
-    };
+    const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
+    const onSelect = (value: string,compname?:string) => {setSection(value);};
 
     const renderSectionA = () => {
         return (
@@ -121,19 +113,11 @@ function InputEditor({}:InputEditorProps) {
         );
     };
 
-    const renderMainContent = () => {
-        if(section === SECTION_A.id) {
-            return renderSectionA();
-        }
-        else if(section === SECTION_B.id) {
-            return renderSectionB();
-        }        
-    };
-
     return (
         <Flex direction="column" gapY="5" className="h-full">
-            <XRadioGroup onselect={onSelect} options={EditorConfig.SECTIONS}  value="1" />
-            {renderMainContent()}
+            <XRadioGroup autocommit = {true} onselect={onSelect} options={EditorConfig.SECTIONS}  value = {section} />
+            {section === EditorConfig.TABLES.id && renderSectionA()}
+            {section === EditorConfig.SERVICES.id && renderSectionB()}
         </Flex>
     );
 
@@ -210,6 +194,7 @@ function PrimaryBar({sections,onselection,actsection}: PrimaryBarProps) {
             <MenuButtons options={sections}
                 onselection={onselection} 
                 optactid={actsection} />	
+            <Separator.Root className="SeparatorRoot" style={{ margin: "15px 0" }} />  
         </Flex>
     );
 

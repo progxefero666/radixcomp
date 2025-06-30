@@ -139,6 +139,19 @@ textarea:not(:disabled),
     cursor: text !important;
 }
 
+.SeparatorRoot {
+	background-color: var(--violet-6);
+}
+.SeparatorRoot[data-orientation="horizontal"] {
+	height: 1px;
+	width: 100%;
+}
+.SeparatorRoot[data-orientation="vertical"] {
+	height: 100%;
+	width: 1px;
+}
+
+
 .CaretDown {
     position: relative;
     color: var(--accent-10);
