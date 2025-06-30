@@ -12,8 +12,9 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
 import { getTextFile } from "@/app_server/actions/gettextfile";
 import { ModelField, ModelTable } from "@/codegen/cgmodel";
-import { CodeGenSql, CodeGenUtil } from "@/codegen/codegen";
+import { CodeGenSql} from "@/codegen/kernel/codegen";
 import { XInputTextArea } from "@/radix/input/inptextarea";
+import { CodeGenUtil } from "@/codegen/kernel/cghelper";
 
 interface InputEditorProps { section?: string; }
 export function InputEditor({ }: InputEditorProps) {
@@ -74,7 +75,7 @@ export function InputEditor({ }: InputEditorProps) {
 
     }//end createForm
 
-    
+
     const renderPanelTables = () => {
         let showModelTable: boolean = false;
         if (modelTableSel !== null) { showModelTable = true; }

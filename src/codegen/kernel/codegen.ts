@@ -2,57 +2,15 @@
 
 import { ModelTable, ModelField, Relation } from "@/codegen/cgmodel";
 import sqlTypesData from "@/codegen/sqltypes.json";
+import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
+import { CodeGenUtil } from "@/codegen/kernel/cghelper";
 
 export interface SqlTypes {fieldtypes: {[key:string]:string[];};}
 export const SqlFieldtypes = (sqlTypesData as SqlTypes).fieldtypes;
 
 // CodeGenSql.getEsquemaTables(sqlScript: string): ModelTable[] 
-/**
- * class App Db Motor Config
- */
-export class CodeGenLibrary {
 
-    public static readonly CODEGEN_LIB_PATH: string 
-        = "@/codegen/cgmodel"
 
-    public static readonly SQLTYPES_JSON_PATH: string 
-        = "@/codegen/sqltypes.json";
-
-}//end class
-
-/**
- * class CodeGenUtil.getModelTableIndex(modelTables:ModelTable[],name:string)
- */
-export class CodeGenUtil {
-
-    public static capitalize(str: string): string {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    }//end
-
-    public static uncapitalize(str: string): string {
-        return str.charAt(0).toLowerCase() + str.slice(1);
-    }//end  
-
-    public static generateImports(): string {
-        let imports: string = "";
-        imports += `import { ModelTable, ModelField, Relation } from `;
-        imports += `"` + CodeGenLibrary.CODEGEN_LIB_PATH + `";\n`;
-        imports += `import sqlTypesData from `;
-        imports += `"` + CodeGenLibrary.SQLTYPES_JSON_PATH + `";\n\n`;
-        return imports;
-    }
-
-    public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
-        let tableIndex:number = -1;
-        for (let idx=0;idx<modelTables.length;idx++) {
-            if (modelTables[idx].name==name) {
-                tableIndex = idx;
-            }
-        }
-        return tableIndex;
-    }//end  
-
-}//end class
 
 
 /**
@@ -383,7 +341,7 @@ export class CodeGenTsFilesContent {
         let content: string = "";
         
         // 1. Imports una sola vez al principio
-        content += CodeGenUtil.generateImports();
+        content += CodeGenConfig.getKernelImports();
         
         // 2. Para cada tabla, los 3 bloques
         for (let i = 0; i < tableModel.length; i++) {
@@ -472,7 +430,7 @@ export class CodeGenTsFilesContent {
       
     public static genFileContentTableDef(table: ModelTable): string {
         let code: string = "";
-        code += CodeGenUtil.generateImports();
+        code += CodeGenConfig.getKernelImports();
         code += CodeGenTsFilesContent.generateSingleTableDefClass(table);        
         return code;
     }//end
@@ -505,7 +463,7 @@ export class CodeGenTsFilesContent {
 
     public static getTablesDefCode(tables: ModelTable[]): string {
         let code: string = "";
-        code += CodeGenUtil.generateImports();
+        code += CodeGenConfig.getKernelImports();
         for (let i = 0; i < tables.length; i++) {
             const table = tables[i];
             code += CodeGenTsFilesContent.generateSingleTableDefClass(table);

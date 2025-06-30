@@ -6,7 +6,7 @@ import { AppConstants,
 import { ModelTable }   from "@/codegen/cgmodel";
 import { CodeGenStyle }   from "@/codegen/cgstyle";
 import { CodeGenTsFilesContent, 
-        CodeGenSql }    from "@/codegen/codegen";
+        CodeGenSql }    from "@/codegen/kernel/codegen";
 
 
 import { CodeGenServices } from "@/codegen/services/cgservices";
