@@ -3,7 +3,13 @@
 import { Option } from "@/common/model/option";
 
 export class ModuleConfig {
-    
+        public static readonly LAYOUT_STYLE = {
+        backgroundColor: 'var(--gray-a2)',
+        borderRadius: 'var(--radius-3)',
+        border: '2px solid var(--blue-7)',
+        padding: '0px 8px',
+        boxShadow: '0px 0px 5px rgba(222, 251, 137, 0.9)' 
+    };
     public static readonly INDEX: Option 
         = new Option("./","Home",null,null,null);
 
@@ -22,6 +28,9 @@ export class ModuleConfig {
 
 }//export class AppConfig
 
+/**
+ * EditorConfig.LAYOUT_STYLE
+ */
 export class EditorConfig {
     
     public static readonly TABLES: Option 
@@ -39,5 +48,9 @@ export class EditorConfig {
     ]
     
     public static readonly ACTIVE_SECTION: Option = EditorConfig.TABLES;
+
+    public static readonly LAYOUT_STYLE = {
+        padding: '4px 8px 0px 8px'
+    };
 
 }//export class AppConfig

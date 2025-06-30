@@ -1,11 +1,14 @@
 //src\client\metadata\schemaservice.ts
 
+import { Option } from "@/common/model/option";
+import { ModelHelper } from "@/common/util/modelhelper";
+
 /**
  * SchemaService.getDummyListTables
  */
 export class SchemaService {
 
-    public static getDummyListTables(): string[] {
+    public static getDummyListTables(): Promise<Option[]> {
         const dummyTables: string[] = ["agent",
             "application",
             "apptypes",
@@ -20,7 +23,7 @@ export class SchemaService {
             "task",
             "tasktype",
             "workflow"];
-        return dummyTables;
+        return Promise.resolve(ModelHelper.getOptionsFromList(dummyTables));
     }
 
     public static getListTables(): string[] {

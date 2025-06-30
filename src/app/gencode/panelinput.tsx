@@ -1,10 +1,11 @@
 //src\app\gencode\panelinput.tsx
 
 import { XRadioGroup } from "@/radix/group/grpradio";
-
+import { Option } from "@/common/model/option";
 import { Box,Grid, Separator,Flex, Text, Button, Link } from "@radix-ui/themes";
 import { useState, useEffect } from "react";
 import { EditorConfig } from "./config";
+import { SchemaService } from "@/client/metadata/schemaservice";
 
 interface InputEditorProps {section?:string;}
 export function InputEditor({}:InputEditorProps) {
@@ -13,23 +14,36 @@ export function InputEditor({}:InputEditorProps) {
     const onSelect = (value: string,compname?:string) => {setSection(value);};
     const [initialized, setInitialized] = useState<boolean>(false);
 
+    const [squemaTables, setSquemaTables] = useState<Option[]>([]);
+    const [selectTable, setSelectTable] = useState<string>("undefined");
+
+    const onSelectTable = (tableName:string) => {
+        //setSection(tableName);
+    };
+
     useEffect(() => {
         const init = async () => {
-          
-            //const res: boolean = await appRef.current.loadInitCollections();
-            //setInitialized(true);
+            const listTables:Option[] = await SchemaService.getDummyListTables()
+            setSquemaTables(listTables);
+            setSelectTable(listTables[0].id);
+            setInitialized(true);
         };
         init();
     }, []);
 
     const renderSectionA = () => {
         return (
-            <Grid columns="50% 50%" gap="3">
-                <Flex direction="column" gapY="5">
-                    tables
+            <Grid columns="2" gap="3">
+                <Flex width={"49%"} direction="row" >       
+                    <XRadioGroup autocommit = {true} 
+                            onselect={onSelectTable} options={squemaTables}  value = {selectTable}
+                            direction="column" />
+                                               
                 </Flex>
-                <Flex direction="column" gapY="5">
-                    campos
+                
+                <Flex width={"50%"}  direction="row" gapX="5">    
+                   <Separator orientation="vertical" size="4" />                                     
+                   <p>as</p>
                 </Flex>
             </Grid>
         );
@@ -44,7 +58,7 @@ export function InputEditor({}:InputEditorProps) {
     };
 
     return (
-        <Flex direction="column" gapY="5" className="h-full">
+        <Flex direction="column" gapY={"2"} style={EditorConfig.LAYOUT_STYLE} >
             <XRadioGroup autocommit = {true} onselect={onSelect} options={EditorConfig.SECTIONS}  value = {section} />
             <Separator orientation="horizontal" size="4" />
             {section === EditorConfig.TABLES.id && renderSectionA()}
