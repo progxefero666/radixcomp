@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { CodeGenStyle } from "@/codegen/cgstyle";
-
+import { Option } from "@/common/model/option";
 const CARD_DATA_STYLE: string = "w-full h-auto p-2 rounded-md";
 
 /**

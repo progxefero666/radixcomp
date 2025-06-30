@@ -1,5 +1,7 @@
 //src\app_front\appconstants.ts
 
+import { Option } from "@/common/model/option";
+
 /**
  * class AppConstants.ICON_RUN
  */
@@ -13,6 +15,7 @@ export class AppConstants {
     public static readonly ACT_OPEN:string = "open";
     public static readonly ACT_SAVE:string = "save";
     public static readonly ACT_EXPORT:string = "export";
+    public static readonly ACT_COPY:string = "copy";
 
     public static readonly MODE_INSERT:string = "insert";
     public static readonly MODE_EDITION:string = "edit";
