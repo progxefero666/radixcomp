@@ -11,14 +11,6 @@ import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react
 | "4"  | XL (solo en algunos) | \~18px+ font                  |*/
 
 
-/**
- * class RadixColors
- */
-export class RadixColors {
-
- 
-
-}//end class
 
 
 /**

@@ -1,52 +1,94 @@
 //src\radix\group\grpradio.tsx
 
-//src\libcomp\inputcheck.tsx
+import { Option } from "@/common/model/option";
 
 
 import { forwardRef } from "react";
-import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
+import { Checkbox, Flex, Text, Box, RadioGroup, Button } from "@radix-ui/themes";
 
-import { RadixConf } 	  from "@/radix/radixconf";
-import { ThemeCompStyle } from "@/radix/radixtheme";
+import { RadixConf } from "@/radix/radixconf";
+import { ThemeButtonsStyle, ThemeCompStyle } from "@/radix/radixtheme";
 
 interface CompProps {
+    autocommit?: boolean;
     name: string;
+    options: Option[];
     label?: string;
     inline?: boolean;
     value?: boolean;
-    onchange?: (value: string, name?: string) => void;
+    onselect: (operation: string) => void;
     autofocus?: boolean;
 }
-export const TemplateComp = forwardRef<HTMLInputElement, CompProps>(({
-    name, label, value,inline,  autofocus, onchange }, ref) => {
+export const XRadioGoup = forwardRef<HTMLInputElement, CompProps>(({
+    autocommit,options, name, label, value, inline, autofocus, onselect }, ref) => {
 
+    const auto: boolean = autocommit ?? false;    
+    const showInline: boolean = inline ?? false;
+    const direction: "row" | "column" = showInline ? "row" : "column";
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
     const color = RadixConf.COLORS.gray;
-            
-    const showInline: boolean = inline ?? false;
 
-
-    const handleOnChange = (value: boolean) => {
-        if (onchange) {
-            alert("InputCheck: handleOnChange: " + value);
+    const onSelect = (value:string) => {
+        if(auto) {
+            onselect(value);
+            return
         }
+        console.log('Value:', value);
     }
 
-    const renderMainContent = () => {
+    const renderItem = (key: string, value: string, text: string) => {
         return (
-            <div className="w-full">
-                {label}
-                {value}
-            </div>
+            <RadioGroup.Item key={key} value={value}  >
+                {text}
+            </RadioGroup.Item>
         )
     }
 
     return (
-        <>
-            {renderMainContent()}
-        </>
-    )
-}
+        <Flex direction = {direction} gap="2" >
+            <RadioGroup.Root 
+                color = {color} variant={variant}
+                size={size}
+                defaultValue="1"  
+                onValueChange={onSelect}>
 
-)//end component
+                {options.map((opt, index) => (
+                    renderItem(index.toString(),(index + 1).toString(), opt.text)         
+                ))}
+
+            </RadioGroup.Root>
+        </Flex>
+    )
+
+})//end component
+
+/*
+import { RadioGroup, Flex, Text } from '@radix-ui/themes';
+
+function MyRadioGroup() {
+  const handleSelectionChange = (value: string) => {
+    console.log('Valor seleccionado:', value);
+    // Tu lógica aquí
+  };
+
+  return (
+    <RadioGroup.Root 
+      defaultValue="1" 
+      onValueChange={handleSelectionChange}
+    >
+      <Flex direction="column" gap="2">
+        <Text as="label" size="2">
+          <RadioGroup.Item value="1" /> Opción 1
+        </Text>
+        <Text as="label" size="2">
+          <RadioGroup.Item value="2" /> Opción 2
+        </Text>
+        <Text as="label" size="2">
+          <RadioGroup.Item value="3" /> Opción 3
+        </Text>
+      </Flex>
+    </RadioGroup.Root>
+  );
+}
+*/
