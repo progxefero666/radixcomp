@@ -18,10 +18,9 @@ export default function Desktop() {
     useEffect(() => {
 
     }, []);
-
   
     const render = () => {
-        const mode: number = 1;
+        const mode: number = 0;
         switch (mode) {
             case 0: return <Home />
             case 1: return <PageGenCode />;
