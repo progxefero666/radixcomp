@@ -5,7 +5,7 @@ import { Option } from "@/common/model/option";
 /**
  * CodeGen Main App Controller
  */
-export class ModuleDbModelToolsConfig {
+export class ModuleCodeGenConfig {
     
     public static readonly TYPESCRIPT_FORMATS:string = ".ts,.tsx"
     public static readonly SQL_FORMATS:string = ".sql,.txt"
@@ -24,12 +24,12 @@ export class ModuleDbModelToolsConfig {
         ("create_folders", "Entity Folder", null, null, null);
 
     public static readonly MENU: Option[]=[
-        ModuleDbModelToolsConfig.OPT_CREATE_MODELS,
-        ModuleDbModelToolsConfig.OPT_CREATES_SERVICES,
-        ModuleDbModelToolsConfig.OPT_MODEL_CARDS,
-        ModuleDbModelToolsConfig.OPT_MODEL_FOLDER,
+        ModuleCodeGenConfig.OPT_CREATE_MODELS,
+        ModuleCodeGenConfig.OPT_CREATES_SERVICES,
+        ModuleCodeGenConfig.OPT_MODEL_CARDS,
+        ModuleCodeGenConfig.OPT_MODEL_FOLDER,
     ];
-    public static readonly MENU_ACT_OPTION: Option = ModuleDbModelToolsConfig.MENU[0];
+    public static readonly MENU_ACT_OPTION: Option = ModuleCodeGenConfig.MENU[0];
 
     //module messages
     public static readonly MSG_EXPORT_SUCCESS: string = "!! export file success. !!";

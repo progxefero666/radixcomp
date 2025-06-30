@@ -13,7 +13,7 @@ import PageInputEditor from "./inputeditor";
 import { CodeFormats } from "@/codegen/kernel/cgconstants";
 import { useRouter } from "next/navigation";
 import { AppConfig } from "@/app_front/appconfig";
-import { ModuleDbModelToolsConfig } from "@/codegen/mod_config";
+import { ModuleCodeGenConfig } from "@/codegen/config";
 import { Button } from "@radix-ui/themes";
 
 
@@ -42,18 +42,18 @@ export default function PageDbModelTools() {
     const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
     const [outputFormat, setOutputFormat] = useState<string>(CodeFormats.TYPESCRIPT);
     const [code, setCode] = useState<string|null>(null);
-    const [section, setSection] = useState<string>(ModuleDbModelToolsConfig.MENU_ACT_OPTION.id);
+    const [section, setSection] = useState<string>(ModuleCodeGenConfig.MENU_ACT_OPTION.id);
 
 
 
     const chargeSection = (name: string): void => { 
-        if(name == ModuleDbModelToolsConfig.OPT_CREATE_MODELS.id){
+        if(name == ModuleCodeGenConfig.OPT_CREATE_MODELS.id){
         }
-        else if(name == ModuleDbModelToolsConfig.OPT_CREATES_SERVICES.id) {
+        else if(name == ModuleCodeGenConfig.OPT_CREATES_SERVICES.id) {
         }
-        else if(name == ModuleDbModelToolsConfig.OPT_MODEL_CARDS.id) {
+        else if(name == ModuleCodeGenConfig.OPT_MODEL_CARDS.id) {
         }        
-        else if(name == ModuleDbModelToolsConfig.OPT_MODEL_FOLDER.id) {
+        else if(name == ModuleCodeGenConfig.OPT_MODEL_FOLDER.id) {
         }        
         setSection(section); 
     }

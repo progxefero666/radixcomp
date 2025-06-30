@@ -10,7 +10,7 @@ import { CodeGenTsMotor,
 
 
 import { CodeGenServices } from "@/codegen/services/cgservices";
-import { ModuleDbModelToolsConfig } from "@/codegen/mod_config";
+import { ModuleCodeGenConfig } from "@/codegen/config";
 import { Button } from "@radix-ui/themes";
 
 //import { AppTheme } from "@/app_front/apptheme";

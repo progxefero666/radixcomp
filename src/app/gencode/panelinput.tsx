@@ -53,33 +53,6 @@ export function InputEditor({ }: InputEditorProps) {
         init();
     }, []);
 
-
-    const createForm = () => {
-        //const proglanguageRef = useRef<HTMLSelectElement>(null);        
-        //const nameRef = useRef<HTMLInputElement>(null);
-
-        modelTableSel?.fields.forEach((field) => {
-            if (!field.pk && !field.fk) {
-                console.log(`Normal field Key: ${field.name} (${field.type})`);
-            }
-            else {
-                if (field.pk) {
-                    console.log(`Primary Key: ${field.name} (${field.type})`);
-                }
-                else  {
-                    console.log(`Foreign Key: ${field.name} (${field.type})`);
-                    if (field.relations) {
-                        field.relations.forEach((relation) => {
-                            console.log(`Relation: ${relation.table} -> ${relation.field}`);
-                        });
-                    }
-                }
-            }
-        });//end for
-
-    }//end createForm
-
-
     const renderPanelTables = () => {
         let showModelTable: boolean = false;
         if (modelTableSel !== null) { showModelTable = true; }
