@@ -6,6 +6,7 @@ import sqlTypesData from "@/codegen/sqltypes.json";
 export interface SqlTypes {fieldtypes: {[key:string]:string[];};}
 export const SqlFieldtypes = (sqlTypesData as SqlTypes).fieldtypes;
 
+// CodeGenSql.getEsquemaTables(sqlScript: string): ModelTable[] 
 /**
  * class App Db Motor Config
  */
@@ -20,7 +21,7 @@ export class CodeGenLibrary {
 }//end class
 
 /**
- * class CodeGen Util
+ * class CodeGenUtil.getModelTableIndex(modelTables:ModelTable[],name:string)
  */
 export class CodeGenUtil {
 
@@ -40,6 +41,16 @@ export class CodeGenUtil {
         imports += `"` + CodeGenLibrary.SQLTYPES_JSON_PATH + `";\n\n`;
         return imports;
     }
+
+    public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
+        let tableIndex:number = -1;
+        for (let idx=0;idx<modelTables.length;idx++) {
+            if (modelTables[idx].name==name) {
+                tableIndex = idx;
+            }
+        }
+        return tableIndex;
+    }//end  
 
 }//end class
 
