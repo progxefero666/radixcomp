@@ -7,18 +7,15 @@ import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 
 
 /**
- * class CodeGen Ts Files Content --> .ts
+ * class CodeGen TypeScript Entity Files Content
+ *     for store in typescript file .ts
  */
-export class CodeGenTsFilesContent {
+export class CodeGenTsMotor {
 
-    /**
-     * gen File Content Entity Class
-     * @param tableModel 
-     */    
-    public static genFileContentEntityClass(tableModel: ModelTable): string {
+    public static getEntityClass(tableModel: ModelTable): string {
         let content: string = "";      
         
-        content +=  CodeGenTsFilesContent.genFileContentTableDef(tableModel);
+        content +=  CodeGenTsMotor.getEntityDefClass(tableModel);
 
         const className = CodeGenHelper.capitalize(tableModel.name);
         const fileName = `table_${tableModel.name.toLowerCase()}.ts`;        
@@ -101,11 +98,11 @@ export class CodeGenTsFilesContent {
         content += `    }\n\n`;        
         content += `}//end class\n\n`;        
         // Add type definition based on the class        
-        content += CodeGenTsFilesContent.genClassTypeContent(tableModel);        
+        content += CodeGenHelper.getClassType(tableModel);        
         return content;
     }
     
-    public static genFileContentEntityArrayClass(tableModel: ModelTable[]): string {
+    public static getArrayEntityClass(tableModel: ModelTable[]): string {
         let content: string = "";
         
         // 1. Imports una sola vez al principio
@@ -116,11 +113,11 @@ export class CodeGenTsFilesContent {
             const table = tableModel[i];
             
             // Bloque 1: Clase Def (sin imports)
-            content += CodeGenTsFilesContent.generateSingleTableDefClass(table);
+            content += CodeGenTsMotor.getEntityDefClassData(table);
             content += `\n`;
             
             // Bloque 2: Clase normal (extraer solo la parte sin imports ni Def)
-            const fullClassContent = CodeGenTsFilesContent.genFileContentEntityClass(table);
+            const fullClassContent = CodeGenTsMotor.getEntityClass(table);
             // Quitar la parte de imports y Def, quedarnos solo con la clase y tipo
             const lines = fullClassContent.split('\n');
             let startIndex = -1;
@@ -145,56 +142,7 @@ export class CodeGenTsFilesContent {
     }//end
 
 
-    public static genClassTypeContent(tableModel: ModelTable): string {
-        const className = CodeGenHelper.capitalize(tableModel.name);
-        const typeName = `Type${className}`;
-        let content = `/**\n`;
-        content += ` * Type definition for ${className} entity\n`;
-        content += ` */\n`;
-        content += `export type ${typeName} = {\n`;
-        for (const field of tableModel.fields) {
-            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
-            content += `    ${field.name}: ${tsType};\n`;
-        }        
-        content += `};\n`;        
-        return content;
-    }//end
-
-    public static generateSingleTableDefClass(table: ModelTable): string {
-        let classCode = "";
-        const className = `${CodeGenHelper.capitalize(table.name)}Def`;        
-        classCode += `/**\n`;
-        classCode += ` * Table definition class for ${table.name}\n`;
-        classCode += ` * Generated from database schema\n`;
-        classCode += ` */\n`;
-        classCode += `export class ${className} {\n\n`;        
-        // Class properties
-        classCode += `    public name: string = "${table.name}";\n`;
-        classCode += `    public fields: ModelField[] = [];\n\n`;        
-        // Constructor
-        classCode += `    constructor() {\n`;        
-        // Add fields to array
-        for (const field of table.fields) {
-            classCode += CodeGenTsFilesContent.generateTableDefFieldLine(field);
-        }        
-        classCode += `    }\n\n`;        
-        // Add toJsonString method
-        classCode += `    public toJsonString(): string {\n`;
-        classCode += `        return JSON.stringify(this, null, 4);\n`;
-        classCode += `    }\n\n`;        
-        classCode += `}//end class\n`;
-        
-        return classCode;
-    }//end
-      
-    public static genFileContentTableDef(table: ModelTable): string {
-        let code: string = "";
-        code += CodeGenConfig.getKernelImports();
-        code += CodeGenTsFilesContent.generateSingleTableDefClass(table);        
-        return code;
-    }//end
-    
-    public static generateTableDefFieldLine(field: ModelField): string {
+    public static getEntityDefClassFieldLine(field: ModelField): string {
         // Build optional parameters
         let optionalParams = "";
         
@@ -214,18 +162,51 @@ export class CodeGenTsFilesContent {
                 }
                 optionalParams += "]";
             }
-        }
-        
+        }        
         // Generate single line field creation with proper indentation (8 spaces = 2 tabs of 4)
         return `        this.fields.push(new ModelField("${field.name}", "${field.type}", ${field.pk}, ${field.generated}, ${field.required}, ${field.minlen}, ${field.maxlen}${optionalParams}));\n`;
     }//end
 
-    public static getTablesDefCode(tables: ModelTable[]): string {
+    public static getEntityDefClassData(table: ModelTable): string {
+        let classCode = "";
+        const className = `${CodeGenHelper.capitalize(table.name)}Def`;        
+        classCode += `/**\n`;
+        classCode += ` * Table definition class for ${table.name}\n`;
+        classCode += ` * Generated from database schema\n`;
+        classCode += ` */\n`;
+        classCode += `export class ${className} {\n\n`;        
+        // Class properties
+        classCode += `    public name: string = "${table.name}";\n`;
+        classCode += `    public fields: ModelField[] = [];\n\n`;        
+        // Constructor
+        classCode += `    constructor() {\n`;        
+        // Add fields to array
+        for (const field of table.fields) {
+            classCode += CodeGenTsMotor.getEntityDefClassFieldLine(field);
+        }        
+        classCode += `    }\n\n`;        
+        // Add toJsonString method
+        classCode += `    public toJsonString(): string {\n`;
+        classCode += `        return JSON.stringify(this, null, 4);\n`;
+        classCode += `    }\n\n`;        
+        classCode += `}//end class\n`;
+        
+        return classCode;
+    }//end
+      
+    public static getEntityDefClass(table: ModelTable): string {
+        let code: string = "";
+        code += CodeGenConfig.getKernelImports();
+        code += CodeGenTsMotor.getEntityDefClassData(table);        
+        return code;
+    }//end
+    
+    public static getArrayEntityDefClass(tables: ModelTable[]): string {
         let code: string = "";
         code += CodeGenConfig.getKernelImports();
         for (let i = 0; i < tables.length; i++) {
             const table = tables[i];
-            code += CodeGenTsFilesContent.generateSingleTableDefClass(table);
+            code += CodeGenTsMotor.getEntityDefClassData(table);
             if (i < tables.length - 1) {
                 code += `\n`;
             }
@@ -233,22 +214,6 @@ export class CodeGenTsFilesContent {
         return code;
     }//end
 
-    /*
-    public static genFileContentEntityType(tableModel: ModelTable): string {
-        let content: string = "";        
-        const typeName = CodeGenUtil.capitalize(tableModel.name);
-        const fileName = `type_${tableModel.name.toLowerCase()}.ts`;        
-        content += `//${fileName}\n\n`;        
-        content += `export type ${typeName} = {\n`;        
-        //properties
-        for (const field of tableModel.fields) {
-            const tsType = CodeGenSql.mapSqlTypeToTypeScript(field.type);
-            content += `    ${field.name}: ${tsType};\n`;
-        }        
-        content += `};\n`;        
-        return content;
-    }
-    */
 
 
 }//end class ModelUtil

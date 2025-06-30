@@ -5,8 +5,8 @@ import { AppConstants,
          AppUiConst }   from "@/app_front/appconstants";
 import { ModelTable }   from "@/codegen/cgmodel";
 import { CodeGenStyle }   from "@/codegen/cgstyle";
-import { CodeGenTsFilesContent, 
-        CodeGenSql }    from "@/codegen/kernel/codegen";
+import { CodeGenTsMotor, 
+        CodeGenSql }    from "@/codegen/kernel/cgtsmotor";
 
 
 import { CodeGenServices } from "@/codegen/services/cgservices";

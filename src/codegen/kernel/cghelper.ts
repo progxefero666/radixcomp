@@ -1,6 +1,7 @@
 //src\codegen\kernel\cghelper.ts
 
 import { ModelTable, ModelField, Relation } from "@/codegen/cgmodel";
+import { CodeGenSqlHelper } from "./cgsqlhelper";
 
 export class CodeGenHelper {
 
@@ -22,6 +23,22 @@ export class CodeGenHelper {
         return 'null';
     }//end
 
+    public static getClassType(tableModel: ModelTable): string {
+        const className = CodeGenHelper.capitalize(tableModel.name);
+        const typeName = `Type${className}`;
+        let content = `/**\n`;
+        content += ` * Type definition for ${className} entity\n`;
+        content += ` */\n`;
+        content += `export type ${typeName} = {\n`;
+        for (const field of tableModel.fields) {
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
+            content += `    ${field.name}: ${tsType};\n`;
+        }        
+        content += `};\n`;        
+        return content;
+    }//end
+
+    
     public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
         let tableIndex:number = -1;
         for (let idx=0;idx<modelTables.length;idx++) {
@@ -33,3 +50,21 @@ export class CodeGenHelper {
     }//end  
 
 }//end class
+
+
+    /*
+    public static genFileContentEntityType(tableModel: ModelTable): string {
+        let content: string = "";        
+        const typeName = CodeGenUtil.capitalize(tableModel.name);
+        const fileName = `type_${tableModel.name.toLowerCase()}.ts`;        
+        content += `//${fileName}\n\n`;        
+        content += `export type ${typeName} = {\n`;        
+        //properties
+        for (const field of tableModel.fields) {
+            const tsType = CodeGenSql.mapSqlTypeToTypeScript(field.type);
+            content += `    ${field.name}: ${tsType};\n`;
+        }        
+        content += `};\n`;        
+        return content;
+    }
+    */

@@ -134,7 +134,7 @@ export class _Table_Service {
  *      - Generates files content for FastAapi Db 
  */
 import { ModelTable } from "@/codegen/cgmodel";
-import { CodeGenUtil } from "../kernel/codegen";
+import { CodeGenUtil } from "../kernel/cgtsmotor";
 
 export class CodeGenServices {
 
