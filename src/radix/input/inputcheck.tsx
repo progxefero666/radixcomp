@@ -3,7 +3,7 @@
 
 import { forwardRef } from "react";
 import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
-import { RadixColors, ThemeCompStyle } from "../radixtheme";
+import { ThemeCompStyle } from "../radixtheme";
 import { RadixConf } from "../radixconf";
 
 interface InputCheckIfc {
@@ -23,7 +23,7 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
-    const color = RadixColors.colors.gray;
+    const color = RadixConf.COLORS.gray;
             
     const showInline: boolean = inline ?? false;
     const isReadOnly: boolean = readonly ?? false;

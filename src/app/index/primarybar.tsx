@@ -4,7 +4,6 @@ import React from "react";
 import { Flex, Separator } from "@radix-ui/themes";
 
 import MenuButtons from "@/radix/cbars/btmenu";
-import { RadixColors } from "@/radix/radixtheme";
 import { AppConfig } from "@/app_front/appconfig";
 import { Option } from "@/common/model/option";
 interface PrimaryBarProps {
@@ -18,8 +17,6 @@ export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
             <MenuButtons options={AppConfig.MODULES}
                 onselection={onselection} 
-                optactcolor={RadixColors.colors.indigo}
-                optcolor={RadixColors.colors.plum}
                 optactid={section} />	
 
         </Flex>

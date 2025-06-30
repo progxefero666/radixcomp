@@ -13,12 +13,8 @@ import { useEffect, useRef, useState } from "react";
 import { AppConfig } from "@/app_front/appconfig";
 
 import { AppIndex } from "@/app_front/appindex";
-import { Application } from "@/client/models/Application";
-import { Agent } from "@/client/models/Agent";
-import { Service } from "@/client/models/Service";
-import { Server } from "@/client/models/Server";
 import MenuButtons from "@/radix/cbars/btmenu";
-import { RadixColors, ThemeButtonsStyle } from "@/radix/radixtheme";
+import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { ModuleConfig } from "./config";
 
@@ -39,8 +35,6 @@ export default function PageGenCode() {
     const appRef = useRef<AppIndex>(null);
     const [section, setSection] = useState<string>(AppConfig.INDEX.id);
     const [initialized, setInitialized] = useState<boolean>(false);
-
-   
 
     useEffect(() => {
         const init = async () => {
@@ -67,11 +61,11 @@ export default function PageGenCode() {
                                 actsection={section}  />
                 </Box>
                 <Box width={"41%"} style={boxStyle}>
-                    defs
+                    <InputEditor section={section} />
                 </Box>
 
                 <Box width={"41%"} >
-                    sdf
+                    <OutputMonitor section={section} />
                 </Box>
                 <Box width={"4%"} className="h-screen">
                     <SecondBar actsection={section} />
@@ -83,10 +77,8 @@ export default function PageGenCode() {
 
 }//end page
 
-interface InputEditorProps {
-    section: string;
-}
-function InputEditor({ section }: InputEditorProps) {
+interface InputEditorProps {section:string;}
+function InputEditor({section:string}:InputEditorProps) {
 
     const renderMainContent = () => {
 
@@ -100,13 +92,10 @@ function InputEditor({ section }: InputEditorProps) {
 
 }//end InputEditor
 
-interface OutputMonitorProps {
-    section: string;
-}
-function OutputMonitor({ section }: OutputMonitorProps) {
+interface OutputMonitorProps {section:string;}
+function OutputMonitor({section}:OutputMonitorProps) {
 
     const renderMainContent = () => {
-
     };
 
     return (
@@ -120,10 +109,8 @@ function OutputMonitor({ section }: OutputMonitorProps) {
 /**
  * Page Heade
  */
-interface PageHeaderProps {
-    onselection: (sectionId: string) => void;
-}
-function PageHeader({ onselection }: PageHeaderProps) {
+interface PageHeaderProps {onselection:(sectionId:string)=>void;}
+function PageHeader({onselection}:PageHeaderProps) {
 
     const pathname = usePathname();
 
@@ -180,17 +167,15 @@ function PageHeader({ onselection }: PageHeaderProps) {
  * Page Primary Bar
  */
 interface PrimaryBarProps {
-    sections: Option[];
+    sections:   Option[];
     actsection: string;
-    onselection: (sectionId:string) => void;
+    onselection:(sectionId:string) => void;
 }
-function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
+function PrimaryBar({sections,onselection,actsection}: PrimaryBarProps) {
     return (
         <Flex direction="column" >
-            <MenuButtons options={ModuleConfig.SECTIONS}
+            <MenuButtons options={sections}
                 onselection={onselection} 
-                optactcolor={RadixColors.colors.indigo}
-                optcolor={RadixColors.colors.plum}
                 optactid={actsection} />	
         </Flex>
     );
