@@ -29,10 +29,13 @@ export class ModuleConfig {
 }//export class AppConfig
 
 /**
- * EditorConfig.LAYOUT_STYLE
+ * class EditorConfig
  */
 export class EditorConfig {
     
+
+    public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
+
     public static readonly TABLES: Option 
         = new Option("table","Tables",null,null,null);
 
