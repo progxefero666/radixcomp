@@ -1,6 +1,7 @@
 import { CancelablePromise, OpenAPI } from "@/client";
 import { request as __request } from '@/client/core/request';
-import { HttpConst } from "@/codegen/httpconstants";
+import { HttpConst } from "@/codegen/kernel/cgconfig";
+
 
 
 /** 

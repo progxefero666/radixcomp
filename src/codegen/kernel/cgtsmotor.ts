@@ -141,16 +141,10 @@ export class CodeGenTsMotor {
         return content;
     }//end
 
-
     public static getEntityDefClassFieldLine(field: ModelField): string {
-        // Build optional parameters
         let optionalParams = "";
-        
-        // Add fk parameter only if true
         if (field.fk) {
             optionalParams += `, ${field.fk}`;
-            
-            // Add relations only if they exist
             if (field.relations && field.relations.length > 0) {
                 optionalParams += ", [";
                 for (let i = 0; i < field.relations.length; i++) {

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { AppConstants } from "@/app_front/appconstants";
 import { CodeGenStyle } from "../../codegen/cgstyle";
 import CardOutputCode from "../../codegen/codegencard";
-import { CodeFormats } from "@/codegen/cgconstants";
+import { CodeFormats } from "@/codegen/kernel/cgconstants";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
 import BarButtons from "@/radix/cbars/btbar";

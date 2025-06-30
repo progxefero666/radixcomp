@@ -4,7 +4,7 @@
 export const TEMP_APICLIIMPORTS = `
 import { CancelablePromise, OpenAPI } from "@/client";
 import { request as __request } from '@/client/core/request';
-import { HttpConst } from "@/codegen/httpconstants";`;
+import { HttpConst } from "@/codegen/kernel/cgconfig";`;
  
 export const TEMP_APICLISERVICE = `
 import { _Table_ } from "@/client/models/_Table_";
@@ -134,7 +134,8 @@ export class _Table_Service {
  *      - Generates files content for FastAapi Db 
  */
 import { ModelTable } from "@/codegen/cgmodel";
-import { CodeGenUtil } from "../kernel/cgtsmotor";
+import { CodeGenHelper } from "../kernel/cghelper";
+
 
 export class CodeGenServices {
 
@@ -155,8 +156,8 @@ export class CodeGenServices {
      *      - returns The content of the service class as a string.
      */
     public static genFileContentServiceClass(tableModel:ModelTable,includeImports:boolean): string {
-        const className = CodeGenUtil.capitalize(tableModel.name);
-        const pathName  = CodeGenUtil.uncapitalize(tableModel.name);
+        const className = CodeGenHelper.capitalize(tableModel.name);
+        const pathName  = CodeGenHelper.uncapitalize(tableModel.name);
 
         //TEMP_APICLIIMPORTS
         let content: string = includeImports ? TEMP_APICLIIMPORTS : "";

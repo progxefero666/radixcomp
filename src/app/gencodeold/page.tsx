@@ -10,7 +10,7 @@ import PageOutputMonitor from "./outputmonitor";
 import { CodeGenStyle } from "../../codegen/cgstyle";
 import PageInputEditor from "./inputeditor";
 
-import { CodeFormats } from "@/codegen/cgconstants";
+import { CodeFormats } from "@/codegen/kernel/cgconstants";
 import { useRouter } from "next/navigation";
 import { AppConfig } from "@/app_front/appconfig";
 import { ModuleDbModelToolsConfig } from "@/codegen/mod_config";

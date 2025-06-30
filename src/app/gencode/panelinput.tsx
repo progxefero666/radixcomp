@@ -55,6 +55,9 @@ export function InputEditor({ }: InputEditorProps) {
 
 
     const createForm = () => {
+        //const proglanguageRef = useRef<HTMLSelectElement>(null);        
+        //const nameRef = useRef<HTMLInputElement>(null);
+
         modelTableSel?.fields.forEach((field) => {
             if (!field.pk && !field.fk) {
                 console.log(`Normal field Key: ${field.name} (${field.type})`);
