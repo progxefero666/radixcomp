@@ -2,7 +2,7 @@
 
 import React from "react";
 import { forwardRef, useEffect, useState } from "react";
-import { Box, Flex,TextField } from "@radix-ui/themes";
+import { Box, Flex,TextArea,TextField } from "@radix-ui/themes";
 import { ThemeCompStyle } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
@@ -12,69 +12,62 @@ import { RadixConf } from "@/radix/radixconf";
 /**
  * InputTextComponent
  */
-interface InputTextProps {
+interface CompProps {
     inline?: boolean;
     name?: string;
     label?: string;
     readonly?: boolean;
     disabled?: boolean
     value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onsubmmit?: (value:string) => void;
     type?: any;
     placeholder?: string;
-    icon?: any | null;
     autofocus?: boolean;
     minlen?: number;
     maxlen?: number;
 }
 
+const areaStyle = {
+    width: '100%',   
+    height: 'auto',            
+    border: '2px solid rgb(28, 28, 43)',
+    padding: '2px',
+    minHeight: '500px'      
+};
 
-export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
-                type, inline, label, placeholder, value, onChange, icon, readonly, disabled }, ref) => {        
+export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
+        (({ inline, label, placeholder, value, onsubmmit, readonly, disabled }, ref) => {        
+
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
     const radius = ThemeCompStyle.COMP_CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
     const showInline: boolean = inline ?? false;
-
-    const input_type = type ?? RadixConf.INPUT_TEXT_TYPES.text;
-    //const input_icon     = icon ?? null;       
+      
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
     const renderReadComp = () => {
         return (
-            <TextField.Root type={input_type}
-                value={value}
-                placeholder={placeholder}
-                onChange={onChange}
-                variant={variant}
-                size={size}
-                color={color}
-                radius={radius}
-                disabled={true} >
-                {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
-            </TextField.Root>
+            <TextArea value={value} style={areaStyle}  size={size} 
+                      variant={variant} color={color} radius={radius}
+                      disabled={true} />          
         )
     }
 
     const renderEditComp = () => {
         return (
-            <TextField.Root type={input_type}
-                value={value}
+             <TextArea value={value} style={areaStyle}  size={size}            
                 placeholder={placeholder}
-                onChange={onChange}
-                variant={variant}
-                size={size} color={color} radius={radius}
-                disabled={input_disabled} >
-                {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
-            </TextField.Root>
+                onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
+                variant={variant}  color={color} radius={radius}
+                disabled={input_disabled} />            
         )
     }
 
     const renderRowSimpleContent = () => {
         return (
-            <Box className={ThemeCompStyle.C_CELL_STYLE}>
+            <Box >
                 {input_readonly ? renderReadComp() :
                     renderEditComp()}
             </Box>
@@ -92,7 +85,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const renderRowLabelContent = () => {
         return (
-            <Flex  gap="1"> 
+            <Flex  width={"100%"} gap="1"> 
                 <Label.Root>{label}</Label.Root> 
                 {renderRowSimpleContent()}
              </Flex>
@@ -102,7 +95,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const renderColLabelContent = () => {
         //className="LabelRoot"
         return (
-            <Flex direction="column" gap="1">    
+            <Flex width={"100%"} direction="column" gap="1">    
                 <Label.Root>{label}</Label.Root>                              
                 {renderColSimpleContent()}
             </Flex>
