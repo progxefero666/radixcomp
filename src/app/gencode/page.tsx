@@ -1,191 +1,152 @@
-//src\app\codegen\page.tsx
-"use client";
+//src\app\gencode\page.tsx
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Option } from "@/common/model/option";
-import { AppConstants, AppUiConst } from "@/app_front/appconstants";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Box, Grid, Flex ,Text, Button, Link} from "@radix-ui/themes";
 
-
-import PageOutputMonitor from "./outputmonitor";
-import { CodeGenStyle } from "../../codegen/cgstyle";
-import PageInputEditor from "./inputeditor";
-
-import { CodeFormats } from "@/codegen/cgconstants";
-import { useRouter } from "next/navigation";
 import { AppConfig } from "@/app_front/appconfig";
-import { ModuleDbModelToolsConfig } from "@/codegen/mod_config";
-import { Button } from "@radix-ui/themes";
+
+import { AppIndex } from "@/app_front/appindex";
+import MenuButtons from "@/radix/cbars/btmenu";
+import { RadixColors, ThemeButtonsStyle } from "@/radix/radixtheme";
+import { RadixConf } from "@/radix/radixconf";
 
 
+const BODY_STYLE: string = "w-full h-auto grid grid-cols-[14%_41%_41%_4%]";
 
 /**
- * Page Index JSX Client
- * start command:
- *  npx openapi-typescript-codegen --input http://localhost:8000/openapi.json --output ./src/client --client axios
- *  ManApplicationUtil.getFormEntity
- *  
- *  ApplicationEditor
- *  src\app_front\manapplications\appeditorcfg.ts
+ * Page GenCode
  */
-export const CODEGEN_PATH: string = "./codegen";
+export default function PageGenCode() {
+    const router = useRouter();
+    const [section, setSection] = useState<string>("undefined");
 
-//const codeGenControl: DbModelToolsControl = new DbModelToolsControl();
 
-const LAYOUT_STYLE: string = "w-full h-auto ";
+    useEffect(() => {
+        const init = async () => {
+           
+        };
+        init();
+    }, []);
 
-export default function PageDbModelTools() {
-    const router = useRouter();   
-    const execNavToIndex = () => { 
-        router.push("./");
+    const onSelection = (sectionId: string) => {    
+        setSection(sectionId);
     }
 
-    const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
-    const [outputFormat, setOutputFormat] = useState<string>(CodeFormats.TYPESCRIPT);
-    const [code, setCode] = useState<string|null>(null);
-    const [section, setSection] = useState<string>(ModuleDbModelToolsConfig.MENU_ACT_OPTION.id);
-
-
-
-    const chargeSection = (name: string): void => { 
-        if(name == ModuleDbModelToolsConfig.OPT_CREATE_MODELS.id){
-        }
-        else if(name == ModuleDbModelToolsConfig.OPT_CREATES_SERVICES.id) {
-        }
-        else if(name == ModuleDbModelToolsConfig.OPT_MODEL_CARDS.id) {
-        }        
-        else if(name == ModuleDbModelToolsConfig.OPT_MODEL_FOLDER.id) {
-        }        
-        setSection(section); 
-    }
-
-    const runGeneration = (data:string) => {        
-        setCode(data);
-    }
-
-    const exportFileCode = (fileName:string,code:string) => {        
-        console.log("Export file: " + fileName + " with code: " + code);
-
-    }
-
-        const onselection = (sectionId:string) => {        
-        console.log("Export file: " + code);
-
-    }
-
+ 
 
     return (
-        <div id = "root"className={LAYOUT_STYLE} >
-            <PageHeader />
-            <div className={CodeGenStyle.BODY_STYLE}>
-                
-                <PagePrimaryBar     onselection={onselection}
-                    section={section}  />
+        <Flex direction="column" className="h-screen">
+             <PageHeader onselection={onSelection} />
 
-                <PageInputEditor    section={section} run = {runGeneration}/>      
+            <Box className="w-[14%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
+                <PagePrimaryBar section={section} onselection={onSelection} />
+            </Box>
+            <Box className="w-[41%] bg-gray-3 p-4">
 
-                <PageOutputMonitor  key={code} 
-                                    onexport={exportFileCode}       
-                                    format={outputFormat} code={code} />
-                
-                <PageSecondaryBar   actsection={section} />                
-            </div>
-        </div>
-    );
+            </Box>
+            <Box className="w-[41%] bg-gray-10 p-4">
 
-}//end 
+            </Box>
+            <Box className="w-[4%] bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6 overflow-y-auto">
+                <PageSecondBar actsection={section} />
+            </Box>
 
-const MODULE_HEADER_STYLE: string
-       = "w-full h-auto grid grid-cols-[14%_41%_41%_4%] border-b-1 mb-3 border-b-red-800 py-2";
-
-interface PageHeaderProp {
-    value?:string;
-     //onfileloaded?: (file: File) => void;
-}
-function PageHeader({ value }: PageHeaderProp) {
-    const router = useRouter(); 
-    const execNavToIndex = () => { 
-        router.push("./");
-    }
-    const maxLen: number = 50;
-    const onSearchSubmit = (value:string): void => { }
-    const onButtonClick = () => { };
-    
-    return (
-
-        <div className={MODULE_HEADER_STYLE}>
-
-            {/*column left */}
-            <div className="w-full h-auto flex flex-row items-center px-4 top-2">
-                <div className="flex-1 flex items-center text-white text-2xl translate-y-[-4px]">
-                    Code Gen
-                </div>
-                <div>                   
-                    <Button onClick={onButtonClick}  />                           
-                </div>
-            </div>
-
-            {/*column center */}
-            <div className="w-full h-auto flex flex-row ">
-                <div className="w-[26%] flex flex-items-center" >
-                </div>
-            </div>
-
-            {/* column right */}
-            <div className="w-full h-auto flex flex-row">
-                right
-            </div>
-
-        </div>
+        </Flex>
     )
 
-}//end
+}//end page
 
-const LAYOUT_PRIMARY_BAR: string =
-        "w-full min-h-screen flex flex-col px-2 mb-2";
-interface PrimaryBarProps {
+interface PageHeaderProps {
+    onselection: (sectionId: string) => void;
+}
+function PageHeader({ onselection }: PageHeaderProps) {
+
+    const pathname = usePathname();
+
+    const onSelection = (sectionId: string) => {
+        alert("Home: onselection: " + sectionId);
+    }
+
+    const renderHomeButton = () => {
+        return (
+            <Link href="/" >
+                <Button
+                    variant={pathname === "/" ? RadixConf.VARIANTS.solid :
+                                                RadixConf.VARIANTS.soft}
+                    color={ThemeButtonsStyle.BTN_HOME_COLOR}
+                    className={ThemeButtonsStyle.BTN_HOME_STYLE}
+                    size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                    Home
+                </Button>
+            </Link>
+        )
+    }
+
+    return (
+        <Flex className="w-full h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
+
+            <Flex direction="row" gap="2" justify="between" 
+                 className="full h-auto w-[16%] bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6">
+                <Text size="5" weight="bold" className="text-gray-12">
+                    Radix UI
+                </Text>   
+                <Box>
+                 {renderHomeButton()}  
+                </Box>  
+                         
+            </Flex>
+
+            <Box className="h-auto w-[68%] bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto">
+                <Text size="5" weight="bold" className="text-gray-12">
+                    Primitives Sandbox
+                </Text>
+            </Box>
+
+            <Box className="h-auto w-[16%] bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
+                <p>header-left</p>
+            </Box>
+
+        </Flex>
+    );
+
+}//end PrimaryBar
+
+
+interface PagePrimaryBarProps {
     section: string;
     onselection: (sectionId:string) => void;
 }
-function PagePrimaryBar({section,onselection}: PrimaryBarProps) {
+function PagePrimaryBar({onselection,section}: PagePrimaryBarProps) {
+
     return (
-        <div className={LAYOUT_PRIMARY_BAR}>
-            {/*
-                        <TwDaisyMenu onselection={chargesection}
-                options={sections}
-                optactname={actsection}
-                optcolor={AppThemeMenus.MENU_OPT_COLOR}
-                optactcolor={AppThemeMenus.MENU_OPT_ACT_COLOR} />
-            */}
+        <Flex direction="column" >
 
-        </div>
-    )
+            <MenuButtons options={AppConfig.MODULES}
+                onselection={onselection} 
+                optactcolor={RadixColors.colors.indigo}
+                optcolor={RadixColors.colors.plum}
+                optactid={section} />	
 
-}//end comp
+        </Flex>
+    );
 
-const LAYOUT_SECONDARY_BAR: string =        
-        "w-full min-h-screen flex flex-col p-2";
+}//end PrimaryBar
 
-
-interface PageSecondaryBarProp {
+interface PageSecondBarProps {
     actsection: string;
 }
-function PageSecondaryBar({ actsection }: PageSecondaryBarProp) {
+function PageSecondBar({actsection}: PageSecondBarProps) {
+
+    const onSelection = (sectionId: string) => {
+        //not implemented yet
+    }
 
     return (
-        <div className = {LAYOUT_SECONDARY_BAR}>
-            Editor Tools
-        </div>
-    )
+        <Flex direction="column" >
+            <p>Second Bar</p>
+       
+        </Flex>
+    );
 
-}//end comp
-
-    /*
-    const moduleControl = useRef<DbModelToolsControl>(null); 
-    useEffect(() => {
-        const init=():void=>{
-              moduleControl.current = 
-                new DbModelToolsControl(ModuleDbModelToolsConfig.MENU_ACT_OPTION.name);    
-        } 
-        init();
-    }, []);
-    */
+}//end PrimaryBar
