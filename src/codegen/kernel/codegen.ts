@@ -1,241 +1,9 @@
 //src\app_front\codegen\util\modelutil.ts
 
 import { ModelTable, ModelField, Relation } from "@/codegen/cgmodel";
-import sqlTypesData from "@/codegen/sqltypes.json";
 import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
-import { CodeGenUtil } from "@/codegen/kernel/cghelper";
-
-export interface SqlTypes {fieldtypes: {[key:string]:string[];};}
-export const SqlFieldtypes = (sqlTypesData as SqlTypes).fieldtypes;
-
-// CodeGenSql.getEsquemaTables(sqlScript: string): ModelTable[] 
-
-
-
-
-/**
- * CodeGen Sql Process
- *    info data sQL types:
- *       file: src/app_front/codegen/appdbmotor.ts
- *
- *       import sqlTypesData from "@/app_front/codegen/sql/sqltypes.json";
- *       export interface SqlTypes {fieldtypes: {[key:string]:string[];};}
- *       export const SqlFieldtypes = (sqlTypesData as SqlTypes).fieldtypes; 
- *
- * class CodeGen Sql
- */
-export class CodeGenSql {
-
-    public static typeMap: Map<string, string> = CodeGenSql.buildTypeMap();
-
-    public static mapSqlTypeToTypeScript(sqlType: string): string {
-        const type = sqlType.toLowerCase();
-        
-        // Check text types
-        if (type.includes('text') || type.includes('varchar') || type.includes('character')) {
-            return 'string';
-        }
-        
-        // Check numeric types - TODOS los números como number | null
-        if (type.includes('integer') || type.includes('int') || type.includes('serial')) {
-            return 'number | null';
-        }
-        
-        // Check decimal types - también number | null para consistencia
-        if (type.includes('decimal') || type.includes('numeric') || type.includes('real') || 
-            type.includes('float') || type.includes('double')) {
-            return 'number | null';
-        }
-        
-        // Check date types
-        if (type.includes('date') || type.includes('timestamp') || type.includes('time')) {
-            return 'Date';
-        }
-        
-        // Check boolean types
-        if (type.includes('boolean')) {
-            return 'boolean';
-        }
-        
-        // Default to string
-        return 'string';
-    }//end
-
-    public static buildTypeMap(): Map<string, string> {
-        const map = new Map<string, string>();
-        for (const genericType in SqlFieldtypes) {
-            for (const pgType of SqlFieldtypes[genericType]) {
-                const key = pgType.split('(')[0].trim().toUpperCase();
-                if (key) {
-                    map.set(key, genericType);
-                }
-            }
-        }
-        return map;
-    }//end
-
-
-    public static mapPgTypeToModelType(pgType: string): string {
-        const normalizedType = pgType.split('(')[0].trim().toUpperCase();
-        return CodeGenSql.typeMap.get(normalizedType) || 'unknown';
-    }//end
-
-    public static isNumericType(sqlType: string): boolean {
-        const type = sqlType.toLowerCase();
-        return type.includes('integer') || type.includes('int') || type.includes('serial') ||
-               type.includes('decimal') || type.includes('numeric') || type.includes('real') ||
-               type.includes('float') || type.includes('double');
-    }//end
-
-    public static getMaxDigitsForNumericType(sqlType: string): number {
-        const type = sqlType.toLowerCase();
-        
-        // SMALLINT: -32,768 to 32,767 → 5 dígitos
-        if (type.includes('smallint')) {
-            return 5;
-        }
-        
-        // INTEGER/INT: -2,147,483,648 to 2,147,483,647 → 10 dígitos
-        if (type.includes('integer') || type === 'int') {
-            return 10;
-        }
-        
-        // BIGINT: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 → 19 dígitos
-        if (type.includes('bigint')) {
-            return 19;
-        }
-        
-        // SERIAL (INTEGER): mismo que INTEGER → 10 dígitos
-        if (type.includes('serial') && !type.includes('big')) {
-            return 10;
-        }
-        
-        // BIGSERIAL: mismo que BIGINT → 19 dígitos
-        if (type.includes('bigserial')) {
-            return 19;
-        }
-        
-        // DECIMAL/NUMERIC: depende de la precisión, por defecto 15 dígitos
-        if (type.includes('decimal') || type.includes('numeric')) {
-            return 15;
-        }
-        
-        // REAL: ~7 dígitos significativos
-        if (type.includes('real')) {
-            return 7;
-        }
-        
-        // DOUBLE PRECISION/FLOAT: ~15 dígitos significativos
-        if (type.includes('double') || type.includes('float')) {
-            return 15;
-        }
-        
-        // Por defecto
-        return 10;
-    }//end
-
-    /**
-     * Implementation function for parse SQL script.
-     * @param sqlScript El contenido del script de esquema d la bbdd en SQL.
-     * @returns ModelTable Array with the tables included in the script
-     *      and store in a single model clases:
-     *          Relation
-     *          ModelField
-     *          ModelTable
-     */
-    public static getEsquemaTables(sqlScript: string): ModelTable[] {
-        const tablesMap = new Map<string, ModelTable>();
-
-        // 1. Step 1: Parsear CREATE TABLE para obtener tablas y campos básicos
-        const createTableRegex = /CREATE TABLE public\.(\w+)\s*\(([\s\S]*?)\);/g;
-        let tableMatch;
-        while ((tableMatch = createTableRegex.exec(sqlScript)) !== null) {
-            const tableName = tableMatch[1];
-            const fieldsBlock = tableMatch[2];
-            
-            const table = new ModelTable(tableName);
-            
-            const fieldLines = fieldsBlock.split('\n').filter(line => line.trim() && !line.trim().startsWith('--'));
-
-            for (const line of fieldLines) {
-                const trimmedLine = line.trim().replace(/,$/, '');
-                const fieldRegex = /^(\w+)\s+((?:character varying|timestamp without time zone|[\w]+)(?:\(\d+\))?)/;
-                const fieldMatch = trimmedLine.match(fieldRegex);
-
-                if (!fieldMatch) continue;
-
-                const fieldName = fieldMatch[1];
-                const fullType = fieldMatch[2];
-
-                const required = trimmedLine.toUpperCase().includes('NOT NULL');
-                const modelType = CodeGenSql.mapPgTypeToModelType(fullType);
-
-                let maxlen: number | null = null;
-                const maxlenMatch = fullType.match(/\((\d+)\)/);
-                if (maxlenMatch) {
-                    maxlen = parseInt(maxlenMatch[1], 10);
-                }
-                
-                const field = new ModelField(
-                    fieldName, modelType,
-                    false, false, // pk, generated (se determinan después)
-                    required,
-                    null, maxlen,
-                    false // fk (se determina después)
-                );
-                table.addField(field);
-            }
-            tablesMap.set(tableName, table);
-        }
-
-        // 2. Step 2: Parsear PRIMARY KEYs
-        const pkRegex = /ALTER TABLE ONLY public\.(\w+)\s+ADD CONSTRAINT \w+_pkey PRIMARY KEY \((\w+)\);/g;
-        let pkMatch;
-        while ((pkMatch = pkRegex.exec(sqlScript)) !== null) {
-            const tableName = pkMatch[1];
-            const pkFieldName = pkMatch[2];
-            const table = tablesMap.get(tableName);
-            if (table) {
-                const field = table.fields.find(f => f.name === pkFieldName);
-                if (field) field.pk = true;
-            }
-        }
-
-        // 3. Step 3: Parsear campos autogenerados (GENERATED ALWAYS AS IDENTITY)
-        const generatedRegex = /ALTER TABLE public\.(\w+) ALTER COLUMN (\w+) ADD GENERATED ALWAYS AS IDENTITY/g;
-        let genMatch;
-        while ((genMatch = generatedRegex.exec(sqlScript)) !== null) {
-            const tableName = genMatch[1];
-            const fieldName = genMatch[2];
-            const table = tablesMap.get(tableName);
-            if (table) {
-                const field = table.fields.find(f => f.name === fieldName);
-                if (field) field.generated = true;
-            }
-        }
-
-        // 4. Step 4: Parsear FOREIGN KEYs y crear las relaciones
-        const fkRegex = /ALTER TABLE ONLY public\.(\w+)\s+ADD CONSTRAINT \w+_fkey FOREIGN KEY \((\w+)\) REFERENCES public\.(\w+)\((\w+)\)/g;
-        let fkMatch;
-        while ((fkMatch = fkRegex.exec(sqlScript)) !== null) {
-            const [_, localTableName, localFieldName, foreignTableName, foreignFieldName] = fkMatch;
-            
-            const table = tablesMap.get(localTableName);
-            if (table) {
-                const field = table.fields.find(f => f.name === localFieldName);
-                if (field) {
-                    field.fk = true;
-                    if (!field.relations) field.relations = [];
-                    field.relations.push(new Relation(foreignTableName, foreignFieldName));
-                }
-            }
-        }
-
-        return Array.from(tablesMap.values());
-    }
-
-
-}//end class CodeGenSql
+import { CodeGenHelper } from "@/codegen/kernel/cghelper";
+import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 
 
 /**
@@ -252,7 +20,7 @@ export class CodeGenTsFilesContent {
         
         content +=  CodeGenTsFilesContent.genFileContentTableDef(tableModel);
 
-        const className = CodeGenUtil.capitalize(tableModel.name);
+        const className = CodeGenHelper.capitalize(tableModel.name);
         const fileName = `table_${tableModel.name.toLowerCase()}.ts`;        
         content += `//${fileName}\n\n`;
         
@@ -266,15 +34,15 @@ export class CodeGenTsFilesContent {
         content += `export class ${className} {\n\n`;        
         // Generate properties
         for (const field of tableModel.fields) {
-            const tsType = CodeGenSql.mapSqlTypeToTypeScript(field.type);
-            const defaultValue = CodeGenTsFilesContent.getDefaultValue(field, tsType);            
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
+            const defaultValue = CodeGenHelper.getDefaultValue(field, tsType);            
             content += `    public ${field.name}: ${tsType} = ${defaultValue};\n`;
         }        
         // Constructor
         content += `\n    constructor(`;
         const constructorParams: string[] = [];
         for (const field of tableModel.fields) {
-            const tsType = CodeGenSql.mapSqlTypeToTypeScript(field.type);
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
             constructorParams.push(`${field.name}: ${tsType}`);
         }        
         content += constructorParams.join(',\n                ');
@@ -321,9 +89,9 @@ export class CodeGenTsFilesContent {
                 content += `        if (fieldName === "${field.name}") {\n`;
                 content += `            return -1; // unlimited length\n`;
                 content += `        }\n`;
-            } else if (CodeGenSql.isNumericType(field.type)) {
+            } else if (CodeGenSqlHelper.isNumericType(field.type)) {
                 // Campos numéricos: calcular dígitos máximos según el tipo
-                const maxDigits = CodeGenSql.getMaxDigitsForNumericType(field.type);
+                const maxDigits = CodeGenSqlHelper.getMaxDigitsForNumericType(field.type);
                 content += `        if (fieldName === "${field.name}") {\n`;
                 content += `            return ${maxDigits}; // max digits for ${field.type}\n`;
                 content += `        }\n`;
@@ -376,25 +144,16 @@ export class CodeGenTsFilesContent {
         return content;
     }//end
 
-    public static getDefaultValue(field: ModelField, tsType: string): string {    
-        if (field.pk || field.name.toLowerCase() === 'id') {return 'null';}        
-        if (tsType.includes('number')) {return 'null';}
-        
-        if (tsType === 'boolean') {return 'false';}        
-        if (tsType === 'Date')    {return 'new Date()';}
-        if (tsType === 'string')  {return '"undefined"'; }        
-        return 'null';
-    }//end
 
     public static genClassTypeContent(tableModel: ModelTable): string {
-        const className = CodeGenUtil.capitalize(tableModel.name);
+        const className = CodeGenHelper.capitalize(tableModel.name);
         const typeName = `Type${className}`;
         let content = `/**\n`;
         content += ` * Type definition for ${className} entity\n`;
         content += ` */\n`;
         content += `export type ${typeName} = {\n`;
         for (const field of tableModel.fields) {
-            const tsType = CodeGenSql.mapSqlTypeToTypeScript(field.type);
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
             content += `    ${field.name}: ${tsType};\n`;
         }        
         content += `};\n`;        
@@ -403,7 +162,7 @@ export class CodeGenTsFilesContent {
 
     public static generateSingleTableDefClass(table: ModelTable): string {
         let classCode = "";
-        const className = `${CodeGenUtil.capitalize(table.name)}Def`;        
+        const className = `${CodeGenHelper.capitalize(table.name)}Def`;        
         classCode += `/**\n`;
         classCode += ` * Table definition class for ${table.name}\n`;
         classCode += ` * Generated from database schema\n`;

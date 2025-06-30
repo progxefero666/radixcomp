@@ -12,9 +12,10 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
 import { getTextFile } from "@/app_server/actions/gettextfile";
 import { ModelField, ModelTable } from "@/codegen/cgmodel";
-import { CodeGenSql} from "@/codegen/kernel/codegen";
+
 import { XInputTextArea } from "@/radix/input/inptextarea";
-import { CodeGenUtil } from "@/codegen/kernel/cghelper";
+import { CodeGenHelper } from "@/codegen/kernel/cghelper";
+import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
 interface InputEditorProps { section?: string; }
 export function InputEditor({ }: InputEditorProps) {
@@ -30,7 +31,7 @@ export function InputEditor({ }: InputEditorProps) {
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
 
     const onSelectTable = (tableName: string) => {
-        const tableIndex: number = CodeGenUtil.getModelTableIndex(modelTables, tableName);
+        const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
         console.log(modelTables[tableIndex]);
         setModelTableSel(modelTables[tableIndex]);
         setClientTableSel(tableName);
@@ -41,7 +42,7 @@ export function InputEditor({ }: InputEditorProps) {
             const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-            const tableIndex: number = CodeGenUtil.getModelTableIndex(model_tables, client_tables[0].id);
+            const tableIndex: number = CodeGenHelper.getModelTableIndex(model_tables, client_tables[0].id);
 
             setClientTables(client_tables);
             setClientTableSel(client_tables[0].id);
