@@ -1,6 +1,6 @@
 //src\codegen\kernel\cghelper.ts
 
-import { ModelTable, ModelField, Relation } from "@/codegen/cgmodel";
+import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";
 
 export class CodeGenHelper {

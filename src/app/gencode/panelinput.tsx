@@ -11,7 +11,7 @@ import { XRadioGroup } from "@/radix/input/inpgrpradio";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
 import { getTextFile } from "@/app_server/actions/gettextfile";
-import { ModelField, ModelTable } from "@/codegen/cgmodel";
+import { ModelField, ModelTable } from "@/codegen/kernel/cgmodel";
 
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";

@@ -1,6 +1,6 @@
 //src\codegen\kernel\cgsqlmotor.ts
 
-import { ModelTable, ModelField, Relation } from "@/codegen/cgmodel";
+import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";

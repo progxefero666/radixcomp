@@ -18,10 +18,10 @@ export class HttpConst {
 export class CodeGenConfig {
 
     public static readonly CODEGEN_LIB_PATH: string 
-        = "@/codegen/cgmodel"
+        = "@/codegen/kernel/cgmodel"
 
     public static readonly SQLTYPES_JSON_PATH: string 
-        = "@/codegen/sqltypes.json";
+        = "@/codegen/kernel/sqltypes.json";
 
 
     public static getKernelImports(): string {

@@ -133,7 +133,7 @@ export class _Table_Service {
  * # Description
  *      - Generates files content for FastAapi Db 
  */
-import { ModelTable } from "@/codegen/cgmodel";
+import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { CodeGenHelper } from "../kernel/cghelper";
 
 
