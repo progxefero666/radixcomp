@@ -3,7 +3,7 @@
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 
 import sqlTypesData from "@/codegen/kernel/sqltypes.json";
-import numerictypes from "@/codegen/kernel/sqltypesnumber.json";
+import types from "@/codegen/kernel/sqltypesnumber.json";
 
 export interface SqlTypes {fieldtypes: {[key:string]:string[];};}
 export const SqlFieldtypes = (sqlTypesData as SqlTypes).fieldtypes;

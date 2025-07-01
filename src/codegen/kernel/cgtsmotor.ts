@@ -4,7 +4,7 @@ import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
-
+import types from "@/codegen/kernel/sqltypesnumber.json";
 
 /**
  * class CodeGen TypeScript Entity Files Content

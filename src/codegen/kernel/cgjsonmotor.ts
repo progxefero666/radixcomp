@@ -1,6 +1,7 @@
 //src\codegen\kernel\cgjsonmotor.ts
 
 import { ModelTable } from "@/codegen/kernel/cgmodel";
+import types from "@/codegen/kernel/sqltypesnumber.json";
 
 /**
  * Class CodeGenJson

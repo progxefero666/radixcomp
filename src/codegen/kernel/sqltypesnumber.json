@@ -1,5 +1,5 @@
 {
-    "numerictypes": [
+    "types": [
         {
             "name": "SMALLINT",
             "maxvalue": 32767,
