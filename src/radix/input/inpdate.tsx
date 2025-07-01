@@ -1,6 +1,6 @@
 //src\radix\input\inpdate.tsx
 
-import { forwardRef } from "react";
+import { forwardRef, useState, useRef } from "react";
 import { TextField } from "@radix-ui/themes"
 import DatePicker from 'react-datepicker';
 import "@radix-ui/themes/styles.css";
@@ -16,7 +16,7 @@ import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { es } from 'date-fns/locale/es';
 registerLocale('es', es);
 
-
+//returnFormat?: 'iso' | 'local'; 
 interface CompProps {
     name: string;
     label?: string;
@@ -40,20 +40,48 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
     const isReadOnly: boolean = readonly ?? false;
     const isDisabled: boolean = disabled ?? false;
 
-    const handleOnChange = (value: boolean) => {
+    const [internalValue, setInternalValue] = useState<Date>(value);
+    const isFromCalendarClick = useRef<boolean>(false);
+
+    const triggerCallback = (date: Date) => {
         if (onchange) {
-            alert("InputCheck: handleOnChange: " + value);
+            // Always use UTC format: ISO 8601
+            const dateString = date.toISOString(); // "2023-10-05T18:25:30.123Z"
+            onchange(dateString, name);
         }
-    }
+    };
+
+    const handleOnChange = (date: Date | null) => {
+        if (date) {
+            setInternalValue(date);
+            // Solo disparar callback si viene del calendar popup
+            if (isFromCalendarClick.current) {
+                triggerCallback(date);
+                isFromCalendarClick.current = false; // Reset flag
+            }
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && internalValue) {
+            triggerCallback(internalValue);
+        }
+    };
+
+    const handleCalendarOpen = () => {
+        isFromCalendarClick.current = true;
+    };
     const renderReadComp = () => {
         return (
             <Box>
                 <Text as="label" size={size}>
                     <Flex gap="2" align="center">
-                        <DatePicker selected ={value}
+                        <DatePicker selected={internalValue}
                             disabled={true}
                             showPopperArrow={false}
                             popperPlacement="bottom-start"
+                            locale="es"
+                            dateFormat="dd/MM/yyyy"
                             customInput={<TextField.Root />} />                        
             
                     </Flex>
@@ -71,11 +99,18 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
             <Box>
                 <Text as="label" size={size}>
                     <Flex gap="2" align="center">
-                        <DatePicker selected ={value}
+                        <DatePicker 
+                            selected={internalValue}
+                            onChange={handleOnChange}
+                            onCalendarOpen={handleCalendarOpen}
+                            onKeyDown={handleKeyDown}
                             disabled={disabled}
                             showPopperArrow={false}
                             popperPlacement="bottom-start"
-                            placeholderText="Select date"  />            
+                            placeholderText={placeholder || "Seleccionar fecha"}
+                            locale="es"
+                            dateFormat="dd/MM/yyyy"
+                            customInput={<TextField.Root />} />            
                     </Flex>
                 </Text>
             </Box>

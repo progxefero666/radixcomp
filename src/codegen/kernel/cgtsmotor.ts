@@ -156,7 +156,29 @@ export class CodeGenTsMotor {
                 }
                 optionalParams += "]";
             }
-        }        
+        }
+        
+        // Handle default value
+        let defaultValue = 'null';
+        if (field.default !== null) {
+            if (field.type === "date" && 
+                (field.default.toLowerCase().includes("current_date") || 
+                 field.default.toLowerCase().includes("now()") || 
+                 field.default.toLowerCase().includes("'today'") ||
+                 field.default.toLowerCase().includes("date_trunc"))) {
+                defaultValue = '"CURRENT_DATE"';
+            } else {
+                defaultValue = `"${field.default}"`;
+            }
+        }
+        
+        // Add default value to optional parameters
+        if (optionalParams) {
+            optionalParams += `, ${defaultValue}`;
+        } else {
+            optionalParams += `, false, null, ${defaultValue}`;
+        }
+        
         // Generate single line field creation with proper indentation (8 spaces = 2 tabs of 4)
         return `        this.fields.push(new ModelField("${field.name}", "${field.type}", ${field.pk}, ${field.generated}, ${field.required}, ${field.minlen}, ${field.maxlen}${optionalParams}));\n`;
     }//end

@@ -1,4 +1,4 @@
-//src\app_front\codegen\cgmodel.ts
+//src\codegen\kernel\cgmodel.ts
 
 /**
  * class Field
@@ -26,9 +26,7 @@ export class ModelField {
     public minlen: number | null;
     public maxlen: number | null;
     public relations: Relation[] | null = null;
-
-    //!!! new attribute !!!
-    public default: string ="undefined"; //required=false
+    public default: string | null; 
 
     constructor(name: string, 
                 type: string,
@@ -37,7 +35,7 @@ export class ModelField {
                 required: boolean, 
                 minlen: number | null, 
                 maxlen: number | null,
-                fk?: boolean, relations?: Relation[]) {
+                fk?: boolean, relations?: Relation[], defaultValue?: string) {
         this.name = name;
         this.type = type;
         this.pk = pk;
@@ -47,6 +45,7 @@ export class ModelField {
         this.maxlen = maxlen;
         this.fk = fk ?? false;
         this.relations = relations ?? null;
+        this.default = defaultValue ?? null;
     }
 }//end 
 
