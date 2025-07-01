@@ -4,7 +4,7 @@ import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
-import types from "@/codegen/kernel/sqltypesnumber.json";
+import numericTypesData from "@/codegen/kernel/sqltypesnumber.json";
 
 
 /**
@@ -61,12 +61,48 @@ export class CodeGenSql {
                 if (maxlenMatch) {
                     maxlen = parseInt(maxlenMatch[1], 10);
                 }
+
+                // Parse DEFAULT value from SQL
+                let defaultValue: string | null = null;
+                const defaultMatch = trimmedLine.match(/DEFAULT\s+([^,\s]+(?:\s+[^,\s]*)*)/i);
+                if (defaultMatch) {
+                    let rawDefault = defaultMatch[1].trim();
+                    // Clean up common patterns
+                    rawDefault = rawDefault.replace(/::[\w\s]+$/g, ''); // Remove type casting like ::character varying
+                    rawDefault = rawDefault.replace(/^'(.*)'$/, '$1'); // Remove outer quotes if present
+                    
+                    // For date fields with CURRENT_DATE/NOW()/etc., don't set defaultValue
+                    if (modelType.toLowerCase() === 'date' && 
+                        (rawDefault.toUpperCase().includes('CURRENT_DATE') || 
+                         rawDefault.toUpperCase().includes('NOW()') || 
+                         rawDefault.toUpperCase().includes('CURRENT_TIMESTAMP'))) {
+                        defaultValue = null; // Let date fields with current date handle this specially
+                    } else {
+                        defaultValue = rawDefault;
+                    }
+                }
+
+                // Determine format for numeric types using the JSON
+                let format: string | null = null;
+                const numericType = numericTypesData.types.find((t: any) => 
+                    t.name.toUpperCase() === fullType.toUpperCase() ||
+                    modelType.toLowerCase() === 'numeric' || 
+                    modelType.toLowerCase() === 'decimal'
+                );
+                if (numericType) {
+                    format = `${numericType.maxdiginteger}:${numericType.maxdigdecimal}`;
+                }
                 
                 const field = new ModelField(
-                    fieldName, modelType,
-                    false, false, // pk, generated (se determinan después)
-                    required,
-                    null, maxlen,
+                    fieldName, // name
+                    modelType, // type
+                    false, // pk (se determina después)
+                    false, // generated (se determina después)
+                    required, // required
+                    defaultValue, // defaultValue parseado del SQL
+                    format, // format basado en sqltypesnumber.json
+                    null, // minlen
+                    maxlen, // maxlen
                     false // fk (se determina después)
                 );
                 table.addField(field);

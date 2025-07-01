@@ -172,15 +172,22 @@ export class CodeGenTsMotor {
             }
         }
         
-        // Add default value to optional parameters
+        // Handle format value
+        let formatValue = 'null';
+        if (field.format !== null) {
+            formatValue = `"${field.format}"`;
+        }
+        
+        // Add default and format values to optional parameters
         if (optionalParams) {
-            optionalParams += `, ${defaultValue}`;
+            optionalParams += `, ${defaultValue}, ${formatValue}`;
         } else {
-            optionalParams += `, false, null, ${defaultValue}`;
+            optionalParams += `, false, null, ${defaultValue}, ${formatValue}`;
         }
         
         // Generate single line field creation with proper indentation (8 spaces = 2 tabs of 4)
-        return `        this.fields.push(new ModelField("${field.name}", "${field.type}", ${field.pk}, ${field.generated}, ${field.required}, ${field.minlen}, ${field.maxlen}${optionalParams}));\n`;
+        // New constructor order: name, type, pk, generated, required, defaultValue, format, minlen, maxlen, fk?, relations?
+        return `        this.fields.push(new ModelField("${field.name}", "${field.type}", ${field.pk}, ${field.generated}, ${field.required}, ${defaultValue}, ${formatValue}, ${field.minlen}, ${field.maxlen}${optionalParams}));\n`;
     }//end
 
     public static getEntityDefClassData(table: ModelTable): string {

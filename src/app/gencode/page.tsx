@@ -13,9 +13,6 @@ import { RadixConf } from "@/radix/radixconf";
 import { ModuleConfig } from "./config";
 import { InputEditor } from "@/app/gencode/panelinput";
 
-
-
-
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
     border: '1px solid rgb(93, 92, 93)',

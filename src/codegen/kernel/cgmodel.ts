@@ -17,37 +17,45 @@ export class Relation {
  * class Field
  */
 export class ModelField {
+    
     public name: string;
     public type: string;
     public required: boolean;
     public generated: boolean;
+    public default: string | null; 
+    public format: string | null;     
     public pk: boolean;
     public fk: boolean;
     public minlen: number | null;
     public maxlen: number | null;
     public relations: Relation[] | null = null;
-    public default: string | null; 
+
 
     constructor(name: string, 
                 type: string,
                 pk: boolean, 
                 generated: boolean,
                 required: boolean, 
+                defaultValue: string | null,
+				format: string | null,
                 minlen: number | null, 
                 maxlen: number | null,
-                fk?: boolean, relations?: Relation[], defaultValue?: string) {
+                fk?: boolean, relations?: Relation[] ) {
         this.name = name;
         this.type = type;
         this.pk = pk;
         this.generated = generated;
         this.required = required;
+        this.default = defaultValue ?? null;        
+		this.format = format ?? null; 
         this.minlen = minlen;
         this.maxlen = maxlen;
         this.fk = fk ?? false;
-        this.relations = relations ?? null;
-        this.default = defaultValue ?? null;
+        this.relations = relations ?? null;        
     }
+	
 }//end 
+
 
 export class ModelTable {
     public name: string;
