@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 
+
+import { format, addDays, differenceInDays } from "date-fns";
+import { es } from 'date-fns/locale/es';
 import { EditorConfig } from "@/app/gencode/config";
 import { SchemaService } from "@/client/metadata/schemaservice";
 import { XRadioGroup } from "@/radix/input/inpgrpradio";
@@ -16,6 +19,7 @@ import { ModelField, ModelTable } from "@/codegen/kernel/cgmodel";
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
+import { XInputDate } from "@/radix/input/inpdate";
 
 interface InputEditorProps { section?: string; }
 export function InputEditor({ }: InputEditorProps) {
@@ -38,7 +42,11 @@ export function InputEditor({ }: InputEditorProps) {
     };
 
     useEffect(() => {
+
         const init = async () => {
+
+            //const date: string = format(new Date(), "yyyy/MM/dd");
+
             const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
@@ -90,9 +98,11 @@ export function InputEditor({ }: InputEditorProps) {
             </Text>
         );
     };
-
+    
     return (
         <Flex direction="column" gapY={"2"} style={EditorConfig.LAYOUT_STYLE} >
+            <XInputDate name="inputdate" value={new Date()} />
+             
             <XRadioGroup autocommit={true} onselect={onSelect} options={EditorConfig.SECTIONS} value={section} />
             <SeparatorH />
             {section === EditorConfig.TABLES.id && renderPanelTables()}

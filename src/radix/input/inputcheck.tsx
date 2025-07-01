@@ -3,8 +3,8 @@
 
 import { forwardRef } from "react";
 import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
-import { ThemeCompStyle } from "../radixtheme";
-import { RadixConf } from "../radixconf";
+import { ThemeCompStyle } from "@/radix/radixtheme";
+import { RadixConf } from "@/radix/radixconf";
 
 interface InputCheckIfc {
     name: string;
