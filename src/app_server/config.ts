@@ -8,8 +8,8 @@ export default class ServerConfig {
     
     public static ENV_DEV:string         = "development";
     public static ENV_PROD:string        = "production";
-    public static ROOTFOLDER_DEV: string = "C:\\claudeapps\\nextapps\\radixcomp\\public"; 
-    public static ROOTFOLDER_PROD:string = "C:\\claudeapps\\nextapps\\radixcomp\\public"; 
+    public static ROOTFOLDER_DEV: string = "C:\\claudeapps\\nextapps\\aigenerator\\public"; 
+    public static ROOTFOLDER_PROD:string = "C:\\claudeapps\\nextapps\\aigenerator\\public"; 
     //static ROOTFOLDER_PROD:string ="/nextapps/data";
     //dbsquema.sql
 

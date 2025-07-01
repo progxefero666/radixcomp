@@ -30,7 +30,6 @@ export class ModelField {
     public maxlen: number | null;
     public relations: Relation[] | null = null;
 
-
     constructor(name: string, 
                 type: string,
                 pk: boolean, 
@@ -41,6 +40,7 @@ export class ModelField {
                 minlen: number | null, 
                 maxlen: number | null,
                 fk?: boolean, relations?: Relation[] ) {
+                    
         this.name = name;
         this.type = type;
         this.pk = pk;

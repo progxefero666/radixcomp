@@ -11,32 +11,12 @@ import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
  */
 export class CodeGenForms {
 
-    //const proglanguageRef = useRef<HTMLSelectElement>(null);        
-    //const nameRef = useRef<HTMLInputElement>(null);
+    public static fieldInputTempRef:string  = `useRef<HTMLInputElement>(null);`;	
+    public static fieldSelectTempRef:string = `useRef<HTMLSelectElement>(null);`;
 
-    /*
-        <XInputText name="path" ref={pathRef} label="path"
-                value={app.apppath} maxlen={AppDef.PATH_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+    //public static state_disabled:string  = `const [disabled, setDisabled] = useState<boolean>(false);`;
+    //public static state_readonly:string  = `const [readonly, setReadonly] = useState<boolean>(false);`;
 
-        <InputSelect name="type" ref={typeRef} inline={true}
-            label="Type"
-            collection={apptypes}
-            value={app.apptype}
-            readonly={readonly} disabled={disabled} />    
-
-        <InputCheck name="usedocker" ref={usedockerRef} inline={true}
-            label="use docker"
-            defaultvalue={app.usedocker!}
-            readonly={readonly} disabled={disabled} />  
-
-            <TextArea value={value} style={areaStyle}  size={size}            
-            placeholder={placeholder}
-            onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
-            variant={variant}  color={color} radius={radius}
-            disabled={input_disabled} />                   
-                             
-    */
     public static createForm = (modelTable:ModelTable) => {
 
         modelTable.fields.forEach((field) => {
