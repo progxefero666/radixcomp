@@ -1,0 +1,64 @@
+{
+    "numerictypes": [
+        {
+            "name": "SMALLINT",
+            "maxvalue": 32767,
+            "maxdiginteger": 5,
+            "maxdigdecimal": 0
+        },
+        {
+            "name": "INTEGER",
+            "maxvalue": 2147483647,
+            "maxdiginteger": 10,
+            "maxdigdecimal": 0
+        },
+        {
+            "name": "INT",
+            "maxvalue": 2147483647,
+            "maxdiginteger": 10,
+            "maxdigdecimal": 0
+        },
+        {
+            "name": "BIGINT",
+            "maxvalue": 9223372036854775807,
+            "maxdiginteger": 19,
+            "maxdigdecimal": 0
+        },
+        {
+            "name": "DECIMAL",
+            "maxvalue": 999999999999999999999999999999999999,
+            "maxdiginteger": 131072,
+            "maxdigdecimal": 16383
+        },
+        {
+            "name": "NUMERIC",
+            "maxvalue": 999999999999999999999999999999999999,
+            "maxdiginteger": 131072,
+            "maxdigdecimal": 16383
+        },
+        {
+            "name": "MONEY",
+            "maxvalue": 92233720368547758.07,
+            "maxdiginteger": 17,
+            "maxdigdecimal": 2
+        },
+        {
+            "name": "REAL",
+            "maxvalue": 3.40282347e+38,
+            "maxdiginteger": 7,
+            "maxdigdecimal": 7
+        },
+        {
+            "name": "DOUBLE PRECISION",
+            "maxvalue": 1.7976931348623157e+308,
+            "maxdiginteger": 15,
+            "maxdigdecimal": 15
+        },
+        {
+            "name": "FLOAT",
+            "maxvalue": 1.7976931348623157e+308,
+            "maxdiginteger": 15,
+            "maxdigdecimal": 15
+        }
+    ]
+}

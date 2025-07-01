@@ -11,16 +11,19 @@ import { RadixConf } from "@/radix/radixconf";
 
 /**
  * InputTextComponent
+ *  format: string; //"numdefdigits:numdecdigits"
  */
 interface CompProps {
     inline?: boolean;
     isdecimal?: boolean;
+    format?: string; //"numdefdigits:numdecdigits"
     name?: string;
     label?: string;
     readonly?: boolean;
     disabled?: boolean
     value?: string;
-    onChange?: (value: string, name?: string) => void;
+    onchange?: (value: string, name?: string) => void;
+    onsubmit?: (value: string, name?: string) => void;
     step?: number;
     placeholder?: string;
     autofocus?: boolean;
@@ -28,7 +31,7 @@ interface CompProps {
 
 
 export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
-    (({isdecimal,step,inline,name,label,value,onChange,readonly,disabled }, ref) => {  
+    (({isdecimal,format,step,inline,name,label,value,onchange,onsubmit,readonly,disabled }, ref) => {  
 
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
@@ -36,28 +39,73 @@ export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
     const variant = RadixConf.VARIANTS.surface;
     const showInline: boolean = inline ?? false;
     
-    const typeDecimal: boolean = isdecimal ?? false; 
-    const input_step = step ?? 1;
+    const isDecimal: boolean = isdecimal ?? false; 
+    const decFormat:string|null = format ?? null; 
+    const input_step = step ?? (isDecimal ? 0.01 : 1);
     const [internalValue, setInternalValue] = useState<string>(value || "");
+
+    // Parse format if provided
+    let maxIntegerDigits: number | null = null;
+    let maxDecimalDigits: number | null = null;
+    
+    if (decFormat) {
+        const parts = decFormat.split(':');
+        if (parts.length === 2) {
+            maxIntegerDigits = parseInt(parts[0]) || null;
+            maxDecimalDigits = parseInt(parts[1]) || null;
+        }
+    }
 
     //const input_icon     = icon ?? null;       
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
-    const triggerCallback = (newValue: string) => {
-        if (onChange) {
-            onChange(newValue, name);
+    const triggerOnChange = (newValue: string) => {
+        if (onchange) {
+            onchange(newValue, name);
+        }
+    };
+
+    const triggerOnSubmit = (newValue: string) => {
+        if (onsubmit) {
+            onsubmit(newValue, name);
         }
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInternalValue(e.target.value);
-        // No disparar callback aquí, solo actualizar estado interno
+        let newValue = e.target.value;
+        
+        // Validate based on isDecimal and format
+        if (decFormat && (maxIntegerDigits || maxDecimalDigits)) {
+            const parts = newValue.split('.');
+            const integerPart = parts[0] || '';
+            const decimalPart = parts[1] || '';
+            
+            // Check integer part length
+            if (maxIntegerDigits && integerPart.length > maxIntegerDigits) {
+                return; // Don't update if exceeds max integer digits
+            }
+            
+            // Check decimal part length (only if isDecimal is true)
+            if (isDecimal && maxDecimalDigits && decimalPart.length > maxDecimalDigits) {
+                return; // Don't update if exceeds max decimal digits
+            }
+            
+            // If not decimal, don't allow decimal point
+            if (!isDecimal && newValue.includes('.')) {
+                return; // Don't update if trying to input decimal when not allowed
+            }
+        }
+        
+        setInternalValue(newValue);
+        // Disparar onchange siempre al escribir
+        triggerOnChange(newValue);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            triggerCallback(internalValue);
+            // Disparar onsubmit solo con Enter
+            triggerOnSubmit(internalValue);
         }
     };
 
@@ -83,8 +131,11 @@ export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 variant={variant}
-                size={size} color={color} radius={radius}
-                disabled={input_disabled} />
+                size={size} 
+                color={color} 
+                radius={radius}
+                disabled={input_disabled}
+                placeholder={`${isDecimal ? 'Decimal' : 'Entero'}${decFormat ? ` (${decFormat})` : ''}`} />
         )
     }
 
