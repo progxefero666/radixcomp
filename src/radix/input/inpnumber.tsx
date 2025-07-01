@@ -18,17 +18,16 @@ interface CompProps {
     disabled?: boolean
     value?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    step: number;
+    step?: number;
     placeholder?: string;
-    icon?: any | null;
     autofocus?: boolean;
     minlen?: number;
     maxlen?: number;
 }
 
 
-export const XInputText = forwardRef<HTMLInputElement,CompProps>(({
-                step, inline, label, placeholder, value, onChange, icon, readonly, disabled }, ref) => {        
+export const XInputNumber = forwardRef<HTMLInputElement,CompProps>(({
+                step, inline, label, value, onChange,  readonly, disabled }, ref) => {        
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
     const radius = ThemeCompStyle.COMP_CONT_RADIUS;

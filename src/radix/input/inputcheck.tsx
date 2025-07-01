@@ -12,14 +12,12 @@ interface InputCheckIfc {
     inline?: boolean;
     readonly?: boolean;
     disabled?: boolean;
-    defaultvalue?: boolean;
+    value?: boolean;
     onchange?: (value: string, name?: string) => void;
-    placeholder?: string;
     autofocus?: boolean;
 }
 export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
-    name, label, placeholder, defaultvalue,
-    inline, readonly, disabled, autofocus, onchange }, ref) => {
+    name,label,value,inline,readonly,disabled,autofocus,onchange }, ref) => {
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
@@ -40,7 +38,7 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
                 <Text as="label" size={size}>
                     <Flex gap="2" align="center">
                         <Checkbox
-                            defaultChecked={defaultvalue}
+                            defaultChecked={value}
                             variant={variant}
                             size={size}
                             color={color}                      
@@ -62,7 +60,7 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
                 <Text as="label" size={size}>
                     <Flex gap="2" align="center">
                         <Checkbox
-                            defaultChecked={defaultvalue}
+                            defaultChecked={value}
                             variant={variant}
                             size={size}
                             color={color}                                                        

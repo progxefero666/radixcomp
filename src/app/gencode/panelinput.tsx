@@ -45,8 +45,6 @@ export function InputEditor({ }: InputEditorProps) {
 
         const init = async () => {
 
-            //const date: string = format(new Date(), "yyyy/MM/dd");
-
             const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);

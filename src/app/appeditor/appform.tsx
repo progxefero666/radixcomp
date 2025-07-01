@@ -1,51 +1,18 @@
 //src\app_front\editapplication\form\appform.tsx
 
 import React, { useRef } from "react";
-import { Box, Grid, Text, Flex, Heading, CheckboxCards } from "@radix-ui/themes";
-import { XInputText } from "@/radix/input/inptext";
+import { Flex } from "@radix-ui/themes";
+import { format, addDays, differenceInDays } from "date-fns";
 
-import { Application } from "@/client";
+import { XInputText } from "@/radix/input/inptext";
 import { InputSelect } from "@/radix/input/inpselect";
 import { InputCheck } from "@/radix/input/inputcheck";
+import { XInputNumber } from "@/radix/input/inpnumber";
+import { XInputDate } from "@/radix/input/inpdate";
 
-/*
-export class ApplicationDef {
+import { Application } from "@/client";
+import { XInputTextArea } from "@/radix/input/inptextarea";
 
-    public name: string = "application";
-    public fields: ModelField[] = [];
-
-    this.fields.push(new ModelField("id", "numeric", true, false, true, null, null));
-    this.fields.push(new ModelField("author", "text", false, false, true, null, 100));    
-    this.fields.push(new ModelField("creationdate", "date", false, false, true, null, null));
-    this.fields.push(new ModelField("updatedate", "date", false, false, true, null, null));
-    this.fields.push(new ModelField("osystem", "text", false, false, true, null, 100));
-    this.fields.push(new ModelField("description", "text", false, false, true, null, 255));
-    this.fields.push(new ModelField("controlusers", "boolean", false, false, true, null, null));
-     this.fields.push(new ModelField("localdev", "boolean", false, false, true, null, null));
-    this.fields.push(new ModelField("usedocker", "boolean", false, false, true, null, null));
-    this.fields.push(new ModelField("consumeai", "boolean", false, false, true, null, null));
-    this.fields.push(new ModelField("useagents", "boolean", false, false, true, null, null));     
-    this.fields.push(new ModelField("appurl", "text", false, false, true, null, 500));
-    this.fields.push(new ModelField("reference", "text", false, false, true, null, 50));
-    this.fields.push(new ModelField("useui",     "boolean", false, false, true, null, null));
-
-    constructor() {
-        this.fields.push(new ModelField("name",         "text", false, false, true, null, 50));
-        this.fields.push(new ModelField("apptype",      "text", false, false, true, null, 50));
-        this.fields.push(new ModelField("proglanguage", "text", false, false, true, null, 50));         
-        this.fields.push(new ModelField("apppath",      "text", false, false, true, null, 500));    
-        this.fields.push(new ModelField("consumedb", "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("consumeapi","boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("exposedb",  "boolean", false, false, true, null, null));
-        this.fields.push(new ModelField("exposeapi", "boolean", false, false, true, null, null));
-    }
-
-    public toJsonString(): string {
-        return JSON.stringify(this, null, 4);
-    }
-
-}//end class
-*/
 
 export class AppDef {
     //creationdate?: string;
@@ -80,12 +47,15 @@ export class AppDef {
 interface AppFormProps {
     proglanguages: string[];
     apptypes: string[];
-    app: Application;
+    item: Application;
     readonly?: boolean;
     disabled?: boolean
 }
-export function AppForm({ app, proglanguages, apptypes,
-    disabled, readonly }: AppFormProps) {
+export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: AppFormProps) {
+
+    //const item_date: string = format(new Date(), "yyyy/MM/dd");
+    const item_date: Date = new Date();
+    const dateRef = useRef<HTMLInputElement>(null);
 
     const typeRef = useRef<HTMLSelectElement>(null);
     const proglanguageRef = useRef<HTMLSelectElement>(null);
@@ -114,96 +84,178 @@ export function AppForm({ app, proglanguages, apptypes,
 
         <Flex direction="column" gap="2">
 
-            <XInputText name="name" ref={nameRef} label="Name"
-                value={app.name} maxlen={AppDef.NAME_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+            <XInputText
+                name="name"
+                label="Name"
+                ref={nameRef}                
+                value={item.name}
+                maxlen={5}
+                readonly={readonly} 
+                disabled={disabled} />
 
-            <XInputText name="author" ref={authorRef} label="Auhor"
-                value={app.author} maxlen={AppDef.AUTHOR_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+            <XInputText
+                name="author"
+                ref={authorRef} 
+                label="Auhor"
+                value={item.author}
+                maxlen={AppDef.AUTHOR_MAXLEN}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <XInputText name="reference" ref={referenceRef} label="reference"
-                value={app.reference} maxlen={AppDef.REFERENCE_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+            <XInputText
+                name="reference"
+                ref={referenceRef}
+                label="reference"
+                value={item.reference}
+                maxlen={AppDef.REFERENCE_MAXLEN}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <XInputText name="description" ref={descriptionRef} label="Description"
-                value={app.description} maxlen={AppDef.DESCRIPTION_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+            <XInputText
+                name="description"
+                ref={descriptionRef}
+                label="Description"
+                value={item.description}
+                maxlen={AppDef.DESCRIPTION_MAXLEN}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <XInputText name="url" ref={urlRef} label="url"
-                value={app.appurl} maxlen={AppDef.URL_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+            <XInputText 
+                name="url" 
+                ref={urlRef} 
+                label="url"
+                value={item.appurl} 
+                maxlen={AppDef.URL_MAXLEN}
+                readonly={readonly} 
+                disabled={disabled} />
 
-            <XInputText name="path" ref={pathRef} label="path"
-                value={app.apppath} maxlen={AppDef.PATH_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+            <XInputText
+                name="path"
+                ref={pathRef}
+                label="path"
+                value={item.apppath}
+                maxlen={AppDef.PATH_MAXLEN}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputSelect name="type" ref={typeRef} inline={true}
+            <InputSelect
+                name="type"
+                ref={typeRef}
+                inline={true}
                 label="Type"
                 collection={apptypes}
-                value={app.apptype}
-                readonly={readonly} disabled={disabled} />
+                value={item.apptype}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputSelect name="proglanguage" ref={proglanguageRef} inline={true}
+            <InputSelect
+                name="proglanguage"
+                ref={proglanguageRef}
                 label="code lang"
                 collection={proglanguages}
-                value={app.proglanguage!}
-                readonly={readonly} disabled={disabled} />
+                value={item.proglanguage!}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <XInputText name="opsystem" ref={osystemRef} inline={true}
+            <XInputText
+                name="opsystem"
+                ref={osystemRef}
                 label="system"
-                value={app.osystem}
+                value={item.osystem}
                 maxlen={AppDef.OSSYSTEM_MAXLEN}
-                readonly={readonly} disabled={disabled} />
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputCheck name="localdev" ref={localdevRef} inline={true}
+            <XInputTextArea
+                name="opsystem"
+                ref={osystemRef}
+                label="system"
+                value={item.osystem}
+                maxlen={AppDef.OSSYSTEM_MAXLEN}
+                readonly={readonly}
+                disabled={disabled} />
+
+            <XInputNumber
+                name="opsystem"
+                ref={osystemRef}
+                label="system"
+                value={item.osystem}
+                step={1}
+                readonly={readonly}
+                disabled={disabled} />
+
+            <XInputDate
+                name="inputdate"
+                ref={dateRef}
+                label="creation date"
+                value={item_date}
+                readonly={readonly}
+                disabled={disabled} />
+
+            <InputCheck
+                name="localdev"
+                ref={localdevRef}
                 label="local dev"
-                defaultvalue={app.localdev!}
-                readonly={readonly} disabled={disabled} />
+                value={item.localdev!}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputCheck name="usedocker" ref={usedockerRef} inline={true}
+            <InputCheck
+                name="usedocker"
+                ref={usedockerRef}
                 label="use docker"
-                defaultvalue={app.usedocker!}
-                readonly={readonly} disabled={disabled} />
+                value={item.usedocker!}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputCheck name="controlusers" ref={controlusersRef!} inline={true}
+            <InputCheck
+                name="controlusers"
+                ref={controlusersRef!}
                 label="control users"
-                defaultvalue={app.controlusers!}
-                readonly={readonly} disabled={disabled} />
+                value={item.controlusers!}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputCheck name="useui" ref={useuiRef} inline={true}
+            <InputCheck
+                name="useui"
+                ref={useuiRef}
                 label="use ui"
-                defaultvalue={app.useui!}
-                readonly={readonly} disabled={disabled} />
+                value={item.useui!}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputCheck name="useagents" ref={useagentsRef} inline={true}
+            <InputCheck
+                name="useagents"
+                ref={useagentsRef}
                 label="use agents"
-                defaultvalue={app.useagents!}
-                readonly={readonly} disabled={disabled} />
+                value={item.useagents!}
+                readonly={readonly}
+                disabled={disabled} />
 
-            <InputCheck name="consumedb" ref={consumedbRef} inline={true}
+            <InputCheck
+                name="consumedb" ref={consumedbRef}
                 label="consume db"
-                defaultvalue={app.consumedb!}
+                value={item.consumedb!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="consumeapi" ref={consumeapiRef} inline={true}
+            <InputCheck name="consumeapi" ref={consumeapiRef}
                 label="consume api"
-                defaultvalue={app.consumeapi!}
+                value={item.consumeapi!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="consumeai" ref={consumeaiRef} inline={true}
+            <InputCheck name="consumeai" ref={consumeaiRef}
                 label="consume ai"
-                defaultvalue={app.consumeai!}
+                value={item.consumeai!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="exposedb" ref={exposedbRef} inline={true}
+            <InputCheck name="exposedb" ref={exposedbRef}
                 label="expose db"
-                defaultvalue={app.exposedb!}
+                value={item.exposedb!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="exposeapi" ref={exposeapiRef} inline={true}
+            <InputCheck name="exposeapi" ref={exposeapiRef}
                 label="expose api"
-                defaultvalue={app.exposeapi!}
+                value={item.exposeapi!}
                 readonly={readonly} disabled={disabled} />
 
         </Flex>
@@ -211,68 +263,4 @@ export function AppForm({ app, proglanguages, apptypes,
     );
 
 }//end AppForm
-
-
-/*
-<CheckboxCards.Root  
-    columns={{ initial: "3", sm: "3" }}
-    defaultValue={["1","2","3","4","5","6","7","8","9"]} >
-
-    <CheckboxCards.Item value="1">
-        <Flex direction="column" width="100%">
-            <Text >local dev</Text>            
-        </Flex>
-    </CheckboxCards.Item>
-
-    <CheckboxCards.Item value="2">
-        <Flex direction="column" width="100%">
-            <Text >use docker</Text>            
-        </Flex> 
-    </CheckboxCards.Item>
-
-    <CheckboxCards.Item value="3">  
-        <Flex direction="column" width="100%">
-            <Text >control users</Text>            
-        </Flex>         
-    </CheckboxCards.Item>
-
-    <CheckboxCards.Item value="4">
-        <Flex direction="column" width="100%">
-            <Text >use ui</Text>            
-        </Flex> 
-    </CheckboxCards.Item>
-
-    <CheckboxCards.Item value="5">
-        <Flex direction="column" width="100%">
-            <Text >use agents</Text>            
-        </Flex>
-    </CheckboxCards.Item>
-
-    <CheckboxCards.Item value="6">
-        <Flex direction="column" width="100%">
-            <Text >consume db</Text>            
-        </Flex>     
-    </CheckboxCards.Item>
-
-    <CheckboxCards.Item value="7">
-        <Flex direction="column" width="100%">
-            <Text >consume api</Text>            
-        </Flex> 
-    </CheckboxCards.Item>
-    <CheckboxCards.Item value="8">
-        <Flex direction="column" width="100%">
-            <Text >consume ai</Text>            
-        </Flex>
-    </CheckboxCards.Item>
-
-    <CheckboxCards.Item value="9">
-        <Flex direction="column" width="100%">
-            <Text >expose db</Text>            
-        </Flex>
-    </CheckboxCards.Item>
-
-
-</CheckboxCards.Root>
-
-*/
 

@@ -27,10 +27,17 @@ export class ModelField {
     public maxlen: number | null;
     public relations: Relation[] | null = null;
 
-    constructor(name: string, type: string,
-        pk: boolean, generated: boolean,
-        required: boolean, minlen: number | null, maxlen: number | null,
-        fk?: boolean, relations?: Relation[]) {
+    //!!! new attribute !!!
+    public default: string ="undefined"; //required=false
+
+    constructor(name: string, 
+                type: string,
+                pk: boolean, 
+                generated: boolean,
+                required: boolean, 
+                minlen: number | null, 
+                maxlen: number | null,
+                fk?: boolean, relations?: Relation[]) {
         this.name = name;
         this.type = type;
         this.pk = pk;
