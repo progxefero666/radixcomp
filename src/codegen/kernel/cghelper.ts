@@ -2,6 +2,7 @@
 
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";
+import { CodeGenConfig } from "./cgconfig";
 
 export class CodeGenHelper {
 
@@ -51,6 +52,16 @@ export class CodeGenHelper {
         return tableIndex;
     }//end  
 
+    public static applyTabsToStringBlock(text:string,countTabs:number): string {
+        let spaceApply:string = "";
+        for (let idx=0;idx<countTabs;idx++) {
+            spaceApply += CodeGenConfig.TAB_4;
+        }
+        let result = "";
+
+        return result;
+    }
+    
 }//end class
 
 
