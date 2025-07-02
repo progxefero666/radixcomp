@@ -55,28 +55,7 @@ export class ModuleConfig {
         padding: '6px 8px 0px 8px'
     };
 
-    public static getSectionOperations(sectionName: string): Option[] {
 
-        if (sectionName === ModuleConfig.SC_TS_ENTITY_FILES.id) {
-            return TsEntFilesOperations.Operations;
-        }
-        else if (sectionName === ModuleConfig.SC_JSON_ENTITY_FILES.id) {
-            return JsonEntFilesOperations.Operations;
-        }
-        else if (sectionName === ModuleConfig.SC_TSX_ENTITY_FORMS.id) {
-            return TsxEntFormsOperations.Operations;
-        }
-        else if (sectionName === ModuleConfig.SC_TS_SERVICES_FILES.id) {
-            return TsEntServiceFilesOperations.Operations;
-        }
-        else if (sectionName === ModuleConfig.SC_PY_SERVICES_FILES.id) {
-            return PyEntServiceFilesOperations.Operations;
-        }
-        else if (sectionName === ModuleConfig.SC_DB_SQUEMA.id) {
-            return ControlDatabase.Operations;
-        }        
-        return [];
-    }
 
 
 }//export class AppConfig

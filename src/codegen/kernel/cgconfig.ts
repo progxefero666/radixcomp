@@ -45,16 +45,28 @@ export class CodeGenConfig {
         return imports;
     }
 
-    /*
+    public static getSectionOperations(sectionName: string): Option[] {
 
-    public static readonly OP_CATEGORIES: string[] = ;
-        = "typescript_entityfiles";
-        = "json_files";
-        = "typescript_entityform";
-        = "typescript_servicefiles";
-        = "python_serverfiles;
-        = "sql_db_squema";    
-    */
+        if (sectionName === OP_CATEGORIES.typescript_entityfiles) {
+            return TsEntFilesOperations.Operations;
+        }
+        else if (sectionName === OP_CATEGORIES.json_entityfiles) {
+            return JsonEntFilesOperations.Operations;
+        }
+        else if (sectionName === OP_CATEGORIES.typescript_entityforms) {
+            return TsxEntFormsOperations.Operations;
+        }
+        else if (sectionName === OP_CATEGORIES.typescript_servicefiles) {
+            return TsEntServiceFilesOperations.Operations;
+        }
+        else if (sectionName === OP_CATEGORIES.python_serverfiles) {
+            return PyEntServiceFilesOperations.Operations;
+        }
+        else if (sectionName === OP_CATEGORIES.sql_db_squema) {
+            return ControlDatabase.Operations;
+        }        
+        return [];
+    }
 
 }//end class
 

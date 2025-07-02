@@ -49,6 +49,7 @@ export default function PageGenCode() {
     }
 
     const onSelection = (sectionId: string) => {
+        //alert(sectionId);
         setSection(sectionId);
     }
 

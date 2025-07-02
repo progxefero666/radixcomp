@@ -33,7 +33,9 @@ interface CompProps {
     section?: string;
     ondataresult: (data: string) => void;
 }
-export function GenCodeControl({ ondataresult }: CompProps) {
+export function GenCodeControl({section, ondataresult }: CompProps) {
+
+    //if(section){alert(section);}
 
     //const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
     //const onSelect = (value: string, compname?: string) => { setSection(value); };
@@ -57,6 +59,8 @@ export function GenCodeControl({ ondataresult }: CompProps) {
     useEffect(() => {
 
         const init = async () => {
+            
+
             //const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
