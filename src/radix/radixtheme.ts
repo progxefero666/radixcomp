@@ -59,7 +59,7 @@ export class ThemeCompStyle {
         "flex-col";
 
     public static readonly C_INCLABEL_ROW_STYLE: string =
-        "flex-rowgrid grid-cols-[35%_65%] px-[8px]";
+        "flex-row grid grid-cols-[35%_65%] px-[8px]";
 
     public static readonly C_SELECT_EDIT_STYLE: string = "gray"
     public static readonly C_SELECT_DISABLED_STYLE: string = "indigo"

@@ -5,7 +5,7 @@ import { forwardRef, useEffect, useState } from "react";
 
 
 import React from "react";
-import { Select } from "@radix-ui/themes";
+import { Box,Text, Flex, Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
 import { ThemeCompStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
@@ -67,61 +67,62 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
         if (isDisabled) { cell_style = ThemeCompStyle.C_SELECT_DISABLED_STYLE; }
         else { cell_style = ThemeCompStyle.C_SELECT_EDIT_STYLE; }
 
-        return (
-            <>
-                <Select.Root
-                    defaultValue={defaultvalue}                    
-                    onValueChange={onchange}
-                    disabled={disabled}
-                    size={size}  >
-                    <Select.Trigger variant={variant} color={color} placeholder={placeholder} />
-                    <Select.Content>
-                        {collection.map((item, index) => (
-                            <Select.Item  key={index} value={item}>
-                                {item}
-                            </Select.Item>
-                        ))}
-                    </Select.Content>
-                </Select.Root>
-            </>
+        return (            
+            <Select.Root
+                defaultValue={defaultvalue}                    
+                onValueChange={onchange}
+                disabled={disabled}
+                size={size}  >
+                <Select.Trigger variant={variant} color={color} placeholder={placeholder} />
+                <Select.Content>
+                    {collection.map((item, index) => (
+                        <Select.Item  key={index} value={item}>
+                            {item}
+                        </Select.Item>
+                    ))}
+                </Select.Content>
+            </Select.Root>            
         )
     }
 
     const renderRowSimpleContent = () => {
         return (
-            <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <Box>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
-            </div>
+            </Box>
         )
     }
 
     const renderRowLabelContent = () => {
         return (
-            <div className={ThemeCompStyle.C_INCLABEL_ROW_STYLE}>
-                <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <Flex  direction={"row"} gap="2" >
+                <Box pt={"1"} >
+                    <Text size="3" >
                     {label}
-                </div>
+
+                    </Text>
+                </Box>
                 {renderRowSimpleContent()}
-            </div>
+            </Flex>
         )
     }
 
     const renderColSimpleContent = () => {
         return (
-            <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <Box>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
-            </div>
+            </Box>
         )
     }
 
     const renderColLabelContent = () => {
         return (
-            <div className={ThemeCompStyle.C_INCLABEL_COL_STYLE}>
+            <Flex  direction={"column"} gap="2" >
                 {label}
                 {renderColSimpleContent()}
-            </div>
+            </Flex>
         )
     }
 

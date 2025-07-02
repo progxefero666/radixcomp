@@ -22,7 +22,7 @@ export class ModelHelper {
         const options: string[] = [];
 
         for (const item of listStrings) {
-            const option = item.id; 
+            const option = item.text; 
             options.push(option);
         }
         return options;

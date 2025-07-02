@@ -27,8 +27,7 @@ import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { ModuleConfig } from "../config";
 import { InputSelect } from "@/radix/input/inpselect";
 import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
-
-
+import { BasicEvaluatedExpression } from "next/dist/compiled/webpack/webpack";
 
 
 interface CompProps {
@@ -37,44 +36,38 @@ interface CompProps {
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
 
-    //if(section){alert(section);}
-
-    //const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
-    //const onSelect = (value: string, compname?: string) => { setSection(value); };
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    const [optionsTables, setOptionsTables] = useState<Option[]>([]);
+    const [menuListTables, setMenuListTables] = useState<Option[]>([]);
     const [optionTableSel, setOptionTableSel] = useState<string | null>(null);
-
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
-    const [operations, setOperations] = useState<Option[]>([]);
     const [operationsNames, setOperationsNames] = useState<string[]>([]);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
-
     //ondataresult(tableClass);        
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
         setModelTableSel(modelTables[tableIndex]);
-
     };
 
     useEffect(() => {
         const init = async () => {
             if(section!=null){
-                const listOperations:Option[] = CodeGenConfig.getSectionOperations(section!);
+ 
                 const listOperationsNames: string[] = CodeGenConfig.getSectionOperationsNames(section!);
 
-                console.log("listOperationsNames:", listOperationsNames);
-                alert(listOperationsNames.length);
                 const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
-                const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);                
-                setOptionsTables(SchemaService.getListTablesAsOptions(model_tables));
+                const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
+                
+                setModelTables(model_tables);
+                setModelTableSel(model_tables[0]);
+
+                setMenuListTables(SchemaService.getListTablesAsOptions(model_tables));
                 setOptionTableSel(model_tables[0].name);
-                setOperations(listOperations);
+
                 setOperationsNames(listOperationsNames);
             }
            
@@ -89,13 +82,17 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         }
     }//end
 
+    const onOpSelected = async (operationId: string) => {
+        alert(operationId);
+    }//end
+
     const renderListTables = () => {
         return (
             <XRadioGroup
                 autocommit={true}
                 key={optionTableSel}
                 onselect={onSelectTable}
-                options={optionsTables}
+                options={menuListTables}
                 value={optionTableSel}
                 direction="column" />
         )
@@ -113,7 +110,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         */
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
-                <Box width={"30%"} >
+                <Box width={"30%"} pb="2" >
                     {initialized ? renderListTables() : null}
                 </Box>
 
@@ -133,17 +130,20 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         <Flex width={"100%"} direction="column" pt="2" style={ModuleConfig.GC_CONTROL_LAYOUT_STYLE} >
 
             <Flex width={"100%"} direction="row" pb="2" justify="between"  >
-                <div>
+                <Box>
                     <InputSelect key={operationsNames[0]}
+                        inline={true}
                         name="operations"
+                        label="Operation: "
                         ref={operationsRef}
                         collection={operationsNames}
                         value={operationsNames[0]}
+                        onchange={onOpSelected}
                         disabled={false} />
-                </div>
-                <div>
+                </Box>
+                <Box>
                     list icons
-                </div>
+                </Box>
             </Flex>
 
             <SeparatorH />

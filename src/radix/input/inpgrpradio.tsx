@@ -35,7 +35,10 @@ export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
     const renderItem = (key:string,value:string,text:string) => {
         return (
             <RadioGroup.Item key={key} value={value}  >
-                {text}
+                <Text size="2" >  
+                    {text}  
+                </Text>
+                
             </RadioGroup.Item>
         )
     }
@@ -47,11 +50,13 @@ export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
             size         = {compStyle.size} 
             defaultValue = {def_value}  
             onValueChange= {onSelect}>
-            <Flex direction = {compDirection} gap="2">
-                {options.map((opt, index) => (
-                    renderItem(index.toString(),opt.id, opt.text)         
-                ))}                    
-            </Flex>
+            
+                <Flex direction = {compDirection} gap="2">
+                    {options.map((opt, index) => (
+                        renderItem(index.toString(),opt.id, opt.text)         
+                    ))}                    
+                </Flex>
+
         </RadioGroup.Root>
     )
 
