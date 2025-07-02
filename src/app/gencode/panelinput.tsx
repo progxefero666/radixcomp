@@ -64,9 +64,13 @@ export function InputEditor({ ondataresult }: InputEditorProps) {
             setOptionTableSel(model_tables[0].name);
             setInitialized(true);
 
-            const firstTableJson: string = CodeGenJson.getJsonEntDef(model_tables[0]);
-            console.log("First table JSON definition:", firstTableJson);
-            ondataresult(firstTableJson);
+            //const firstTableJson: string = CodeGenJson.getJsonEntDef(model_tables[0]);
+            //console.log("First table JSON definition:", firstTableJson);
+            //ondataresult(firstTableJson);
+
+            const allTableDefsJson: string = CodeGenJson.getJsonArrayEntDef(model_tables);
+            console.log(allTableDefsJson);
+
             //const tableClass: string = CodeGenTsMotor.getEntityClass(model_tables[0]);
             //ondataresult(tableClass);
         };

@@ -71,8 +71,22 @@ export class CodeGenJson {
         return code;
     }//end 
 
+    //code += CodeGenJson.getJsonEntDef(table);
+    public static getJsonArrayEntDef(tables: ModelTable[]): string {
+        let code = "[" + CodeGenConfig.RETURN;            
+        for (let idx = 0; idx < tables.length; idx++) {
+            const tableCode: string = CodeGenJson.getJsonEntDef(tables[idx]);
+            code += CodeGenHelper.applyTabsToStringBlock(tableCode,1);
+            if (idx<tables.length-1) {code+= `, `;}
+            code += CodeGenConfig.RETURN;
+        }
+        code += CodeGenConfig.RETURN + "]" + CodeGenConfig.RETURN;
+        return code;
+    }
 
-    /*    
+} //end class
+
+   /*    
     public static getCompEntityJson(tableModel: ModelTable): string {
         const compEntity = {
             classdef: tableModel,
@@ -89,5 +103,3 @@ export class CodeGenJson {
         return JSON.stringify(compEntities, null, 4);
     }
     */
-
-} //end class
