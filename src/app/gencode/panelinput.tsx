@@ -23,6 +23,7 @@ import { XInputDate } from "@/radix/input/inpdate";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { InputFiles } from "@/radix/notready/inputfiles";
 import { RadixConfTexts } from "@/radix/radixconf";
+import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 
 
 
@@ -57,14 +58,17 @@ export function InputEditor({ ondataresult }: InputEditorProps) {
             //const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-
-            const tableClass: string = CodeGenTsMotor.getEntityClass(model_tables[0]);
             setModelTables(model_tables);
             setModelTableSel(model_tables[0]);
             setOptionsTables(SchemaService.getListTablesAsOptions(model_tables));
             setOptionTableSel(model_tables[0].name);
             setInitialized(true);
-            ondataresult(tableClass);
+
+            const firstTableJson: string = CodeGenJson.getJsonEntDef(model_tables[0]);
+            console.log("First table JSON definition:", firstTableJson);
+            ondataresult(firstTableJson);
+            //const tableClass: string = CodeGenTsMotor.getEntityClass(model_tables[0]);
+            //ondataresult(tableClass);
         };
         init();
     }, []);

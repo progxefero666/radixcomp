@@ -73,7 +73,7 @@ export class CodeGenHelper {
             lines[idx] = spaceApply + lines[idx];
         }
   
-        return lines.join(' ');
+        return lines.join('\n');
     }
     
 }//end class
