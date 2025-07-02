@@ -22,14 +22,15 @@ import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { XInputDate } from "@/radix/input/inpdate";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { InputFiles } from "@/radix/notready/inputfiles";
+import { RadixConfTexts } from "@/radix/radixconf";
 
 
 
-interface InputEditorProps { 
-    section?: string; 
+interface InputEditorProps {
+    section?: string;
     ondataresult: (data: string) => void;
 }
-export function InputEditor({ondataresult}: InputEditorProps) {
+export function InputEditor({ ondataresult }: InputEditorProps) {
 
     const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
     const onSelect = (value: string, compname?: string) => { setSection(value); };
@@ -45,7 +46,7 @@ export function InputEditor({ondataresult}: InputEditorProps) {
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
-        const tableClass:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
+        const tableClass: string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
         setModelTableSel(modelTables[tableIndex]);
         //ondataresult(tableClass);        
     };
@@ -53,23 +54,23 @@ export function InputEditor({ondataresult}: InputEditorProps) {
     useEffect(() => {
 
         const init = async () => {
-            const client_tables: Option[] = await SchemaService.getDummyListTables();
+            //const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-            
-            const tableClass:string = CodeGenTsMotor.getEntityClass(model_tables[0]);
+
+            const tableClass: string = CodeGenTsMotor.getEntityClass(model_tables[0]);
             setModelTables(model_tables);
             setModelTableSel(model_tables[0]);
             setOptionsTables(SchemaService.getListTablesAsOptions(model_tables));
             setOptionTableSel(model_tables[0].name);
             setInitialized(true);
-            ondataresult(tableClass); 
+            ondataresult(tableClass);
         };
         init();
     }, []);
 
-    const onFileCharged = async (file: File,name?:string) => {
-   
+    const onFileCharged = async (file: File, name?: string) => {
+
         if (file) {
             alert(file.name);
         }
@@ -87,15 +88,15 @@ export function InputEditor({ondataresult}: InputEditorProps) {
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
                 <Box width={"30%"} >
-                    {initialized ? 
-                        <XRadioGroup 
-                            autocommit={true} 
+                    {initialized ?
+                        <XRadioGroup
+                            autocommit={true}
                             key={optionTableSel}
                             onselect={onSelectTable}
-                            options={optionsTables} 
+                            options={optionsTables}
                             value={optionTableSel}
                             direction="column" />
-                    :null}
+                        : null}
 
                 </Box>
 
@@ -119,17 +120,22 @@ export function InputEditor({ondataresult}: InputEditorProps) {
             </Text>
         );
     };
-    
+
     return (
-        <Flex direction="column" pt="2" style={EditorConfig.LAYOUT_STYLE} >
-            <Box  mb="1">
-                <Flex direction="row" pt="2" justify="between"  >
-                    <XRadioGroup autocommit={true} onselect={onSelect} 
-                                options={EditorConfig.SECTIONS} value={section} />
-                    <InputFiles formats=".sql,.json,.ts" multiple={false}
-                                name="inputFileCode" onchange={onFileCharged} />
-                </Flex>
-            </Box>
+        <Flex width={"100%"} direction="column" pt="2" style={EditorConfig.LAYOUT_STYLE} >
+
+            <Flex width={"100%"} direction="row" justify="between"  >
+                <XRadioGroup autocommit={true} 
+                             onselect={onSelect}
+                             options={EditorConfig.SECTIONS} value={section} />
+
+                
+                    <InputFiles 
+                        formats=".sql,.json,.ts" 
+                        multiple={false}
+                        name="inputFileCode" onchange={onFileCharged} />
+                
+            </Flex>
 
             <SeparatorH />
             {section === EditorConfig.TABLES.id && renderPanelTables()}

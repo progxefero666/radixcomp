@@ -2,12 +2,36 @@
 
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import types from "@/codegen/kernel/sqltypesnumber.json";
+import { CodeGenConfig } from "./cgconfig";
+import { CodeGenTsMotor } from "./cgtsmotor";
+import { CodeGenHelper } from "./cghelper";
 
 /**
  * Class CodeGenJson
  */
 export class CodeGenJson {
 
+    public static getEntityDefClassData(table: ModelTable): string {
+        //\n` 
+
+        const className = CodeGenHelper.capitalize(table.name)
+                         .concat(CodeGenConfig.DEF_CLASS_NAMEADD);//Def
+
+        let classCode = "{";
+
+        for (let idx = 0; idx < table.fields.length; idx++) {
+            classCode += "{";
+            
+            classCode += "}";
+            if(idx<table.fields.length-1) {
+                classCode += `, `;
+            }
+        }        
+        classCode += `}`;            
+        return classCode;
+    }//end
+        
+    /*
     public static getEntityJson(tableModel: ModelTable): string {
         return JSON.stringify(tableModel, null, 4);
     }
@@ -39,5 +63,6 @@ export class CodeGenJson {
         }));
         return JSON.stringify(compEntities, null, 4);
     }
+    */
 
 } //end class

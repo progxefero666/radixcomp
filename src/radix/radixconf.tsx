@@ -111,3 +111,13 @@ export class RadixConf {
     };
 
 }//end class
+
+/**
+ * RadixConfTexts
+ * Contiene textos y mensajes comunes para la aplicación.
+ */
+export class RadixConfTexts {
+
+    public static readonly TEXT_DEF_SIZE: any = RadixConf.SIZES.size_2;
+
+}//end class

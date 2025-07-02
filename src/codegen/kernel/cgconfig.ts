@@ -15,9 +15,11 @@ export class HttpConst {
 }
 
 /**
- * class CodeGen Config
+ * class CodeGenConfig.DEF_CLASS_NAMEADD
  */
 export class CodeGenConfig {
+
+    public static readonly DEF_CLASS_NAMEADD: string = "Def"
 
     public static readonly CODEGEN_LIB_PATH: string 
         = "@/codegen/kernel/cgmodel"

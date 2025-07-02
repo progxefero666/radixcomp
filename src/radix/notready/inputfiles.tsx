@@ -1,7 +1,8 @@
 //src\libcomp\inputfiles.tsx
 
 import { forwardRef, ChangeEvent } from "react";
-
+import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
+import { RadixConfTexts } from "../radixconf";
 export interface InputFilesProps {
     disabled?: boolean;
     inline?: boolean;
@@ -31,7 +32,7 @@ export const InputFiles = forwardRef<HTMLInputElement, InputFilesProps>
         };
 
         const renderContent = () => (
-            <>
+            <Text size={RadixConfTexts.TEXT_DEF_SIZE} >
                 {label && <label className="w-full">{label}</label>}
                 <input
                     name={name}
@@ -41,7 +42,7 @@ export const InputFiles = forwardRef<HTMLInputElement, InputFilesProps>
                     multiple={multiple}
                     accept={formats}
                     onChange={handleOnChange} />
-            </>
+            </Text>
         );
 
         return classname ? (
