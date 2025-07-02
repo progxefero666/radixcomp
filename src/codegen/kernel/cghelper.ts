@@ -4,6 +4,9 @@ import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CodeGenConfig } from "./cgconfig";
 
+/**
+ * class CodeGenHelper.applyTabsToStringBlock
+ */
 export class CodeGenHelper {
 
     public static capitalize(str: string): string {
@@ -52,14 +55,25 @@ export class CodeGenHelper {
         return tableIndex;
     }//end  
 
+    public static getTabsSpace(countTabs:number): string {
+        return CodeGenConfig.TAB_4.repeat(countTabs);
+    }
+
     public static applyTabsToStringBlock(text:string,countTabs:number): string {
+
+        //calculate total identation characters
         let spaceApply:string = "";
         for (let idx=0;idx<countTabs;idx++) {
             spaceApply += CodeGenConfig.TAB_4;
         }
-        let result = "";
 
-        return result;
+        // apply indentation to each line
+        const lines = text.split('\n');
+        for (let idx=0;idx<lines.length;idx++) {
+            lines[idx] = spaceApply + lines[idx];
+        }
+  
+        return lines.join(' ');
     }
     
 }//end class
