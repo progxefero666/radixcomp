@@ -20,12 +20,13 @@ import { XInputTextArea } from "@/radix/input/inptextarea";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { XInputDate } from "@/radix/input/inpdate";
+import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 
 interface InputEditorProps { 
     section?: string; 
     ondataresult: (data: string) => void;
 }
-export function InputEditor({ }: InputEditorProps) {
+export function InputEditor({ondataresult}: InputEditorProps) {
 
     const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
     const onSelect = (value: string, compname?: string) => { setSection(value); };
@@ -39,27 +40,28 @@ export function InputEditor({ }: InputEditorProps) {
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
-        
-        //CodeGenTsMotor.getEntityClass
-
-        console.log(modelTables[tableIndex]);
         setModelTableSel(modelTables[tableIndex]);
         setClientTableSel(tableName);
+        const tableClass:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
+        console.log("Selected table class:", tableClass);
+        //ondataresult(tableClass);        
     };
 
     useEffect(() => {
 
         const init = async () => {
-
-            const client_tables: Option[] = await SchemaService.getDummyListTables();
+            //const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-            const tableIndex: number = CodeGenHelper.getModelTableIndex(model_tables, client_tables[0].id);
+            const tableIndex: number = CodeGenHelper.getModelTableIndex(model_tables, model_tables[0].name);
+            
+            const tableClass:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
+            console.log(tableClass);
 
-            setClientTables(client_tables);
-            setClientTableSel(client_tables[0].id);
-            setModelTables(model_tables);
-            setModelTableSel(model_tables[tableIndex]);
+            //setClientTables(client_tables);
+            //setClientTableSel(client_tables[0].id);
+            //setModelTables(model_tables);
+            //setModelTableSel(model_tables[tableIndex]);
             setInitialized(true);
         };
         init();

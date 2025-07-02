@@ -42,8 +42,10 @@ export class CodeGenHelper {
     public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
         let tableIndex:number = -1;
         for (let idx=0;idx<modelTables.length;idx++) {
+            console.log(modelTables[idx].name);
             if (modelTables[idx].name==name) {
                 tableIndex = idx;
+                break;
             }
         }
         return tableIndex;

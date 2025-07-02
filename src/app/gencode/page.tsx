@@ -68,7 +68,7 @@ export default function PageGenCode() {
                 </Box>
 
                 <Box width={"41%"} >
-                    <OutputMonitor section={section} />
+                    <OutputMonitor section={section} code={code} />
                 </Box>
                 <Box width={"4%"} className="h-screen">
                     <SecondBar actsection={section} />
@@ -83,7 +83,7 @@ export default function PageGenCode() {
 interface OutputMonitorProps {
     section:string;
     format?: string;
-    code?: string;
+    code?: string|null;
     fileName?: string;
 }
 function OutputMonitor({section,code}:OutputMonitorProps) {
