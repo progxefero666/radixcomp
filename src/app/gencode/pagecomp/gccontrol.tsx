@@ -88,13 +88,32 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         alert(operationId);
     };//end
 
-    const runOperation = () => {
-        
-        ondataresult(allEntitiesClass);   
-        //if(section==)
-        //alert(section);
-        //alert(operationSelected?.id);
+    //ondataresult(allEntitiesClass);              
+    
+
+    const runOperation = () => {        
+        alert(section);
+        alert(operationSelected?.id);
+
+        if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
+            
+        }
+        else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){
+        }
+        else if(section==ModuleConfig.SC_TSX_ENTITY_FORMS.id){       
+        }
+        else if(section==ModuleConfig.SC_TS_SERVICES_FILES.id){           
+        }
+        else if(section==ModuleConfig.SC_PY_SERVICES_FILES.id){         
+        }
+        else if(section==ModuleConfig.SC_DB_SQUEMA.id){
+        }   
+
+
     };//end
+
+
+
 
     /*
         if (modelTableSel !== null) { showModelTable = true; }

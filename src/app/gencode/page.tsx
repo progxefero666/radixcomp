@@ -10,11 +10,13 @@ import { AppIndex } from "@/app_front/appindex";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { ModuleConfig } from "./config";
+
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import CardCode from "./comp/cardcode";
 import { AppConstants } from "@/app_front/appconstants";
 import { GenCodeViewer } from "./pagecomp/gcviewer";
+import { CodeGenConfig } from "@/codegen/cgconfig";
+import { ModuleConfig } from "./config";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',

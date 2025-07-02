@@ -2,13 +2,7 @@
 
 import { Option } from "@/common/model/option";
 
-import { ControlDatabase,
-         TsEntFilesOperations, 
-         TsxEntFormsOperations, 
-         TsEntServiceFilesOperations,
-         PyEntServiceFilesOperations, 
-         JsonEntFilesOperations,
-         OP_CATEGORIES} from "@/codegen/cgconfig";
+import { OP_CATEGORIES} from "@/codegen/cgconfig";
 
 
 /**
