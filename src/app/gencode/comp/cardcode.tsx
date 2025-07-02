@@ -8,6 +8,7 @@ import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { RadixConf } from "@/radix/radixconf";
 import BarButtons from "@/radix/cbars/btbar";
 import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
+import { XInputTextArea } from "@/radix/input/inptextarea";
 
 
 /**
@@ -45,10 +46,10 @@ export default function CardCode({ title, code }: CompProps) {
 
             <Separator orientation="horizontal" size="4" mb="2" />
 
+
             <Box width={"100%"}>
-                <Text size="3" >
-                    {code}
-                </Text>
+                <XInputTextArea value={code} />                
+
             </Box>
 
         </Flex>

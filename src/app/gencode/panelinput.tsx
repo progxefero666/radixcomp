@@ -32,37 +32,33 @@ export function InputEditor({ondataresult}: InputEditorProps) {
     const onSelect = (value: string, compname?: string) => { setSection(value); };
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    const [clientTables, setClientTables] = useState<Option[]>([]);
-    const [clientTableSel, setClientTableSel] = useState<string>("undefined");
+    const [optionsTables, setOptionsTables] = useState<Option[]>([]);
+    const [optionTableSel, setOptionTableSel] = useState<string | null>(null);
 
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
-        setModelTableSel(modelTables[tableIndex]);
-        setClientTableSel(tableName);
         const tableClass:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
-        console.log("Selected table class:", tableClass);
+        setModelTableSel(modelTables[tableIndex]);
         //ondataresult(tableClass);        
     };
 
     useEffect(() => {
 
         const init = async () => {
-            //const client_tables: Option[] = await SchemaService.getDummyListTables();
+            const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-            const tableIndex: number = CodeGenHelper.getModelTableIndex(model_tables, model_tables[0].name);
             
-            const tableClass:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
-            console.log(tableClass);
-
-            //setClientTables(client_tables);
-            //setClientTableSel(client_tables[0].id);
-            //setModelTables(model_tables);
-            //setModelTableSel(model_tables[tableIndex]);
+            const tableClass:string = CodeGenTsMotor.getEntityClass(model_tables[0]);
+            setModelTables(model_tables);
+            setModelTableSel(model_tables[0]);
+            setOptionsTables(SchemaService.getListTablesAsOptions(model_tables));
+            setOptionTableSel(model_tables[0].name);
             setInitialized(true);
+            ondataresult(tableClass); 
         };
         init();
     }, []);
@@ -79,9 +75,16 @@ export function InputEditor({ondataresult}: InputEditorProps) {
         return (
             <Flex width={"100%"} direction="row" >
                 <Box width={"30%"} >
-                    <XRadioGroup autocommit={true} key={clientTableSel}
-                        onselect={onSelectTable} options={clientTables} value={clientTableSel}
-                        direction="column" />
+                    {initialized ? 
+                        <XRadioGroup 
+                            autocommit={true} 
+                            key={optionTableSel}
+                            onselect={onSelectTable}
+                            options={optionsTables} 
+                            value={optionTableSel}
+                            direction="column" />
+                    :null}
+
                 </Box>
 
                 <Box width={"70%"} >

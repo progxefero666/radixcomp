@@ -28,7 +28,7 @@ export default function PageGenCode() {
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);
 
-    const [code, setCode] = useState<string|null>(null);
+    const [code, setCode] = useState<string>("undefined");
     const [section, setSection] = useState<string>(AppConfig.INDEX.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
@@ -42,7 +42,6 @@ export default function PageGenCode() {
     }, []);
 
     const onCodeResult= (datacode: string) => {
-        // Handle the data result from InputEditor
         setCode(datacode);
         console.log("Data received from InputEditor:", datacode);
     }
@@ -89,7 +88,12 @@ interface OutputMonitorProps {
 function OutputMonitor({section,code}:OutputMonitorProps) {
 
     const [showCode, setShowCode] = useState<boolean>(false);
-    if(code !== null) {setShowCode(true);}
+    
+    useEffect(() => {
+        if(code !== null) {
+            setShowCode(true);
+        }
+    }, []);
 
     //const renderMainContent = () => {};
 
