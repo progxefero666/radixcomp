@@ -86,9 +86,9 @@ export function GenCodeControl({ ondataresult }: CompProps) {
         }
     }
 
-    const renderPanelTables = () => {
+    const renderMainContent = () => {
         let showModelTable: boolean = false;
-        if (modelTableSel !== null) { showModelTable = true; }
+        //if (modelTableSel !== null) { showModelTable = true; }
 
         let rightPanelData: string = "";
         if (showModelTable) {
@@ -106,8 +106,7 @@ export function GenCodeControl({ ondataresult }: CompProps) {
                             options={optionsTables}
                             value={optionTableSel}
                             direction="column" />
-                        : null}
-
+                    : null}
                 </Box>
 
                 <Box width={"70%"} >
@@ -116,25 +115,18 @@ export function GenCodeControl({ ondataresult }: CompProps) {
                         <div className="w-full">
                             <XInputTextArea value={rightPanelData} />
                         </div>
-
                         : null}
                 </Box>
             </Flex>
         );
     }
 
-    const renderPanelServices = () => {
-        return (
-            <Text size="5" weight="bold" className="text-gray-12">
-                Section B Content
-            </Text>
-        );
-    };
+
 
     return (
-        <Flex width={"100%"} direction="column" pt="2" style={ModuleConfig.LAYOUT_STYLE} >
+        <Flex width={"100%"} direction="column" pt="2" style={ModuleConfig.GC_CONTROL_LAYOUT_STYLE} >
 
-            <Flex width={"100%"} direction="row" justify="between"  >
+            <Flex width={"100%"} direction="row" pb="2" justify="between"  >
                 <div>
                     list operations
                 </div>
@@ -144,7 +136,7 @@ export function GenCodeControl({ ondataresult }: CompProps) {
             </Flex>
 
             <SeparatorH />
-            {renderPanelTables()}
+            {renderMainContent()}
          
             <SeparatorH />
             <Box width={"100%"}>

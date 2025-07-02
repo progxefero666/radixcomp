@@ -102,8 +102,8 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
 
     return (
         <Flex className="h-full" direction="column"   >
-            <Flex width={"100%"} justify="between" px="2" pt="1" align="start" >
-                <Text size="4" align="left">{"Output Monitor"}</Text>
+            <Flex width={"100%"} justify="between" px="2" py="1" align="start" >
+                <Text size="3" align="left">{"Output Monitor"}</Text>
                 <BarButtons barconfig={barButtons} onclick={onClick} />
             </Flex>
 
