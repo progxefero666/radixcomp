@@ -3,6 +3,7 @@
 import types from "@/codegen/kernel/sqltypesnumber.json";
 
 import { Option } from "@/common/model/option";
+import { ModelHelper } from "@/common/util/modelhelper";
 
 export class HttpConst {
 
@@ -17,7 +18,7 @@ export class HttpConst {
 }
 
 /**
- * class CodeGenConfig.TAB_4
+ * class CodeGenConfig.getSectionOperations
  */
 export class CodeGenConfig {
 
@@ -68,6 +69,29 @@ export class CodeGenConfig {
         return [];
     }
 
+    public static getSectionOperationsNames(sectionName: string): string[] {
+
+        if (sectionName === OP_CATEGORIES.typescript_entityfiles) {
+            return ModelHelper.getListFromOptions(TsEntFilesOperations.Operations);
+        }
+        else if (sectionName === OP_CATEGORIES.json_entityfiles) {
+            return ModelHelper.getListFromOptions(JsonEntFilesOperations.Operations);
+        }
+        else if (sectionName === OP_CATEGORIES.typescript_entityforms) {
+            return ModelHelper.getListFromOptions(TsxEntFormsOperations.Operations);
+        }
+        else if (sectionName === OP_CATEGORIES.typescript_servicefiles) {
+            return ModelHelper.getListFromOptions(TsEntServiceFilesOperations.Operations);
+        }
+        else if (sectionName === OP_CATEGORIES.python_serverfiles) {
+            return ModelHelper.getListFromOptions(PyEntServiceFilesOperations.Operations);
+        }
+        else if (sectionName === OP_CATEGORIES.sql_db_squema) {
+            return ModelHelper.getListFromOptions(ControlDatabase.Operations);
+        }        
+        return [];
+    }    
+    
 }//end class
 
 export enum OP_CATEGORIES {

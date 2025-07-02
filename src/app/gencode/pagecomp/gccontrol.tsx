@@ -25,6 +25,8 @@ import { InputFiles } from "@/radix/notready/inputfiles";
 import { RadixConfTexts } from "@/radix/radixconf";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { ModuleConfig } from "../config";
+import { InputSelect } from "@/radix/input/inpselect";
+import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
 
 
 
@@ -33,7 +35,7 @@ interface CompProps {
     section?: string;
     ondataresult: (data: string) => void;
 }
-export function GenCodeControl({section, ondataresult }: CompProps) {
+export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     //if(section){alert(section);}
 
@@ -46,21 +48,117 @@ export function GenCodeControl({section, ondataresult }: CompProps) {
 
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
+    const [operations, setOperations] = useState<Option[]>([]);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const operationsRef = useRef<HTMLSelectElement>(null);
+
+    //ondataresult(tableClass);        
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
-        const tableClass: string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
         setModelTableSel(modelTables[tableIndex]);
-        //ondataresult(tableClass);        
+
     };
 
     useEffect(() => {
-
         const init = async () => {
-            
+            if(section!=null){
+                const listOperations:Option[] = CodeGenConfig.getSectionOperations(section!);
+                
+                setOperations(listOperations);
+            }
+           
+            setInitialized(true);
+        };
+        init();
+    }, []);
 
+    const onFileCharged = async (file: File, name?: string) => {
+        if (file) {
+            alert(file.name);
+        }
+    }//end
+
+    const renderListTables = () => {
+        return (
+            <XRadioGroup
+                autocommit={true}
+                key={optionTableSel}
+                onselect={onSelectTable}
+                options={optionsTables}
+                value={optionTableSel}
+                direction="column" />
+        )
+    }//end
+
+    const renderMainContent = () => {
+        let showModelTable: boolean = false;
+
+        /*
+        if (modelTableSel !== null) { showModelTable = true; }
+        let rightPanelData: string = "";
+        if (showModelTable) {
+            rightPanelData = JSON.stringify(modelTableSel, null, 4);
+        }
+        */
+        return (
+            <Flex width={"100%"} direction="row" pt="2"   >
+                <Box width={"30%"} >
+                    {initialized ? renderListTables() : null}
+                </Box>
+
+                <Box width={"70%"} >
+                    <SeparatorV />
+                    {showModelTable ?
+                        <div className="w-full">
+                            <XInputTextArea value={"rightPanelData"} />
+                        </div>
+                        : null}
+                </Box>
+            </Flex>
+        );
+    }//end renderMainContent
+
+    return (
+        <Flex width={"100%"} direction="column" pt="2" style={ModuleConfig.GC_CONTROL_LAYOUT_STYLE} >
+
+            <Flex width={"100%"} direction="row" pb="2" justify="between"  >
+                <div>
+                    <InputSelect
+                        name="operations"
+                        ref={operationsRef}
+                        label="code lang"
+                        collection={[]}
+                        value={"first"}
+                        disabled={false} />
+                </div>
+                <div>
+                    list icons
+                </div>
+            </Flex>
+
+            <SeparatorH />
+            {renderMainContent()}
+
+            <SeparatorH />
+            <Box width={"100%"}>
+                <InputFiles
+                    ref={fileInputRef}
+                    name="inputFileCode"
+                    formats=".sql,.json,.ts"
+                    multiple={false}
+                    onchange={onFileCharged} />
+            </Box>
+        </Flex>
+    );
+
+}//end InputEditor
+
+/*
+//const tableClass: string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
+            //const client_tables: Option[] = await SchemaService.getDummyListTables();
+        const init = async () => {
             //const client_tables: Option[] = await SchemaService.getDummyListTables();
             const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
@@ -81,78 +179,6 @@ export function GenCodeControl({section, ondataresult }: CompProps) {
             //const tableClass: string = CodeGenTsMotor.getEntityClass(model_tables[0]);
             //ondataresult(tableClass);
         };
-        init();
-    }, []);
-
-    const onFileCharged = async (file: File, name?: string) => {
-        if (file) {
-            alert(file.name);
-        }
-    }
-
-    const renderMainContent = () => {
-        let showModelTable: boolean = false;
-        //if (modelTableSel !== null) { showModelTable = true; }
-
-        let rightPanelData: string = "";
-        if (showModelTable) {
-            rightPanelData = JSON.stringify(modelTableSel, null, 4);
-        }
-
-        return (
-            <Flex width={"100%"} direction="row" pt="2"   >
-                <Box width={"30%"} >
-                    {initialized ?
-                        <XRadioGroup
-                            autocommit={true}
-                            key={optionTableSel}
-                            onselect={onSelectTable}
-                            options={optionsTables}
-                            value={optionTableSel}
-                            direction="column" />
-                    : null}
-                </Box>
-
-                <Box width={"70%"} >
-                    <SeparatorV />
-                    {showModelTable ?
-                        <div className="w-full">
-                            <XInputTextArea value={rightPanelData} />
-                        </div>
-                        : null}
-                </Box>
-            </Flex>
-        );
-    }
-
-
-
-    return (
-        <Flex width={"100%"} direction="column" pt="2" style={ModuleConfig.GC_CONTROL_LAYOUT_STYLE} >
-
-            <Flex width={"100%"} direction="row" pb="2" justify="between"  >
-                <div>
-                    list operations
-                </div>
-                <div>
-                    list icons
-                </div>                
-            </Flex>
-
-            <SeparatorH />
-            {renderMainContent()}
-         
-            <SeparatorH />
-            <Box width={"100%"}>
-                <InputFiles 
-                    formats=".sql,.json,.ts" 
-                    multiple={false}
-                    name="inputFileCode" onchange={onFileCharged} />
-            </Box>    
-        </Flex>
-    );
-
-}//end InputEditor
-
+*/
 //const className = CodeGenHelper.capitalize(table.name)
 //                 .concat(CodeGenConfig.DEF_CLASS_NAMEADD);//Def

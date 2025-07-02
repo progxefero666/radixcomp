@@ -18,5 +18,14 @@ export class ModelHelper {
         return options;
     }
 
+    public static getListFromOptions(listStrings: Option[]): string[] {
+        const options: string[] = [];
+
+        for (const item of listStrings) {
+            const option = item.id; 
+            options.push(option);
+        }
+        return options;
+    }    
 
 }// end class
