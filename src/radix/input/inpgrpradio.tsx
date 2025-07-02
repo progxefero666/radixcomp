@@ -3,14 +3,24 @@
 import { forwardRef } from "react";
 import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { GroupCompProps, radixTypeComp, radixTypeDirection } from "@/radix/radixmodels";
+import { Option } from "@/common/model/option";
+import { radixTypeComp, radixTypeDirection } from "@/radix/radixmodels";
 
 
 /**
  * XRadioGroup
  */
-
-export const XRadioGroup = forwardRef<HTMLInputElement, GroupCompProps>(({
+interface CompProps {
+    autocommit?: boolean;
+    name?: string;
+    options: Option[];
+    label?: string;
+    direction?: radixTypeDirection;
+    value?: any;
+    onselect: (value: string,compname?:string) => void;
+    autofocus?: boolean;
+}
+export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
     autocommit,options, name, label, value, direction, autofocus, onselect }, ref) => {
 
     const auto: boolean = autocommit ?? false;    

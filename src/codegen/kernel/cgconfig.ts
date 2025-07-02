@@ -71,7 +71,7 @@ export class CodeGenConfig {
     }
 
     public static getSectionOperationsNames(sectionName: string): string[] {
-        alert("getSectionOperationsNames: " + sectionName);
+        //alert("getSectionOperationsNames: " + sectionName);
         if (sectionName === OP_CATEGORIES.typescript_entityfiles) {
             return ModelHelper.getListFromOptions(TsEntFilesOperations.Operations);
         }

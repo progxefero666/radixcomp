@@ -42,22 +42,18 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [optionTableSel, setOptionTableSel] = useState<string | null>(null);
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
-    const [operationsNames, setOperationsNames] = useState<string[]>([]);
-
+    const [operations, setOperations] = useState<Option[]>([]);
+    const [operationSelected, setOperationSelected] = useState<Option|null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
     //ondataresult(tableClass);        
 
-    const onSelectTable = (tableName: string) => {
-        const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
-        setModelTableSel(modelTables[tableIndex]);
-    };
 
     useEffect(() => {
         const init = async () => {
             if(section!=null){
  
-                const listOperationsNames: string[] = CodeGenConfig.getSectionOperationsNames(section!);
+                const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
 
                 const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
                 const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
@@ -68,9 +64,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 setMenuListTables(SchemaService.getListTablesAsOptions(model_tables));
                 setOptionTableSel(model_tables[0].name);
 
-                setOperationsNames(listOperationsNames);
-            }
-           
+                setOperations(listOperations);
+                setOperationSelected(listOperations[0]);
+            }           
             setInitialized(true);
         };
         init();
@@ -82,8 +78,15 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         }
     }//end
 
+
+    const onSelectTable = (tableName: string) => {
+        const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
+        setModelTableSel(modelTables[tableIndex]);
+    };
+
     const onOpSelected = async (operationId: string) => {
         alert(operationId);
+
     }//end
 
     const renderListTables = () => {
@@ -131,15 +134,18 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
             <Flex width={"100%"} direction="row" pb="2" justify="between"  >
                 <Box>
-                    <InputSelect key={operationsNames[0]}
+                    {initialized ? 
+                      <InputSelect key={operations[0].id}
                         inline={true}
                         name="operations"
                         label="Operation: "
                         ref={operationsRef}
-                        collection={operationsNames}
-                        value={operationsNames[0]}
+                        collection={operations}
+                        value={operationSelected?.id ?? ""}
                         onchange={onOpSelected}
-                        disabled={false} />
+                        disabled={false} />                    
+                    : null}
+
                 </Box>
                 <Box>
                     list icons

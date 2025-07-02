@@ -14,13 +14,3 @@ export type radixTypeComp = {
     radius: any;
 }
 
-export interface GroupCompProps {
-    autocommit?: boolean;
-    name?: string;
-    options: Option[];
-    label?: string;
-    direction?: radixTypeDirection;
-    value?: any;
-    onselect: (value: string,compname?:string) => void;
-    autofocus?: boolean;
-}

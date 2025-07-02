@@ -3,31 +3,40 @@
 
 import { forwardRef, useEffect, useState } from "react";
 
-
+import { Option } from "@/common/model/option";
 import React from "react";
 import { Box,Text, Flex, Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
 import { ThemeCompStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
+/*
+export interface GroupCompProps {
+    autocommit?: boolean;
+    name?: string;
+    options: Option[];
+    label?: string;
+    direction?: radixTypeDirection;
+    value?: any;
+    onselect: (value: string,compname?:string) => void;
+    autofocus?: boolean;
+}
+*/
 interface InputSelectProps {
-    children?: React.ReactNode;
     name: string;
     inline?: boolean;
     readonly?: boolean;
     disabled?: boolean;
-    collection: string[];
+    collection: Option[];
     label?: string;
-    placeholder?: string;
     value?: string;
     maxlen?: number;
     autofocus?: boolean;
     onchange?: (value: string) => void;
 }                  
 export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({    
-    name, collection, label, placeholder, value: defaultvalue,
-    inline, readonly, disabled,children,
-    maxlen, autofocus, onchange }, ref) => {
+    name, collection, label, value: defaultvalue,
+    inline, readonly, disabled, autofocus, onchange }, ref) => {
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
@@ -44,17 +53,18 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
     }
 
     const renderReadComp = () => {
+        //placeholder={placeholder}
         return (
             <Select.Root
                 defaultValue={defaultvalue}                    
                 onValueChange={onchange}
                 disabled={true}
                 size={size}  >
-                <Select.Trigger variant={variant} color={color} placeholder={placeholder} />
+                <Select.Trigger variant={variant} color={color}  />
                 <Select.Content>
                     {collection.map((item, index) => (
-                        <Select.Item  key={index} value={item}>
-                            {item}
+                        <Select.Item  key={index} value={item.id}>
+                            {item.text}
                         </Select.Item>
                     ))}
                 </Select.Content>
@@ -63,6 +73,7 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
     }
 
     const renderEditComp = () => {
+        //placeholder={placeholder}
         let cell_style: string = "";
         if (isDisabled) { cell_style = ThemeCompStyle.C_SELECT_DISABLED_STYLE; }
         else { cell_style = ThemeCompStyle.C_SELECT_EDIT_STYLE; }
@@ -73,11 +84,11 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
                 onValueChange={onchange}
                 disabled={disabled}
                 size={size}  >
-                <Select.Trigger variant={variant} color={color} placeholder={placeholder} />
+                <Select.Trigger variant={variant} color={color}  />
                 <Select.Content>
                     {collection.map((item, index) => (
-                        <Select.Item  key={index} value={item}>
-                            {item}
+                        <Select.Item  key={index} value={item.id}>
+                            {item.text}
                         </Select.Item>
                     ))}
                 </Select.Content>
@@ -99,8 +110,7 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
             <Flex  direction={"row"} gap="2" >
                 <Box pt={"1"} >
                     <Text size="3" >
-                    {label}
-
+                        {label}
                     </Text>
                 </Box>
                 {renderRowSimpleContent()}
@@ -120,7 +130,9 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
     const renderColLabelContent = () => {
         return (
             <Flex  direction={"column"} gap="2" >
-                {label}
+                <Text size="3" >
+                    {label}
+                </Text>
                 {renderColSimpleContent()}
             </Flex>
         )
