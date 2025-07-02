@@ -66,11 +66,12 @@ export class CodeGenConfig {
         else if (sectionName === OP_CATEGORIES.sql_db_squema) {
             return ControlDatabase.Operations;
         }        
+        alert("not found");
         return [];
     }
 
     public static getSectionOperationsNames(sectionName: string): string[] {
-
+        alert("getSectionOperationsNames: " + sectionName);
         if (sectionName === OP_CATEGORIES.typescript_entityfiles) {
             return ModelHelper.getListFromOptions(TsEntFilesOperations.Operations);
         }
@@ -89,6 +90,7 @@ export class CodeGenConfig {
         else if (sectionName === OP_CATEGORIES.sql_db_squema) {
             return ModelHelper.getListFromOptions(ControlDatabase.Operations);
         }        
+        alert("not found");
         return [];
     }    
     

@@ -12,7 +12,7 @@ import { ControlDatabase,
 
 
 /**
- * class ModuleConfig.GC_CONTROL_LAYOUT_STYLE
+ * class ModuleConfig.SC_TS_ENTITY_FILES
  */
 export class ModuleConfig {
 

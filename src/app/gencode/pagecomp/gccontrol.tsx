@@ -49,6 +49,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
     const [operations, setOperations] = useState<Option[]>([]);
+    const [operationsNames, setOperationsNames] = useState<string[]>([]);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
@@ -65,8 +66,16 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         const init = async () => {
             if(section!=null){
                 const listOperations:Option[] = CodeGenConfig.getSectionOperations(section!);
-                
+                const listOperationsNames: string[] = CodeGenConfig.getSectionOperationsNames(section!);
+
+                console.log("listOperationsNames:", listOperationsNames);
+                alert(listOperationsNames.length);
+                const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
+                const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);                
+                setOptionsTables(SchemaService.getListTablesAsOptions(model_tables));
+                setOptionTableSel(model_tables[0].name);
                 setOperations(listOperations);
+                setOperationsNames(listOperationsNames);
             }
            
             setInitialized(true);
@@ -125,12 +134,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
             <Flex width={"100%"} direction="row" pb="2" justify="between"  >
                 <div>
-                    <InputSelect
+                    <InputSelect key={operationsNames[0]}
                         name="operations"
                         ref={operationsRef}
-                        label="code lang"
-                        collection={[]}
-                        value={"first"}
+                        collection={operationsNames}
+                        value={operationsNames[0]}
                         disabled={false} />
                 </div>
                 <div>

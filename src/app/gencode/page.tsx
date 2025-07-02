@@ -31,7 +31,7 @@ export default function PageGenCode() {
     const appRef = useRef<AppIndex>(null);
 
     const [code, setCode] = useState<string>("undefined");
-    const [section, setSection] = useState<string>(AppConfig.INDEX.id);
+    const [section, setSection] = useState<string>(ModuleConfig.SC_TS_ENTITY_FILES.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
     useEffect(() => {

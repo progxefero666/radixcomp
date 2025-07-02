@@ -7,7 +7,7 @@ import { forwardRef, useEffect, useState } from "react";
 import React from "react";
 import { Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
-import { RadixColors, ThemeCompStyle } from "@/radix/radixtheme";
+import { ThemeCompStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
 interface InputSelectProps {
@@ -31,7 +31,7 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
-    const color = RadixColors.colors.gray;
+    const color = RadixConf.COLORS.gray;
 
     const showInline: boolean = inline ?? false;
     const isReadOnly: boolean = readonly ?? false;
