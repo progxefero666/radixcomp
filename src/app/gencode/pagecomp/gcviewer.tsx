@@ -44,12 +44,16 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
 
     const exportCodeFile = async (mimetype:string,fileName:string,code:string) => {
         alert("init export");
+        
         const file:File = new File([code], fileName, { type: mimetype });
-        const fileBuffer: ArrayBuffer =await file.arrayBuffer();
-        const fileData = new Blob([fileBuffer], {type: mimetype});
-
-        //const objURL = URL.createObjectURL(blob);
-
+        const objURL = URL.createObjectURL(file);
+        
+        const link = document.createElement('a');
+        link.href = objURL;
+        link.download = fileName;
+        link.click();
+        
+        URL.revokeObjectURL(objURL);
     }
     
     const getExportFileMimetype = () => {

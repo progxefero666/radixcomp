@@ -20,15 +20,15 @@ export enum CodeFormats {
  *    - For Code Files
  */
 export enum FilesMimeTypes {
-    TYPESCRIPT= "text/plain",
-    PYTHON = "text/plain",		
-    JAVASCRIPT = "text/javascript",
-    JSON= "application/json",
-    SQL = "text/plain",
-    PDF = "application/pdf",
-    HTML= "text/html",
-    TXT = "text/plain",
-    CSS = "text/cssv"   
+   TYPESCRIPT = "text/typescript",
+   PYTHON = "text/x-python",		
+   JAVASCRIPT = "text/javascript",
+   JSON = "application/json",
+   SQL = "text/x-sql",
+   PDF = "application/pdf",
+   HTML = "text/html",
+   TXT = "text/plain",
+   CSS = "text/css"   
 }
 
 /**
