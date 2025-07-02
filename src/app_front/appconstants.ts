@@ -46,7 +46,7 @@ export class AppUiConst {
     public static readonly COLOR_ACT_SAVE:string     = "btn-warning";
     public static readonly COLOR_EXPORT:string     = "btn-info";
     public static readonly COLOR_RUN:string     = "btn-info";
-
+    public static readonly COLOR_COPY:string     = "btn-info";
     
     public static readonly ICON_COLLAPSE_OFF:string = "ti-angle-up"; 
     public static readonly ICON_COLLAPSE_ON:string = "ti-angle-down"; 
@@ -58,7 +58,7 @@ export class AppUiConst {
     public static readonly ICON_ACT_SAVE:string = "ti-save";
     public static readonly ICON_RUN:string = "ti-control-play";
     public static readonly ICON_EXPORT:string = "ti-export";
-    
+    public static readonly ICON_COPY:string = "ti-save";
 
 }//end class
 
@@ -71,5 +71,7 @@ export class AppTexts {
     public static readonly SAVE : string = "Save";
     public static readonly RUN : string = "Run";
     public static readonly EXPORT: string = "Export";   
+
+    public static readonly COPY: string = "Copy";  
 
 }//end class

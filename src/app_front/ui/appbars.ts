@@ -21,6 +21,14 @@ export const BARCFG_EXPORT: BarButtonsCfg = new BarButtonsCfg(
     [false],
     [true]
 );
+export const BARCFG_EXPORT_COPY: BarButtonsCfg = new BarButtonsCfg(
+    [AppConstants.ACT_EXPORT,AppConstants.ACT_COPY],
+    [AppTexts.EXPORT,AppTexts.COPY],
+    [AppUiConst.COLOR_EXPORT,AppUiConst.COLOR_COPY],
+    [AppUiConst.ICON_EXPORT,AppUiConst.ICON_COPY],
+    [false,false],
+    [true, true]
+);
 
 export const BARCFG_EDITION: BarButtonsCfg = new BarButtonsCfg(
     [AppConstants.MODE_EDITION,     AppConstants.ACT_SAVE],

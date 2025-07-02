@@ -13,7 +13,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import CardCode from "@/app/gencode/comp/cardcode";
 import { AppConstants } from "@/app_front/appconstants";
-import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
+import { BARCFG_EXPORT, BARCFG_EXPORT_COPY } from "@/app_front/ui/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 
@@ -26,7 +26,7 @@ interface CompProps {
 export function GenCodeViewer({ section, code, fileName }: CompProps) {
     const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
     const [codeCharged, setCodeCharged] = useState<boolean>(false);
-    const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT);
+    const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
 
     const expFileName: string = fileName ?? AppConstants.NOT_DEF;
 

@@ -69,7 +69,8 @@ export function GenCodeControl({ ondataresult }: CompProps) {
             //ondataresult(firstTableJson);
 
             const allTableDefsJson: string = CodeGenJson.getJsonArrayEntDef(model_tables);
-            console.log(allTableDefsJson);
+            ondataresult(allTableDefsJson);
+            //console.log(allTableDefsJson);
 
             //const tableClass: string = CodeGenTsMotor.getEntityClass(model_tables[0]);
             //ondataresult(tableClass);
