@@ -1,0 +1,27 @@
+
+
+public static state_disabled:string  = `const [disabled, setDisabled] = useState<boolean>(false);`;
+public static state_readonly:string  = `const [readonly, setReadonly] = useState<boolean>(false);`;
+
+public static createForm = (modelTable:ModelTable) => {
+
+    modelTable.fields.forEach((field) => {
+        if (!field.pk && !field.fk) {
+            console.log(`Normal field Key: ${field.name} (${field.type})`);
+        }
+        else {
+            if (field.pk) {
+                console.log(`Primary Key: ${field.name} (${field.type})`);
+            }
+            else  {
+                console.log(`Foreign Key: ${field.name} (${field.type})`);
+                if (field.relations) {
+                    field.relations.forEach((relation) => {
+                        console.log(`Relation: ${relation.table} -> ${relation.field}`);
+                    });
+                }
+            }
+        }
+    });//end for
+
+}//end createForm

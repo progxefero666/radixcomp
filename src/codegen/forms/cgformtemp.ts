@@ -8,6 +8,9 @@
  */
 export class CodeGenFormTemp {
 
+    public static fieldInputTempRef:string  = `useRef<HTMLInputElement>(null);`;	
+    public static fieldSelectTempRef:string = `useRef<HTMLSelectElement>(null);`;
+
     public static TEMP_TEXT = 
         `<XInputText
             name  		= "_name_"

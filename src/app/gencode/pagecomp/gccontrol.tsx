@@ -27,11 +27,11 @@ import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 
 
 
-interface InputEditorProps {
+interface CompProps {
     section?: string;
     ondataresult: (data: string) => void;
 }
-export function InputEditor({ ondataresult }: InputEditorProps) {
+export function GenCodeControl({ ondataresult }: CompProps) {
 
     const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
     const onSelect = (value: string, compname?: string) => { setSection(value); };

@@ -10,7 +10,7 @@ import { AppIndex } from "@/app_front/appindex";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { InputEditor } from "@/app/gencode/panelinput";
+import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import CardCode from "@/app/gencode/comp/cardcode";
 import { AppConstants } from "@/app_front/appconstants";
 import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
@@ -23,7 +23,7 @@ interface CompProps {
     code?: string | null;
     fileName?: string;
 }
-export function OutputMonitor({ section, code, fileName }: CompProps) {
+export function GenCodeViewer({ section, code, fileName }: CompProps) {
     const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
     const [codeCharged, setCodeCharged] = useState<boolean>(false);
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT);

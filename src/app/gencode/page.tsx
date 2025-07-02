@@ -10,11 +10,11 @@ import { AppIndex } from "@/app_front/appindex";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { EditorConfig, ModuleConfig } from "./config";
-import { InputEditor } from "@/app/gencode/panelinput";
+import { ModuleConfig } from "./config";
+import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import CardCode from "./comp/cardcode";
 import { AppConstants } from "@/app_front/appconstants";
-import { OutputMonitor } from "./pagecomp/outputmonitor";
+import { GenCodeViewer } from "./pagecomp/gcviewer";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
@@ -65,12 +65,12 @@ export default function PageGenCode() {
                                 actsection={section}  />
                 </Box>
                 <Box width="41%" style={boxStyle}>
-                    <InputEditor section={section}  
+                    <GenCodeControl section={section}  
                                  ondataresult={onCodeResult}/>
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
-                    <OutputMonitor section={section} code={code} />
+                    <GenCodeViewer section={section} code={code} />
                 </Box>
 
                 <Box width="4%" style={boxStyle}>
