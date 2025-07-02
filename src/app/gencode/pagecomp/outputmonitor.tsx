@@ -13,25 +13,29 @@ import { RadixConf } from "@/radix/radixconf";
 import { InputEditor } from "@/app/gencode/panelinput";
 import CardCode from "@/app/gencode/comp/cardcode";
 import { AppConstants } from "@/app_front/appconstants";
+import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
+import BarButtons from "@/radix/cbars/btbar";
+import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 
 interface CompProps {
-    section:string;
+    section: string;
     format?: string;
-    code?: string|null;
+    code?: string | null;
     fileName?: string;
 }
-export function OutputMonitor({section,code,fileName}:CompProps) {
-     const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
+export function OutputMonitor({ section, code, fileName }: CompProps) {
+    const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
     const [codeCharged, setCodeCharged] = useState<boolean>(false);
+    const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT);
 
     const expFileName: string = fileName ?? AppConstants.NOT_DEF;
 
     useEffect(() => {
-        const init=():void=>{
-            if(code && code!==null) {
+        const init = (): void => {
+            if (code && code !== null) {
                 setCodeCharged(true);
             }
-        } 
+        }
         init();
     }, []);
 
@@ -53,9 +57,10 @@ export function OutputMonitor({section,code,fileName}:CompProps) {
     }
 
     const onClick = (opId?: string) => {
+        alert(opId);
+        if (!codeCharged) { return; }
 
-        if(!codeCharged) {return;}
-
+        /*
         if (opId) {
             switch (opId) {
                 case AppConstants.ACT_EXPORT:
@@ -68,13 +73,20 @@ export function OutputMonitor({section,code,fileName}:CompProps) {
                 default:
                     setAlertMessage("Operation not defined");
             }
-        }
+        }*/
+       
     };
 
     return (
         <Flex className="h-full" direction="column"   >
+            <Flex width={"100%"} justify="between" px="2" pt="1" align="start" >
+                <Text size="4" align="left">{"Output Monitor"}</Text>
+                <BarButtons barconfig={barButtons} onclick={onClick} />
+            </Flex>
+
+            <Separator orientation="horizontal" size="4" mb="2" />
             <CardCode title="Output Monitor"
-                      code={code ?? "No code generated yet."} />                      
+                code={code ?? "No code generated yet."} />
         </Flex>
     );
 

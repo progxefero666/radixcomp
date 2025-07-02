@@ -58,6 +58,7 @@ export default function PageGenCode() {
             <PageHeader onselection={onSelection} />
             
             <Flex height="100%">
+
                 <Box width="14%" style={boxStyle}>
                     <PrimaryBar sections={ModuleConfig.SECTIONS} 
                                 onselection={onSelection}
@@ -71,6 +72,7 @@ export default function PageGenCode() {
                 <Box width="41%" style={boxStyle}>
                     <OutputMonitor section={section} code={code} />
                 </Box>
+
                 <Box width="4%" style={boxStyle}>
                     <SecondBar actsection={section} />
                 </Box>
@@ -150,7 +152,7 @@ interface PrimaryBarProps {
 }
 function PrimaryBar({sections,onselection,actsection}: PrimaryBarProps) {
     return (
-        <Flex direction="column" >
+        <Flex direction="column" p="3" >
             <MenuButtons options={sections}
                 onselection={onselection} 
                 optactid={actsection} />	

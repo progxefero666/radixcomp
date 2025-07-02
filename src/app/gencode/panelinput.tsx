@@ -1,6 +1,6 @@
 //src\app\gencode\panelinput.tsx
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
@@ -21,6 +21,9 @@ import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { XInputDate } from "@/radix/input/inpdate";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
+import { InputFiles } from "@/radix/notready/inputfiles";
+
+
 
 interface InputEditorProps { 
     section?: string; 
@@ -37,6 +40,8 @@ export function InputEditor({ondataresult}: InputEditorProps) {
 
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
@@ -62,6 +67,13 @@ export function InputEditor({ondataresult}: InputEditorProps) {
         };
         init();
     }, []);
+
+    const onFileCharged = async (file: File,name?:string) => {
+   
+        if (file) {
+            alert(file.name);
+        }
+    }
 
     const renderPanelTables = () => {
         let showModelTable: boolean = false;
@@ -111,8 +123,12 @@ export function InputEditor({ondataresult}: InputEditorProps) {
     return (
         <Flex direction="column" pt="2" style={EditorConfig.LAYOUT_STYLE} >
             <Box  mb="1">
-                <XRadioGroup autocommit={true} onselect={onSelect} 
-                            options={EditorConfig.SECTIONS} value={section} />
+                <Flex direction="row" pt="2" justify="between"  >
+                    <XRadioGroup autocommit={true} onselect={onSelect} 
+                                options={EditorConfig.SECTIONS} value={section} />
+                    <InputFiles formats=".sql,.json,.ts" multiple={false}
+                                name="inputFileCode" onchange={onFileCharged} />
+                </Flex>
             </Box>
 
             <SeparatorH />
