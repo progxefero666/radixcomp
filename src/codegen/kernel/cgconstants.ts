@@ -5,11 +5,11 @@
  */
 export enum CodeFormats {
     TXT = "textplain",
-    TYPESCRIPT = "typescript",
-    SQL = "sql",
-    PYTHON = "pyhton",
-    JAVASCRIPT = "json",
     JSON = "json",
+    TYPESCRIPT = "typescript",
+    PYTHON = "pyhton",
+    SQL = "sql",    
+    JAVASCRIPT = "json",
     MD = "mardown",
     CSS = "css",
     HTML = "html"

@@ -80,7 +80,6 @@ export function GenCodeControl({ ondataresult }: CompProps) {
     }, []);
 
     const onFileCharged = async (file: File, name?: string) => {
-
         if (file) {
             alert(file.name);
         }

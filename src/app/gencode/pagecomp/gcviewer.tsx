@@ -17,6 +17,7 @@ import { BARCFG_EXPORT, BARCFG_EXPORT_COPY } from "@/app_front/ui/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { FilesMimeTypes } from "@/codegen/kernel/cgconstants";
+import { exportFile } from "@/app_front/common/filesmanager";
 
 interface CompProps {
     section: string;
@@ -42,19 +43,7 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
     }, []);
 
 
-    const exportCodeFile = async (mimetype:string,fileName:string,code:string) => {
-        alert("init export");
-        
-        const file:File = new File([code], fileName, { type: mimetype });
-        const objURL = URL.createObjectURL(file);
-        
-        const link = document.createElement('a');
-        link.href = objURL;
-        link.download = fileName;
-        link.click();
-        
-        URL.revokeObjectURL(objURL);
-    }
+
     
     const getExportFileMimetype = () => {
         let mimetype: string = "";
@@ -101,7 +90,7 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
                 showAlert("not file name defined");
                 return;                 
             }   
-            exportCodeFile(getExportFileMimetype(),code!,fileName);
+            exportFile(getExportFileMimetype(),code!,fileName);
             return;      
         }                   
     }//end
