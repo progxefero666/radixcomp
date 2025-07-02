@@ -12,6 +12,7 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { ModuleConfig } from "./config";
 import { InputEditor } from "@/app/gencode/panelinput";
+import CardCode from "./comp/cardcode";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
@@ -26,6 +27,8 @@ const boxStyle = {
 export default function PageGenCode() {
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);
+
+    const [code, setCode] = useState<string|null>(null);
     const [section, setSection] = useState<string>(AppConfig.INDEX.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
@@ -37,6 +40,12 @@ export default function PageGenCode() {
         };
         init();
     }, []);
+
+    const onCodeResult= (datacode: string) => {
+        // Handle the data result from InputEditor
+        setCode(datacode);
+        console.log("Data received from InputEditor:", datacode);
+    }
 
     const onSelection = (sectionId: string) => {
         setSection(sectionId);
@@ -54,7 +63,8 @@ export default function PageGenCode() {
                                 actsection={section}  />
                 </Box>
                 <Box width={"41%"} style={boxStyle}>
-                    <InputEditor section={section} />
+                    <InputEditor section={section}  
+                                 ondataresult={onCodeResult}/>
                 </Box>
 
                 <Box width={"41%"} >
@@ -70,16 +80,23 @@ export default function PageGenCode() {
 
 }//end page
 
-interface OutputMonitorProps {section:string;}
-function OutputMonitor({section:string}:OutputMonitorProps) {
+interface OutputMonitorProps {
+    section:string;
+    format?: string;
+    code?: string;
+    fileName?: string;
+}
+function OutputMonitor({section,code}:OutputMonitorProps) {
 
-    const renderMainContent = () => {
+    const [showCode, setShowCode] = useState<boolean>(false);
+    if(code !== null) {setShowCode(true);}
 
-    };
+    //const renderMainContent = () => {};
 
     return (
         <Flex direction="column" gapY="5" className="h-full">
-
+            <CardCode title="Output Monitor"
+                      code={code ?? "No code generated yet."} />                      
         </Flex>
     );
 

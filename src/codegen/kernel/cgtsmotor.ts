@@ -7,6 +7,7 @@ import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 import types from "@/codegen/kernel/sqltypesnumber.json";
 
 /**
+ * CodeGenTsMotor.getEntityClass
  * class CodeGen TypeScript Entity Files Content
  *     for store in typescript file .ts
  */

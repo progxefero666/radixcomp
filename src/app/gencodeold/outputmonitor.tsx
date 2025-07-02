@@ -4,13 +4,13 @@
 import { useEffect, useRef, useState } from "react";
 import { AppConstants } from "@/app_front/appconstants";
 import { CodeGenStyle } from "../../codegen/cgstyle";
-import CardOutputCode from "../../codegen/comp/codegencard";
+import CardOutputCode from "./codegencard";
 import { CodeFormats } from "@/codegen/kernel/cgconstants";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { XInputText } from "@/radix/input/inptext";
-import { Option } from "@/common/model/option";
+
 const BODY_MAINCONTENT_STYLE: string = "main_monitor w-full min-h-screen rounded-lg";
 
 /**
@@ -115,6 +115,15 @@ export default function PageOutputMonitor({onexport,fileName,format,code}: PageO
                         barconfig={monitorBarConfig}
                         onclick={onClick} />
                 </div>
+            </div>
+        )
+    }
+
+
+    const renderMainContent = () => {
+        return (
+            <div >
+         
             </div>
         )
     }

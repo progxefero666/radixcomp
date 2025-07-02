@@ -4,7 +4,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
+import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 import Home from "./index/page";
 import PageGenCode from "./gencode/page";
 
@@ -19,16 +19,16 @@ export default function Desktop() {
     useEffect(() => {
 
     }, []);
-  
+
     const render = () => {
         const mode: number = 1;
         switch (mode) {
             case 0: return <Home />
-           case 1: return <PageGenCode />
+            case 1: return <PageGenCode />
         }
     };
     return (
-        <Flex direction="column" className="h-screen">          
+        <Flex direction="column" className="h-screen">
             {render()}
         </Flex>
     );

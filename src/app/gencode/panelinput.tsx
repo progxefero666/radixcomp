@@ -21,7 +21,10 @@ import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { XInputDate } from "@/radix/input/inpdate";
 
-interface InputEditorProps { section?: string; }
+interface InputEditorProps { 
+    section?: string; 
+    ondataresult: (data: string) => void;
+}
 export function InputEditor({ }: InputEditorProps) {
 
     const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
@@ -36,6 +39,9 @@ export function InputEditor({ }: InputEditorProps) {
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
+        
+        //CodeGenTsMotor.getEntityClass
+
         console.log(modelTables[tableIndex]);
         setModelTableSel(modelTables[tableIndex]);
         setClientTableSel(tableName);

@@ -41,3 +41,66 @@ export class CodeGenForms {
     }//end createForm
 
 }//end class
+
+/*
+
+
+const [disabled, setDisabled] = useState<boolean>(false);
+const [readonly, setReadonly] = useState<boolean>(false);
+
+<XInputText
+	name  		= "_name_"
+	label 		= "_Name_"
+	ref 		= {_name_Ref}
+	value 		= {_table_._name_}
+	readonly	= {readonly}
+	disabled	= {disabled}
+	maxlen 		= {_maxlen_} />
+
+<XInputTextArea
+	name  		= "_name_"
+	label 		= "_Name_"
+	ref 		= {_name_Ref}
+	value 		= {_table_._name_}
+	readonly	= {readonly}
+	disabled	= {disabled}
+	maxlen 		= {_maxlen_} />
+	
+<XInputDate
+	name  		= "_name_"
+	label 		= "_Name_"
+	ref 		= {_name_Ref}
+	value 		= {_table_._name_}
+	readonly	= {readonly}
+	disabled	= {disabled} />
+	
+<InputCheck
+	name  		= "_name_"
+	label 		= "_Name_"
+	ref 		= {_name_Ref}
+	value 		= {_table_._name_}
+	readonly	= {readonly}
+	disabled	= {disabled} />
+	
+<InputSelect	
+	name  		= "_name_"
+	label		= "_Name_"
+	ref 		= {_name_Ref}
+	value 		= {_table_._name_}
+	readonly	= {readonly}
+	disabled	= {disabled} 
+	collection 	= {[]} />
+	
+<XInputNumber
+	name  		= "_name_"
+	label 		= "_Name_"
+	ref 		= {_name_Ref}
+	value 		= {_table_._name_}
+	readonly	= {readonly}
+	disabled	= {disabled}
+	step 		= {1}	
+	isdecimal	= {_isdecimal_}
+	format 		= {"_format"} />
+
+
+*/
