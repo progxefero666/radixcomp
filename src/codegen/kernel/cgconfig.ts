@@ -45,15 +45,33 @@ export class CodeGenConfig {
         return imports;
     }
 
+    /*
 
+    public static readonly OP_CATEGORIES: string[] = ;
+        = "typescript_entityfiles";
+        = "json_files";
+        = "typescript_entityform";
+        = "typescript_servicefiles";
+        = "python_serverfiles;
+        = "sql_db_squema";    
+    */
 
 }//end class
+
+export enum OP_CATEGORIES {
+    json_entityfiles        = "json_files",
+    typescript_entityfiles  = "typescript_entityfiles",
+    typescript_entityforms  = "typescript_entityforms",
+    typescript_servicefiles = "typescript_servicefiles",    
+    python_serverfiles      = "python_serverfiles",
+    sql_db_squema           = "sql_db_squema"    
+}
 
 
 /**
  * class TsEntityFiles
  */
-export class TsEntitiesFiles {
+export class TsEntFilesOperations {
 
     public static readonly OP_GET_DEF_CLASS: Option
         = new Option("get_definition_class", "Get Def. Class", null, null, null);
@@ -68,12 +86,12 @@ export class TsEntitiesFiles {
         = new Option("get_entity_class", "Get Array Entity Class", null, null, null);
 
     public static readonly Operations: Option[] = [
-        TsEntitiesFiles.OP_GET_DEF_CLASS,
-        TsEntitiesFiles.OP_GET_ENT_CLASS,
-        TsEntitiesFiles.OP_GET_ARRAY_DEF_CLASS,
-        TsEntitiesFiles.OP_GET_ARRAY_ENT_CLASS
+        TsEntFilesOperations.OP_GET_DEF_CLASS,
+        TsEntFilesOperations.OP_GET_ENT_CLASS,
+        TsEntFilesOperations.OP_GET_ARRAY_DEF_CLASS,
+        TsEntFilesOperations.OP_GET_ARRAY_ENT_CLASS
     ]
-    public static readonly ACTIVE_OPERATION: Option = TsEntitiesFiles.OP_GET_DEF_CLASS
+    public static readonly ACTIVE_OPERATION: Option = TsEntFilesOperations.OP_GET_DEF_CLASS
 
 }//end class
 
@@ -81,7 +99,7 @@ export class TsEntitiesFiles {
 /**
  * class Json EntityFiles
  */
-export class JsonEntitiesFiles {
+export class JsonEntFilesOperations {
 
     public static readonly OP_A: Option
         = new Option("option_a", "Option A", null, null, null);
@@ -90,10 +108,10 @@ export class JsonEntitiesFiles {
         = new Option("option_b", "Option B", null, null, null);
 
     public static readonly Operations: Option[] = [
-        JsonEntitiesFiles.OP_A,
-        JsonEntitiesFiles.OP_B
+        JsonEntFilesOperations.OP_A,
+        JsonEntFilesOperations.OP_B
     ]
-    public static readonly ACTIVE_OPERATION: Option = JsonEntitiesFiles.OP_A;
+    public static readonly ACTIVE_OPERATION: Option = JsonEntFilesOperations.OP_A;
 
 }//end class
 
@@ -101,7 +119,7 @@ export class JsonEntitiesFiles {
 /**
  * class TsxEntityForms
  */
-export class TsxEntitiesForms {
+export class TsxEntFormsOperations {
 
     public static readonly OP_A: Option
         = new Option("option_a", "Option A", null, null, null);
@@ -110,10 +128,10 @@ export class TsxEntitiesForms {
         = new Option("option_b", "Option B", null, null, null);
 
     public static readonly Operations: Option[] = [
-        TsxEntitiesForms.OP_A,
-        TsxEntitiesForms.OP_B
+        TsxEntFormsOperations.OP_A,
+        TsxEntFormsOperations.OP_B
     ]
-    public static readonly ACTIVE_OPERATION: Option = TsxEntitiesForms.OP_A;
+    public static readonly ACTIVE_OPERATION: Option = TsxEntFormsOperations.OP_A;
 
 }//end class
 
@@ -121,7 +139,7 @@ export class TsxEntitiesForms {
 /**
  * class TsEntityFiles
  */
-export class TsEntitiesServiceFiles {
+export class TsEntServiceFilesOperations {
 
     public static readonly OP_A: Option
         = new Option("option_a", "Option A", null, null, null);
@@ -130,10 +148,10 @@ export class TsEntitiesServiceFiles {
         = new Option("option_b", "Option B", null, null, null);
 
     public static readonly Operations: Option[] = [
-        TsEntitiesServiceFiles.OP_A,
-        TsEntitiesServiceFiles.OP_B
+        TsEntServiceFilesOperations.OP_A,
+        TsEntServiceFilesOperations.OP_B
     ]
-    public static readonly ACTIVE_OPERATION: Option = TsEntitiesServiceFiles.OP_A;
+    public static readonly ACTIVE_OPERATION: Option = TsEntServiceFilesOperations.OP_A;
 
 }//end class
 
@@ -141,7 +159,7 @@ export class TsEntitiesServiceFiles {
 /**
  * class TsEntityFiles
  */
-export class PyEntitiesServiceFiles {
+export class PyEntServiceFilesOperations {
 
     public static readonly OP_A: Option
         = new Option("option_a", "Option A", null, null, null);
@@ -150,10 +168,10 @@ export class PyEntitiesServiceFiles {
         = new Option("option_b", "Option B", null, null, null);
 
     public static readonly Operations: Option[] = [
-        PyEntitiesServiceFiles.OP_A,
-        PyEntitiesServiceFiles.OP_B
+        PyEntServiceFilesOperations.OP_A,
+        PyEntServiceFilesOperations.OP_B
     ]
-    public static readonly ACTIVE_OPERATION: Option = PyEntitiesServiceFiles.OP_A;
+    public static readonly ACTIVE_OPERATION: Option = PyEntServiceFilesOperations.OP_A;
 
 }//end class
 
