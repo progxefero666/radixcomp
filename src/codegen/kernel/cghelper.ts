@@ -2,7 +2,7 @@
 
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";
-import { CodeGenConfig } from "./cgconfig";
+import { CodeGenConfig } from "../cgconfig";
 
 /**
  * class CodeGenHelper.applyTabsToStringBlock

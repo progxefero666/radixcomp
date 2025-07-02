@@ -2,7 +2,7 @@
 
 import { ModelField, ModelTable, Relation } from "@/codegen/kernel/cgmodel";
 import types from "@/codegen/kernel/sqltypesnumber.json";
-import { CodeGenConfig } from "./cgconfig";
+import { CodeGenConfig } from "../cgconfig";
 import { CodeGenTsMotor } from "./cgtsmotor";
 import { CodeGenHelper } from "./cghelper";
 

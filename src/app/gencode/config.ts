@@ -8,7 +8,7 @@ import { ControlDatabase,
          TsEntServiceFilesOperations,
          PyEntServiceFilesOperations, 
          JsonEntFilesOperations,
-         OP_CATEGORIES} from "@/codegen/kernel/cgconfig";
+         OP_CATEGORIES} from "@/codegen/cgconfig";
 
 
 /**

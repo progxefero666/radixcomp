@@ -1,7 +1,7 @@
 //src\codegen\kernel\cgsqlmotor.ts
 
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
-import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
+import { CodeGenConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 import numericTypesData from "@/codegen/kernel/sqltypesnumber.json";

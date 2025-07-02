@@ -26,7 +26,7 @@ import { RadixConfTexts } from "@/radix/radixconf";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { ModuleConfig } from "../config";
 import { InputSelect } from "@/radix/input/inpselect";
-import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
+import { CodeGenConfig } from "@/codegen/cgconfig";
 import { BasicEvaluatedExpression } from "next/dist/compiled/webpack/webpack";
 
 
