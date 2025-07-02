@@ -39,13 +39,19 @@ export function GenCodeViewer({ section, code, fileName }: CompProps) {
         init();
     }, []);
 
-    const onFileExport = () => {
+    const onFileExport = (code:string, fileName?:string) => {
+        alert("onFileExport");
+        if (!codeCharged) { 
+            alert("not code charged");
+            return; 
+        }
 
+        /*
         let result = true; //CodeGenCfg.exportCode(code);
         if (fileName && fileName !== AppConstants.NOT_DEF) {
             //result = CodeGenCfg.exportCode(code, fileName);
         }
-        /*
+        
         if (result) {
             setAlertMessage(AppEditorMessages.MSG_EXPORT_SUCCESS);
         }
@@ -57,25 +63,30 @@ export function GenCodeViewer({ section, code, fileName }: CompProps) {
     }
 
     const onClick = (opId?: string) => {
-        alert(opId);
-        if (!codeCharged) { return; }
+  
+        if (!codeCharged) { 
+            renderAlert("not code charged");
+            return; 
+        }
 
-        /*
-        if (opId) {
-            switch (opId) {
-                case AppConstants.ACT_EXPORT:
-                    onFileExport();
-                    break;
-                case AppConstants.ACT_COPY:
-                    navigator.clipboard.writeText(code!);
-                    setAlertMessage("Code copied to clipboard");
-                    break;
-                default:
-                    setAlertMessage("Operation not defined");
-            }
-        }*/
-       
-    };
+        if (opId==AppConstants.ACT_COPY) {
+            navigator.clipboard.writeText(code!);
+            setAlertMessage("Code copied to clipboard");
+            //setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);  
+            return; 
+        }
+        else if (opId==AppConstants.ACT_EXPORT) {
+            setAlertMessage("File exported success");
+            //setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);       
+            return;      
+        }        
+           
+    }//end
+
+
+    const renderAlert = (message:string) => {
+        alert("Alert: " + message);
+    }
 
     return (
         <Flex className="h-full" direction="column"   >
@@ -87,7 +98,10 @@ export function GenCodeViewer({ section, code, fileName }: CompProps) {
             <Separator orientation="horizontal" size="4" mb="2" />
             <CardCode title="Output Monitor"
                 code={code ?? "No code generated yet."} />
+            
         </Flex>
     );
 
 }//end component
+
+//{(alertMessage !== AppConstants.NOT_DEF) ? renderAlert(alertMessage) : null}    
