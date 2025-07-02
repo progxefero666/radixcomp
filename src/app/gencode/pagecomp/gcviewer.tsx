@@ -16,6 +16,7 @@ import { AppConstants } from "@/app_front/appconstants";
 import { BARCFG_EXPORT, BARCFG_EXPORT_COPY } from "@/app_front/ui/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { FilesMimeTypes } from "@/codegen/kernel/cgconstants";
 
 interface CompProps {
     section: string;
@@ -23,12 +24,13 @@ interface CompProps {
     code?: string | null;
     fileName?: string;
 }
-export function GenCodeViewer({ section, code, fileName }: CompProps) {
+export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
     const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
     const [codeCharged, setCodeCharged] = useState<boolean>(false);
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
 
     const expFileName: string = fileName ?? AppConstants.NOT_DEF;
+    const codeFormat: string = format ?? FilesMimeTypes.TYPESCRIPT;
 
     useEffect(() => {
         const init = (): void => {
@@ -39,52 +41,69 @@ export function GenCodeViewer({ section, code, fileName }: CompProps) {
         init();
     }, []);
 
-    const onFileExport = (code:string, fileName?:string) => {
-        alert("onFileExport");
-        if (!codeCharged) { 
-            alert("not code charged");
-            return; 
-        }
 
-        /*
-        let result = true; //CodeGenCfg.exportCode(code);
-        if (fileName && fileName !== AppConstants.NOT_DEF) {
-            //result = CodeGenCfg.exportCode(code, fileName);
+    const exportCodeFile = async (mimetype:string,fileName:string,code:string) => {
+        alert("init export");
+        const file:File = new File([code], fileName, { type: mimetype });
+        const fileBuffer: ArrayBuffer =await file.arrayBuffer();
+        const fileData = new Blob([fileBuffer], {type: mimetype});
+
+        //const objURL = URL.createObjectURL(blob);
+
+    }
+    
+    const getExportFileMimetype = () => {
+        let mimetype: string = "";
+        if(codeFormat === FilesMimeTypes.TYPESCRIPT) {
+            mimetype = FilesMimeTypes.TYPESCRIPT;
+        }      
+        else if(codeFormat === FilesMimeTypes.JSON) {
+            mimetype = FilesMimeTypes.JSON; 
+        }          
+        else if(codeFormat === FilesMimeTypes.JAVASCRIPT) {
+            mimetype = FilesMimeTypes.JAVASCRIPT;
+        } 
+        else if(codeFormat === FilesMimeTypes.PYTHON) {
+            mimetype = FilesMimeTypes.PYTHON;
         }
-        
-        if (result) {
-            setAlertMessage(AppEditorMessages.MSG_EXPORT_SUCCESS);
+        else if(codeFormat === FilesMimeTypes.SQL) {
+            mimetype = FilesMimeTypes.SQL;
+        }        
+        else if(codeFormat === FilesMimeTypes.HTML) {
+            mimetype = FilesMimeTypes.HTML;
+        }
+        else if(codeFormat === FilesMimeTypes.CSS) {
+            mimetype = FilesMimeTypes.CSS;
         }
         else {
-            setAlertMessage(AppEditorMessages.MSG_EXPORT_ERROR);
+            mimetype = FilesMimeTypes.TXT; 
         }
-        setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);
-        */
+        return mimetype;
     }
 
     const onClick = (opId?: string) => {
-  
+
         if (!codeCharged) { 
-            renderAlert("not code charged");
+            showAlert("not code charged");
             return; 
         }
-
         if (opId==AppConstants.ACT_COPY) {
             navigator.clipboard.writeText(code!);
-            setAlertMessage("Code copied to clipboard");
-            //setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);  
+            showAlert("Code copied to clipboard");
             return; 
         }
-        else if (opId==AppConstants.ACT_EXPORT) {
-            setAlertMessage("File exported success");
-            //setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);       
+        if (opId==AppConstants.ACT_EXPORT) {
+            if(!fileName){
+                showAlert("not file name defined");
+                return;                 
+            }   
+            exportCodeFile(getExportFileMimetype(),code!,fileName);
             return;      
-        }        
-           
+        }                   
     }//end
 
 
-    const renderAlert = (message:string) => {
+    const showAlert = (message:string) => {
         alert("Alert: " + message);
     }
 
@@ -105,3 +124,21 @@ export function GenCodeViewer({ section, code, fileName }: CompProps) {
 }//end component
 
 //{(alertMessage !== AppConstants.NOT_DEF) ? renderAlert(alertMessage) : null}    
+
+
+        /*
+        setAlertMessage("Code copied to clipboard");
+               //setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);    
+        let result = true; //CodeGenCfg.exportCode(code);
+        if (fileName && fileName !== AppConstants.NOT_DEF) {
+            //result = CodeGenCfg.exportCode(code, fileName);
+        }
+        
+        if (result) {
+            setAlertMessage(AppEditorMessages.MSG_EXPORT_SUCCESS);
+        }
+        else {
+            setAlertMessage(AppEditorMessages.MSG_EXPORT_ERROR);
+        }
+        setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);
+        */

@@ -26,14 +26,7 @@ import { RadixConfTexts } from "@/radix/radixconf";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 
 
-/*
-    
-    public static async arrayBufferToImageBitmap(buffer: ArrayBuffer, mimeType: string): Promise<ImageBitmap> {
-    const blob = new Blob([buffer], { type: mimeType });
-    return await createImageBitmap(blob); 
-}
 
-*/
 
 interface CompProps {
     section?: string;

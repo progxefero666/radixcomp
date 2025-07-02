@@ -1,4 +1,4 @@
-//src\app_front\codegen\cgconstants.ts
+//src\codegen\kernel\cgconstants.ts
 
 /**
  * CodeGen Formats
