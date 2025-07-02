@@ -3,6 +3,7 @@
 import { Option } from "@/common/model/option";
 
 export class ModuleConfig {
+
         public static readonly LAYOUT_STYLE = {
         backgroundColor: 'var(--gray-a2)',
         borderRadius: 'var(--radius-3)',
@@ -12,6 +13,8 @@ export class ModuleConfig {
     };
     public static readonly INDEX: Option 
         = new Option("./","Home",null,null,null);
+
+    public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
 
     public static readonly SC_TS_ENTITY_FILES: Option 
         = new Option("typescript_entityfiles","TS Entity Files",null,null,null);
@@ -31,6 +34,7 @@ export class ModuleConfig {
     public static readonly SECTIONS: Option[] = [
         ModuleConfig.SC_TS_ENTITY_FILES,
         ModuleConfig.SC_JSON_ENTITY_FILES,
+        ModuleConfig.SC_TSX_ENTITY_FORMS,
         ModuleConfig.SC_TS_SERVICES_FILES,
         ModuleConfig.SC_PY_SERVICES_FILES
     ]
@@ -42,11 +46,12 @@ export class ModuleConfig {
 /**
  * class EditorConfig
  */
-export class EditorConfig {
+export class S_ENTITY_FILES {
     
 
-    public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
+    
 
+    /*
     public static readonly TABLES: Option 
         = new Option("table","Tables",null,null,null);
 
@@ -62,7 +67,7 @@ export class EditorConfig {
     ]
     
     public static readonly ACTIVE_SECTION: Option = EditorConfig.TABLES;
-
+    */
     public static readonly LAYOUT_STYLE = {
         padding: '6px 8px 0px 8px'
     };

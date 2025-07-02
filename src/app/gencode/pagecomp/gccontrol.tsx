@@ -8,7 +8,7 @@ import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes
 
 import { format, addDays, differenceInDays } from "date-fns";
 import { es } from 'date-fns/locale/es';
-import { EditorConfig } from "@/app/gencode/config";
+
 import { SchemaService } from "@/client/metadata/schemaservice";
 import { XRadioGroup } from "@/radix/input/inpgrpradio";
 import { SeparatorH } from "@/radix/container/separatorh";
@@ -24,6 +24,7 @@ import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { InputFiles } from "@/radix/notready/inputfiles";
 import { RadixConfTexts } from "@/radix/radixconf";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
+import { ModuleConfig } from "../config";
 
 
 
@@ -34,8 +35,8 @@ interface CompProps {
 }
 export function GenCodeControl({ ondataresult }: CompProps) {
 
-    const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
-    const onSelect = (value: string, compname?: string) => { setSection(value); };
+    //const [section, setSection] = useState<string>(EditorConfig.ACTIVE_SECTION.id);
+    //const onSelect = (value: string, compname?: string) => { setSection(value); };
     const [initialized, setInitialized] = useState<boolean>(false);
 
     const [optionsTables, setOptionsTables] = useState<Option[]>([]);
@@ -57,7 +58,7 @@ export function GenCodeControl({ ondataresult }: CompProps) {
 
         const init = async () => {
             //const client_tables: Option[] = await SchemaService.getDummyListTables();
-            const dbSqlSquema: string = await getTextFile(EditorConfig.DBSQUEMA_FILE);
+            const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
             const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
             setModelTables(model_tables);
             setModelTableSel(model_tables[0]);
@@ -131,23 +132,20 @@ export function GenCodeControl({ ondataresult }: CompProps) {
     };
 
     return (
-        <Flex width={"100%"} direction="column" pt="2" style={EditorConfig.LAYOUT_STYLE} >
+        <Flex width={"100%"} direction="column" pt="2" style={ModuleConfig.LAYOUT_STYLE} >
 
             <Flex width={"100%"} direction="row" justify="between"  >
-                <XRadioGroup autocommit={true} 
-                             onselect={onSelect}
-                             options={EditorConfig.SECTIONS} value={section} />
                 <div>
-                    buttons
-
-
+                    list operations
                 </div>
-                
+                <div>
+                    list icons
+                </div>                
             </Flex>
 
             <SeparatorH />
-            {section === EditorConfig.TABLES.id && renderPanelTables()}
-            {section === EditorConfig.SERVICES.id && renderPanelServices()}
+            {renderPanelTables()}
+         
             <SeparatorH />
             <Box width={"100%"}>
                 <InputFiles 
