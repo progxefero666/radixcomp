@@ -3,21 +3,21 @@
 import { useEffect, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
-import { Box, Separator,Flex, Text, Button, Link } from "@radix-ui/themes";
+import { Box, Separator, Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
 import { AppConfig } from "@/app_front/appconfig";
 import { AppIndex } from "@/app_front/appindex";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { ModuleConfig } from "./config";
+import { EditorConfig, ModuleConfig } from "./config";
 import { InputEditor } from "@/app/gencode/panelinput";
 import CardCode from "./comp/cardcode";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
     border: '1px solid rgb(93, 92, 93)',
-    padding: '8px',
+    padding: '0',
 };
 
 
@@ -51,25 +51,25 @@ export default function PageGenCode() {
     }
 
     return (
-        <Flex direction="column" className="h-screen">
+        <Flex direction="column" height="100vh">
 
             <PageHeader onselection={onSelection} />
             
-            <Flex className="flex-1 overflow-hidden">
-                <Box width={"14%"} className="h-screen p-4">
+            <Flex height="100%">
+                <Box width="14%" style={boxStyle}>
                     <PrimaryBar sections={ModuleConfig.SECTIONS} 
                                 onselection={onSelection}
                                 actsection={section}  />
                 </Box>
-                <Box width={"41%"} style={boxStyle}>
+                <Box width="41%" style={boxStyle}>
                     <InputEditor section={section}  
                                  ondataresult={onCodeResult}/>
                 </Box>
 
-                <Box width={"41%"} >
+                <Box width="41%" style={boxStyle}>
                     <OutputMonitor section={section} code={code} />
                 </Box>
-                <Box width={"4%"} className="h-screen">
+                <Box width="4%" style={boxStyle}>
                     <SecondBar actsection={section} />
                 </Box>
             </Flex>
@@ -87,18 +87,8 @@ interface OutputMonitorProps {
 }
 function OutputMonitor({section,code}:OutputMonitorProps) {
 
-    const [showCode, setShowCode] = useState<boolean>(false);
-    
-    useEffect(() => {
-        if(code !== null) {
-            setShowCode(true);
-        }
-    }, []);
-
-    //const renderMainContent = () => {};
-
     return (
-        <Flex direction="column" gapY="5" className="h-full">
+        <Flex className="h-full" direction="column"   >
             <CardCode title="Output Monitor"
                       code={code ?? "No code generated yet."} />                      
         </Flex>
@@ -138,7 +128,7 @@ function PageHeader({onselection}:PageHeaderProps) {
         <Flex className="w-full h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
 
             <Flex direction="row" gap="2" justify="between" 
-                 className="full h-auto w-[16%] bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6">
+                 className="full h-auto w-[14%] bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6">
                 <Text size="5" weight="bold" className="text-gray-12">
                     Radix UI
                 </Text>   
@@ -148,14 +138,14 @@ function PageHeader({onselection}:PageHeaderProps) {
                          
             </Flex>
 
-            <Box className="h-auto w-[68%] bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto">
+            <Box className="h-auto w-[82%] bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto">
                 <Text size="5" weight="bold" className="text-gray-12">
                     Primitives Sandbox
                 </Text>
             </Box>
 
-            <Box className="h-auto w-[16%] bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
-                <p>header-left</p>
+            <Box className="h-auto w-[4%] bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
+                
             </Box>
 
         </Flex>

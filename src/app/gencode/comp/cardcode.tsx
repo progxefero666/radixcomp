@@ -29,17 +29,17 @@ export default function CardCode({ title, code }: CompProps) {
     }
 
     const boxStyle = {
-        backgroundColor: "rgb(55, 55, 57)",
-        borderRadius: "10px",
+         background: 'rgb(35, 35, 39)',
+        borderRadius: "0px",
         border: "1px solidrgb(75, 75, 75)",
-        padding: "var(--space-2)",
+        padding: "0px 0px 0px 0px",
     };
 
     return (
 
-        <Flex direction="column" style={boxStyle} gap="2">
+        <Flex direction="column" style={boxStyle} >
 
-            <Flex width={"100%"} justify="between" align="start" >
+            <Flex width={"100%"} justify="between" px="2" pt="1" align="start" >
                 <Text size="4" align="left">{title}</Text>
                 <BarButtons barconfig={barButtons} onclick={onClick} />
             </Flex>
@@ -47,7 +47,7 @@ export default function CardCode({ title, code }: CompProps) {
             <Separator orientation="horizontal" size="4" mb="2" />
 
 
-            <Box width={"100%"}>
+            <Box width={"100%"}  px="2" >
                 <XInputTextArea value={code} />                
 
             </Box>

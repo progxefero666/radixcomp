@@ -73,7 +73,7 @@ export function InputEditor({ondataresult}: InputEditorProps) {
         }
 
         return (
-            <Flex width={"100%"} direction="row" >
+            <Flex width={"100%"} direction="row" pt="2"   >
                 <Box width={"30%"} >
                     {initialized ? 
                         <XRadioGroup 
@@ -109,10 +109,12 @@ export function InputEditor({ondataresult}: InputEditorProps) {
     };
     
     return (
-        <Flex direction="column" gapY={"2"} style={EditorConfig.LAYOUT_STYLE} >
-            <XInputDate name="inputdate" value={new Date()} />
-             
-            <XRadioGroup autocommit={true} onselect={onSelect} options={EditorConfig.SECTIONS} value={section} />
+        <Flex direction="column" pt="2" style={EditorConfig.LAYOUT_STYLE} >
+            <Box  mb="1">
+                <XRadioGroup autocommit={true} onselect={onSelect} 
+                            options={EditorConfig.SECTIONS} value={section} />
+            </Box>
+
             <SeparatorH />
             {section === EditorConfig.TABLES.id && renderPanelTables()}
             {section === EditorConfig.SERVICES.id && renderPanelServices()}

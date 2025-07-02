@@ -53,7 +53,7 @@ export class EditorConfig {
     public static readonly ACTIVE_SECTION: Option = EditorConfig.TABLES;
 
     public static readonly LAYOUT_STYLE = {
-        padding: '4px 8px 0px 8px'
+        padding: '6px 8px 0px 8px'
     };
 
 }//export class AppConfig

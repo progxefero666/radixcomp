@@ -29,10 +29,10 @@ interface CompProps {
 
 const areaStyle = {
     width: '100%',   
-    height: 'auto',            
+    height: '600px',
+     
     border: '2px solid rgb(28, 28, 43)',
-    padding: '2px',
-    minHeight: '500px'      
+    padding: '2px'
 };
 
 export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
@@ -57,10 +57,14 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
 
     const renderEditComp = () => {
         return (
-             <TextArea value={value} style={areaStyle}  size={size}            
+             <TextArea value={value} 
+                style={areaStyle}  
+                size={size}            
                 placeholder={placeholder}
                 onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
-                variant={variant}  color={color} radius={radius}
+                variant={variant}  
+                color={color} 
+                radius={radius}
                 disabled={input_disabled} />            
         )
     }
