@@ -13,18 +13,29 @@ export class ModuleConfig {
     public static readonly INDEX: Option 
         = new Option("./","Home",null,null,null);
 
-    public static readonly SECTION_SQUEMA: Option 
-        = new Option("front","Front",null,null,null);
+    public static readonly SC_TS_ENTITY_FILES: Option 
+        = new Option("typescript_entityfiles","TS Entity Files",null,null,null);
 
-    public static readonly SECTION_FORMS: Option 
-        = new Option("server","Server",null,null,null);
+    public static readonly SC_JSON_ENTITY_FILES: Option 
+        = new Option("json_files","JSon Entity Files",null,null,null);
+
+    public static readonly SC_TSX_ENTITY_FORMS: Option 
+        = new Option("typescript_entityform","TS Entity Forms",null,null,null);
+
+    public static readonly SC_TS_SERVICES_FILES: Option 
+        = new Option("typescript_servicefiles","TS Entity Files",null,null,null);
+
+    public static readonly SC_PY_SERVICES_FILES: Option 
+        = new Option("python_serverfiles","Python Server Files",null,null,null);
 
     public static readonly SECTIONS: Option[] = [
-        ModuleConfig.SECTION_SQUEMA,
-        ModuleConfig.SECTION_FORMS
+        ModuleConfig.SC_TS_ENTITY_FILES,
+        ModuleConfig.SC_JSON_ENTITY_FILES,
+        ModuleConfig.SC_TS_SERVICES_FILES,
+        ModuleConfig.SC_PY_SERVICES_FILES
     ]
     
-    public static readonly ACTIVE_SECTION: Option = ModuleConfig.SECTION_SQUEMA;
+    public static readonly ACTIVE_SECTION: Option = ModuleConfig.SC_TS_ENTITY_FILES;
 
 }//export class AppConfig
 

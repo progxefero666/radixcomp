@@ -5,7 +5,7 @@ import { Option } from "@/common/model/option";
 /**
  * CodeGen Main App Controller
  */
-export class ModuleCodeGenConfig {
+export class CodeGenModuleConfig {
     
     public static readonly TYPESCRIPT_FORMATS:string = ".ts,.tsx"
     public static readonly SQL_FORMATS:string = ".sql,.txt"
@@ -24,16 +24,48 @@ export class ModuleCodeGenConfig {
         ("create_folders", "Entity Folder", null, null, null);
 
     public static readonly MENU: Option[]=[
-        ModuleCodeGenConfig.OPT_CREATE_MODELS,
-        ModuleCodeGenConfig.OPT_CREATES_SERVICES,
-        ModuleCodeGenConfig.OPT_MODEL_CARDS,
-        ModuleCodeGenConfig.OPT_MODEL_FOLDER,
+        CodeGenModuleConfig.OPT_CREATE_MODELS,
+        CodeGenModuleConfig.OPT_CREATES_SERVICES,
+        CodeGenModuleConfig.OPT_MODEL_CARDS,
+        CodeGenModuleConfig.OPT_MODEL_FOLDER,
     ];
-    public static readonly MENU_ACT_OPTION: Option = ModuleCodeGenConfig.MENU[0];
+    public static readonly MENU_ACT_OPTION: Option = CodeGenModuleConfig.MENU[0];
 
     //module messages
     public static readonly MSG_EXPORT_SUCCESS: string = "!! export file success. !!";
 
 }//end class
 
+/**
+ * CodeGen Create Models Config
+ */
+export class CodeGenCreateModelsConfig {
 
+    public static readonly OP_SQL_ALLSQUEMA: Option = new Option
+        ("export_sql_compschema", "Export SQL Complete Schema", null, null, null);
+
+
+    public static readonly OP_TS_ENTITY_CLASS_DEF: Option = new Option
+        ("export_entity_classdef", "Export Entity Def Class", null, null, null);     
+
+    public static readonly OP_TS_ENTITY_CLASS: Option = new Option
+        ("export_entity_class", "Export Entity Class", null, null, null);
+
+    public static readonly OPERATIONS: Option[] = [
+        
+    ];
+}//end class
+
+/*
+export enum CREATE_MODELS_OPERATIONS {
+    TXT = "textplain",
+    JSON = "json",
+    TYPESCRIPT = "typescript",
+    PYTHON = "pyhton",
+    SQL = "sql",    
+    JAVASCRIPT = "json",
+    MD = "mardown",
+    CSS = "css",
+    HTML = "html"
+}
+*/

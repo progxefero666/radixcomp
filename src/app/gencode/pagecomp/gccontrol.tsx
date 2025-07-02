@@ -137,18 +137,24 @@ export function GenCodeControl({ ondataresult }: CompProps) {
                 <XRadioGroup autocommit={true} 
                              onselect={onSelect}
                              options={EditorConfig.SECTIONS} value={section} />
+                <div>
+                    buttons
 
-                
-                    <InputFiles 
-                        formats=".sql,.json,.ts" 
-                        multiple={false}
-                        name="inputFileCode" onchange={onFileCharged} />
+
+                </div>
                 
             </Flex>
 
             <SeparatorH />
             {section === EditorConfig.TABLES.id && renderPanelTables()}
             {section === EditorConfig.SERVICES.id && renderPanelServices()}
+            <SeparatorH />
+            <Box width={"100%"}>
+                <InputFiles 
+                    formats=".sql,.json,.ts" 
+                    multiple={false}
+                    name="inputFileCode" onchange={onFileCharged} />
+            </Box>    
         </Flex>
     );
 
