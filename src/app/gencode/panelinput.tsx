@@ -148,3 +148,6 @@ export function InputEditor({ ondataresult }: InputEditorProps) {
     );
 
 }//end InputEditor
+
+//const className = CodeGenHelper.capitalize(table.name)
+//                 .concat(CodeGenConfig.DEF_CLASS_NAMEADD);//Def

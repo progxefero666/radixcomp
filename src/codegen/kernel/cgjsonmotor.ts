@@ -12,35 +12,22 @@ import { CodeGenHelper } from "./cghelper";
 export class CodeGenJson {
 
     public static getJsonEntDef(table: ModelTable): string {
-        //const className = CodeGenHelper.capitalize(table.name)
-        //                 .concat(CodeGenConfig.DEF_CLASS_NAMEADD);//Def
-        let code = "{";
-        code += CodeGenConfig.RETURN;
-        code += CodeGenConfig.TAB_4;
-        code += "\"name\": \"" + table.name + "\",";
-        code += CodeGenConfig.RETURN;
-        code += CodeGenConfig.TAB_4;
-        code += "\"fields\":[";
-        code += CodeGenConfig.RETURN;
+        let code = "{" + CodeGenConfig.RETURN;    
+        code += CodeGenConfig.TAB_4 + "\"name\": \"" + table.name + "\"," + CodeGenConfig.RETURN;
+        code += CodeGenConfig.TAB_4 + "\"fields\":[" + CodeGenConfig.RETURN;
         for (let idx = 0; idx < table.fields.length; idx++) {
-            code += CodeGenConfig.TAB_4;
-            code += CodeGenJson.getJsonEntDefField(table.fields[idx]);
-            if (idx < table.fields.length - 1) {
-                code += `, `;
-            }
+            code += CodeGenConfig.TAB_4 + CodeGenJson.getJsonEntDefField(table.fields[idx]);
+            if (idx<table.fields.length-1) {code+= `, `;}
             code += CodeGenConfig.RETURN;
         }
-        code += CodeGenConfig.TAB_4;
-        code += `]`;
-        code += CodeGenConfig.RETURN;
+        code += CodeGenConfig.TAB_4 + `]` + CodeGenConfig.RETURN;
         code += `}`;
         return code;
     }//end
 
     public static getJsonEntDefField(field: ModelField): string {
         
-        //applyTabsToStringBlock 3......................................................
-        //
+        //attrs Block 
         let attrsBlock = `"name": "${field.name}",\n`;
         attrsBlock  += `"type": "${field.type}",\n`;
         attrsBlock += `"required": ${field.required},\n`;
@@ -51,77 +38,41 @@ export class CodeGenJson {
         attrsBlock += `"fk": ${field.fk},\n`;
         attrsBlock += `"minlen": ${field.minlen !== null ? field.minlen : null},\n`;
         attrsBlock += `"maxlen": ${field.maxlen !== null ? field.maxlen : null},\n`;
-        let attrsBlockIndent = CodeGenHelper.applyTabsToStringBlock(attrsBlock,3);
-        //..............................................................................
 
-        let code = CodeGenHelper.getTabsSpace(1) + "{\n";
+        //applyTabsToStringBlock 3
+        let attrsBlockIndent = CodeGenHelper.applyTabsToStringBlock(attrsBlock,3);
+
+        let code = CodeGenHelper.getTabsSpace(1) + "{" + CodeGenConfig.RETURN;
         code += attrsBlockIndent;
         if (field.relations && field.relations.length > 0) {
-            //applyTabsToStringBlock 3......................................................
+            //applyTabsToStringBlock 3
             const relationssBlock = CodeGenJson.getJsonEntDefFieldRelations(field.relations);
-            const relationssBlockIndent = CodeGenHelper.applyTabsToStringBlock(relationssBlock,3);
-            code += relationssBlockIndent;
-            //..............................................................................
+            code += CodeGenHelper.applyTabsToStringBlock(relationssBlock,3);
         }
-        else {
-            code += `"relations": null`;
-            code += CodeGenConfig.RETURN;
-        }
-        code += CodeGenHelper.getTabsSpace(2) + "}";
-        
+        else {code += `"relations": null`+CodeGenConfig.RETURN;}
+        code += CodeGenHelper.getTabsSpace(2) + "}";        
         return code;
     }//end 
 
-    public static getJsonEntDefFieldRelations(relations: Relation[]): string {
-        let code = `"relations": [`;
-        code += CodeGenConfig.RETURN;
-        const tabElem:string = CodeGenHelper.getTabsSpace(2);
-
-        for (let idx = 0; idx < relations.length; idx++) {
-            const relation = relations[idx];
-
-            code += CodeGenConfig.TAB_4;
-            code += `{ `;
-            code += CodeGenConfig.RETURN;
-
-            code += tabElem;
-            code += `"table": "${relation.table}",`;
-            code += CodeGenConfig.RETURN;
-
-            code += tabElem;
-            code += `"field": "${relation.field}"`;
-            code += CodeGenConfig.RETURN;
-
-            code += CodeGenConfig.TAB_4;
-            code += ` }`;
+    public static getJsonEntDefFieldRelations(relations: Relation[]): string {        
+        const tabspace:string = CodeGenHelper.getTabsSpace(2);
+        let code = `"relations": [` + CodeGenConfig.RETURN;
+        for (let idx = 0; idx < relations.length; idx++) {            
+            code += CodeGenConfig.TAB_4 + `{`+ CodeGenConfig.RETURN;
+            code += tabspace + `"table": "${relations[idx].table}",`+ CodeGenConfig.RETURN;
+            code += tabspace + `"field": "${relations[idx].field}"`+ CodeGenConfig.RETURN;
+            code += CodeGenConfig.TAB_4 + `}`;            
             if (idx < relations.length - 1) {
                 code += `, `;
             }
             code += CodeGenConfig.RETURN;
         }
-        code += `]`;
-        code += CodeGenConfig.RETURN;
+        code += `]` + CodeGenConfig.RETURN;
         return code;
     }//end 
 
 
-    /*
-    public static getEntityJson(tableModel: ModelTable): string {
-        return JSON.stringify(tableModel, null, 4);
-    }
-    
-    public static getArrayEntityJson(tableModels: ModelTable[]): string {
-        return JSON.stringify(tableModels, null, 4);
-    }
-    
-    public static getEntityDefJson(tableModel: ModelTable): string {
-        return JSON.stringify(tableModel, null, 4);
-    }
-    
-    public static getArrayEntityDefJson(tableModels: ModelTable[]): string {
-        return JSON.stringify(tableModels, null, 4);
-    }
-    
+    /*    
     public static getCompEntityJson(tableModel: ModelTable): string {
         const compEntity = {
             classdef: tableModel,
