@@ -13,6 +13,8 @@ import { RadixConf } from "@/radix/radixconf";
 import { EditorConfig, ModuleConfig } from "./config";
 import { InputEditor } from "@/app/gencode/panelinput";
 import CardCode from "./comp/cardcode";
+import { AppConstants } from "@/app_front/appconstants";
+import { OutputMonitor } from "./pagecomp/outputmonitor";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
@@ -79,22 +81,6 @@ export default function PageGenCode() {
 
 }//end page
 
-interface OutputMonitorProps {
-    section:string;
-    format?: string;
-    code?: string|null;
-    fileName?: string;
-}
-function OutputMonitor({section,code}:OutputMonitorProps) {
-
-    return (
-        <Flex className="h-full" direction="column"   >
-            <CardCode title="Output Monitor"
-                      code={code ?? "No code generated yet."} />                      
-        </Flex>
-    );
-
-}//end InputEditor
 
 
 /**
