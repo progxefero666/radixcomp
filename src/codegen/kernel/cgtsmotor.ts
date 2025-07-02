@@ -7,16 +7,20 @@ import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 import types from "@/codegen/kernel/sqltypesnumber.json";
 
 /**
- * CodeGenTsMotor.getEntityClass
+ * CodeGenTsMotor.getArrayEntityClass(tableModel: ModelTable[],includeDef:boolean):
  * class CodeGen TypeScript Entity Files Content
  *     for store in typescript file .ts
  */
+
+
 export class CodeGenTsMotor {
 
-    public static getEntityClass(tableModel: ModelTable): string {
+    public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
         let content: string = "";      
         
-        content +=  CodeGenTsMotor.getEntityDefClass(tableModel);
+        if(includeDef){
+            content +=  CodeGenTsMotor.getEntityDefClass(tableModel);
+        }
 
         const className = CodeGenHelper.capitalize(tableModel.name);
         const fileName = `table_${tableModel.name.toLowerCase()}.ts`;        
@@ -103,7 +107,7 @@ export class CodeGenTsMotor {
         return content;
     }
     
-    public static getArrayEntityClass(tableModel: ModelTable[]): string {
+    public static getArrayEntityClass(tableModel: ModelTable[],includeDef:boolean): string {
         let content: string = "";
         
         // 1. Imports una sola vez al principio
@@ -118,7 +122,7 @@ export class CodeGenTsMotor {
             content += `\n`;
             
             // Bloque 2: Clase normal (extraer solo la parte sin imports ni Def)
-            const fullClassContent = CodeGenTsMotor.getEntityClass(table);
+            const fullClassContent = CodeGenTsMotor.getEntityClass(table,includeDef);
             // Quitar la parte de imports y Def, quedarnos solo con la clase y tipo
             const lines = fullClassContent.split('\n');
             let startIndex = -1;
@@ -178,14 +182,8 @@ export class CodeGenTsMotor {
         if (field.format !== null) {
             formatValue = `"${field.format}"`;
         }
-        
-        // Add default and format values to optional parameters
-        if (optionalParams) {
-            optionalParams += `, ${defaultValue}, ${formatValue}`;
-        } else {
-            optionalParams += `, false, null, ${defaultValue}, ${formatValue}`;
-        }
-        
+
+
         // Generate single line field creation with proper indentation (8 spaces = 2 tabs of 4)
         // New constructor order: name, type, pk, generated, required, defaultValue, format, minlen, maxlen, fk?, relations?
         return `        this.fields.push(new ModelField("${field.name}", "${field.type}", ${field.pk}, ${field.generated}, ${field.required}, ${defaultValue}, ${formatValue}, ${field.minlen}, ${field.maxlen}${optionalParams}));\n`;

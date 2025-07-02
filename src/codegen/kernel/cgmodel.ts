@@ -39,7 +39,7 @@ export class ModelField {
 				format: string | null,
                 minlen: number | null, 
                 maxlen: number | null,
-                fk?: boolean, relations?: Relation[] ) {
+                fk?: boolean, relations?: Relation[]|null ) {
                     
         this.name = name;
         this.type = type;

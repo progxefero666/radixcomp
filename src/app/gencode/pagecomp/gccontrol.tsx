@@ -30,6 +30,7 @@ import { CodeGenConfig } from "@/codegen/kernel/cgconfig";
 import { BasicEvaluatedExpression } from "next/dist/compiled/webpack/webpack";
 
 
+let  allEntitiesClass:string = "undefined";
 interface CompProps {
     section?: string;
     ondataresult: (data: string) => void;
@@ -48,7 +49,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const operationsRef = useRef<HTMLSelectElement>(null);
     //ondataresult(tableClass);        
 
-
     useEffect(() => {
         const init = async () => {
             if(section!=null){
@@ -57,7 +57,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
                 const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
                 const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-                
+                allEntitiesClass = CodeGenTsMotor.getArrayEntityClass(model_tables,true);
+
                 setModelTables(model_tables);
                 setModelTableSel(model_tables[0]);
 
@@ -76,45 +77,46 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (file) {
             alert(file.name);
         }
-    }//end
-
+    };//end
 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
         setModelTableSel(modelTables[tableIndex]);
-    };
+    };//
 
     const onOpSelected = async (operationId: string) => {
         alert(operationId);
+    };//end
 
-    }//end
+    const runOperation = () => {
+        
+        ondataresult(allEntitiesClass);   
+        //if(section==)
+        //alert(section);
+        //alert(operationSelected?.id);
+    };//end
 
-    const renderListTables = () => {
-        return (
-            <XRadioGroup
-                autocommit={true}
-                key={optionTableSel}
-                onselect={onSelectTable}
-                options={menuListTables}
-                value={optionTableSel}
-                direction="column" />
-        )
-    }//end
-
-    const renderMainContent = () => {
-        let showModelTable: boolean = false;
-
-        /*
+    /*
         if (modelTableSel !== null) { showModelTable = true; }
         let rightPanelData: string = "";
         if (showModelTable) {
             rightPanelData = JSON.stringify(modelTableSel, null, 4);
         }
-        */
+    */
+    const renderMainContent = () => {
+        let showModelTable: boolean = false;
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
                 <Box width={"30%"} pb="2" >
-                    {initialized ? renderListTables() : null}
+                    {initialized ?
+                        <XRadioGroup
+                            autocommit={true}
+                            key={optionTableSel}
+                            onselect={onSelectTable}
+                            options={menuListTables}
+                            value={optionTableSel}
+                            direction="column" />
+                     : null}
                 </Box>
 
                 <Box width={"70%"} >
@@ -143,12 +145,16 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         collection={operations}
                         value={operationSelected?.id ?? ""}
                         onchange={onOpSelected}
-                        disabled={false} />                    
-                    : null}
-
+                        disabled={false} /> : null}
                 </Box>
+
                 <Box>
-                    list icons
+                    {initialized ? 
+                        <Button onClick={runOperation}
+                                color = "green">
+                            Run
+                        </Button>    
+                    : null}
                 </Box>
             </Flex>
 
