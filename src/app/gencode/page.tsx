@@ -11,14 +11,18 @@ import MenuButtons from "@/radix/cbars/btmenu";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
-import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
+
 import CardCode from "./comp/cardcode";
 import { AppConstants } from "@/app_front/appconstants";
-import { GenCodeViewer } from "./pagecomp/gcviewer";
+
 import { CodeGenConfig } from "@/codegen/cgconfig";
 import { ModuleConfig } from "./config";
 import { getTextFile } from "@/app_server/actions/gettextfile";
 import { AppContext } from "@/app_front/appcontext";
+
+import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
+import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
+import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
@@ -35,25 +39,29 @@ export default function PageGenCode() {
     const appRef = useRef<AppIndex>(null);
 
     //const [code, setCode] = useState<string>("undefined");
-    //const [section, setSection] = useState<string>(ModuleConfig.SC_TS_ENTITY_FILES.id);
+    const [section, setSection] = useState<string|null>(null);
 
-    let section:string|null =  null;
+    //let section:string|null =  null;
     let code:string =  AppConstants.NOT_DEF;
     let initialized: boolean = false;
+
     useEffect(() => {
+        if(initialized) {return;} 
+        
         const init = async () => {
             //store dbSquema in SessionStorage...................................
             const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
             AppContext.saveDbSquema(dbSquema);  
             //...................................................................
-
+            
+            //ModuleConfig.ACTIVE_SECTION
+ 
             //...................................................................
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
             if(!res) {alert("Error loading initial collections");}
             else {initialized =true;}
             //...................................................................
-
         };
         init();
     }, []);
@@ -63,26 +71,26 @@ export default function PageGenCode() {
         console.log("Data received from InputEditor:", datacode);
     }
 
-    const onSelection = (sectionId: string) => {
-        //alert(sectionId);
-        section = sectionId;
+    const loadSection = (sectionId: string) => {
+        alert(sectionId);
+        setSection(sectionId);
     }
 
     return (
         <Flex direction="column" height="100vh">
 
-            <PageHeader onselection={onSelection} />
+            <PageHeader onselection={loadSection} />
             
             <Flex height="100%">
 
                 <Box width="14%" style={boxStyle}>
-                    <PrimaryBar 
-                                onselection={onSelection}
-                                actsection={section}  />
+                    <PrimaryBar actsection={section}
+                                onselection={loadSection} />
                 </Box>
+
                 <Box width="41%" style={boxStyle}>
                     <GenCodeControl section={section}  
-                                 ondataresult={onCodeResult}/>
+                                    ondataresult={onCodeResult}/>
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
@@ -100,69 +108,10 @@ export default function PageGenCode() {
 }//end page
 
 
-
-/**
- * Page Heade
- */
-interface PageHeaderProps {onselection:(sectionId:string)=>void;}
-function PageHeader({onselection}:PageHeaderProps) {
-
-    const pathname = usePathname();
-
-    const onSelection = (sectionId: string) => {
-        alert("Home: onselection: " + sectionId);
-    }
-
-    const renderHomeButton = () => {
-        return (
-            <Link href="/" >
-                <Button
-                    variant={pathname === "/" ? RadixConf.VARIANTS.solid :
-                                                RadixConf.VARIANTS.soft}
-                    color={ThemeButtonsStyle.BTN_HOME_COLOR}
-                    className={ThemeButtonsStyle.BTN_HOME_STYLE}
-                    size={ThemeButtonsStyle.BTN_DEF_SIZE} >
-                    Home
-                </Button>
-            </Link>
-        )
-    }
-
-    return (
-        <Flex className="w-full h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
-
-            <Flex direction="row" gap="2" justify="between" 
-                 className="full h-auto w-[14%] bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6">
-                <Text size="5" weight="bold" className="text-gray-12">
-                    Radix UI
-                </Text>   
-                <Box>
-                 {renderHomeButton()}  
-                </Box>  
-                         
-            </Flex>
-
-            <Box className="h-auto w-[82%] bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto">
-                <Text size="5" weight="bold" className="text-gray-12">
-                    Primitives Sandbox
-                </Text>
-            </Box>
-
-            <Box className="h-auto w-[4%] bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
-                
-            </Box>
-
-        </Flex>
-    );
-
-}//end PrimaryBar
-
-
 /**
  * Page Primary Bar
  */
-interface PrimaryBarProps {
-    
+interface PrimaryBarProps {    
     actsection: string|null;
     onselection:(sectionId:string) => void;
 }
@@ -185,6 +134,7 @@ function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
     );
 
 }//end PrimaryBar
+
 
 
 /**

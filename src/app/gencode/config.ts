@@ -6,7 +6,7 @@ import { OP_CATEGORIES} from "@/codegen/cgconfig";
 
 
 /**
- * class ModuleConfig.SC_TS_ENTITY_FILES
+ * class ModuleConfig.ACTIVE_SECTION
  */
 export class ModuleConfig {
 

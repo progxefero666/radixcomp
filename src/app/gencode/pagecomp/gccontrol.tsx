@@ -84,7 +84,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const onFileCharged = async (file: File, name?: string) => {
         if (file) {
-            alert(file.name);
+            //alert(file.name);
         }
     };//end
 
@@ -93,13 +93,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const onOpSelected = async (operationId: string) => {
-        alert(operationId);
+        //alert(operationId);
         setOperationId(operationId);
     };//end
 
     const runOperation = () => {        
-        alert(section);
-        alert(operationId);
+        //alert(section);
+        //alert(operationId);
 
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
             if(operationId == TsEntFilesOperations.OP_GET_DEF_CLASS.id){               
@@ -142,7 +142,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const renderMainContent = () => {
         let showInfoPanel: boolean = false;
-        console.log(tableIndex);
+        console.log(modelTables[tableIndex].name);
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
                 <Box width={"30%"} pb="2" >
