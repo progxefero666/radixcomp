@@ -1,5 +1,36 @@
 // File: src\radix\radixconstants.ts
 
+export enum CONTROL_TYPES {
+    TEXT     = "text",
+    CHECKBOX = "checkbox",
+    EMAIL    = "email",
+    NUMBER   = "number",
+    DATE     = "date",    
+    RANGE    = "range",
+    URL      = "url",
+    COLOR    = "color",
+    PASSWORD = "password",    
+    SEARCH   = "search",
+    FILE     = "file"   
+}
+
+/*
+- FormControl` es un wrapper sobre el elemento nativo `<input>`, 
+        soporta todos los atributos HTML estándar como:
+- `required` 
+- `disabled` 
+- `readOnly` 
+- `placeholder` 
+- `maxLength`
+- `minLength`
+- `min`
+- `max`
+- `step` 
+- `pattern` 
+- `accept`
+- `multiple`
+*/
+
 
 /**
  * class RadixConstants
@@ -14,7 +45,6 @@ export class RadixConstants {
 
     public static readonly RADIX_THEME_LIGHT: string = "light";
     public static readonly RADIX_THEME_DARK: string = "dark";
-    
 
 }//end class 
 
@@ -26,6 +56,5 @@ export class RadixKeys {
 
     public static readonly KEY_INTRO: string = "Enter";
 
-    
 
 }//end class 

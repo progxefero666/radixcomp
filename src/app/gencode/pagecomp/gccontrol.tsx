@@ -42,16 +42,15 @@ interface CompProps {
     ondataresult: (data: string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
-
-    const [operations, setOperations] = useState<Option[]>([]);
-    const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const [menuListTables, setMenuListTables] = useState<Option[]>([]);
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [tableIndex,setTableIndex] = useState<number>(0);
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [operations, setOperations] = useState<Option[]>([]);
+    const [operationId,setOperationId] = useState<string>(AppConstants.NOT_DEF);    
     const operationsRef = useRef<HTMLSelectElement>(null);
     
     useEffect(() => {
@@ -60,20 +59,16 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
         const init = async () => {
             if(section!=null){
-
-                //load model tables and tables menu
+                //step 1: load db schema from SessionStorage
                 const db_squema = AppContext.readDbSquema();
                 const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema); 
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
 
-                //load section operations
+                //step 2: load operations for the selected section
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
-                JSonConsole.logArray(listOperations);
                 setOperations(listOperations);
                 setOperationId(listOperations[0].id);
-
-                //initialize
                 setInitialized(true);
             }                       
         };
@@ -81,9 +76,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     }, []);
 
     const onFileCharged = async (file: File, name?: string) => {
-        if (file) {
-            //alert(file.name);
-        }
+        if (file) {alert(file.name);}
     };//end
 
     const onSelectTable = (index:number,compname?:string) => {
@@ -91,7 +84,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const onOpSelected = async (operationId: string) => {
-        //alert(operationId);
         setOperationId(operationId);
     };//end
 

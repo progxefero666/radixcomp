@@ -1,10 +1,12 @@
 //src\app\testcomp\playground.tsx
 
 import React, { useEffect, useState } from "react";
+
 import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes";
 import {Form,FormField,FormLabel,FormControl,
         createFormScope,Root,Field,Control,Label,Submit,
         Message,FormValidityState,ValidityState} from '@/radix/forms/form';
+
 import { FormMessage } from "@/radix/forms/formmsg";
 
 
@@ -82,71 +84,68 @@ s
 
 /*
 
-                    
-         
-                    <FormField name="password_input">
-                        <FormLabel>Contraseña</FormLabel>
-                        <FormControl type="password" required minLength={6} />
-                        <FormMessage match="tooShort">La contraseña debe tener al menos 6 caracteres</FormMessage>
-                    </FormField>
-    
-                    <FormField name="email_input">
-                        <FormLabel>Email</FormLabel>
-                        <FormControl type="email" required />
-                        <FormMessage match="typeMismatch">Por favor ingresa un email válido</FormMessage>
-                    </FormField>
-            
-                    <FormField name="number_input">
-                        <FormLabel>Número</FormLabel>
-                        <FormControl type="number" min={1} max={100} step={1} />
-                        <FormMessage match="rangeOverflow">El valor máximo es 100</FormMessage>
-                    </FormField>
- 
-                    <FormField name="tel_input">
-                        <FormLabel>Teléfono</FormLabel>
-                        <FormControl type="tel" pattern="[0-9]{9}" />
-                        <FormMessage match="patternMismatch">Introduce un número de 9 dígitos</FormMessage>
-                    </FormField>
-       
-                    <FormField name="url_input">
-                        <FormLabel>URL</FormLabel>
-                        <FormControl type="url" placeholder="https://ejemplo.com" />
-                        <FormMessage match="typeMismatch">Introduce una URL válida</FormMessage>
-                    </FormField>
-      
-                    <FormField name="search_input">
-                        <FormLabel>Búsqueda</FormLabel>
-                        <FormControl type="search" placeholder="Buscar..." />
-                    </FormField>
+<FormField name="number_input">
+    <FormLabel>Número</FormLabel>
+    <FormControl type="number" min={1} max={100} step={1} />
+    <FormMessage match="rangeOverflow">El valor máximo es 100</FormMessage>
+</FormField>
 
-                    <FormField name="datetime_input">
-                        <FormLabel>Fecha y Hora</FormLabel>
-                        <FormControl type="datetime-local" />
-                    </FormField>
-             
-                    <FormField name="month_input">
-                        <FormLabel>Mes</FormLabel>
-                        <FormControl type="month" />
-                    </FormField>
 
-                    <FormField name="week_input">
-                        <FormLabel>Semana</FormLabel>
-                        <FormControl type="week" />
-                    </FormField>
-                    
-           
-                    <FormField name="color_input">
-                        <FormLabel>Color</FormLabel>
-                        <FormControl type="color" defaultValue="#ff0000" />
-                    </FormField>
-                    
-          
-
-                 
 <FormField name="date_input">
     <FormLabel>Fecha</FormLabel>
     <FormControl type="date" />
 </FormField>
+
+<FormField name="url_input">
+    <FormLabel>URL</FormLabel>
+    <FormControl type="url" placeholder="https://ejemplo.com" />
+    <FormMessage match="typeMismatch">Introduce una URL válida</FormMessage>
+</FormField>
+
+<FormField name="password_input">
+    <FormLabel>Contraseña</FormLabel>
+    <FormControl type="password" required minLength={6} />
+    <FormMessage match="tooShort">La contraseña debe tener al menos 6 caracteres</FormMessage>
+</FormField>
+
+<FormField name="email_input">
+    <FormLabel>Email</FormLabel>
+    <FormControl type="email" required />
+    <FormMessage match="typeMismatch">Por favor ingresa un email válido</FormMessage>
+</FormField>
+
+<FormField name="tel_input">
+    <FormLabel>Teléfono</FormLabel>
+    <FormControl type="tel" pattern="[0-9]{9}" />
+    <FormMessage match="patternMismatch">Introduce un número de 9 dígitos</FormMessage>
+</FormField>
+
+<FormField name="search_input">
+    <FormLabel>Búsqueda</FormLabel>
+    <FormControl type="search" placeholder="Buscar..." />
+</FormField>
+
+<FormField name="color_input">
+    <FormLabel>Color</FormLabel>
+    <FormControl type="color" defaultValue="#ff0000" />
+</FormField>
+
+<FormField name="datetime_input">
+    <FormLabel>Fecha y Hora</FormLabel>
+    <FormControl type="datetime-local" />
+</FormField>
+
+<FormField name="month_input">
+    <FormLabel>Mes</FormLabel>
+    <FormControl type="month" />
+</FormField>
+
+<FormField name="week_input">
+    <FormLabel>Semana</FormLabel>
+    <FormControl type="week" />
+</FormField>
+
+
 
 <FormField name="time_input">
     <FormLabel>Hora</FormLabel>
