@@ -1,43 +1,7 @@
 //src\radix\forms\formconst.ts
-import * as React from 'react';
-import { composeEventHandlers } from '@radix-ui/primitive';
-import { useComposedRefs } from '@radix-ui/react-compose-refs';
-import { createContextScope } from '@radix-ui/react-context';
-import { useId } from '@radix-ui/react-id';
-import { Label as LabelPrimitive, LabelProps } from '@radix-ui/react-label';
-import { Primitive } from '@radix-ui/react-primitive';
-
-
-// Import util functions
-import {
-    validityStateToObject,
-    isHTMLElement,
-    isFormControl,
-    isInvalid,
-    getFirstInvalidControl,
-    isAsyncCustomMatcherEntry,
-    isSyncCustomMatcherEntry,
-    returnsPromise,
-    hasBuiltInError,
-    getValidAttribute,
-    getInvalidAttribute } from './formutil';
-
-import {
-    PrimitiveFormProps, PrimitiveDivProps, PrimitiveInputProps,
-    PrimitiveSpanProps, CustomMatcher, PrimitiveButtonProps,
-    ValidationContextValue, AriaDescriptionContextValue,
-    FormElement, ScopedProps, ValidityMap, CustomMatcherEntriesMap,
-    CustomErrorsMap, MessageIdsMap, FormFieldContextValue,
-    FormFieldElement, FormLabelElement, FormControlElement,
-    CustomMatcherArgs, SyncCustomMatcherEntry, AsyncCustomMatcherEntry,
-    FormMessageImplElement, FormSubmitElement,
-    FormMessageImplProps} from './formtypes';
-
-
-import { FormControlProps, FormFieldProps, FormLabelProps, FormProps, FormSubmitProps } from '@radix-ui/react-form';
 
 // Constants
-// -------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
 export enum FORM_CONST_ELEMS {
     FORM_NAME = 'Form',
     FIELD_NAME = 'FormField',
@@ -48,14 +12,9 @@ export enum FORM_CONST_ELEMS {
     SUBMIT_NAME = 'FormSubmit'
 }
 
-const [createFormContext, createFormScope] = createContextScope('Form');
 
-const [ValidationProvider, useValidationContext] =
-    createFormContext<ValidationContextValue>(FORM_CONST_ELEMS.FORM_NAME);
-
-
-
-// Constantes de mensajes por defecto
+// Messages
+// ------------------------------------------------------------------------------------
 export const DEFAULT_INVALID_MESSAGE = 'This value is not valid';
 
 export const DEFAULT_BUILT_IN_MESSAGES: Record<ValidityMatcher, string | undefined> = {
@@ -71,9 +30,8 @@ export const DEFAULT_BUILT_IN_MESSAGES: Record<ValidityMatcher, string | undefin
     valueMissing: 'This value is missing',
 };
 
-
-
 // Type definition for ValidityMatcher
+// ------------------------------------------------------------------------------------
 export const _validityMatchers = [
     'badInput',
     'patternMismatch',

@@ -1,13 +1,17 @@
 import React, { useId } from "react";
-import { CustomMatcher, FormMessageImplElement, FormMessageImplProps, ScopedProps } from "./formtypes";
+import { CustomMatcher, FormMessageImplElement, FormMessageImplProps, ScopedProps } from "@/radix/forms/formtypes";
 import { Primitive } from '@radix-ui/react-primitive';
-import { useAriaDescriptionContext, useValidationContext } from "./form";
-import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
-import { Scope } from "@radix-ui/react-context";
 import { useComposedRefs } from '@radix-ui/react-compose-refs';
-import { useFormFieldContext } from "@/radix/forms/form";
-import { hasBuiltInError } from "./formutil";
 
+import { useAriaDescriptionContext, useValidationContext } from "@/radix/forms/form";
+import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES,
+         DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from '@/radix/forms/formconst';
+import { useFormFieldContext } from "@/radix/forms/form";
+import { hasBuiltInError } from "@/radix/forms/formutil";
+
+/**
+ * 
+ */
 export const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImplProps>(
     (props: ScopedProps<FormMessageImplProps>, forwardedRef) => {
         const { __scopeForm, id: idProp, name, ...messageProps } = props;

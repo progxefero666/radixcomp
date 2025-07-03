@@ -5,53 +5,34 @@ import { composeEventHandlers } from '@radix-ui/primitive';
 import { useComposedRefs } from '@radix-ui/react-compose-refs';
 import { createContextScope } from '@radix-ui/react-context';
 import { useId } from '@radix-ui/react-id';
-import { Label as LabelPrimitive, LabelProps } from '@radix-ui/react-label';
 import { Primitive } from '@radix-ui/react-primitive';
-
-
-// Import util functions
-import {
-    validityStateToObject,
-    isHTMLElement,
-    isFormControl,
-    isInvalid,
-    getFirstInvalidControl,
-    isAsyncCustomMatcherEntry,
-    isSyncCustomMatcherEntry,
-    returnsPromise,
-    hasBuiltInError,
-    getValidAttribute,
-    getInvalidAttribute } from './formutil';
-
-import {
-    PrimitiveFormProps, PrimitiveDivProps, PrimitiveInputProps,
-    PrimitiveSpanProps, CustomMatcher, PrimitiveButtonProps,
-    ValidationContextValue, AriaDescriptionContextValue,
-    FormElement, ScopedProps, ValidityMap, CustomMatcherEntriesMap,
-    CustomErrorsMap, MessageIdsMap, FormFieldContextValue,
-    FormFieldElement, FormLabelElement, FormControlElement,
-    CustomMatcherArgs, SyncCustomMatcherEntry, AsyncCustomMatcherEntry,
-    FormMessageImplElement, FormSubmitElement,
-    FormMessageImplProps} from './formtypes';
-
-import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
-import { FormControlProps, FormFieldProps,  FormLabelProps, FormMessage, FormProps, FormSubmitProps, FormValidityState } from '@radix-ui/react-form';
-import {  FormMessageImpl } from '@/radix/forms/formmsg';
-
-
 import { FormLabel } from '@/radix/forms/formlabel';
+import { FormControlProps, FormFieldProps,  FormLabelProps, 
+         FormMessage, FormProps, FormSubmitProps, FormValidityState } from '@radix-ui/react-form';
 
+// Folder functions
+import {validityStateToObject,
+        getFirstInvalidControl,isAsyncCustomMatcherEntry,isSyncCustomMatcherEntry,
+        hasBuiltInError,getValidAttribute,getInvalidAttribute } from '@/radix/forms/formutil';
+import { ValidationContextValue,AriaDescriptionContextValue,FormElement,
+         ScopedProps, ValidityMap, CustomMatcherEntriesMap, CustomErrorsMap, 
+         MessageIdsMap, FormFieldContextValue, FormFieldElement, 
+         FormControlElement, CustomMatcherArgs, SyncCustomMatcherEntry,
+         AsyncCustomMatcherEntry,  FormSubmitElement} from '@/radix/forms/formtypes';
+import { _validityMatchers, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS } from '@/radix/forms/formconst';
 
-// Form
-// -------------------------------------------------------------------------------------------------
-export const [createFormContext, ] = createContextScope('Form');
 const [createFormScope] = createContextScope('Form');
+
+export const [createFormContext ] = createContextScope('Form');
+
 export const [ValidationProvider, useValidationContext] =
     createFormContext<ValidationContextValue>(FORM_CONST_ELEMS.FORM_NAME);
 
 export const [AriaDescriptionProvider, useAriaDescriptionContext] =
     createFormContext<AriaDescriptionContextValue>(FORM_CONST_ELEMS.FORM_NAME);
 
+// Form
+// -------------------------------------------------------------------------------------------------    
 const Form = React.forwardRef<FormElement, FormProps>(
     (props: ScopedProps<FormProps>, forwardedRef) => {
         const { __scopeForm, onClearServerErrors = () => { }, ...rootProps } = props;
@@ -184,7 +165,7 @@ const Form = React.forwardRef<FormElement, FormProps>(
 );
 Form.displayName = FORM_CONST_ELEMS.FORM_NAME;
 
-
+// -------------------------------------------------------------------------------------------------
 // FormField
 // -------------------------------------------------------------------------------------------------
 export const [FormFieldProvider, useFormFieldContext] =
@@ -209,6 +190,7 @@ const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
 );
 FormField.displayName = FORM_CONST_ELEMS.FIELD_NAME;
 
+// -------------------------------------------------------------------------------------------------
 // FormControl
 // -------------------------------------------------------------------------------------------------
 const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
