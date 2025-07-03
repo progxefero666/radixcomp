@@ -1,11 +1,12 @@
 import React, { useId } from "react";
 import { CustomMatcher, FormMessageImplElement, FormMessageImplProps, ScopedProps } from "./formtypes";
 import { Primitive } from '@radix-ui/react-primitive';
-import { FormBuiltInMessage, FormCustomMessage, useAriaDescriptionContext } from "./form";
+import { useAriaDescriptionContext, useValidationContext } from "./form";
 import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
 import { Scope } from "@radix-ui/react-context";
-
+import { useComposedRefs } from '@radix-ui/react-compose-refs';
 import { useFormFieldContext } from "@/radix/forms/form";
+import { hasBuiltInError } from "./formutil";
 
 export const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImplProps>(
     (props: ScopedProps<FormMessageImplProps>, forwardedRef) => {
@@ -58,3 +59,63 @@ export const FormMessage = React.forwardRef<FormMessageElement, FormMessageProps
 );
 FormMessage.displayName = FORM_CONST_ELEMS.MESSAGE_NAME;
 
+export type FormBuiltInMessageElement = FormMessageImplElement;
+export interface FormBuiltInMessageProps extends FormMessageImplProps {
+    match: ValidityMatcher;
+    forceMatch?: boolean;
+    name: string;
+}
+export type FormCustomMessageElement = React.ComponentRef<typeof FormMessageImpl>;
+export interface FormCustomMessageProps extends React.ComponentPropsWithoutRef<typeof FormMessageImpl> {
+    match: CustomMatcher;
+    forceMatch?: boolean;
+    name: string;
+}
+
+export const FormBuiltInMessage = React.forwardRef<FormBuiltInMessageElement, FormBuiltInMessageProps>(
+    (props: ScopedProps<FormBuiltInMessageProps>, forwardedRef) => {
+        const { match, forceMatch = false, name, children, ...messageProps } = props;
+        const validationContext = useValidationContext(FORM_CONST_ELEMS.MESSAGE_NAME, messageProps.__scopeForm);
+        const validity = validationContext.getFieldValidity(name);
+        const matches = forceMatch || validity?.[match];
+        if (matches) {
+            return (
+                <FormMessageImpl ref={forwardedRef} {...messageProps} name={name}>
+                    {children ?? DEFAULT_BUILT_IN_MESSAGES[match]}
+                </FormMessageImpl>
+            );
+        }
+        return null;
+    }
+);
+
+export const FormCustomMessage = React.forwardRef<FormCustomMessageElement, FormCustomMessageProps>(
+    (props: ScopedProps<FormCustomMessageProps>, forwardedRef) => {
+        const { match, forceMatch = false, name, id: idProp, children, ...messageProps } = props;
+        const validationContext = useValidationContext(FORM_CONST_ELEMS.MESSAGE_NAME, messageProps.__scopeForm);
+        const ref = React.useRef<FormCustomMessageElement>(null);
+        const composedRef = useComposedRefs(forwardedRef, ref);
+        const _id = useId();
+        const id = idProp ?? _id;
+
+        const customMatcherEntry = React.useMemo(() => ({ id, match }), [id, match]);
+        const { onFieldCustomMatcherEntryAdd, onFieldCustomMatcherEntryRemove } = validationContext;
+        React.useEffect(() => {
+            onFieldCustomMatcherEntryAdd(name, customMatcherEntry);
+            return () => onFieldCustomMatcherEntryRemove(name, customMatcherEntry.id);
+        }, [customMatcherEntry, name, onFieldCustomMatcherEntryAdd, onFieldCustomMatcherEntryRemove]);
+
+        const validity = validationContext.getFieldValidity(name);
+        const customErrors = validationContext.getFieldCustomErrors(name);
+        const hasMatchingCustomError = customErrors[id];
+        const matches = forceMatch || (validity && !hasBuiltInError(validity) && hasMatchingCustomError);
+        if (matches) {
+            return (
+                <FormMessageImpl id={id} ref={composedRef} {...messageProps} name={name}>
+                    {children ?? DEFAULT_INVALID_MESSAGE}
+                </FormMessageImpl>
+            );
+        }
+        return null;
+    }
+);
