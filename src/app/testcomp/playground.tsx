@@ -9,39 +9,11 @@ import { renderHomeButton } from "@/radix/radixbuttons";
 
 //import { Field,Label,Message,Form,Control, FormSubmit } from "@radix-ui/react-form";
 
-
+import { Form} from "@radix-ui/react-form";
 
 import { Sub } from "@radix-ui/react-context-menu";
 
-import {
-    createFormScope,
-    //
-    Form,
-    FormField,
-    FormLabel,
-    FormControl,
-    FormMessage,
-    FormValidityState,
-    FormSubmit,
-    //
-    Root,
-    Field,
-    Label,
-    Control,
-    Message,
-    ValidityState,
-    Submit,
-} from './form';
 
-import {
-    FormProps,
-    FormFieldProps,
-    FormLabelProps,
-    FormControlProps,
-    FormMessageProps,
-    FormValidityStateProps,
-    FormSubmitProps,
-} from './form';
 
 export const layoutStyle = {
     background: '#c1c1c1',
@@ -71,7 +43,17 @@ export function TestPlayground({ mode }: CompProps) {
         <Flex width="100%" direction="column" style={layoutStyle} >
 
         <Form>
-            <Field name="username"  >
+
+        </Form>
+    
+
+        </Flex>
+    );
+
+}//end component
+
+/*
+                       <Field name="username"  >
                 <Label>Username</Label>
                 <Control></Control>
                 <Message></Message>
@@ -82,16 +64,6 @@ export function TestPlayground({ mode }: CompProps) {
                 <Message></Message>
             </Field>            
             <FormSubmit>Submit</FormSubmit>
-        </Form>
-    
-
-        </Flex>
-    );
-
-}//end component
-
-/*
-           
             <Form.Root>
                 <Form.Field>
                     <Form.Label />
