@@ -17,9 +17,13 @@ import { SeparatorV } from "@/radix/container/separatorv";
 
 export const pageStyle = {
   
-    background: '#ff00ff'
+    background: '#000000'
 };
 
+export const columnStyle = {
+    borderColor: 'rgb(98, 97, 98)',
+    background: 'rgb(7, 7, 7)'
+};
 
 /**
  * Page Test Components
@@ -30,7 +34,7 @@ export default function PageTest() {
     //const onClick = (sectionId: string) => {}
 
     return (
-        <Flex direction="column" className="h-screen" style={pageStyle}>
+        <Flex direction="column" style={{ minHeight: '100vh', ...pageStyle }}>
 
             { /* Header */}
             <TestHeader  />
@@ -38,16 +42,16 @@ export default function PageTest() {
 
             
             { /* Main content */}
-            <Flex width="100%"  direction="row">
-                <Flex width="16%" className="h-screen">
+            <Flex width="100%"  direction="row" style={{ flex: 1 }}>
+                <Flex width="16%" style={{ flex: '0 0 16%', minHeight: '100%' }}>
                     <PrimaryBar  />
                 </Flex>    
             
-                <Flex width="68%" className="h-screen">
+                <Flex width="68%" style={{ flex: '1 1 68%', minHeight: '100%' }}>
                     <TestPlayground />
                 </Flex>
 
-                <Flex width="16%"  className="h-screen">                    
+                <Flex width="16%" style={{ flex: '0 0 16%', minHeight: '100%' }}>                    
                     <TestSecondBar  />
                 </Flex>                
             </Flex> 

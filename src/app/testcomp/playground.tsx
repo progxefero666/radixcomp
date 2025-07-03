@@ -4,8 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes";
-import { usePathname } from "next/navigation";
-import { renderHomeButton } from "@/radix/radixbuttons";
+
 
 
 import {
@@ -16,7 +15,6 @@ import {
     FormControl,
     FormMessage,
     FormValidityState,
-    FormSubmit,
     Root,
     Field,
     Label,
@@ -40,15 +38,11 @@ import { Sub } from "@radix-ui/react-context-menu";
 
 
 export const layoutStyle = {
-    background: '#c1c1c1',
+    background: 'rgb(7, 7, 7)',
     border: '2px solidrgb(98, 97, 98)',
     padding: 'var(--space-2)',
 };
 
-export const columnStyle = {
-    borderColor: 'rgb(98, 97, 98)',
-    background: '#ff00ff'
-};
 
 /**
  * Template - Page Header
@@ -81,7 +75,7 @@ export function TestPlayground({ mode }: CompProps) {
 
             {/* El componente Form recibe la función onSubmit */}
             <Form onSubmit={handleSubmit}>
-                <Flex direction="column" gap="4">
+                <Flex direction="column" gap="4"  style={layoutStyle}>
                     {/* 1. Input de texto normal */}
                     <FormField name="text_input">
                         <FormLabel>Texto</FormLabel>
@@ -129,18 +123,7 @@ export function TestPlayground({ mode }: CompProps) {
                         <FormLabel>Búsqueda</FormLabel>
                         <FormControl type="search" placeholder="Buscar..." />
                     </FormField>
-                    
-                    {/* 8. Input para fechas */}
-                    <FormField name="date_input">
-                        <FormLabel>Fecha</FormLabel>
-                        <FormControl type="date" />
-                    </FormField>
-                    
-                    {/* 9. Input para horas */}
-                    <FormField name="time_input">
-                        <FormLabel>Hora</FormLabel>
-                        <FormControl type="time" />
-                    </FormField>
+
                     
                     {/* 10. Input para fecha y hora */}
                     <FormField name="datetime_input">
@@ -174,9 +157,7 @@ export function TestPlayground({ mode }: CompProps) {
                     
                     {/* Botón de envío */}
                     <Box mt="4">
-                        <FormSubmit>
-                            <Button>Enviar formulario</Button>
-                        </FormSubmit>
+                        <Button type="submit">Enviar formulario</Button>
                     </Box>
                 </Flex>
             </Form>
@@ -196,34 +177,14 @@ export function TestPlayground({ mode }: CompProps) {
 }//end component
 
 /*
-                       <Field name="username"  >
-                <Label>Username</Label>
-                <Control></Control>
-                <Message></Message>
-            </Field>
-            <Field name="userpass"  >
-                <Label>userpass</Label>
-                <Control></Control>
-                <Message></Message>
-            </Field>            
-            <FormSubmit>Submit</FormSubmit>
-            <Form.Root>
-                <Form.Field>
-                    <Form.Label />
-                    <Form.Control />
-                    <Form.Message />
-                    <Form.ValidityState />
-                </Form.Field>
+                 
+<FormField name="date_input">
+    <FormLabel>Fecha</FormLabel>
+    <FormControl type="date" />
+</FormField>
 
-                <Form.Message />
-                <Form.ValidityState />
-
-                <Form.Submit />
-            </Form.Root>
-            
-            <Grid columns="20% 60% 20%" gap="2">
-                <Box >Column I</Box>
-                <Box>Column Center</Box>
-                <Box>Column R</Box>
-            </Grid>
+<FormField name="time_input">
+    <FormLabel>Hora</FormLabel>
+    <FormControl type="time" />
+</FormField>
 */
