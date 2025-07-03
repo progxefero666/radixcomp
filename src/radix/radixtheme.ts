@@ -58,7 +58,7 @@ export class ThemeButtonsStyle {
 }
 
 /**
- * class ThemeCompStyle
+ * class ThemeCompStyle.COMP_CONT_STYLE
  */
 export class ThemeCompStyle {
 

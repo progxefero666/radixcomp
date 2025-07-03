@@ -7,7 +7,7 @@ import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 
-//<TextArea placeholder="Reply to comment…" />
+import { radixTypeComp } from "../radixmodels";
 
 /**
  * InputTextComponent

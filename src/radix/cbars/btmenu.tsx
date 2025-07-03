@@ -3,7 +3,8 @@
 import { Option } from "@/common/model/option";
 import { Flex, Button, } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { ThemeButtonsStyle, ThemeMenusStyle } from "@/radix/radixtheme";
+import { ThemeButtonsStyle, ThemeCompStyle, ThemeMenusStyle } from "@/radix/radixtheme";
+import { radixTypeComp } from "../radixmodels";
 
 /**
  * MenuButtons Column menu
@@ -20,6 +21,7 @@ export default function MenuButtons
     const actcolor    = ThemeMenusStyle.ACTIVE_COLOR;
     const notactcolor = ThemeMenusStyle.DEFAULT_COLOR;
 
+    const compStyle:radixTypeComp = ThemeCompStyle.COMP_CONT_STYLE
     const renderButton = (option: Option) => {
         let color = notactcolor;
         if( (actoption!== null) && (actoption === option.id) ) {

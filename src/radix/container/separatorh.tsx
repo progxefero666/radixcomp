@@ -2,6 +2,7 @@
 
 import { Separator } from "@radix-ui/themes";
 import { ThemeStyle } from "@/radix/radixtheme";
+import { radixTypeComp } from "../radixmodels";
 
 export function SeparatorH() {
     return (

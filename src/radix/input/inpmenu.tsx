@@ -3,7 +3,7 @@
 
 import { forwardRef, useEffect, useState } from "react";
 
-
+import { radixTypeComp } from "../radixmodels";
 import React from "react";
 import { Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";

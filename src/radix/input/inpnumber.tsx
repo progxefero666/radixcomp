@@ -8,7 +8,7 @@ import { Box, Flex,TextField } from "@radix-ui/themes";
 import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
-
+import { radixTypeComp } from "../radixmodels";
 /**
  * InputTextComponent
  *  format: string; //"numdefdigits:numdecdigits"

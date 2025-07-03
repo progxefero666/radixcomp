@@ -1,6 +1,6 @@
 //src\radix\cbars\btbar.tsx
 
-
+import { radixTypeComp } from "../radixmodels";
 import { Option } from "@/common/model/option";
 import { Flex, Button, } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";

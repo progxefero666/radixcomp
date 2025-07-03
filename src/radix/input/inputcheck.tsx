@@ -5,6 +5,7 @@ import { forwardRef } from "react";
 import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
 import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
+import { radixTypeComp } from "../radixmodels";
 
 interface InputCheckIfc {
     name: string;
