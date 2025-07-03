@@ -34,11 +34,12 @@ export default function PageGenCode() {
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);
 
-    const [code, setCode] = useState<string>("undefined");
-    const [section, setSection] = useState<string>(ModuleConfig.SC_TS_ENTITY_FILES.id);
-    const [initialized, setInitialized] = useState<boolean>(false);
+    //const [code, setCode] = useState<string>("undefined");
+    //const [section, setSection] = useState<string>(ModuleConfig.SC_TS_ENTITY_FILES.id);
 
-
+    let section:string|null =  null;
+    let code:string =  AppConstants.NOT_DEF;
+    let initialized: boolean = false;
     useEffect(() => {
         const init = async () => {
             //store dbSquema in SessionStorage...................................
@@ -46,22 +47,25 @@ export default function PageGenCode() {
             AppContext.saveDbSquema(dbSquema);  
             //...................................................................
 
+            //...................................................................
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
             if(!res) {alert("Error loading initial collections");}
-            else {setInitialized(true);}
+            else {initialized =true;}
+            //...................................................................
+
         };
         init();
     }, []);
 
     const onCodeResult= (datacode: string) => {
-        setCode(datacode);
+        code = datacode;
         console.log("Data received from InputEditor:", datacode);
     }
 
     const onSelection = (sectionId: string) => {
         //alert(sectionId);
-        setSection(sectionId);
+        section = sectionId;
     }
 
     return (
@@ -72,7 +76,7 @@ export default function PageGenCode() {
             <Flex height="100%">
 
                 <Box width="14%" style={boxStyle}>
-                    <PrimaryBar sections={ModuleConfig.SECTIONS} 
+                    <PrimaryBar 
                                 onselection={onSelection}
                                 actsection={section}  />
                 </Box>
@@ -158,16 +162,24 @@ function PageHeader({onselection}:PageHeaderProps) {
  * Page Primary Bar
  */
 interface PrimaryBarProps {
-    sections:   Option[];
-    actsection: string;
+    
+    actsection: string|null;
     onselection:(sectionId:string) => void;
 }
-function PrimaryBar({sections,onselection,actsection}: PrimaryBarProps) {
+function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
+    const sections:Option[] = ModuleConfig.SECTIONS
+    let optSelected:string = AppConstants.NOT_DEF
+    if(actsection!=null){
+        optSelected = actsection;
+    }
+    else {
+        optSelected = sections[0].id; 
+    }
     return (
-        <Flex direction="column" p="3" >
+        <Flex direction="column" p="3" >            
             <MenuButtons options={sections}
                 onselection={onselection} 
-                optactid={actsection} />	
+                optactid={optSelected} />	
             <Separator orientation="horizontal" size="4"  />
         </Flex>
     );
@@ -179,7 +191,7 @@ function PrimaryBar({sections,onselection,actsection}: PrimaryBarProps) {
  * Page Second Bar
  */
 interface SecondBarProps {
-    actsection: string;
+    actsection: string|null;
 }
 function SecondBar({actsection}: SecondBarProps) {
 

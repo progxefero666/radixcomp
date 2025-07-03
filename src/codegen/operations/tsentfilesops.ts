@@ -2,6 +2,7 @@
 
 import { Option } from "@/common/model/option";
 
+//allEntitiesClass = CodeGenTsMotor.getArrayEntityClass(model_tables,true);
 
 /**
  * class TsEntityFiles

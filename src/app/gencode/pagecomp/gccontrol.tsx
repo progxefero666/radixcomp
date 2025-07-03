@@ -1,4 +1,5 @@
 //src\app\gencode\panelinput.tsx
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 
@@ -37,8 +38,13 @@ import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
 
 
+    
+
+/**
+ * GenCodeControl
+ */
 interface CompProps {
-    section?: string;
+    section?: string |null;
     ondataresult: (data: string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
@@ -53,21 +59,25 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
-    //ondataresult(tableClass);        
+    
 
     useEffect(() => {
+        if(initialized) { return; }
+
         const init = async () => {
             if(section!=null){
-      
+
+                //load model tables and tables menu
                 const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(AppContext.readDbSquema());                
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
-    
+                //load section operations
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
                 setOperations(listOperations);
                 setOperationId(listOperations[0].id);
-            }           
-            setInitialized(true);
+                //initialize
+                setInitialized(true);
+            }                       
         };
         init();
     }, []);
@@ -78,7 +88,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         }
     };//end
 
-    
     const onSelectTable = (index:number,compname?:string) => {
         setTableIndex(index);
     };//end
@@ -91,7 +100,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const runOperation = () => {        
         alert(section);
         alert(operationId);
-        //allEntitiesClass = CodeGenTsMotor.getArrayEntityClass(model_tables,true);
+
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
             if(operationId == TsEntFilesOperations.OP_GET_DEF_CLASS.id){               
             }
@@ -131,27 +140,28 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     };//end
 
-
     const renderMainContent = () => {
-        let showModelTable: boolean = false;
-        const optionTableSel: string = modelTables[tableIndex].name;
+        let showInfoPanel: boolean = false;
+        console.log(tableIndex);
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
                 <Box width={"30%"} pb="2" >
+                    {/*
                     {initialized ?
                         <XRadioGroup
                             autocommit={true}
-                            key={optionTableSel}
+                            key={modelTables[tableIndex].name}
                             onselect={onSelectTable}
                             options={menuListTables}
-                            value={optionTableSel}
+                            value={modelTables[tableIndex].name}
                             direction="column" />
-                     : null}
+                     : null}                    
+                    */}
                 </Box>
 
                 <Box width={"70%"} >
                     <SeparatorV />
-                    {showModelTable ?
+                    {showInfoPanel ?
                         <div className="w-full">
                             <XInputTextArea value={"rightPanelData"} />
                         </div>

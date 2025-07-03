@@ -20,7 +20,7 @@ import { FilesMimeTypes } from "@/codegen/kernel/cgconstants";
 import { exportFile } from "@/app_front/common/filesmanager";
 
 interface CompProps {
-    section: string;
+    section: string|null;
     format?: string;
     code?: string | null;
     fileName?: string;
