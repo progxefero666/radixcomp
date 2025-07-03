@@ -1,7 +1,7 @@
 //src\radix\radixcolors.ts
 
-import { RadixConf } from "./radixconf";
-import { radixTypeComp } from "./radixmodels";
+import { RadixConf } from "@/radix/radixconf";
+import { radixTypeComp } from "@/radix/radixmodels";
 
 /**
  * class  ThemeStyle.SEPARATOR_V_STYLE
@@ -15,9 +15,6 @@ export class ThemeStyle {
     public static SEPARATOR_H_STYLE = {
         height: '2px'
     };
-
-
-
 
     public static boxStyle = {
         margin: '20px',
@@ -135,19 +132,22 @@ export class ThemeDataStyle {
 }
 
 /**
- * class ThemeMenusStyle.OPT_COLOR_CSS_STYLE
+ * class ThemeMenusStyle.OPT_SIZE
  */
 export class ThemeMenusStyle {
 
-    public static readonly OPT_ACTIVE_COLOR: any = RadixConf.COLORS.indigo;
-    public static readonly OPT_DEF_COLOR: any = RadixConf.COLORS.blue;
+    public static readonly OPT_ACT_COLOR: any = RadixConf.COLORS.indigo;
+    public static readonly OPT_COLOR: any = RadixConf.COLORS.blue;
 
-    public static readonly OPT_COLOR_CSS_STYLE = {
+    public static readonly OPT_SIZE: any = RadixConf.SIZES.size_2;
+
+    public static readonly OPT_CSS = {
         backgroundColor: "var(--blue-9)",          
         borderRadius: "var(--radius-3)"
     };
 
-    public static readonly OPT_ACTIVE_COLOR_CSS_STYLE = {
+    public static readonly OPT_ACT_CSS = {
+        variant: "soft",
         backgroundColor: "var(--red-9)",          
         borderRadius: "var(--radius-3)"
     };

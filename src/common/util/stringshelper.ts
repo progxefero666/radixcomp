@@ -3,13 +3,21 @@
 import { AppConstants } from "@/app_front/appconstants";
 
 /**
- * class ShowAlerts.show
+ * class StringsHelper.equals
  */
 export class StringsHelper {
     
     //public static readonly SEPARATOR: string = " : ";
 
-    static getElementIndex(collection: string[]): number {
+    public static equals = (valueA:string,valueB:string|null) => {
+        if ((valueB !== null) && 
+            (valueB === valueA)) {
+            return true;
+        }
+        return false;
+    };
+
+    public static getElementIndex(collection: string[]): number {
         let index:number = -1;
         if (collection == null || collection.length === 0) {
             return index;

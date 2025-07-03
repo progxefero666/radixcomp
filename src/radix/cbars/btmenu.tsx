@@ -1,10 +1,12 @@
 //src\radix\cbars\btmenu.tsx
 
 import { Option } from "@/common/model/option";
-import { Flex, Button, Box, } from "@radix-ui/themes";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { ThemeButtonsStyle, ThemeCompStyle, ThemeMenusStyle } from "@/radix/radixtheme";
-import { radixTypeComp } from "../radixmodels";
+import { Flex, Box, } from "@radix-ui/themes";
+import { ThemeCompStyle, ThemeMenusStyle } from "@/radix/radixtheme";
+import { radixTypeComp } from "@/radix//radixmodels";
+import { renderOptionButton } from "@/radix/radixbuttons";
+import { StringsHelper } from "@/common/util/stringshelper";
+
 
 /**
  * MenuButtons Column menu
@@ -16,38 +18,16 @@ export interface MenuButtonsProp {
 }
 export default function MenuButtons({ options, actoption, onselection }: MenuButtonsProp) {
 
-    const compStyle: radixTypeComp = ThemeCompStyle.CONT_STYLE;
-
-    const isActiveOption = (optionId: string, actoptionId: string | null) => {
-        if ((actoptionId !== null) && (actoptionId === optionId)) {
-            return true;
-        }
-        return false;
-    };
-
-    const renderButton = (id: string, onclick: (name: string) => void,
-        text: string, style: any) => {
-        return (
-            <Button key={id}
-                onClick={() => onclick(id)}
-                style={style}
-                size={compStyle.size}
-                variant={compStyle.variant} >
-                {text}
-            </Button>
-        )
-    }
-
     return (
         <Flex direction="column" gap="2" style={ThemeCompStyle.CONT_CSS_STYLE} >
             {options.map((section, index) => (
                 <Box key={index.toString()} >
-                    {isActiveOption(section.id, actoption) ?
-                        renderButton(section.id, onselection, section.text,
-                            ThemeMenusStyle.OPT_ACTIVE_COLOR_CSS_STYLE)
+                    {StringsHelper.equals(section.id, actoption) ?
+                        renderOptionButton(section.id, onselection, section.text,
+                            ThemeMenusStyle.OPT_ACT_CSS)
                         :
-                        renderButton(section.id, onselection, section.text,
-                            ThemeMenusStyle.OPT_COLOR_CSS_STYLE)
+                        renderOptionButton(section.id, onselection, section.text,
+                            ThemeMenusStyle.OPT_CSS)
                     }
                 </Box>
             ))}
@@ -55,9 +35,3 @@ export default function MenuButtons({ options, actoption, onselection }: MenuBut
     )
 
 }//end
-
-/*
-                  <Card key={index.toString()} >
-                       {renderButton(section)}
-                    </Card>
-*/
