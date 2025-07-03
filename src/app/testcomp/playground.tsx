@@ -61,6 +61,15 @@ s
                         <FormControl type="range" min={0} max={100} step={5} defaultValue="50" />
                     </FormField>
 
+                    <FormField name="select_category">
+                        <FormLabel>Category</FormLabel>
+                        <FormControl asChild >
+                            <select>
+                                <option value="uk">United Kingdom</option>…
+                            </select>                            
+                        </FormControl>
+                    </FormField>
+
                     {/* Botón de envío */}
                     <Box mt="4">
                         <Button type="submit">Enviar formulario</Button>
