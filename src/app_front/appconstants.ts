@@ -3,7 +3,7 @@
 import { Option } from "@/common/model/option";
 
 /**
- * class AppConstants.ICON_RUN
+ * class AppConstants.NOT_DEF
  */
 export class AppConstants {
 

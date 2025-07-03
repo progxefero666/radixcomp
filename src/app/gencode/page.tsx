@@ -17,6 +17,7 @@ import { AppConstants } from "@/app_front/appconstants";
 import { GenCodeViewer } from "./pagecomp/gcviewer";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 import { ModuleConfig } from "./config";
+import { getTextFile } from "@/app_server/actions/gettextfile";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
@@ -36,8 +37,11 @@ export default function PageGenCode() {
     const [section, setSection] = useState<string>(ModuleConfig.SC_TS_ENTITY_FILES.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
+    let dbSquema: string = AppConstants.NOT_DEF;
+
     useEffect(() => {
         const init = async () => {
+            dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);            
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
             setInitialized(true);

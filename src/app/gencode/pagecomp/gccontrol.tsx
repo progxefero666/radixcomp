@@ -14,12 +14,12 @@ import { XRadioGroup } from "@/radix/input/inpgrpradio";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
 import { getTextFile } from "@/app_server/actions/gettextfile";
-import { ModelField, ModelTable } from "@/codegen/kernel/cgmodel";
+import { ModelTable } from "@/codegen/kernel/cgmodel";
 
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
-import { XInputDate } from "@/radix/input/inpdate";
+
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { InputFiles } from "@/radix/notready/inputfiles";
 import { RadixConfTexts } from "@/radix/radixconf";
@@ -27,29 +27,30 @@ import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { ModuleConfig } from "../config";
 import { InputSelect } from "@/radix/input/inpselect";
 import { CodeGenConfig } from "@/codegen/cgconfig";
-import { BasicEvaluatedExpression } from "next/dist/compiled/webpack/webpack";
+
 import { TsEntFilesOperations } from "@/codegen/operations/tsentfilesops";
 import { JsonEntFilesOperations } from "@/codegen/operations/jsonentfilesops";
 import { PyEntServiceFilesOperations } from "@/codegen/operations/pyentservicefilesops";
 import { TsxEntFormsOperations } from "@/codegen/operations/tsxentformsops";
 import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefilesops";
+import { AppConstants } from "@/app_front/appconstants";
 
 
-let  allEntitiesClass:string = "undefined";
 interface CompProps {
     section?: string;
     ondataresult: (data: string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
 
-    const [initialized, setInitialized] = useState<boolean>(false);
+    const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
 
+    const [initialized, setInitialized] = useState<boolean>(false);
     const [menuListTables, setMenuListTables] = useState<Option[]>([]);
     const [optionTableSel, setOptionTableSel] = useState<string | null>(null);
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
     const [operations, setOperations] = useState<Option[]>([]);
-    const [operationId, setOperationId] = useState<string>("undefined");
+    const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
     
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
@@ -58,19 +59,16 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     useEffect(() => {
         const init = async () => {
             if(section!=null){
- 
+                const db_squema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
+                setDbSquema(db_squema);
+
+                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);                
+                setModelTables(db_modeltables);
+                setModelTableSel(db_modeltables[0]);
+                setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
+                setOptionTableSel(db_modeltables[0].name);
+
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
-
-                const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
-                const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-                allEntitiesClass = CodeGenTsMotor.getArrayEntityClass(model_tables,true);
-
-                setModelTables(model_tables);
-                setModelTableSel(model_tables[0]);
-
-                setMenuListTables(SchemaService.getListTablesAsOptions(model_tables));
-                setOptionTableSel(model_tables[0].name);
-
                 setOperations(listOperations);
                 setOperationId(listOperations[0].id);
             }           
@@ -99,7 +97,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const runOperation = () => {        
         alert(section);
         alert(operationId);
-
+        //allEntitiesClass = CodeGenTsMotor.getArrayEntityClass(model_tables,true);
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
             if(operationId == TsEntFilesOperations.OP_GET_DEF_CLASS.id){               
             }
