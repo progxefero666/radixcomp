@@ -4,12 +4,12 @@ import types from "@/codegen/kernel/sqltypesnumber.json";
 
 import { Option } from "@/common/model/option";
 import { ModelHelper } from "@/common/util/modelhelper";
-import { TsEntFilesOperations } from "./operations/tsentfilesops";
-import { JsonEntFilesOperations } from "./operations/jsonentfilesops";
-import { TsxEntFormsOperations } from "./operations/tsxentformsops";
-import { TsEntServiceFilesOperations } from "./operations/tsentservicefilesops";
-import { PyEntServiceFilesOperations } from "./operations/pyentservicefilesops";
-import { ControlDatabase } from "./ControlDatabase";
+import { TsEntFilesOperations } from "@/codegen/operations/tsentfilesops";
+import { JsonEntFilesOperations } from "@/codegen/operations/jsonentfilesops";
+import { TsxEntFormsOperations } from "@/codegen/operations/tsxentformsops";
+import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefilesops";
+import { PyEntServiceFilesOperations } from "@/codegen/operations/pyentservicefilesops";
+import { ControlDatabase } from "@/codegen/ControlDatabase";
 
 
 export enum OP_CATEGORIES {

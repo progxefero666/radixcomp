@@ -28,6 +28,11 @@ import { ModuleConfig } from "../config";
 import { InputSelect } from "@/radix/input/inpselect";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 import { BasicEvaluatedExpression } from "next/dist/compiled/webpack/webpack";
+import { TsEntFilesOperations } from "@/codegen/operations/tsentfilesops";
+import { JsonEntFilesOperations } from "@/codegen/operations/jsonentfilesops";
+import { PyEntServiceFilesOperations } from "@/codegen/operations/pyentservicefilesops";
+import { TsxEntFormsOperations } from "@/codegen/operations/tsxentformsops";
+import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefilesops";
 
 
 let  allEntitiesClass:string = "undefined";
@@ -44,7 +49,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
     const [operations, setOperations] = useState<Option[]>([]);
-    const [operationSelected, setOperationSelected] = useState<Option|null>(null);
+    const [operationId, setOperationId] = useState<string>("undefined");
+    
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
     //ondataresult(tableClass);        
@@ -66,7 +72,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 setOptionTableSel(model_tables[0].name);
 
                 setOperations(listOperations);
-                setOperationSelected(listOperations[0]);
+                setOperationId(listOperations[0].id);
             }           
             setInitialized(true);
         };
@@ -79,6 +85,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         }
     };//end
 
+    //ondataresult(allEntitiesClass); 
     const onSelectTable = (tableName: string) => {
         const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
         setModelTableSel(modelTables[tableIndex]);
@@ -86,42 +93,53 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const onOpSelected = async (operationId: string) => {
         alert(operationId);
+        setOperationId(operationId);
     };//end
-
-    //ondataresult(allEntitiesClass);              
-    
 
     const runOperation = () => {        
         alert(section);
-        alert(operationSelected?.id);
+        alert(operationId);
 
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
-            
+            if(operationId == TsEntFilesOperations.OP_GET_DEF_CLASS.id){               
+            }
+            else if(operationId == TsEntFilesOperations.OP_GET_ENT_CLASS.id){
+            }
+            else if(operationId == TsEntFilesOperations.OP_GET_ARRAY_DEF_CLASS.id){
+            }
+            else if(operationId == TsEntFilesOperations.OP_GET_ARRAY_ENT_CLASS.id){
+            }
         }
         else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){
+            if(operationId == JsonEntFilesOperations.OP_A.id){
+            }
+            else if(operationId == JsonEntFilesOperations.OP_B.id){
+            }            
         }
-        else if(section==ModuleConfig.SC_TSX_ENTITY_FORMS.id){       
+        else if(section == ModuleConfig.SC_TSX_ENTITY_FORMS.id){   
+            if(operationId == TsxEntFormsOperations.OP_A.id){
+            }
+            else if(operationId == TsxEntFormsOperations.OP_B.id){
+            }                       
         }
         else if(section==ModuleConfig.SC_TS_SERVICES_FILES.id){           
+            if(operationId == TsEntServiceFilesOperations.OP_A.id){
+            }
+            else if(operationId == TsEntServiceFilesOperations.OP_B.id){
+            }             
         }
-        else if(section==ModuleConfig.SC_PY_SERVICES_FILES.id){         
+        else if(section==ModuleConfig.SC_PY_SERVICES_FILES.id){      
+            if(operationId == PyEntServiceFilesOperations.OP_A.id){
+            }
+            else if(operationId == PyEntServiceFilesOperations.OP_B.id){
+            }                   
         }
         else if(section==ModuleConfig.SC_DB_SQUEMA.id){
         }   
 
-
     };//end
 
 
-
-
-    /*
-        if (modelTableSel !== null) { showModelTable = true; }
-        let rightPanelData: string = "";
-        if (showModelTable) {
-            rightPanelData = JSON.stringify(modelTableSel, null, 4);
-        }
-    */
     const renderMainContent = () => {
         let showModelTable: boolean = false;
         return (
@@ -162,7 +180,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         label="Operation: "
                         ref={operationsRef}
                         collection={operations}
-                        value={operationSelected?.id ?? ""}
+                        value={operationId ?? ""}
                         onchange={onOpSelected}
                         disabled={false} /> : null}
                 </Box>
@@ -193,6 +211,14 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     );
 
 }//end InputEditor
+
+/*
+    if (modelTableSel !== null) { showModelTable = true; }
+    let rightPanelData: string = "";
+    if (showModelTable) {
+        rightPanelData = JSON.stringify(modelTableSel, null, 4);
+    }
+*/
 
 /*
 //const tableClass: string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
