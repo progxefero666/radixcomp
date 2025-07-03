@@ -34,8 +34,6 @@ import {
 import { Sub } from "@radix-ui/react-context-menu";
 import { FormMessage } from "@/radix/forms/formmsg";
 
-
-
 export const layoutStyle = {
     background: 'rgb(7, 7, 7)',
     border: '2px solidrgb(98, 97, 98)',
@@ -49,7 +47,7 @@ export const layoutStyle = {
 interface CompProps { mode?: string; }
 
 export function TestPlayground({ mode }: CompProps) {
-    const [formValues, setFormValues] = useState<{[key: string]: string}>({});
+    const [formValues, setFormValues] = useState<{ [key: string]: string }>({});
     const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
@@ -60,8 +58,9 @@ export function TestPlayground({ mode }: CompProps) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData);
-        setFormValues(data as {[key: string]: string});
+        setFormValues(data as { [key: string]: string });
         setSubmitted(true);
+        alert("Formulario enviado con éxito");
         console.log("Datos del formulario:", data);
     };
 
@@ -74,93 +73,26 @@ export function TestPlayground({ mode }: CompProps) {
 
             {/* El componente Form recibe la función onSubmit */}
             <Form onSubmit={handleSubmit}>
-                <Flex direction="column" gap="4"  style={layoutStyle}>
-                    {/* 1. Input de texto normal */}
+                <Flex direction="column" gap="4" style={layoutStyle}>
+s
                     <FormField name="text_input">
                         <FormLabel>Texto</FormLabel>
                         <FormControl type="text" required placeholder="Texto normal" />
                         <FormMessage match="valueMissing">Este campo es obligatorio</FormMessage>
                     </FormField>
                     
-                    {/* 2. Input para contraseñas */}
-                    <FormField name="password_input">
-                        <FormLabel>Contraseña</FormLabel>
-                        <FormControl type="password" required minLength={6} />
-                        <FormMessage match="tooShort">La contraseña debe tener al menos 6 caracteres</FormMessage>
-                    </FormField>
-                    
-                    {/* 3. Input para correos electrónicos */}
-                    <FormField name="email_input">
-                        <FormLabel>Email</FormLabel>
-                        <FormControl type="email" required />
-                        <FormMessage match="typeMismatch">Por favor ingresa un email válido</FormMessage>
-                    </FormField>
-                    
-                    {/* 4. Input para números */}
-                    <FormField name="number_input">
-                        <FormLabel>Número</FormLabel>
-                        <FormControl type="number" min={1} max={100} step={1} />
-                        <FormMessage match="rangeOverflow">El valor máximo es 100</FormMessage>
-                    </FormField>
-                    
-                    {/* 5. Input para teléfonos */}
-                    <FormField name="tel_input">
-                        <FormLabel>Teléfono</FormLabel>
-                        <FormControl type="tel" pattern="[0-9]{9}" />
-                        <FormMessage match="patternMismatch">Introduce un número de 9 dígitos</FormMessage>
-                    </FormField>
-                    
-                    {/* 6. Input para URLs */}
-                    <FormField name="url_input">
-                        <FormLabel>URL</FormLabel>
-                        <FormControl type="url" placeholder="https://ejemplo.com" />
-                        <FormMessage match="typeMismatch">Introduce una URL válida</FormMessage>
-                    </FormField>
-                    
-                    {/* 7. Input para búsqueda */}
-                    <FormField name="search_input">
-                        <FormLabel>Búsqueda</FormLabel>
-                        <FormControl type="search" placeholder="Buscar..." />
-                    </FormField>
-
-                    
-                    {/* 10. Input para fecha y hora */}
-                    <FormField name="datetime_input">
-                        <FormLabel>Fecha y Hora</FormLabel>
-                        <FormControl type="datetime-local" />
-                    </FormField>
-                    
-                    {/* 11. Input para mes */}
-                    <FormField name="month_input">
-                        <FormLabel>Mes</FormLabel>
-                        <FormControl type="month" />
-                    </FormField>
-                    
-                    {/* 12. Input para semana */}
-                    <FormField name="week_input">
-                        <FormLabel>Semana</FormLabel>
-                        <FormControl type="week" />
-                    </FormField>
-                    
-                    {/* 13. Input para seleccionar colores */}
-                    <FormField name="color_input">
-                        <FormLabel>Color</FormLabel>
-                        <FormControl type="color" defaultValue="#ff0000" />
-                    </FormField>
-                    
-                    {/* 15. Input para seleccionar un valor en un rango */}
                     <FormField name="range_input">
                         <FormLabel>Rango (0-100)</FormLabel>
                         <FormControl type="range" min={0} max={100} step={5} defaultValue="50" />
                     </FormField>
-                    
+
                     {/* Botón de envío */}
                     <Box mt="4">
                         <Button type="submit">Enviar formulario</Button>
                     </Box>
                 </Flex>
             </Form>
-            
+
             {/* Mostrar los datos capturados */}
             {submitted && (
                 <Box mt="4" p="3" style={{ background: '#e3e3e3', borderRadius: '4px' }}>
@@ -176,6 +108,67 @@ export function TestPlayground({ mode }: CompProps) {
 }//end component
 
 /*
+
+                    
+         
+                    <FormField name="password_input">
+                        <FormLabel>Contraseña</FormLabel>
+                        <FormControl type="password" required minLength={6} />
+                        <FormMessage match="tooShort">La contraseña debe tener al menos 6 caracteres</FormMessage>
+                    </FormField>
+    
+                    <FormField name="email_input">
+                        <FormLabel>Email</FormLabel>
+                        <FormControl type="email" required />
+                        <FormMessage match="typeMismatch">Por favor ingresa un email válido</FormMessage>
+                    </FormField>
+            
+                    <FormField name="number_input">
+                        <FormLabel>Número</FormLabel>
+                        <FormControl type="number" min={1} max={100} step={1} />
+                        <FormMessage match="rangeOverflow">El valor máximo es 100</FormMessage>
+                    </FormField>
+ 
+                    <FormField name="tel_input">
+                        <FormLabel>Teléfono</FormLabel>
+                        <FormControl type="tel" pattern="[0-9]{9}" />
+                        <FormMessage match="patternMismatch">Introduce un número de 9 dígitos</FormMessage>
+                    </FormField>
+       
+                    <FormField name="url_input">
+                        <FormLabel>URL</FormLabel>
+                        <FormControl type="url" placeholder="https://ejemplo.com" />
+                        <FormMessage match="typeMismatch">Introduce una URL válida</FormMessage>
+                    </FormField>
+      
+                    <FormField name="search_input">
+                        <FormLabel>Búsqueda</FormLabel>
+                        <FormControl type="search" placeholder="Buscar..." />
+                    </FormField>
+
+                    <FormField name="datetime_input">
+                        <FormLabel>Fecha y Hora</FormLabel>
+                        <FormControl type="datetime-local" />
+                    </FormField>
+             
+                    <FormField name="month_input">
+                        <FormLabel>Mes</FormLabel>
+                        <FormControl type="month" />
+                    </FormField>
+
+                    <FormField name="week_input">
+                        <FormLabel>Semana</FormLabel>
+                        <FormControl type="week" />
+                    </FormField>
+                    
+           
+                    <FormField name="color_input">
+                        <FormLabel>Color</FormLabel>
+                        <FormControl type="color" defaultValue="#ff0000" />
+                    </FormField>
+                    
+          
+
                  
 <FormField name="date_input">
     <FormLabel>Fecha</FormLabel>

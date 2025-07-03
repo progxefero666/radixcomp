@@ -35,8 +35,9 @@ import {
     FormMessageImplProps} from './formtypes';
 
 import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
-import { FormControlProps, FormFieldProps, FormLabelProps, FormMessage, FormProps, FormSubmitProps } from '@radix-ui/react-form';
-import { FormMessageImpl } from './formmsg';
+import { FormControlProps, FormFieldProps,  FormLabelProps, FormMessage, FormProps, FormSubmitProps } from '@radix-ui/react-form';
+import { FormMessageImpl } from '@/radix/forms/formmsg';
+import { FormLabel } from '@/radix/forms/formlabel';
 
 
 // Form
@@ -208,32 +209,6 @@ const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
 );
 FormField.displayName = FORM_CONST_ELEMS.FIELD_NAME;
 
-// FormLabel
-// -------------------------------------------------------------------------------------------------
-const FormLabel = React.forwardRef<FormLabelElement, FormLabelProps>(
-    (props: ScopedProps<FormLabelProps>, forwardedRef) => {
-        const { __scopeForm, ...labelProps } = props;
-        const validationContext = useValidationContext(FORM_CONST_ELEMS.LABEL_NAME, __scopeForm);
-        const fieldContext = useFormFieldContext(FORM_CONST_ELEMS.LABEL_NAME, __scopeForm);
-        const htmlFor = labelProps.htmlFor || fieldContext.id;
-        const validity = validationContext.getFieldValidity(fieldContext.name);
-
-        return (
-            <LabelPrimitive
-                data-radix-form-label
-                data-valid={getValidAttribute(validity, fieldContext.serverInvalid)}
-                data-invalid={getInvalidAttribute(validity, fieldContext.serverInvalid)}
-                {...labelProps}
-                ref={forwardedRef}
-                htmlFor={htmlFor}
-            />
-        );
-    }
-);
-
-FormLabel.displayName = FORM_CONST_ELEMS.LABEL_NAME;
-
-
 // FormControl
 // -------------------------------------------------------------------------------------------------
 const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
@@ -250,28 +225,23 @@ const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
         const id = controlProps.id || fieldContext.id;
         const customMatcherEntries = validationContext.getFieldCustomMatcherEntries(name);
 
-        const { onFieldValidityChange, onFieldCustomErrorsChange, onFieldValiditionClear } =
-            validationContext;
+        const { onFieldValidityChange, 
+                onFieldCustomErrorsChange, 
+                onFieldValiditionClear } = validationContext;
+
         const updateControlValidity = React.useCallback(
             async (control: FormControlElement) => {
-                //------------------------------------------------------------------------------------------
                 // 1. first, if we have built-in errors we stop here
-
                 if (hasBuiltInError(control.validity)) {
                     const controlValidity = validityStateToObject(control.validity);
                     onFieldValidityChange(name, controlValidity);
                     return;
                 }
-
-                //------------------------------------------------------------------------------------------
                 // 2. then gather the form data to give to custom matchers for cross-comparisons
-
                 const formData = control.form ? new FormData(control.form) : new FormData();
                 const matcherArgs: CustomMatcherArgs = [control.value, formData];
 
-                //------------------------------------------------------------------------------------------
                 // 3. split sync and async custom matcher entries
-
                 const syncCustomMatcherEntries: Array<SyncCustomMatcherEntry> = [];
                 const ayncCustomMatcherEntries: Array<AsyncCustomMatcherEntry> = [];
                 customMatcherEntries.forEach((customMatcherEntry) => {
@@ -282,9 +252,7 @@ const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
                     }
                 });
 
-                //------------------------------------------------------------------------------------------
                 // 4. run sync custom matchers and update control validity / internal validity + errors
-
                 const syncCustomErrors = syncCustomMatcherEntries.map(({ id, match }) => {
                     return [id, match(...matcherArgs)] as const;
                 });
@@ -296,9 +264,7 @@ const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
                 onFieldValidityChange(name, controlValidity);
                 onFieldCustomErrorsChange(name, syncCustomErrorsById);
 
-                //------------------------------------------------------------------------------------------
                 // 5. run async custom matchers and update control validity / internal validity + errors
-
                 if (!hasSyncCustomErrors && ayncCustomMatcherEntries.length > 0) {
                     const promisedCustomErrors = ayncCustomMatcherEntries.map(({ id, match }) =>
                         match(...matcherArgs).then((matches) => [id, matches] as const)
@@ -381,41 +347,11 @@ const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
         );
     }
 );
-
 FormControl.displayName = FORM_CONST_ELEMS.CONTROL_NAME;
 
 
-// Form Message functionality
-// -------------------------------------------------------------------------------------------------=
-/*
-export type FormMessageElement = FormMessageImplElement;
-export interface FormMessageProps extends Omit<FormMessageImplProps, 'name'> {
-    match?: ValidityMatcher | CustomMatcher;
-    forceMatch?: boolean;
-    name?: string;
-}
-export const FormMessage = React.forwardRef<FormMessageElement, FormMessageProps>(
-    (props: ScopedProps<FormMessageProps>, forwardedRef) => {
-        const { match, name: nameProp, ...messageProps } = props;
-        const fieldContext = useFormFieldContext(FORM_CONST_ELEMS.MESSAGE_NAME, props.__scopeForm);
-        const name = nameProp ?? fieldContext.name;
-
-        if (match === undefined) {
-            return (
-                <FormMessageImpl {...messageProps} ref={forwardedRef} name={name}>
-                    {props.children || DEFAULT_INVALID_MESSAGE}
-                </FormMessageImpl>
-            );
-        } else if (typeof match === 'function') {
-            return <FormCustomMessage match={match} {...messageProps} ref={forwardedRef} name={name} />;
-        } else {
-            return <FormBuiltInMessage match={match} {...messageProps} ref={forwardedRef} name={name} />;
-        }
-    }
-);
-FormMessage.displayName = FORM_CONST_ELEMS.MESSAGE_NAME;
-*/
-
+// BuiltInMessage -CustomMessage
+// -------------------------------------------------------------------------------------------------
 export type FormBuiltInMessageElement = FormMessageImplElement;
 export interface FormBuiltInMessageProps extends FormMessageImplProps {
     match: ValidityMatcher;
@@ -428,7 +364,6 @@ export const FormBuiltInMessage = React.forwardRef<FormBuiltInMessageElement, Fo
         const validationContext = useValidationContext(FORM_CONST_ELEMS.MESSAGE_NAME, messageProps.__scopeForm);
         const validity = validationContext.getFieldValidity(name);
         const matches = forceMatch || validity?.[match];
-
         if (matches) {
             return (
                 <FormMessageImpl ref={forwardedRef} {...messageProps} name={name}>
@@ -436,18 +371,15 @@ export const FormBuiltInMessage = React.forwardRef<FormBuiltInMessageElement, Fo
                 </FormMessageImpl>
             );
         }
-
         return null;
     }
 );
-
 type FormCustomMessageElement = React.ComponentRef<typeof FormMessageImpl>;
 interface FormCustomMessageProps extends React.ComponentPropsWithoutRef<typeof FormMessageImpl> {
     match: CustomMatcher;
     forceMatch?: boolean;
     name: string;
 }
-
 export const FormCustomMessage = React.forwardRef<FormCustomMessageElement, FormCustomMessageProps>(
     (props: ScopedProps<FormCustomMessageProps>, forwardedRef) => {
         const { match, forceMatch = false, name, id: idProp, children, ...messageProps } = props;
@@ -497,7 +429,6 @@ const FormValidityState = (props: ScopedProps<FormValidityStateProps>) => {
     const validity = validationContext.getFieldValidity(name);
     return <>{children(validity)}</>;
 };
-
 FormValidityState.displayName = FORM_CONST_ELEMS.VALIDITY_STATE_NAME;
 
 
