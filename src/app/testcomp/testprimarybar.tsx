@@ -6,6 +6,14 @@ import { Flex, Separator } from "@radix-ui/themes";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { AppConfig } from "@/app_front/appconfig";
 import { Option } from "@/common/model/option";
+
+
+export const layoutStyle = {
+    padding: '8px',
+    background: '#0000ff'
+};
+
+
 interface PrimaryBarProps {
     section?: string;
     onselection?: (sectionId:string) => void;
@@ -13,7 +21,7 @@ interface PrimaryBarProps {
 export function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
     return (
-        <Flex direction="column" >
+        <Flex width="100%" direction="column" style={layoutStyle} >
             Primary Bar
         </Flex>
     );

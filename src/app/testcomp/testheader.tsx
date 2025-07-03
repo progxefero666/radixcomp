@@ -3,7 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { Link,Flex, Text, Button, Box } from "@radix-ui/themes";
 import { usePathname } from "next/navigation";
+import { renderHomeButton } from "@/radix/radixbuttons";
 
+export const pageStyle = {
+  
+    backgroundColor: "#000000",
+};
 
 
 /**
@@ -29,36 +34,24 @@ export function TestHeader({navback}:CompProps) {
 
 
 
-    function renderHomeButton(isIndexPage: boolean): React.ReactNode {
-        throw new Error("Function not implemented.");
-    }
-
     return (
-        <Flex className="w-full h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
+        <Flex  width="100%"  direction="row" pt="2" style={pageStyle} >
 
-            <Flex direction="row" gap="2" justify="between" 
-                 className="full h-auto w-[14%] bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6">
-                <Text size="5" weight="bold" className="text-gray-12">
-                    Radix UI
-                </Text>   
-                <Box>
-                 {renderHomeButton(isIndexPage)}  
-                </Box>  
-                         
+            <Flex direction="row" width="16%" gap="2" px="2" pb="2" justify="between" >
+                <Text size="5" weight="bold" >Radix UI</Text>   
+                <Box> {renderHomeButton(isIndexPage)}</Box>                           
             </Flex>
 
-            <Box className="h-auto w-[82%] bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto">
-                <Text size="5" weight="bold" className="text-gray-12">
-                    Primitives Sandbox
-                </Text>
-            </Box>
+            <Flex width="68%" direction="column" pl="3">
+                <Text size="5" weight="bold">Primitives Sandbox</Text>
+            </Flex>
 
-            <Box className="h-auto w-[4%] bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
-                
-            </Box>
+            <Flex width="16%" direction="column" >
+                2 bar
+            </Flex>
 
         </Flex>
     );
 
-}//end PrimaryBar
+}//end component
 
