@@ -5,32 +5,41 @@ import { composeEventHandlers } from '@radix-ui/primitive';
 import { useComposedRefs } from '@radix-ui/react-compose-refs';
 import { createContextScope } from '@radix-ui/react-context';
 import { useId } from '@radix-ui/react-id';
-import { Label as LabelPrimitive } from '@radix-ui/react-label';
+import { Label as LabelPrimitive, LabelProps } from '@radix-ui/react-label';
 import { Primitive } from '@radix-ui/react-primitive';
 
 import type { Scope } from '@radix-ui/react-context';
 
+
 // Importación de funciones de utilidad
 import { 
-  validityStateToObject,
-  isHTMLElement,
-  isFormControl,
-  isInvalid,
-  getFirstInvalidControl,
-  isAsyncCustomMatcherEntry,
-  isSyncCustomMatcherEntry,
-  returnsPromise,
-  hasBuiltInError,
-  getValidAttribute,
-  getInvalidAttribute 
-} from './formutil';
+    validityStateToObject,
+    isHTMLElement,
+    isFormControl,
+    isInvalid,
+    getFirstInvalidControl,
+    isAsyncCustomMatcherEntry,
+    isSyncCustomMatcherEntry,
+    returnsPromise,
+    hasBuiltInError,
+    getValidAttribute,
+    getInvalidAttribute } 
+  from './formutil';
+  import { PrimitiveFormProps, PrimitiveDivProps, PrimitiveInputProps, 
+          PrimitiveSpanProps, CustomMatcher, PrimitiveButtonProps, 
+          ValidationContextValue, AriaDescriptionContextValue, 
+          FormElement, ScopedProps, ValidityMap, CustomMatcherEntriesMap,
+          CustomErrorsMap, MessageIdsMap, FormFieldContextValue, 
+          FormFieldElement, FormLabelElement, FormControlElement, 
+          CustomMatcherArgs, SyncCustomMatcherEntry, AsyncCustomMatcherEntry,
+          FormMessageImplElement, FormSubmitElement } from './formtypes';
 
 // -------------------------------------------------------------------------------------------------
 // Tipos y definiciones
 // -------------------------------------------------------------------------------------------------
 
 // Constantes para Validity Matchers
-const _validityMatchers = [
+export const _validityMatchers = [
   'badInput',
   'patternMismatch',
   'rangeOverflow',
@@ -45,6 +54,9 @@ const _validityMatchers = [
 
 // Constantes de mensajes por defecto
 const DEFAULT_INVALID_MESSAGE = 'This value is not valid';
+// Type definition for ValidityMatcher
+type ValidityMatcher = (typeof _validityMatchers)[number];
+
 const DEFAULT_BUILT_IN_MESSAGES: Record<ValidityMatcher, string | undefined> = {
   badInput: DEFAULT_INVALID_MESSAGE,
   patternMismatch: 'This value does not match the required pattern',
@@ -58,6 +70,7 @@ const DEFAULT_BUILT_IN_MESSAGES: Record<ValidityMatcher, string | undefined> = {
   valueMissing: 'This value is missing',
 };
 
+/*
 // Base types
 type ScopedProps<P> = P & { __scopeForm?: Scope };
 type ValidityStateKey = keyof ValidityState;
@@ -115,6 +128,7 @@ type FormMessageImplElement = React.ComponentRef<typeof Primitive.span>;
 type PrimitiveSpanProps = React.ComponentPropsWithoutRef<typeof Primitive.span>;
 type FormSubmitElement = React.ComponentRef<typeof Primitive.button>;
 type PrimitiveButtonProps = React.ComponentPropsWithoutRef<typeof Primitive.button>;
+*/
 
 // Form component prop interfaces
 interface FormProps extends PrimitiveFormProps {
