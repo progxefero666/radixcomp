@@ -45,7 +45,7 @@ import { FormControlProps, FormFieldProps, FormLabelProps, FormProps, FormSubmit
 // -------------------------------------------------------------------------------------------------
 const [createFormContext, createFormScope] = createContextScope('Form');
 
-const [ValidationProvider, useValidationContext] =
+export const [ValidationProvider, useValidationContext] =
     createFormContext<ValidationContextValue>(FORM_CONST_ELEMS.FORM_NAME);
 
 const [AriaDescriptionProvider, useAriaDescriptionContext] =
@@ -505,6 +505,7 @@ interface FormCustomMessageProps extends React.ComponentPropsWithoutRef<typeof F
     forceMatch?: boolean;
     name: string;
 }
+
 
 // FormValidityState
 // -------------------------------------------------------------------------------------------------

@@ -35,21 +35,18 @@ import {
     FormMessageImplProps} from './formtypes';
 
 import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
-import { FormControlProps, FormFieldProps, FormLabel, FormLabelProps, FormProps, FormSubmitProps } from '@radix-ui/react-form';
-
-
-
+import { FormControlProps, FormFieldProps, FormLabelProps, FormProps, FormSubmitProps } from '@radix-ui/react-form';
+import { FormMessageImpl } from './formmsg';
 
 
 // Form
 // -------------------------------------------------------------------------------------------------
-export const [createFormContext] = createContextScope('Form');
+export const [createFormContext, ] = createContextScope('Form');
 const [createFormScope] = createContextScope('Form');
-
 export const [ValidationProvider, useValidationContext] =
     createFormContext<ValidationContextValue>(FORM_CONST_ELEMS.FORM_NAME);
 
-const [AriaDescriptionProvider, useAriaDescriptionContext] =
+export const [AriaDescriptionProvider, useAriaDescriptionContext] =
     createFormContext<AriaDescriptionContextValue>(FORM_CONST_ELEMS.FORM_NAME);
 
 const Form = React.forwardRef<FormElement, FormProps>(
@@ -187,7 +184,7 @@ Form.displayName = FORM_CONST_ELEMS.FORM_NAME;
 
 // FormField
 // -------------------------------------------------------------------------------------------------
-export const [FormFieldProvider, useFormFieldContext] =
+const [FormFieldProvider, useFormFieldContext] =
     createFormContext<FormFieldContextValue>(FORM_CONST_ELEMS.FIELD_NAME);
 
 const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
@@ -204,14 +201,37 @@ const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
                     data-valid={getValidAttribute(validity, serverInvalid)}
                     data-invalid={getInvalidAttribute(validity, serverInvalid)}
                     {...fieldProps}
-                    ref={forwardedRef}
-                />
+                    ref={forwardedRef}  />
             </FormFieldProvider>
         );
     }
 );
 FormField.displayName = FORM_CONST_ELEMS.FIELD_NAME;
 
+// FormLabel
+// -------------------------------------------------------------------------------------------------
+const FormLabel = React.forwardRef<FormLabelElement, FormLabelProps>(
+    (props: ScopedProps<FormLabelProps>, forwardedRef) => {
+        const { __scopeForm, ...labelProps } = props;
+        const validationContext = useValidationContext(FORM_CONST_ELEMS.LABEL_NAME, __scopeForm);
+        const fieldContext = useFormFieldContext(FORM_CONST_ELEMS.LABEL_NAME, __scopeForm);
+        const htmlFor = labelProps.htmlFor || fieldContext.id;
+        const validity = validationContext.getFieldValidity(fieldContext.name);
+
+        return (
+            <LabelPrimitive
+                data-radix-form-label
+                data-valid={getValidAttribute(validity, fieldContext.serverInvalid)}
+                data-invalid={getInvalidAttribute(validity, fieldContext.serverInvalid)}
+                {...labelProps}
+                ref={forwardedRef}
+                htmlFor={htmlFor}
+            />
+        );
+    }
+);
+
+FormLabel.displayName = FORM_CONST_ELEMS.LABEL_NAME;
 
 
 // FormControl
@@ -461,7 +481,8 @@ const FormCustomMessage = React.forwardRef<FormCustomMessageElement, FormCustomM
     }
 );
 
-const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImplProps>(
+/*
+export const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImplProps>(
     (props: ScopedProps<FormMessageImplProps>, forwardedRef) => {
         const { __scopeForm, id: idProp, name, ...messageProps } = props;
         const ariaDescriptionContext = useAriaDescriptionContext(FORM_CONST_ELEMS.MESSAGE_NAME, __scopeForm);
@@ -477,12 +498,13 @@ const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImpl
         return <Primitive.span data-radix-form-message id={id} {...messageProps} ref={forwardedRef} />;
     }
 );
+
 interface FormCustomMessageProps extends React.ComponentPropsWithoutRef<typeof FormMessageImpl> {
     match: CustomMatcher;
     forceMatch?: boolean;
     name: string;
 }
-
+*/
 
 // FormValidityState
 // -------------------------------------------------------------------------------------------------
