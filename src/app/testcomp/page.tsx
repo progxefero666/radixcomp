@@ -10,20 +10,18 @@ import { Option } from "@/common/model/option";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { AppConstants } from "@/app_front/appconstants";
-
-
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 import { ShowAlerts } from "@/common/util/showalerts";
 
-import {PrimaryBar} from "@/app/testcomp/primarybar";
-import {TestHeader} from "@/app/testcomp/header";
-import TestSecondBar from "./secondbar";
+import {PrimaryBar} from "@/app/testcomp/testprimarybar";
+import {TestHeader} from "@/app/testcomp/testheader";
+import {TestSecondBar} from "@/app/testcomp/testsecondbar";
+
 
 /**
- * Application Main page 
+ * Page Test Components
  */
 export default function PageTest() {
-
 
     //useEffect(() => {}, []);
     //const onClick = (sectionId: string) => {}

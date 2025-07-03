@@ -1,21 +1,16 @@
-//src\app\gencode\pagecomp\gcheader.ts
+"use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { Link,Flex, Text, Button, Box } from "@radix-ui/themes";
 import { usePathname } from "next/navigation";
-import { Option } from "@/common/model/option";
-import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
-import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { renderHomeButton } from "@/radix/radixbuttons";
+
 
 
 /**
- * Page Header
+ * Template - Page Header
  */
-interface CompProps {
-    navback?:()=>void;
-}
-export function PageHeader({navback}:CompProps) {
+interface CompProps { navback?:()=>void;}
+export function TestHeader({navback}:CompProps) {
 
     const pathname = usePathname();
 
@@ -33,6 +28,10 @@ export function PageHeader({navback}:CompProps) {
     }, []);
 
 
+
+    function renderHomeButton(isIndexPage: boolean): React.ReactNode {
+        throw new Error("Function not implemented.");
+    }
 
     return (
         <Flex className="w-full h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >

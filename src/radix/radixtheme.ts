@@ -1,7 +1,7 @@
 //src\radix\radixcolors.ts
 
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "@/radix/radixmodels";
+import { radixTypeComp } from "@/radix/radixtypes";
 
 /**
  * class  ThemeStyle.SEPARATOR_V_STYLE

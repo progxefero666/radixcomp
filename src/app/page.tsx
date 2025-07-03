@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 import Home from "./index/page";
 import PageGenCode from "./gencode/page";
+import PageTest from "./testcomp/page";
 
 
 /**
@@ -21,10 +22,11 @@ export default function Desktop() {
     }, []);
 
     const render = () => {
-        const mode: number = 1;
+        const mode: number = 2;
         switch (mode) {
             case 0: return <Home />
             case 1: return <PageGenCode />
+            case 2: return <PageTest />
         }
     };
     return (

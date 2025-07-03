@@ -7,7 +7,7 @@ import { Flex, Separator } from "@radix-ui/themes";
 interface CompProps {
     value?: string;
 }
-export default function TestSecondBar({value}: CompProps) {
+export function TestSecondBar({value}: CompProps) {
 
     const onSelection = (sectionId: string) => {
     }

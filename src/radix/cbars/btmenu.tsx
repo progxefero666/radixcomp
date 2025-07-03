@@ -3,7 +3,7 @@
 import { Option } from "@/common/model/option";
 import { Flex, Box, } from "@radix-ui/themes";
 import { ThemeCompStyle, ThemeMenusStyle } from "@/radix/radixtheme";
-import { radixTypeComp } from "@/radix//radixmodels";
+import { radixTypeComp } from "@/radix/radixtypes";
 import { renderOptionButton } from "@/radix/radixbuttons";
 import { StringsHelper } from "@/common/util/stringshelper";
 

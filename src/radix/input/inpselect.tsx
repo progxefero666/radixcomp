@@ -9,7 +9,7 @@ import { Box,Text, Flex, Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
 import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "../radixmodels";
+import { radixTypeComp } from "../radixtypes";
 /*
 export interface GroupCompProps {
     autocommit?: boolean;

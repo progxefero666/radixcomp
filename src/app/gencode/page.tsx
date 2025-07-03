@@ -83,7 +83,7 @@ export default function PageGenCode() {
     return (
         <Flex direction="column" height="100vh">
 
-            <PageHeader onselection={loadSection} />
+            <PageHeader />
             
             <Flex height="100%">
 

@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
 import { Option } from "@/common/model/option";
-import { radixTypeComp, radixTypeDirection } from "@/radix/radixmodels";
+import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
 
 
 /*

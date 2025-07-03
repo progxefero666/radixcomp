@@ -7,7 +7,7 @@ import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 
-import { radixTypeComp } from "../radixmodels";
+import { radixTypeComp } from "../radixtypes";
 
 /**
  * InputTextComponent
