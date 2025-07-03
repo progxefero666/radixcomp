@@ -36,11 +36,12 @@ export enum CONTROL_TYPES {
 	"accept"
 	"multiple"
 
+
 <FormField name="text_input">
-	<FormLabel>Texto</FormLabel>
-	<FormControl type="text" required placeholder="Texto normal" />
-	<FormMessage match="valueMissing">Este campo es obligatorio</FormMessage>
-</FormField>	
+                        <FormLabel>Texto</FormLabel>
+                        <FormControl type="text"  placeholder="Texto normal" />
+                        <FormMessage match="valueMissing">Este campo es obligatorio</FormMessage>
+                    </FormField>
 */
 
 /**

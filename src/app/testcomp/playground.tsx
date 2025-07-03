@@ -8,6 +8,7 @@ import {Form,FormField,FormLabel,FormControl,
         Message,FormValidityState,ValidityState} from '@/radix/forms/form';
 
 import { FormMessage } from "@/radix/forms/formmsg";
+import { XInputText } from "@/radix/input/inptext";
 
 
 export const layoutStyle = {
@@ -49,10 +50,10 @@ export function TestPlayground({ mode }: CompProps) {
             {/* El componente Form recibe la función onSubmit */}
             <Form onSubmit={handleSubmit}>
                 <Flex direction="column" gap="4" style={layoutStyle}>
-s
+
                     <FormField name="text_input">
                         <FormLabel>Texto</FormLabel>
-                        <FormControl type="text" required placeholder="Texto normal" />
+                        <XInputText name="text_input" value="asdas"/>
                         <FormMessage match="valueMissing">Este campo es obligatorio</FormMessage>
                     </FormField>
                     

@@ -59,7 +59,8 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const renderEditComp = () => {
         return (
             <TextField.Root type={input_type}
-                value={value}
+        
+                defaultValue={value}
                 placeholder={placeholder}
                 onChange={onChange}
                 variant={variant}
