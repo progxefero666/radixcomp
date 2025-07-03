@@ -21,7 +21,7 @@ export function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
     return (
         <Flex direction="column" p="3" >            
             <MenuButtons options={sections}
-                onselection={onselection} 
+                onclick={onselection} 
                 actoption={actsection} />	
             <Separator orientation="horizontal" size="4"  />
         </Flex>

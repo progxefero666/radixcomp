@@ -9,6 +9,7 @@ import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixmodels";
+import { RadixKeys } from "../radixconstants";
 /**
  * InputTextComponent
  *  format: string; //"numdefdigits:numdecdigits"
@@ -25,7 +26,6 @@ interface CompProps {
     onchange?: (value: string, name?: string) => void;
     onsubmit?: (value: string, name?: string) => void;
     step?: number;
-    placeholder?: string;
     autofocus?: boolean;
 }
 
@@ -73,38 +73,26 @@ export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newValue = e.target.value;
-        
-        // Validate based on isDecimal and format
+        let newValue = e.target.value;        
+        // Validate
         if (decFormat && (maxIntegerDigits || maxDecimalDigits)) {
-            const parts = newValue.split('.');
-            const integerPart = parts[0] || '';
-            const decimalPart = parts[1] || '';
-            
-            // Check integer part length
+            const parts = newValue.split(".");
+            const integerPart = parts[0] || "";
+            const decimalPart = parts[1] || "";            
             if (maxIntegerDigits && integerPart.length > maxIntegerDigits) {
-                return; // Don't update if exceeds max integer digits
-            }
-            
-            // Check decimal part length (only if isDecimal is true)
+                return;
+            }            
             if (isDecimal && maxDecimalDigits && decimalPart.length > maxDecimalDigits) {
-                return; // Don't update if exceeds max decimal digits
-            }
-            
-            // If not decimal, don't allow decimal point
-            if (!isDecimal && newValue.includes('.')) {
-                return; // Don't update if trying to input decimal when not allowed
-            }
-        }
-        
-        setInternalValue(newValue);
-        // Disparar onchange siempre al escribir
+                return; 
+            }            
+            if (!isDecimal && newValue.includes(".")) {return;}
+        }        
+        setInternalValue(newValue);        
         triggerOnChange(newValue);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            // Disparar onsubmit solo con Enter
+        if (e.key === RadixKeys.KEY_INTRO) {
             triggerOnSubmit(internalValue);
         }
     };
@@ -134,8 +122,7 @@ export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
                 size={size} 
                 color={color} 
                 radius={radius}
-                disabled={input_disabled}
-                placeholder={`${isDecimal ? 'Decimal' : 'Entero'}${decFormat ? ` (${decFormat})` : ''}`} />
+                disabled={input_disabled}/>
         )
     }
 

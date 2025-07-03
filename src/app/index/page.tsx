@@ -3,9 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
 
-import Image from 'next/image'
 
-import ThemeSwitcher from "@/app_front/theme/themeswitcher";
 import PrimaryBar from "@/app/index/primarybar";
 import IndexHeader from "./header";
 import { useEffect, useRef, useState } from "react";

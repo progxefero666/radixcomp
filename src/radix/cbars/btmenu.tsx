@@ -11,12 +11,18 @@ import { StringsHelper } from "@/common/util/stringshelper";
 /**
  * MenuButtons Column menu
  */
-export interface MenuButtonsProp {
+export interface MenuProp {
+    inline?: boolean;
+    disabled?: boolean;
+    name?: string;
+    label?: string;    
+    icon?: any | null;
+    autofocus?: boolean;    
     actoption: string | null;
     options: Option[]
-    onselection: (name: string) => void;
+    onclick: (name: string) => void;
 }
-export default function MenuButtons({ options, actoption, onselection }: MenuButtonsProp) {
+export default function MenuButtons({options,actoption,onclick: onselection}: MenuProp) {
 
     return (
         <Flex direction="column" gap="2" style={ThemeCompStyle.CONT_CSS_STYLE} >

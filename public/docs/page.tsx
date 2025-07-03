@@ -120,7 +120,7 @@ function PagePrimaryBar({onselection,actsection}: PagePrimaryBarProps) {
         <Flex direction="column" >
 
             <MenuButtons options={ManApplicationsCfg.SECTIONS}
-                onselection={onselection} 
+                onclick={onselection} 
                 optactcolor={RadixColors.colors.indigo}
                 optcolor={RadixColors.colors.plum}
                 actoption={actsection} />	

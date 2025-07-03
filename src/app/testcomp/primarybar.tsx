@@ -7,18 +7,14 @@ import MenuButtons from "@/radix/cbars/btmenu";
 import { AppConfig } from "@/app_front/appconfig";
 import { Option } from "@/common/model/option";
 interface PrimaryBarProps {
-    section: string;
-    onselection: (sectionId:string) => void;
+    section?: string;
+    onselection?: (sectionId:string) => void;
 }
-export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
+export function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
     return (
         <Flex direction="column" >
-
-            <MenuButtons options={AppConfig.MODULES}
-                onclick={onselection} 
-                actoption={section} />	
-
+            Primary Bar
         </Flex>
     );
 

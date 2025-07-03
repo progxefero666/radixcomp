@@ -9,10 +9,10 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { AppConfig } from "@/app_front/appconfig";
 
-interface IndexHeaderProps {
-    onselection: (sectionId: string) => void;
+interface CompProps {
+    onselection?: (sectionId: string) => void;
 }
-export default function IndexHeader({ onselection }: IndexHeaderProps) {
+export function TestHeader({ onselection }: CompProps) {
 
     const pathname = usePathname();
 
