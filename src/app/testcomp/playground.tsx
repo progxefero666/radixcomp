@@ -9,8 +9,35 @@ import { renderHomeButton } from "@/radix/radixbuttons";
 
 //import { Field,Label,Message,Form,Control, FormSubmit } from "@radix-ui/react-form";
 
-import { Form} from "@radix-ui/react-form";
+//import { Form} from "@radix-ui/react-form";
 
+import {
+    createFormScope,
+
+    FormField,
+    FormLabel,
+    FormControl,
+    FormMessage,
+    FormValidityState,
+    FormSubmit,
+    Root,
+    Field,
+    Label,
+    Control,
+    Message,
+    ValidityState,
+    Submit,
+} from '@/radix/forms/form';
+
+import {
+    FormProps,
+    FormFieldProps,
+    FormLabelProps,
+    FormControlProps,
+    FormMessageProps,
+    FormValidityStateProps,
+    FormSubmitProps,
+} from '@/radix/forms/form';
 import { Sub } from "@radix-ui/react-context-menu";
 
 
