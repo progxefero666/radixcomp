@@ -2,7 +2,7 @@
 
 
 /**
- * class JsonHelper
+ * class JsonHelper.toJsonString
  * Provides utility methods for JSON operations.
  */
 export class JsonHelper {

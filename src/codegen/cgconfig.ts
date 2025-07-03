@@ -17,7 +17,8 @@ export enum OP_CATEGORIES {
     typescript_entityforms  = "typescript_entityforms",
     typescript_servicefiles = "typescript_servicefiles",    
     python_serverfiles      = "python_serverfiles",
-    sql_db_squema           = "sql_db_squema"    
+    sql_db_squema           = "sql_db_squema",
+    test_components         = "sql_db_squema"
 }
 
 export class HttpConst {

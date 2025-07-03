@@ -27,7 +27,10 @@ import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefi
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
+
+import { ShowAlerts } from "@/common/util/showalerts";
 import { XRadioGroup } from "@/radix/input/inpgrpradio";
+import { ThemePagesStyles } from "@/radix/radixtheme";
 
  
 
@@ -57,7 +60,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
         const init = async () => {
             if(section!=null){
-                alert(section);
+
                 //load model tables and tables menu
                 const db_squema = AppContext.readDbSquema();
                 const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema); 
@@ -69,6 +72,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 JSonConsole.logArray(listOperations);
                 setOperations(listOperations);
                 setOperationId(listOperations[0].id);
+
                 //initialize
                 setInitialized(true);
             }                       
@@ -92,7 +96,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = () => {        
-        //alert(section);
+        alert(section);
         //alert(operationId);
 
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
@@ -139,8 +143,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         //console.log(modelTables[tableIndex].name);
         //console.log("Model Tables:", modelTables);
         return (
-            <Flex width={"100%"} direction="row" pt="2"   >
-                <Box width={"30%"} pb="2" >          
+            <Flex width="100%" direction="row" pt="2"   >
+                <Box width="30%" pb="2" >          
                     <XRadioGroup
                         autocommit={true}
                         key={modelTables[tableIndex].name}
@@ -150,7 +154,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         direction="column" />                                                       
                 </Box>
 
-                <Box width={"70%"} >
+                <Box width="70%" >
                     <SeparatorV />
                     {showInfoPanel ?
                         <div className="w-full">
@@ -163,22 +167,21 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     }//end renderMainContent
 
     return (
-        <Flex width={"100%"} direction="column" pt="2" style={ModuleConfig.GC_CONTROL_LAYOUT_STYLE} >
+        <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
 
-            <Flex width={"100%"} direction="row" pb="2" justify="between"  >
-                <Box>
-                    
+            <Flex width="100%" direction="row" pb="2" justify="between"  >
+                <Box>                    
                     {initialized ? 
-                      <InputSelect key={operations[0].id}
-                        inline={true}
-                        name="operations"
-                        label="Operation: "
-                        ref={operationsRef}
-                        collection={operations}
-                        value={operationId ?? ""}
-                        onchange={onOpSelected}
-                        disabled={false} /> : null}                    
-                    
+                      <InputSelect 
+                            key={operations[0].id}
+                            inline={true}
+                            name="operations"
+                            label="Operation: "
+                            ref={operationsRef}
+                            collection={operations}
+                            value={operationId ?? ""}
+                            onchange={onOpSelected}
+                            disabled={false} /> : null}                    
                 </Box>
 
                 <Box>

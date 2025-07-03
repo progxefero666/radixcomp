@@ -15,6 +15,9 @@ export class ThemeStyle {
         height: '2px'
     };
 
+
+
+
     public static boxStyle = {
         margin: '20px',
         background: '#00ff00',
@@ -24,6 +27,17 @@ export class ThemeStyle {
         boxShadow: '0px 0px 10px #ffff00' 
     };
 
+
+}//end class
+
+/**
+ * class ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE
+ */
+export class ThemePagesStyles {
+
+    public static readonly GC_CONTROL_LAYOUT_STYLE = {
+        padding: '6px 8px 0px 8px'
+    };
 
 }//end class
 
@@ -87,18 +101,3 @@ export class ThemeMenusStyle {
     public static readonly DEFAULT_COLOR: any = RadixConf.COLORS.plum;
 }
 
-
-/*
-    const renderOption = (key: string,  callback: (name: any) => void,
-                          color: any,   size: any,
-                          name: string, text: string, icon?: string) => {
-        return (
-            <Button key={key}
-                variant={ThemeButtonsStyle.BTN_DEF_VAR}
-                color={color} size={size}
-                onClick={() => callback(name)}>
-                {text}
-            </Button>
-        )
-    }    
-*/
