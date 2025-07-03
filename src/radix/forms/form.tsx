@@ -8,10 +8,8 @@ import { useId } from '@radix-ui/react-id';
 import { Label as LabelPrimitive, LabelProps } from '@radix-ui/react-label';
 import { Primitive } from '@radix-ui/react-primitive';
 
-import type { Scope } from '@radix-ui/react-context';
 
-
-// Importación de funciones de utilidad
+// Import util functions
 import {
     validityStateToObject,
     isHTMLElement,
@@ -23,9 +21,8 @@ import {
     returnsPromise,
     hasBuiltInError,
     getValidAttribute,
-    getInvalidAttribute
-}
-    from './formutil';
+    getInvalidAttribute } from './formutil';
+
 import {
     PrimitiveFormProps, PrimitiveDivProps, PrimitiveInputProps,
     PrimitiveSpanProps, CustomMatcher, PrimitiveButtonProps,
@@ -34,43 +31,13 @@ import {
     CustomErrorsMap, MessageIdsMap, FormFieldContextValue,
     FormFieldElement, FormLabelElement, FormControlElement,
     CustomMatcherArgs, SyncCustomMatcherEntry, AsyncCustomMatcherEntry,
-    FormMessageImplElement, FormSubmitElement
-} from './formtypes';
-import { FORM_CONST_ELEMS } from './formconst';
+    FormMessageImplElement, FormSubmitElement} from './formtypes';
 
-// -------------------------------------------------------------------------------------------------
+import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
+
+
 // Tipos y definiciones
 // -------------------------------------------------------------------------------------------------
-export const _validityMatchers = [
-    'badInput',
-    'patternMismatch',
-    'rangeOverflow',
-    'rangeUnderflow',
-    'stepMismatch',
-    'tooLong',
-    'tooShort',
-    'typeMismatch',
-    'valid',
-    'valueMissing',
-] as const;
-
-// Constantes de mensajes por defecto
-const DEFAULT_INVALID_MESSAGE = 'This value is not valid';
-// Type definition for ValidityMatcher
-type ValidityMatcher = (typeof _validityMatchers)[number];
-
-const DEFAULT_BUILT_IN_MESSAGES: Record<ValidityMatcher, string | undefined> = {
-    badInput: DEFAULT_INVALID_MESSAGE,
-    patternMismatch: 'This value does not match the required pattern',
-    rangeOverflow: 'This value is too large',
-    rangeUnderflow: 'This value is too small',
-    stepMismatch: 'This value does not match the required step',
-    tooLong: 'This value is too long',
-    tooShort: 'This value is too short',
-    typeMismatch: 'This value does not match the required type',
-    valid: undefined,
-    valueMissing: 'This value is missing',
-};
 
 
 

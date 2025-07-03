@@ -11,7 +11,7 @@ import { Primitive } from '@radix-ui/react-primitive';
 
 import type { Scope } from '@radix-ui/react-context';
 
-import { _validityMatchers } from './form';
+import { _validityMatchers } from "@/radix/forms/formconst";
 
 
 // Base types
