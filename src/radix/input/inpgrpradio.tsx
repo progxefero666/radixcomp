@@ -5,6 +5,8 @@ import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
 import { Option } from "@/common/model/option";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
+import { StringsHelper } from "@/common/util/stringshelper";
+import { ModelHelper } from "@/common/util/modelhelper";
 
 
 /*
@@ -41,15 +43,14 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
         variant: RadixConf.VARIANTS.surface,
         radius: RadixConf.RADIUS.medium
     }
-
+        
     const onSelect = (value:string) => {
-        /*
+        const itemIndex:number = ModelHelper.getElementIndex(options,value);        
         if(auto) {
-            if(name){onselect(value,name);}
-            else    {onselect(value);}           
+            if(name){onselect(itemIndex,name);}
+            else    {onselect(itemIndex);}           
             return;
         }     
-        */   
     }
 
     const renderItem = (key:string,value:string,text:string) => {

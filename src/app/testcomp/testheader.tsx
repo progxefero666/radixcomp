@@ -33,20 +33,19 @@ export function TestHeader({navback}:CompProps) {
     }, []);
 
 
-
     return (
         <Flex  width="100%"  direction="row" pt="2" style={pageStyle} >
 
-            <Flex direction="row" width="16%" gap="2" px="2" pb="2" justify="between" >
+            <Flex  width="16%" direction="row" gap="2" px="2" pb="2" justify="between" >
                 <Text size="5" weight="bold" >Radix UI</Text>   
                 <Box> {renderHomeButton(isIndexPage)}</Box>                           
             </Flex>
 
-            <Flex width="68%" direction="column" pl="3">
+            <Flex width="68%" direction="row" pl="3">
                 <Text size="5" weight="bold">Primitives Sandbox</Text>
             </Flex>
 
-            <Flex width="16%" direction="column" >
+            <Flex width="16%" direction="row" >
                 2 bar
             </Flex>
 

@@ -3,7 +3,7 @@
 import { AppConstants } from "@/app_front/appconstants";
 
 /**
- * class StringsHelper.equals
+ * class StringsHelper.getElementIndex
  */
 export class StringsHelper {
     
@@ -17,13 +17,13 @@ export class StringsHelper {
         return false;
     };
 
-    public static getElementIndex(collection: string[]): number {
+    public static getElementIndex(collection: string[],findValue:string): number {
         let index:number = -1;
         if (collection == null || collection.length === 0) {
             return index;
         }
         for (let itemIdx=0;itemIdx<collection.length;itemIdx++) {
-            if (collection[itemIdx] === AppConstants.NOT_DEF) {
+            if (collection[itemIdx] == findValue) {
                 index = itemIdx;
                 break;
             }
