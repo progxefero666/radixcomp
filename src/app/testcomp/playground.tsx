@@ -7,7 +7,41 @@ import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes
 import { usePathname } from "next/navigation";
 import { renderHomeButton } from "@/radix/radixbuttons";
 
+//import { Field,Label,Message,Form,Control, FormSubmit } from "@radix-ui/react-form";
 
+
+
+import { Sub } from "@radix-ui/react-context-menu";
+
+import {
+    createFormScope,
+    //
+    Form,
+    FormField,
+    FormLabel,
+    FormControl,
+    FormMessage,
+    FormValidityState,
+    FormSubmit,
+    //
+    Root,
+    Field,
+    Label,
+    Control,
+    Message,
+    ValidityState,
+    Submit,
+} from './form';
+
+import {
+    FormProps,
+    FormFieldProps,
+    FormLabelProps,
+    FormControlProps,
+    FormMessageProps,
+    FormValidityStateProps,
+    FormSubmitProps,
+} from './form';
 
 export const layoutStyle = {
     background: '#c1c1c1',
@@ -30,18 +64,51 @@ export function TestPlayground({ mode }: CompProps) {
     useEffect(() => {
     }, []);
 
+    
+ 
 
     return (
         <Flex width="100%" direction="column" style={layoutStyle} >
 
-            <Grid columns="20% 60% 20%" gap="2">
-                <Box >Column I</Box>
-                <Box>Column Center</Box>
-                <Box>Column R</Box>
-            </Grid>
+        <Form>
+            <Field name="username"  >
+                <Label>Username</Label>
+                <Control></Control>
+                <Message></Message>
+            </Field>
+            <Field name="userpass"  >
+                <Label>userpass</Label>
+                <Control></Control>
+                <Message></Message>
+            </Field>            
+            <FormSubmit>Submit</FormSubmit>
+        </Form>
+    
 
         </Flex>
     );
 
 }//end component
 
+/*
+           
+            <Form.Root>
+                <Form.Field>
+                    <Form.Label />
+                    <Form.Control />
+                    <Form.Message />
+                    <Form.ValidityState />
+                </Form.Field>
+
+                <Form.Message />
+                <Form.ValidityState />
+
+                <Form.Submit />
+            </Form.Root>
+            
+            <Grid columns="20% 60% 20%" gap="2">
+                <Box >Column I</Box>
+                <Box>Column Center</Box>
+                <Box>Column R</Box>
+            </Grid>
+*/

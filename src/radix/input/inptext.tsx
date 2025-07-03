@@ -25,8 +25,6 @@ interface InputTextProps {
     minlen?: number;
     maxlen?: number;
 }
-
-
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                 type, inline, label, placeholder, value, onChange, icon, readonly, disabled }, ref) => {     
 
