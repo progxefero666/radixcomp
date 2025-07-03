@@ -1,4 +1,4 @@
-//src\radix\forms\form.tsx
+//src\app\testcomp\form.tsx
 
 import * as React from 'react';
 import { composeEventHandlers } from '@radix-ui/primitive';
@@ -10,170 +10,50 @@ import { Primitive } from '@radix-ui/react-primitive';
 
 import type { Scope } from '@radix-ui/react-context';
 
-// Importación de funciones de utilidad
-import { 
-  validityStateToObject,
-  isHTMLElement,
-  isFormControl,
-  isInvalid,
-  getFirstInvalidControl,
-  isAsyncCustomMatcherEntry,
-  isSyncCustomMatcherEntry,
-  returnsPromise,
-  hasBuiltInError,
-  getValidAttribute,
-  getInvalidAttribute 
-} from './formutil';
-
-// -------------------------------------------------------------------------------------------------
-// Tipos y definiciones
-// -------------------------------------------------------------------------------------------------
-
-// Constantes para Validity Matchers
-const _validityMatchers = [
-  'badInput',
-  'patternMismatch',
-  'rangeOverflow',
-  'rangeUnderflow',
-  'stepMismatch',
-  'tooLong',
-  'tooShort',
-  'typeMismatch',
-  'valid',
-  'valueMissing',
-] as const;
-
-// Constantes de mensajes por defecto
-const DEFAULT_INVALID_MESSAGE = 'This value is not valid';
-const DEFAULT_BUILT_IN_MESSAGES: Record<ValidityMatcher, string | undefined> = {
-  badInput: DEFAULT_INVALID_MESSAGE,
-  patternMismatch: 'This value does not match the required pattern',
-  rangeOverflow: 'This value is too large',
-  rangeUnderflow: 'This value is too small',
-  stepMismatch: 'This value does not match the required step',
-  tooLong: 'This value is too long',
-  tooShort: 'This value is too short',
-  typeMismatch: 'This value does not match the required type',
-  valid: undefined,
-  valueMissing: 'This value is missing',
-};
-
-// Base types
 type ScopedProps<P> = P & { __scopeForm?: Scope };
-type ValidityStateKey = keyof ValidityState;
-type ValidityMatcher = (typeof _validityMatchers)[number];
+const [createFormContext, createFormScope] = createContextScope('Form');
 
-// Custom matcher types
-type SyncCustomMatcher = (value: string, formData: FormData) => boolean;
-type AsyncCustomMatcher = (value: string, formData: FormData) => Promise<boolean>;
-type CustomMatcher = SyncCustomMatcher | AsyncCustomMatcher;
-type CustomMatcherEntry = { id: string; match: CustomMatcher };
-type SyncCustomMatcherEntry = { id: string; match: SyncCustomMatcher };
-type AsyncCustomMatcherEntry = { id: string; match: AsyncCustomMatcher };
-type CustomMatcherArgs = [string, FormData];
+/* -------------------------------------------------------------------------------------------------
+ * Form
+ * -----------------------------------------------------------------------------------------------*/
 
-// Form state types
+const FORM_NAME = 'Form';
+
 type ValidityMap = { [fieldName: string]: ValidityState | undefined };
 type CustomMatcherEntriesMap = { [fieldName: string]: CustomMatcherEntry[] };
 type CustomErrorsMap = { [fieldName: string]: Record<string, boolean> };
-type MessageIdsMap = { [fieldName: string]: Set<string> };
 
-// Context value types
 type ValidationContextValue = {
   getFieldValidity(fieldName: string): ValidityState | undefined;
   onFieldValidityChange(fieldName: string, validity: ValidityState): void;
+
   getFieldCustomMatcherEntries(fieldName: string): CustomMatcherEntry[];
   onFieldCustomMatcherEntryAdd(fieldName: string, matcherEntry: CustomMatcherEntry): void;
   onFieldCustomMatcherEntryRemove(fieldName: string, matcherEntryId: string): void;
+
   getFieldCustomErrors(fieldName: string): Record<string, boolean>;
   onFieldCustomErrorsChange(fieldName: string, errors: Record<string, boolean>): void;
+
   onFieldValiditionClear(fieldName: string): void;
 };
+const [ValidationProvider, useValidationContext] =
+  createFormContext<ValidationContextValue>(FORM_NAME);
+
+type MessageIdsMap = { [fieldName: string]: Set<string> };
 
 type AriaDescriptionContextValue = {
   onFieldMessageIdAdd(fieldName: string, id: string): void;
   onFieldMessageIdRemove(fieldName: string, id: string): void;
   getFieldDescription(fieldName: string): string | undefined;
 };
+const [AriaDescriptionProvider, useAriaDescriptionContext] =
+  createFormContext<AriaDescriptionContextValue>(FORM_NAME);
 
-type FormFieldContextValue = {
-  id: string;
-  name: string;
-  serverInvalid: boolean;
-};
-
-// Element and primitive component types
 type FormElement = React.ComponentRef<typeof Primitive.form>;
 type PrimitiveFormProps = React.ComponentPropsWithoutRef<typeof Primitive.form>;
-type FormFieldElement = React.ComponentRef<typeof Primitive.div>;
-type PrimitiveDivProps = React.ComponentPropsWithoutRef<typeof Primitive.div>;
-type FormLabelElement = React.ComponentRef<typeof LabelPrimitive>;
-type LabelProps = React.ComponentPropsWithoutRef<typeof LabelPrimitive>;
-type FormControlElement = React.ComponentRef<typeof Primitive.input>;
-type PrimitiveInputProps = React.ComponentPropsWithoutRef<typeof Primitive.input>;
-type FormMessageImplElement = React.ComponentRef<typeof Primitive.span>;
-type PrimitiveSpanProps = React.ComponentPropsWithoutRef<typeof Primitive.span>;
-type FormSubmitElement = React.ComponentRef<typeof Primitive.button>;
-type PrimitiveButtonProps = React.ComponentPropsWithoutRef<typeof Primitive.button>;
-
-// Form component prop interfaces
 interface FormProps extends PrimitiveFormProps {
   onClearServerErrors?(): void;
 }
-interface FormFieldProps extends PrimitiveDivProps {
-  name: string;
-  serverInvalid?: boolean;
-}
-interface FormLabelProps extends LabelProps {}
-interface FormControlProps extends PrimitiveInputProps {}
-interface FormMessageImplProps extends PrimitiveSpanProps {
-  name: string;
-}
-interface FormMessageProps extends Omit<FormMessageImplProps, 'name'> {
-  match?: ValidityMatcher | CustomMatcher;
-  forceMatch?: boolean;
-  name?: string;
-}
-interface FormBuiltInMessageProps extends FormMessageImplProps {
-  match: ValidityMatcher;
-  forceMatch?: boolean;
-  name: string;
-}
-interface FormCustomMessageProps extends React.ComponentPropsWithoutRef<typeof FormMessageImpl> {
-  match: CustomMatcher;
-  forceMatch?: boolean;
-  name: string;
-}
-interface FormValidityStateProps {
-  children(validity: ValidityState | undefined): React.ReactNode;
-  name?: string;
-}
-interface FormSubmitProps extends PrimitiveButtonProps {}
-// -------------------------------------------------------------------------------------------------
-
-
-// -------------------------------------------------------------------------------------------------
-// Constants
-// -------------------------------------------------------------------------------------------------
-const FORM_NAME = 'Form';
-const FIELD_NAME = 'FormField';
-const LABEL_NAME = 'FormLabel';
-const CONTROL_NAME = 'FormControl';
-const MESSAGE_NAME = 'FormMessage';
-const VALIDITY_STATE_NAME = 'FormValidityState';
-const SUBMIT_NAME = 'FormSubmit';
-
-
-/* -------------------------------------------------------------------------------------------------
- * Form
- * -----------------------------------------------------------------------------------------------*/
-const [createFormContext, createFormScope] = createContextScope('Form');
-
-const [ValidationProvider, useValidationContext] =
-  createFormContext<ValidationContextValue>(FORM_NAME);
-
-const [AriaDescriptionProvider, useAriaDescriptionContext] =
-  createFormContext<AriaDescriptionContextValue>(FORM_NAME);
 
 const Form = React.forwardRef<FormElement, FormProps>(
   (props: ScopedProps<FormProps>, forwardedRef) => {
@@ -312,8 +192,22 @@ Form.displayName = FORM_NAME;
  * FormField
  * -----------------------------------------------------------------------------------------------*/
 
+const FIELD_NAME = 'FormField';
+
+type FormFieldContextValue = {
+  id: string;
+  name: string;
+  serverInvalid: boolean;
+};
 const [FormFieldProvider, useFormFieldContext] =
   createFormContext<FormFieldContextValue>(FIELD_NAME);
+
+type FormFieldElement = React.ComponentRef<typeof Primitive.div>;
+type PrimitiveDivProps = React.ComponentPropsWithoutRef<typeof Primitive.div>;
+interface FormFieldProps extends PrimitiveDivProps {
+  name: string;
+  serverInvalid?: boolean;
+}
 
 const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
   (props: ScopedProps<FormFieldProps>, forwardedRef) => {
@@ -325,7 +219,6 @@ const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
     return (
       <FormFieldProvider scope={__scopeForm} id={id} name={name} serverInvalid={serverInvalid}>
         <Primitive.div
-          data-radix-form-field
           data-valid={getValidAttribute(validity, serverInvalid)}
           data-invalid={getInvalidAttribute(validity, serverInvalid)}
           {...fieldProps}
@@ -342,6 +235,12 @@ FormField.displayName = FIELD_NAME;
  * FormLabel
  * -----------------------------------------------------------------------------------------------*/
 
+const LABEL_NAME = 'FormLabel';
+
+type FormLabelElement = React.ComponentRef<typeof LabelPrimitive>;
+type LabelProps = React.ComponentPropsWithoutRef<typeof LabelPrimitive>;
+interface FormLabelProps extends LabelProps {}
+
 const FormLabel = React.forwardRef<FormLabelElement, FormLabelProps>(
   (props: ScopedProps<FormLabelProps>, forwardedRef) => {
     const { __scopeForm, ...labelProps } = props;
@@ -352,7 +251,6 @@ const FormLabel = React.forwardRef<FormLabelElement, FormLabelProps>(
 
     return (
       <LabelPrimitive
-        data-radix-form-label
         data-valid={getValidAttribute(validity, fieldContext.serverInvalid)}
         data-invalid={getInvalidAttribute(validity, fieldContext.serverInvalid)}
         {...labelProps}
@@ -368,6 +266,12 @@ FormLabel.displayName = LABEL_NAME;
 /* -------------------------------------------------------------------------------------------------
  * FormControl
  * -----------------------------------------------------------------------------------------------*/
+
+const CONTROL_NAME = 'FormControl';
+
+type FormControlElement = React.ComponentRef<typeof Primitive.input>;
+type PrimitiveInputProps = React.ComponentPropsWithoutRef<typeof Primitive.input>;
+interface FormControlProps extends PrimitiveInputProps {}
 
 const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
   (props: ScopedProps<FormControlProps>, forwardedRef) => {
@@ -491,7 +395,6 @@ const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
 
     return (
       <Primitive.input
-        data-radix-form-control
         data-valid={getValidAttribute(validity, fieldContext.serverInvalid)}
         data-invalid={getInvalidAttribute(validity, fieldContext.serverInvalid)}
         aria-invalid={fieldContext.serverInvalid ? true : undefined}
@@ -520,7 +423,37 @@ FormControl.displayName = CONTROL_NAME;
 /* -------------------------------------------------------------------------------------------------
  * FormMessage
  * -----------------------------------------------------------------------------------------------*/
-// Mensajes por defecto están definidos al principio del archivo
+
+const _validityMatchers = [
+  'badInput',
+  'patternMismatch',
+  'rangeOverflow',
+  'rangeUnderflow',
+  'stepMismatch',
+  'tooLong',
+  'tooShort',
+  'typeMismatch',
+  'valid',
+  'valueMissing',
+] as const;
+type ValidityMatcher = (typeof _validityMatchers)[number];
+
+const DEFAULT_INVALID_MESSAGE = 'This value is not valid';
+const DEFAULT_BUILT_IN_MESSAGES: Record<ValidityMatcher, string | undefined> = {
+  badInput: DEFAULT_INVALID_MESSAGE,
+  patternMismatch: 'This value does not match the required pattern',
+  rangeOverflow: 'This value is too large',
+  rangeUnderflow: 'This value is too small',
+  stepMismatch: 'This value does not match the required step',
+  tooLong: 'This value is too long',
+  tooShort: 'This value is too short',
+  typeMismatch: 'This value does not match the required type',
+  valid: undefined,
+  valueMissing: 'This value is missing',
+};
+
+const MESSAGE_NAME = 'FormMessage';
+
 type FormMessageElement = FormMessageImplElement;
 interface FormMessageProps extends Omit<FormMessageImplProps, 'name'> {
   match?: ValidityMatcher | CustomMatcher;
@@ -617,6 +550,12 @@ const FormCustomMessage = React.forwardRef<FormCustomMessageElement, FormCustomM
   }
 );
 
+type FormMessageImplElement = React.ComponentRef<typeof Primitive.span>;
+type PrimitiveSpanProps = React.ComponentPropsWithoutRef<typeof Primitive.span>;
+interface FormMessageImplProps extends PrimitiveSpanProps {
+  name: string;
+}
+
 const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImplProps>(
   (props: ScopedProps<FormMessageImplProps>, forwardedRef) => {
     const { __scopeForm, id: idProp, name, ...messageProps } = props;
@@ -630,17 +569,21 @@ const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImpl
       return () => onFieldMessageIdRemove(name, id);
     }, [name, id, onFieldMessageIdAdd, onFieldMessageIdRemove]);
 
-    return <Primitive.span data-radix-form-message id={id} {...messageProps} ref={forwardedRef} />;
+    return <Primitive.span id={id} {...messageProps} ref={forwardedRef} />;
   }
 );
 
 /* -------------------------------------------------------------------------------------------------
  * FormValidityState
  * -----------------------------------------------------------------------------------------------*/
+
+const VALIDITY_STATE_NAME = 'FormValidityState';
+
 interface FormValidityStateProps {
   children(validity: ValidityState | undefined): React.ReactNode;
   name?: string;
 }
+
 const FormValidityState = (props: ScopedProps<FormValidityStateProps>) => {
   const { __scopeForm, name: nameProp, children } = props;
   const validationContext = useValidationContext(VALIDITY_STATE_NAME, __scopeForm);
@@ -655,16 +598,100 @@ FormValidityState.displayName = VALIDITY_STATE_NAME;
 /* -------------------------------------------------------------------------------------------------
  * FormSubmit
  * -----------------------------------------------------------------------------------------------*/
+
+const SUBMIT_NAME = 'FormSubmit';
+
+type FormSubmitElement = React.ComponentRef<typeof Primitive.button>;
+type PrimitiveButtonProps = React.ComponentPropsWithoutRef<typeof Primitive.button>;
+interface FormSubmitProps extends PrimitiveButtonProps {}
+
 const FormSubmit = React.forwardRef<FormSubmitElement, FormSubmitProps>(
   (props: ScopedProps<FormSubmitProps>, forwardedRef) => {
     const { __scopeForm, ...submitProps } = props;
-    return <Primitive.button data-radix-form-submit type="submit" {...submitProps} ref={forwardedRef} />;
+    return <Primitive.button type="submit" {...submitProps} ref={forwardedRef} />;
   }
 );
+
 FormSubmit.displayName = SUBMIT_NAME;
 
+/* -----------------------------------------------------------------------------------------------*/
+
+type ValidityStateKey = keyof ValidityState;
+type SyncCustomMatcher = (value: string, formData: FormData) => boolean;
+type AsyncCustomMatcher = (value: string, formData: FormData) => Promise<boolean>;
+type CustomMatcher = SyncCustomMatcher | AsyncCustomMatcher;
+type CustomMatcherEntry = { id: string; match: CustomMatcher };
+type SyncCustomMatcherEntry = { id: string; match: SyncCustomMatcher };
+type AsyncCustomMatcherEntry = { id: string; match: AsyncCustomMatcher };
+type CustomMatcherArgs = [string, FormData];
+
+function validityStateToObject(validity: ValidityState) {
+  const object: any = {};
+  for (const key in validity) {
+    object[key] = validity[key as ValidityStateKey];
+  }
+  return object as Record<ValidityStateKey, boolean>;
+}
+
+function isHTMLElement(element: any): element is HTMLElement {
+  return element instanceof HTMLElement;
+}
+
+function isFormControl(element: any): element is { validity: ValidityState } {
+  return 'validity' in element;
+}
+
+function isInvalid(control: HTMLElement) {
+  return (
+    isFormControl(control) &&
+    (control.validity.valid === false || control.getAttribute('aria-invalid') === 'true')
+  );
+}
+
+function getFirstInvalidControl(form: HTMLFormElement): HTMLElement | undefined {
+  const elements = form.elements;
+  const [firstInvalidControl] = Array.from(elements).filter(isHTMLElement).filter(isInvalid);
+  return firstInvalidControl;
+}
+
+function isAsyncCustomMatcherEntry(
+  entry: CustomMatcherEntry,
+  args: CustomMatcherArgs
+): entry is AsyncCustomMatcherEntry {
+  return entry.match.constructor.name === 'AsyncFunction' || returnsPromise(entry.match, args);
+}
+
+function isSyncCustomMatcherEntry(entry: CustomMatcherEntry): entry is SyncCustomMatcherEntry {
+  return entry.match.constructor.name === 'Function';
+}
+
+function returnsPromise(func: Function, args: Array<unknown>) {
+  return func(...args) instanceof Promise;
+}
+
+function hasBuiltInError(validity: ValidityState) {
+  let error = false;
+  for (const validityKey in validity) {
+    const key = validityKey as ValidityStateKey;
+    if (key !== 'valid' && key !== 'customError' && validity[key]) {
+      error = true;
+      break;
+    }
+  }
+  return error;
+}
+
+function getValidAttribute(validity: ValidityState | undefined, serverInvalid: boolean) {
+  if (validity?.valid === true && !serverInvalid) return true;
+  return undefined;
+}
+function getInvalidAttribute(validity: ValidityState | undefined, serverInvalid: boolean) {
+  if (validity?.valid === false || serverInvalid) return true;
+  return undefined;
+}
 
 /* -----------------------------------------------------------------------------------------------*/
+
 const Root = Form;
 const Field = FormField;
 const Label = FormLabel;
