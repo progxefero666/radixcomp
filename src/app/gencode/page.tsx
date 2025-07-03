@@ -18,6 +18,7 @@ import { GenCodeViewer } from "./pagecomp/gcviewer";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 import { ModuleConfig } from "./config";
 import { getTextFile } from "@/app_server/actions/gettextfile";
+import { AppContext } from "@/app_front/appcontext";
 
 const boxStyle = {
     background: 'rgb(35, 35, 39)',
@@ -37,14 +38,18 @@ export default function PageGenCode() {
     const [section, setSection] = useState<string>(ModuleConfig.SC_TS_ENTITY_FILES.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    let dbSquema: string = AppConstants.NOT_DEF;
 
     useEffect(() => {
         const init = async () => {
-            dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);            
+            //store dbSquema in SessionStorage...................................
+            const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
+            AppContext.saveDbSquema(dbSquema);  
+            //...................................................................
+
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
-            setInitialized(true);
+            if(!res) {alert("Error loading initial collections");}
+            else {setInitialized(true);}
         };
         init();
     }, []);
