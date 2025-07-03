@@ -19,15 +19,16 @@ import { ValidationContextValue,AriaDescriptionContextValue,FormElement,
          MessageIdsMap, FormFieldContextValue, FormFieldElement, 
          FormControlElement, CustomMatcherArgs, SyncCustomMatcherEntry,
          AsyncCustomMatcherEntry,  FormSubmitElement} from '@/radix/forms/formtypes';
+
 import { _validityMatchers, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS } from '@/radix/forms/formconst';
 
+
+// constants
+// -------------------------------------------------------------------------------------------------  
 const [createFormScope] = createContextScope('Form');
-
 export const [createFormContext ] = createContextScope('Form');
-
 export const [ValidationProvider, useValidationContext] =
     createFormContext<ValidationContextValue>(FORM_CONST_ELEMS.FORM_NAME);
-
 export const [AriaDescriptionProvider, useAriaDescriptionContext] =
     createFormContext<AriaDescriptionContextValue>(FORM_CONST_ELEMS.FORM_NAME);
 
@@ -264,8 +265,6 @@ const FormControl = React.forwardRef<FormControlElement, FormControlProps>(
         React.useEffect(() => {
             const control = ref.current;
             if (control) {
-                // We only want validate on change (native `change` event, not React's `onChange`). This is primarily
-                // a UX decision, we don't want to validate on every keystroke and React's `onChange` is the `input` event.
                 const handleChange = () => updateControlValidity(control);
                 control.addEventListener('change', handleChange);
                 return () => control.removeEventListener('change', handleChange);
@@ -346,6 +345,7 @@ const FormSubmit = React.forwardRef<FormSubmitElement, FormSubmitProps>(
 FormSubmit.displayName = FORM_CONST_ELEMS.SUBMIT_NAME;
 
 
+// exports
 // -------------------------------------------------------------------------------------------------
 const Root = Form;
 const Field = FormField;

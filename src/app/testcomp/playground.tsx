@@ -1,43 +1,18 @@
 //src\app\testcomp\playground.tsx
 
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes";
-
-
-
-import {
-    createFormScope,
-    Form,
-    FormField,
-    FormLabel,
-    FormControl,
-    FormValidityState,
-    Root,
-    Field,
-    Label,
-    Control,
-    Message,
-    ValidityState,
-    Submit,
-} from '@/radix/forms/form';
-
-import {
-    FormProps,
-    FormFieldProps,
-    FormControlProps,
-    FormSubmitProps,
-} from '@/radix/forms/form';
-import { Sub } from "@radix-ui/react-context-menu";
+import {Form,FormField,FormLabel,FormControl,
+        createFormScope,Root,Field,Control,Label,Submit,
+        Message,FormValidityState,ValidityState} from '@/radix/forms/form';
 import { FormMessage } from "@/radix/forms/formmsg";
+
 
 export const layoutStyle = {
     background: 'rgb(7, 7, 7)',
     border: '2px solidrgb(98, 97, 98)',
     padding: 'var(--space-2)',
 };
-
 
 /**
  * Template - Page Header
