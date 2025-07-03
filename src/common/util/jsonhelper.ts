@@ -1,0 +1,71 @@
+// File: src/common/util/jsonhelper.ts
+
+import { ModelTable } from "@/codegen/kernel/cgmodel";
+
+
+/**
+ * class JsonHelper
+ * Provides utility methods for JSON operations.
+ */
+export class JsonHelper {
+
+    public static readonly TAB_SPACE: number = 4;
+
+    public static toJsonString(obj: any): string {
+        return JSON.stringify(obj, null,JsonHelper.TAB_SPACE);
+    }//end
+
+    public static fromJsonString(jsonString: string): any {
+        try {
+            return JSON.parse(jsonString);
+        } 
+        catch (error) {
+            alert("Error parsing JSON string: ".concat );
+            return null;
+        }
+    }//end
+
+    public static isValidJson(jsonString: string): boolean {
+        try {
+            JSON.parse(jsonString);
+            return true;
+        } 
+        catch (error) {
+            return false;
+        }
+    }//end
+
+}//end class
+
+/**
+ * class JSonConsole.logArray
+ * Provides a console for JSON operations.
+ */
+export class JSonConsole {
+
+    public static log(json:string): void {
+        console.log(json);
+    }//end
+    
+    public static logArray(elements:any[]): void {
+        const json = JSON.stringify(elements, null, JsonHelper.TAB_SPACE);
+        JSonConsole.log(json);
+
+    }//end
+
+
+}//end class 
+
+// console.log("DB Squema loaded:", val);
+/*
+      public static logJson(obj: any): void {
+        console.log(JsonHelper.toJsonString(obj));
+    }//end
+    public static logJson(json: string): void {
+        if (JsonHelper.isValidJson(json)) {
+            console.log(json);
+        } else {
+            console.error("Invalid JSON string");
+        }
+    }//end    
+ */

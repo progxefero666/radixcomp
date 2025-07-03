@@ -23,22 +23,24 @@ import { AppContext } from "@/app_front/appcontext";
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
 import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
+import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 
-const boxStyle = {
-    background: 'rgb(35, 35, 39)',
-    border: '1px solid rgb(93, 92, 93)',
-    padding: '0',
-};
+
 
 
 /**
  * Application Main page 
  */
+const boxStyle = {
+    background: 'rgb(35, 35, 39)',
+    border: '1px solid rgb(93, 92, 93)',
+    padding: '0',
+};
 export default function PageGenCode() {
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);
 
-    //const [code, setCode] = useState<string>("undefined");
+    ////ModuleConfig.ACTIVE_SECTION
     const [section, setSection] = useState<string|null>(null);
 
     //let section:string|null =  null;
@@ -52,10 +54,10 @@ export default function PageGenCode() {
             //store dbSquema in SessionStorage...................................
             const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
             AppContext.saveDbSquema(dbSquema);  
+            //const val = AppContext.readDbSquema();
+            //console.log("DB Squema loaded:", val);
             //...................................................................
             
-            //ModuleConfig.ACTIVE_SECTION
- 
             //...................................................................
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
@@ -72,7 +74,7 @@ export default function PageGenCode() {
     }
 
     const loadSection = (sectionId: string) => {
-        alert(sectionId);
+        //alert(sectionId);
         setSection(sectionId);
     }
 
@@ -89,7 +91,7 @@ export default function PageGenCode() {
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
-                    <GenCodeControl section={section}  
+                    <GenCodeControl key={section}  section={section}  
                                     ondataresult={onCodeResult}/>
                 </Box>
 
@@ -106,35 +108,6 @@ export default function PageGenCode() {
     );
 
 }//end page
-
-
-/**
- * Page Primary Bar
- */
-interface PrimaryBarProps {    
-    actsection: string|null;
-    onselection:(sectionId:string) => void;
-}
-function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
-    const sections:Option[] = ModuleConfig.SECTIONS
-    let optSelected:string = AppConstants.NOT_DEF
-    if(actsection!=null){
-        optSelected = actsection;
-    }
-    else {
-        optSelected = sections[0].id; 
-    }
-    return (
-        <Flex direction="column" p="3" >            
-            <MenuButtons options={sections}
-                onselection={onselection} 
-                optactid={optSelected} />	
-            <Separator orientation="horizontal" size="4"  />
-        </Flex>
-    );
-
-}//end PrimaryBar
-
 
 
 /**

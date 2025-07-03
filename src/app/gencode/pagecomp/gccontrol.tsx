@@ -5,23 +5,13 @@ import { useState, useEffect, useRef } from "react";
 
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
-
-
-import { format, addDays, differenceInDays } from "date-fns";
-import { es } from 'date-fns/locale/es';
-
 import { SchemaService } from "@/client/metadata/schemaservice";
-import { XRadioGroup } from "@/radix/input/inpgrpradio";
+
 import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
-import { getTextFile } from "@/app_server/actions/gettextfile";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
-
 import { XInputTextArea } from "@/radix/input/inptextarea";
-import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
-
-import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { InputFiles } from "@/radix/notready/inputfiles";
 import { RadixConfTexts } from "@/radix/radixconf";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
@@ -36,9 +26,9 @@ import { TsxEntFormsOperations } from "@/codegen/operations/tsxentformsops";
 import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefilesops";
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
+import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 
-
-    
+ 
 
 /**
  * GenCodeControl
@@ -60,17 +50,24 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
     
-
     useEffect(() => {
+        if(section==null) { return; }
         if(initialized) { return; }
 
+        alert(section);
         const init = async () => {
             if(section!=null){
+                //alert("gcControl Section: ".concat(section));
+                //console.log("DB Squema loaded:", val);
 
                 //load model tables and tables menu
-                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(AppContext.readDbSquema());                
+                const db_squema = AppContext.readDbSquema();
+                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);             
+                JSonConsole.logArray(db_modeltables);
+
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
+
                 //load section operations
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
                 setOperations(listOperations);
@@ -142,7 +139,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const renderMainContent = () => {
         let showInfoPanel: boolean = false;
-        console.log(modelTables[tableIndex].name);
+        //console.log(modelTables[tableIndex].name);
+        //console.log("Model Tables:", modelTables);
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
                 <Box width={"30%"} pb="2" >
@@ -176,6 +174,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
             <Flex width={"100%"} direction="row" pb="2" justify="between"  >
                 <Box>
+                    {/*
                     {initialized ? 
                       <InputSelect key={operations[0].id}
                         inline={true}
@@ -185,7 +184,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         collection={operations}
                         value={operationId ?? ""}
                         onchange={onOpSelected}
-                        disabled={false} /> : null}
+                        disabled={false} /> : null}                    
+                    */}
                 </Box>
 
                 <Box>
