@@ -27,6 +27,7 @@ import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefi
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
+import { XRadioGroup } from "@/radix/input/inpgrpradio";
 
  
 
@@ -54,16 +55,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if(section==null) { return; }
         if(initialized) { return; }
 
-        alert(section);
         const init = async () => {
             if(section!=null){
-                //alert("gcControl Section: ".concat(section));
-                //console.log("DB Squema loaded:", val);
-
+                alert(section);
                 //load model tables and tables menu
                 const db_squema = AppContext.readDbSquema();
                 const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);             
-                JSonConsole.logArray(db_modeltables);
+            
 
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
@@ -143,18 +141,14 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         //console.log("Model Tables:", modelTables);
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
-                <Box width={"30%"} pb="2" >
-                    {/*
-                    {initialized ?
-                        <XRadioGroup
-                            autocommit={true}
-                            key={modelTables[tableIndex].name}
-                            onselect={onSelectTable}
-                            options={menuListTables}
-                            value={modelTables[tableIndex].name}
-                            direction="column" />
-                     : null}                    
-                    */}
+                <Box width={"30%"} pb="2" >          
+                    <XRadioGroup
+                        autocommit={true}
+                        key={modelTables[tableIndex].name}
+                        onselect={onSelectTable}
+                        options={menuListTables}
+                        value={modelTables[tableIndex].name}
+                        direction="column" />                                                       
                 </Box>
 
                 <Box width={"70%"} >
@@ -190,16 +184,14 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
                 <Box>
                     {initialized ? 
-                        <Button onClick={runOperation}
-                                color = "green">
+                        <Button onClick={runOperation} color = "green">
                             Run
-                        </Button>    
-                    : null}
+                        </Button> : null}
                 </Box>
             </Flex>
 
             <SeparatorH />
-            {renderMainContent()}
+             {initialized ? renderMainContent(): null}  
 
             <SeparatorH />
             <Box width={"100%"}>

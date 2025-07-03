@@ -38,7 +38,7 @@ export class JsonHelper {
 }//end class
 
 /**
- * class JSonConsole.logArray
+ * class JSonConsole.log(json);
  * Provides a console for JSON operations.
  */
 export class JSonConsole {
