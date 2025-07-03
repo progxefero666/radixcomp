@@ -25,7 +25,7 @@ export class ThemeStyle {
         borderRadius: 20,
         border: '2px solid #ff00ff',
         padding: 'var(--space-2)',
-        boxShadow: '0px 0px 10px #ffff00' 
+        boxShadow: '0px 0px 10px #ffff00'
     };
 
 
@@ -55,23 +55,43 @@ export class ThemeButtonsStyle {
 
     public static readonly BTN_HOME_COLOR: any = "gray";
     public static readonly BTN_HOME_STYLE: any = "w-full justify-start";
+
+    /*
+         backgroundColor: 'var(--gray-a2)',    
+         border: '2px solid var(--blue-7)',
+         padding: '0px 8px',
+         boxShadow: '0px 0px 5px rgba(222, 251, 137, 0.9)'     
+     */
+    public static readonly BTN_DEF_STYLE = {
+        borderRadius: "var(--blue-9)"
+    };
 }
 
 /**
- * class ThemeCompStyle.COMP_CONT_STYLE
+ * class ThemeCompStyle.CONT_CSS_STYLE
  */
 export class ThemeCompStyle {
 
-    public static readonly COMP_CONT_SIZE: any    = RadixConf.SIZES.size_2;
-    public static readonly COMP_CONT_RADIUS: any  = RadixConf.RADIUS.medium;
-    public static readonly COMP_CONT_VARIANT: any = RadixConf.VARIANTS.soft;
-    public static readonly COMP_CONT_COLOR: any   = RadixConf.COLORS.gray;
+    public static readonly CONT_SIZE: any = RadixConf.SIZES.size_2;
+    public static readonly CONT_RADIUS: any = RadixConf.RADIUS.medium;
+    public static readonly CONT_VARIANT: any = RadixConf.VARIANTS.soft;
+    public static readonly CONT_COLOR: any = RadixConf.COLORS.gray;
 
-    public static readonly COMP_CONT_STYLE: radixTypeComp = {
-        size:    ThemeCompStyle.COMP_CONT_SIZE,
-        radius:  ThemeCompStyle.COMP_CONT_RADIUS,
-        variant: ThemeCompStyle.COMP_CONT_VARIANT,
-        color:   ThemeCompStyle.COMP_CONT_COLOR
+    public static readonly CONT_STYLE: radixTypeComp = {
+        size: ThemeCompStyle.CONT_SIZE,
+        radius: ThemeCompStyle.CONT_RADIUS,
+        variant: ThemeCompStyle.CONT_VARIANT,
+        color: ThemeCompStyle.CONT_COLOR
+    };
+
+    /*
+        backgroundColor: 'var(--gray-a2)',    
+        border: '2px solid var(--blue-7)',
+        padding: '0px 8px',
+        boxShadow: '0px 0px 5px rgba(222, 251, 137, 0.9)'     
+    */
+    public static readonly CONT_CSS_STYLE = {
+        borderRadius: "var(--radius-3)",
     };
 
 }//end class
@@ -115,11 +135,22 @@ export class ThemeDataStyle {
 }
 
 /**
- * class ThemeDataStyle.TABLE_DEF_SIZE
+ * class ThemeMenusStyle.OPT_COLOR_CSS_STYLE
  */
 export class ThemeMenusStyle {
 
-    public static readonly ACTIVE_COLOR: any = RadixConf.COLORS.indigo;
-    public static readonly DEFAULT_COLOR: any = RadixConf.COLORS.plum;
-}
+    public static readonly OPT_ACTIVE_COLOR: any = RadixConf.COLORS.indigo;
+    public static readonly OPT_DEF_COLOR: any = RadixConf.COLORS.blue;
+
+    public static readonly OPT_COLOR_CSS_STYLE = {
+        backgroundColor: "var(--blue-9)",          
+        borderRadius: "var(--radius-3)"
+    };
+
+    public static readonly OPT_ACTIVE_COLOR_CSS_STYLE = {
+        backgroundColor: "var(--red-9)",          
+        borderRadius: "var(--radius-3)"
+    };
+
+}//end class
 

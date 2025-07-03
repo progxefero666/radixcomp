@@ -14,34 +14,46 @@ export interface MenuButtonsProp {
     options: Option[]
     onselection: (name: string) => void;
 }
-export default function MenuButtons
-    ({options,actoption,onselection}: MenuButtonsProp) {
+export default function MenuButtons({options,actoption,onselection}: MenuButtonsProp) {
 
-    const size: any = ThemeButtonsStyle.BTN_DEF_SIZE;
-    const actcolor    = ThemeMenusStyle.ACTIVE_COLOR;
-    const notactcolor = ThemeMenusStyle.DEFAULT_COLOR;
+    const compStyle:radixTypeComp = ThemeCompStyle.CONT_STYLE;
 
-    const compStyle:radixTypeComp = ThemeCompStyle.COMP_CONT_STYLE
-    const renderButton = (option: Option) => {
-        let color = notactcolor;
-        if( (actoption!== null) && (actoption === option.id) ) {
-            color = actcolor;
-        }        
+    const isActiveOption = (optionId:string,actoptionId:string|null) => {
+        if( (actoptionId!== null) && (actoptionId === optionId) ) {
+            return true;
+        } 
+        return false;
+    };
+	
+
+    
+    const renderButton = (id:string,
+                          onclick:(name:string)=>void,
+                          text:string,style:any ) => {
         return (
-            <Button key={option.id}
-                variant={ThemeButtonsStyle.BTN_DEF_VAR}
-                color={color}
-                size={size}
-                onClick={() => onselection(option.id)}>
-                {option.text}
+            <Button key={id}
+                    onClick={() => onclick(id)}
+                    style={style}                                
+                    size={compStyle.size}
+                    variant={compStyle.variant} >
+                {text}
             </Button>
         )
     }
 
     return (    
-        <Flex direction="column" gap="2">
+        <Flex direction="column" gap="2" style={ThemeCompStyle.CONT_CSS_STYLE} >
             {options.map((section, index) => (
-                renderButton(section)
+                <div>
+                    {isActiveOption(section.id,actoption) ?
+                        renderButton(section.id,onselection,section.text,
+                                     ThemeMenusStyle.OPT_ACTIVE_COLOR_CSS_STYLE)
+                    :
+                        renderButton(section.id,onselection,section.text,
+                                     ThemeMenusStyle.OPT_COLOR_CSS_STYLE)                    
+                    }
+                    
+                </div>                
             ))}
         </Flex>
     )

@@ -168,9 +168,3 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
     )
 
 })//end component
-
-/*
-const [startDate, setStartDate] = useState(new Date());
-<DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />;
-<DatePicker selected={date} onChange={handleDateChange} showTimeSelect dateFormat="Pp" />        
-*/

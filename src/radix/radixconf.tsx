@@ -74,7 +74,7 @@ export class RadixConf {
         amber: "amber" as any,
         orange: "orange" as any,
         brown: "brown" as any,
-        sky: "sky" as any, // experimental
+        sky: "sky-7" as any, // experimental
     };
 
     //placeholder = "Enter text..." 
