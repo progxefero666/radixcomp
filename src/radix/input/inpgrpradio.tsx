@@ -17,7 +17,7 @@ interface CompProps {
     label?: string;
     direction?: radixTypeDirection;
     value?: any;
-    onselect: (value: string,compname?:string) => void;
+    onselect: (index:number,name?:string) => void;
     autofocus?: boolean;
 }
 export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
@@ -35,11 +35,13 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
     }
 
     const onSelect = (value:string) => {
+        /*
         if(auto) {
             if(name){onselect(value,name);}
             else    {onselect(value);}           
             return;
-        }        
+        }     
+        */   
     }
 
     const renderItem = (key:string,value:string,text:string) => {
@@ -59,14 +61,12 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
             variant      = {compStyle.variant}
             size         = {compStyle.size} 
             defaultValue = {def_value}  
-            onValueChange= {onSelect}>
-            
+            onValueChange= {onSelect}>            
                 <Flex direction = {compDirection} gap="2">
                     {options.map((opt, index) => (
                         renderItem(index.toString(),opt.id, opt.text)         
                     ))}                    
                 </Flex>
-
         </RadioGroup.Root>
     )
 

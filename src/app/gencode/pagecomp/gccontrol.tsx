@@ -34,6 +34,7 @@ import { PyEntServiceFilesOperations } from "@/codegen/operations/pyentservicefi
 import { TsxEntFormsOperations } from "@/codegen/operations/tsxentformsops";
 import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefilesops";
 import { AppConstants } from "@/app_front/appconstants";
+import { AppContext } from "@/app_front/appcontext";
 
 
 interface CompProps {
@@ -42,16 +43,14 @@ interface CompProps {
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
 
-    const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
-
-    const [initialized, setInitialized] = useState<boolean>(false);
-    const [menuListTables, setMenuListTables] = useState<Option[]>([]);
-    const [optionTableSel, setOptionTableSel] = useState<string | null>(null);
-    const [modelTables, setModelTables] = useState<ModelTable[]>([]);
-    const [modelTableSel, setModelTableSel] = useState<ModelTable | null>(null);
     const [operations, setOperations] = useState<Option[]>([]);
     const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
-    
+
+    const [menuListTables, setMenuListTables] = useState<Option[]>([]);
+    const [modelTables, setModelTables] = useState<ModelTable[]>([]);
+    const [tableIndex,setTableIndex] = useState<number>(0);
+    const [initialized, setInitialized] = useState<boolean>(false);
+
     const fileInputRef = useRef<HTMLInputElement>(null);
     const operationsRef = useRef<HTMLSelectElement>(null);
     //ondataresult(tableClass);        
@@ -59,15 +58,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     useEffect(() => {
         const init = async () => {
             if(section!=null){
-                const db_squema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
-                setDbSquema(db_squema);
-
-                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);                
+      
+                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(AppContext.readDbSquema());                
                 setModelTables(db_modeltables);
-                setModelTableSel(db_modeltables[0]);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
-                setOptionTableSel(db_modeltables[0].name);
-
+    
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
                 setOperations(listOperations);
                 setOperationId(listOperations[0].id);
@@ -83,11 +78,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         }
     };//end
 
-    //ondataresult(allEntitiesClass); 
-    const onSelectTable = (tableName: string) => {
-        const tableIndex: number = CodeGenHelper.getModelTableIndex(modelTables, tableName);
-        setModelTableSel(modelTables[tableIndex]);
-    };//
+    
+    const onSelectTable = (index:number,compname?:string) => {
+        setTableIndex(index);
+    };//end
 
     const onOpSelected = async (operationId: string) => {
         alert(operationId);
@@ -140,6 +134,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const renderMainContent = () => {
         let showModelTable: boolean = false;
+        const optionTableSel: string = modelTables[tableIndex].name;
         return (
             <Flex width={"100%"} direction="row" pt="2"   >
                 <Box width={"30%"} pb="2" >
