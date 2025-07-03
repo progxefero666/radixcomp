@@ -31,57 +31,22 @@ import {
     CustomErrorsMap, MessageIdsMap, FormFieldContextValue,
     FormFieldElement, FormLabelElement, FormControlElement,
     CustomMatcherArgs, SyncCustomMatcherEntry, AsyncCustomMatcherEntry,
-    FormMessageImplElement, FormSubmitElement} from './formtypes';
+    FormMessageImplElement, FormSubmitElement,
+    FormMessageImplProps} from './formtypes';
 
 import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
-
-
-// Tipos y definiciones
-// -------------------------------------------------------------------------------------------------
+import { FormControlProps, FormFieldProps, FormLabel, FormLabelProps, FormProps, FormSubmitProps } from '@radix-ui/react-form';
 
 
 
-// Form component prop interfaces
-// -------------------------------------------------------------------------------------------------
-interface FormProps extends PrimitiveFormProps {
-    onClearServerErrors?(): void;
-}
-interface FormFieldProps extends PrimitiveDivProps {
-    name: string;
-    serverInvalid?: boolean;
-}
-interface FormLabelProps extends LabelProps { }
-interface FormControlProps extends PrimitiveInputProps { }
-interface FormMessageImplProps extends PrimitiveSpanProps {
-    name: string;
-}
-interface FormMessageProps extends Omit<FormMessageImplProps, 'name'> {
-    match?: ValidityMatcher | CustomMatcher;
-    forceMatch?: boolean;
-    name?: string;
-}
-interface FormBuiltInMessageProps extends FormMessageImplProps {
-    match: ValidityMatcher;
-    forceMatch?: boolean;
-    name: string;
-}
-interface FormCustomMessageProps extends React.ComponentPropsWithoutRef<typeof FormMessageImpl> {
-    match: CustomMatcher;
-    forceMatch?: boolean;
-    name: string;
-}
-interface FormValidityStateProps {
-    children(validity: ValidityState | undefined): React.ReactNode;
-    name?: string;
-}
-interface FormSubmitProps extends PrimitiveButtonProps { }
 
 
 // Form
 // -------------------------------------------------------------------------------------------------
-const [createFormContext, createFormScope] = createContextScope('Form');
+export const [createFormContext] = createContextScope('Form');
+const [createFormScope] = createContextScope('Form');
 
-const [ValidationProvider, useValidationContext] =
+export const [ValidationProvider, useValidationContext] =
     createFormContext<ValidationContextValue>(FORM_CONST_ELEMS.FORM_NAME);
 
 const [AriaDescriptionProvider, useAriaDescriptionContext] =
@@ -222,7 +187,7 @@ Form.displayName = FORM_CONST_ELEMS.FORM_NAME;
 
 // FormField
 // -------------------------------------------------------------------------------------------------
-const [FormFieldProvider, useFormFieldContext] =
+export const [FormFieldProvider, useFormFieldContext] =
     createFormContext<FormFieldContextValue>(FORM_CONST_ELEMS.FIELD_NAME);
 
 const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
@@ -247,30 +212,6 @@ const FormField = React.forwardRef<FormFieldElement, FormFieldProps>(
 );
 FormField.displayName = FORM_CONST_ELEMS.FIELD_NAME;
 
-// FormLabel
-// -------------------------------------------------------------------------------------------------
-const FormLabel = React.forwardRef<FormLabelElement, FormLabelProps>(
-    (props: ScopedProps<FormLabelProps>, forwardedRef) => {
-        const { __scopeForm, ...labelProps } = props;
-        const validationContext = useValidationContext(FORM_CONST_ELEMS.LABEL_NAME, __scopeForm);
-        const fieldContext = useFormFieldContext(FORM_CONST_ELEMS.LABEL_NAME, __scopeForm);
-        const htmlFor = labelProps.htmlFor || fieldContext.id;
-        const validity = validationContext.getFieldValidity(fieldContext.name);
-
-        return (
-            <LabelPrimitive
-                data-radix-form-label
-                data-valid={getValidAttribute(validity, fieldContext.serverInvalid)}
-                data-invalid={getInvalidAttribute(validity, fieldContext.serverInvalid)}
-                {...labelProps}
-                ref={forwardedRef}
-                htmlFor={htmlFor}
-            />
-        );
-    }
-);
-
-FormLabel.displayName = FORM_CONST_ELEMS.LABEL_NAME;
 
 
 // FormControl
@@ -451,8 +392,8 @@ const FormMessage = React.forwardRef<FormMessageElement, FormMessageProps>(
         }
     }
 );
-
 FormMessage.displayName = FORM_CONST_ELEMS.MESSAGE_NAME;
+
 
 type FormBuiltInMessageElement = FormMessageImplElement;
 interface FormBuiltInMessageProps extends FormMessageImplProps {
@@ -460,7 +401,6 @@ interface FormBuiltInMessageProps extends FormMessageImplProps {
     forceMatch?: boolean;
     name: string;
 }
-
 const FormBuiltInMessage = React.forwardRef<FormBuiltInMessageElement, FormBuiltInMessageProps>(
     (props: ScopedProps<FormBuiltInMessageProps>, forwardedRef) => {
         const { match, forceMatch = false, name, children, ...messageProps } = props;
@@ -537,6 +477,11 @@ const FormMessageImpl = React.forwardRef<FormMessageImplElement, FormMessageImpl
         return <Primitive.span data-radix-form-message id={id} {...messageProps} ref={forwardedRef} />;
     }
 );
+interface FormCustomMessageProps extends React.ComponentPropsWithoutRef<typeof FormMessageImpl> {
+    match: CustomMatcher;
+    forceMatch?: boolean;
+    name: string;
+}
 
 
 // FormValidityState

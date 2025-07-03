@@ -71,3 +71,32 @@ export type FormMessageImplElement = React.ComponentRef<typeof Primitive.span>;
 export type PrimitiveSpanProps = React.ComponentPropsWithoutRef<typeof Primitive.span>;
 export type FormSubmitElement = React.ComponentRef<typeof Primitive.button>;
 export type PrimitiveButtonProps = React.ComponentPropsWithoutRef<typeof Primitive.button>;
+
+export interface FormProps extends PrimitiveFormProps {
+    onClearServerErrors?(): void;
+}
+export interface FormFieldProps extends PrimitiveDivProps {
+    name: string;
+    serverInvalid?: boolean;
+}
+export interface FormLabelProps extends LabelProps { }
+export interface FormControlProps extends PrimitiveInputProps { }
+export interface FormMessageImplProps extends PrimitiveSpanProps {
+    name: string;
+}
+export interface FormMessageProps extends Omit<FormMessageImplProps, 'name'> {
+    match?: ValidityMatcher | CustomMatcher;
+    forceMatch?: boolean;
+    name?: string;
+}
+export interface FormBuiltInMessageProps extends FormMessageImplProps {
+    match: ValidityMatcher;
+    forceMatch?: boolean;
+    name: string;
+}
+
+export interface FormValidityStateProps {
+    children(validity: ValidityState | undefined): React.ReactNode;
+    name?: string;
+}
+export interface FormSubmitProps extends PrimitiveButtonProps { }
