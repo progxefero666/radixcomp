@@ -96,8 +96,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = () => {        
-        alert(section);
-        //alert(operationId);
+        
+        ShowAlerts.showCouple(section!,operationId);
 
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
             if(operationId == TsEntFilesOperations.OP_GET_DEF_CLASS.id){               

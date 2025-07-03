@@ -1,5 +1,7 @@
 //src\common\util\showalerts.ts
 
+import { JsonHelper } from "./jsonhelper";
+
 /**
  * class ShowAlerts.show
  */
@@ -12,21 +14,19 @@ export class ShowAlerts {
     }
     
     static showCouple(valueA:string,valueB:string): void {
-        const message = valueA.concat(ShowAlerts.SEPARATOR).concat(valueB);
-        alert(message);
+        alert(valueA.concat(ShowAlerts.SEPARATOR).concat(valueB));
     }
 
     static showError(message: string): void {
-        alert(`Error: ${message}`);
+        alert("Error: ".concat(message));
     }    
 
     static showSuccess(message: string): void {
         alert(message);
     }
 
-    static showJson(message: string): void {
-        //JsonHelper.toJsonString
-        alert(message);
+    static showJson(json: string): void {       
+        alert( JsonHelper.toJsonString(json));
     }
 
 }//end class

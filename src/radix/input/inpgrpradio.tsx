@@ -7,6 +7,14 @@ import { Option } from "@/common/model/option";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixmodels";
 
 
+/*
+<CheckboxGroup.Root defaultValue={["1"]} name="example">
+	<CheckboxGroup.Item value="1">Fun</CheckboxGroup.Item>
+	<CheckboxGroup.Item value="2">Serious</CheckboxGroup.Item>
+	<CheckboxGroup.Item value="3">Smart</CheckboxGroup.Item>
+</CheckboxGroup.Root>
+
+*/
 /**
  * XRadioGroup
  */
