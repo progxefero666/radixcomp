@@ -13,7 +13,6 @@ import {
     FormField,
     FormLabel,
     FormControl,
-    FormMessage,
     FormValidityState,
     Root,
     Field,
@@ -29,11 +28,11 @@ import {
     FormFieldProps,
     FormLabelProps,
     FormControlProps,
-    FormMessageProps,
     FormValidityStateProps,
     FormSubmitProps,
 } from '@/radix/forms/form';
 import { Sub } from "@radix-ui/react-context-menu";
+import { FormMessage } from "@/radix/forms/formmsg";
 
 
 
