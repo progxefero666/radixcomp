@@ -1,7 +1,5 @@
 // File: src/common/util/jsonhelper.ts
 
-import { ModelTable } from "@/codegen/kernel/cgmodel";
-
 
 /**
  * class JsonHelper

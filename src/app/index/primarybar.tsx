@@ -17,7 +17,7 @@ export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
             <MenuButtons options={AppConfig.MODULES}
                 onselection={onselection} 
-                optactid={section} />	
+                actoption={section} />	
 
         </Flex>
     );

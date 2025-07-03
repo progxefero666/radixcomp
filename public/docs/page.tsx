@@ -123,7 +123,7 @@ function PagePrimaryBar({onselection,actsection}: PagePrimaryBarProps) {
                 onselection={onselection} 
                 optactcolor={RadixColors.colors.indigo}
                 optcolor={RadixColors.colors.plum}
-                optactid={actsection} />	
+                actoption={actsection} />	
 
         </Flex>
     );

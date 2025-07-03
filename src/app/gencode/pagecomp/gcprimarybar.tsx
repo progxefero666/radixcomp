@@ -18,17 +18,12 @@ interface PrimaryBarProps {
 export function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
     const sections:Option[] = ModuleConfig.SECTIONS
     let optSelected:string = AppConstants.NOT_DEF
-    if(actsection!=null){
-        optSelected = actsection;
-    }
-    else {
-        optSelected = sections[0].id; 
-    }
+
     return (
         <Flex direction="column" p="3" >            
             <MenuButtons options={sections}
                 onselection={onselection} 
-                optactid={optSelected} />	
+                actoption={optSelected} />	
             <Separator orientation="horizontal" size="4"  />
         </Flex>
     );

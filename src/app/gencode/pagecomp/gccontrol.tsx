@@ -60,14 +60,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 alert(section);
                 //load model tables and tables menu
                 const db_squema = AppContext.readDbSquema();
-                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);             
-            
-
+                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema); 
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
 
                 //load section operations
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
+                JSonConsole.logArray(listOperations);
                 setOperations(listOperations);
                 setOperationId(listOperations[0].id);
                 //initialize
@@ -168,7 +167,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
             <Flex width={"100%"} direction="row" pb="2" justify="between"  >
                 <Box>
-                    {/*
+                    
                     {initialized ? 
                       <InputSelect key={operations[0].id}
                         inline={true}
@@ -179,7 +178,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         value={operationId ?? ""}
                         onchange={onOpSelected}
                         disabled={false} /> : null}                    
-                    */}
+                    
                 </Box>
 
                 <Box>

@@ -9,12 +9,12 @@ import { ThemeButtonsStyle, ThemeMenusStyle } from "@/radix/radixtheme";
  * MenuButtons Column menu
  */
 export interface MenuButtonsProp {
-    optactid: string;
+    actoption: string | null;
     options: Option[]
     onselection: (name: string) => void;
 }
 export default function MenuButtons
-    ({ options, onselection, optactid }: MenuButtonsProp) {
+    ({options,actoption,onselection}: MenuButtonsProp) {
 
     const size: any = ThemeButtonsStyle.BTN_DEF_SIZE;
     const actcolor    = ThemeMenusStyle.ACTIVE_COLOR;
@@ -22,7 +22,9 @@ export default function MenuButtons
 
     const renderButton = (option: Option) => {
         let color = notactcolor;
-        if (optactid === option.id) { color = actcolor; }
+        if( (actoption!== null) && (actoption === option.id) ) {
+            color = actcolor;
+        }        
         return (
             <Button key={option.id}
                 variant={ThemeButtonsStyle.BTN_DEF_VAR}
