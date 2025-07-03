@@ -3,7 +3,7 @@
 
 import { forwardRef } from "react";
 import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
-import { ThemeCompStyle } from "@/radix/radixtheme";
+import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
 interface InputCheckIfc {
@@ -52,8 +52,8 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
 
     const renderEditComp = () => {
         let cell_style: string = "";
-        if (isDisabled) { cell_style = ThemeCompStyle.C_CHECK_DISABLED_STYLE }
-        else { cell_style = ThemeCompStyle.C_CHECK_STYLE }
+        if (isDisabled) { cell_style = ThemeCompStyleOld.C_CHECK_DISABLED_STYLE }
+        else { cell_style = ThemeCompStyleOld.C_CHECK_STYLE }
 
         return (
             <Box>
@@ -75,7 +75,7 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
 
     const renderRowSimpleContent = () => {
         return (
-            <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
             </div>
@@ -84,8 +84,8 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
 
     const renderRowLabelContent = () => {
         return (
-            <div className={ThemeCompStyle.C_INCLABEL_ROW_STYLE}>
-                <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <div className={ThemeCompStyleOld.C_INCLABEL_ROW_STYLE}>
+                <div className={ThemeCompStyleOld.C_CELL_STYLE}>
                     {label}
                 </div>
                 {renderRowSimpleContent()}
@@ -95,7 +95,7 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
 
     const renderColSimpleContent = () => {
         return (
-            <div className={ThemeCompStyle.C_CELL_STYLE}>
+            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
             </div>
@@ -104,7 +104,7 @@ export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
 
     const renderColLabelContent = () => {
         return (
-            <div className={ThemeCompStyle.C_INCLABEL_COL_STYLE}>
+            <div className={ThemeCompStyleOld.C_INCLABEL_COL_STYLE}>
                 {label}
                 {renderColSimpleContent()}
             </div>

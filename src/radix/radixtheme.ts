@@ -1,6 +1,7 @@
 //src\radix\radixcolors.ts
 
 import { RadixConf } from "./radixconf";
+import { radixTypeComp } from "./radixmodels";
 
 /**
  * class  ThemeStyle.SEPARATOR_V_STYLE
@@ -57,23 +58,44 @@ export class ThemeButtonsStyle {
 }
 
 /**
- * class 
+ * class ThemeCompStyle
  */
 export class ThemeCompStyle {
+
+    public static readonly COMP_CONT_SIZE: any    = RadixConf.SIZES.size_2;
+    public static readonly COMP_CONT_RADIUS: any  = RadixConf.RADIUS.medium;
+    public static readonly COMP_CONT_VARIANT: any = RadixConf.VARIANTS.soft;
+    public static readonly COMP_CONT_COLOR: any   = RadixConf.COLORS.gray;
+
+    public static readonly COMP_CONT_STYLE: radixTypeComp = {
+        size:    ThemeCompStyle.COMP_CONT_SIZE,
+        radius:  ThemeCompStyle.COMP_CONT_RADIUS,
+        variant: ThemeCompStyle.COMP_CONT_VARIANT,
+        color:   ThemeCompStyle.COMP_CONT_COLOR
+    };
+
+}//end class
+
+
+/**
+ * class ThemeCompStyleOld
+ */
+export class ThemeCompStyleOld {
 
     public static readonly COMP_CONT_RADIUS: any = "medium";
     public static readonly COMP_CONT_VARIANT: any = "soft";
 
+    /*
+    radixTypeComp
+    */
     public static readonly C_EDIT_STYLE: any = "gray";
     public static readonly C_DISABLED_STYLE: any = "brown";
     public static readonly C_READONLY_STYLE: any = "tomato";
 
     public static readonly C_CELL_STYLE = "w-full h-auto";
-    public static readonly C_INCLABEL_COL_STYLE: string =
-        "flex-col";
+    public static readonly C_INCLABEL_COL_STYLE: string = "flex-col";
 
-    public static readonly C_INCLABEL_ROW_STYLE: string =
-        "flex-row grid grid-cols-[35%_65%] px-[8px]";
+    public static readonly C_INCLABEL_ROW_STYLE: string = "flex-row grid grid-cols-[35%_65%] px-[8px]";
 
     public static readonly C_SELECT_EDIT_STYLE: string = "gray"
     public static readonly C_SELECT_DISABLED_STYLE: string = "indigo"
