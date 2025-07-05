@@ -93,25 +93,23 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
 
         if(name!=null){}         
         return (
-            <CheckboxGroup.Root 
-                name={name}
-                defaultValue={["1"]} 
-                size    = {compStyle.size}
-                color   = {compStyle.color}
-                variant = {compStyle.variant} >
-
-                <Flex direction = {compDirection} gap="2">
-                    {options.map((opt, index) => (
-                        <CheckboxGroup.Item key={index.toString()} 
-                            value={rootValues[index]} onChange={() => onSelect(opt.id)} >
-                            <Text size="2" >
-                                {opt.text}
-                            </Text>
-                        </CheckboxGroup.Item>      
-                    ))}                    
-                </Flex>
-
-            </CheckboxGroup.Root>
+            <Flex direction = {compDirection} gap="2">
+                {options.map((opt, index) => (
+                    <CheckboxGroup.Root key={index.toString()}
+                        name={name}
+                        defaultValue={["1"]} 
+                        size    = {compStyle.size}
+                        color   = {compStyle.color}
+                        variant = {compStyle.variant} >                
+                                <CheckboxGroup.Item  
+                                    value={rootValues[index]} onChange={() => onSelect(opt.id)} >
+                                    <Text size="2" >
+                                        {opt.text}
+                                    </Text>
+                                </CheckboxGroup.Item>      
+                    </CheckboxGroup.Root>
+                ))}                    
+            </Flex>
         )
     }
     return (

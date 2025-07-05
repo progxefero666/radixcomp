@@ -99,28 +99,28 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const onSelectTable = (index: number, compname?: string) => {
-        setTableIndex(index);
+
+        ShowAlerts.showCouple(compname!,index.toString());
+        //setTableIndex(index);
     };//end
 
     const onParameterChange = (value: boolean, name?: string) => {
         if (name === "opt_includedef") {
-            alert("opt_includedef: " + value);
             setIncludeDefs(value);
         }
     }
 
     const onOpSelected = async (operationId: string) => {
-        alert("onOpSelected: " + operationId);
         if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
             if (operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id) {
                 setShowIncludeDefs(false);
                 setShowRadioList(false);
-                setShowCheckList(false);                   
+                setShowCheckList(false);
             }
             else if (operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id) {
                 setShowIncludeDefs(true);
                 setShowRadioList(false);
-                setShowCheckList(false);                  
+                setShowCheckList(false);
             }
             else if (operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id) {
                 setShowIncludeDefs(false);
@@ -133,20 +133,18 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             else if (operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id) {
                 setShowIncludeDefs(false);
                 setShowRadioList(false);
-                setShowCheckList(true);             
+                setShowCheckList(true);
             }
             else if (operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id) {
                 setShowIncludeDefs(true);
                 setShowRadioList(false);
-                setShowCheckList(true);           
+                setShowCheckList(true);
             }
         }
         setOperationId(operationId);
     };//end
 
     const runOperation = async () => {
-        //ondataresult(tableClassStr);
-        //ShowAlerts.showCouple(section!,operationId);
         const modelTableSel: ModelTable = modelTables[tableIndex];
 
         if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
@@ -190,11 +188,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     }
 
     const renderMainContent = () => {
-        let showInfoPanel: boolean = false;
-        //console.log(modelTables[tableIndex].name);
-        //console.log("Model Tables:", modelTables);
-        //XCheckGroup
-
         return (
             <>
                 {showRadioList ?
@@ -214,101 +207,72 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         );
     }//end renderMainContent
 
+    const renderHeader = () => {
+        return (
+            <>
+                <Box>
+                    <InputSelect
+                        key={operations[0].id}
+                        inline={true}
+                        name="operations"
+                        label="Operation: "
+                        ref={operationsRef}
+                        collection={operations}
+                        value={operationId ?? ""}
+                        onchange={onOpSelected}
+                        disabled={false} />
+                </Box>
+                <Box>
+                    {showIncludeDefs ?
+                        <InputCheck name="opt_includedef"
+                            onchange={onParameterChange}
+                            inline={true}
+                            label="Include Def. Class"
+                            value={false} /> : null}
+                </Box>
+                <Box>
+                    <Button onClick={runOperation} color="green">
+                        Run
+                    </Button>
+                </Box>
+            </>
+        );
+    }//end  
+
     return (
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
 
             <Flex width="100%" direction="row" pb="2" justify="between"  >
-                {initialized ?
-                    <>
-                        <Box>
-                            <InputSelect
-                                key={operations[0].id}
-                                inline={true}
-                                name="operations"
-                                label="Operation: "
-                                ref={operationsRef}
-                                collection={operations}
-                                value={operationId ?? ""}
-                                onchange={onOpSelected}
-                                disabled={false} />
-                        </Box>
-                        <Box>
-                            {showIncludeDefs ?
-                                <InputCheck name="opt_includedef"
-                                    onchange={onParameterChange}
-                                    inline={true}
-                                    label="Include Def. Class"
-                                    value={false} /> : null}
-                        </Box>
-                        <Box>
-                            <Button onClick={runOperation} color="green">
-                                Run
-                            </Button>
-                        </Box>
-                    </>
-
-                    : null}
+                {initialized ? renderHeader() : null}
             </Flex>
 
             <SeparatorH />
-            {initialized ?
-                <Flex width="100%" direction="row" pt="2"   >
-                    <Box width="30%" pb="2" >
-                        {renderMainContent()}
-                    </Box>
-                    <Box width="70%" >
-                        <SeparatorV />
-                        {renderParamsContent()}
-                    </Box>
-                </Flex>
-                : null}
 
-            <SeparatorH />
-            <Box width={"100%"}>
-                <InputFiles
-                    ref={fileInputRef}
-                    name="inputFileCode"
-                    formats=".sql,.json,.ts"
-                    multiple={false}
-                    onchange={onFileCharged} />
-            </Box>
+            {initialized ?
+            <Flex width="100%" direction="row" pt="2"   >
+                <Box width="30%" pb="2" >
+                    {renderMainContent()}
+                </Box>
+                <Box width="70%" >
+                    <SeparatorV />
+                    {renderParamsContent()}
+                </Box>
+            </Flex>: null}
+
         </Flex>
     );
 
 }//end InputEditor
 
 /*
-    if (modelTableSel !== null) { showModelTable = true; }
-    let rightPanelData: string = "";
-    if (showModelTable) {
-        rightPanelData = JSON.stringify(modelTableSel, null, 4);
-    }
+<SeparatorH />
+<Box width={"100%"}>
+    <InputFiles
+        ref={fileInputRef}
+        name="inputFileCode"
+        formats=".sql,.json,.ts"
+        multiple={false}
+        onchange={onFileCharged} />
+</Box>
 */
 
-/*
-//const tableClass: string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex]);
-            //const client_tables: Option[] = await SchemaService.getDummyListTables();
-        const init = async () => {
-            //const client_tables: Option[] = await SchemaService.getDummyListTables();
-            const dbSqlSquema: string = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
-            const model_tables: ModelTable[] = CodeGenSql.getEsquemaTables(dbSqlSquema);
-            setModelTables(model_tables);
-            setModelTableSel(model_tables[0]);
-            setOptionsTables(SchemaService.getListTablesAsOptions(model_tables));
-            setOptionTableSel(model_tables[0].name);
-            setInitialized(true);
-
-            //const firstTableJson: string = CodeGenJson.getJsonEntDef(model_tables[0]);
-            //console.log("First table JSON definition:", firstTableJson);
-            //ondataresult(firstTableJson);
-
-            const allTableDefsJson: string = CodeGenJson.getJsonArrayEntDef(model_tables);
-            ondataresult(allTableDefsJson);
-            //console.log(allTableDefsJson);
-
-            //const tableClass: string = CodeGenTsMotor.getEntityClass(model_tables[0]);
-            //ondataresult(tableClass);
-        };
-*/
-//const className = CodeGenHelper.capitalize(table.name)
-//                 .concat(CodeGenConfig.DEF_CLASS_NAMEADD);//Def
