@@ -10,13 +10,12 @@ import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
 import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
 import { PyEntServiceFilesOps } from "@/codegen/operations/pyentservicefilesops";
 import { ServClientTScriptEntities } from "@/app/gencode/module/client_tscriptentities";
+import { ServiceClientJsxForms } from "@/app/gencode/module/client_jsxforms";
+import { ServClientTScriptServices } from "@/app/gencode/module/client_tscriptservices";
+import { ServiceClientJson } from "@/app/gencode/module/client_json";
 
 
 export enum OP_CATEGORIES {
-    json_entityfiles        = "json_files",
-    
-    typescript_entityforms  = "typescript_entityforms",
-    typescript_servicefiles = "typescript_servicefiles",    
     python_serverfiles      = "python_serverfiles",
     sql_db_squema           = "sql_db_squema",
     test_components         = "test_components"
@@ -68,21 +67,24 @@ export class CodeGenConfig {
         if (sectionName === ServClientTScriptEntities.ID) {
             return TsEntFilesOps.Operations;
         }
-        else if (sectionName === OP_CATEGORIES.json_entityfiles) {
-            return JsonEntFilesOps.Operations;
-        }
-        else if (sectionName === OP_CATEGORIES.typescript_entityforms) {
+        else if (sectionName === ServiceClientJsxForms.ID) {
             return TsxEntFormsOps.Operations;
         }
-        else if (sectionName === OP_CATEGORIES.typescript_servicefiles) {
+        else if (sectionName === ServClientTScriptServices.ID) {
             return TsEntServiceFilesOps.Operations;
+        }        
+        else if (sectionName === ServiceClientJson.ID) {
+            return JsonEntFilesOps.Operations;
         }
+
+        /*
         else if (sectionName === OP_CATEGORIES.python_serverfiles) {
             return PyEntServiceFilesOps.Operations;
         }
         else if (sectionName === OP_CATEGORIES.sql_db_squema) {
             return ControlDatabase.Operations;
-        }        
+        }  
+        */      
         alert("not found");
         return [];
     }

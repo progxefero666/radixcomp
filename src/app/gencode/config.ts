@@ -6,6 +6,7 @@ import { OP_CATEGORIES} from "@/codegen/cgconfig";
 import { ServClientTScriptEntities } from "./module/client_tscriptentities";
 import { ServiceClientJsxForms } from "./module/client_jsxforms";
 import { ServClientTScriptServices } from "./module/client_tscriptservices";
+import { ServiceClientJson } from "./module/client_json";
 
 
 /**
@@ -21,7 +22,8 @@ export class ModuleConfig {
 
 
     public static readonly SC_JSON_ENTITY_FILES: Option
-        = new Option(OP_CATEGORIES.json_entityfiles, "JSon Entity Files", null, null, null);
+        = new Option(ServiceClientJson.ID, 
+                     ServiceClientJson.OPTION_VALUE, null, null, null);
 
     public static readonly SC_TS_ENTITY_FILES: Option
         = new Option(ServClientTScriptEntities.ID,
