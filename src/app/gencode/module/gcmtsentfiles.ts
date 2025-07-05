@@ -1,6 +1,7 @@
 //src\app\gencode\module\gcmtsentfiles.ts
 
 import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
+import { GenCodeModuleControl } from "@/app/gencode/module/gcmodcontrol";
 
 
 TsEntFilesOps
@@ -10,11 +11,14 @@ TsEntFilesOps
  *      - GenCode Control for TypeScript Entity Files Operations
  *      - kernel: src\codegen\operations\tsentfilesops.ts
  */
-export class GcControlTsEntFilesOps {
+export class GcControlTsEntFilesOps extends GenCodeModuleControl {
 
-    public static execOperation(operationId:string):boolean {
+    public constructor(sqlsquema: string) {
+        super(sqlsquema);
+    }//end
 
-        return true;
+    public executeOperation(operationId: string): void {
+        
     }
 
 }//end class

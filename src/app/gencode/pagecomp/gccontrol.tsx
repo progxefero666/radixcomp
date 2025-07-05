@@ -34,6 +34,7 @@ import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SchemaService } from "@/codegen/schemaservice";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
+import { GcControlTsEntFilesOps } from "../module/gcmtsentfiles";
 
  
 
@@ -46,6 +47,11 @@ interface CompProps {
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+
+    const ctrTsEntFilesOpsRef = useRef<GcControlTsEntFilesOps>(null);
+
+    const [dbSquema,setDbSquema] = useState<string>(AppConstants.NOT_DEF);  
 
     const [menuListTables, setMenuListTables] = useState<Option[]>([]);
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
@@ -65,11 +71,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 //step 1: load db schema from SessionStorage
                 const db_squema = AppContext.readDbSquema();
                 const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema); 
+                setDbSquema(db_squema);
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
 
-
-
+                ctrTsEntFilesOpsRef.current = new GcControlTsEntFilesOps(db_squema);
 
                 //step 2: load operations for the selected section
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
@@ -99,34 +105,39 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         const modelTableSel: ModelTable = modelTables[tableIndex];
 
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){    
+
+            ctrTsEntFilesOpsRef.current!.executeOperation(operationId);
+
+            /*
             if(operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id){  
                 const contcode: string | null 
-                    = await getTypeScriptTableContent(operationId,modelTableSel.name);
+                    = await getTypeScriptTableContent(dbSquema,operationId,modelTableSel.name);
                 if(contcode != null) {
                     ondataresult(contcode);
                 }
             }
             else if(operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id){
                 const contcode: string | null 
-                    = await getTypeScriptTableContent(operationId,modelTableSel.name); 
+                    = await getTypeScriptTableContent(dbSquema,operationId,modelTableSel.name); 
                 if(contcode != null) {
                     ondataresult(contcode);
                 }
             }
             else if(operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id){
                 const allTablesDefClass: string | null 
-                    = await getTypeScriptArrayTableContent(operationId);
+                    = await getTypeScriptArrayTableContent(dbSquema,operationId);
                 if(allTablesDefClass != null) {
                     ondataresult(allTablesDefClass);
                 }
             }
             else if(operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id){
                 const allTablesEntClass: string | null 
-                    = await getTypeScriptArrayTableContent(operationId);
+                    = await getTypeScriptArrayTableContent(dbSquema,operationId);
                 if(allTablesEntClass != null) {
                     ondataresult(allTablesEntClass);
                 }
             }
+            */
         }
 
         /*else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){
