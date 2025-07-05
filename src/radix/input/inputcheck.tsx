@@ -14,23 +14,23 @@ interface CompProps {
     readonly?: boolean;
     disabled?: boolean;
     value?: boolean;
-    onchange?: (value: string, name?: string) => void;
+    onchange?: (value: boolean, name?: string) => void;
     autofocus?: boolean;
 }
 export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
-    name,label,value,inline,readonly,disabled,autofocus,onchange }, ref) => {
+    name, label, value, inline, readonly, disabled, autofocus, onchange }, ref) => {
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
     const color = RadixConf.COLORS.gray;
-            
+
     const showInline: boolean = inline ?? false;
     const isReadOnly: boolean = readonly ?? false;
     const isDisabled: boolean = disabled ?? false;
 
     const handleOnChange = (value: boolean) => {
         if (onchange) {
-            alert("InputCheck: handleOnChange: " + value);
+            onchange(value, name);
         }
     }
     const renderReadComp = () => {
@@ -42,7 +42,7 @@ export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
                             defaultChecked={value}
                             variant={variant}
                             size={size}
-                            color={color}                      
+                            color={color}
                             disabled={true} />
                         {label}
                     </Flex>
@@ -64,8 +64,8 @@ export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
                             defaultChecked={value}
                             variant={variant}
                             size={size}
-                            color={color}                                                        
-                            onCheckedChange={handleOnChange} 
+                            color={color}
+                            onCheckedChange={handleOnChange}
                             disabled={disabled} />
                         {label}
                     </Flex>
@@ -85,12 +85,18 @@ export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
 
     const renderRowLabelContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_INCLABEL_ROW_STYLE}>
-                <div className={ThemeCompStyleOld.C_CELL_STYLE}>
-                    {label}
-                </div>
-                {renderRowSimpleContent()}
-            </div>
+            <Flex direction="row" mt="1"
+                width="100%"
+                gap="2" align="center">
+                <Checkbox
+                    defaultChecked={value}
+                    variant={variant}
+                    size={size}
+                    color={color}
+                    onCheckedChange={handleOnChange}
+                    disabled={disabled} />
+                {label}
+            </Flex>
         )
     }
 
@@ -111,7 +117,7 @@ export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
             </div>
         )
     }
-
+ 
     return (
         <>
             {showInline ?
@@ -123,6 +129,7 @@ export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
             }
         </>
     )
+
 }
 
 )//end component

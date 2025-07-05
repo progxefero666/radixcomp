@@ -35,6 +35,8 @@ import { SchemaService } from "@/codegen/schemaservice";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
 import { GcControlTsEntFilesOps } from "../module/gcmtsentfiles";
+import { InputCheck } from "@/radix/input/inputcheck";
+import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
  
 
@@ -62,6 +64,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const operationsRef = useRef<HTMLSelectElement>(null);
     
     // UI
+    const [includeDefs,setIncludeDefs] = useState<boolean>(false);  
+    const [showIncludeDefs,setShowIncludeDefs] = useState<boolean>(false); 
     const [showRadioList,setShowRadioList] = useState<boolean>(false);  
     const [showCheckList,setShowCheckList] = useState<boolean>(false);  
 
@@ -98,21 +102,34 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         setTableIndex(index);
     };//end
 
+    const onParameterChange =(value: boolean, name?: string)=> {
+        if(name === "opt_includedef") {
+            alert("opt_includedef: " + value);
+            setIncludeDefs(value);                      
+        }
+    }
+
     const onOpSelected = async (operationId: string) => {
        
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){  
-            if(operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id){
-               
+            if(operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id){                
+            }
+            else if(operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id){        
+                setShowIncludeDefs(true);        
+            }              
+            else if(operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id){                
+                setShowRadioList(true);                
             }
             else if(operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id){
-            }
-            else if(operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id){                
-            }
-            else if(operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id){                
-            }            
-            else if(operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id){                
+                setShowIncludeDefs(true);
+                setShowRadioList(true); 
+            }          
+            else if(operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id){   
+                setShowCheckList(true);             
             }        
-            else if(operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id){                
+            else if(operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id){     
+                setShowIncludeDefs(true);
+                setShowCheckList(true);           
             }                   
         }
          setOperationId(operationId);
@@ -171,13 +188,21 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
         return (
             <>
-                <XRadioGroup
-                    autocommit={true}
-                    key={modelTables[tableIndex].name}
-                    onselect={onSelectTable}
-                    options={menuListTables}
-                    value={modelTables[tableIndex].name}
-                    direction="column" />              
+                {showRadioList ? 
+                    <XRadioGroup name="selectTable"
+                        autocommit={true}
+                        key={modelTables[tableIndex].name}
+                        onselect={onSelectTable}
+                        options={menuListTables}
+                        value={modelTables[tableIndex].name}
+                        direction="column" /> :null}
+
+                {showCheckList ? 
+                    <XCheckGroup name="selectTables"
+                                 inline={false}
+                                 options={menuListTables} 
+                                 onselect={onSelectTable}  />
+                :null}                           
             </>
         );
     }//end renderMainContent
@@ -201,7 +226,12 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         disabled={false} />                 
                 </Box>
                 <Box>
-
+                    {showIncludeDefs ?
+                        <InputCheck name="opt_includedef"
+                                    onchange={onParameterChange}
+                                    inline={true} 
+                                    label="Include Def. Class"
+                                    value={false}/>:null}
                 </Box>
                 <Box>                    
                     <Button onClick={runOperation} color = "green">
