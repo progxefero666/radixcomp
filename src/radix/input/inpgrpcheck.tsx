@@ -40,7 +40,7 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
     const showInline: boolean = inline ?? false;
     const auto: boolean = autocommit ?? false;
     //const def_value: string = value || options[0].id;
-    const compDirection: radixTypeDirection = direction ?? "row";
+    const compDirection: radixTypeDirection = direction ?? "column";
 
     const compStyle: radixTypeComp = {
         color: RadixConf.COLORS.gray,

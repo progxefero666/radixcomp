@@ -38,13 +38,13 @@ import { GcControlTsEntFilesOps } from "../module/gcmtsentfiles";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
- 
+
 
 /**
  * GenCodeControl
  */
 interface CompProps {
-    section?: string |null;
+    section?: string | null;
     ondataresult: (data: string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
@@ -52,32 +52,32 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const ctrTsEntFilesOpsRef = useRef<GcControlTsEntFilesOps>(null);
 
-    const [dbSquema,setDbSquema] = useState<string>(AppConstants.NOT_DEF);  
+    const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
 
     const [menuListTables, setMenuListTables] = useState<Option[]>([]);
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
-    const [tableIndex,setTableIndex] = useState<number>(0);
+    const [tableIndex, setTableIndex] = useState<number>(0);
     const [initialized, setInitialized] = useState<boolean>(false);
 
     const [operations, setOperations] = useState<Option[]>([]);
-    const [operationId,setOperationId] = useState<string>(AppConstants.NOT_DEF);    
+    const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
     const operationsRef = useRef<HTMLSelectElement>(null);
-    
+
     // UI
-    const [includeDefs,setIncludeDefs] = useState<boolean>(false);  
-    const [showIncludeDefs,setShowIncludeDefs] = useState<boolean>(false); 
-    const [showRadioList,setShowRadioList] = useState<boolean>(false);  
-    const [showCheckList,setShowCheckList] = useState<boolean>(false);  
+    const [includeDefs, setIncludeDefs] = useState<boolean>(false);
+    const [showIncludeDefs, setShowIncludeDefs] = useState<boolean>(false);
+    const [showRadioList, setShowRadioList] = useState<boolean>(true);
+    const [showCheckList, setShowCheckList] = useState<boolean>(false);
 
     useEffect(() => {
-        if(section==null) { return; }
-        if(initialized) { return; }
+        if (section == null) { return; }
+        if (initialized) { return; }
 
         const init = async () => {
-            if(section!=null){
+            if (section != null) {
                 //step 1: load db schema from SessionStorage
                 const db_squema = AppContext.readDbSquema();
-                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema); 
+                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
                 setDbSquema(db_squema);
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
@@ -89,58 +89,67 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 setOperations(listOperations);
                 setOperationId(listOperations[0].id);
                 setInitialized(true);
-            }                       
+            }
         };
         init();
     }, []);
 
     const onFileCharged = async (file: File, name?: string) => {
-        if (file) {alert(file.name);}
+        if (file) { alert(file.name); }
     };//end
 
-    const onSelectTable = (index:number,compname?:string) => {
+    const onSelectTable = (index: number, compname?: string) => {
         setTableIndex(index);
     };//end
 
-    const onParameterChange =(value: boolean, name?: string)=> {
-        if(name === "opt_includedef") {
+    const onParameterChange = (value: boolean, name?: string) => {
+        if (name === "opt_includedef") {
             alert("opt_includedef: " + value);
-            setIncludeDefs(value);                      
+            setIncludeDefs(value);
         }
     }
 
     const onOpSelected = async (operationId: string) => {
-       
-        if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){  
-            if(operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id){                
+        alert("onOpSelected: " + operationId);
+        if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
+            if (operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id) {
+                setShowIncludeDefs(false);
+                setShowRadioList(false);
+                setShowCheckList(false);                   
             }
-            else if(operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id){        
-                setShowIncludeDefs(true);        
-            }              
-            else if(operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id){                
-                setShowRadioList(true);                
-            }
-            else if(operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id){
+            else if (operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id) {
                 setShowIncludeDefs(true);
-                setShowRadioList(true); 
-            }          
-            else if(operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id){   
+                setShowRadioList(false);
+                setShowCheckList(false);                  
+            }
+            else if (operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id) {
+                setShowIncludeDefs(false);
+                setShowRadioList(true);
+            }
+            else if (operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id) {
+                setShowIncludeDefs(true);
+                setShowRadioList(true);
+            }
+            else if (operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id) {
+                setShowIncludeDefs(false);
+                setShowRadioList(false);
                 setShowCheckList(true);             
-            }        
-            else if(operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id){     
+            }
+            else if (operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id) {
                 setShowIncludeDefs(true);
+                setShowRadioList(false);
                 setShowCheckList(true);           
-            }                   
+            }
         }
-         setOperationId(operationId);
+        setOperationId(operationId);
     };//end
 
-    const runOperation = async () => {        
+    const runOperation = async () => {
         //ondataresult(tableClassStr);
         //ShowAlerts.showCouple(section!,operationId);
         const modelTableSel: ModelTable = modelTables[tableIndex];
 
-        if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){    
+        if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
             ctrTsEntFilesOpsRef.current!.executeOperation(operationId);
         }
 
@@ -176,7 +185,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const renderParamsContent = () => {
         return (
-            <p>saas</p>
+            <p>params</p>
         )
     }
 
@@ -188,21 +197,19 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
         return (
             <>
-                {showRadioList ? 
+                {showRadioList ?
                     <XRadioGroup name="selectTable"
                         autocommit={true}
                         key={modelTables[tableIndex].name}
                         onselect={onSelectTable}
                         options={menuListTables}
                         value={modelTables[tableIndex].name}
-                        direction="column" /> :null}
-
-                {showCheckList ? 
+                        direction="column" /> : null}
+                {showCheckList ?
                     <XCheckGroup name="selectTables"
-                                 inline={false}
-                                 options={menuListTables} 
-                                 onselect={onSelectTable}  />
-                :null}                           
+                        inline={false}
+                        options={menuListTables}
+                        onselect={onSelectTable} /> : null}
             </>
         );
     }//end renderMainContent
@@ -211,50 +218,50 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
 
             <Flex width="100%" direction="row" pb="2" justify="between"  >
-                {initialized ? 
-                <>
-                <Box>                    
-                    <InputSelect 
-                        key={operations[0].id}
-                        inline={true}
-                        name="operations"
-                        label="Operation: "
-                        ref={operationsRef}
-                        collection={operations}
-                        value={operationId ?? ""}
-                        onchange={onOpSelected}
-                        disabled={false} />                 
-                </Box>
-                <Box>
-                    {showIncludeDefs ?
-                        <InputCheck name="opt_includedef"
+                {initialized ?
+                    <>
+                        <Box>
+                            <InputSelect
+                                key={operations[0].id}
+                                inline={true}
+                                name="operations"
+                                label="Operation: "
+                                ref={operationsRef}
+                                collection={operations}
+                                value={operationId ?? ""}
+                                onchange={onOpSelected}
+                                disabled={false} />
+                        </Box>
+                        <Box>
+                            {showIncludeDefs ?
+                                <InputCheck name="opt_includedef"
                                     onchange={onParameterChange}
-                                    inline={true} 
+                                    inline={true}
                                     label="Include Def. Class"
-                                    value={false}/>:null}
-                </Box>
-                <Box>                    
-                    <Button onClick={runOperation} color = "green">
-                        Run
-                    </Button> 
-                </Box>                
-                </>
+                                    value={false} /> : null}
+                        </Box>
+                        <Box>
+                            <Button onClick={runOperation} color="green">
+                                Run
+                            </Button>
+                        </Box>
+                    </>
 
-                : null}
+                    : null}
             </Flex>
 
             <SeparatorH />
-            {initialized ? 
+            {initialized ?
                 <Flex width="100%" direction="row" pt="2"   >
-                    <Box width="30%" pb="2" >          
-                        {renderMainContent()}                                                  
+                    <Box width="30%" pb="2" >
+                        {renderMainContent()}
                     </Box>
                     <Box width="70%" >
                         <SeparatorV />
                         {renderParamsContent()}
                     </Box>
                 </Flex>
-            : null}  
+                : null}
 
             <SeparatorH />
             <Box width={"100%"}>
