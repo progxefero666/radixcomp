@@ -220,13 +220,12 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             <>
                 <Box>
                     <XInputSelect
-                        key={operations[0].id}
-                        inline={true}
+                        key={operations[0].id}                
                         name="operations"
                         label="Operation: "
                         ref={operationsRef}
                         collection={operations}
-                        value={operationId ?? ""}
+                        default={operationId ?? ""}
                         onchange={onOpSelected}
                         disabled={false} />
                 </Box>
@@ -251,10 +250,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         return (
             <Flex width="100%" direction="column"  >
                 {showRadioList ?
-                    <XInputSelect name="selectTable"
+                    <XInputSelect name="selectTable"                    
                         autocommit={true}
                         collection={modelsTableOptions.current}
-                        value={modelsTableOptions.current[0].id}
+                        default={modelsTableOptions.current[0].id}
                         onchange={onSelectTable} /> : null}
                 {showCheckList ?
                     <XPopOver text="select">
@@ -302,22 +301,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const onFileCharged = async (file: File, name?: string) => {
         if (file) { alert(file.name); }
     };//end
-<SeparatorH />
-<Box width={"100%"}>
+
     <InputFiles
         ref={fileInputRef}
         name="inputFileCode"
         formats=".sql,.json,.ts"
         multiple={false}
         onchange={onFileCharged} />
-</Box>
-
-<XRadioGroup name="selectTable"
-                        autocommit={true}
-                        onselect={onSelectTable}
-                        options={menuListTables}
-                        value={modelTables[0].name}
-                        direction="column" />    
 
 */
 

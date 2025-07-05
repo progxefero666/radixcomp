@@ -16,8 +16,13 @@ import { ModelHelper } from "@/common/util/modelhelper";
 	<CheckboxGroup.Item value="3">Smart</CheckboxGroup.Item>
 </CheckboxGroup.Root>
 
-*/
-/**
+
+<XRadioGroup name="selectTable"
+                        autocommit={true}
+                        onselect={onSelectTable}
+                        options={menuListTables}
+                        value={modelTables[0].name}
+                        direction="column" />    
  * XRadioGroup
  */
 interface CompProps {

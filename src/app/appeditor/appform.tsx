@@ -90,7 +90,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="name"
                 label="Name"
                 ref={nameRef}                
-                value={item.name}
+                default={item.name}
                 maxlen={5}
                 readonly={readonly} 
                 disabled={disabled} />
@@ -99,7 +99,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="author"
                 ref={authorRef} 
                 label="Auhor"
-                value={item.author}
+                default={item.author}
                 maxlen={AppDef.AUTHOR_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -108,7 +108,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="reference"
                 ref={referenceRef}
                 label="reference"
-                value={item.reference}
+                default={item.reference}
                 maxlen={AppDef.REFERENCE_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -117,7 +117,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="description"
                 ref={descriptionRef}
                 label="Description"
-                value={item.description}
+                default={item.description}
                 maxlen={AppDef.DESCRIPTION_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -126,7 +126,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="url" 
                 ref={urlRef} 
                 label="url"
-                value={item.appurl} 
+                default={item.appurl} 
                 maxlen={AppDef.URL_MAXLEN}
                 readonly={readonly} 
                 disabled={disabled} />
@@ -135,7 +135,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="path"
                 ref={pathRef}
                 label="path"
-                value={item.apppath}
+                default={item.apppath}
                 maxlen={AppDef.PATH_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -146,7 +146,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 inline={true}
                 label="Type"
                 collection={apptypes}
-                value={item.apptype}
+                default={item.apptype}
                 readonly={readonly}
                 disabled={disabled} />
 
@@ -155,7 +155,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 ref={proglanguageRef}
                 label="code lang"
                 collection={proglanguages}
-                value={item.proglanguage!}
+                default={item.proglanguage!}
                 readonly={readonly}
                 disabled={disabled} />
 
@@ -163,7 +163,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="opsystem"
                 ref={osystemRef}
                 label="system"
-                value={item.osystem}
+                default={item.osystem}
                 maxlen={AppDef.OSSYSTEM_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />

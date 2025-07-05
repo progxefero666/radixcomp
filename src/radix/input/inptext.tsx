@@ -11,12 +11,13 @@ import { radixTypeComp } from "../radixtypes";
  * InputTextComponent
  */
 interface InputTextProps {
+    autocommit?: boolean;
     inline?: boolean;
     name?: string;
     label?: string;
     readonly?: boolean;
     disabled?: boolean
-    value?: string;
+    default?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     type?: any;
     placeholder?: string;
@@ -26,7 +27,7 @@ interface InputTextProps {
     maxlen?: number;
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
-                type, inline, label, placeholder, value, onChange, icon, readonly, disabled }, ref) => {     
+                type, inline, label, placeholder, default: value, onChange, icon, readonly, disabled }, ref) => {     
 
     const color = RadixConf.COLORS.gray;
     const size = RadixConf.SIZES.size_2;

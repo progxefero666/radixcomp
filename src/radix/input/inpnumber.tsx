@@ -15,6 +15,7 @@ import { RadixKeys } from "../radixconstants";
  *  format: string; //"numdefdigits:numdecdigits"
  */
 interface CompProps {
+    autocommit?: boolean;
     inline?: boolean;
     isdecimal?: boolean;
     format?: string; //"numdefdigits:numdecdigits"

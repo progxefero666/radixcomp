@@ -44,6 +44,7 @@ import { RadixConf } from "@/radix/radixconf";
 */
 
 interface InputMenuProps {
+    autocommit?: boolean;
     children?: React.ReactNode;
     name: string;
     inline?: boolean;
@@ -52,13 +53,13 @@ interface InputMenuProps {
     collection: string[];
     label?: string;
     placeholder?: string;
-    defaultvalue?: string;
+    default?: string;
     maxlen?: number;
     autofocus?: boolean;
     onchange?: (value: string) => void;
 }
 export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
-    name, collection, label, placeholder, defaultvalue,
+    name, collection, label, placeholder, default: defaultvalue,
     inline, readonly, disabled,children,
     maxlen, autofocus, onchange }, ref) => {
 

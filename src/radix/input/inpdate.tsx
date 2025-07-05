@@ -18,6 +18,7 @@ registerLocale('es', es);
 
 //returnFormat?: 'iso' | 'local'; 
 interface CompProps {
+    autocommit?: boolean;
     name: string;
     label?: string;
     inline?: boolean;
