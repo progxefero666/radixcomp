@@ -36,16 +36,14 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const [value, setValue] = useState<string|null>(defaul ?? null);
 
-    const color = RadixConf.COLORS.gray;
-    const size = RadixConf.SIZES.size_2;
-    const radius = ThemeCompStyleOld.COMP_CONT_RADIUS;
+    const color   = RadixConf.COLORS.gray;
+    const size    = RadixConf.SIZES.size_2;
+    const radius  = ThemeCompStyleOld.COMP_CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
 
-    const auto: boolean = autocommit ?? false;
     const showInline: boolean = inline ?? false;
-
+    const auto: boolean = autocommit ?? false;
     const input_type = type ?? RadixConf.INPUT_TEXT_TYPES.text;
-
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
@@ -126,7 +124,6 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     }
 
     const renderColLabelContent = () => {
-        //className="LabelRoot"
         return (
             <Flex direction="column" gap="1">
                 <Label.Root>{label}</Label.Root>

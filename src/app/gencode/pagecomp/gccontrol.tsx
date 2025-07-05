@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { TOption } from "@/common/types";
 import { Option } from "@/common/model/option";
-import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
+import { Box, Grid, Separator, Flex, Text, Button, Link  } from "@radix-ui/themes";
 
 
 import { SeparatorH } from "@/radix/container/separatorh";
@@ -30,6 +30,10 @@ import { ServiceClientJsxForms } from "../module/client_jsxforms";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 import { ShowAlerts } from "@/common/util/showalerts";
+import ContCollapsible from "@/radix/container/collapsible";
+import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
+import { Label } from "@radix-ui/react-context-menu";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
 
@@ -42,6 +46,8 @@ interface CompProps {
     ondataresult: (data: string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
+
+    const [squemaPath, setSquemaPath] = useState<string>("");
 
     //const fileInputRef = useRef<HTMLInputElement>(null);
     const [initialized, setInitialized] = useState<boolean>(false);
@@ -224,9 +230,38 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         );
     }//end renderMainContent
 
+    //
+    const renderDbPanel = () => {
+        const  barbuttonscfg: BarButtonsCfg = BARCFG_EXPORT;
+        return (
+            <ContCollapsible title="Database Config." >
+                <Flex width="100%" direction="column" pt="2">
+                    <Text size="3" >
+                        <Flex width="100%" direction="row" justify="between" gapY="1">
+                            <Box>
+                                <Label>Database Schema: </Label>
+                            </Box>
+                            <Box>
+                                <Button color="blue"></Button>
+                            </Box>
+
+                            <Box>
+                                <Button color="blue"></Button>
+                            </Box>
+                            
+                        </Flex>
+                    </Text>
+                    <Box width="100%" >
+                    </Box>    
+                </Flex>
+            </ContCollapsible>
+        )
+    }
 
     return (
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
+            {renderDbPanel()}
+            <SeparatorH />
             {initialized ? renderHeader() : null}
             <SeparatorH />
             {initialized ? renderMainContent() : null}

@@ -4,10 +4,14 @@ import { Option } from "@/common/model/option";
 
 
 /**
- * AppConfig.getModulesMenu
+ * AppConfig.DBSQUEMA_FPATH
  */
 export class AppConfig {
     
+
+    public static readonly DBSQUEMA_FPATH: string 
+        = "C:\claudeapps\nextapps\aigenerator\public\data\dbsquema.sql";
+
     public static readonly INDEX: Option 
         = new Option("./","Home",null,null,null);
 

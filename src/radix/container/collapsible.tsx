@@ -16,7 +16,7 @@ import { RadixConf } from "../radixconf";
  * jsx Collapsible Component
  */
 interface CompProps {
-    id: number;
+    id?: number;
     title: string;
     intro?: string;
     opened?: boolean;

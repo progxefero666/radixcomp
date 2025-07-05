@@ -12,7 +12,7 @@ import { XInputDate } from "@/radix/input/inpdate";
 
 
 import { XInputTextArea } from "@/radix/input/inptextarea";
-import { Application } from "@/client";
+import { Application } from "@/db/model/application";
 
 
 
@@ -65,7 +65,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
     const nameRef = useRef<HTMLInputElement>(null);
     const osystemRef = useRef<HTMLInputElement>(null);
     const authorRef = useRef<HTMLInputElement>(null);
-    const referenceRef = useRef<HTMLInputElement>(null);
+    const repositoryRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const urlRef = useRef<HTMLInputElement>(null);
     const pathRef = useRef<HTMLInputElement>(null);
@@ -90,7 +90,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="name"
                 label="Name"
                 ref={nameRef}                
-                default={item.name}
+                defaul={item.name}
                 maxlen={5}
                 readonly={readonly} 
                 disabled={disabled} />
@@ -99,16 +99,16 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="author"
                 ref={authorRef} 
                 label="Auhor"
-                default={item.author}
+                defaul={item.author}
                 maxlen={AppDef.AUTHOR_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
 
             <XInputText
-                name="reference"
-                ref={referenceRef}
-                label="reference"
-                default={item.reference}
+                name="repository"
+                ref={repositoryRef}
+                label="repository"
+                defaul={item.repository}
                 maxlen={AppDef.REFERENCE_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -117,7 +117,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="description"
                 ref={descriptionRef}
                 label="Description"
-                default={item.description}
+                defaul={item.description}
                 maxlen={AppDef.DESCRIPTION_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -126,7 +126,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="url" 
                 ref={urlRef} 
                 label="url"
-                default={item.appurl} 
+                defaul={item.appurl} 
                 maxlen={AppDef.URL_MAXLEN}
                 readonly={readonly} 
                 disabled={disabled} />
@@ -135,11 +135,12 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="path"
                 ref={pathRef}
                 label="path"
-                default={item.apppath}
+                defaul={item.apppath}
                 maxlen={AppDef.PATH_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
 
+            {/*
             <XInputSelect
                 name="type"
                 ref={typeRef}
@@ -166,7 +167,8 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 default={item.osystem}
                 maxlen={AppDef.OSSYSTEM_MAXLEN}
                 readonly={readonly}
-                disabled={disabled} />
+                disabled={disabled} /> 
+            */}
 
             <XInputTextArea
                 name="opsystem"
