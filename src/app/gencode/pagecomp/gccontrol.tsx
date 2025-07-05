@@ -32,6 +32,7 @@ import { ShowAlerts } from "@/common/util/showalerts";
 import { XRadioGroup } from "@/radix/input/inpgrpradio";
 import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SchemaService } from "@/codegen/schemaservice";
+import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 
  
 
@@ -66,6 +67,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
 
+
+
+
                 //step 2: load operations for the selected section
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
                 setOperations(listOperations);
@@ -89,7 +93,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = () => {        
-        
+            const tableClassStr:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex],false);
+            ondataresult(tableClassStr);
+
+        /*
         ShowAlerts.showCouple(section!,operationId);
 
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
@@ -128,6 +135,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         }
         else if(section==ModuleConfig.SC_DB_SQUEMA.id){
         }   
+        */
 
     };//end
 

@@ -10,6 +10,7 @@ import { ServerReader } from "../config";
  */
 export async function getTextFile(fname: string): Promise<string> {
     const filePath: string = ServerReader.getFilePath(fname);
+    console.log("getTextFile: ", filePath);
     const fileContent: string = await ServerFileUtil.readFile(filePath);
     return fileContent;
 }//end action

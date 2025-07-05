@@ -1,41 +1,41 @@
-
 --
--- Name: agent; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.agent (
-    id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    agtype character varying(50) NOT NULL,
-    application character varying(150) DEFAULT 'undefined'::character varying NOT NULL,
-    description character varying(255) DEFAULT 'undefined'::character varying NOT NULL,
-    config text DEFAULT 'undefined'::text NOT NULL,
-    motor character varying(100) DEFAULT 'undefined'::character varying NOT NULL,
-    username character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    userpassword character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    port character varying(10) DEFAULT 'undefined'::character varying NOT NULL,
-    url character varying(250) DEFAULT 'undefined'::character varying NOT NULL,
-    scriptstart text DEFAULT 'undefined'::text NOT NULL,
-    scriptstop text DEFAULT 'undefined'::text NOT NULL,
-    scriptscheck text DEFAULT 'undefined'::text NOT NULL
-);
-
-
-ALTER TABLE public.agent OWNER TO postgres;
-
---
--- Name: agent_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- PostgreSQL database dump
 --
 
-ALTER TABLE public.agent ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.agent_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+-- Dumped from database version 17.5
+-- Dumped by pg_dump version 17.5
 
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
 
 --
 -- Name: application; Type: TABLE; Schema: public; Owner: postgres
@@ -43,19 +43,17 @@ ALTER TABLE public.agent ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 CREATE TABLE public.application (
     id integer NOT NULL,
+    apptype_id integer DEFAULT 0 NOT NULL,
+    codelang_id integer NOT NULL,
     name character varying(50) NOT NULL,
-    reference character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    author character varying(100) NOT NULL,
-    apptype character varying(50) NOT NULL,
-    proglanguage character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    osystem character varying(100) DEFAULT 'windows'::character varying NOT NULL,
-    appurl character varying(500) DEFAULT 'undefined'::character varying NOT NULL,
-    apppath character varying(500) DEFAULT 'undefined'::character varying NOT NULL,
+    description character varying(255) DEFAULT 'undefined'::character varying NOT NULL,
+    repository character varying(250) DEFAULT 'undefined'::character varying NOT NULL,
+    author character varying(100),
+    osystem character varying(100),
+    appurl character varying(500),
+    apppath character varying(500),
     localdev boolean DEFAULT true NOT NULL,
     usedocker boolean DEFAULT false NOT NULL,
-    creationdate date DEFAULT CURRENT_DATE NOT NULL,
-    updatedate date DEFAULT CURRENT_DATE NOT NULL,
-    description character varying(255) NOT NULL,
     controlusers boolean DEFAULT false NOT NULL,
     useui boolean DEFAULT false NOT NULL,
     useagents boolean DEFAULT false NOT NULL,
@@ -63,17 +61,18 @@ CREATE TABLE public.application (
     consumeapi boolean DEFAULT false NOT NULL,
     consumeai boolean DEFAULT false NOT NULL,
     exposedb boolean DEFAULT false NOT NULL,
-    exposeapi boolean DEFAULT false NOT NULL
+    exposeapi boolean DEFAULT false NOT NULL,
+    updated date DEFAULT CURRENT_DATE NOT NULL
 );
 
 
 ALTER TABLE public.application OWNER TO postgres;
 
 --
--- Name: application_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: aplication_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.application_id_seq
+CREATE SEQUENCE public.aplication_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -82,68 +81,33 @@ CREATE SEQUENCE public.application_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.application_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.aplication_id_seq OWNER TO postgres;
 
 --
--- Name: application_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: aplication_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.application_id_seq OWNED BY public.application.id;
-
-
---
--- Name: apptypes; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.apptypes (
-    id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    description character varying(255) NOT NULL
-);
-
-
-ALTER TABLE public.apptypes OWNER TO postgres;
-
---
--- Name: apptypes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.apptypes_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.apptypes_id_seq OWNER TO postgres;
-
---
--- Name: apptypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.apptypes_id_seq OWNED BY public.apptypes.id;
+ALTER SEQUENCE public.aplication_id_seq OWNED BY public.application.id;
 
 
 --
--- Name: doccategory; Type: TABLE; Schema: public; Owner: postgres
+-- Name: apptype; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.doccategory (
+CREATE TABLE public.apptype (
     id integer NOT NULL,
     name character varying(50) NOT NULL,
     description character varying(255) DEFAULT 'undefined'::character varying NOT NULL
 );
 
 
-ALTER TABLE public.doccategory OWNER TO postgres;
+ALTER TABLE public.apptype OWNER TO postgres;
 
 --
--- Name: doccategory_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: apptype_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.doccategory_id_seq
+CREATE SEQUENCE public.apptype_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -152,38 +116,33 @@ CREATE SEQUENCE public.doccategory_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.doccategory_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.apptype_id_seq OWNER TO postgres;
 
 --
--- Name: doccategory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: apptype_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.doccategory_id_seq OWNED BY public.doccategory.id;
+ALTER SEQUENCE public.apptype_id_seq OWNED BY public.apptype.id;
 
 
 --
--- Name: docprojanalisis; Type: TABLE; Schema: public; Owner: postgres
+-- Name: codelang; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.docprojanalisis (
+CREATE TABLE public.codelang (
     id integer NOT NULL,
-    project character varying(50) NOT NULL,
-    updatedate date DEFAULT CURRENT_DATE NOT NULL,
-    dtype character varying(50) NOT NULL,
-    dcategory character varying(50) NOT NULL,
-    content text DEFAULT 'undefined'::text NOT NULL,
-    durl character varying(50) NOT NULL,
-    dpath character varying(50) NOT NULL
+    name character varying(20) NOT NULL,
+    description character varying(150) NOT NULL
 );
 
 
-ALTER TABLE public.docprojanalisis OWNER TO postgres;
+ALTER TABLE public.codelang OWNER TO postgres;
 
 --
--- Name: docprojanalisis_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: codelang_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.docprojanalisis_id_seq
+CREATE SEQUENCE public.codelang_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -192,34 +151,40 @@ CREATE SEQUENCE public.docprojanalisis_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.docprojanalisis_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.codelang_id_seq OWNER TO postgres;
 
 --
--- Name: docprojanalisis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: codelang_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.docprojanalisis_id_seq OWNED BY public.docprojanalisis.id;
+ALTER SEQUENCE public.codelang_id_seq OWNED BY public.codelang.id;
 
 
 --
--- Name: doctype; Type: TABLE; Schema: public; Owner: postgres
+-- Name: task; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.doctype (
+CREATE TABLE public.task (
     id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    dataformat character varying(50) NOT NULL,
-    description character varying(255) DEFAULT 'undefined'::character varying NOT NULL
+    tasktype_id integer NOT NULL,
+    codelang_id integer NOT NULL,
+    workflow_id integer NOT NULL,
+    orden integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description text,
+    files text,
+    folders text,
+    final boolean DEFAULT false
 );
 
 
-ALTER TABLE public.doctype OWNER TO postgres;
+ALTER TABLE public.task OWNER TO postgres;
 
 --
--- Name: doctype_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: task_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.doctype_id_seq
+CREATE SEQUENCE public.task_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -228,130 +193,13 @@ CREATE SEQUENCE public.doctype_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.doctype_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.task_id_seq OWNER TO postgres;
 
 --
--- Name: doctype_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.doctype_id_seq OWNED BY public.doctype.id;
-
-
---
--- Name: proglanguage; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.proglanguage (
-    id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    description character varying(255) NOT NULL
-);
-
-
-ALTER TABLE public.proglanguage OWNER TO postgres;
-
---
--- Name: proglanguage_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.proglanguage_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.proglanguage_id_seq OWNER TO postgres;
-
---
--- Name: proglanguage_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.proglanguage_id_seq OWNED BY public.proglanguage.id;
-
-
---
--- Name: server; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.server (
-    id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    srvtype character varying(50) NOT NULL,
-    description character varying(255) DEFAULT 'undefined'::character varying NOT NULL,
-    config text DEFAULT 'undefined'::text NOT NULL,
-    usedocker boolean DEFAULT false NOT NULL,
-    useclaude boolean DEFAULT false NOT NULL,
-    motor character varying(100) DEFAULT 'undefined'::character varying NOT NULL,
-    username character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    userpassword character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    application character varying(150) DEFAULT 'undefined'::character varying NOT NULL,
-    dbversion character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    port character varying(10) DEFAULT 'undefined'::character varying NOT NULL,
-    url character varying(250) DEFAULT 'undefined'::character varying NOT NULL,
-    exposedb boolean DEFAULT false NOT NULL,
-    exposeapi boolean DEFAULT false NOT NULL,
-    scriptstart text DEFAULT 'undefined'::text NOT NULL,
-    scriptstop text DEFAULT 'undefined'::text NOT NULL,
-    scriptscheck text DEFAULT 'undefined'::text NOT NULL
-);
-
-
-ALTER TABLE public.server OWNER TO postgres;
-
---
--- Name: server_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.server ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.server_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- Name: service; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.service (
-    id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    stype character varying(50) NOT NULL,
-    application character varying(150) DEFAULT 'undefined'::character varying NOT NULL,
-    description character varying(255) DEFAULT 'undefined'::character varying NOT NULL,
-    config text DEFAULT 'undefined'::text NOT NULL,
-    motor character varying(100) DEFAULT 'undefined'::character varying NOT NULL,
-    dbversion character varying(10) DEFAULT 'undefined'::character varying NOT NULL,
-    username character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    userpassword character varying(50) DEFAULT 'undefined'::character varying NOT NULL,
-    port character varying(10) DEFAULT 'undefined'::character varying NOT NULL,
-    url character varying(250) DEFAULT 'undefined'::character varying NOT NULL,
-    scriptstart text DEFAULT 'undefined'::text NOT NULL,
-    scriptstop text DEFAULT 'undefined'::text NOT NULL,
-    scriptscheck text DEFAULT 'undefined'::text NOT NULL
-);
-
-
-ALTER TABLE public.service OWNER TO postgres;
-
---
--- Name: service_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.service ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.service_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+ALTER SEQUENCE public.task_id_seq OWNED BY public.task.id;
 
 
 --
@@ -361,7 +209,7 @@ ALTER TABLE public.service ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 CREATE TABLE public.tasktype (
     id integer NOT NULL,
     name character varying(100) NOT NULL,
-    description text
+    description character varying(200) NOT NULL
 );
 
 
@@ -388,45 +236,6 @@ ALTER SEQUENCE public.tasktype_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.tasktype_id_seq OWNED BY public.tasktype.id;
 
---
--- Name: task; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.task (
-    id integer NOT NULL,
-    workflow_id integer,
-    name character varying(255) NOT NULL,
-    wtype character varying(100) NOT NULL,
-    description text,
-    files text,
-    folders text,
-    task_order integer NOT NULL,
-    is_final_task boolean DEFAULT false
-);
-
-
-ALTER TABLE public.task OWNER TO postgres;
-
---
--- Name: task_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.task_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-ALTER SEQUENCE public.task_id_seq OWNER TO postgres;
-
---
--- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.task_id_seq OWNED BY public.task.id;
-
 
 --
 -- Name: workflow; Type: TABLE; Schema: public; Owner: postgres
@@ -434,14 +243,11 @@ ALTER SEQUENCE public.task_id_seq OWNED BY public.task.id;
 
 CREATE TABLE public.workflow (
     id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    context_codelang character varying(50),
-    context_main character varying(255),
-    context_app character varying(255),
-    context_folder character varying(255),
-    context_libs text,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+    name character varying(100) NOT NULL,
+    description character varying(500) DEFAULT 'undefined'::character varying NOT NULL,
+    application character varying(50),
+    fpath character varying(500),
+    updated date DEFAULT CURRENT_DATE NOT NULL
 );
 
 
@@ -473,42 +279,21 @@ ALTER SEQUENCE public.workflow_id_seq OWNED BY public.workflow.id;
 -- Name: application id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.application ALTER COLUMN id SET DEFAULT nextval('public.application_id_seq'::regclass);
+ALTER TABLE ONLY public.application ALTER COLUMN id SET DEFAULT nextval('public.aplication_id_seq'::regclass);
 
 
 --
--- Name: apptypes id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: apptype id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.apptypes ALTER COLUMN id SET DEFAULT nextval('public.apptypes_id_seq'::regclass);
-
-
---
--- Name: doccategory id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.doccategory ALTER COLUMN id SET DEFAULT nextval('public.doccategory_id_seq'::regclass);
+ALTER TABLE ONLY public.apptype ALTER COLUMN id SET DEFAULT nextval('public.apptype_id_seq'::regclass);
 
 
 --
--- Name: docprojanalisis id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: codelang id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.docprojanalisis ALTER COLUMN id SET DEFAULT nextval('public.docprojanalisis_id_seq'::regclass);
-
-
---
--- Name: doctype id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.doctype ALTER COLUMN id SET DEFAULT nextval('public.doctype_id_seq'::regclass);
-
-
---
--- Name: proglanguage id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.proglanguage ALTER COLUMN id SET DEFAULT nextval('public.proglanguage_id_seq'::regclass);
+ALTER TABLE ONLY public.codelang ALTER COLUMN id SET DEFAULT nextval('public.codelang_id_seq'::regclass);
 
 
 --
@@ -533,67 +318,59 @@ ALTER TABLE ONLY public.workflow ALTER COLUMN id SET DEFAULT nextval('public.wor
 
 
 --
--- Name: agent agent_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.agent
-    ADD CONSTRAINT agent_pkey PRIMARY KEY (id);
-
-
---
--- Name: application application_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: application aplication_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.application
-    ADD CONSTRAINT application_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT aplication_name_key UNIQUE (name);
 
 
 --
--- Name: apptypes apptypes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: application aplication_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.apptypes
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT aplication_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: apptype apptypes_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.apptype
+    ADD CONSTRAINT apptypes_name_key UNIQUE (name);
+
+
+--
+-- Name: apptype apptypes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.apptype
     ADD CONSTRAINT apptypes_pkey PRIMARY KEY (id);
 
 
 --
--- Name: doccategory doccategory_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: codelang codelang_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.doccategory
-    ADD CONSTRAINT doccategory_pkey PRIMARY KEY (id);
-
-
---
--- Name: docprojanalisis docprojanalisis_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.docprojanalisis
-    ADD CONSTRAINT docprojanalisis_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.codelang
+    ADD CONSTRAINT codelang_name_key UNIQUE (name);
 
 
 --
--- Name: doctype doctype_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: codelang codelang_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.doctype
-    ADD CONSTRAINT doctype_pkey PRIMARY KEY (id);
-
-
---
--- Name: proglanguage proglanguage_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.proglanguage
-    ADD CONSTRAINT proglanguage_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.codelang
+    ADD CONSTRAINT codelang_pkey PRIMARY KEY (id);
 
 
 --
--- Name: server server_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: task task_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.server
-    ADD CONSTRAINT server_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.task
+    ADD CONSTRAINT task_name_key UNIQUE (name);
 
 
 --
@@ -621,11 +398,51 @@ ALTER TABLE ONLY public.tasktype
 
 
 --
+-- Name: workflow workflow_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.workflow
+    ADD CONSTRAINT workflow_name_key UNIQUE (name);
+
+
+--
 -- Name: workflow workflow_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.workflow
     ADD CONSTRAINT workflow_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: application aplication_apptype_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT aplication_apptype_id_fkey FOREIGN KEY (apptype_id) REFERENCES public.apptype(id) ON DELETE CASCADE;
+
+
+--
+-- Name: application aplication_codelang_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT aplication_codelang_id_fkey FOREIGN KEY (codelang_id) REFERENCES public.codelang(id) ON DELETE CASCADE;
+
+
+--
+-- Name: task task_codelang_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.task
+    ADD CONSTRAINT task_codelang_id_fkey FOREIGN KEY (codelang_id) REFERENCES public.codelang(id) ON DELETE CASCADE;
+
+
+--
+-- Name: task task_tasktype_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.task
+    ADD CONSTRAINT task_tasktype_id_fkey FOREIGN KEY (tasktype_id) REFERENCES public.tasktype(id) ON DELETE CASCADE;
 
 
 --

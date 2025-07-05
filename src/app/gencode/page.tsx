@@ -43,10 +43,10 @@ export default function PageGenCode() {
     const appRef = useRef<AppIndex>(null);
 
     ////ModuleConfig.ACTIVE_SECTION
+    const [code, setCode] = useState<string>(AppConstants.NOT_DEF);
     const [section, setSection] = useState<string|null>(null);
 
-    //let section:string|null =  null;
-    let code:string =  AppConstants.NOT_DEF;
+
     let initialized: boolean = false;
 
     useEffect(() => {
@@ -55,6 +55,7 @@ export default function PageGenCode() {
         const init = async () => {
             //store dbSquema in SessionStorage...................................
             const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
+            //alert(dbSquema);
             AppContext.saveDbSquema(dbSquema);  
             //const val = AppContext.readDbSquema();
             //console.log("DB Squema loaded:", val);
@@ -71,8 +72,8 @@ export default function PageGenCode() {
     }, []);
 
     const onCodeResult= (datacode: string) => {
-        code = datacode;
-        console.log("Data received from InputEditor:", datacode);
+        //console.log("Data received from InputEditor:", datacode);
+        setCode(datacode);        
     }
 
     const loadSection = (sectionId: string) => {
