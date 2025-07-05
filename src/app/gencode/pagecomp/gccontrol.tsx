@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
+import { TOption } from "@/common/types";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 //import { SchemaService } from "@/client/metadata/schemaservice";
@@ -10,44 +11,33 @@ import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes
 import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
-import { XInputTextArea } from "@/radix/input/inptextarea";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
-import { InputFiles } from "@/radix/notready/inputfiles";
-import { RadixConfTexts } from "@/radix/radixconf";
-import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
-import { ModuleConfig } from "../config";
+import { GenCodeModuleConfig } from "@/app/gencode/config";
 import { XInputSelect } from "@/radix/input/inpselect";
-import { CodeGenConfig } from "@/codegen/cgconfig";
 
-import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
-import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
-import { PyEntServiceFilesOps } from "@/codegen/operations/pyentservicefilesops";
-import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
-import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
-import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
-
-import { ShowAlerts } from "@/common/util/showalerts";
-
 import { ThemePagesStyles } from "@/radix/radixtheme";
-import { SchemaService } from "@/codegen/schemaservice";
-
-import { ServClientTScriptEntities } from "../module/client_tscriptentities";
+import { XPopOver } from "@/radix/container/popover";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
-
-import { TOption } from "@/common/types";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
+
+import { SchemaService } from "@/codegen/schemaservice";
+import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
+import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
+import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
+import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
+import { ServClientTScriptEntities } from "../module/client_tscriptentities";
 import { ServiceClientJson } from "../module/client_json";
 import { ServiceClientJsxForms } from "../module/client_jsxforms";
 import { ServiceClientSqlScripts } from "../module/client_sqlscripts";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
-import { XPopOver } from "@/radix/container/popover";
-import { ModelHelper } from "@/common/util/modelhelper";
+import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
+import { ShowAlerts } from "@/common/util/showalerts";
 
 
-function getSectionOperations(sectionName: string): Option[] {
+function getServCliOperations(sectionName: string): Option[] {
 
     if (sectionName === ServClientTScriptEntities.ID) {
         return TsEntFilesOps.Operations;
@@ -130,7 +120,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         clientJson.current = new ServiceClientJson(db_squema);
 
         //load operations for the selected service
-        const listOperations: Option[] = getSectionOperations(section!);
+        const listOperations: Option[] = getServCliOperations(section!);
         setOperations(listOperations);
         onOpSelected(listOperations[0].id);
         setInitialized(true);       
@@ -157,7 +147,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     }
 
     const onOpSelected = (operationId: string) => {
-        if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
+        if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
             if (operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id) {
                 setShowIncludeDefs(false);
                 setShowRadioList(false);
@@ -194,19 +184,19 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const runOperation = async () => {
 
-        if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
+        if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
             const codecont: string | null = await clientTScriptEntities.current!.executeOperation(
                 operationId,
                 selTableName.current,
                 selGroupTableNames.current);
             ondataresult(codecont!);
         }
-        else if (section === ModuleConfig.SC_TSX_ENTITY_FORMS.id) {
+        else if (section === GenCodeModuleConfig.CLIENT_JSX_FORMS.id) {
 
         }
-        else if (section === ModuleConfig.SC_JSON_ENTITY_FILES.id) { }
-        else if (section === ModuleConfig.SC_TS_SERVICES_FILES.id) { }
-        else if (section === ModuleConfig.SC_SQL_SCRIPTS.id) { }
+        else if (section === GenCodeModuleConfig.CLIENT_JSON.id) { }
+        else if (section === GenCodeModuleConfig.CLIENT_TS_SERVICES.id) { }
+        else if (section === GenCodeModuleConfig.CLIENT_SQL_SCRIPTS.id) { }
     };//end
 
     const renderParamsContent = () => {

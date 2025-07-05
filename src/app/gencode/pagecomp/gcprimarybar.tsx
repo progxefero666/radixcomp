@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
-import { ModuleConfig } from "../config";
+import { GenCodeModuleConfig } from "../config";
 import { AppConstants } from "@/app_front/appconstants";
 import MenuButtons from "@/radix/cbars/btmenu";
 
@@ -16,7 +16,7 @@ interface PrimaryBarProps {
     onselection:(sectionId:string) => void;
 }
 export function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
-    const sections:Option[] = ModuleConfig.SECTIONS
+    const sections:Option[] = GenCodeModuleConfig.CLIENT_SERVICES
 
     return (
         <Flex direction="column" p="3" >            

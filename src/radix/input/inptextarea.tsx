@@ -13,6 +13,7 @@ import { radixTypeComp } from "../radixtypes";
  * InputTextComponent
  */
 interface CompProps {
+    autocommit?: boolean;
     inline?: boolean;
     name?: string;
     label?: string;

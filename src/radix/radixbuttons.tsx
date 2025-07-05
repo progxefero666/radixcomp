@@ -13,7 +13,6 @@ export class RadixButtons {
 
 }//end class
 
-
 export const renderHomeButton = (isPageIndex:boolean) => {
     return (
         <Link href="/" >

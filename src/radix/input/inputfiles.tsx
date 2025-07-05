@@ -4,6 +4,7 @@ import { forwardRef, ChangeEvent } from "react";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 import { RadixConfTexts } from "../radixconf";
 export interface InputFilesProps {
+    autocommit?: boolean;
     disabled?: boolean;
     inline?: boolean;
     readonly?: boolean;

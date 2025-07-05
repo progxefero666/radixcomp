@@ -8,6 +8,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 
 interface CompProps {
+    autocommit?: boolean;
     name: string;
     label?: string;
     inline?: boolean;
