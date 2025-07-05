@@ -81,6 +81,12 @@ export class CodeGenSql {
                         defaultValue = rawDefault;
                     }
                 }
+                if(defaultValue){
+                    if(defaultValue.includes('NOT NULL')){
+                        defaultValue = defaultValue.replace('NOT NULL','').trim();
+                    }
+                }
+
 
                 // Determine format for numeric types using the JSON
                 let format: string | null = null;

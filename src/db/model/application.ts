@@ -24,7 +24,7 @@ export class Application {
     public consumeapi: boolean = false;
     public consumeai: boolean = false;
     public exposedb: boolean = false;
-    public exposeapi: boolean = false ;
+    public exposeapi: boolean = false;
     public updated: Date;
 
     constructor(id: number,

@@ -93,12 +93,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = () => {        
-            const tableClassStr:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex],false);
-            ondataresult(tableClassStr);
 
-        /*
-        ShowAlerts.showCouple(section!,operationId);
-
+        //const tableClassStr:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex],false);
+        //ondataresult(tableClassStr);
+        //ShowAlerts.showCouple(section!,operationId);
+       
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
             if(operationId == TsEntFilesOperations.OP_GET_DEF_CLASS.id){               
             }
@@ -109,7 +108,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             else if(operationId == TsEntFilesOperations.OP_GET_ARRAY_ENT_CLASS.id){
             }
         }
-        else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){
+
+        /*else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){
             if(operationId == JsonEntFilesOperations.OP_A.id){
             }
             else if(operationId == JsonEntFilesOperations.OP_B.id){

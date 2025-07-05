@@ -1,7 +1,8 @@
 "use server";
 
-import { ServerFileUtil } from "@/app_server/serverfileutil";
-import { ServerReader } from "../config";
+import { ServerFileUtil } from "@/app_server/lib/serverfileutil";
+import { ServerReader } from "@/app_server/config";
+
 
 /**
  * Server action to get the content of a text file.

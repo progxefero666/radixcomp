@@ -4,29 +4,16 @@ import { useEffect, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 import { Box, Separator, Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
-import { Option } from "@/common/model/option";
-import { AppConfig } from "@/app_front/appconfig";
 import { AppIndex } from "@/app_front/appindex";
-import MenuButtons from "@/radix/cbars/btmenu";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { RadixConf } from "@/radix/radixconf";
-
-
-import CardCode from "./comp/cardcode";
 import { AppConstants } from "@/app_front/appconstants";
-
-import { CodeGenConfig } from "@/codegen/cgconfig";
-import { ModuleConfig } from "./config";
-import { getTextFile } from "@/app_server/actions/gettextfile";
 import { AppContext } from "@/app_front/appcontext";
-
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
 import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
-
 import { ShowAlerts } from "@/common/util/showalerts";
+import { getSqlSquema } from "@/app_server/xeferodb/sqlscripts";
 
 
 
@@ -54,7 +41,9 @@ export default function PageGenCode() {
         
         const init = async () => {
             //store dbSquema in SessionStorage...................................
-            const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
+            //const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
+            const dbSquema = await getSqlSquema();
+
             //alert(dbSquema);
             AppContext.saveDbSquema(dbSquema);  
             //const val = AppContext.readDbSquema();

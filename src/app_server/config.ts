@@ -23,12 +23,16 @@ export default class ServerConfig {
     public static FOLDER_ROOT:string = ServerConfig.getRootFolderPath(ServerConfig.ENV_DEV);
     public static SUBFOLDER_DATA =  path.join(ServerConfig.FOLDER_ROOT,"data");
 
+    public static XEFERODB_PATH =  path.join(ServerConfig.FOLDER_ROOT,"data");
 
 }//end class
 
+//ServerReader.getXeferoDbPath
 export class ServerReader {
 
-    
+    public static getXeferoDbPath(fname:string):string {
+        return path.join(ServerConfig.XEFERODB_PATH, fname);
+    }
 
     public static getFilePath(fname:string):string {
         return path.join(ServerConfig.SUBFOLDER_DATA, fname);
