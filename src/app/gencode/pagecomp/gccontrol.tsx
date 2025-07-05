@@ -29,17 +29,50 @@ import { AppContext } from "@/app_front/appcontext";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 
 import { ShowAlerts } from "@/common/util/showalerts";
-import { XRadioGroup } from "@/radix/input/inpgrpradio";
+
 import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SchemaService } from "@/codegen/schemaservice";
-import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
-import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
+
 import { ServClientTScriptEntities } from "../module/client_tscriptentities";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
-import { TSelected, TSelection } from "@/common/types";
+import { TSelection } from "@/common/types";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
+import { ServiceClientJson } from "../module/client_json";
+import { ServiceClientJsxForms } from "../module/client_jsxforms";
+import { ServiceClientSqlScripts } from "../module/client_sqlscripts";
+import { ServClientTScriptServices } from "../module/client_tscriptservices";
+
+
+function getSectionOperations(sectionName: string): Option[] {
+
+    if (sectionName === ServClientTScriptEntities.ID) {
+        return TsEntFilesOps.Operations;
+    }
+    else if (sectionName === ServiceClientJsxForms.ID) {
+        return TsxEntFormsOps.Operations;
+    }
+    else if (sectionName === ServClientTScriptServices.ID) {
+        return TsEntServiceFilesOps.Operations;
+    }
+    else if (sectionName === ServiceClientJson.ID) {
+        return JsonEntFilesOps.Operations;
+    }
+    else if (sectionName === ServiceClientSqlScripts.ID) {
+        return JsonEntFilesOps.Operations;
+    }
+    /*
+    else if (sectionName === OP_CATEGORIES.python_serverfiles) {
+        return PyEntServiceFilesOps.Operations;
+    }
+    else if (sectionName === OP_CATEGORIES.sql_db_squema) {
+        return ControlDatabase.Operations;
+    }  
+    */
+    alert("not found");
+    return [];
+}
 
 /**
  * GenCodeControl
@@ -52,23 +85,27 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     //const fileInputRef = useRef<HTMLInputElement>(null);
 
     const [initialized, setInitialized] = useState<boolean>(false);
-    
-    // db objects
-    const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
+
+    // list tables
+
     const [menuListTables, setMenuListTables] = useState<Option[]>([]);
-    const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     
+
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
     const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
     const operationsRef = useRef<HTMLSelectElement>(null);
 
     // operations controllers
-    const selTableName = useRef<string|null>(null);
+    const selTableName = useRef<string | null>(null);
     const selGroupTableNames = useRef<TSelection>(null);
 
     const modelsTableOptions = useRef<Option[]>([]);
-    const ctrTsEntFilesOpsRef = useRef<ServClientTScriptEntities>(null);
+    const clientTScriptEntities = useRef<ServClientTScriptEntities>(null);
+    const clientTScriptServices = useRef<ServClientTScriptServices>(null);
+    const clientJsxForms = useRef<ServiceClientJsxForms>(null);
+    const clientJson = useRef<ServiceClientJson>(null);
+
 
     // UI
     const [includeDefs, setIncludeDefs] = useState<boolean>(false);
@@ -76,39 +113,45 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
 
+    const init = () => {
+        if (section == null) {return;}
+      
+        //step 1: load db schema from SessionStorage
+        const db_squema = AppContext.readDbSquema();
+        const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
+
+        //setDbSquema(db_squema);
+        //setModelTables(db_modeltables);
+        setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
+
+        //set selections
+        modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
+        selTableName.current = db_modeltables[0].name;
+
+        //charge service clients
+        clientTScriptEntities.current = new ServClientTScriptEntities(db_squema);
+        clientTScriptServices.current = new ServClientTScriptServices(db_squema);
+        clientJsxForms.current = new ServiceClientJsxForms(db_squema);
+        clientJson.current = new ServiceClientJson(db_squema);
+
+        //load operations for the selected service
+        const listOperations: Option[] = getSectionOperations(section!);
+        setOperations(listOperations);
+        onOpSelected(listOperations[0].id);
+        setInitialized(true);       
+    };
+
     useEffect(() => {
         if (section == null) { return; }
         if (initialized) { return; }
-
-        const init = async () => {
-            if (section != null) {
-                //step 1: load db schema from SessionStorage
-                const db_squema = AppContext.readDbSquema();
-                const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
-                setDbSquema(db_squema);
-                setModelTables(db_modeltables);
-                setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
-
-                modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
-                selTableName.current = db_modeltables[0].name;
-
-                ctrTsEntFilesOpsRef.current = new ServClientTScriptEntities(db_squema);
-
-                //step 2: load operations for the selected section
-                const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
-                setOperations(listOperations);
-                setOperationId(listOperations[0].id);
-                setInitialized(true);
-            }
-        };
         init();
     }, []);
 
-    const onSelectTable = (tableName:string,compName?:string) => {
+    const onSelectTable = (tableName: string, compName?: string) => {
         selTableName.current = tableName;
     }
 
-    const onSelectTables = (tableNames:TSelection) => {
+    const onSelectTables = (tableNames: TSelection) => {
         selGroupTableNames.current = tableNames;
     };//end
 
@@ -118,7 +161,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         }
     }
 
-    const onOpSelected = async (operationId: string) => {
+    const onOpSelected = (operationId: string) => {
         if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
             if (operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id) {
                 setShowIncludeDefs(false);
@@ -157,18 +200,18 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const runOperation = async () => {
 
         if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
-            const codecont:string|null = await ctrTsEntFilesOpsRef.current!.executeOperation(
+            const codecont: string | null = await clientTScriptEntities.current!.executeOperation(
                 operationId,
                 selTableName.current,
                 selGroupTableNames.current);
-            ondataresult(codecont!);    
+            ondataresult(codecont!);
         }
-        else if(section === ModuleConfig.SC_TSX_ENTITY_FORMS.id){
+        else if (section === ModuleConfig.SC_TSX_ENTITY_FORMS.id) {
 
         }
-        else if(section === ModuleConfig.SC_JSON_ENTITY_FILES.id){}
-        else if(section === ModuleConfig.SC_TS_SERVICES_FILES.id){}
-        else if(section === ModuleConfig.SC_DB_SQUEMA.id){}        
+        else if (section === ModuleConfig.SC_JSON_ENTITY_FILES.id) { }
+        else if (section === ModuleConfig.SC_TS_SERVICES_FILES.id) { }
+        else if (section === ModuleConfig.SC_SQL_SCRIPTS.id) { }
     };//end
 
     const renderParamsContent = () => {
@@ -213,11 +256,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         return (
             <Flex width="100%" direction="column"  >
                 {showRadioList ?
-                <XInputSelect name="selectTable"  
-                              autocommit={true}
-                              collection={modelsTableOptions.current}
-                              value={modelsTableOptions.current[0].id}
-                              onchange={onSelectTable}/> : null}
+                    <XInputSelect name="selectTable"
+                        autocommit={true}
+                        collection={modelsTableOptions.current}
+                        value={modelsTableOptions.current[0].id}
+                        onchange={onSelectTable} /> : null}
                 {showCheckList ?
                     <XCheckGroup name="selectTables"
                         autocommit={true}
@@ -239,22 +282,25 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             <SeparatorH />
 
             {initialized ?
-            <Flex width="100%" direction="row" pt="2"   >
-                <Box width="30%" pb="2" >
-                    {renderMainContent()}
-                </Box>
-                <Box width="70%" >
-                    <SeparatorV />
-                    {renderParamsContent()}
-                </Box>
-            </Flex>: null}
+                <Flex width="100%" direction="row" pt="2"   >
+                    <Box width="30%" pb="2" >
+                        {renderMainContent()}
+                    </Box>
+                    <Box width="70%" >
+                        <SeparatorV />
+                        {renderParamsContent()}
+                    </Box>
+                </Flex> : null}
 
         </Flex>
     );
 
-}//end InputEditor
+}//end component
+
 
 /*
+    //const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
+    //const [modelTables, setModelTables] = useState<ModelTable[]>([]);
     const onFileCharged = async (file: File, name?: string) => {
         if (file) { alert(file.name); }
     };//end

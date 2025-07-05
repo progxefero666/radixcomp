@@ -13,6 +13,7 @@ import { ServClientTScriptEntities } from "@/app/gencode/module/client_tscripten
 import { ServiceClientJsxForms } from "@/app/gencode/module/client_jsxforms";
 import { ServClientTScriptServices } from "@/app/gencode/module/client_tscriptservices";
 import { ServiceClientJson } from "@/app/gencode/module/client_json";
+import { ServiceClientSqlScripts } from "@/app/gencode/module/client_sqlscripts";
 
 
 export enum OP_CATEGORIES {
@@ -62,32 +63,7 @@ export class CodeGenConfig {
         return imports;
     }
 
-    public static getSectionOperations(sectionName: string): Option[] {
 
-        if (sectionName === ServClientTScriptEntities.ID) {
-            return TsEntFilesOps.Operations;
-        }
-        else if (sectionName === ServiceClientJsxForms.ID) {
-            return TsxEntFormsOps.Operations;
-        }
-        else if (sectionName === ServClientTScriptServices.ID) {
-            return TsEntServiceFilesOps.Operations;
-        }        
-        else if (sectionName === ServiceClientJson.ID) {
-            return JsonEntFilesOps.Operations;
-        }
-
-        /*
-        else if (sectionName === OP_CATEGORIES.python_serverfiles) {
-            return PyEntServiceFilesOps.Operations;
-        }
-        else if (sectionName === OP_CATEGORIES.sql_db_squema) {
-            return ControlDatabase.Operations;
-        }  
-        */      
-        alert("not found");
-        return [];
-    }
 
 }//end class
 
