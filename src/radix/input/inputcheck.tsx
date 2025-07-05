@@ -7,7 +7,7 @@ import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 
-interface InputCheckIfc {
+interface CompProps {
     name: string;
     label?: string;
     inline?: boolean;
@@ -17,7 +17,7 @@ interface InputCheckIfc {
     onchange?: (value: string, name?: string) => void;
     autofocus?: boolean;
 }
-export const InputCheck = forwardRef<HTMLInputElement, InputCheckIfc>(({
+export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
     name,label,value,inline,readonly,disabled,autofocus,onchange }, ref) => {
 
     const size = RadixConf.SIZES.size_2;

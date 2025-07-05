@@ -48,7 +48,6 @@ interface CompProps {
 export function GenCodeControl({ section, ondataresult }: CompProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-
     const ctrTsEntFilesOpsRef = useRef<GcControlTsEntFilesOps>(null);
 
     const [dbSquema,setDbSquema] = useState<string>(AppConstants.NOT_DEF);  
@@ -62,6 +61,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [operationId,setOperationId] = useState<string>(AppConstants.NOT_DEF);    
     const operationsRef = useRef<HTMLSelectElement>(null);
     
+    // UI
+    const [showRadioList,setShowRadioList] = useState<boolean>(false);  
+    const [showCheckList,setShowCheckList] = useState<boolean>(false);  
+
     useEffect(() => {
         if(section==null) { return; }
         if(initialized) { return; }
@@ -96,7 +99,23 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const onOpSelected = async (operationId: string) => {
-        setOperationId(operationId);
+       
+        if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){  
+            if(operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id){
+               
+            }
+            else if(operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id){
+            }
+            else if(operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id){                
+            }
+            else if(operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id){                
+            }            
+            else if(operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id){                
+            }        
+            else if(operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id){                
+            }                   
+        }
+         setOperationId(operationId);
     };//end
 
     const runOperation = async () => {        
@@ -105,39 +124,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         const modelTableSel: ModelTable = modelTables[tableIndex];
 
         if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){    
-
             ctrTsEntFilesOpsRef.current!.executeOperation(operationId);
-
-            /*
-            if(operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id){  
-                const contcode: string | null 
-                    = await getTypeScriptTableContent(dbSquema,operationId,modelTableSel.name);
-                if(contcode != null) {
-                    ondataresult(contcode);
-                }
-            }
-            else if(operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id){
-                const contcode: string | null 
-                    = await getTypeScriptTableContent(dbSquema,operationId,modelTableSel.name); 
-                if(contcode != null) {
-                    ondataresult(contcode);
-                }
-            }
-            else if(operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id){
-                const allTablesDefClass: string | null 
-                    = await getTypeScriptArrayTableContent(dbSquema,operationId);
-                if(allTablesDefClass != null) {
-                    ondataresult(allTablesDefClass);
-                }
-            }
-            else if(operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id){
-                const allTablesEntClass: string | null 
-                    = await getTypeScriptArrayTableContent(dbSquema,operationId);
-                if(allTablesEntClass != null) {
-                    ondataresult(allTablesEntClass);
-                }
-            }
-            */
         }
 
         /*else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){
@@ -170,31 +157,28 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     };//end
 
+    const renderParamsContent = () => {
+        return (
+            <p>saas</p>
+        )
+    }
+
     const renderMainContent = () => {
         let showInfoPanel: boolean = false;
         //console.log(modelTables[tableIndex].name);
         //console.log("Model Tables:", modelTables);
-        return (
-            <Flex width="100%" direction="row" pt="2"   >
-                <Box width="30%" pb="2" >          
-                    <XRadioGroup
-                        autocommit={true}
-                        key={modelTables[tableIndex].name}
-                        onselect={onSelectTable}
-                        options={menuListTables}
-                        value={modelTables[tableIndex].name}
-                        direction="column" />                                                       
-                </Box>
+        //XCheckGroup
 
-                <Box width="70%" >
-                    <SeparatorV />
-                    {showInfoPanel ?
-                        <div className="w-full">
-                            <XInputTextArea value={"rightPanelData"} />
-                        </div>
-                        : null}
-                </Box>
-            </Flex>
+        return (
+            <>
+                <XRadioGroup
+                    autocommit={true}
+                    key={modelTables[tableIndex].name}
+                    onselect={onSelectTable}
+                    options={menuListTables}
+                    value={modelTables[tableIndex].name}
+                    direction="column" />              
+            </>
         );
     }//end renderMainContent
 
@@ -202,30 +186,45 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
 
             <Flex width="100%" direction="row" pb="2" justify="between"  >
+                {initialized ? 
+                <>
                 <Box>                    
-                    {initialized ? 
-                      <InputSelect 
-                            key={operations[0].id}
-                            inline={true}
-                            name="operations"
-                            label="Operation: "
-                            ref={operationsRef}
-                            collection={operations}
-                            value={operationId ?? ""}
-                            onchange={onOpSelected}
-                            disabled={false} /> : null}                    
+                    <InputSelect 
+                        key={operations[0].id}
+                        inline={true}
+                        name="operations"
+                        label="Operation: "
+                        ref={operationsRef}
+                        collection={operations}
+                        value={operationId ?? ""}
+                        onchange={onOpSelected}
+                        disabled={false} />                 
                 </Box>
-
                 <Box>
-                    {initialized ? 
-                        <Button onClick={runOperation} color = "green">
-                            Run
-                        </Button> : null}
+
                 </Box>
+                <Box>                    
+                    <Button onClick={runOperation} color = "green">
+                        Run
+                    </Button> 
+                </Box>                
+                </>
+
+                : null}
             </Flex>
 
             <SeparatorH />
-             {initialized ? renderMainContent(): null}  
+            {initialized ? 
+                <Flex width="100%" direction="row" pt="2"   >
+                    <Box width="30%" pb="2" >          
+                        {renderMainContent()}                                                  
+                    </Box>
+                    <Box width="70%" >
+                        <SeparatorV />
+                        {renderParamsContent()}
+                    </Box>
+                </Flex>
+            : null}  
 
             <SeparatorH />
             <Box width={"100%"}>

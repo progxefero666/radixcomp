@@ -5,6 +5,7 @@ import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CodeGenConfig } from "../cgconfig";
 
 /**
+ * CodeGenHelper.getModelsTableNames
  * class CodeGenHelper.getSelectModelTables(modelTables:ModelTable[],names:string[])
  */
 export class CodeGenHelper {
@@ -42,16 +43,14 @@ export class CodeGenHelper {
         return content;
     }//end
 
-     public static getModelsTableNames(modelTables:ModelTable[],name:string): string[] {
+    public static getModelsTableNames(modelTables:ModelTable[]): string[] {
         const names: string[] = [];
-        for (const table of modelTables) {
-            if (table.name === name) {
+        for (const table of modelTables) {            
                 names.push(table.name);
-            }
         }
         return names;   
     }
-    
+
     public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
         let tableIndex:number = -1;
         for (let idx=0;idx<modelTables.length;idx++) {
@@ -96,6 +95,19 @@ export class CodeGenHelper {
         return lines.join('\n');
     }
     
+    //CodeGenHelper.getStringsJoined
+    public static getStringsJoined(values:string[]): string {
+        let result: string = "";
+        for (let itemIdx=0;itemIdx<values.length;itemIdx++) {
+            result+= values[itemIdx];
+            if(itemIdx<(values.length-1)) {
+                result+= "|";
+            }
+        }
+        return result;   
+    }
+    
+
 }//end class
 
 
