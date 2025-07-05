@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { TOption } from "@/common/types";
 import { Option } from "@/common/model/option";
-import { Box, Grid, Separator, Flex, Text, Button, Link  } from "@radix-ui/themes";
+import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 
 
 import { SeparatorH } from "@/radix/container/separatorh";
@@ -34,6 +34,7 @@ import ContCollapsible from "@/radix/container/collapsible";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
 import { Label } from "@radix-ui/react-context-menu";
+import { AppConfig } from "@/app_front/appconfig";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
 
@@ -47,7 +48,7 @@ interface CompProps {
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
 
-    const [squemaPath, setSquemaPath] = useState<string>("");
+    const [squemaPath, setSquemaPath] = useState<string>(AppConfig.DBSQUEMA_FPATH);
 
     //const fileInputRef = useRef<HTMLInputElement>(null);
     const [initialized, setInitialized] = useState<boolean>(false);
@@ -108,7 +109,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const onSelectTable = (tableName: string, compName?: string) => {
         selTableName.current = tableName;
-    }
+    };
 
     const onSelectTables = (selecction: TOption[]) => {
         selGroupTableNames.current = selecction;
@@ -118,7 +119,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (name === "opt_includedef") {
             setIncludeDefs(value);
         }
-    }
+    };
 
     const onOpSelected = (operationId: string) => {
         if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
@@ -184,11 +185,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         value={false} /> : null}
             </Box>
         )
-    }
+    };
 
     const renderHeader = () => {
         return (
-            <Flex width="100%" direction="row" justify="between" pb="2" align="center" >
+            <Flex width="100%" direction="row" justify="between" mt="2" pb="2" align="center" >
                 <XInputSelect
                     inline={true}
                     label="Operation: "
@@ -201,71 +202,98 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 </Button>
             </Flex>
         );
-    }//end  
+    };//end  
 
     const renderMainContent = () => {
         return (
-            <Flex width="100%" direction="column" pt="2" >
+            <Flex width="100%" direction="column" py="2" >
                 <Flex width="100%" direction="row"  >
+                    <Box mr="2">
+                        <Label>Select Tables: </Label>
+                    </Box>
                     {showRadioList ?
                         <XInputSelect name="selectTable"
                             inline={true}
-                            label={"Select Tables "}
                             autocommit={true}
                             collection={modelsTableOptions.current}
                             default={modelsTableOptions.current[0].id}
                             onchange={onSelectTable} /> : null}
                     {showCheckList ?
-                        <XPopOver text="select">
-                            <XCheckGroup
-                                label={"Select Tables "}
-                                name="selectTables"
-                                autocommit={true}
-                                inline={false}
-                                collection={menuListTables}
-                                onselect={onSelectTables} />
-                        </XPopOver> : null}
+                        <Box mr="2">
+                            <XPopOver text="select">
+                                <XCheckGroup
+                                    name="selectTables"
+                                    autocommit={true}
+                                    inline={true}
+                                    collection={menuListTables}
+                                    onselect={onSelectTables} />
+                            </XPopOver>
+                        </Box> : null}
                 </Flex>
             </Flex>
         );
-    }//end renderMainContent
+    };//end renderMainContent
 
-    //
+
     const renderDbPanel = () => {
-        const  barbuttonscfg: BarButtonsCfg = BARCFG_EXPORT;
+        const barbuttonscfg: BarButtonsCfg = BARCFG_EXPORT;
         return (
             <ContCollapsible title="Database Config." >
-                <Flex width="100%" direction="column" pt="2">
+                <Flex width="100%" direction="column" pt="2" pl="2">
                     <Text size="3" >
                         <Flex width="100%" direction="row" justify="between" gapY="1">
                             <Box>
                                 <Label>Database Schema: </Label>
                             </Box>
                             <Box>
-                                <Button color="blue"></Button>
+                                <Button color="blue" >
+                                    upload
+                                </Button>
                             </Box>
-
-                            <Box>
-                                <Button color="blue"></Button>
-                            </Box>
-                            
+                        </Flex>
+                        <SeparatorH />
+                        <Flex width="100%" direction="row" mt="2" >
+                            {squemaPath}
                         </Flex>
                     </Text>
+
                     <Box width="100%" >
-                    </Box>    
+                    </Box>
                 </Flex>
             </ContCollapsible>
         )
-    }
+    };
+
+    const renderSelection = () => {
+        return (
+            <Box>
+                <p>as</p>
+            </Box>
+        )
+    };
+
+
+    const renderInputPanel = () => {
+        return (
+            <Box>
+                <p>as</p>
+            </Box>
+        )
+    };
 
     return (
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
-            {renderDbPanel()}
-            <SeparatorH />
-            {initialized ? renderHeader() : null}
-            <SeparatorH />
-            {initialized ? renderMainContent() : null}
-            <SeparatorH />
+            {initialized ? 
+                <>
+                    renderDbPanel()
+                    <SeparatorH /> 
+                    renderHeader() 
+                    <SeparatorH />
+                    renderMainContent()
+                    <SeparatorH />     
+                    renderSelection()       
+                </>
+                : null}
         </Flex>
     );
 
@@ -273,12 +301,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
 
 /*
-    //const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
-    //const [modelTables, setModelTables] = useState<ModelTable[]>([]);
-    const onFileCharged = async (file: File, name?: string) => {
-        if (file) { alert(file.name); }
-    };//end
-
     <InputFiles
         ref={fileInputRef}
         name="inputFileCode"

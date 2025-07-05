@@ -30,12 +30,13 @@ export default function ContCollapsible({ id, barbuttonscfg, title, intro, child
     const onClick = (operation: string) => {
     }
 
+    //backgroundColor: 'var(--gray-a2)',
     const boxStyle = {
-        backgroundColor: 'var(--gray-a2)',
-        borderRadius: 'var(--radius-3)',
+        
+        borderRadius: 'var(--radius-1)',
         border: '2px solid var(--blue-7)',
         padding: 'var(--space-2)',
-        boxShadow: '0px 0px 5px rgba(222, 251, 137, 0.9)' 
+        boxShadow: '0px 0px 1px rgba(253, 72, 6, 0.9)' 
     };
 
     return (
@@ -46,7 +47,7 @@ export default function ContCollapsible({ id, barbuttonscfg, title, intro, child
                 open={open}
                 onOpenChange={setOpen}>
 
-                <Flex align="start"  width={"100%"} gapX={"2"} >
+                <Flex align="start"  width={"100%"} pl="2" pt="1"  gapX={"2"} >
 
                     <Collapsible.Trigger asChild>
                         <IconButton variant={RadixConf.VARIANTS.ghost} >
