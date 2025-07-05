@@ -10,7 +10,7 @@ interface CompProps {
     text: string;    
     children?: React.ReactNode;   
 }
-export const ContCollapsible = ({text,children,barbuttonscfg}: CompProps) => {
+export const XPopOver = ({text,children,barbuttonscfg}: CompProps) => {
 
     const onClick = (btn:HTMLButtonElement) => {
         alert(btn.value);

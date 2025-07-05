@@ -43,6 +43,7 @@ import { ServiceClientJson } from "../module/client_json";
 import { ServiceClientJsxForms } from "../module/client_jsxforms";
 import { ServiceClientSqlScripts } from "../module/client_sqlscripts";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
+import { XPopOver } from "@/radix/container/popover";
 
 
 function getSectionOperations(sectionName: string): Option[] {
@@ -254,11 +255,14 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         value={modelsTableOptions.current[0].id}
                         onchange={onSelectTable} /> : null}
                 {showCheckList ?
-                    <XCheckGroup name="selectTables"
-                        autocommit={true}
-                        inline={false}
-                        options={menuListTables}
-                        onselect={onSelectTables} /> : null}
+                    <XPopOver text="select">
+                        <XCheckGroup 
+                            name="selectTables"
+                            autocommit={true}
+                            inline={false}
+                            options={menuListTables}
+                            onselect={onSelectTables} />
+                    </XPopOver> : null}
             </Flex>
         );
     }//end renderMainContent

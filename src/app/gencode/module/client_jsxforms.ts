@@ -17,7 +17,7 @@ import { JsonHelper } from "@/common/util/jsonhelper";
  */
 export class ServiceClientJsxForms extends GenCodeModuleControl {
 
-    public static readonly ID: string =  "typescript_entityfiles";
+    public static readonly ID: string =  "jsx_forms";
     public static readonly OPTION_VALUE: string =  "JSX Forms files";
 
     public constructor(sqlsquema:string) {
