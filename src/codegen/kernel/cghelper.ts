@@ -5,7 +5,7 @@ import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CodeGenConfig } from "../cgconfig";
 
 /**
- * class CodeGenHelper.applyTabsToStringBlock
+ * class CodeGenHelper.getSelectModelTables(modelTables:ModelTable[],names:string[])
  */
 export class CodeGenHelper {
 
@@ -42,6 +42,15 @@ export class CodeGenHelper {
         return content;
     }//end
 
+     public static getModelsTableNames(modelTables:ModelTable[],name:string): string[] {
+        const names: string[] = [];
+        for (const table of modelTables) {
+            if (table.name === name) {
+                names.push(table.name);
+            }
+        }
+        return names;   
+    }
     
     public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
         let tableIndex:number = -1;
@@ -54,6 +63,17 @@ export class CodeGenHelper {
         }
         return tableIndex;
     }//end  
+
+    public static getSelectModelTables(modelTables:ModelTable[],names:string[]): ModelTable[] {
+        const selectedTables: ModelTable[] = [];
+        for (const name of names) {
+            const index = CodeGenHelper.getModelTableIndex(modelTables, name);
+            if (index >= 0) {
+                selectedTables.push(modelTables[index]);
+            }
+        }
+        return selectedTables;  
+    }
 
     public static getTabsSpace(countTabs:number): string {
         return CodeGenConfig.TAB_4.repeat(countTabs);

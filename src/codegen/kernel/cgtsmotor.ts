@@ -18,7 +18,9 @@ export class CodeGenTsMotor {
     public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
         let content: string = "";      
         
-        if(includeDef){
+        let applyIncludeDef:boolean = includeDef ?? false;
+
+        if(applyIncludeDef){
             content +=  CodeGenTsMotor.getEntityDefClass(tableModel);
         }
 
@@ -115,9 +117,10 @@ export class CodeGenTsMotor {
         return content;
     }
     
-    public static getArrayEntityClass(tableModel: ModelTable[],includeDef:boolean): string {
+    public static getArrayEntityClass(tableModel: ModelTable[],includeDef?:boolean): string {
         let content: string = "";
         
+        let applyIncludeDef:boolean = includeDef ?? false;
         // 1. Imports una sola vez al principio
         content += CodeGenConfig.getKernelImports();
         
@@ -130,7 +133,7 @@ export class CodeGenTsMotor {
             content += `\n`;
             
             // Bloque 2: Clase normal (extraer solo la parte sin imports ni Def)
-            const fullClassContent = CodeGenTsMotor.getEntityClass(table,includeDef);
+            const fullClassContent = CodeGenTsMotor.getEntityClass(table,applyIncludeDef);
             // Quitar la parte de imports y Def, quedarnos solo con la clase y tipo
             const lines = fullClassContent.split('\n');
             let startIndex = -1;

@@ -19,11 +19,11 @@ import { ModuleConfig } from "../config";
 import { InputSelect } from "@/radix/input/inpselect";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 
-import { TsEntFilesOperations } from "@/codegen/operations/tsentfilesops";
-import { JsonEntFilesOperations } from "@/codegen/operations/jsonentfilesops";
-import { PyEntServiceFilesOperations } from "@/codegen/operations/pyentservicefilesops";
-import { TsxEntFormsOperations } from "@/codegen/operations/tsxentformsops";
-import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefilesops";
+import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
+import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
+import { PyEntServiceFilesOps } from "@/codegen/operations/pyentservicefilesops";
+import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
+import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
@@ -33,6 +33,7 @@ import { XRadioGroup } from "@/radix/input/inpgrpradio";
 import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SchemaService } from "@/codegen/schemaservice";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
+import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
 
  
 
@@ -92,20 +93,39 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         setOperationId(operationId);
     };//end
 
-    const runOperation = () => {        
-
-        //const tableClassStr:string = CodeGenTsMotor.getEntityClass(modelTables[tableIndex],false);
+    const runOperation = async () => {        
         //ondataresult(tableClassStr);
         //ShowAlerts.showCouple(section!,operationId);
-       
-        if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){
-            if(operationId == TsEntFilesOperations.OP_GET_DEF_CLASS.id){               
+        const modelTableSel: ModelTable = modelTables[tableIndex];
+
+        if(section==ModuleConfig.SC_TS_ENTITY_FILES.id){    
+            if(operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id){  
+                const contcode: string | null 
+                    = await getTypeScriptTableContent(operationId,modelTableSel.name);
+                if(contcode != null) {
+                    ondataresult(contcode);
+                }
             }
-            else if(operationId == TsEntFilesOperations.OP_GET_ENT_CLASS.id){
+            else if(operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id){
+                const contcode: string | null 
+                    = await getTypeScriptTableContent(operationId,modelTableSel.name); 
+                if(contcode != null) {
+                    ondataresult(contcode);
+                }
             }
-            else if(operationId == TsEntFilesOperations.OP_GET_ARRAY_DEF_CLASS.id){
+            else if(operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id){
+                const allTablesDefClass: string | null 
+                    = await getTypeScriptArrayTableContent(operationId);
+                if(allTablesDefClass != null) {
+                    ondataresult(allTablesDefClass);
+                }
             }
-            else if(operationId == TsEntFilesOperations.OP_GET_ARRAY_ENT_CLASS.id){
+            else if(operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id){
+                const allTablesEntClass: string | null 
+                    = await getTypeScriptArrayTableContent(operationId);
+                if(allTablesEntClass != null) {
+                    ondataresult(allTablesEntClass);
+                }
             }
         }
 

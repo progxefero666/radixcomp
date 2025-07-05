@@ -164,6 +164,10 @@ export class CodeGenSql {
         return Array.from(tablesMap.values());
     }//end method getEsquemaTables
 
+    public static getEsquemaSelectTables(sqlScript:string,tableNames:string[]): ModelTable|null {
+        return null;
+    }
+
     public static getEsquemaTable(sqlScript:string,tableName:string): ModelTable|null {
         //temp code
         const allTableModels :ModelTable[] = CodeGenSql.getEsquemaTables(sqlScript);

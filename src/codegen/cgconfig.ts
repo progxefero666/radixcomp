@@ -4,11 +4,11 @@ import types from "@/codegen/kernel/sqltypesnumber.json";
 
 import { Option } from "@/common/model/option";
 import { ControlDatabase } from "@/codegen/controldatabase";
-import { TsEntFilesOperations } from "@/codegen/operations/tsentfilesops";
-import { JsonEntFilesOperations } from "@/codegen/operations/jsonentfilesops";
-import { TsxEntFormsOperations } from "@/codegen/operations/tsxentformsops";
-import { TsEntServiceFilesOperations } from "@/codegen/operations/tsentservicefilesops";
-import { PyEntServiceFilesOperations } from "@/codegen/operations/pyentservicefilesops";
+import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
+import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
+import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
+import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
+import { PyEntServiceFilesOps } from "@/codegen/operations/pyentservicefilesops";
 
 
 export enum OP_CATEGORIES {
@@ -65,19 +65,19 @@ export class CodeGenConfig {
     public static getSectionOperations(sectionName: string): Option[] {
 
         if (sectionName === OP_CATEGORIES.typescript_entityfiles) {
-            return TsEntFilesOperations.Operations;
+            return TsEntFilesOps.Operations;
         }
         else if (sectionName === OP_CATEGORIES.json_entityfiles) {
-            return JsonEntFilesOperations.Operations;
+            return JsonEntFilesOps.Operations;
         }
         else if (sectionName === OP_CATEGORIES.typescript_entityforms) {
-            return TsxEntFormsOperations.Operations;
+            return TsxEntFormsOps.Operations;
         }
         else if (sectionName === OP_CATEGORIES.typescript_servicefiles) {
-            return TsEntServiceFilesOperations.Operations;
+            return TsEntServiceFilesOps.Operations;
         }
         else if (sectionName === OP_CATEGORIES.python_serverfiles) {
-            return PyEntServiceFilesOperations.Operations;
+            return PyEntServiceFilesOps.Operations;
         }
         else if (sectionName === OP_CATEGORIES.sql_db_squema) {
             return ControlDatabase.Operations;

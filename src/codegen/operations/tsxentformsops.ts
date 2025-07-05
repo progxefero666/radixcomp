@@ -5,7 +5,7 @@ import { Option } from "@/common/model/option";
 /**
  * class TsxEntityForms
  */
-export class TsxEntFormsOperations {
+export class TsxEntFormsOps {
 
     public static readonly OP_A: Option
         = new Option("option_a", "Option A", null, null, null);
@@ -14,9 +14,9 @@ export class TsxEntFormsOperations {
         = new Option("option_b", "Option B", null, null, null);
 
     public static readonly Operations: Option[] = [
-        TsxEntFormsOperations.OP_A,
-        TsxEntFormsOperations.OP_B
+        TsxEntFormsOps.OP_A,
+        TsxEntFormsOps.OP_B
     ]
-    public static readonly ACTIVE_OPERATION: Option = TsxEntFormsOperations.OP_A;
+    public static readonly ACTIVE_OPERATION: Option = TsxEntFormsOps.OP_A;
 
 }//end class
