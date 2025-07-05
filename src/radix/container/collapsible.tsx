@@ -15,7 +15,7 @@ import { RadixConf } from "../radixconf";
  * radix-ui/themes
  * jsx Collapsible Component
  */
-interface ContCollapsibleProps {
+interface CompProps {
     id: number;
     title: string;
     intro?: string;
@@ -24,7 +24,7 @@ interface ContCollapsibleProps {
     barbuttonscfg?: BarButtonsCfg;
 }
 
-export default function ContCollapsible({ id, barbuttonscfg, title, intro, children, opened }: ContCollapsibleProps) {
+export default function ContCollapsible({ id, barbuttonscfg, title, intro, children, opened }: CompProps) {
     const [open, setOpen] = React.useState(opened);
 
     const onClick = (operation: string) => {
@@ -83,9 +83,3 @@ export default function ContCollapsible({ id, barbuttonscfg, title, intro, child
 
 }//end component
 
-
-/*
-    trigger?: React.ReactNode;
-disabled?: boolean;
-disabled={disabled}
-*/

@@ -82,31 +82,23 @@ interface CompProps {
     ondataresult: (data: string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
+
     //const fileInputRef = useRef<HTMLInputElement>(null);
-
     const [initialized, setInitialized] = useState<boolean>(false);
-
     // list tables
-
-    const [menuListTables, setMenuListTables] = useState<Option[]>([]);
-    
-
+    const [menuListTables, setMenuListTables] = useState<Option[]>([]);    
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
     const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
     const operationsRef = useRef<HTMLSelectElement>(null);
-
     // operations controllers
     const selTableName = useRef<string | null>(null);
     const selGroupTableNames = useRef<TSelection>(null);
-
     const modelsTableOptions = useRef<Option[]>([]);
     const clientTScriptEntities = useRef<ServClientTScriptEntities>(null);
     const clientTScriptServices = useRef<ServClientTScriptServices>(null);
     const clientJsxForms = useRef<ServiceClientJsxForms>(null);
     const clientJson = useRef<ServiceClientJson>(null);
-
-
     // UI
     const [includeDefs, setIncludeDefs] = useState<boolean>(false);
     const [showIncludeDefs, setShowIncludeDefs] = useState<boolean>(false);
