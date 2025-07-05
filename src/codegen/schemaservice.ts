@@ -3,11 +3,26 @@
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { Option } from "@/common/model/option";
 import { ModelHelper } from "@/common/util/modelhelper";
+import { TOption, TSelection } from "@/common/types";
 
 /**
  * SchemaService.getListTablesAsOptions
  */
 export class SchemaService {
+
+    
+    public static getListTablesAsTOptions(modeltables:ModelTable[]):TOption[]{
+        let options: TOption[] = [];
+        for(const table of modeltables) {
+            const option = {
+                name: table.name,
+                text: table.name,
+                selected: false
+            };
+            options.push(option);
+        }
+        return options;
+    }
 
     public static getListTablesAsOptions(modeltables:ModelTable[]):Option[]{
         let options: Option[] = [];

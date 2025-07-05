@@ -11,3 +11,14 @@ export type TSelection = {
     id: string,
     items: TSelected[]
 };
+
+export type TOption = {
+    name: string,
+    text: string,
+    selected: boolean
+};
+
+export type TMenu = {
+    name?: string,
+    items: TOption[]
+};

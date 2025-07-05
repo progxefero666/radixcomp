@@ -7,21 +7,21 @@ import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 
 interface CompProps {
     barbuttonscfg?: BarButtonsCfg;
-    text: string;    
-    children?: React.ReactNode;   
+    text: string;
+    children?: React.ReactNode;
 }
-export const XPopOver = ({text,children,barbuttonscfg}: CompProps) => {
+export const XPopOver = ({ text, children, barbuttonscfg }: CompProps) => {
 
-    const onClick = (btn:HTMLButtonElement) => {
+    const onClick = (btn: HTMLButtonElement) => {
         alert(btn.value);
     }
 
-    const toConsole = (open:boolean) => {
+    const toConsole = (open: boolean) => {
         console.log(open);
     }
 
     return (
-        <Popover.Root onOpenChange={(open) => {toConsole(open)}} >
+        <Popover.Root onOpenChange={(open) => { toConsole(open) }} >
             <Popover.Trigger >
                 <Button >
                     {text}
@@ -30,16 +30,16 @@ export const XPopOver = ({text,children,barbuttonscfg}: CompProps) => {
             <Flex width="100%" direction="column" gap="2" >
                 <Popover.Content sideOffset={5} align="start">
                     {children}
+                    <Popover.Close>
+                        <Button size="1" onClick={() => { onClick }} >
+                            close
+                        </Button>
+                    </Popover.Close>
                 </Popover.Content>
 
-                <Popover.Close>
-                    <Button size="1" onClick={() => {onClick}} >
-                        close
-                    </Button>
-                </Popover.Close>                
             </Flex>
-                                
-       </Popover.Root>
 
-    );  
+        </Popover.Root>
+
+    );
 }

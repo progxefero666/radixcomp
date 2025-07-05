@@ -37,13 +37,14 @@ import { ServClientTScriptEntities } from "../module/client_tscriptentities";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
-import { TSelection } from "@/common/types";
+import { TOption } from "@/common/types";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { ServiceClientJson } from "../module/client_json";
 import { ServiceClientJsxForms } from "../module/client_jsxforms";
 import { ServiceClientSqlScripts } from "../module/client_sqlscripts";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
 import { XPopOver } from "@/radix/container/popover";
+import { ModelHelper } from "@/common/util/modelhelper";
 
 
 function getSectionOperations(sectionName: string): Option[] {
@@ -86,20 +87,24 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     //const fileInputRef = useRef<HTMLInputElement>(null);
     const [initialized, setInitialized] = useState<boolean>(false);
+
     // list tables
-    const [menuListTables, setMenuListTables] = useState<Option[]>([]);    
+    const [menuListTables, setMenuListTables] = useState<TOption[]>([]);   
+    const selTableName = useRef<string | null>(null);
+    const selGroupTableNames = useRef<TOption[]|null>(null);
+    const modelsTableOptions = useRef<Option[]>([]);    
+
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
     const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
     const operationsRef = useRef<HTMLSelectElement>(null);
-    // operations controllers
-    const selTableName = useRef<string | null>(null);
-    const selGroupTableNames = useRef<TSelection>(null);
-    const modelsTableOptions = useRef<Option[]>([]);
+
+    // service clients
     const clientTScriptEntities = useRef<ServClientTScriptEntities>(null);
     const clientTScriptServices = useRef<ServClientTScriptServices>(null);
     const clientJsxForms = useRef<ServiceClientJsxForms>(null);
     const clientJson = useRef<ServiceClientJson>(null);
+
     // UI
     const [includeDefs, setIncludeDefs] = useState<boolean>(false);
     const [showIncludeDefs, setShowIncludeDefs] = useState<boolean>(false);
@@ -109,19 +114,16 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const init = () => {
         if (section == null) {return;}
       
-        //step 1: load db schema from SessionStorage
+        //load modeltables
         const db_squema = AppContext.readDbSquema();
         const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
+        setMenuListTables(SchemaService.getListTablesAsTOptions(db_modeltables));
 
-        //setDbSquema(db_squema);
-        //setModelTables(db_modeltables);
-        setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
-
-        //set selections
+        //set basic selections
         modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
         selTableName.current = db_modeltables[0].name;
 
-        //charge service clients
+        //active service clients
         clientTScriptEntities.current = new ServClientTScriptEntities(db_squema);
         clientTScriptServices.current = new ServClientTScriptServices(db_squema);
         clientJsxForms.current = new ServiceClientJsxForms(db_squema);
@@ -144,8 +146,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         selTableName.current = tableName;
     }
 
-    const onSelectTables = (tableNames: TSelection) => {
-        selGroupTableNames.current = tableNames;
+    const onSelectTables = (selecction:TOption[]) => {       
+        selGroupTableNames.current =  selecction;
     };//end
 
     const onParameterChange = (value: boolean, name?: string) => {

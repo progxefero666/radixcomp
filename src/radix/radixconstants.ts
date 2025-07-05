@@ -33,7 +33,8 @@ export enum CONTROL_TYPES {
 
 
 /**
- * class RadixConstants
+ * class RadixConstants.ITEM_CHECKED RadixConstants.ITEM_UNCHECKED
+ *  
  */
 export class RadixConstants {   
 
@@ -45,6 +46,9 @@ export class RadixConstants {
 
     public static readonly RADIX_THEME_LIGHT: string = "light";
     public static readonly RADIX_THEME_DARK: string = "dark";
+
+    public static readonly ITEM_CHECKED: string = "1";
+    public static readonly ITEM_UNCHECKED: string = "2";
 
 }//end class 
 

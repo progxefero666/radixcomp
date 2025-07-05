@@ -1,10 +1,10 @@
 //src\common\util\modelhelper.ts
 
 import { Option } from "@/common/model/option";
-import { TSelection } from "@/common/types";
+import { TOption, TSelection } from "@/common/types";
 
 /**
- *  class ModelHelper.getListFromTSelection
+ *  class ModelHelper.getListFromTOptions
  *      provides utility methods to work with model data.
  */
 export class ModelHelper {
@@ -29,6 +29,16 @@ export class ModelHelper {
         return options;
     }    
 
+    public static getListFromTOptions(collection: TOption[]): string[] {
+        const options: string[] = [];
+
+        for (const item of collection) {
+            const option = item.name; 
+            options.push(option);
+        }
+        return options;
+    } 
+
     public static getElementIndex(collection: Option[],findValue:string): number {
         let index:number = -1;
         if (collection == null || collection.length === 0) {
@@ -43,6 +53,22 @@ export class ModelHelper {
         return index;
     }
 
+    public static getTOptionIndex(collection: TOption[],findValue:string): number {
+        let index:number = -1;
+        if (collection == null || collection.length === 0) {
+            return index;
+        }
+        for (let itemIdx=0;itemIdx<collection.length;itemIdx++) {
+            if (collection[itemIdx].name == findValue) {
+                index = itemIdx;
+                break;
+            }
+        }
+        return index;
+    }    
+    //options:TOption[];
+    
+
     public static getListFromTSelection(tselection:TSelection): string[] {
         const list: string[] = [];
         for (const item of tselection.items) {
@@ -50,8 +76,8 @@ export class ModelHelper {
         }
         return list;
     }   
-    
-    
+
+
 
     
 }// end class

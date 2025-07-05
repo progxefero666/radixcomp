@@ -4,7 +4,7 @@ import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
 import { GenCodeModuleControl } from "@/app/gencode/module/gcmodcontrol";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
-import { TSelection } from "@/common/types";
+import { TOption, TSelection } from "@/common/types";
 import { ModelHelper } from "@/common/util/modelhelper";
 import { JsonHelper } from "@/common/util/jsonhelper";
 
@@ -26,7 +26,7 @@ export class ServClientTScriptEntities extends GenCodeModuleControl {
 
     public async executeOperation(operationId:string,
                                   table:string|null,
-                                  tables:TSelection|null): Promise<string|null> {  
+                                  tables:TOption[]|null): Promise<string|null> {  
         //console.log(JsonHelper.getTSelectionJsonString(tables!));                                             
         let code:string|null = null;
         if( (operationId === TsEntFilesOps.OP_GET_DEF_CLASS.id) ||
@@ -39,7 +39,7 @@ export class ServClientTScriptEntities extends GenCodeModuleControl {
         } 
         else if( (operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id) ||
                  (operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id) ){   
-            const selectTables:string[] = ModelHelper.getListFromTSelection(tables!);
+            const selectTables:string[] = ModelHelper.getListFromTOptions(tables!);
             const namesjoined:string = CodeGenHelper.getStringsJoined(selectTables!);
             code = await getTypeScriptArrayTableContent(this.sqlsquema,operationId,namesjoined);  
         }               

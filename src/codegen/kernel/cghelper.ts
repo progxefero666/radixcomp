@@ -1,7 +1,7 @@
 //src\codegen\kernel\cghelper.ts
 
 import { Option } from "@/common/model/option";
-
+import { TOption } from "@/common/types";
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CodeGenConfig } from "../cgconfig";
@@ -61,6 +61,20 @@ export class CodeGenHelper {
         }
         return options;   
     }
+
+    public static getModelsTableTOptions(modelTables:ModelTable[]): TOption[] {
+        const options: TOption[] = [];
+        for (const table of modelTables) {            
+            const option = {
+                name: table.name,
+                text: table.name,
+                selected: false
+            }
+            options.push(option);
+        }
+        return options;   
+    }    
+
 
     public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
         let tableIndex:number = -1;
