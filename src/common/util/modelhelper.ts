@@ -1,9 +1,10 @@
 //src\common\util\modelhelper.ts
 
 import { Option } from "@/common/model/option";
+import { TSelection } from "@/common/types";
 
 /**
- *  class ModelHelper.getElementIndex
+ *  class ModelHelper.getListFromTSelection
  *      provides utility methods to work with model data.
  */
 export class ModelHelper {
@@ -41,6 +42,16 @@ export class ModelHelper {
         }
         return index;
     }
+
+    public static getListFromTSelection(tselection:TSelection): string[] {
+        const list: string[] = [];
+        for (const item of tselection.items) {
+            list.push(item.id);
+        }
+        return list;
+    }   
     
+    
+
     
 }// end class

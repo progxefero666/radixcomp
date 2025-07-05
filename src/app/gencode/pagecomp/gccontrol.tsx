@@ -39,6 +39,7 @@ import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
 import { TSelected, TSelection } from "@/common/types";
+import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 
 /**
  * GenCodeControl
@@ -56,8 +57,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
     const [menuListTables, setMenuListTables] = useState<Option[]>([]);
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
-
-    //const [tableIndex, setTableIndex] = useState<number>(0);
     
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
@@ -65,6 +64,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const operationsRef = useRef<HTMLSelectElement>(null);
 
     // operations controllers
+    const selTableName = useRef<string|null>(null);
+    const selGroupTableNames = useRef<TSelection>(null);
+
+    const modelsTableOptions = useRef<Option[]>([]);
     const ctrTsEntFilesOpsRef = useRef<GcControlTsEntFilesOps>(null);
 
     // UI
@@ -86,6 +89,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 setModelTables(db_modeltables);
                 setMenuListTables(SchemaService.getListTablesAsOptions(db_modeltables));
 
+                modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
+                selTableName.current = db_modeltables[0].name;
+
                 ctrTsEntFilesOpsRef.current = new GcControlTsEntFilesOps(db_squema);
 
                 //step 2: load operations for the selected section
@@ -98,20 +104,16 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         init();
     }, []);
 
-    const onFileCharged = async (file: File, name?: string) => {
-        if (file) { alert(file.name); }
-    };//end
+
 
     const onSelectTable = (tableName:string,compName?:string) => {
-
+        selTableName.current = tableName;
+        alert("Selected table: " + tableName);
     }
 
     const onSelectTables = (tableNames:TSelection) => {
         //const str:string|null = JsonHelper.getTSelectionJsonString(tableNames);
-        ShowAlerts.showTSelection(tableNames);
-
-        //ShowAlerts.showCouple(compname!,index.toString());
-        //setTableIndex(index);
+        selGroupTableNames.current = tableNames;
     };//end
 
     const onParameterChange = (value: boolean, name?: string) => {
@@ -135,10 +137,12 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             else if (operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id) {
                 setShowIncludeDefs(false);
                 setShowRadioList(true);
+                setShowCheckList(false);
             }
             else if (operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id) {
                 setShowIncludeDefs(true);
                 setShowRadioList(true);
+                setShowCheckList(false);
             }
             else if (operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id) {
                 setShowIncludeDefs(false);
@@ -155,40 +159,18 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = async () => {
-        const modelTableSel: ModelTable = modelTables[0];
 
         if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
-            ctrTsEntFilesOpsRef.current!.executeOperation(operationId);
+            ctrTsEntFilesOpsRef.current!.executeOperation(
+                operationId,
+                selTableName.current,
+                selGroupTableNames.current);
         }
-
-        /*else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){
-            if(operationId == JsonEntFilesOperations.OP_A.id){
-            }
-            else if(operationId == JsonEntFilesOperations.OP_B.id){
-            }            
-        }
-        else if(section == ModuleConfig.SC_TSX_ENTITY_FORMS.id){   
-            if(operationId == TsxEntFormsOperations.OP_A.id){
-            }
-            else if(operationId == TsxEntFormsOperations.OP_B.id){
-            }                       
-        }
-        else if(section==ModuleConfig.SC_TS_SERVICES_FILES.id){           
-            if(operationId == TsEntServiceFilesOperations.OP_A.id){
-            }
-            else if(operationId == TsEntServiceFilesOperations.OP_B.id){
-            }             
-        }
-        else if(section==ModuleConfig.SC_PY_SERVICES_FILES.id){      
-            if(operationId == PyEntServiceFilesOperations.OP_A.id){
-            }
-            else if(operationId == PyEntServiceFilesOperations.OP_B.id){
-            }                   
-        }
-        else if(section==ModuleConfig.SC_DB_SQUEMA.id){
-        }   
-        */
-
+        else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){}
+        else if(section == ModuleConfig.SC_TSX_ENTITY_FORMS.id){}
+        else if(section==ModuleConfig.SC_TS_SERVICES_FILES.id){}
+        else if(section==ModuleConfig.SC_PY_SERVICES_FILES.id){}
+        else if(section==ModuleConfig.SC_DB_SQUEMA.id){}        
     };//end
 
     const renderParamsContent = () => {
@@ -235,7 +217,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 {showRadioList ?
                 <XInputSelect name="selectTable"  
                               autocommit={true}
-                              collection={[]}
+                              collection={modelsTableOptions.current}
+                              value={modelsTableOptions.current[0].id}
                               onchange={onSelectTable}/> : null}
                 {showCheckList ?
                     <XCheckGroup name="selectTables"
@@ -274,6 +257,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 }//end InputEditor
 
 /*
+    const onFileCharged = async (file: File, name?: string) => {
+        if (file) { alert(file.name); }
+    };//end
 <SeparatorH />
 <Box width={"100%"}>
     <InputFiles

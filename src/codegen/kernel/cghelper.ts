@@ -1,11 +1,13 @@
 //src\codegen\kernel\cghelper.ts
 
+import { Option } from "@/common/model/option";
+
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CodeGenConfig } from "../cgconfig";
 
 /**
- * CodeGenHelper.getModelsTableNames
+ * CodeGenHelper.getModelsTableOptions
  * class CodeGenHelper.getSelectModelTables(modelTables:ModelTable[],names:string[])
  */
 export class CodeGenHelper {
@@ -49,6 +51,15 @@ export class CodeGenHelper {
                 names.push(table.name);
         }
         return names;   
+    }
+    
+    public static getModelsTableOptions(modelTables:ModelTable[]): Option[] {
+        const options: Option[] = [];
+        for (const table of modelTables) {            
+            const option: Option = new Option(table.name, table.name, null, null, null);
+            options.push(option);
+        }
+        return options;   
     }
 
     public static getModelTableIndex(modelTables:ModelTable[],name:string): number {

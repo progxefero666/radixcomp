@@ -29,10 +29,11 @@ export class ShowAlerts {
     static showJson(json: string): void {       
         alert( JsonHelper.toJsonString(json));
     }
+    /*
     static showTSelection(tselection: TSelection): void {     
         const json: string | null = JsonHelper.getTSelectionJsonString(tselection);  
         alert( JsonHelper.toJsonString(json));
     }
-    
+    */
 
 }//end class
