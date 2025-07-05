@@ -18,15 +18,14 @@ const cardStyle = {
     padding: 'var(--space-2)',
     boxShadow: '0px 0px 1px rgba(253, 72, 6, 0.9)' 
 };
-
-export default function CardDatabase(squemaInitPath: string) {
+interface CompProps {
+    squemaPath: string;
+}
+export function CardDatabase({squemaPath}: CompProps) {
     const barbuttonscfg: BarButtonsCfg = BARCFG_EXPORT;
  
-    const [squemaPath, setSquemaPath] = useState<string>(squemaInitPath);
-
-    useEffect(() => {
-
-    }, []);
+    //const [squemaPath, setSquemaPath] = useState<string>(squemaInitPath);
+    //useEffect(() => { }, []);
 
     return(
             <ContCollapsible title="Database Config." >

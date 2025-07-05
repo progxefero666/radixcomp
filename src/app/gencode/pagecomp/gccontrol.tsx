@@ -6,18 +6,16 @@ import { useState, useEffect, useRef } from "react";
 import { TOption } from "@/common/types";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
+import { ThemePagesStyles } from "@/radix/radixtheme";
 
 
-import { SeparatorH } from "@/radix/container/separatorh";
-import { SeparatorV } from "@/radix/container/separatorv";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { GenCodeModuleConfig } from "@/app/gencode/config";
 import { XInputSelect } from "@/radix/input/inpselect";
-
+import { SeparatorH } from "@/radix/container/separatorh";
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
-import { ThemePagesStyles } from "@/radix/radixtheme";
 import { XPopOver } from "@/radix/container/popover";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
@@ -28,16 +26,10 @@ import { ServClientTScriptEntities } from "../module/client_tscriptentities";
 import { ServiceClientJson } from "../module/client_json";
 import { ServiceClientJsxForms } from "../module/client_jsxforms";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
-import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
-import { ShowAlerts } from "@/common/util/showalerts";
-import ContCollapsible from "@/radix/container/collapsible";
-import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
-import { BARCFG_EXPORT } from "@/app_front/ui/appbars";
 import { Label } from "@radix-ui/react-context-menu";
 import { AppConfig } from "@/app_front/appconfig";
+import { CardDatabase } from "@/app_front/comp/carddatabase";
 //import { SchemaService } from "@/client/metadata/schemaservice";
-
-
 
 /**
  * GenCode Main Control
@@ -99,7 +91,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         setOperations(listOperations);
         onOpSelected(listOperations[0].id);
         setInitialized(true);
-    };
+    };//end
 
     useEffect(() => {
         if (section == null) { return; }
@@ -109,7 +101,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const onSelectTable = (tableName: string, compName?: string) => {
         selTableName.current = tableName;
-    };
+    };//end
 
     const onSelectTables = (selecction: TOption[]) => {
         selGroupTableNames.current = selecction;
@@ -119,7 +111,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (name === "opt_includedef") {
             setIncludeDefs(value);
         }
-    };
+    };//end
 
     const onOpSelected = (operationId: string) => {
         if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
@@ -158,7 +150,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = async () => {
-
         if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
             const codecont: string | null = await clientTScriptEntities.current!.executeOperation(
                 operationId,
@@ -167,7 +158,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             ondataresult(codecont!);
         }
         else if (section === GenCodeModuleConfig.CLIENT_JSX_FORMS.id) {
-
         }
         else if (section === GenCodeModuleConfig.CLIENT_JSON.id) { }
         else if (section === GenCodeModuleConfig.CLIENT_TS_SERVICES.id) { }
@@ -185,7 +175,23 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         value={false} /> : null}
             </Box>
         )
-    };
+    };//end
+
+    const renderSelection = () => {
+        return (
+            <Box>
+                <p>as</p>
+            </Box>
+        )
+    };//end
+
+    const renderInputPanel = () => {
+        return (
+            <Box>
+                <p>as</p>
+            </Box>
+        )
+    };//end
 
     const renderHeader = () => {
         return (
@@ -232,60 +238,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 </Flex>
             </Flex>
         );
-    };//end renderMainContent
-
-
-    const renderDbPanel = () => {
-        const barbuttonscfg: BarButtonsCfg = BARCFG_EXPORT;
-        return (
-            <ContCollapsible title="Database Config." >
-                <Flex width="100%" direction="column" pt="2" pl="2">
-                    <Text size="3" >
-                        <Flex width="100%" direction="row" justify="between" gapY="1">
-                            <Box>
-                                <Label>Database Schema: </Label>
-                            </Box>
-                            <Box>
-                                <Button color="blue" >
-                                    upload
-                                </Button>
-                            </Box>
-                        </Flex>
-                        <SeparatorH />
-                        <Flex width="100%" direction="row" mt="2" >
-                            {squemaPath}
-                        </Flex>
-                    </Text>
-
-                    <Box width="100%" >
-                    </Box>
-                </Flex>
-            </ContCollapsible>
-        )
-    };
-
-    const renderSelection = () => {
-        return (
-            <Box>
-                <p>as</p>
-            </Box>
-        )
-    };
-
-
-    const renderInputPanel = () => {
-        return (
-            <Box>
-                <p>as</p>
-            </Box>
-        )
-    };
+    };//end
 
     return (
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
             {initialized ? 
                 <>
-                    {renderDbPanel()}
+                    <CardDatabase squemaPath={squemaPath}  />
                     <SeparatorH /> 
                     {renderHeader()} 
                     <SeparatorH />
