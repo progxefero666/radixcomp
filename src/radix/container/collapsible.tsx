@@ -15,7 +15,15 @@ import { RadixConf } from "../radixconf";
  * radix-ui/themes
  * jsx Collapsible Component
  */
+const compStyleDef = {
+    
+    borderRadius: 'var(--radius-1)',
+    border: '2px solid var(--blue-7)',
+    padding: 'var(--space-2)',
+    boxShadow: '0px 0px 1px rgba(253, 72, 6, 0.9)' 
+};
 interface CompProps {
+    compstyle?: React.CSSProperties;
     id?: number;
     title: string;
     intro?: string;
@@ -23,24 +31,17 @@ interface CompProps {
     children?: React.ReactNode;
     barbuttonscfg?: BarButtonsCfg;
 }
-
-export default function ContCollapsible({ id, barbuttonscfg, title, intro, children, opened }: CompProps) {
+//React.CSSProperties | undefined
+export default function ContCollapsible({compstyle, id, barbuttonscfg, title, intro, children, opened }: CompProps) {
     const [open, setOpen] = React.useState(opened);
 
-    const onClick = (operation: string) => {
-    }
+    let compStyle: React.CSSProperties= compstyle ?? compStyleDef;
 
-    //backgroundColor: 'var(--gray-a2)',
-    const boxStyle = {
-        
-        borderRadius: 'var(--radius-1)',
-        border: '2px solid var(--blue-7)',
-        padding: 'var(--space-2)',
-        boxShadow: '0px 0px 1px rgba(253, 72, 6, 0.9)' 
-    };
+    const onClick = (item:string,compName?:string) => {};
+
 
     return (
-        <Box as="div" px="4" py="2" width="var(--size-4)" style={boxStyle}  >
+        <Box as="div" px="4" py="2" width="var(--size-4)" style={compStyle}  >
        
             <Collapsible.Root
                 className="CollapsibleRoot"

@@ -285,13 +285,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
             {initialized ? 
                 <>
-                    renderDbPanel()
+                    {renderDbPanel()}
                     <SeparatorH /> 
-                    renderHeader() 
+                    {renderHeader()} 
                     <SeparatorH />
-                    renderMainContent()
+                    {renderMainContent()}
                     <SeparatorH />     
-                    renderSelection()       
+                    {renderSelection()}       
                 </>
                 : null}
         </Flex>
