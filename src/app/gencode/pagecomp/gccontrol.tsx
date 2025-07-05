@@ -200,6 +200,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         direction="column" /> : null}
                 {showCheckList ?
                     <XCheckGroup name="selectTables"
+                        autocommit={true}
                         inline={false}
                         options={menuListTables}
                         onselect={onSelectTable} /> : null}

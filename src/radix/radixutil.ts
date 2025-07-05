@@ -16,4 +16,20 @@ export class RadixUtil {
         return arr;
     }
     
+    public static getArrayBoolean(value:boolean, count:number): boolean[] {
+        let arr: boolean[] = [];
+        for(let i=0; i<count; i++) {
+            arr.push(value);
+        }   
+        return arr;
+    } 
+    
+    public static getArrayTrue(value:boolean, count:number): boolean[] {
+        return RadixUtil.getArrayBoolean(true, count);
+    }  
+    
+    public static getArrayFalse(value:boolean, count:number): boolean[] {
+        return RadixUtil.getArrayBoolean(true, count);
+    }   
+
 }//end class
