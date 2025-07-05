@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { TOption } from "@/common/types";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
-//import { SchemaService } from "@/client/metadata/schemaservice";
+
 
 import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
@@ -22,52 +22,20 @@ import { XPopOver } from "@/radix/container/popover";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
-
 import { SchemaService } from "@/codegen/schemaservice";
 import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
-import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
-import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
-import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
 import { ServClientTScriptEntities } from "../module/client_tscriptentities";
 import { ServiceClientJson } from "../module/client_json";
 import { ServiceClientJsxForms } from "../module/client_jsxforms";
-import { ServiceClientSqlScripts } from "../module/client_sqlscripts";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 import { ShowAlerts } from "@/common/util/showalerts";
+//import { SchemaService } from "@/client/metadata/schemaservice";
 
 
-function getServCliOperations(sectionName: string): Option[] {
-
-    if (sectionName === ServClientTScriptEntities.ID) {
-        return TsEntFilesOps.Operations;
-    }
-    else if (sectionName === ServiceClientJsxForms.ID) {
-        return TsxEntFormsOps.Operations;
-    }
-    else if (sectionName === ServClientTScriptServices.ID) {
-        return TsEntServiceFilesOps.Operations;
-    }
-    else if (sectionName === ServiceClientJson.ID) {
-        return JsonEntFilesOps.Operations;
-    }
-    else if (sectionName === ServiceClientSqlScripts.ID) {
-        return JsonEntFilesOps.Operations;
-    }
-    /*
-    else if (sectionName === OP_CATEGORIES.python_serverfiles) {
-        return PyEntServiceFilesOps.Operations;
-    }
-    else if (sectionName === OP_CATEGORIES.sql_db_squema) {
-        return ControlDatabase.Operations;
-    }  
-    */
-    alert("not found");
-    return [];
-}
 
 /**
- * GenCodeControl
+ * GenCode Main Control
  */
 interface CompProps {
     section?: string | null;
@@ -79,10 +47,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [initialized, setInitialized] = useState<boolean>(false);
 
     // list tables
-    const [menuListTables, setMenuListTables] = useState<TOption[]>([]);   
+    const [menuListTables, setMenuListTables] = useState<TOption[]>([]);
     const selTableName = useRef<string | null>(null);
-    const selGroupTableNames = useRef<TOption[]|null>(null);
-    const modelsTableOptions = useRef<Option[]>([]);    
+    const selGroupTableNames = useRef<TOption[] | null>(null);
+    const modelsTableOptions = useRef<Option[]>([]);
 
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
@@ -102,8 +70,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
 
     const init = () => {
-        if (section == null) {return;}
-      
+        if (section == null) { return; }
+
         //load modeltables
         const db_squema = AppContext.readDbSquema();
         const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
@@ -120,10 +88,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         clientJson.current = new ServiceClientJson(db_squema);
 
         //load operations for the selected service
-        const listOperations: Option[] = getServCliOperations(section!);
+        const listOperations: Option[] = GenCodeModuleConfig.getServCliOperations(section!);
         setOperations(listOperations);
         onOpSelected(listOperations[0].id);
-        setInitialized(true);       
+        setInitialized(true);
     };
 
     useEffect(() => {
@@ -136,8 +104,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         selTableName.current = tableName;
     }
 
-    const onSelectTables = (selecction:TOption[]) => {       
-        selGroupTableNames.current =  selecction;
+    const onSelectTables = (selecction: TOption[]) => {
+        selGroupTableNames.current = selecction;
     };//end
 
     const onParameterChange = (value: boolean, name?: string) => {
@@ -201,59 +169,57 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const renderParamsContent = () => {
         return (
-            <p>params</p>
+            <Box>
+                {showIncludeDefs ?
+                    <InputCheck name="opt_includedef"
+                        onchange={onParameterChange}
+                        inline={true}
+                        label="Include Def. Class"
+                        value={false} /> : null}
+            </Box>
         )
     }
 
     const renderHeader = () => {
         return (
-            <>
-                <Box>
-                    <XInputSelect
-                        key={operations[0].id}                
-                        name="operations"
-                        label="Operation: "
-                        ref={operationsRef}
-                        collection={operations}
-                        default={operationId ?? ""}
-                        onchange={onOpSelected}
-                        disabled={false} />
-                </Box>
-                <Box>
-                    {showIncludeDefs ?
-                        <InputCheck name="opt_includedef"
-                            onchange={onParameterChange}
-                            inline={true}
-                            label="Include Def. Class"
-                            value={false} /> : null}
-                </Box>
-                <Box>
-                    <Button onClick={runOperation} color="green">
-                        Run
-                    </Button>
-                </Box>
-            </>
+            <Flex width="100%" direction="row" justify="between" pb="2" align="center" >
+                <XInputSelect
+                    inline={true}
+                    label="Operation: "
+                    collection={operations}
+                    default={operationId}
+                    onchange={onOpSelected}
+                    disabled={false} />
+                <Button onClick={runOperation} color="green">
+                    Run
+                </Button>
+            </Flex>
         );
     }//end  
 
     const renderMainContent = () => {
         return (
-            <Flex width="100%" direction="column"  >
-                {showRadioList ?
-                    <XInputSelect name="selectTable"                    
-                        autocommit={true}
-                        collection={modelsTableOptions.current}
-                        default={modelsTableOptions.current[0].id}
-                        onchange={onSelectTable} /> : null}
-                {showCheckList ?
-                    <XPopOver text="select">
-                        <XCheckGroup 
-                            name="selectTables"
+            <Flex width="100%" direction="column" pt="2" >
+                <Flex width="100%" direction="row"  >
+                    {showRadioList ?
+                        <XInputSelect name="selectTable"
+                            inline={true}
+                            label={"Select Tables "}
                             autocommit={true}
-                            inline={false}
-                            options={menuListTables}
-                            onselect={onSelectTables} />
-                    </XPopOver> : null}
+                            collection={modelsTableOptions.current}
+                            default={modelsTableOptions.current[0].id}
+                            onchange={onSelectTable} /> : null}
+                    {showCheckList ?
+                        <XPopOver text="select">
+                            <XCheckGroup
+                                label={"Select Tables "}
+                                name="selectTables"
+                                autocommit={true}
+                                inline={false}
+                                collection={menuListTables}
+                                onselect={onSelectTables} />
+                        </XPopOver> : null}
+                </Flex>
             </Flex>
         );
     }//end renderMainContent
@@ -261,24 +227,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     return (
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
-
-            <Flex width="100%" direction="row" pb="2" justify="between"  >
-                {initialized ? renderHeader() : null}
-            </Flex>
-
+            {initialized ? renderHeader() : null}
             <SeparatorH />
-
-            {initialized ?
-                <Flex width="100%" direction="row" pt="2"   >
-                    <Box width="30%" pb="2" >
-                        {renderMainContent()}
-                    </Box>
-                    <Box width="70%" >
-                        <SeparatorV />
-                        {renderParamsContent()}
-                    </Box>
-                </Flex> : null}
-
+            {initialized ? renderMainContent() : null}
+            <SeparatorH />
         </Flex>
     );
 

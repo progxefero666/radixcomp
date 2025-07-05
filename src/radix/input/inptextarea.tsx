@@ -19,7 +19,7 @@ interface CompProps {
     label?: string;
     readonly?: boolean;
     disabled?: boolean
-    value?: string;
+    defaul?: string;
     onsubmmit?: (value:string) => void;
     type?: any;
     placeholder?: string;
@@ -37,7 +37,7 @@ const areaStyle = {
 };
 
 export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
-        (({ inline, label, placeholder, value, onsubmmit, readonly, disabled }, ref) => {        
+        (({ inline, label, placeholder, defaul: value, onsubmmit, readonly, disabled }, ref) => {        
 
     const color = "gray";
     const size = RadixConf.SIZES.size_2;

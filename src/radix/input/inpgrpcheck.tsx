@@ -1,7 +1,7 @@
 //src\radix\group\grpradio.tsx
 
 import { forwardRef, useEffect, useState } from "react";
-import { Flex, Text, RadioGroup, CheckboxGroup } from "@radix-ui/themes";
+import { Flex, Text, RadioGroup, CheckboxGroup, Box } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
 import { Option } from "@/common/model/option";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
@@ -24,26 +24,27 @@ import { RadixConstants } from "../radixconstants";
  * XRadioGroup
  */
 interface CompProps {
+    readonly?: boolean;
+    disabled?: boolean;
     inline?: boolean;
     autocommit?: boolean;
     name?: string;
-    options:TOption[];
+    collection:TOption[];
     label?: string;
-    direction?: radixTypeDirection;
-    onselect: (options:TOption[],name?:string) => void;
+    onselect: (collection:TOption[],name?:string) => void;
     autofocus?: boolean;
 }
 export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
-    autocommit, inline, options, name, label, direction, onselect }, ref) => {
+    autocommit, inline, collection: options, name, label, onselect }, ref) => {
 
     const [rootValues,setRootValues] = useState<string[]>
         (RadixUtil.getArrayChar(RadixConstants.ITEM_UNCHECKED, options.length));
 
     const [collValues,setCollValues] = useState<boolean[]>(RadixUtil.getArrayFalse(options.length));
 
-    const showInline: boolean = inline ?? false;
     const auto: boolean = autocommit ?? false;
-    const compDirection: radixTypeDirection = direction ?? "column";
+    let compDirection: any = "column";
+    if(inline) {compDirection = "row";}
 
     const compStyle: radixTypeComp = {
         color: RadixConf.COLORS.gray,
@@ -67,24 +68,13 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
         init();
     }, []);
 
-    const getValue = (compName?:string):TSelection => {
-        let items: TSelected[] = [];
-        for(let i=0; i<collValues.length; i++) {
-            items.push({id: options[i].name,value: collValues[i]});
-        }
-        return {id:compName??"undefined",items:items};
-    }
-
+ 
     const onSelect = (value: string) => {
         const itemIndex: number = ModelHelper.getTOptionIndex(options, value);
         let coll_values:boolean[] = collValues;
         coll_values[itemIndex] = !coll_values[itemIndex];
         options[itemIndex].selected = coll_values[itemIndex];
-
         setCollValues(coll_values);        
-
-        
-        //const groupSelection: TSelection = getValue(name);
         if (auto) {
             if (name) { onselect(options, name); }
             else { onselect(options); }
@@ -92,31 +82,13 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
         }
     }
 
-    const renderItem = (key: string, id: string, text: string) => {
+    const renderMainContent = () => {
         return (
-            <CheckboxGroup.Item key={key} 
-                value="1" onChange={() => onSelect(id)} >
-                <Text size="2" >
-                    {text}
-                </Text>
-            </CheckboxGroup.Item>   
-        )
-    }
-    const renderRowContent = () => {
-        return (
-            <p>aa</p>
-        )
-    }
-
-    const renderColumnContent = () => {
-
-        if(name!=null){}         
-        return (
-            <Flex direction = {compDirection} gap="2">
+               <Box width="100%">
                 {options.map((opt, index) => (
                     <CheckboxGroup.Root key={index.toString()} onClick={() => onSelect(opt.name)}
                         name={name}
-                        defaultValue={["1"]} 
+                        defaultValue={[RadixConstants.ITEM_CHECKED]} 
                         size    = {compStyle.size}
                         color   = {compStyle.color}
                         variant = {compStyle.variant} > 
@@ -129,20 +101,17 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
                         </CheckboxGroup.Item>      
 
                     </CheckboxGroup.Root>
-                ))}                    
-            </Flex>
+                ))}  
+            </Box>       
         )
-    }
+
+    }//end renderMainContent
+
+
     return (
-        <>
-            {showInline ?
-                label ? renderColumnContent() :
-                    renderColumnContent()
-                :
-                label ? renderColumnContent() :
-                    renderColumnContent()
-            }
-        </>
+        <Flex direction = {compDirection} gap="2">
+            {renderMainContent()}            
+        </Flex>
     )
 
 })//end component

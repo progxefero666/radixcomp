@@ -172,7 +172,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="opsystem"
                 ref={osystemRef}
                 label="system"
-                value={item.osystem}
+                defaul={item.osystem}
                 maxlen={AppDef.OSSYSTEM_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />

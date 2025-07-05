@@ -22,7 +22,7 @@ export default function CardCode({ title, code }: CompProps) {
     return (
         <Flex direction="column" style={boxStyle} >
             <Box width={"100%"}  px="2" >
-                <XInputTextArea value={code} />                
+                <XInputTextArea defaul={code} />                
             </Box>
         </Flex>
     );
