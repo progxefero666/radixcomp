@@ -8,7 +8,6 @@ import {Form,FormField,FormLabel,FormControl,
         Message,FormValidityState,ValidityState} from '@/radix/forms/form';
 
 import { FormMessage } from "@/radix/forms/formmsg";
-import { XInputText } from "@/radix/input/inptext";
 
 
 export const layoutStyle = {
@@ -53,7 +52,7 @@ export function TestPlayground({ mode }: CompProps) {
 
                     <FormField name="text_input">
                         <FormLabel>Texto</FormLabel>
-                        <XInputText name="text_input" value="asdas"/>
+                        <FormControl type="text"  placeholder="Texto normal" />
                         <FormMessage match="valueMissing">Este campo es obligatorio</FormMessage>
                     </FormField>
                     
