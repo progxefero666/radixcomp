@@ -14,7 +14,8 @@ export class ModuleConfig {
     public static readonly INDEX: Option
         = new Option("./", "Home", null, null, null);
 
-    public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
+    //public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
+    public static readonly DBSQUEMA_FILE: string = "xeferodb.sql";
 
     public static readonly SC_JSON_ENTITY_FILES: Option
         = new Option(OP_CATEGORIES.json_entityfiles, "JSon Entity Files", null, null, null);

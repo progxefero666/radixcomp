@@ -10,28 +10,9 @@ import { useEffect, useRef, useState } from "react";
 import { AppConfig } from "@/app_front/appconfig";
 import SecondBar from "./secondbar";
 import { AppIndex } from "@/app_front/appindex";
-import { Application } from "@/client/models/Application";
-import { Agent } from "@/client/models/Agent";
-import { Service } from "@/client/models/Service";
-import { Server } from "@/client/models/Server";
+
 import { renderListAgents, renderListApplications, renderListServers, renderListServices } from "./mainrender";
 
-/*
-import ProfileImage from './profile.png'
- 
-export default function Page() {
-  return (
-    <Image
-      src={ProfileImage}
-      alt="Picture of the author"
-      // width={500} automatically provided
-      // height={500} automatically provided
-      // blurDataURL="data:..." automatically provided
-      // placeholder="blur" // Optional blur-up while loading
-    />
-  )
-}
-*/
 
 /**
  * Application Main page 
@@ -66,11 +47,7 @@ export default function Home() {
                 </Box>
                 <Box className="w-[68%] bg-gray-0 dark:bg-gray-1 p-4 overflow-y-auto">
                     {initialized ?
-                        <IndexMainContent section={section}
-                            applications={appRef.current?.applications!}
-                            services={appRef.current?.services!}
-                            servers={appRef.current?.servers!}
-                            agents={[]} />
+                        <IndexMainContent section={section} />
                         : null}
                 </Box>
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6 overflow-y-auto">
@@ -89,27 +66,24 @@ export default function Home() {
  */
 interface IndexMainContentProps {
     section: string;
-    applications: Application[];
-    services: Service[];
-    servers: Server[]
-    agents: Agent[]
+
 }
-function IndexMainContent({ section, applications, services, servers, agents }: IndexMainContentProps) {
+function IndexMainContent({ section, }: IndexMainContentProps) {
 
     //useEffect(() => { }, []);
 
     const renderMainContent = () => {
         if (section === AppConfig.MOD_APPLICATIONS.id) {
-            return (renderListApplications(applications));
+            return (<p>sds</p>);
         }
         else if (section === AppConfig.MOD_SERVICES.id) {
-            return (renderListServices(services));
+            return (<p>sds</p>);
         }
         else if (section === AppConfig.MOD_SERVERS.id) {
-            return (renderListServers(servers));
+            return (<p>sds</p>);
         }
         else if (section === AppConfig.MOD_AGENTS.id) {
-            return (renderListAgents(agents));
+           return (<p>sds</p>);
         }
     };
 

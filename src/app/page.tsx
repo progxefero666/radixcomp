@@ -22,7 +22,7 @@ export default function Desktop() {
     }, []);
 
     const render = () => {
-        const mode: number = 2;
+        const mode: number = 1;
         switch (mode) {
             case 0: return <Home />
             case 1: return <PageGenCode />

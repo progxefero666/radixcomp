@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
-import { SchemaService } from "@/client/metadata/schemaservice";
+//import { SchemaService } from "@/client/metadata/schemaservice";
 
 import { SeparatorH } from "@/radix/container/separatorh";
 import { SeparatorV } from "@/radix/container/separatorv";
@@ -31,6 +31,7 @@ import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 import { ShowAlerts } from "@/common/util/showalerts";
 import { XRadioGroup } from "@/radix/input/inpgrpradio";
 import { ThemePagesStyles } from "@/radix/radixtheme";
+import { SchemaService } from "@/codegen/schemaservice";
 
  
 
