@@ -1,8 +1,10 @@
 // File: src/common/util/jsonhelper.ts
 
+import { TSelection } from "../types";
+
 
 /**
- * class JsonHelper.toJsonString
+ * class JsonHelper.getTSelectionJsonString
  * Provides utility methods for JSON operations.
  */
 export class JsonHelper {
@@ -31,6 +33,13 @@ export class JsonHelper {
         catch (error) {
             return false;
         }
+    }//end
+
+    public static getTSelectionJsonString(tselection: TSelection): string| null {
+        if (tselection == null) {
+            return null;
+        }
+        return JSON.stringify(tselection, null, JsonHelper.TAB_SPACE);
     }//end
 
 }//end class

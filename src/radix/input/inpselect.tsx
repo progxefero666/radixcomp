@@ -23,7 +23,8 @@ export interface GroupCompProps {
 }
 */
 interface CompProps {
-    name: string;
+    autocommit?: boolean;
+    name?: string;
     inline?: boolean;
     readonly?: boolean;
     disabled?: boolean;
@@ -35,7 +36,7 @@ interface CompProps {
     onchange?: (value: string,name?:string) => void;
 }                  
 export const XInputSelect = forwardRef<HTMLSelectElement, CompProps>(({    
-    name, collection, label, value: defaultvalue,
+    autocommit,name, collection, label, value: defaultvalue,
     inline, readonly, disabled, autofocus, onchange }, ref) => {
 
     const size = RadixConf.SIZES.size_2;
@@ -47,8 +48,11 @@ export const XInputSelect = forwardRef<HTMLSelectElement, CompProps>(({
     const isDisabled: boolean = disabled ?? false;
 
     const handleOnChange = (value: string) => {
-        if (onchange) {
-            onchange(value);
+        if(autocommit) {
+            if (onchange) {
+                if (name) {onchange(value, name);}
+                else      {onchange(value);}
+            }
         }
     }
 
@@ -57,7 +61,7 @@ export const XInputSelect = forwardRef<HTMLSelectElement, CompProps>(({
         return (
             <Select.Root
                 defaultValue={defaultvalue}                    
-                onValueChange={onchange}
+                onValueChange={handleOnChange}
                 disabled={true}
                 size={size}  >
                 <Select.Trigger variant={variant} color={color}  />

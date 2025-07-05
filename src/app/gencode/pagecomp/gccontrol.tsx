@@ -106,7 +106,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     }
 
-    const onSelectTables = (group:TSelection) => {
+    const onSelectTables = (tableNames:TSelection) => {
+        //const str:string|null = JsonHelper.getTSelectionJsonString(tableNames);
+        ShowAlerts.showTSelection(tableNames);
 
         //ShowAlerts.showCouple(compname!,index.toString());
         //setTableIndex(index);
@@ -195,24 +197,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         )
     }
 
-
-    const renderMainContent = () => {
-        return (
-            <Flex width="100%" direction="column"  >
-                {showRadioList ?
-                <XInputSelect name="selectTable"  
-                              collection={[]}
-                              onchange={onSelectTable}/> : null}
-                {showCheckList ?
-                    <XCheckGroup name="selectTables"
-                        autocommit={true}
-                        inline={false}
-                        options={menuListTables}
-                        onselect={onSelectTables} /> : null}
-            </Flex>
-        );
-    }//end renderMainContent
-
     const renderHeader = () => {
         return (
             <>
@@ -244,6 +228,25 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             </>
         );
     }//end  
+
+    const renderMainContent = () => {
+        return (
+            <Flex width="100%" direction="column"  >
+                {showRadioList ?
+                <XInputSelect name="selectTable"  
+                              autocommit={true}
+                              collection={[]}
+                              onchange={onSelectTable}/> : null}
+                {showCheckList ?
+                    <XCheckGroup name="selectTables"
+                        autocommit={true}
+                        inline={false}
+                        options={menuListTables}
+                        onselect={onSelectTables} /> : null}
+            </Flex>
+        );
+    }//end renderMainContent
+
 
     return (
         <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >

@@ -29,7 +29,7 @@ interface CompProps {
     label?: string;
     direction?: radixTypeDirection;
     defaultValues?: boolean[];
-    onselect: (group:TSelection) => void;
+    onselect: (group:TSelection,name?:string) => void;
     autofocus?: boolean;
 }
 export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
@@ -38,6 +38,7 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
     const [rootValues,setRootValues] = useState<string[]>(RadixUtil.getArrayChar("1", options.length));
     const [collValues,setCollValues] = useState<boolean[]>(RadixUtil.getArrayFalse(options.length));
 
+  
     const showInline: boolean = inline ?? false;
     const auto: boolean = autocommit ?? false;
     //const def_value: string = value || options[0].id;
@@ -67,18 +68,26 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
         init();
     }, []);
 
+    const getValue = (compName?:string):TSelection => {
+        let items: TSelected[] = [];
+        for(let i=0; i<collValues.length; i++) {
+            items.push({id: options[i].id,value: collValues[i]});
+        }
+        return {id:compName??"undefined",items:items};
+    }
+
     const onSelect = (value: string) => {
-        alert("onSelect: " + value);
         const itemIndex: number = ModelHelper.getElementIndex(options, value);
         let coll_values:boolean[] = collValues;
         coll_values[itemIndex] = !coll_values[itemIndex];
         setCollValues(coll_values);
-        /*
+        
+        const groupSelection: TSelection = getValue(name);
         if (auto) {
-            if (name) { onselect(itemIndex, name); }
-            else { onselect(itemIndex); }
+            if (name) { onselect(groupSelection, name); }
+            else { onselect(groupSelection); }
             return;
-        }*/
+        }
     }
 
     const renderItem = (key: string, id: string, text: string) => {

@@ -1,9 +1,10 @@
 //src\common\util\showalerts.ts
 
+import { TSelection } from "../types";
 import { JsonHelper } from "./jsonhelper";
 
 /**
- * class ShowAlerts.show
+ * class ShowAlerts.showTSelection
  */
 export class ShowAlerts {
     
@@ -28,5 +29,10 @@ export class ShowAlerts {
     static showJson(json: string): void {       
         alert( JsonHelper.toJsonString(json));
     }
+    static showTSelection(tselection: TSelection): void {     
+        const json: string | null = JsonHelper.getTSelectionJsonString(tselection);  
+        alert( JsonHelper.toJsonString(json));
+    }
+    
 
 }//end class
