@@ -8,7 +8,7 @@ import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
 import { StringsHelper } from "@/common/util/stringshelper";
 import { ModelHelper } from "@/common/util/modelhelper";
 import { RadixUtil } from "../radixutil";
-
+import { TSelected, TSelection } from "@/common/types";
 
 /*
 <CheckboxGroup.Root defaultValue={["1"]} name="example">
@@ -28,14 +28,15 @@ interface CompProps {
     options: Option[];
     label?: string;
     direction?: radixTypeDirection;
-    values?: boolean[];
-    onselect: (index: number, name?: string) => void;
+    defaultValues?: boolean[];
+    onselect: (group:TSelection) => void;
     autofocus?: boolean;
 }
 export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
-    autocommit, inline, options, name, label, values, direction, onselect }, ref) => {
+    autocommit, inline, options, name, label, defaultValues, direction, onselect }, ref) => {
 
     const [rootValues,setRootValues] = useState<string[]>(RadixUtil.getArrayChar("1", options.length));
+    const [collValues,setCollValues] = useState<boolean[]>(RadixUtil.getArrayFalse(options.length));
 
     const showInline: boolean = inline ?? false;
     const auto: boolean = autocommit ?? false;
@@ -49,14 +50,17 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
         radius: RadixConf.RADIUS.medium
     }
 
-    useEffect(() => {        
+    useEffect(() => {      
         const init =  () => {
-            if(values!=null) {
+            if(defaultValues!=null) {
+                const coll_values:boolean[] = [];
                 const root_values: string[] = [];
-                for(let i=0; i<values.length; i++) {
-                    if(values[i] === true) {root_values[i] = "1";}
-                    else                   {root_values[i] = "2";}
+                for(let i=0; i<defaultValues.length; i++) {
+                    coll_values[i] = defaultValues[i];
+                    if(defaultValues[i] === true) {root_values[i] = "1";}
+                    else                          {root_values[i] = "2";}                    
                 }
+                setCollValues(coll_values);
                 setRootValues(root_values);
             }
         };
@@ -64,12 +68,17 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
     }, []);
 
     const onSelect = (value: string) => {
+        alert("onSelect: " + value);
         const itemIndex: number = ModelHelper.getElementIndex(options, value);
+        let coll_values:boolean[] = collValues;
+        coll_values[itemIndex] = !coll_values[itemIndex];
+        setCollValues(coll_values);
+        /*
         if (auto) {
             if (name) { onselect(itemIndex, name); }
             else { onselect(itemIndex); }
             return;
-        }
+        }*/
     }
 
     const renderItem = (key: string, id: string, text: string) => {
@@ -95,18 +104,20 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
         return (
             <Flex direction = {compDirection} gap="2">
                 {options.map((opt, index) => (
-                    <CheckboxGroup.Root key={index.toString()}
+                    <CheckboxGroup.Root key={index.toString()} onClick={() => onSelect(opt.id)}
                         name={name}
                         defaultValue={["1"]} 
                         size    = {compStyle.size}
                         color   = {compStyle.color}
-                        variant = {compStyle.variant} >                
-                                <CheckboxGroup.Item  
-                                    value={rootValues[index]} onChange={() => onSelect(opt.id)} >
-                                    <Text size="2" >
-                                        {opt.text}
-                                    </Text>
-                                </CheckboxGroup.Item>      
+                        variant = {compStyle.variant} > 
+
+                        <CheckboxGroup.Item  
+                            value={rootValues[index]} >
+                            <Text size="2" >
+                                {opt.text}
+                            </Text>
+                        </CheckboxGroup.Item>      
+
                     </CheckboxGroup.Root>
                 ))}                    
             </Flex>

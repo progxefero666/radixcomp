@@ -16,7 +16,7 @@ import { InputFiles } from "@/radix/notready/inputfiles";
 import { RadixConfTexts } from "@/radix/radixconf";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { ModuleConfig } from "../config";
-import { InputSelect } from "@/radix/input/inpselect";
+import { XInputSelect } from "@/radix/input/inpselect";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 
 import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
@@ -38,7 +38,7 @@ import { GcControlTsEntFilesOps } from "../module/gcmtsentfiles";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
-
+import { TSelected, TSelection } from "@/common/types";
 
 /**
  * GenCodeControl
@@ -48,20 +48,24 @@ interface CompProps {
     ondataresult: (data: string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    //const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const ctrTsEntFilesOpsRef = useRef<GcControlTsEntFilesOps>(null);
-
+    const [initialized, setInitialized] = useState<boolean>(false);
+    
+    // db objects
     const [dbSquema, setDbSquema] = useState<string>(AppConstants.NOT_DEF);
-
     const [menuListTables, setMenuListTables] = useState<Option[]>([]);
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
-    const [tableIndex, setTableIndex] = useState<number>(0);
-    const [initialized, setInitialized] = useState<boolean>(false);
 
+    //const [tableIndex, setTableIndex] = useState<number>(0);
+    
+    // operations list
     const [operations, setOperations] = useState<Option[]>([]);
     const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
     const operationsRef = useRef<HTMLSelectElement>(null);
+
+    // operations controllers
+    const ctrTsEntFilesOpsRef = useRef<GcControlTsEntFilesOps>(null);
 
     // UI
     const [includeDefs, setIncludeDefs] = useState<boolean>(false);
@@ -98,9 +102,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (file) { alert(file.name); }
     };//end
 
-    const onSelectTable = (index: number, compname?: string) => {
+    const onSelectTable = (tableName:string,compName?:string) => {
 
-        ShowAlerts.showCouple(compname!,index.toString());
+    }
+
+    const onSelectTables = (group:TSelection) => {
+
+        //ShowAlerts.showCouple(compname!,index.toString());
         //setTableIndex(index);
     };//end
 
@@ -145,7 +153,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = async () => {
-        const modelTableSel: ModelTable = modelTables[tableIndex];
+        const modelTableSel: ModelTable = modelTables[0];
 
         if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
             ctrTsEntFilesOpsRef.current!.executeOperation(operationId);
@@ -187,24 +195,21 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         )
     }
 
+
     const renderMainContent = () => {
         return (
-            <>
+            <Flex width="100%" direction="column"  >
                 {showRadioList ?
-                    <XRadioGroup name="selectTable"
-                        autocommit={true}
-                        key={modelTables[tableIndex].name}
-                        onselect={onSelectTable}
-                        options={menuListTables}
-                        value={modelTables[tableIndex].name}
-                        direction="column" /> : null}
+                <XInputSelect name="selectTable"  
+                              collection={[]}
+                              onchange={onSelectTable}/> : null}
                 {showCheckList ?
                     <XCheckGroup name="selectTables"
                         autocommit={true}
                         inline={false}
                         options={menuListTables}
-                        onselect={onSelectTable} /> : null}
-            </>
+                        onselect={onSelectTables} /> : null}
+            </Flex>
         );
     }//end renderMainContent
 
@@ -212,7 +217,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         return (
             <>
                 <Box>
-                    <InputSelect
+                    <XInputSelect
                         key={operations[0].id}
                         inline={true}
                         name="operations"
@@ -275,5 +280,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         multiple={false}
         onchange={onFileCharged} />
 </Box>
+
+<XRadioGroup name="selectTable"
+                        autocommit={true}
+                        onselect={onSelectTable}
+                        options={menuListTables}
+                        value={modelTables[0].name}
+                        direction="column" />    
+
 */
 

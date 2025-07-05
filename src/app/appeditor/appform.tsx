@@ -5,7 +5,7 @@ import { Flex } from "@radix-ui/themes";
 import { format, addDays, differenceInDays } from "date-fns";
 
 import { XInputText } from "@/radix/input/inptext";
-import { InputSelect } from "@/radix/input/inpselect";
+import { XInputSelect } from "@/radix/input/inpselect";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XInputNumber } from "@/radix/input/inpnumber";
 import { XInputDate } from "@/radix/input/inpdate";
@@ -140,7 +140,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputSelect
+            <XInputSelect
                 name="type"
                 ref={typeRef}
                 inline={true}
@@ -150,7 +150,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputSelect
+            <XInputSelect
                 name="proglanguage"
                 ref={proglanguageRef}
                 label="code lang"

@@ -24,11 +24,11 @@ export class RadixUtil {
         return arr;
     } 
     
-    public static getArrayTrue(value:boolean, count:number): boolean[] {
+    public static getArrayTrue( count:number): boolean[] {
         return RadixUtil.getArrayBoolean(true, count);
     }  
     
-    public static getArrayFalse(value:boolean, count:number): boolean[] {
+    public static getArrayFalse(count:number): boolean[] {
         return RadixUtil.getArrayBoolean(true, count);
     }   
 

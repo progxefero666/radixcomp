@@ -22,7 +22,7 @@ export interface GroupCompProps {
     autofocus?: boolean;
 }
 */
-interface InputSelectProps {
+interface CompProps {
     name: string;
     inline?: boolean;
     readonly?: boolean;
@@ -32,9 +32,9 @@ interface InputSelectProps {
     value?: string;
     maxlen?: number;
     autofocus?: boolean;
-    onchange?: (value: string) => void;
+    onchange?: (value: string,name?:string) => void;
 }                  
-export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>(({    
+export const XInputSelect = forwardRef<HTMLSelectElement, CompProps>(({    
     name, collection, label, value: defaultvalue,
     inline, readonly, disabled, autofocus, onchange }, ref) => {
 
