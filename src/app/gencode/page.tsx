@@ -13,7 +13,7 @@ import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 import { ShowAlerts } from "@/common/util/showalerts";
-import { getSqlSquema } from "@/app_server/xeferodb/sqlscripts";
+import { getDbSqlSquema, readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
 
 
 
@@ -34,6 +34,7 @@ export default function PageGenCode() {
     const [section, setSection] = useState<string|null>(null);
 
 
+    //const val = AppContext.readDbSquema();
     let initialized: boolean = false;
 
     useEffect(() => {
@@ -42,12 +43,10 @@ export default function PageGenCode() {
         const init = async () => {
             //store dbSquema in SessionStorage...................................
             //const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
-            const dbSquema = await getSqlSquema();
-
-            //alert(dbSquema);
-            AppContext.saveDbSquema(dbSquema);  
-            //const val = AppContext.readDbSquema();
-            //console.log("DB Squema loaded:", val);
+            const dbSquema = await readDbSqlScriptFile("dbsquema");
+            if(dbSquema!== null) {
+                AppContext.saveDbSquema(dbSquema); 
+            }
             //...................................................................
             
             //...................................................................

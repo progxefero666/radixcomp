@@ -1,26 +1,39 @@
-"use server";
-
 //src\app_server\xeferodb\sqlscripts.ts
+"use server";
 
 import { ServerFileUtil } from "@/app_server/lib/serverfileutil";
 import { ServerReader } from "@/app_server/config";
 
-//    public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
-
-export enum SqlScripts {
-    DBSQUEMA_FILE = "dbsquema.sql",
-    DB_INIT_FILE = "dbinit.sql",
-    DB_TEST_FILE = "dbtest.sql"
-}
 
 /**
  * Server action to get the content of a text file.
  * @param fname 
  * @returns file content as a string
  */
-export async function getSqlSquema(): Promise<string> {
-    const filePath: string = ServerReader.getXeferoDbPath(SqlScripts.DBSQUEMA_FILE);    
-    console.log("filePath: ", filePath);
+export async function readDbSqlScriptFile(id:string): Promise<string|null> {
+    let fileName:string|null = null;
+    if(id === "dbsquema") {
+        fileName = "dbsquema.sql";
+    }
+    if(fileName!=null) {
+        const filePath: string = ServerReader.getFilePath(fileName);
+        const fileContent: string = await ServerFileUtil.readFile(filePath);
+        return fileContent;        
+    }
+    else {
+        return null
+    }
+}//end action
+
+/**
+ * Server action to get the content of a text file.
+ * @param fname 
+ * @returns file content as a string
+ */
+export async function getDbSqlSquema(): Promise<string> {
+    const fileName:string = "dbsquema.sql";
+    const filePath: string = ServerReader.getFilePath(fileName);
+    console.log("getTextFile: ", filePath);
     const fileContent: string = await ServerFileUtil.readFile(filePath);
     return fileContent;
 }//end action

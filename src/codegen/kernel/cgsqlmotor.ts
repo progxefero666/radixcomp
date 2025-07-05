@@ -18,6 +18,8 @@ import numericTypesData from "@/codegen/kernel/sqltypesnumber.json";
  *
  * class CodeGen Sql
  */
+
+//CodeGenSql.getEsquemaTable
 export class CodeGenSql {
 
     /**
@@ -160,7 +162,20 @@ export class CodeGenSql {
         }
 
         return Array.from(tablesMap.values());
-    }
+    }//end method getEsquemaTables
 
+    public static getEsquemaTable(sqlScript:string,tableName:string): ModelTable|null {
+        //temp code
+        const allTableModels :ModelTable[] = CodeGenSql.getEsquemaTables(sqlScript);
+        let index = -1;
+        for (let itemIdx=0;itemIdx<allTableModels.length;itemIdx++) {
+            if (tableName == allTableModels[itemIdx].name) {
+                index = itemIdx;
+                break;
+            }
+        }
+        if (index>=0) {return allTableModels[index];}
+        return null;
+    }
 
 }//end class CodeGenSql

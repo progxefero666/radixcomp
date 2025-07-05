@@ -21,9 +21,9 @@ export default class ServerConfig {
 
     //public static ROOT_FOLDER:string = ServerPaths.getRootFolderPath(process.env.NODE_ENV);
     public static FOLDER_ROOT:string = ServerConfig.getRootFolderPath(ServerConfig.ENV_DEV);
-    public static SUBFOLDER_DATA =  path.join(ServerConfig.FOLDER_ROOT,"data");
-
     public static XEFERODB_PATH =  path.join(ServerConfig.FOLDER_ROOT,"data");
+
+   
 
 }//end class
 
@@ -35,7 +35,7 @@ export class ServerReader {
     }
 
     public static getFilePath(fname:string):string {
-        return path.join(ServerConfig.SUBFOLDER_DATA, fname);
+        return path.join(ServerConfig.XEFERODB_PATH, fname);
     }
 
     /*
