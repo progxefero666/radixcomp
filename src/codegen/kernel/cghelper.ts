@@ -18,7 +18,7 @@ export class CodeGenHelper {
     }//end  
 
     public static getDefaultValue(field: ModelField, tsType: string): string {    
-        if (field.pk || field.name.toLowerCase() === 'id') {return 'null';}        
+        if (field.pk) {return 'null';}        
         if (tsType.includes('number')) {return 'null';}
         
         if (tsType === 'boolean') {return 'false';}        

@@ -1,18 +1,15 @@
 //src\db\model\apptype.ts
 
 /**
- * Class Apptype
- * Represents a Apptype entity with various properties and methods.
- * 
- * @class Apptype
- */
+ * Db Table Entity Class Apptype
+ **/
 export class Apptype {
 
-    public id: number | null = null;
-    public name: string = "undefined";
-    public description: string = "undefined";
+    public id: number;
+    public name: string;
+    public description: string = 'undefined';
 
-    constructor(id: number | null,
+    constructor(id: number,
                 name: string,
                 description: string) {
 
@@ -55,7 +52,7 @@ export class Apptype {
  * Type definition for Apptype entity
  */
 export type TypeApptype = {
-    id: number | null;
+    id: number;
     name: string;
     description: string;
 };

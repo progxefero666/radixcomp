@@ -1,24 +1,21 @@
-//src\db\model\application.ts
+//table_application.ts
 
 /**
- * Class Application
- * Represents a Application entity with various properties and methods.
- * 
- * @class Application
- */
+ * Db Table Entity Class Application
+ **/
 export class Application {
 
-    public id: number | null = null;
-    public apptype_id: number | null = null;
-    public codelang_id: number | null = null;
-    public name: string = "undefined";
-    public description: string = "undefined";
-    public repository: string = "undefined";
-    public author: string = "undefined";
-    public osystem: string = "undefined";
-    public appurl: string = "undefined";
-    public apppath: string = "undefined";
-    public localdev: boolean = false;
+    public id: number;
+    public apptype_id: number = 0;
+    public codelang_id: number;
+    public name: string;
+    public description: string = 'undefined';
+    public repository: string = 'undefined';
+    public author: string;
+    public osystem: string;
+    public appurl: string;
+    public apppath: string;
+    public localdev: boolean = true;
     public usedocker: boolean = false;
     public controlusers: boolean = false;
     public useui: boolean = false;
@@ -27,12 +24,12 @@ export class Application {
     public consumeapi: boolean = false;
     public consumeai: boolean = false;
     public exposedb: boolean = false;
-    public exposeapi: boolean = false;
-    public updated: Date = new Date();
+    public exposeapi: boolean = false ;
+    public updated: Date;
 
-    constructor(id: number | null,
-                apptype_id: number | null,
-                codelang_id: number | null,
+    constructor(id: number,
+                apptype_id: number,
+                codelang_id: number,
                 name: string,
                 description: string,
                 repository: string,
@@ -130,9 +127,9 @@ export class Application {
  * Type definition for Application entity
  */
 export type TypeApplication = {
-    id: number | null;
-    apptype_id: number | null;
-    codelang_id: number | null;
+    id: number;
+    apptype_id: number;
+    codelang_id: number;
     name: string;
     description: string;
     repository: string;

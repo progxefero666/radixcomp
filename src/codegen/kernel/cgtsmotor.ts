@@ -28,17 +28,25 @@ export class CodeGenTsMotor {
         
         // Class info
         content += `/**\n`;
-        content += ` * Class ${className}\n`;
-        content += ` * Represents a ${className} entity with various properties and methods.\n`;
-        content += ` * \n`;
-        content += ` * @class ${className}\n`;
-        content += ` */\n`;
+        content += ` * Db Table Entity Class ${className}\n`;
+        content += ` **/\n`;
         content += `export class ${className} {\n\n`;        
         // Generate properties
         for (const field of tableModel.fields) {
-            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
-            const defaultValue = CodeGenHelper.getDefaultValue(field, tsType);            
-            content += `    public ${field.name}: ${tsType} = ${defaultValue};\n`;
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);    
+            console.log(field.default);  
+            if(field.default!=null){
+                if (field.type === "text"){
+                    content += `    public ${field.name}: ${tsType} = '${field.default}';\n`;
+                }
+                else {
+                    content += `    public ${field.name}: ${tsType} = ${field.default};\n`;
+                }
+                
+            }
+            else{
+                content += `    public ${field.name}: ${tsType};\n`;
+            }       
         }        
         // Constructor
         content += `\n    constructor(`;

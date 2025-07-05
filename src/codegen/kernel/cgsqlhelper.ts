@@ -22,13 +22,13 @@ export class CodeGenSqlHelper {
         
         // Check numeric types - TODOS los números como number | null
         if (type.includes('integer') || type.includes('int') || type.includes('serial')) {
-            return 'number | null';
+            return 'number';
         }
         
         // Check decimal types - también number | null para consistencia
         if (type.includes('decimal') || type.includes('numeric') || type.includes('real') || 
             type.includes('float') || type.includes('double')) {
-            return 'number | null';
+            return 'number';
         }
         
         // Check date types

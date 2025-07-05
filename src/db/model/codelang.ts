@@ -8,11 +8,11 @@
  */
 export class Codelang {
 
-    public id: number | null = null;
-    public name: string = "undefined";
-    public description: string = "undefined";
+    public id: number;
+    public name: string;
+    public description: string;
 
-    constructor(id: number | null,
+    constructor(id: number,
                 name: string,
                 description: string) {
 
@@ -55,7 +55,7 @@ export class Codelang {
  * Type definition for Codelang entity
  */
 export type TypeCodelang = {
-    id: number | null;
+    id: number;
     name: string;
     description: string;
 };

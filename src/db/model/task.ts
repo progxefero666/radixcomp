@@ -1,29 +1,26 @@
 //src\db\model\task.ts
 
 /**
- * Class Task
- * Represents a Task entity with various properties and methods.
- * 
- * @class Task
- */
+ * Db Table Entity Class Task
+ **/
 export class Task {
 
-    public id: number | null = null;
-    public tasktype_id: number | null = null;
-    public codelang_id: number | null = null;
-    public workflow_id: number | null = null;
-    public orden: number | null = null;
-    public name: string = "undefined";
-    public description: string = "undefined";
-    public files: string = "undefined";
-    public folders: string = "undefined";
+    public id: number;
+    public tasktype_id: number;
+    public codelang_id: number;
+    public workflow_id: number;
+    public orden: number;
+    public name: string;
+    public description: string;
+    public files: string;
+    public folders: string;
     public final: boolean = false;
 
-    constructor(id: number | null,
-                tasktype_id: number | null,
-                codelang_id: number | null,
-                workflow_id: number | null,
-                orden: number | null,
+    constructor(id: number,
+                tasktype_id: number,
+                codelang_id: number,
+                workflow_id: number,
+                orden: number,
                 name: string,
                 description: string,
                 files: string,
@@ -94,11 +91,11 @@ export class Task {
  * Type definition for Task entity
  */
 export type TypeTask = {
-    id: number | null;
-    tasktype_id: number | null;
-    codelang_id: number | null;
-    workflow_id: number | null;
-    orden: number | null;
+    id: number;
+    tasktype_id: number;
+    codelang_id: number;
+    workflow_id: number;
+    orden: number;
     name: string;
     description: string;
     files: string;

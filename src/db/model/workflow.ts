@@ -1,21 +1,18 @@
 //src\db\model\workflow.ts
 
 /**
- * Class Workflow
- * Represents a Workflow entity with various properties and methods.
- * 
- * @class Workflow
- */
+ * Db Table Entity Class Workflow
+ **/
 export class Workflow {
 
-    public id: number | null = null;
-    public name: string = "undefined";
-    public description: string = "undefined";
-    public application: string = "undefined";
-    public fpath: string = "undefined";
-    public updated: Date = new Date();
+    public id: number;
+    public name: string;
+    public description: string = 'undefined';
+    public application: string;
+    public fpath: string;
+    public updated: Date;
 
-    constructor(id: number | null,
+    constructor(id: number,
                 name: string,
                 description: string,
                 application: string,
@@ -70,7 +67,7 @@ export class Workflow {
  * Type definition for Workflow entity
  */
 export type TypeWorkflow = {
-    id: number | null;
+    id: number;
     name: string;
     description: string;
     application: string;
