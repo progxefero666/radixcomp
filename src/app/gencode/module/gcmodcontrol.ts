@@ -3,7 +3,11 @@
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
-
+/*
+export interface GenCodeIServiceClient {
+    sqlsquema: string;
+}
+*/
 /**
  * GenCodeModuleControl is a class base
  *   !! not implement alone !!

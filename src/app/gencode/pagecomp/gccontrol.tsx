@@ -34,7 +34,7 @@ import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SchemaService } from "@/codegen/schemaservice";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
-import { GcControlTsEntFilesOps } from "../module/gcmtsentfiles";
+import { TsEntFilesServiceClient } from "../module/gcmtsentfiles";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
@@ -68,7 +68,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const selGroupTableNames = useRef<TSelection>(null);
 
     const modelsTableOptions = useRef<Option[]>([]);
-    const ctrTsEntFilesOpsRef = useRef<GcControlTsEntFilesOps>(null);
+    const ctrTsEntFilesOpsRef = useRef<TsEntFilesServiceClient>(null);
 
     // UI
     const [includeDefs, setIncludeDefs] = useState<boolean>(false);
@@ -92,7 +92,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
                 selTableName.current = db_modeltables[0].name;
 
-                ctrTsEntFilesOpsRef.current = new GcControlTsEntFilesOps(db_squema);
+                ctrTsEntFilesOpsRef.current = new TsEntFilesServiceClient(db_squema);
 
                 //step 2: load operations for the selected section
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
@@ -104,15 +104,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         init();
     }, []);
 
-
-
     const onSelectTable = (tableName:string,compName?:string) => {
         selTableName.current = tableName;
-        alert("Selected table: " + tableName);
     }
 
     const onSelectTables = (tableNames:TSelection) => {
-        //const str:string|null = JsonHelper.getTSelectionJsonString(tableNames);
         selGroupTableNames.current = tableNames;
     };//end
 
@@ -161,10 +157,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const runOperation = async () => {
 
         if (section == ModuleConfig.SC_TS_ENTITY_FILES.id) {
-            ctrTsEntFilesOpsRef.current!.executeOperation(
+            const codecont:string|null = await ctrTsEntFilesOpsRef.current!.executeOperation(
                 operationId,
                 selTableName.current,
                 selGroupTableNames.current);
+            ondataresult(codecont!);    
         }
         else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){}
         else if(section == ModuleConfig.SC_TSX_ENTITY_FORMS.id){}
