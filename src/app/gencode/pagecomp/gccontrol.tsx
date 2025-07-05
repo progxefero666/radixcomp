@@ -34,7 +34,7 @@ import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SchemaService } from "@/codegen/schemaservice";
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
-import { TsEntFilesServiceClient } from "../module/gcmtsentfiles";
+import { ServClientTScriptEntities } from "../module/client_tscriptentities";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 
@@ -68,7 +68,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const selGroupTableNames = useRef<TSelection>(null);
 
     const modelsTableOptions = useRef<Option[]>([]);
-    const ctrTsEntFilesOpsRef = useRef<TsEntFilesServiceClient>(null);
+    const ctrTsEntFilesOpsRef = useRef<ServClientTScriptEntities>(null);
 
     // UI
     const [includeDefs, setIncludeDefs] = useState<boolean>(false);
@@ -92,7 +92,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
                 selTableName.current = db_modeltables[0].name;
 
-                ctrTsEntFilesOpsRef.current = new TsEntFilesServiceClient(db_squema);
+                ctrTsEntFilesOpsRef.current = new ServClientTScriptEntities(db_squema);
 
                 //step 2: load operations for the selected section
                 const listOperations: Option[] = CodeGenConfig.getSectionOperations(section!);
@@ -163,11 +163,12 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 selGroupTableNames.current);
             ondataresult(codecont!);    
         }
-        else if(section==ModuleConfig.SC_JSON_ENTITY_FILES.id){}
-        else if(section == ModuleConfig.SC_TSX_ENTITY_FORMS.id){}
-        else if(section==ModuleConfig.SC_TS_SERVICES_FILES.id){}
-        else if(section==ModuleConfig.SC_PY_SERVICES_FILES.id){}
-        else if(section==ModuleConfig.SC_DB_SQUEMA.id){}        
+        else if(section === ModuleConfig.SC_TSX_ENTITY_FORMS.id){
+
+        }
+        else if(section === ModuleConfig.SC_JSON_ENTITY_FILES.id){}
+        else if(section === ModuleConfig.SC_TS_SERVICES_FILES.id){}
+        else if(section === ModuleConfig.SC_DB_SQUEMA.id){}        
     };//end
 
     const renderParamsContent = () => {

@@ -6,15 +6,19 @@ import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
 import { TSelection } from "@/common/types";
 import { ModelHelper } from "@/common/util/modelhelper";
+import { JsonHelper } from "@/common/util/jsonhelper";
 
 
 /**
- * # Service client: TsEntFilesService
+ * # GenCode Service client: TypeScript Table Entities clases
  *      - GenCode Control for TypeScript Entity Files Operations
  *      - kernel: src\codegen\operations\tsentfilesops.ts
  *      - server actions: src\app_server\xeferodb\tsclasses.ts
  */
-export class TsEntFilesServiceClient extends GenCodeModuleControl {
+export class ServClientTScriptEntities extends GenCodeModuleControl {
+
+    public static readonly ID: string =  "typescript_entityfiles";
+    public static readonly OPTION_VALUE: string =  "TS Entities files";
 
     public constructor(sqlsquema:string) {
         super(sqlsquema);
@@ -22,7 +26,8 @@ export class TsEntFilesServiceClient extends GenCodeModuleControl {
 
     public async executeOperation(operationId:string,
                                   table:string|null,
-                                  tables:TSelection|null): Promise<string|null> {               
+                                  tables:TSelection|null): Promise<string|null> {  
+        //console.log(JsonHelper.getTSelectionJsonString(tables!));                                             
         let code:string|null = null;
         if( (operationId === TsEntFilesOps.OP_GET_DEF_CLASS.id) ||
             (operationId === TsEntFilesOps.OP_GET_ENT_CLASS.id)){          
@@ -43,4 +48,4 @@ export class TsEntFilesServiceClient extends GenCodeModuleControl {
 
 }//end class
 
-//JsonHelper.getTSelectionJsonString(tableNames) 
+//

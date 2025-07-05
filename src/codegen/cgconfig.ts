@@ -9,11 +9,12 @@ import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
 import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
 import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
 import { PyEntServiceFilesOps } from "@/codegen/operations/pyentservicefilesops";
+import { ServClientTScriptEntities } from "@/app/gencode/module/client_tscriptentities";
 
 
 export enum OP_CATEGORIES {
     json_entityfiles        = "json_files",
-    typescript_entityfiles  = "typescript_entityfiles",
+    
     typescript_entityforms  = "typescript_entityforms",
     typescript_servicefiles = "typescript_servicefiles",    
     python_serverfiles      = "python_serverfiles",
@@ -64,7 +65,7 @@ export class CodeGenConfig {
 
     public static getSectionOperations(sectionName: string): Option[] {
 
-        if (sectionName === OP_CATEGORIES.typescript_entityfiles) {
+        if (sectionName === ServClientTScriptEntities.ID) {
             return TsEntFilesOps.Operations;
         }
         else if (sectionName === OP_CATEGORIES.json_entityfiles) {

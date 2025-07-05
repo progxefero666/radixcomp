@@ -14,6 +14,7 @@ export interface GenCodeIServiceClient {
  */
 export class GenCodeModuleControl {
 
+    
     public sqlsquema: string = "";
     public modeltables: ModelTable[] = []; 
 
