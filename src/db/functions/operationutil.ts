@@ -3,7 +3,7 @@
 import { DbOps } from "../dboperations";
 
 /**
- * Class OpUtil.getErrorMessage
+ * Class OpUtil.getErrNotFoundMessage
  * Utility class for operations.
  */
 export class OpUtil {
@@ -22,6 +22,17 @@ export class OpUtil {
     public static getErrMessageString(error: unknown): string {        
         return String(OpUtil.getErrMessage(error));
     }    
+
+    public static getErrNotFoundMessage(name:string|null,tipe:string|null): string {        
+        let message:string = DbOps.ERROR_NOTFOUND;
+        if(name) {
+            message += "name:".concat(name).concat("");
+        }
+        if(tipe) {
+            message += "type:".concat(tipe).concat("");
+        }  
+        return message;
+    }  
 
     public static consoleSuccess(opId:string|null,data:string|null,table?:string):void {   
         let message:string = "Operation succeess:";

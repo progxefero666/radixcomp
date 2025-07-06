@@ -1,7 +1,7 @@
 //src\db\dboperation.ts
 
 /**
- * class DbOperation.SUCCESS
+ * class DbOps.TYPE_TABLE
  */
 export class DbOps {
 
@@ -20,14 +20,12 @@ export class DbOps {
     public static readonly COUNT_ROWS: string = "getAll";
 
     public static readonly ROW_ID: string = "getAll";
-    public static readonly CREATED_AT = "created";
-    public static readonly UPDATED_AT = "updated";
+    public static readonly CREATED_AT: string = "created";
+    public static readonly UPDATED_AT: string = "updated";
+
+    public static readonly ERROR_NOTFOUND: string = "not found ";
+
+    public static readonly TYPE_TABLE: string = "table";
 
 }//end class
 
-
-    /*
-    public static get(table: string): string {
-        return "";
-    }
-    */
