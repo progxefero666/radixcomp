@@ -2,51 +2,36 @@
 
 
 import { Option } from "@/common/model/option";
+import { DbTables } from "@/db/dbesquema";
+import { Codelang } from "@/db/model/codelang";
 
+import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
+
+import { ShowAlerts } from "@/common/util/showalerts";
+import { GetAll } from "@/db/services/srvreadcmcollections";
 
 /**
- * Manager Common Collections
+ * App Main in Home Page
+ *    - This class is responsible for managing the application index,
+ *    - Include load init collections and display them.
  */
 export class AppIndex {
 
-    /*
-    public applications: Application[] = [];
-    public agents:   Agent[]   = [];
-    public services: Service[] = [];
-    public servers:  Server[]  = [];
-    */
+    public codelangs: Codelang[] = [];
+
     constructor() {
-        //this.loadApplications();
-        //this.loadServices();
-        //this.loadServers();
-        //this.loadAgents();     
+        //this.loadInitCollections();     
     }
 
     public async loadInitCollections(): Promise<boolean> {
-        /*
-                try {
-           this.applications = await ApplicationsService.getAll();
-           this.services = await ServicesService.getAll();
-           this.servers = await ServersService.getAll();
-           //this.agents = await AgentsService.getAll();
-        }
-        catch (error) {
-            alert('List app loaded error: ' + error);
-            //console.error('List app loaded error:', error);
-            return false;
-        }        
-        finally {
-            return true
-        } 
-        */
-       return true;
+        const coll = await GetAll(DbTables.codelang);
+        const coll_json = JsonHelper.toJsonString(coll);
+        ShowAlerts.showJson(coll_json);
+        return true;
     }
 
     public outputConsole() {
-        //console.log(this.applications);
-        //console.log(this.services);
-        //console.log(this.servers);
-        //console.log(this.agents);
+        //console.log(this.codelangs);
     }
 
 }//end class
