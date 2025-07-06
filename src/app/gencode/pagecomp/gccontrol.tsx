@@ -31,9 +31,12 @@ import { AppConfig } from "@/app_front/appconfig";
 import { CardDatabase } from "@/app_front/comp/carddatabase";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
+//---------------------------------------------------------------------------------------
 /**
- * GenCode Main Control
+ * GenCode Main Control Panel.
+ * 
  */
+//---------------------------------------------------------------------------------------
 interface CompProps {
     section?: string | null;
     ondataresult: (data: string) => void;
@@ -186,6 +189,14 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const renderInputPanel = () => {
+        /*
+            <InputFiles
+                ref={fileInputRef}
+                name="inputFileCode"
+                formats=".sql,.json,.ts"
+                multiple={false}
+                onchange={onFileCharged} />
+        */
         return (
             <Box>
                 <p>as</p>
@@ -257,15 +268,4 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     );
 
 }//end component
-
-
-/*
-    <InputFiles
-        ref={fileInputRef}
-        name="inputFileCode"
-        formats=".sql,.json,.ts"
-        multiple={false}
-        onchange={onFileCharged} />
-
-*/
 
