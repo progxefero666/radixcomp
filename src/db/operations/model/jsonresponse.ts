@@ -1,8 +1,12 @@
-//src\common\json\model\jsonresponse.ts
+//src\db\operations\model\jsonresponse.ts
 
-import { JsonConstant } from "@/db/operations/jsonconstant";
-import { DbOperations } from "@/db/dboperations";
+import { JsonOpConstants } from "@/db/operations/jsonconstant";
+import { DbOps } from "@/db/dboperations";
 
+/**
+ * Model: JsonResponse
+ *    for back services responses.
+ */
 export class JsonResponse {
 
     public result: string;
@@ -16,23 +20,25 @@ export class JsonResponse {
     }
 
     public toJson(): string {
-        return JSON.stringify(this,null,JsonConstant.TAB);
+        return JSON.stringify(this,null,JsonOpConstants.TAB);
     }
 
     public isSuccess(): boolean {
-        return this.result === DbOperations.SUCCESS;
+        return this.result === DbOps.SUCCESS;
     }
 
     public isError(): boolean {
-        return this.result === DbOperations.ERROR;
+        return this.result === DbOps.ERROR;
     }
 
-    public static success(message:string|null,data:any|null): JsonResponse {
-        return new JsonResponse(DbOperations.SUCCESS, message, data);
+    public static SUCCESS(message:string|null,data:any|null): string {
+        const jsonResponse:JsonResponse = new JsonResponse(DbOps.SUCCESS, message, data);
+        return jsonResponse.toJson();
     }
 
-    public static error(message:string|null): JsonResponse {
-        return new JsonResponse(DbOperations.ERROR, message, null);
+    public static ERROR(message:string|null): string {
+        const jsonResponse:JsonResponse = new JsonResponse(DbOps.ERROR, message, null);
+        return jsonResponse.toJson();
     }
 
 

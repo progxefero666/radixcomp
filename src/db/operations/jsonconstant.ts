@@ -1,10 +1,10 @@
-//src\common\json\jsonconstant.ts
+//src\db\operations\jsonconstant.ts
 
 /**
- * Class JsonConstant
+ * class JsonOpConstants
+ *      for database back services operations 
  */
-export class JsonConstant {
-
+export class JsonOpConstants {
 
     public static readonly TAB: number = 4;
     

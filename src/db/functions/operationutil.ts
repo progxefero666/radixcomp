@@ -1,6 +1,6 @@
 //src\db\functions\operationutil.ts
 
-import { DbOperations } from "../dboperations";
+import { DbOps } from "../dboperations";
 
 /**
  * Class OpUtil.getErrorMessage
@@ -16,7 +16,7 @@ export class OpUtil {
         if(error instanceof Error) {
             return error.message;
         }        
-        return DbOperations.ERROR_UNKNOWN;
+        return DbOps.ERROR_UNKNOWN;
     }    
 
     public static getErrMessageString(error: unknown): string {        
