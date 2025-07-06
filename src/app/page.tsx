@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
 import PrimaryBar from "@/app/index/primarybar";
-import IndexHeader from "./index/header";
+import Header from "./index/header";
 import { useEffect, useRef, useState } from "react";
 import { AppConfig } from "@/app_front/appconfig";
 import SecondBar from "./index/secondbar";
@@ -42,23 +42,30 @@ export default function Home() {
         setActModule(sectionId);
     };
 
+    if(!initialized) {
+        return (
+            <Box style={layoutStyle} >
+                <Text>Loading...</Text>
+            </Box>
+        );
+    }
     return (
         <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
             
             <Flex gridColumn="1/4" gridRow="1" >
-                <IndexHeader />    
+                <Header section={actmodule} />    
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
                 <PrimaryBar section={actmodule} onselection={onSelection} />
             </Flex>
 
-            <Flex gridColumn="2" gridRow="2" > {initialized?
-                <MainContent section={actmodule} onselection={onSelection}/>:null}
+            <Flex gridColumn="2" gridRow="2" > 
+                <MainContent section={actmodule} />
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" >
-                <SecondBar actsection={actmodule} />
+                <SecondBar section={actmodule} />
             </Flex>
 
         </Grid>

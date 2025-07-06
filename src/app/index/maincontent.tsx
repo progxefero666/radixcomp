@@ -18,9 +18,8 @@ const mainContentStyle = {
 
 interface CompProps {
     section:string;
-    onselection:(sectionId:string)=>void;
 }
-export default function MainContent({onselection,section}: CompProps) {
+export default function MainContent({section}: CompProps) {
 
     const renderModPlatform = () => {
         return (

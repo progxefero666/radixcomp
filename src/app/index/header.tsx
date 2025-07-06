@@ -10,15 +10,11 @@ import { RadixConf } from "@/radix/radixconf";
 import { AppConfig } from "@/app_front/appconfig";
 
 interface IndexHeaderProps {
-    onselection?: (sectionId: string) => void;
+    section?: string;
 }
-export default function IndexHeader({ onselection }: IndexHeaderProps) {
+export default function Header({ section }: IndexHeaderProps) {
 
     const pathname = usePathname();
-
-    const onSelection = (sectionId: string) => {
-        alert("Home: onselection: " + sectionId);
-    }
 
     const renderHomeButton = () => {
         return (
