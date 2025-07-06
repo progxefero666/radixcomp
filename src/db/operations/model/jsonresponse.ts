@@ -1,6 +1,7 @@
 //src\common\json\model\jsonresponse.ts
 
-import { JsonConstant } from "@/common/json/jsonconstant";
+import { JsonConstant } from "@/db/operations/jsonconstant";
+import { DbOperations } from "@/db/dboperations";
 
 export class JsonResponse {
 
@@ -19,19 +20,19 @@ export class JsonResponse {
     }
 
     public isSuccess(): boolean {
-        return this.result === JsonConstant.SUCCESS;
+        return this.result === DbOperations.SUCCESS;
     }
 
     public isError(): boolean {
-        return this.result === JsonConstant.ERROR;
+        return this.result === DbOperations.ERROR;
     }
-    
+
     public static success(message:string|null,data:any|null): JsonResponse {
-        return new JsonResponse("success", message, data);
+        return new JsonResponse(DbOperations.SUCCESS, message, data);
     }
 
     public static error(message:string|null): JsonResponse {
-        return new JsonResponse("error", message, null);
+        return new JsonResponse(DbOperations.ERROR, message, null);
     }
 
 

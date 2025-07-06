@@ -1,5 +1,5 @@
 //src\db\services\servicecodelang.ts
-import { JsonResponse } from "@/common/json/model/jsonresponse";
+import { JsonResponse } from "@/db/operations/model/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 import { OpUtil } from "../functions/operationutil";
 import { DbOperations } from "../dboperations";
@@ -15,6 +15,7 @@ error instanceof Error ? error.message : "Unknown error"
  */
 export async function GetAllRows(table: string,filter: string): Promise<string> { 
     
+    const opName:string = OpUtil.getOpName(table, DbOperations.GET_ALL);
     const prisma = new PrismaClient(); 
     try {
         const result = await prisma.codeLang.findMany();
@@ -24,13 +25,8 @@ export async function GetAllRows(table: string,filter: string): Promise<string> 
         ).toJson();
     } 
     catch (error) {
-        let errorMessage = DbOperations.ERROR_UNKNOWN;
-        if(error instanceof Error) {
-            errorMessage = error.message;
-        }
-    
-        console.error("Error fetching rows from table:", table, error);
-        return JsonResponse.error("Failed to fetch data").toJson();
+        OpUtil.consoleErr(error,opName);
+        return JsonResponse.error(OpUtil.getErrMessageString(error)).toJson();
     }
     finally {
         await prisma.$disconnect(); // Aseguramos el cierre del cliente

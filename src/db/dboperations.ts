@@ -1,9 +1,12 @@
 //src\db\dboperation.ts
 
 /**
- * class DbOperation.ERROR_UNKNOWN
+ * class DbOperation.SUCCESS
  */
 export class DbOperations {
+
+    public static readonly SUCCESS: string = "success";
+    public static readonly ERROR: string = "error";
 
     public static readonly INSERT: string = "insert";
     public static readonly UPDATE: string = "update";
