@@ -1,3 +1,22 @@
+
+/* 
+export async function GetFiltered(table: string,filter: string): Promise<string> {     
+    const prisma = new PrismaClient(); 
+    let result = null;
+    try {
+        result = await prisma.codeLang.findMany();
+    } 
+    catch (error) {OpUtil.consoleErr(error,OpUtil.getOpName(table,DbOps.GET_ALL));
+        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+    }
+    finally {
+        await prisma.$disconnect(); 
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(table,DbOps.GET_ALL),result);
+} 
+*/
+
+
 //src\db\services\servicecodelang.ts
 
 import { JsonResponse } from "@/common/json/model/jsonresponse";

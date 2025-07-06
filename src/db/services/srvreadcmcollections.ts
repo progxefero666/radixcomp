@@ -1,4 +1,6 @@
 //src\db\services\servicecodelang.ts
+"use server";
+
 import { JsonResponse } from "@/db/operations/model/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 import { OpUtil } from "../functions/operationutil";
@@ -13,12 +15,13 @@ import { DbTables } from "../dbesquema";
  * @param table
  * @returns JSON string with result
  */
-export async function GetAll(table: string): Promise<string> { 
-    
+export async function GetAll(table: string): Promise<string> {
+    console.log("GetAll table:", table);
     const prisma = new PrismaClient(); 
     let result = null;
     try {
         if( table === DbTables.codelang ) {
+            console.log("run query for codelang");
             result = await prisma.codeLang.findMany();
         }        
         else if( table === DbTables.tasktype ) {
@@ -49,20 +52,3 @@ export async function GetAll(table: string): Promise<string> {
     return JsonResponse.SUCCESS(OpUtil.getOpName(table,DbOps.GET_ALL),result);
 
 } //end function
-
-/* 
-export async function GetFiltered(table: string,filter: string): Promise<string> {     
-    const prisma = new PrismaClient(); 
-    let result = null;
-    try {
-        result = await prisma.codeLang.findMany();
-    } 
-    catch (error) {OpUtil.consoleErr(error,OpUtil.getOpName(table,DbOps.GET_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
-    }
-    finally {
-        await prisma.$disconnect(); 
-    }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(table,DbOps.GET_ALL),result);
-} 
-*/

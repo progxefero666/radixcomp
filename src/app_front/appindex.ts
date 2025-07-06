@@ -9,6 +9,7 @@ import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 
 import { ShowAlerts } from "@/common/util/showalerts";
 import { GetAll } from "@/db/services/srvreadcmcollections";
+import { TypeCodelang } from "@/db/model/codelang";
 
 /**
  * App Main in Home Page
@@ -19,21 +20,16 @@ export class AppIndex {
 
     public codelangs: Codelang[] = [];
 
-    constructor() {
-        //this.loadInitCollections();     
-    }
+    constructor() {}
 
     public async loadInitCollections(): Promise<boolean> {
         const coll = await GetAll(DbTables.codelang);
-        const coll_json = JsonHelper.toJsonString(coll);
-        ShowAlerts.showJson(coll_json);
+        if(coll!== null) {
+            this.codelangs = ???
+        }
         return true;
     }
-
-    public outputConsole() {
-        //console.log(this.codelangs);
-    }
-
+  
 }//end class
 
 

@@ -20,6 +20,8 @@ model CodeLang {
   description String       @db.VarChar(150)
   tasks       Task[]
   applications Application[]
+
+  @@map("codelang")
 }
 
 model TaskType {
