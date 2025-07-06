@@ -15,6 +15,7 @@ import { AppIndex } from "@/app_front/appindex";
 
 
 
+const boxClassName = "bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6";
 
 /**
  * Application Main page 
@@ -51,8 +52,32 @@ export default function Home() {
     };
 
     return (
+        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" gap="2">
+            
+            <Flex gridColumn="1/4" gridRow="1">
+                <IndexHeader onselection={onSelection} />    
+            </Flex>
+
+            <Flex gridColumn="1" gridRow="2" direction="column" p="2">
+                <PrimaryBar section={actmodule} onselection={onSelection} />
+            </Flex>
+
+            <Flex gridColumn="2" gridRow="2"  direction="column" gapY="2">
+                {initialized ? renderMainContent():null}
+            </Flex>
+            
+            <Flex gridColumn="3" gridRow="2" direction="column" gapY="2" className={boxClassName}>
+                <SecondBar actsection={actmodule} />
+            </Flex>
+
+        </Grid>
+    );
+
+    /*
         <Flex direction="column" className="h-screen">
+            
             <IndexHeader onselection={onSelection} />
+
             <Flex className="flex-1 overflow-hidden">
                 <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
                     <PrimaryBar section={actmodule} onselection={onSelection} />
@@ -64,7 +89,7 @@ export default function Home() {
                     <SecondBar actsection={actmodule} />
                 </Box>
             </Flex>
-        </Flex>
-    );
+        </Flex>    
+    */
 
 }//end class

@@ -24,6 +24,7 @@ const boxStyle = {
     border: '1px solid rgb(93, 92, 93)',
     padding: '0',
 };
+
 export default function PageGenCode() {
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);

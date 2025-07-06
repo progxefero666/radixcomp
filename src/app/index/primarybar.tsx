@@ -13,7 +13,7 @@ interface PrimaryBarProps {
 export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
     return (
-        <Flex direction="column" >
+        <Flex direction="column" p="2" className="bg-gray-1 dark:bg-gray-2 border border-gray-6">
 
             <MenuButtons options={AppConfig.MODULES}
                 onclick={onselection} 

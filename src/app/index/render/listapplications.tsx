@@ -1,4 +1,4 @@
-//src\app\index\render\rendermain.tsx
+//src\app\index\render\listapplications.tsx
 
 import { Button, Box, Text, Flex, Separator, IconButton } from "@radix-ui/themes";
 import { Application } from "@/db/model/application";
@@ -6,7 +6,7 @@ import ContCollapsible from "@/radix/container/collapsible";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { BARCFG_DELETE_OPEN } from "@/app_front/ui/appbars";
 
-export const renderListApplications = (apps: Application[]) => {
+export const ListApplications = (apps: Application[]) => {
     const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
     return (
         <>
