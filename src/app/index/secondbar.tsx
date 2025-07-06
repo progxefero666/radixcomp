@@ -19,7 +19,7 @@ export default function SecondBar({actsection}: SecondBarProps) {
     }
 
     return (
-        <Flex direction="column" gapY="2" style={secondBarStyle} >
+        <Flex width="100%" direction="column" gapY="2" style={secondBarStyle} >
             <p>Second Bar</p>
             <ThemeSwitcher />
         </Flex>

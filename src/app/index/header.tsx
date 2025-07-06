@@ -10,7 +10,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { AppConfig } from "@/app_front/appconfig";
 
 interface IndexHeaderProps {
-    onselection: (sectionId: string) => void;
+    onselection?: (sectionId: string) => void;
 }
 export default function IndexHeader({ onselection }: IndexHeaderProps) {
 
