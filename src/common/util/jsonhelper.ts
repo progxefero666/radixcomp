@@ -4,12 +4,18 @@ import { TSelection } from "../types";
 
 
 /**
- * class JsonHelper.getTSelectionJsonString
+ * class JsonHelper.toJsData
  * Provides utility methods for JSON operations.
  */
 export class JsonHelper {
 
     public static readonly TAB_SPACE: number = 4;
+
+
+    public static toJsData(obj: any): string {
+        const jsonData = JSON.parse(obj);
+        return jsonData;
+    }//end
 
     public static toJsonString(obj: any): string {
         return JSON.stringify(obj, null,JsonHelper.TAB_SPACE);

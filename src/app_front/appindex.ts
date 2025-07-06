@@ -27,7 +27,7 @@ export class AppIndex {
         const coll = await GetAll(DbTables.codelang);
         if(coll !== null) {
             const jsonData = JSON.parse(coll);
-            const response = new JsonResponse(jsonData.result, jsonData.message, jsonData.data);
+            const response = new JsonResponse(jsonData.result,jsonData.message,jsonData.data);
             
             if(response.isSuccess() && response.data) {
                 this.codelangs = response.data as Codelang[];
