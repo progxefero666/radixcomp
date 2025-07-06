@@ -12,13 +12,6 @@ import { CodeGenConfig } from "../cgconfig";
  */
 export class CodeGenHelper {
 
-    public static capitalize(str: string): string {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    }//end
-
-    public static uncapitalize(str: string): string {
-        return str.charAt(0).toLowerCase() + str.slice(1);
-    }//end  
 
     public static getDefaultValue(field: ModelField, tsType: string): string {    
         if (field.pk) {return 'null';}        
@@ -75,7 +68,6 @@ export class CodeGenHelper {
         return options;   
     }    
 
-
     public static getModelTableIndex(modelTables:ModelTable[],name:string): number {
         let tableIndex:number = -1;
         for (let idx=0;idx<modelTables.length;idx++) {
@@ -98,6 +90,15 @@ export class CodeGenHelper {
         }
         return selectedTables;  
     }
+
+
+    public static capitalize(str: string): string {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }//end
+
+    public static uncapitalize(str: string): string {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+    }//end  
 
     public static getTabsSpace(countTabs:number): string {
         return CodeGenConfig.TAB_4.repeat(countTabs);
