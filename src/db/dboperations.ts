@@ -31,13 +31,3 @@ export class DbOps {
 
 }//end class
 
-/*
-'local-hibrid',
-'local-server',
-'local-front',
-'local-docker',
-'cloud-front',
-'cloud-server',
-'cloud-hibrid',
-'cloud-docker',
-*/

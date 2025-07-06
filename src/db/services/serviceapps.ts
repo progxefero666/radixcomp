@@ -1,17 +1,12 @@
 //src\db\services\serviceapps.ts
 
 import { PrismaClient } from "@generated/prisma";
-import { DbTables } from "../dbesquema";
 import { DbOps } from "../dboperations";
 import { OpUtil } from "../functions/operationutil";
 import { JsonResponse } from "../operations/model/jsonresponse";
+//import { DbTables } from "../dbesquema";
 
-/**
- * Server Action for Read Commom Tables
- *    desc: get all rows from table passed in parameter.
- * @param table
- * @returns JSON string with result
- */
+
 export async function GetAll(table: string): Promise<string> {
 
     const prisma = new PrismaClient();
