@@ -12,9 +12,8 @@ export class JsonHelper {
     public static readonly TAB_SPACE: number = 4;
 
 
-    public static toJsData(obj: any): string {
-        const jsonData = JSON.parse(obj);
-        return jsonData;
+    public static toJavaScript(obj: any): string {
+        return JSON.parse(obj);
     }//end
 
     public static toJsonString(obj: any): string {
