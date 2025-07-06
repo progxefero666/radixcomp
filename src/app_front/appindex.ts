@@ -11,7 +11,7 @@ import { ShowAlerts } from "@/common/util/showalerts";
 import { GetAll } from "@/db/services/srvreadcmcollections";
 import { TypeCodelang } from "@/db/model/codelang";
 import { JsonResponse } from "@/db/operations/model/jsonresponse";
-import { toArrayObjectsClass } from "@/db/functions/modelutil";
+import { toArrayObjectsClass } from "@/db/functions/objectsutil";
 
 /**
  * App Main in Home Page
