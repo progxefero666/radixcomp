@@ -8,11 +8,7 @@ import { CodeGenConfig } from "@/codegen/cgconfig";
  */
 export class StringsHelper {
     
-    public static readonly SEP_DP: string = " : ";
-    public static readonly SEP_EQUAL: string = " : ";
-    public static readonly TAB_4:string = "    ";
-
-    public static equals = (valueA:string,valueB:string|null) => {
+      public static equals = (valueA:string,valueB:string|null) => {
         if ((valueB !== null) && 
             (valueB === valueA)) {
             return true;
