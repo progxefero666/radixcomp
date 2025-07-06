@@ -1,4 +1,4 @@
-//src\common\markdown\mkdconfig.ts
+//src\markdown\mkdconfig.ts
 
 /**
  * MarkdownConfig class
