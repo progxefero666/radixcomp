@@ -10,7 +10,7 @@ export class Task {
     public codelang_id: number;
     public workflow_id: number;
     public orden: number;
-    public name: string;
+    public tkname: string;
     public description: string;
     public files: string;
     public folders: string;
@@ -21,7 +21,7 @@ export class Task {
                 codelang_id: number,
                 workflow_id: number,
                 orden: number,
-                name: string,
+                tkname: string,
                 description: string,
                 files: string,
                 folders: string,
@@ -32,7 +32,7 @@ export class Task {
         this.codelang_id = codelang_id;
         this.workflow_id = workflow_id;
         this.orden = orden;
-        this.name = name;
+        this.tkname = tkname;
         this.description = description;
         this.files = files;
         this.folders = folders;
@@ -70,7 +70,7 @@ export class Task {
         if (fieldName === "orden") {
             return 15; // max digits for numeric
         }
-        if (fieldName === "name") {
+        if (fieldName === "tkname") {
             return 255;
         }
         if (fieldName === "description") {
@@ -96,7 +96,7 @@ export type TypeTask = {
     codelang_id: number;
     workflow_id: number;
     orden: number;
-    name: string;
+    tkname: string;
     description: string;
     files: string;
     folders: string;

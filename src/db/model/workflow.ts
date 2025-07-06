@@ -6,21 +6,21 @@
 export class Workflow {
 
     public id: number;
-    public name: string;
+    public wwname: string;
     public description: string = 'undefined';
     public application: string;
     public fpath: string;
     public updated: Date;
 
     constructor(id: number,
-                name: string,
+                wwname: string,
                 description: string,
                 application: string,
                 fpath: string,
                 updated: Date) {
 
         this.id = id;
-        this.name = name;
+        this.wwname = wwname;
         this.description = description;
         this.application = application;
         this.fpath = fpath;
@@ -46,7 +46,7 @@ export class Workflow {
         if (fieldName === "id") {
             return 15; // max digits for numeric
         }
-        if (fieldName === "name") {
+        if (fieldName === "wwname") {
             return 100;
         }
         if (fieldName === "description") {
@@ -68,7 +68,7 @@ export class Workflow {
  */
 export type TypeWorkflow = {
     id: number;
-    name: string;
+    wwname: string;
     description: string;
     application: string;
     fpath: string;

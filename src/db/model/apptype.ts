@@ -6,15 +6,12 @@
 export class Apptype {
 
     public id: number;
-    public name: string;
+    public aename: string;
     public description: string = 'undefined';
 
-    constructor(id: number,
-                name: string,
-                description: string) {
-
+    constructor(id:number,aename:string,description:string) {
         this.id = id;
-        this.name = name;
+        this.aename = aename;
         this.description = description;
     }
 
@@ -37,7 +34,7 @@ export class Apptype {
         if (fieldName === "id") {
             return 15; // max digits for numeric
         }
-        if (fieldName === "name") {
+        if (fieldName === "aename") {
             return 50;
         }
         if (fieldName === "description") {
@@ -53,6 +50,6 @@ export class Apptype {
  */
 export type TypeApptype = {
     id: number;
-    name: string;
+    aename: string;
     description: string;
 };

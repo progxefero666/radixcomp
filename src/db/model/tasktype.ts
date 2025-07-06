@@ -6,15 +6,12 @@
 export class Tasktype {
 
     public id: number;
-    public name: string;
+    public tename: string;
     public description: string;
 
-    constructor(id: number,
-                name: string,
-                description: string) {
-
+    constructor(id:number,tename:string,description:string) {
         this.id = id;
-        this.name = name;
+        this.tename = tename;
         this.description = description;
     }
 
@@ -37,7 +34,7 @@ export class Tasktype {
         if (fieldName === "id") {
             return 15; // max digits for numeric
         }
-        if (fieldName === "name") {
+        if (fieldName === "tename") {
             return 100;
         }
         if (fieldName === "description") {
@@ -53,6 +50,6 @@ export class Tasktype {
  */
 export type TypeTasktype = {
     id: number;
-    name: string;
+    tename: string;
     description: string;
 };
