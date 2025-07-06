@@ -2,14 +2,14 @@
 
 
 import { Option } from "@/common/model/option";
-import { DbTables } from "@/db/dbesquema";
-import { Codelang } from "@/db/model/codelang";
+import { DbTables } from "@/db/dbcatalog";
+import { Codelang } from "@/db/dmmodels/codelang";
 
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 
 import { ShowAlerts } from "@/common/util/showalerts";
 import { GetAll } from "@/db/services/srvreadcmcollections";
-import { TypeCodelang } from "@/db/model/codelang";
+import { TypeCodelang } from "@/db/dmmodels/codelang";
 import { JsonResponse } from "@/db/operations/model/jsonresponse";
 import { parseCollection } from "@/common/parsers/javascriptparser";
 
