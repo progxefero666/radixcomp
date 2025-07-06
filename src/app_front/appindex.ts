@@ -26,11 +26,10 @@ export class AppIndex {
 
     public async loadInitCollections(): Promise<boolean> {
         const coll = await GetAll(DbTables.codelang);
-        const jsonData = JSON.parse(coll);
-        const response = new JsonResponse(jsonData.result, jsonData.message, jsonData.data);
+        const response = toArrayObjectsClass<Codelang>(coll);
         
-        if(response.isSuccess() && response.data) {
-            this.codelangs = response.data as Codelang[];
+        if(response) {
+            this.codelangs = response;
         }
         return true;
     }
