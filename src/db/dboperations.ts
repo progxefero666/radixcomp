@@ -1,7 +1,7 @@
 //src\db\dboperation.ts
 
 /**
- * class DbOps.TYPE_TABLE
+ * class DbOps.GET_BY_FK
  */
 export class DbOps {
 
@@ -17,6 +17,8 @@ export class DbOps {
     public static readonly GET_ALL: string = "getAll";
     public static readonly GET_BY_ID: string = "get";
     public static readonly GET_BY_NAME: string = "get";
+    public static readonly GET_BY_FK: string = "getByFk";
+
     public static readonly COUNT_ROWS: string = "getAll";
 
     public static readonly ROW_ID: string = "getAll";
@@ -29,3 +31,13 @@ export class DbOps {
 
 }//end class
 
+/*
+'local-hibrid',
+'local-server',
+'local-front',
+'local-docker',
+'cloud-front',
+'cloud-server',
+'cloud-hibrid',
+'cloud-docker',
+*/
