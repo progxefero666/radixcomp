@@ -11,6 +11,11 @@ import SecondBar from "./index/secondbar";
 import { AppIndex } from "@/app_front/appindex";
 
 
+const layoutStyle = {
+    background: 'rgb(153, 17, 62)',
+    padding: '0',
+};
+
 const mainContentStyle = {
     background: 'rgb(35, 35, 39)',
     borderTop: 'none',    
@@ -19,9 +24,6 @@ const mainContentStyle = {
     borderRight: '1px solid rgb(125, 134, 145)',
 };
 
-const secondBarStyle = {
-    padding: '0',
-};
 
 
 /**
@@ -46,20 +48,37 @@ export default function Home() {
         setActModule(sectionId);
     }
     
+    const renderModPlatform = () => {
+        return (
+            <p>Platform</p>
+        );
+    };
+
+    const renderModApplications = () => {
+        return (
+            <p>sds</p>
+        );
+    };    
+
+    const renderModWorkFlows = () => {
+        return (
+            <p>sds</p>
+        );
+    };
+
+
     const renderMainContent = () => {
-        if (actmodule === AppConfig.MOD_WORKFLOWS.id) {
-            return (<p>sds</p>);
-        }        
-        else if (actmodule === AppConfig.MOD_APPLICATIONS.id) {
-            return (<p>sds</p>);
-        }
-        else if (actmodule === AppConfig.MOD_PLATFORM.id) {
-           return (<p>sds</p>);
-        }
+        return (
+            <Flex width="100%" direction="column" gapY="2" style={mainContentStyle} >
+                {actmodule === AppConfig.MOD_WORKFLOWS.id ? renderModWorkFlows() :
+                actmodule === AppConfig.MOD_APPLICATIONS.id ? renderModApplications() :
+                actmodule === AppConfig.MOD_PLATFORM.id ? renderModPlatform() : null}
+            </Flex>
+        );
     };
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" gap="2">
+        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
             
             <Flex gridColumn="1/4" gridRow="1" direction="row" >
                 <IndexHeader onselection={onSelection} />    
@@ -69,11 +88,11 @@ export default function Home() {
                 <PrimaryBar section={actmodule} onselection={onSelection} />
             </Flex>
 
-            <Flex gridColumn="2" gridRow="2"  direction="column" gapY="2" style={mainContentStyle} >
+            <Flex gridColumn="2" gridRow="2" >
                 {initialized ? renderMainContent():null}
             </Flex>
             
-            <Flex gridColumn="3" gridRow="2" direction="column" gapY="2" style={secondBarStyle} >
+            <Flex gridColumn="3" gridRow="2" direction="column" >
                 <SecondBar actsection={actmodule} />
             </Flex>
 

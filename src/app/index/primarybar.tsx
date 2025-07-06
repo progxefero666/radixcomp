@@ -8,7 +8,7 @@ import { AppConfig } from "@/app_front/appconfig";
 import { Option } from "@/common/model/option";
 
 const primaryBarStyle = {
-    padding: '0',
+    background: 'rgb(24, 24, 27)',
 };
 
 interface PrimaryBarProps {
@@ -20,7 +20,7 @@ export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
     //className="bg-gray-1 dark:bg-gray-2 border border-gray-6"
     return (
         <Flex height="100vh" align="center" 
-              direction="column" p="2" style={primaryBarStyle} >
+              direction="column" py="4" style={primaryBarStyle} >
 
             <MenuButtons options={AppConfig.MODULES}
                 onclick={onselection} 
