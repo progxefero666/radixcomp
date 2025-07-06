@@ -18,6 +18,22 @@ export class AppConfig {
     public static readonly MOD_APPLICATIONS: Option 
         = new Option("./applications","Applications",null,null,null);
 
+    public static readonly MOD_WORKFLOWS: Option 
+        = new Option("./applications","Applications",null,null,null);
+
+    public static readonly MOD_PLATFORM: Option 
+        = new Option("./platform","Pc Platform",null,null,null);
+
+    public static readonly MODULES: Option[] = [
+        AppConfig.MOD_APPLICATIONS,        
+        AppConfig.MOD_WORKFLOWS,
+        AppConfig.MOD_PLATFORM        
+    ]
+    
+}//export class AppConfig
+
+
+/*
     public static readonly MOD_SERVICES: Option 
         = new Option("./services","Services",null,null,null);
 
@@ -26,13 +42,4 @@ export class AppConfig {
 
       public static readonly MOD_AGENTS: Option 
         = new Option("./agents","Agents",null,null,null);
-
-    public static readonly MODULES: Option[] = [
-        AppConfig.MOD_APPLICATIONS,
-        AppConfig.MOD_SERVICES,
-        AppConfig.MOD_SERVERS,
-        AppConfig.MOD_AGENTS,
-    ]
-    
-}//export class AppConfig
-
+*/

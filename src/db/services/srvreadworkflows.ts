@@ -7,9 +7,8 @@ import { DbOps } from "../dboperations";
 import { DB_TABLES } from "../dbesquema";
 
 
-
 /**
- * Server Action:*    
+ * Server Action: Get All TaskTypesS
  *    desc: read all rows in table tasktypes
  */
 export async function GetAllTaskType(): Promise<string> {
@@ -31,11 +30,10 @@ export async function GetAllTaskType(): Promise<string> {
 } //end function
 
 /**
- * Server Action:*    
+ * Server Action: Get All Workflows
  *    desc: read all rows in table workflow
  */
 export async function GetAllWorkflows(): Promise<string> {
-
     const prisma = new PrismaClient();
     let result = null;
     try {
@@ -49,11 +47,11 @@ export async function GetAllWorkflows(): Promise<string> {
         await prisma.$disconnect();
     }
     return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_ALL), result);
-
 } //end function
 
+
 /**
- * Server Action:*    
+ * Server Action: Get Tasks by Workflow id   
  *    desc: read all rows in table tasktypes
  */
 export async function GetTasksByFk(workflow_id:number): Promise<string> {
