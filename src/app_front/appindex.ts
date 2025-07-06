@@ -10,6 +10,7 @@ import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 import { ShowAlerts } from "@/common/util/showalerts";
 import { GetAll } from "@/db/services/srvreadcmcollections";
 import { TypeCodelang } from "@/db/model/codelang";
+import { JsonResponse } from "@/db/operations/model/jsonresponse";
 
 /**
  * App Main in Home Page
@@ -24,8 +25,13 @@ export class AppIndex {
 
     public async loadInitCollections(): Promise<boolean> {
         const coll = await GetAll(DbTables.codelang);
-        if(coll!== null) {
-            this.codelangs = ???
+        if(coll !== null) {
+            const jsonData = JSON.parse(coll);
+            const response = new JsonResponse(jsonData.result, jsonData.message, jsonData.data);
+            
+            if(response.isSuccess() && response.data) {
+                this.codelangs = response.data as Codelang[];
+            }
         }
         return true;
     }

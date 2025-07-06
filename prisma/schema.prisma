@@ -14,13 +14,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// CodeLang excluded fields:
+//   tasks Task[]
+//   applications Application[]
+
 model CodeLang {
   id          Int          @id @default(autoincrement())
   cgname      String       @unique @db.VarChar(20)
   description String       @db.VarChar(150)
-  tasks       Task[]
-  applications Application[]
-
   @@map("codelang")
 }
 
