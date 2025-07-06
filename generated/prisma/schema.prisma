@@ -16,7 +16,7 @@ datasource db {
 
 model CodeLang {
   id           Int           @id @default(autoincrement())
-  name         String        @unique @db.VarChar(20)
+  cgname       String        @unique @db.VarChar(20)
   description  String        @db.VarChar(150)
   tasks        Task[]
   applications Application[]
@@ -24,14 +24,14 @@ model CodeLang {
 
 model TaskType {
   id          Int    @id @default(autoincrement())
-  name        String @unique @db.VarChar(100)
+  tename      String @unique @db.VarChar(100)
   description String @db.VarChar(200)
   tasks       Task[]
 }
 
 model Workflow {
   id          Int      @id @default(autoincrement())
-  name        String   @unique @db.VarChar(100)
+  wwname      String   @unique @db.VarChar(100)
   description String   @default("undefined") @db.VarChar(500)
   application String?  @db.VarChar(50)
   fpath       String?  @db.VarChar(500)
@@ -48,7 +48,7 @@ model Task {
   workflow    Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
   workflowId  Int
   orden       Int
-  name        String   @unique @db.VarChar(255)
+  tkname      String   @unique @db.VarChar(255)
   description String?  @db.Text
   files       String?  @db.Text
   folders     String?  @db.Text
@@ -57,7 +57,7 @@ model Task {
 
 model AppType {
   id           Int           @id @default(autoincrement())
-  name         String        @unique @db.VarChar(50)
+  aename       String        @unique @db.VarChar(50)
   description  String        @default("undefined") @db.VarChar(255)
   applications Application[]
 }
@@ -68,7 +68,7 @@ model Application {
   apptypeId    Int
   codelang     CodeLang @relation(fields: [codelangId], references: [id], onDelete: Cascade)
   codelangId   Int
-  name         String   @unique @db.VarChar(50)
+  anname       String   @unique @db.VarChar(50)
   description  String   @default("undefined") @db.VarChar(255)
   repository   String   @default("undefined") @db.VarChar(250)
   author       String?  @db.VarChar(100)

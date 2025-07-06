@@ -20,7 +20,8 @@ export class DbOps {
     public static readonly COUNT_ROWS: string = "getAll";
 
     public static readonly ROW_ID: string = "getAll";
-
+    public static readonly CREATED_AT = "created";
+    public static readonly UPDATED_AT = "updated";
 
 }//end class
 

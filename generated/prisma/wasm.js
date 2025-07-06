@@ -122,19 +122,19 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.CodeLangScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  cgname: 'cgname',
   description: 'description'
 };
 
 exports.Prisma.TaskTypeScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  tename: 'tename',
   description: 'description'
 };
 
 exports.Prisma.WorkflowScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  wwname: 'wwname',
   description: 'description',
   application: 'application',
   fpath: 'fpath',
@@ -147,7 +147,7 @@ exports.Prisma.TaskScalarFieldEnum = {
   codelangId: 'codelangId',
   workflowId: 'workflowId',
   orden: 'orden',
-  name: 'name',
+  tkname: 'tkname',
   description: 'description',
   files: 'files',
   folders: 'folders',
@@ -156,7 +156,7 @@ exports.Prisma.TaskScalarFieldEnum = {
 
 exports.Prisma.AppTypeScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  aename: 'aename',
   description: 'description'
 };
 
@@ -164,7 +164,7 @@ exports.Prisma.ApplicationScalarFieldEnum = {
   id: 'id',
   apptypeId: 'apptypeId',
   codelangId: 'codelangId',
-  name: 'name',
+  anname: 'anname',
   description: 'description',
   repository: 'repository',
   author: 'author',
