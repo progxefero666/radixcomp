@@ -20,7 +20,7 @@ export type TypeTableMap = {
     application:DbTables.application;
 };
 
-export const tables: TypeTableMap = {
+export const DB_TABLES: TypeTableMap = {
     codeLang:   DbTables.codelang,
     tasktype:   DbTables.tasktype,
     workflow:   DbTables.workflow,
