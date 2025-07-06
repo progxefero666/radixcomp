@@ -1,7 +1,7 @@
 //src\db\dboperation.ts
 
 /**
- * class DbOperation
+ * class DbOperation.ERROR_UNKNOWN
  */
 export class DbOperations {
 
@@ -17,6 +17,10 @@ export class DbOperations {
     public static readonly ROW_ID: string = "getAll";
 
     public static readonly COUNT_ROWS: string = "getAll";
+
+    public static readonly ERROR_UNKNOWN: unknown = "Unknown error";
+
+
 
 }//end class
 
