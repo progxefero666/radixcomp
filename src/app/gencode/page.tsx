@@ -3,17 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
-import { Box, Separator, Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
+import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
 import { AppIndex } from "@/app_front/appindex";
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
-import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
+
+import { readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
 import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
-import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
-import { ShowAlerts } from "@/common/util/showalerts";
-import { getDbSqlSquema, readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
+import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 
 
 

@@ -2,7 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
+import { Option } from "@/common/model/option";
 
+import { AppConstants } from "@/app_front/appconstants"
 
 import PrimaryBar from "@/app/index/primarybar";
 import IndexHeader from "./index/header";

@@ -5,9 +5,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
+import { Option } from "@/common/model/option";
+import { AppConstants } from "@/app_front/appconstants"
 import Home from "../page";
-import PageGenCode from "../gencode/page";
-import PageTest from "../testcomp/page";
 
 
 /**
