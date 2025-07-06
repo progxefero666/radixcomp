@@ -6,7 +6,7 @@
  *    - Same logic as objectsutil.ts but returns JSON strings instead of JS objects
  */
 
-export const toObjectJson = <T>(obj: string): string | null => {
+export const parseItem = <T>(obj: string): string | null => {
     if (obj == null) {
         return null;
     }
@@ -14,7 +14,7 @@ export const toObjectJson = <T>(obj: string): string | null => {
     return JSON.stringify(jsonParsed as T, null, 4);
 };
 
-export const toArrayObjectsJson = <T>(coll: string): string | null => {
+export const parseCollection = <T>(coll: string): string | null => {
     if (coll == null) {
         return null;
     }
@@ -22,7 +22,7 @@ export const toArrayObjectsJson = <T>(coll: string): string | null => {
     return JSON.stringify(jsonParsed as Array<T>, null, 4);
 };
 
-export const toObjectWithRelationsJson = <T, R>(obj: string): string | null => {
+export const parseItemWithRelChildrens = <T, R>(obj: string): string | null => {
     if (obj == null) {
         return null;
     }
@@ -30,7 +30,7 @@ export const toObjectWithRelationsJson = <T, R>(obj: string): string | null => {
     return JSON.stringify(jsonParsed as T & { [key: string]: R[] }, null, 4);
 };
 
-export const toArrayObjectsWithRelationsJson = <T, R>(coll: string): string | null => {
+export const parseCollectionWithRelChildrens = <T, R>(coll: string): string | null => {
     if (coll == null) {
         return null;
     }

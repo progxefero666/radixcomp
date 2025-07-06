@@ -8,7 +8,7 @@ import { StringsHelper } from "@/common/util/stringshelper";
 * use MarkdownConfig in:
 *    src\common\markdown\mkdconfig.ts
 */
-export class MarkdownUtils {
+export class MarkdownFunctions {
 
     // ========================================
     // BASIC TEXT FORMATTING UTILITIES

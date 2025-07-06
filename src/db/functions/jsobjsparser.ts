@@ -8,7 +8,7 @@
  * export class ModelUtil {}
  */
 
-export const toArrayObjectsClass = <T>(coll: string): Array<T> | null => {
+export const parseCollection = <T>(coll: string): Array<T> | null => {
     if (coll == null) {
         return null;
     }
@@ -16,7 +16,7 @@ export const toArrayObjectsClass = <T>(coll: string): Array<T> | null => {
     return jsonParsed as Array<T>;
 };
 
-export const toObjectClass = <T>(obj: string): T | null => {
+export const parseItem = <T>(obj: string): T | null => {
     if (obj == null) {
         return null;
     }
@@ -24,17 +24,8 @@ export const toObjectClass = <T>(obj: string): T | null => {
     return jsonParsed as T;
 };
 
-/*
-Tipo de la entidad principal (ej: User, Task, etc.)
-R → Tipo de las entidades relacionadas (ej: Task[], Application[], etc.)
-Application[], etc.)
-// Usuario con sus tareas
-const userWithTasks = toObjectWithRelations<User, Task>(response);
 
-// CodeLang con sus aplicaciones y tareas
-const codeLangWithApps = toObjectWithRelations<CodeLang, Application>(response);
- */
-export const toObjectWithRelations = <T, R>(obj: string): T & { [key: string]: R[] } | null => {
+export const parseItemWithRelChildrens = <T, R>(obj: string): T & { [key: string]: R[] } | null => {
     if (obj == null) {
         return null;
     }
@@ -42,7 +33,7 @@ export const toObjectWithRelations = <T, R>(obj: string): T & { [key: string]: R
     return jsonParsed as T & { [key: string]: R[] };
 };
 
-export const toArrayObjectsWithRelations = <T, R>(coll: string): Array<T & { [key: string]: R[] }> | null => {
+export const parseCollectionWithRelChildrens = <T, R>(coll: string): Array<T & { [key: string]: R[] }> | null => {
     if (coll == null) {
         return null;
     }

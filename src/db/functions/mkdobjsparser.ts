@@ -2,7 +2,7 @@
 
 import { MarkdownConfig } from "@/markdown/mkdconfig";
 import { StringsHelper } from "@/common/util/stringshelper";
-import {MarkdownUtils} from "@/markdown/utils/mkdutils"
+import {MarkdownFunctions} from "@/markdown/mkdfunctions"
 
 
 // ========================================
@@ -16,30 +16,30 @@ import {MarkdownUtils} from "@/markdown/utils/mkdutils"
  * @param title - Optional title for the object
  * @returns Markdown formatted string
  */
-export function toObjectMarkdown<T>(obj: T, title?: string): string {
+export function parseItem<T>(obj: T, title?: string): string {
     if (!obj) return "";
     
     let result = "";
     
     // Add title if provided (level 2 header)
     if (title) {
-        result += MarkdownUtils.createDefaultHeader(title);
-        result += MarkdownUtils.addNewlines(result, 2);
+        result += MarkdownFunctions.createDefaultHeader(title);
+        result += MarkdownFunctions.addNewlines(result, 2);
     }
     
     // Process each field of the object
     Object.entries(obj as Record<string, any>).forEach(([key, value]) => {
         const fieldName = StringsHelper.capitalize(key);
-        const fieldSeparator = MarkdownUtils.createFieldSeparator(fieldName);
+        const fieldSeparator = MarkdownFunctions.createFieldSeparator(fieldName);
         result += fieldSeparator;
         
         if (value !== null && value !== undefined) {
             result += ` ${value}`;
         }
-        result += MarkdownUtils.addNewlines("", 1);
+        result += MarkdownFunctions.addNewlines("", 1);
     });
     
-    return MarkdownUtils.addParagraphBreak(result);
+    return MarkdownFunctions.addParagraphBreak(result);
 }
 
 /**
@@ -49,40 +49,40 @@ export function toObjectMarkdown<T>(obj: T, title?: string): string {
  * @param title - Optional title for the collection
  * @returns Markdown formatted string
  */
-export function toArrayObjectsMarkdown<T>(objects: T[], title?: string): string {
+export function parseCollection<T>(objects: T[], title?: string): string {
     if (!objects || objects.length === 0) return "";
     
     let result = "";
     
     // Add title if provided (level 2 header)
     if (title) {
-        result += MarkdownUtils.createDefaultHeader(title);
-        result += MarkdownUtils.addNewlines(result, 2);
+        result += MarkdownFunctions.createDefaultHeader(title);
+        result += MarkdownFunctions.addNewlines(result, 2);
     }
     
     // Process each object in the array
     objects.forEach((obj, index) => {
         const objectTitle = `${index + 1}`;
-        const objectHeader = MarkdownUtils.createHeader(objectTitle, 3);
+        const objectHeader = MarkdownFunctions.createHeader(objectTitle, 3);
         result += objectHeader;
-        result += MarkdownUtils.addNewlines("", 2);
+        result += MarkdownFunctions.addNewlines("", 2);
         
         // Process each field of the object
         Object.entries(obj as Record<string, any>).forEach(([key, value]) => {
             const fieldName = StringsHelper.capitalize(key);
-            const fieldSeparator = MarkdownUtils.createFieldSeparator(fieldName);
+            const fieldSeparator = MarkdownFunctions.createFieldSeparator(fieldName);
             result += fieldSeparator;
             
             if (value !== null && value !== undefined) {
                 result += ` ${value}`;
             }
-            result += MarkdownUtils.addNewlines("", 1);
+            result += MarkdownFunctions.addNewlines("", 1);
         });
         
-        result += MarkdownUtils.addNewlines("", 1);
+        result += MarkdownFunctions.addNewlines("", 1);
     });
     
-    return MarkdownUtils.addParagraphBreak(result);
+    return MarkdownFunctions.addParagraphBreak(result);
 }
 
 /**
@@ -93,7 +93,7 @@ export function toArrayObjectsMarkdown<T>(objects: T[], title?: string): string 
  * @param title - Optional title for the object
  * @returns Markdown formatted string
  */
-export function toObjectWithRelationsMarkdown<T, R>(
+export function parseItemWithRelChildrens<T, R>(
     obj: T, 
     relations: Record<string, string>, 
     title?: string
@@ -104,8 +104,8 @@ export function toObjectWithRelationsMarkdown<T, R>(
     
     // Add title if provided (level 2 header)
     if (title) {
-        result += MarkdownUtils.createDefaultHeader(title);
-        result += MarkdownUtils.addNewlines(result, 2);
+        result += MarkdownFunctions.createDefaultHeader(title);
+        result += MarkdownFunctions.addNewlines(result, 2);
     }
     
     const objRecord = obj as Record<string, any>;
@@ -115,50 +115,50 @@ export function toObjectWithRelationsMarkdown<T, R>(
     Object.entries(objRecord).forEach(([key, value]) => {
         if (!relationKeys.includes(key)) {
             const fieldName = StringsHelper.capitalize(key);
-            const fieldSeparator = MarkdownUtils.createFieldSeparator(fieldName);
+            const fieldSeparator = MarkdownFunctions.createFieldSeparator(fieldName);
             result += fieldSeparator;
             
             if (value !== null && value !== undefined) {
                 result += ` ${value}`;
             }
-            result += MarkdownUtils.addNewlines("", 1);
+            result += MarkdownFunctions.addNewlines("", 1);
         }
     });
     
-    result += MarkdownUtils.addNewlines("", 1);
+    result += MarkdownFunctions.addNewlines("", 1);
     
     // Process child relations/arrays
     relationKeys.forEach(relationKey => {
         const relationArray = objRecord[relationKey];
         if (relationArray && Array.isArray(relationArray) && relationArray.length > 0) {
             const relationTitle = relations[relationKey] || StringsHelper.capitalize(relationKey);
-            const relationHeader = MarkdownUtils.createHeader(relationTitle, 3);
+            const relationHeader = MarkdownFunctions.createHeader(relationTitle, 3);
             result += relationHeader;
-            result += MarkdownUtils.addNewlines("", 2);
+            result += MarkdownFunctions.addNewlines("", 2);
             
             relationArray.forEach((childObj, index) => {
                 const childTitle = `${index + 1}`;
-                const childHeader = MarkdownUtils.createHeader(childTitle, 4);
+                const childHeader = MarkdownFunctions.createHeader(childTitle, 4);
                 result += childHeader;
-                result += MarkdownUtils.addNewlines("", 1);
+                result += MarkdownFunctions.addNewlines("", 1);
                 
                 Object.entries(childObj as Record<string, any>).forEach(([childKey, childValue]) => {
                     const fieldName = StringsHelper.capitalize(childKey);
-                    const fieldSeparator = MarkdownUtils.createFieldSeparator(fieldName);
+                    const fieldSeparator = MarkdownFunctions.createFieldSeparator(fieldName);
                     result += fieldSeparator;
                     
                     if (childValue !== null && childValue !== undefined) {
                         result += ` ${childValue}`;
                     }
-                    result += MarkdownUtils.addNewlines("", 1);
+                    result += MarkdownFunctions.addNewlines("", 1);
                 });
                 
-                result += MarkdownUtils.addNewlines("", 1);
+                result += MarkdownFunctions.addNewlines("", 1);
             });
         }
     });
     
-    return MarkdownUtils.addParagraphBreak(result);
+    return MarkdownFunctions.addParagraphBreak(result);
 }
 
 /**
@@ -169,7 +169,7 @@ export function toObjectWithRelationsMarkdown<T, R>(
  * @param title - Optional title for the collection
  * @returns Markdown formatted string
  */
-export function toArrayObjectsWithRelationsMarkdown<T, R>(
+export function parseCollectionWithRelChildrens<T, R>(
     objects: T[], 
     relations: Record<string, string>, 
     title?: string
@@ -180,8 +180,8 @@ export function toArrayObjectsWithRelationsMarkdown<T, R>(
     
     // Add title if provided (level 2 header)
     if (title) {
-        result += MarkdownUtils.createDefaultHeader(title);
-        result += MarkdownUtils.addNewlines(result, 2);
+        result += MarkdownFunctions.createDefaultHeader(title);
+        result += MarkdownFunctions.addNewlines(result, 2);
     }
     
     const relationKeys = Object.keys(relations);
@@ -189,9 +189,9 @@ export function toArrayObjectsWithRelationsMarkdown<T, R>(
     // Process each object in the array
     objects.forEach((obj, index) => {
         const objectTitle = `${index + 1}`;
-        const objectHeader = MarkdownUtils.createHeader(objectTitle, 3);
+        const objectHeader = MarkdownFunctions.createHeader(objectTitle, 3);
         result += objectHeader;
-        result += MarkdownUtils.addNewlines("", 2);
+        result += MarkdownFunctions.addNewlines("", 2);
         
         const objRecord = obj as Record<string, any>;
         
@@ -199,51 +199,51 @@ export function toArrayObjectsWithRelationsMarkdown<T, R>(
         Object.entries(objRecord).forEach(([key, value]) => {
             if (!relationKeys.includes(key)) {
                 const fieldName = StringsHelper.capitalize(key);
-                const fieldSeparator = MarkdownUtils.createFieldSeparator(fieldName);
+                const fieldSeparator = MarkdownFunctions.createFieldSeparator(fieldName);
                 result += fieldSeparator;
                 
                 if (value !== null && value !== undefined) {
                     result += ` ${value}`;
                 }
-                result += MarkdownUtils.addNewlines("", 1);
+                result += MarkdownFunctions.addNewlines("", 1);
             }
         });
         
-        result += MarkdownUtils.addNewlines("", 1);
+        result += MarkdownFunctions.addNewlines("", 1);
         
         // Process child relations/arrays for this object
         relationKeys.forEach(relationKey => {
             const relationArray = objRecord[relationKey];
             if (relationArray && Array.isArray(relationArray) && relationArray.length > 0) {
                 const relationTitle = relations[relationKey] || StringsHelper.capitalize(relationKey);
-                const relationHeader = MarkdownUtils.createHeader(relationTitle, 4);
+                const relationHeader = MarkdownFunctions.createHeader(relationTitle, 4);
                 result += relationHeader;
-                result += MarkdownUtils.addNewlines("", 2);
+                result += MarkdownFunctions.addNewlines("", 2);
                 
                 relationArray.forEach((childObj, childIndex) => {
                     const childTitle = `${childIndex + 1}`;
-                    const childHeader = MarkdownUtils.createHeader(childTitle, 5);
+                    const childHeader = MarkdownFunctions.createHeader(childTitle, 5);
                     result += childHeader;
-                    result += MarkdownUtils.addNewlines("", 1);
+                    result += MarkdownFunctions.addNewlines("", 1);
                     
                     Object.entries(childObj as Record<string, any>).forEach(([childKey, childValue]) => {
                         const fieldName = StringsHelper.capitalize(childKey);
-                        const fieldSeparator = MarkdownUtils.createFieldSeparator(fieldName);
+                        const fieldSeparator = MarkdownFunctions.createFieldSeparator(fieldName);
                         result += fieldSeparator;
                         
                         if (childValue !== null && childValue !== undefined) {
                             result += ` ${childValue}`;
                         }
-                        result += MarkdownUtils.addNewlines("", 1);
+                        result += MarkdownFunctions.addNewlines("", 1);
                     });
                     
-                    result += MarkdownUtils.addNewlines("", 1);
+                    result += MarkdownFunctions.addNewlines("", 1);
                 });
             }
         });
         
-        result += MarkdownUtils.addNewlines("", 1);
+        result += MarkdownFunctions.addNewlines("", 1);
     });
     
-    return MarkdownUtils.addParagraphBreak(result);
+    return MarkdownFunctions.addParagraphBreak(result);
 }

@@ -11,7 +11,7 @@ import { ShowAlerts } from "@/common/util/showalerts";
 import { GetAll } from "@/db/services/srvreadcmcollections";
 import { TypeCodelang } from "@/db/model/codelang";
 import { JsonResponse } from "@/db/operations/model/jsonresponse";
-import { toArrayObjectsClass } from "@/db/functions/objectsutil";
+import { parseCollection } from "@/db/functions/jsobjsparser";
 
 /**
  * App Main in Home Page
@@ -26,7 +26,7 @@ export class AppIndex {
 
     public async loadInitCollections(): Promise<boolean> {
         const coll = await GetAll(DbTables.codelang);
-        const response = toArrayObjectsClass<Codelang>(coll);
+        const response = parseCollection<Codelang>(coll);
         
         if(response) {
             this.codelangs = response;
