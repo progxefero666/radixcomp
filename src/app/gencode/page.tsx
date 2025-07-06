@@ -81,7 +81,7 @@ export default function PageGenCode() {
                                 onselection={loadSection} />
                 </Box>
 
-                <Box width="41%" style={boxStyle}>
+                <Box  width="41%" style={boxStyle}> 
                     <GenCodeControl key={section}  section={section}  
                                     ondataresult={onCodeResult}/>
                 </Box>

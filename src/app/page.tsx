@@ -3,9 +3,6 @@
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
-
-import { AppConstants } from "@/app_front/appconstants"
-
 import PrimaryBar from "@/app/index/primarybar";
 import IndexHeader from "./index/header";
 import { useEffect, useRef, useState } from "react";
@@ -14,8 +11,18 @@ import SecondBar from "./index/secondbar";
 import { AppIndex } from "@/app_front/appindex";
 
 
+const mainContentStyle = {
+    background: 'rgb(35, 35, 39)',
+    borderTop: 'none',    
+    borderBottom: 'none',   
+    borderLeft: '1px solid rgb(167, 176, 188)', 
+    borderRight: '1px solid rgb(125, 134, 145)',
+};
 
-const boxClassName = "bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6";
+const secondBarStyle = {
+    padding: '0',
+};
+
 
 /**
  * Application Main page 
@@ -54,42 +61,24 @@ export default function Home() {
     return (
         <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" gap="2">
             
-            <Flex gridColumn="1/4" gridRow="1">
+            <Flex gridColumn="1/4" gridRow="1" direction="row" >
                 <IndexHeader onselection={onSelection} />    
             </Flex>
 
-            <Flex gridColumn="1" gridRow="2" direction="column" p="2">
+            <Flex gridColumn="1" gridRow="2" direction="column">
                 <PrimaryBar section={actmodule} onselection={onSelection} />
             </Flex>
 
-            <Flex gridColumn="2" gridRow="2"  direction="column" gapY="2">
+            <Flex gridColumn="2" gridRow="2"  direction="column" gapY="2" style={mainContentStyle} >
                 {initialized ? renderMainContent():null}
             </Flex>
             
-            <Flex gridColumn="3" gridRow="2" direction="column" gapY="2" className={boxClassName}>
+            <Flex gridColumn="3" gridRow="2" direction="column" gapY="2" style={secondBarStyle} >
                 <SecondBar actsection={actmodule} />
             </Flex>
 
         </Grid>
     );
 
-    /*
-        <Flex direction="column" className="h-screen">
-            
-            <IndexHeader onselection={onSelection} />
-
-            <Flex className="flex-1 overflow-hidden">
-                <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-r border-gray-6 overflow-y-auto">
-                    <PrimaryBar section={actmodule} onselection={onSelection} />
-                </Box>
-                <Flex width="68%" direction="column" gapY="2" className="h-full">
-                    {initialized ? renderMainContent():null}
-                </Flex>
-                <Box className="w-[16%] bg-gray-1 dark:bg-gray-2 p-4 border-l border-gray-6 overflow-y-auto">
-                    <SecondBar actsection={actmodule} />
-                </Box>
-            </Flex>
-        </Flex>    
-    */
 
 }//end class

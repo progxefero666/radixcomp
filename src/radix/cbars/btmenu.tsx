@@ -25,7 +25,7 @@ export interface MenuProp {
 export default function MenuButtons({options,actoption,onclick: onselection}: MenuProp) {
 
     return (
-        <Flex direction="column" gap="2" style={ThemeCompStyle.CONT_CSS_STYLE} >
+        <Flex direction="column" align="center" gap="2" style={ThemeCompStyle.CONT_CSS_STYLE} >
             {options.map((section, index) => (
                 <Box key={index.toString()} >
                     {StringsHelper.equals(section.id, actoption) ?
