@@ -7,8 +7,6 @@ import { DbOps, OpUtil } from "@/db/dboperations";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
-
-
 /**
  * Server Action: get -> by id
     include: {
@@ -30,12 +28,34 @@ export async function get(id:number): Promise<string> {
         );
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_ALL));
+        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_BY_ID));
         return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
     }
     finally {
         await prisma.$disconnect();
     }
     return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_BY_ID), result);
+
+} //end function
+
+/**
+ * Server Action: Get All TaskTypesS
+ *    desc: read all rows in table tasktypes
+ */
+export async function getAll(): Promise<string> {
+
+    const prisma = new PrismaClient();
+    let result = null;
+    try {
+        result = await prisma.taskType.findMany();
+    }
+    catch (error) {
+        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_ALL));
+        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_ALL), result);
 
 } //end function

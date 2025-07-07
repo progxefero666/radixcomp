@@ -1,4 +1,4 @@
-//src\db\services\servicetasks.ts
+//src\db\services\read\srvreadtasks.ts
 "use server";
 
 import { JsonResponse }  from "@/common/json/models/jsonresponse";
@@ -36,7 +36,7 @@ export async function get(id:number): Promise<string> {
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_ALL), result);
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_BY_ID), result);
 
 } //end function
 
@@ -50,16 +50,16 @@ export async function getAll(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.taskType.findMany();
+        result = await prisma.task.findMany();
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_ALL));
+        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL));
         return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.tasktype, DbOps.GET_ALL), result);
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
 
 } //end function
 

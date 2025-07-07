@@ -1,4 +1,4 @@
-//src\db\services\read\srvreadworkflows.ts
+//src\db\services\read\srvreadcodelangs.ts
 "use server";
 
 import { JsonResponse }  from "@/common/json/models/jsonresponse";
@@ -7,45 +7,55 @@ import { DbOps, OpUtil } from "@/db/dboperations";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
+/**
+ * Server Action: get -> by id
+    include: {
+        tasktype: true,
+        workflow: true,
+        codelang: true,
+    },
+ *    
+ */
 export async function get(id:number): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.workflow.findFirst(
+        result = await prisma.codeLang.findFirst(
             {
                 where:{id:id},
             }
         );
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_BY_ID));
+        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_BY_ID));
         return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_BY_ID), result);
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_BY_ID), result);
 
 } //end function
 
 /**
- * Server Action: Get All Workflows
- *    desc: read all rows in table workflow
+ * Server Action: Get All TaskTypesS
+ *    desc: read all rows in table tasktypes
  */
 export async function getAll(): Promise<string> {
+
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.workflow.findMany();
+        result = await prisma.codeLang.findMany();
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_ALL));
+        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL));
         return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_ALL), result);
-} //end function
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL), result);
 
+} //end function
