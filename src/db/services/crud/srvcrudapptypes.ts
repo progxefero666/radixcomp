@@ -5,6 +5,7 @@ import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
 import { Apptype, TypeApptype } from "@/db/dmmodels/apptype";
+import { parseItem } from "@/common/parsers/javascriptparser";
 
 
 /**
@@ -16,6 +17,8 @@ import { Apptype, TypeApptype } from "@/db/dmmodels/apptype";
  */
 export async function update(item:Apptype): Promise<string> {
     
+    //parseItem = <T>(obj: string): T | null => {
+        
     const prisma = new PrismaClient();
 
     try {
