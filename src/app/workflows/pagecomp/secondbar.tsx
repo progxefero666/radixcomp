@@ -1,6 +1,8 @@
 //src\app\workflows\pagecomp\wfsecomdbar.tsx
 
+import { Codelang } from "@/db/model/codelang";
 import { Flex } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
 
 
 
@@ -9,16 +11,28 @@ const secondBarStyle = {
 };
 
 
-interface CompProps {section: string|null;}
-export function SecondBar({section}: CompProps) {
+interface CompProps {
+    section: string|null;
+    codelangs:Codelang[]|null;
+}
+export function SecondBar({section,codelangs}: CompProps) {
+    
+//collection: TOption[]
 
     const onSelection = (sectionId: string) => {
-        //not implemented yet
     }
+
+    useEffect(() => {
+        if(codelangs !== null) {
+
+        }   
+    }, []);    
+
     return (
-        <Flex width="100%" direction="column" gapY="2" style={secondBarStyle} >
+        <Flex width="100%" direction="column" px="3" py="2" gapY="2" style={secondBarStyle} >
             <p>Second Bar</p>
         </Flex>
     );
 
 }//end PrimaryBar
+

@@ -23,23 +23,17 @@ const mainContentStyle = {
 // const appRef = useRef<AppWorkflows>(null);
 interface CompProps { 
     section:string;
+    codelangs:Codelang[]|null;
 }
-export  function MainContent({section}: CompProps) {
+export  function MainContent({codelangs,section}: CompProps) {
 
-    const [compReady,setCompReady] = useState<boolean>(false);
-    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
+    const [ready,setReady] = useState<boolean>(false);
 
-    let initialized: boolean = false;
     useEffect(() => {
         /*
-        if(initialized) {return;}
-
+        if(ready) {return;}
         const init = async () => {                      
-            const response = await getAllByTable(DbTables.codelang);
-            if(response === null) {return false;}            
-            setCodelangs(parseCollection<Codelang>(response));
-            setCompReady(true);
-            //alert("init end");
+            setReady(true);
         };
         init();
         */
@@ -88,7 +82,7 @@ export  function MainContent({section}: CompProps) {
     }
 
     return (
-        <Flex width="100%" direction="column" gapY="2" style={mainContentStyle} >
+        <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
             {section==WorkflowsConfig.SC_WORKFLOWS.id ? renderManWorkflows() : null}
             {section==WorkflowsConfig.SC_TASKTYPES.id ? renderTaskTypes() : null}
             {section==WorkflowsConfig.SC_WORKFLOW_SQL.id ? renderSql() : null}

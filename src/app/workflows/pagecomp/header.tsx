@@ -7,6 +7,29 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 
 import { Option } from "@/common/model/option";
 import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
+import { Codelang } from "@/db/model/codelang";
+
+
+const headerStyle = {
+    height: 'auto',
+    background: 'rgb(24, 24, 27)',
+};
+
+const headerLeftStyle = {
+    height: 'auto',
+};
+
+const headerCenterStyle = {
+    borderTop: 'none',    
+    borderBottom: 'none',   
+    borderLeft: '1px solid rgb(167, 176, 188)', 
+    borderRight: '1px solid rgb(125, 134, 145)',
+};
+
+const headerRightStyle = {
+    height: 'auto',
+};
+
 
 /**
  * Page WorkFlows Header
@@ -14,14 +37,22 @@ import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
 interface CompProps {
     section: string|null;
     navback?:()=>void;
+    codelangs:Codelang[]|null;
 }
-export function Header({section,navback}:CompProps) {
+export function Header({codelangs,section,navback}:CompProps) {
 
     const pathname = usePathname();
-
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
-    const [pageReady, setPageReady] = useState<boolean>(false);
+    const [ready, setReady] = useState<boolean>(false);
 
+    useEffect(() => {
+        if(ready) {return;}
+
+        if(pathname === "/"){setIsIndexPage(true);}        
+        if(codelangs !== null) {
+            setReady(true);
+        }   
+    }, []);    
 
     const renderHomeButton = () => {
         return (
@@ -38,41 +69,20 @@ export function Header({section,navback}:CompProps) {
         )
     }
 
-    useEffect(() => {
-        if(pageReady){return;}
-        const init = (): void => {
-            if(pathname === "/"){setIsIndexPage(true);}
-            //else {setIsIndexPage(false); }
-            setPageReady(true);
-        }
-        init();
-    }, []);
-
-
     return (
-        <Flex width="100%" direction="row"
-            className="h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
+        <Flex width="100%" direction="row" style={headerStyle}  py="2">
 
-            <Flex width="16%" height="auto" direction="row" gap="2" justify="between"
-                className="bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6" >
-                <Text size="3" >
-                    Xefero Tools
-                </Text>   
-                <Box>
-                 {renderHomeButton()}  
-                </Box>        
+            <Flex width="16%" direction="row" gap="2" px="3" justify="between" style={headerLeftStyle} >
+                <Text size="3" >Xefero Tools </Text>   
+                <Box>{renderHomeButton()}</Box>        
             </Flex>
 
-            <Box width = "68%" height = "auto"
-                className = "bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto" >
-                <Text size = "3" >
-                    Man. WorkFlows
-                </Text>
-            </Box>
+            <Flex width = "68%" direction="row" px="3" style={headerCenterStyle} >
+                <Text size="3"> Man. WorkFlows</Text>
+            </Flex>
 
-            <Box width="16%" height="auto" 
-                className="bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
-                user
+            <Box width="16%" px="4" style={headerRightStyle}>
+                header right
             </Box>
 
         </Flex>
