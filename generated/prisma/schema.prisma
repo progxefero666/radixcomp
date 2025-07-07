@@ -20,7 +20,7 @@ model CodeLang {
   id           Int           @id @default(autoincrement())
   cgname       String        @unique @db.VarChar(20)
   description  String        @db.VarChar(150)
-  tasks        Task[]
+  tasks        task[]
   applications Application[]
 
   @@map("codelang")
@@ -32,7 +32,7 @@ model TaskType {
   id          Int    @id @default(autoincrement())
   tename      String @unique @db.VarChar(100)
   description String @db.VarChar(200)
-  tasks       Task[]
+  tasks       task[]
 
   @@map("tasktype")
 }
@@ -46,21 +46,21 @@ model Workflow {
   application String?  @db.VarChar(50)
   fpath       String?  @db.VarChar(500)
   updated     DateTime @default(dbgenerated("CURRENT_DATE"))
-  tasks       Task[]
+  tasks       task[]
 
   @@map("workflow")
 }
 
 // Task excluded fields:
 //
-model Task {
+model task {
   id          Int      @id @default(autoincrement())
   tasktype    TaskType @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
-  tasktypeId  Int
+  tasktypeId  Int      @map("tasktype_id")
   codelang    CodeLang @relation(fields: [codelangId], references: [id], onDelete: Cascade)
-  codelangId  Int
+  codelangId  Int      @map("codelang_id")
   workflow    Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  workflowId  Int
+  workflowId  Int      @map("workflow_id")
   orden       Int
   tkname      String   @unique @db.VarChar(255)
   description String?  @db.Text
@@ -68,7 +68,7 @@ model Task {
   folders     String?  @db.Text
   final       Boolean  @default(false)
 
-  @@map("tasks")
+  @@map("task")
 }
 
 // AppType excluded fields:

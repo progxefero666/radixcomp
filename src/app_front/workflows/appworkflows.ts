@@ -14,6 +14,8 @@ import { Tasktype } from "@/db/dmmodels/tasktype";
 import { Workflow } from "@/db/dmmodels/workflow";
 import { Apptype } from "@/db/dmmodels/apptype";
 
+//const dbSquema = await readDbSqlScriptFile("dbsquema");  
+
 /**
  * App Main in Home Page
  *    - This class is responsible for managing the application index,
@@ -39,7 +41,16 @@ export class AppWorkflows {
         const apptype_coll = parseCollection<Apptype>(apptype_response);        
         if(apptype_coll === null) {return false;}       
  
-        //JSonConsole.logArray(apptype_coll);
+        const workflow_response = await GetAll(DbTables.workflow);
+        const workflow_coll = parseCollection<Workflow>(workflow_response);        
+        if(workflow_coll === null) {return false;}
+
+        const task_response = await GetAll(DbTables.task);
+        const task_coll = parseCollection<Apptype>(task_response);  
+        if(task_coll === null) {return false;}      
+        
+        
+        JSonConsole.logArray(task_coll);
         return true;
     }
   
@@ -54,13 +65,8 @@ export class AppIndexCode {
     constructor() {}
     public async loadInitCollections(): Promise<boolean> {
 
-        const workflow_response = await GetAll(DbTables.workflow);
-        const workflow_coll = parseCollection<Workflow>(workflow_response);        
-        if(workflow_coll === null) {return false;}
 
-        const task_response = await GetAll(DbTables.task);
-        const task_coll = parseCollection<Apptype>(task_response);  
-        if(task_coll === null) {return false;}
+
 
         const application_response = await GetAll(DbTables.application);
         const application_coll = parseCollection<Apptype>(application_response); 

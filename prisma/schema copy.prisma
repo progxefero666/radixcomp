@@ -26,11 +26,12 @@ model CodeLang {
 }
 
 // TaskType excluded fields:
-//   tasks Task[]
+//  
 model TaskType {
     id          Int    @id @default(autoincrement())
     tename      String @unique @db.VarChar(100)
     description String @db.VarChar(200)
+    tasks Task[]
     @@map("taskstype")
 }
 

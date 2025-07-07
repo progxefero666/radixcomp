@@ -204,7 +204,7 @@ exports.Prisma.ModelName = {
   CodeLang: 'CodeLang',
   TaskType: 'TaskType',
   Workflow: 'Workflow',
-  Task: 'Task',
+  task: 'task',
   AppType: 'AppType',
   Application: 'Application'
 };

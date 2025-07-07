@@ -6,17 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
-import { PageHeader } from "@/app/workflows/pagecomp/wfheader";
-import { PrimaryBar } from "@/app/workflows/pagecomp/wfprimarybar";
-import MainContent from "./pagecomp/wfmain";
-import { WorkflowsConfig } from "./config";
-
-import { readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
-import { AppContext } from "@/app_front/appcontext";
-import { AppWorkflows } from "@/app_front/workflows/appworkflows";
-import { SecondBar } from "./pagecomp/wfsecomdbar";
-
-//import MainContent from "../index/maincontent";
+import { WorkflowsConfig }  from "@/app/workflows/config";
+import { PageHeader }       from "@/app/workflows/pagecomp/wfheader";
+import { PrimaryBar }       from "@/app/workflows/pagecomp/wfprimarybar";
+import { MainContent }      from "@/app/workflows/pagecomp/wfmain";
+import { SecondBar }        from "@/app/workflows/pagecomp/wfsecomdbar";
 
 
 const layoutStyle = {
