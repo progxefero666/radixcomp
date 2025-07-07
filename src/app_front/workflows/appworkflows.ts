@@ -31,15 +31,16 @@ export class AppWorkflows {
 
     public async loadInitCollections(): Promise<boolean> {
 
-        //const codelang_response = await getAll(DbTables.codelang);
-        //const codelang_coll:Codelang[]|null= parseCollection<Codelang>(codelang_response);        
-        //if(codelang_coll === null) {return false;}
-        //JSonConsole.logArray(codelang_coll);
+        const codelang_response = await getAll(DbTables.codelang);
+        const codelang_coll:Codelang[]|null= parseCollection<Codelang>(codelang_response);        
+        if(codelang_coll === null) {return false;}
+        JSonConsole.logArray(codelang_coll);
 
-        const appType:Apptype = new Apptype("test_2","nuevo registro 2");
-        const appType_obj = JSON.stringify(appType);
-        const op_response = await insert(appType_obj);
+        //const appType:Apptype = new Apptype("test_2","nuevo registro 2");
+        //const appType_obj = JSON.stringify(appType);
+        //const op_response = await insert(appType_obj);
         //const op_response = await insert("item");
+        
         alert("finish");
         return true;
     }

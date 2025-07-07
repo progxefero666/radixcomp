@@ -20,6 +20,11 @@ export  function MainContent({section}: CompProps) {
 
     const appRef = useRef<AppWorkflows>(null);
 
+    const template = (data: string): string => {
+		let result: string = "";
+        return result;        
+    }	
+	    
     let initialized: boolean = false;
     useEffect(() => {
         if(initialized) {return;}         

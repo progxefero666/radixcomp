@@ -1,7 +1,7 @@
 "use server";
 
 import { ServerFileUtil } from "@/app_server/lib/serverfileutil";
-import { ServerReader } from "@/app_server/config";
+import path from "path";
 
 
 /**
@@ -10,7 +10,10 @@ import { ServerReader } from "@/app_server/config";
  * @returns file content as a string
  */
 export async function getTextFile(fname: string): Promise<string> {
-    const filePath: string = ServerReader.getFilePath(fname);
+
+    const filePath: string = path
+        .join("C:\\claudeapps\\nextapps\\aigenerator\\public", fname);
+
     console.log("getTextFile: ", filePath);
     const fileContent: string = await ServerFileUtil.readFile(filePath);
     return fileContent;

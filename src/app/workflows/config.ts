@@ -8,10 +8,10 @@ import { Option } from "@/common/model/option";
 export class WorkflowsConfig {
 
     public static readonly SC_SECTION_A:Option 
-        = new Option("section_a","section a",null,null,null);
+        = new Option("workflows","Workflows",null,null,null);
 
     public static readonly SC_SECTION_B:Option 
-        = new Option("section_b","section b",null,null,null);
+        = new Option("tasktypes","Task Types",null,null,null);
 
     public static readonly MODULES: Option[] = [
         WorkflowsConfig.SC_SECTION_A,        
