@@ -24,6 +24,7 @@ export class AppIndex {
 
     constructor() {}
 
+    //loadInitCollections
     public async loadInitCollections(): Promise<boolean> {
         const coll = await GetAll(DbTables.codelang);
         const response = parseCollection<Codelang>(coll);

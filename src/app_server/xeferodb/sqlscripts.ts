@@ -2,7 +2,9 @@
 "use server";
 
 import { ServerFileUtil } from "@/app_server/lib/serverfileutil";
-import { ServerReader } from "@/app_server/config";
+import path from "path";
+import * as fs from "fs/promises";
+//import { ServerReader } from "@/app_server/config";
 
 
 /**
@@ -11,29 +13,38 @@ import { ServerReader } from "@/app_server/config";
  * @returns file content as a string
  */
 export async function readDbSqlScriptFile(id:string): Promise<string|null> {
-    let fileName:string|null = null;
-    if(id === "dbsquema") {
-        fileName = "dbsquema.sql";
+    
+    let fname:string|null = null;
+    if(id === "dbsquema") {fname = "dbsquema.sql";}
+    if(fname == null) {return null;}
+
+    const FOLDER_ROOT: string = "C:\\claudeapps\\nextapps\\aigenerator\\public";
+    const SUBFOLDER_DATA: string = "data";
+    const XEFERODB_PATH =  path.join(FOLDER_ROOT,SUBFOLDER_DATA);
+
+    let content:string = "";
+
+    const filePath: string = path.join(XEFERODB_PATH, fname);
+    try {
+        await fs.access(filePath, fs.constants.F_OK);
+        content = await fs.readFile(filePath, { encoding: "utf-8" });
+    } 
+    catch (error) {
+        return null;
     }
-    if(fileName!=null) {
-        const filePath: string = ServerReader.getFilePath(fileName);
-        const fileContent: string = await ServerFileUtil.readFile(filePath);
-        return fileContent;        
+    finally {
     }
-    else {
-        return null
-    }
+    return content;        
+   
 }//end action
 
-/**
- * Server action to get the content of a text file.
- * @param fname 
- * @returns file content as a string
- */
+/*
 export async function getDbSqlSquema(): Promise<string> {
     const fileName:string = "dbsquema.sql";
+    return path.join(ServerConfig.XEFERODB_PATH, fname);
     const filePath: string = ServerReader.getFilePath(fileName);
     console.log("getTextFile: ", filePath);
     const fileContent: string = await ServerFileUtil.readFile(filePath);
     return fileContent;
 }//end action
+*/

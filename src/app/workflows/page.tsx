@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
@@ -10,6 +10,9 @@ import { PageHeader } from "@/app/workflows/pagecomp/wfheader";
 import { PrimaryBar } from "@/app/workflows/pagecomp/wfprimarybar";
 import MainContent from "./pagecomp/wfmain";
 import { WorkflowsConfig } from "./config";
+import { AppIndex } from "@/app_front/appindex";
+import { readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
+import { AppContext } from "@/app_front/appcontext";
 
 //import MainContent from "../index/maincontent";
 
@@ -24,14 +27,31 @@ const layoutStyle = {
  * 
  */
 export default function PageWorkflows() {
+    let initialized: boolean = false;
+    const appRef = useRef<AppIndex>(null);
+    
     const router = useRouter();
 
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
 
     useEffect(() => {
-
+        if(initialized) {return;} 
+        
+        const init = async () => {
+            // Db Squema
+             const dbSquema = await readDbSqlScriptFile("dbsquema");
+            console.log("dbSquema: ", dbSquema);
+            // AppIndex 
+            appRef.current = new AppIndex();
+            const res: boolean = await appRef.current.loadInitCollections();
+            if(!res) {return;}
+            
+            // AppContext
+            AppContext.saveCodelangs(appRef.current.codelangs);
+            initialized =true;
+        };
+        init();
     }, []);
-
     const onSelection = (section: string) => {    
         setActSection(section);
     };

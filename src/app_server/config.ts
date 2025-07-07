@@ -1,4 +1,4 @@
-"user server";
+"use server";
 
 import path from "path";
 
@@ -7,6 +7,7 @@ import path from "path";
  */
 export default class ServerConfig {
     
+    /*
     public static ENV_DEV:string         = "development";
     public static ENV_PROD:string        = "production";
     public static SUBFOLDER_DATA: string = "data";
@@ -23,13 +24,15 @@ export default class ServerConfig {
 
     public static XEFERODB_PATH =  path
         .join(ServerConfig.FOLDER_ROOT,ServerConfig.SUBFOLDER_DATA);
-   
+   */
 }//end class
 
 //ServerConfig.ENV_DEV
 //ServerReader.getXeferoDbPath
+/*
 export class ServerReader {
 
+    
     public static getXeferoDbPath(fname:string):string {
         return path.join(ServerConfig.XEFERODB_PATH, fname);
     }
@@ -37,6 +40,10 @@ export class ServerReader {
     public static getFilePath(fname:string):string {
         return path.join(ServerConfig.XEFERODB_PATH, fname);
     }
+    
+
+}//end class
+*/
 
     /*
     static async readDoc(userId: number): Promise<string> {
@@ -46,5 +53,3 @@ export class ServerReader {
         return toolData;
     }
     */
-}//end class
-
