@@ -7,22 +7,30 @@ import { Option } from "@/common/model/option";
  */
 export class WorkflowsConfig {
 
-    public static readonly SC_SECTION_A:Option 
+    public static readonly SC_WORKFLOWS:Option 
         = new Option("workflows","Workflows",null,null,null);
 
-    public static readonly SC_SECTION_B:Option 
+    public static readonly SC_TASKTYPES:Option 
         = new Option("tasktypes","Task Types",null,null,null);
 
+    public static readonly SC_WORKFLOW_JSON:Option 
+        = new Option("workflow_json","JSon Viewer",null,null,null);
+
+    public static readonly SC_WORKFLOW_SQL:Option 
+        = new Option("workflow_sql","Sql Script",null,null,null);
+
     public static readonly MODULES: Option[] = [
-        WorkflowsConfig.SC_SECTION_A,        
-        WorkflowsConfig.SC_SECTION_B        
+        WorkflowsConfig.SC_WORKFLOWS,        
+        WorkflowsConfig.SC_TASKTYPES,
+        WorkflowsConfig.SC_WORKFLOW_JSON,
+        WorkflowsConfig.SC_WORKFLOW_SQL   
     ]
 
     public static getSectionOperations(sectionName: string): Option[]|null {
-        if (sectionName === WorkflowsConfig.SC_SECTION_A.id) {
+        if (sectionName === WorkflowsConfig.SC_WORKFLOWS.id) {
             return [];
         }
-        else if (sectionName === WorkflowsConfig.SC_SECTION_B.id) {
+        else if (sectionName === WorkflowsConfig.SC_TASKTYPES.id) {
             return [];
         }
         return null;
