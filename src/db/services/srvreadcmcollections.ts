@@ -1,7 +1,7 @@
 //src\db\services\servicecodelang.ts
 "use server";
 
-import { JsonResponse } from "@/db/operations/model/jsonresponse";
+import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 import { OpUtil } from "../util/operationutil";
 import { DbOps } from "../dboperations";

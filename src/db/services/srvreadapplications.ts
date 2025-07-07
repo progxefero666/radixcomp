@@ -3,7 +3,7 @@
 import { PrismaClient } from "@generated/prisma";
 import { DbOps } from "../dboperations";
 import { OpUtil } from "../util/operationutil";
-import { JsonResponse } from "../operations/model/jsonresponse";
+import { JsonResponse } from "../../common/json/models/jsonresponse";
 //import { DbTables } from "../dbesquema";
 
 

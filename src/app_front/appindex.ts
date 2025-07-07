@@ -10,7 +10,7 @@ import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 import { ShowAlerts } from "@/common/util/showalerts";
 import { GetAll } from "@/db/services/srvreadcmcollections";
 import { TypeCodelang } from "@/db/dmmodels/codelang";
-import { JsonResponse } from "@/db/operations/model/jsonresponse";
+import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { parseCollection } from "@/common/parsers/javascriptparser";
 
 /**
