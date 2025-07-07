@@ -1,11 +1,11 @@
-//src\db\services\servicecodelang.ts
+//src\db\services\read\srvreadcmcollections.ts
 "use server";
 
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 
-import { DbOps, OpUtil } from "../../dboperations";
-import { DbTables } from "../../dbcatalog";
+import { DbOps, OpUtil } from "@/db/dboperations";
+import { DbTables } from "@/db/dbcatalog";
 
 
 
@@ -21,7 +21,6 @@ export async function GetAll(table: string): Promise<string> {
     let result = null;
     try {
         if( table === DbTables.codelang ) {
-            console.log("run query for codelang");
             result = await prisma.codeLang.findMany();
         }        
         else if( table === DbTables.tasktype ) {
