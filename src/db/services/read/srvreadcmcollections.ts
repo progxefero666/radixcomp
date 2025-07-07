@@ -32,15 +32,15 @@ export async function GetAll(table: string): Promise<string> {
         }
         else if( table === DbTables.task ) {
             result = await prisma.task.findMany();
-        }
-        else if( table === DbTables.apptype ) {
-            result = await prisma.appType.findMany();
         }        
+        else if( table === DbTables.apptype ) {
+            //result = await prisma.appType.findMany();
+        }     
         else if( table === DbTables.application ) {
-            result = await prisma.application.findMany();
+            //result = await prisma.application.findMany();
         }   
         else {
-            throw new Error(OpUtil.getErrNotFoundMessage(table,DbOps.TYPE_TABLE));
+            //throw new Error(OpUtil.getErrNotFoundMessage(table,DbOps.TYPE_TABLE));
         }
     } 
     catch (error) {OpUtil.consoleErr(error,OpUtil.getOpName(table,DbOps.GET_ALL));

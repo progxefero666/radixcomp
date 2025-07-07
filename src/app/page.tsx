@@ -23,15 +23,12 @@ export default function Home() {
 
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);
-    const [actmodule, setActModule] = useState<string>(AppConfig.INDEX.id);
+    const actmodRef = useRef<string>(AppConfig.INDEX.id);
+    //const [actmodule, setActModule] = useState<string>(AppConfig.INDEX.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
     useEffect(() => {          
-        //AppContext.saveCodelangs(appRef.current.codelangs);
         const init = async () => {
-            appRef.current = new AppIndex();
-            const res: boolean = await appRef.current.loadInitCollections();
-            
             setInitialized(true);
         };
         init();
@@ -52,19 +49,19 @@ export default function Home() {
         <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
             
             <Flex gridColumn="1/4" gridRow="1" >
-                <Header module={actmodule} />    
+                <Header module={actmodRef.current} />    
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
-                <PrimaryBar module={actmodule} onselection={onSelection} />
+                <PrimaryBar module={actmodRef.current} onselection={onSelection} />
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" > 
-                <MainContent module={actmodule} />
+                <MainContent module={actmodRef.current} />
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" >
-                <SecondBar module={actmodule} />
+                <SecondBar module={actmodRef.current} />
             </Flex>
 
         </Grid>
