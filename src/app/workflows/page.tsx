@@ -46,7 +46,7 @@ export default function PageWorkflows() {
             const res: boolean = await appRef.current.loadInitCollections();
             if(!res) {return;}
             
-
+            console.log(appRef.current.codelangs);
             initialized =true;
         };
         init();
