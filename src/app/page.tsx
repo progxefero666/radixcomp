@@ -31,7 +31,7 @@ export default function Home() {
         const init = async () => {
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
-            //console.log(appRef.current.codelangs);
+            
             setInitialized(true);
         };
         init();

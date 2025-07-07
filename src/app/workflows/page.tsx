@@ -35,18 +35,12 @@ export default function PageWorkflows() {
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
 
     useEffect(() => {
-        if(initialized) {return;} 
-        
+        if(initialized) {return;}         
         const init = async () => {
-            // Db Squema
-             const dbSquema = await readDbSqlScriptFile("dbsquema");
-            //console.log("dbSquema: ", dbSquema);
-            // AppIndex 
+            //const dbSquema = await readDbSqlScriptFile("dbsquema");
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
-            if(!res) {return;}
-            
-            console.log(appRef.current.codelangs);
+            if(!res) {return;}            
             initialized =true;
         };
         init();

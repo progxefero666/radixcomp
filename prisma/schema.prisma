@@ -19,74 +19,80 @@ datasource db {
 //   applications Application[]
 
 model CodeLang {
-  id          Int          @id @default(autoincrement())
-  cgname      String       @unique @db.VarChar(20)
-  description String       @db.VarChar(150)
-  @@map("codelang")
+    id          Int          @id @default(autoincrement())
+    cgname      String       @unique @db.VarChar(20)
+    description String       @db.VarChar(150)
+    @@map("codelang")
 }
 
+// TaskType excluded fields:
+//   tasks Task[]
 model TaskType {
-  id          Int    @id @default(autoincrement())
-  tename      String @unique @db.VarChar(100)
-  description String @db.VarChar(200)
-  tasks       Task[]
+    id          Int    @id @default(autoincrement())
+    tename      String @unique @db.VarChar(100)
+    description String @db.VarChar(200)
+    @@map("taskstype")
 }
 
+//tasks Task[]
 model Workflow {
-  id          Int    @id @default(autoincrement())
-  wwname      String @unique @db.VarChar(100)
-  description String @default("undefined") @db.VarChar(500)
-  application String? @db.VarChar(50)
-  fpath       String? @db.VarChar(500)
-  updated     DateTime @default(dbgenerated("CURRENT_DATE"))
-  tasks       Task[]
+    id          Int    @id @default(autoincrement())
+    wwname      String @unique @db.VarChar(100)
+    description String @default("undefined") @db.VarChar(500)
+    application String? @db.VarChar(50)
+    fpath       String? @db.VarChar(500)
+    updated     DateTime @default(dbgenerated("CURRENT_DATE"))    
+    @@map("workflow")
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
-  tasktype    TaskType  @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
-  tasktypeId  Int
-  codelang    CodeLang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
-  codelangId  Int
-  workflow    Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  workflowId  Int
-  orden       Int
-  tkname      String    @unique @db.VarChar(255)
-  description String?   @db.Text
-  files       String?   @db.Text
-  folders     String?   @db.Text
-  final       Boolean   @default(false)
+    id          Int       @id @default(autoincrement())
+    tasktype    TaskType  @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
+    tasktypeId  Int
+    codelang    CodeLang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
+    codelangId  Int
+    workflow    Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+    workflowId  Int
+    orden       Int
+    tkname      String    @unique @db.VarChar(255)
+    description String?   @db.Text
+    files       String?   @db.Text
+    folders     String?   @db.Text
+    final       Boolean   @default(false)
+    @@map("tasks")
 }
 
+//applications Application[]
 model AppType {
-  id          Int            @id @default(autoincrement())
-  aename      String         @unique @db.VarChar(50)
-  description String         @default("undefined") @db.VarChar(255)
-  applications Application[]
+    id          Int            @id @default(autoincrement())
+    aename      String         @unique @db.VarChar(50)
+    description String         @default("undefined") @db.VarChar(255)   
+    @@map("apptype") 
 }
 
 model Application {
-  id            Int       @id @default(autoincrement())
-  apptype       AppType   @relation(fields: [apptypeId], references: [id], onDelete: Cascade)
-  apptypeId     Int
-  codelang      CodeLang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
-  codelangId    Int
-  anname        String    @unique @db.VarChar(50)
-  description   String    @default("undefined") @db.VarChar(255)
-  repository    String    @default("undefined") @db.VarChar(250)
-  author        String?   @db.VarChar(100)
-  osystem       String?   @db.VarChar(100)
-  appurl        String?   @db.VarChar(500)
-  apppath       String?   @db.VarChar(500)
-  localdev      Boolean   @default(true)
-  usedocker     Boolean   @default(false)
-  controlusers  Boolean   @default(false)
-  useui         Boolean   @default(false)
-  useagents     Boolean   @default(false)
-  consumedb     Boolean   @default(false)
-  consumeapi    Boolean   @default(false)
-  consumeai     Boolean   @default(false)
-  exposedb      Boolean   @default(false)
-  exposeapi     Boolean   @default(false)
-  updated       DateTime  @default(dbgenerated("CURRENT_DATE"))
+    id            Int       @id @default(autoincrement())
+    apptype       AppType   @relation(fields: [apptypeId], references: [id], onDelete: Cascade)
+    apptypeId     Int
+    codelang      CodeLang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
+    codelangId    Int
+    anname        String    @unique @db.VarChar(50)
+    description   String    @default("undefined") @db.VarChar(255)
+    repository    String    @default("undefined") @db.VarChar(250)
+    author        String?   @db.VarChar(100)
+    osystem       String?   @db.VarChar(100)
+    appurl        String?   @db.VarChar(500)
+    apppath       String?   @db.VarChar(500)
+    localdev      Boolean   @default(true)
+    usedocker     Boolean   @default(false)
+    controlusers  Boolean   @default(false)
+    useui         Boolean   @default(false)
+    useagents     Boolean   @default(false)
+    consumedb     Boolean   @default(false)
+    consumeapi    Boolean   @default(false)
+    consumeai     Boolean   @default(false)
+    exposedb      Boolean   @default(false)
+    exposeapi     Boolean   @default(false)
+    updated       DateTime  @default(dbgenerated("CURRENT_DATE"))
+    @@map("application") 
 }
