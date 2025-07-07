@@ -1,7 +1,7 @@
 //src\db\dboperation.ts
 
 /**
- * class DbOps.GET_BY_FK
+ * class DbOps.ERROR_BADFORMAT
  */
 export class DbOps {
 
@@ -25,7 +25,8 @@ export class DbOps {
     public static readonly CREATED_AT: string = "created";
     public static readonly UPDATED_AT: string = "updated";
 
-    public static readonly ERROR_NOTFOUND: string = "not found ";
+    public static readonly ERR_NOTFOUND: string = "not found ";
+    public static readonly ERR_BADFORMAT: string = "invalid format";
 
     public static readonly TYPE_TABLE: string = "table";
 
@@ -49,7 +50,7 @@ export class OpUtil {
     }    
 
     public static getErrNotFoundMessage(name:string|null,tipe:string|null): string {        
-        let message:string = DbOps.ERROR_NOTFOUND;
+        let message:string = DbOps.ERR_NOTFOUND;
         if(name) {
             message += "name:".concat(name).concat("");
         }
@@ -58,6 +59,8 @@ export class OpUtil {
         }  
         return message;
     }  
+
+
 
     public static consoleSuccess(opId:string|null,data:string|null,table?:string):void {   
         let message:string = "Operation succeess:";

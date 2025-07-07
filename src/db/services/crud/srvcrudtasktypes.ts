@@ -45,9 +45,9 @@ export async function insert(data: TypeTasktype): Promise<string> {
  * @returns JSON string with result
  */
 export async function update(id: number, data: TypeTasktype): Promise<string> {
+    
     console.log("updateTaskType:", id, data);
     const prisma = new PrismaClient();
-
     try {
         const result = await prisma.taskType.update({
             where: { id: id },

@@ -5,14 +5,16 @@
  **/
 export class Apptype {
 
-    public id: number;
+    public id?: number;
     public aename: string;
     public description: string = 'undefined';
 
-    constructor(id:number,aename:string,description:string) {
-        this.id = id;
+    constructor(aename:string,description:string,id?:number) {        
         this.aename = aename;
         this.description = description;
+        if(id){
+            this.id = id;
+        }
     }
 
     /**

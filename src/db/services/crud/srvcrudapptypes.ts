@@ -9,51 +9,45 @@ import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
 
-export async function insert(item: string): Promise<string> {
-    const data: Apptype|null = parseItem<Apptype>(item);
+/*
+         data: {
+                aename: item.aename,
+                description: item.description
+            }
+*/
 
-    if(data === null) {
-        return JsonResponse.ERROR(OpUtil.getErrMessageString("data return null"));
-    }
+export async function insert(item_serial:string): Promise<string> {
+
+    const item: Apptype|null = parseItem<Apptype>(item_serial);
+    if(item===null){return JsonResponse.ERROR(DbOps.ERR_BADFORMAT);}
 
     const prisma = new PrismaClient();
     let result: object|null = null;
     try {
-        result = await prisma.appType.create({
-            data: {
-                aename: data.aename,
-                description: data.description
-            }
-        });
+        result = await prisma.appType.create({data:item});
         if (result === null) {
-            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
+            return JsonResponse.ERROR
+                (OpUtil.getErrNotFoundMessage(DbOps.INSERT,DbTables.apptype));
         }
     }
-    catch (error) {//OpUtil.consoleErr(error, OpUtil.getOpName(DbTables.apptype, DbOps.INSERT));
+    catch (error) {
         return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DbTables.apptype, DbOps.INSERT), null);
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DbTables.apptype,DbOps.INSERT), null);
 }
 
 
-/**
- * Update an existing AppType
- * @param id - AppType ID
- * @param data - AppType data
- * @returns JSON string with result
- * const objTest:Apptype|null = null;
- */
 export async function update(item:Apptype): Promise<string> {    
     //parseItem = <T>(obj: string): T | null => {        
     const prisma = new PrismaClient();
     let result = null;
     try {
         const result = await prisma.appType.update({
-            where: { id: item.id },
-            data: item
+            where: { id: item.id! },
+            data: item!
         });        
         if (result === null) {
             return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
