@@ -2,22 +2,19 @@
 
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
-import { Option } from "@/common/model/option";
-import PrimaryBar from "@/app/index/primarybar";
-import Header from "./index/header";
 import { useEffect, useRef, useState } from "react";
-import { AppConfig } from "@/app_front/appconfig";
-import SecondBar from "./index/secondbar";
-import { AppIndex } from "@/app_front/appindex";
-import MainContent from "./index/maincontent";
 
+import Header from "@/app/index/header";
+import PrimaryBar from "@/app/index/primarybar";
+import SecondBar from "@/app/index/secondbar";
+import MainContent from "@/app/index/maincontent";
+import { AppConfig } from "@/app_front/appconfig";
+import { AppIndex } from "@/app_front/appindex";
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',
     padding: '0',
 };
-
-
 
 /**
  * Application Main page 

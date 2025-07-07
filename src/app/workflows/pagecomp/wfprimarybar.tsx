@@ -13,17 +13,17 @@ import { WorkflowsConfig } from "../config";
  * Page WorkFlows Primary Bar
  */
 interface CompProps {    
-    actsection: string|null;
+    section: string|null;
     onselection:(sectionId:string) => void;
 }
-export function PrimaryBar({onselection,actsection}: CompProps) {
+export function PrimaryBar({onselection,section}: CompProps) {
     const sections:Option[] = WorkflowsConfig.MODULES;
 
     return (
         <Flex direction="column" p="3" >            
             <MenuButtons options={sections}
                 onclick={onselection} 
-                actoption={actsection} />	
+                actoption={section} />	
             <Separator orientation="horizontal" size="4"  />
         </Flex>
     );

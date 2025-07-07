@@ -2,16 +2,20 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
-import { Option } from "@/common/model/option";
-import { AppConstants } from "@/app_front/appconstants"
+
+import { PageHeader } from "@/app/workflows/pagecomp/wfheader";
+import { PrimaryBar } from "@/app/workflows/pagecomp/wfprimarybar";
+import MainContent from "./pagecomp/wfmain";
+import { WorkflowsConfig } from "./config";
+
+//import MainContent from "../index/maincontent";
 
 
-const boxStyle = {
-    background: 'rgb(35, 35, 39)',
-    border: '1px solid rgb(93, 92, 93)',
+const layoutStyle = {
+    background: 'rgb(153, 17, 62)',
     padding: '0',
 };
 
@@ -22,34 +26,49 @@ const boxStyle = {
 export default function PageWorkflows() {
     const router = useRouter();
 
+    const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
+
     useEffect(() => {
 
     }, []);
 
-    const renderMainContent = () => {
-        return (
-            <Box width="100%" >
-                MainContent
-            </Box>
-        )
+    const onSelection = (section: string) => {    
+        setActSection(section);
     };
 
     return (
-        <Flex width="100%" direction="column" gapY="2" className="h-screen">
-            {renderMainContent()}
-        </Flex>
+        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
+            
+            <Flex gridColumn="1/4" gridRow="1" >
+                <PageHeader  />    
+            </Flex>
+
+            <Flex gridColumn="1" gridRow="2" >
+                <PrimaryBar section={actsection} onselection={onSelection} />
+            </Flex>
+
+            <Flex gridColumn="2" gridRow="2" > 
+                <MainContent section={actsection} />
+            </Flex>
+            
+            <Flex gridColumn="3" gridRow="2" >
+                <SecondBar section={actsection} />
+            </Flex>
+
+        </Grid>
     );
 
 }//end page
+
 
 
 /**
  * Page Second Bar
  */
 interface SecondBarProps {
-    actsection: string|null;
+    section: string|null;
 }
-function SecondBar({actsection}: SecondBarProps) {
+function SecondBar({section}: SecondBarProps) {
 
     const onSelection = (sectionId: string) => {
         //not implemented yet
