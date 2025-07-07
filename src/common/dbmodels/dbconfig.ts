@@ -1,10 +1,10 @@
-//src\common\dbmodels\dbconfig.ts
+//import {DbConfig} "@/common/dbmodels/dbconfig"
 
 import { DbUtil } from "@/db/dbutils";
 
-/**
- * class DbConfigUtil
- */
+//import {DbConfig} from "@/common/dbmodels/dbconfig";
+//import {DbUtil} from "@/db/dbutils"
+
 /**
  * Class DbConfig
  */

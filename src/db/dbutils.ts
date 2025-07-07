@@ -1,5 +1,7 @@
-//src\db\dbutils.ts
+//import {DbUtil} "@/db/dbutils"
 
+import {DbConfig} from "@/common/dbmodels/dbconfig";
+import {DbOps} from "@/db/dboperations";
 
 /**
  * class DbUtil
