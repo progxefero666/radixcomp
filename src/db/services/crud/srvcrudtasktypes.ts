@@ -6,7 +6,7 @@
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
-import { Tasktype } from "@/db/dmmodels/tasktype";
+import { Tasktype } from "@/db/model/tasktype";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 

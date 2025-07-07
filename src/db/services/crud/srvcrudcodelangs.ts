@@ -7,7 +7,7 @@ import { DbOps, OpUtil } from "@/db/dboperations";
 
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
-import { Codelang } from "@/db/dmmodels/codelang";
+import { Codelang } from "@/db/model/codelang";
 
 
 /**

@@ -4,7 +4,7 @@ import { StorageService } from "@/common/context/sessionstorage";
 import { Device } from "@/common/model/device";
 
 import { AppConstants } from "@/app_front/appconstants";
-import { Codelang } from "@/db/dmmodels/codelang";
+import { Codelang } from "@/db/model/codelang";
 
 export class AppContext {
 

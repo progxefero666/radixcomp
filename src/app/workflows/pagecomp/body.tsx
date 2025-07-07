@@ -6,6 +6,9 @@ import { Flex} from "@radix-ui/themes";
 
 import { AppWorkflows } from "@/app_front/workflows/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
+import { getAll } from "@/db/services/read/srvreadcodelangs";
+import { DbTables } from "@/db/dbcatalog";
+import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
 
 const mainContentStyle = {
     background: 'rgb(30, 40, 63)',
@@ -24,11 +27,12 @@ export  function MainContent({section}: CompProps) {
 
     let initialized: boolean = false;
     useEffect(() => {
-        if(initialized) {return;}         
+        if(initialized) {return;}
+
         const init = async () => {                      
-            appRef.current = new AppWorkflows();
-            const res: boolean = await appRef.current.loadInitCollections();
-            if(!res) {return;}              
+            const codelang_response = await getAllByTable(DbTables.codelang);
+            if(codelang_response === null) {return false;}
+  
             initialized =true;
         };
         init();
@@ -41,7 +45,7 @@ export  function MainContent({section}: CompProps) {
             </Flex>
         );
     }
-    
+
     const renderTaskTypes = () => {
         if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
             return (

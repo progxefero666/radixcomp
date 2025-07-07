@@ -12,7 +12,7 @@ import { XInputDate } from "@/radix/input/inpdate";
 
 
 import { XInputTextArea } from "@/radix/input/inptextarea";
-import { Application } from "@/db/dmmodels/application";
+import { Application } from "@/db/model/application";
 
 
 

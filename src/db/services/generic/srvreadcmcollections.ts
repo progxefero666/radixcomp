@@ -15,7 +15,7 @@ import { DbTables } from "@/db/dbcatalog";
  * @param table
  * @returns JSON string with result
  */
-export async function getAll(table: string): Promise<string> {
+export async function getAllByTable(table: string): Promise<string> {
     console.log("GetAll table:", table);
     const prisma = new PrismaClient(); 
     let result = null;
