@@ -4,10 +4,12 @@ import { StorageService } from "@/common/context/sessionstorage";
 import { Device } from "@/common/model/device";
 
 import { AppConstants } from "@/app_front/appconstants";
+import { Codelang } from "@/db/dmmodels/codelang";
 
 export class AppContext {
 
     static DB_ESQUEMA:string  = "dbsquema";
+    static CODE_LANGS:string  = "codelangs";
 
     public static isUserLogin(): boolean {
        return StorageService.exist(AppContext.DB_ESQUEMA);
@@ -22,6 +24,17 @@ export class AppContext {
         return StorageService.read(AppContext.DB_ESQUEMA)!;
     }
 
+    public static saveCodelangs(collection:Codelang[]): void {
+        const json = JSON.stringify(collection,null,4  );
+        StorageService.save(AppContext.CODE_LANGS,json);
+    }
+
+    public static readCodelangs(): string {
+        if(!StorageService.exist(AppContext.CODE_LANGS)){
+            return AppConstants.NOT_DEF; 
+        }
+        return StorageService.read(AppContext.CODE_LANGS)!;
+    }
 } //end class
 
     /*.........................................................................

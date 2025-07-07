@@ -15,6 +15,8 @@ import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 
 
+//const router = useRouter();
+//const val = AppContext.readDbSquema();
 
 /**
  * Application Main page 
@@ -26,48 +28,35 @@ const boxStyle = {
 };
 
 export default function PageGenCode() {
-    const router = useRouter();
-    const appRef = useRef<AppIndex>(null);
 
-    ////ModuleConfig.ACTIVE_SECTION
+    let initialized: boolean = false;
+    const appRef = useRef<AppIndex>(null);
     const [code, setCode] = useState<string>(AppConstants.NOT_DEF);
     const [section, setSection] = useState<string|null>(null);
-
-
-    //const val = AppContext.readDbSquema();
-    let initialized: boolean = false;
 
     useEffect(() => {
         if(initialized) {return;} 
         
         const init = async () => {
-            //store dbSquema in SessionStorage...................................
-            //const dbSquema = await getTextFile(ModuleConfig.DBSQUEMA_FILE);
+            // Db Squema
             const dbSquema = await readDbSqlScriptFile("dbsquema");
-            if(dbSquema!== null) {
-                AppContext.saveDbSquema(dbSquema); 
-            }
-            //...................................................................
-            
-            //...................................................................
+            if(dbSquema!== null) {AppContext.saveDbSquema(dbSquema);}            
+            // AppIndex 
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
-            if(!res) {alert("Error loading initial collections");}
-            else {initialized =true;}
-            //...................................................................
+            if(!res) {
+                alert("Error loading initial collections");
+                return;
+            }            
+            // AppContext
+            AppContext.saveCodelangs(appRef.current.codelangs);
+            initialized =true;
         };
         init();
     }, []);
 
-    const onCodeResult= (datacode: string) => {
-        //console.log("Data received from InputEditor:", datacode);
-        setCode(datacode);        
-    }
-
-    const loadSection = (sectionId: string) => {
-        //alert(sectionId);
-        setSection(sectionId);
-    }
+    const onCodeResult= (datacode: string) => {setCode(datacode);}
+    const loadSection = (sectionId: string) => {setSection(sectionId);}
 
     return (
         <Flex direction="column" height="100vh">
