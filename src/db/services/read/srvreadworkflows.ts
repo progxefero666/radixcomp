@@ -1,10 +1,10 @@
 //src\db\services\servicetasks.ts
+"use server";
 
-import { JsonResponse } from "@/common/json/models/jsonresponse";
-import { PrismaClient } from "@generated/prisma";
-import { OpUtil } from "../util/operationutil";
-import { DbOps } from "../dboperations";
-import { DB_TABLES } from "../dbcatalog";
+import { JsonResponse }  from "@/common/json/models/jsonresponse";
+import { PrismaClient }  from "@generated/prisma";
+import { DbOps, OpUtil } from "@/db/dboperations";
+import { DB_TABLES }     from "@/db/dbcatalog";
 
 
 /**

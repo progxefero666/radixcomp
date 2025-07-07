@@ -3,9 +3,9 @@
 
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
-import { OpUtil } from "../util/operationutil";
-import { DbOps } from "../dboperations";
-import { DbTables } from "../dbcatalog";
+
+import { DbOps, OpUtil } from "../../dboperations";
+import { DbTables } from "../../dbcatalog";
 
 
 

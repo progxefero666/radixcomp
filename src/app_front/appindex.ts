@@ -8,7 +8,7 @@ import { Codelang } from "@/db/dmmodels/codelang";
 import { JSonConsole, JsonHelper } from "@/common/util/jsonhelper";
 
 import { ShowAlerts } from "@/common/util/showalerts";
-import { GetAll } from "@/db/services/srvreadcmcollections";
+import { GetAll } from "@/db/services/read/srvreadcmcollections";
 import { TypeCodelang } from "@/db/dmmodels/codelang";
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { parseCollection } from "@/common/parsers/javascriptparser";
