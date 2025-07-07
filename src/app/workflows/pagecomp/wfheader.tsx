@@ -12,9 +12,12 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 /**
  * Page WorkFlows Header
  */
-interface CompProps {navback?:()=>void;}
+interface CompProps {
+    section: string|null;
+    navback?:()=>void;
+}
 
-export function PageHeader({navback}:CompProps) {
+export function PageHeader({section,navback}:CompProps) {
 
     const pathname = usePathname();
 

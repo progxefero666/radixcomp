@@ -12,6 +12,7 @@ import { parseCollection } from "@/common/parsers/javascriptparser";
 import { JSonConsole } from "@/common/util/jsonhelper";
 import { AppIndex } from "@/app_front/appindex";
 import { readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
+import { AppWorkflows } from "@/app_front/workflows/appworkflows";
 
 
 const mainContentStyle = {
@@ -27,22 +28,20 @@ interface CompProps {
     section:string;
 }
 export default function MainContent({section}: CompProps) {
-    const appRef = useRef<AppIndex>(null);
-    const [codelangs,setCodelangs] = useState<boolean>(false);
-    //public codelangs: Codelang[] = [];
 
     let initialized: boolean = false;
+    const appRef = useRef<AppWorkflows>(null);
+
     useEffect(() => {
         if(initialized) {return;} 
         
         const init = async () => {
-            //const dbSquema = await readDbSqlScriptFile("dbsquema");
-            /*
-            appRef.current = new AppIndex();
+            //const dbSquema = await readDbSqlScriptFile("dbsquema");            
+            appRef.current = new AppWorkflows();
             const res: boolean = await appRef.current.loadInitCollections();
             console.log(appRef.current.codelangs);
             if(!res) {return;}  
-            */
+            
             initialized =true;
         };
         init();

@@ -34,8 +34,7 @@ export class AppWorkflows {
         const tasktype_response = await GetAll(DbTables.tasktype);
         const tasktype_coll:Tasktype[]|null = parseCollection<Tasktype>(tasktype_response);        
         if(tasktype_coll === null) {return false;}
-         
-         
+                  
         const apptype_response = await GetAll(DbTables.apptype);
         const apptype_coll = parseCollection<Apptype>(apptype_response);        
         if(apptype_coll === null) {return false;}       
