@@ -21,6 +21,7 @@ import { insert } from "@/db/services/crud/srvcrudapptypes";
  * App Main in Home Page
  *    - This class is responsible for managing the application index,
  *    - Include load init collections and display them.
+ * //parseItem = <T>(obj: string): T | null => {     
  */
 export class AppWorkflows {
 

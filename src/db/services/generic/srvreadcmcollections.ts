@@ -43,7 +43,7 @@ export async function getAll(table: string): Promise<string> {
         }
     } 
     catch (error) {OpUtil.consoleErr(error,OpUtil.getOpName(table,DbOps.GET_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect(); 

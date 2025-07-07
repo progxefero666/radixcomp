@@ -38,16 +38,23 @@ export class OpUtil {
         return table.concat("_", command);
     }
 
-    public static getErrMessage(error: unknown): unknown {        
+    public static getUnknowErrMessage(error: unknown): unknown {        
         if(error instanceof Error) {
             return error.message;
         }        
         return DbOps.ERROR_UNKNOWN;
     }    
 
-    public static getErrMessageString(error: unknown): string {        
-        return String(OpUtil.getErrMessage(error));
+    public static getErrMessage(error: unknown): string {        
+        return String(OpUtil.getUnknowErrMessage(error));
     }    
+    
+    public static getOpErrMessage(table:string,command:string): string {
+        const result:string = DbOps.ERROR.concat("=> ")
+                             .concat(table).concat(" : ").concat(command);
+        return result;
+
+    }
 
     public static getErrNotFoundMessage(name:string|null,tipe:string|null): string {        
         let message:string = DbOps.ERR_NOTFOUND;

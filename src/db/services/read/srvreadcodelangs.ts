@@ -29,7 +29,7 @@ export async function get(id:number): Promise<string> {
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_BY_ID));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
@@ -51,7 +51,7 @@ export async function getAll(): Promise<string> {
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();

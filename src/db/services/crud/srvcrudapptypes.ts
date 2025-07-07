@@ -4,20 +4,16 @@
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
-import { Apptype, TypeApptype } from "@/db/dmmodels/apptype";
+import { Apptype } from "@/db/dmmodels/apptype";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
 
-/*
-         data: {
-                aename: item.aename,
-                description: item.description
-            }
-*/
-
+/**
+ * __table__ insert
+ */
 export async function insert(item_serial:string): Promise<string> {
-
+    
     const item: Apptype|null = parseItem<Apptype>(item_serial);
     if(item===null){return JsonResponse.ERROR(DbOps.ERR_BADFORMAT);}
 
@@ -27,122 +23,76 @@ export async function insert(item_serial:string): Promise<string> {
         result = await prisma.appType.create({data:item});
         if (result === null) {
             return JsonResponse.ERROR
-                (OpUtil.getErrNotFoundMessage(DbOps.INSERT,DbTables.apptype));
+                (OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
         }
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
     return JsonResponse.SUCCESS(OpUtil.getOpName(DbTables.apptype,DbOps.INSERT), null);
-}
+}//end
 
-
-export async function update(item:Apptype): Promise<string> {    
-    //parseItem = <T>(obj: string): T | null => {        
+/**
+ * __table__ update
+ */
+export async function update(item:Apptype): Promise<string> { 
     const prisma = new PrismaClient();
     let result = null;
     try {
-        const result = await prisma.appType.update({
-            where: { id: item.id! },
-            data: item!
-        });        
+        result = await prisma.appType.update({where:{id:item.id!},data:item!});        
         if (result === null) {
-            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
+            return JsonResponse.ERROR
+                (OpUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.apptype));
         }        
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName("apptype", DbOps.UPDATE));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
-    finally {
-        await prisma.$disconnect();
-    }
-    return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.UPDATE), result);
+    finally {await prisma.$disconnect();}
+
+    return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.UPDATE), null);
 }//end
 
-
-
-
-
 /**
- * Delete an AppType by ID
- * @param id - AppType ID to delete
- * @returns JSON string with result
+ * __table__ delete
  */
-export async function deleted(id: number): Promise<string> {
-    console.log("deleteAppType:", id);
+export async function delette(id: number): Promise<string> {
     const prisma = new PrismaClient();
-
+    let result = null;
     try {
-        const result = await prisma.appType.delete({
-            where: { id: id }
-        });
-
-        return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.DELETE), result);
+        result = await prisma.appType.delete({where:{id:id}});
+        if (result === null) {
+            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.apptype));
+        }          
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName("apptype", DbOps.DELETE));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
-    finally {
-        await prisma.$disconnect();
-    }
+    finally {await prisma.$disconnect();}
+
+    return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.DELETE),null);
 }//end
 
 /**
- * Delete all AppTypes
- * @returns JSON string with result
+ * __table__ delete all
  */
 export async function deleteAll(): Promise<string> {
-    console.log("deleteAllAppTypes");
     const prisma = new PrismaClient();
-
+    let result = null;
     try {
-        const result = await prisma.appType.deleteMany({});
-
-        return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.DELETE_ALL), result);
+        result = await prisma.appType.deleteMany({});
+        if (result === null) {
+            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.apptype));
+        }          
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName("apptype", DbOps.DELETE_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
-    finally {
-        await prisma.$disconnect();
-    }
+    finally {await prisma.$disconnect();}
+
+    return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.DELETE_ALL),null);
 }//end
 
-
-
-
-/**
- * Update an existing AppType
- * @param id - AppType ID
- * @param data - AppType data
- * @returns JSON string with result
- */
-export async function update_old(id: number, data: TypeApptype): Promise<string> {
-    console.log("updateAppType:", id, data);
-    const prisma = new PrismaClient();
-
-    try {
-        const result = await prisma.appType.update({
-            where: { id: id },
-            data: {
-                aename: data.aename,
-                description: data.description
-            }
-        });
-
-        return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.UPDATE), result);
-    }
-    catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName("apptype", DbOps.UPDATE));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
-    }
-    finally {
-        await prisma.$disconnect();
-    }
-}//end

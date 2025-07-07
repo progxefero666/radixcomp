@@ -49,7 +49,7 @@ export async function insert(data: TypeApplication): Promise<string> {
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName("application", DbOps.INSERT));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
@@ -97,7 +97,7 @@ export async function update(id: number, data: TypeApplication): Promise<string>
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName("application", DbOps.UPDATE));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
@@ -122,7 +122,7 @@ export async function deleted(id: number): Promise<string> {
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName("application", DbOps.DELETE));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
@@ -144,7 +144,7 @@ export async function deleteAll(): Promise<string> {
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName("application", DbOps.DELETE_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();

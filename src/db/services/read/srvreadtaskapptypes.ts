@@ -23,7 +23,7 @@ export async function get(id:number): Promise<string> {
         }
     }
     catch (error) {        
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
@@ -44,7 +44,7 @@ export async function getAll(): Promise<string> {
         result = await prisma.appType.findMany();        
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
