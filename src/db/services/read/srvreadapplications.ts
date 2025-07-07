@@ -8,7 +8,7 @@ import { JsonResponse } from "../../../common/json/models/jsonresponse";
 //import { DbTables } from "../dbesquema";
 
 
-export async function GetAll(table: string): Promise<string> {
+export async function getAll(table: string): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;

@@ -1,4 +1,4 @@
-//src\db\operations\model\jsonresponse.ts
+//src\common\json\models\jsonresponse.ts
 
 import { JsonOpConstants } from "@/common/json/jsonconstant";
 import { DbOps } from "@/db/dboperations";

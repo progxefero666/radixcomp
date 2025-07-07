@@ -1,4 +1,4 @@
-//src\db\model\apptype.ts
+//src\db\dmmodels\apptype.ts
 
 /**
  * Db Table Entity Class Apptype
