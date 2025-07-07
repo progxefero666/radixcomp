@@ -6,6 +6,37 @@ import { PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
 import { Apptype, TypeApptype } from "@/db/dmmodels/apptype";
 import { parseItem } from "@/common/parsers/javascriptparser";
+import { DbTables } from "@/db/dbcatalog";
+
+
+export async function insert(item: string): Promise<string> {
+    const data: Apptype|null = parseItem<Apptype>(item);
+
+    if(data === null) {
+        return JsonResponse.ERROR(OpUtil.getErrMessageString("data return null"));
+    }
+
+    const prisma = new PrismaClient();
+    let result: object|null = null;
+    try {
+        result = await prisma.appType.create({
+            data: {
+                aename: data.aename,
+                description: data.description
+            }
+        });
+        if (result === null) {
+            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
+        }
+    }
+    catch (error) {//OpUtil.consoleErr(error, OpUtil.getOpName(DbTables.apptype, DbOps.INSERT));
+        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DbTables.apptype, DbOps.INSERT), null);
+}
 
 
 /**
@@ -15,19 +46,18 @@ import { parseItem } from "@/common/parsers/javascriptparser";
  * @returns JSON string with result
  * const objTest:Apptype|null = null;
  */
-export async function update(item:Apptype): Promise<string> {
-    
-    //parseItem = <T>(obj: string): T | null => {
-        
+export async function update(item:Apptype): Promise<string> {    
+    //parseItem = <T>(obj: string): T | null => {        
     const prisma = new PrismaClient();
-
+    let result = null;
     try {
         const result = await prisma.appType.update({
             where: { id: item.id },
             data: item
-        });
-
-        return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.UPDATE), result);
+        });        
+        if (result === null) {
+            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
+        }        
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName("apptype", DbOps.UPDATE));
@@ -36,36 +66,11 @@ export async function update(item:Apptype): Promise<string> {
     finally {
         await prisma.$disconnect();
     }
+    return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.UPDATE), result);
 }//end
 
 
-/**
- * Insert a new AppType
- * @param data - AppType data
- * @returns JSON string with result
- */
-export async function insert(data: TypeApptype): Promise<string> {
-    console.log("insertAppType:", data);
-    const prisma = new PrismaClient();
 
-    try {
-        const result = await prisma.appType.create({
-            data: {
-                aename: data.aename,
-                description: data.description
-            }
-        });
-
-        return JsonResponse.SUCCESS(OpUtil.getOpName("apptype", DbOps.INSERT), result);
-    }
-    catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName("apptype", DbOps.INSERT));
-        return JsonResponse.ERROR(OpUtil.getErrMessageString(error));
-    }
-    finally {
-        await prisma.$disconnect();
-    }
-}
 
 
 /**
