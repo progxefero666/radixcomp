@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Flex} from "@radix-ui/themes";
 
 import { AppWorkflows } from "@/app_front/workflows/appworkflows";
-
+import { WorkflowsConfig } from "@/app/workflows/config";
 
 const mainContentStyle = {
     background: 'rgb(30, 40, 63)',
@@ -15,7 +15,9 @@ const mainContentStyle = {
     borderRight: '1px solid rgb(125, 134, 145)',
 };
 
-interface CompProps { section:string;}
+interface CompProps { 
+    section:string;
+}
 export  function MainContent({section}: CompProps) {
 
     const appRef = useRef<AppWorkflows>(null);
@@ -38,17 +40,20 @@ export  function MainContent({section}: CompProps) {
     }, []);    
 
     const renderMainContent = () => {
-        return (
-            <p>
-                SDASDASDASD
-            </p>
-        );
+        if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
+            return (
+                <p>
+                    SDASDASDASD
+                </p>
+            );
+        }
+        return null;
     };
 
     return (
         <Flex width="100%" direction="column" gapY="2" style={mainContentStyle} >
-            {renderMainContent()}
+            {initialized ? renderMainContent() : null}
         </Flex>
     );
 
-}//end PrimaryBar
+}

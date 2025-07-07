@@ -1,20 +1,5 @@
 //src\codegen\kernel\cgconfig.ts
 
-import types from "@/codegen/kernel/sqltypesnumber.json";
-
-import { Option } from "@/common/model/option";
-import { ControlDatabase } from "@/codegen/controldatabase";
-import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
-import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
-import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
-import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
-import { PyEntServiceFilesOps } from "@/codegen/operations/pyentservicefilesops";
-import { ServClientTScriptEntities } from "@/app/gencode/module/client_tscriptentities";
-import { ServiceClientJsxForms } from "@/app/gencode/module/client_jsxforms";
-import { ServClientTScriptServices } from "@/app/gencode/module/client_tscriptservices";
-import { ServiceClientJson } from "@/app/gencode/module/client_json";
-import { ServiceClientSqlScripts } from "@/app/gencode/module/client_sqlscripts";
-
 
 export enum OP_CATEGORIES {
     python_serverfiles      = "python_serverfiles",

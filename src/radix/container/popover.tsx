@@ -7,31 +7,34 @@ import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 
 interface CompProps {
     barbuttonscfg?: BarButtonsCfg;
-    text: string;
+   
     children?: React.ReactNode;
 }
-export const XPopOver = ({ text, children, barbuttonscfg }: CompProps) => {
+export const XPopOver = ({ children, barbuttonscfg }: CompProps) => {
 
-    const onClick = (btn: HTMLButtonElement) => {
-        alert(btn.value);
+
+    const onOpen = (open: boolean) => {
+        alert(open);
+    }
+    
+    const onClose = (btn: HTMLButtonElement) => {
+        alert("close");
     }
 
-    const toConsole = (open: boolean) => {
-        console.log(open);
-    }
+    const triggerButtonText: string = "open";
 
     return (
-        <Popover.Root onOpenChange={(open) => { toConsole(open) }} >
+        <Popover.Root onOpenChange={(open) => { onOpen(open) }} >
             <Popover.Trigger >
                 <Button >
-                    {text}
+                    {triggerButtonText}
                 </Button>
             </Popover.Trigger>
             <Flex width="100%" direction="column" gap="2" >
                 <Popover.Content sideOffset={5} align="start">
                     {children}
                     <Popover.Close>
-                        <Button size="1" onClick={() => { onClick }} >
+                        <Button size="1" onClick={() => { onClose }} >
                             close
                         </Button>
                     </Popover.Close>
