@@ -62,6 +62,9 @@ export default function PageWorkflows() {
 
 
 
+const secondBarStyle = {
+    background: 'rgb(24, 24, 27)',
+};
 /**
  * Page Second Bar
  */
@@ -74,7 +77,7 @@ function SecondBar({section}: SecondBarProps) {
         //not implemented yet
     }
     return (
-        <Flex direction="column" >
+        <Flex width="100%" direction="column" gapY="2" style={secondBarStyle} >
             <p>Second Bar</p>
         </Flex>
     );

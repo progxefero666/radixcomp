@@ -36,7 +36,7 @@ export default function Home() {
     }, []);
 
     const onSelection = (sectionId: string) => {    
-        setActModule(sectionId);
+        router.push(`/${sectionId}`);
     };
 
     if(!initialized) {

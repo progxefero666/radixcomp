@@ -6,7 +6,7 @@ import { Option } from "@/common/model/option";
 import { Box, Grid, Flex, Text, Button, Link } from "@radix-ui/themes";
 import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { renderHomeButton } from "@/radix/radixbuttons";
+
 
 
 /**
@@ -21,6 +21,22 @@ export function PageHeader({navback}:CompProps) {
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
     const [pageReady, setPageReady] = useState<boolean>(false);
 
+
+    const renderHomeButton = () => {
+        return (
+            <Link href="/" >
+                <Button
+                    variant={pathname === "/" ? RadixConf.VARIANTS.solid :
+                                                RadixConf.VARIANTS.soft}
+                    color={ThemeButtonsStyle.BTN_HOME_COLOR}
+                    className={ThemeButtonsStyle.BTN_HOME_STYLE}
+                    size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                    Home
+                </Button>
+            </Link>
+        )
+    }
+
     useEffect(() => {
         if(pageReady){return;}
         const init = (): void => {
@@ -33,26 +49,29 @@ export function PageHeader({navback}:CompProps) {
 
 
     return (
-        <Flex className="w-full h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
+        <Flex width="100%" direction="row"
+            className="h-auto py-3 bg-gray-2 dark:bg-gray-3 border-b border-gray-6" >
 
-            <Flex height="auto" direction="row" gap="2" justify="between" >
-                <Text size="5" weight="bold" className="text-gray-12">
-                    Man. WorkFlows
+            <Flex width="16%" height="auto" direction="row" gap="2" justify="between"
+                className="bg-gray-1 dark:bg-gray-2 px-4 border-r border-gray-6" >
+                <Text size="3" >
+                    Xefero Tools
                 </Text>   
                 <Box>
-                 {renderHomeButton(isIndexPage)}  
-                </Box>  
-                         
+                 {renderHomeButton()}  
+                </Box>        
             </Flex>
 
-            <Box width="82%" height="auto" >
-                <Text size="5" weight="bold" className="text-gray-12">
-                    Primitives Sandbox
+            <Box width = "68%" height = "auto"
+                className = "bg-gray-0 dark:bg-gray-1 px-6 overflow-y-auto" >
+                <Text size = "3" >
+                    Man. WorkFlows
                 </Text>
             </Box>
 
-            <Box width="4%" height="auto">
-                
+            <Box width="16%" height="auto" 
+                className="bg-gray-1 dark:bg-gray-2 px-4 border-l border-gray-6">
+                user
             </Box>
 
         </Flex>

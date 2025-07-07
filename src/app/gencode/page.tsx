@@ -22,7 +22,7 @@ import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
  * Application Main page 
  */
 const boxStyle = {
-    background: 'rgb(35, 35, 39)',
+   background: 'rgb(30, 40, 63)',
     border: '1px solid rgb(93, 92, 93)',
     padding: '0',
 };

@@ -9,7 +9,7 @@ import { AppConfig } from "@/app_front/appconfig";
 
 
 const mainContentStyle = {
-    background: 'rgb(32, 215, 90)',
+    background: 'rgb(30, 40, 63)',
     borderTop: 'none',    
     borderBottom: 'none',   
     borderLeft: '1px solid rgb(167, 176, 188)', 

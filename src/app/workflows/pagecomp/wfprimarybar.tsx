@@ -8,7 +8,9 @@ import { AppConstants } from "@/app_front/appconstants";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { WorkflowsConfig } from "../config";
 
-
+const primaryBarStyle = {
+    background: 'rgb(24, 24, 27)',
+};
 /**
  * Page WorkFlows Primary Bar
  */
@@ -20,7 +22,8 @@ export function PrimaryBar({onselection,section}: CompProps) {
     const sections:Option[] = WorkflowsConfig.MODULES;
 
     return (
-        <Flex direction="column" p="3" >            
+        <Flex width="100%"  height="100vh" align="center" 
+              direction="column" py="4" style={primaryBarStyle} >         
             <MenuButtons options={sections}
                 onclick={onselection} 
                 actoption={section} />	
