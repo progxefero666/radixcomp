@@ -26,11 +26,12 @@ export default function Home() {
     const [actmodule, setActModule] = useState<string>(AppConfig.INDEX.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    useEffect(() => {
+    useEffect(() => {          
+        //AppContext.saveCodelangs(appRef.current.codelangs);
         const init = async () => {
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
-            console.log(appRef.current.codelangs);
+            //console.log(appRef.current.codelangs);
             setInitialized(true);
         };
         init();

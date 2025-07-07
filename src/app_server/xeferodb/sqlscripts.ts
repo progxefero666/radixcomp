@@ -18,6 +18,9 @@ export async function readDbSqlScriptFile(id:string): Promise<string|null> {
     if(id === "dbsquema") {fname = "dbsquema.sql";}
     if(fname == null) {return null;}
 
+    const environment:string = process.env.NODE_ENV;
+    console.log(environment);
+
     const FOLDER_ROOT: string = "C:\\claudeapps\\nextapps\\aigenerator\\public";
     const SUBFOLDER_DATA: string = "data";
     const XEFERODB_PATH =  path.join(FOLDER_ROOT,SUBFOLDER_DATA);

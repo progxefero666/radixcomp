@@ -40,14 +40,13 @@ export default function PageWorkflows() {
         const init = async () => {
             // Db Squema
              const dbSquema = await readDbSqlScriptFile("dbsquema");
-            console.log("dbSquema: ", dbSquema);
+            //console.log("dbSquema: ", dbSquema);
             // AppIndex 
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
             if(!res) {return;}
             
-            // AppContext
-            AppContext.saveCodelangs(appRef.current.codelangs);
+
             initialized =true;
         };
         init();

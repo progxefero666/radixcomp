@@ -35,21 +35,18 @@ export default function PageGenCode() {
     const [section, setSection] = useState<string|null>(null);
 
     useEffect(() => {
+        //AppContext.saveCodelangs(appRef.current.codelangs);
         if(initialized) {return;} 
         
         const init = async () => {
-            // Db Squema
+            
             const dbSquema = await readDbSqlScriptFile("dbsquema");
             if(dbSquema!== null) {AppContext.saveDbSquema(dbSquema);}            
-            // AppIndex 
+            
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
-            if(!res) {
-                alert("Error loading initial collections");
-                return;
-            }            
-            // AppContext
-            AppContext.saveCodelangs(appRef.current.codelangs);
+            if(!res) {return;}            
+
             initialized =true;
         };
         init();
