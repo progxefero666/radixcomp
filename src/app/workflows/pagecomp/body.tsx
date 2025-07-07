@@ -72,6 +72,28 @@ export  function MainContent({codelangs,section}: CompProps) {
     }
 
     const renderManWorkflows = () => {
+        // const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
+        /*       
+        return (
+            <>
+                {apps.map((app, index) => (
+
+                    <ContCollapsible id={index} key={index.toString()}
+                        barbuttonscfg={barConfig}
+                        title={app.anname}
+                        intro={app.repository!}
+                        opened={false}>
+
+                        <Text size="2">
+                            {app.description}
+                        </Text>
+                    </ContCollapsible>
+                    
+                ))}
+            </>
+        )
+        */
+
         if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
             return (
                 <p>
