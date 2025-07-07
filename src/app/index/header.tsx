@@ -10,9 +10,9 @@ import { RadixConf } from "@/radix/radixconf";
 import { AppConfig } from "@/app_front/appconfig";
 
 interface IndexHeaderProps {
-    section?: string;
+    module?: string;
 }
-export default function Header({ section }: IndexHeaderProps) {
+export default function Header({ module: section }: IndexHeaderProps) {
 
     const pathname = usePathname();
 

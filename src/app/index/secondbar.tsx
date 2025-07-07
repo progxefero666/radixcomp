@@ -10,9 +10,9 @@ const secondBarStyle = {
 };
 
 interface SecondBarProps {
-    section?: string;
+    module?: string;
 }
-export default function SecondBar({section}: SecondBarProps) {
+export default function SecondBar({module}: SecondBarProps) {
 
     const onSelection = (sectionId: string) => {
         //not implemented yet

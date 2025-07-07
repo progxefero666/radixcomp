@@ -17,9 +17,9 @@ const mainContentStyle = {
 
 
 interface CompProps {
-    section:string;
+    module:string;
 }
-export default function MainContent({section}: CompProps) {
+export default function MainContent({module}: CompProps) {
 
     const renderModPlatform = () => {
         return (
@@ -47,9 +47,9 @@ export default function MainContent({section}: CompProps) {
 
     return (
             <Flex width="100%" direction="column" gapY="2" style={mainContentStyle} >
-                {section === AppConfig.MOD_WORKFLOWS.id?   renderModWorkFlows():null}
-                {section === AppConfig.MOD_APPLICATIONS.id?renderModApplications():null}
-                {section === AppConfig.MOD_PLATFORM.id?    renderModPlatform() : null}
+                {module === AppConfig.MOD_WORKFLOWS.id?   renderModWorkFlows():null}
+                {module === AppConfig.MOD_APPLICATIONS.id?renderModApplications():null}
+                {module === AppConfig.MOD_PLATFORM.id?    renderModPlatform() : null}
             </Flex>
     );
 

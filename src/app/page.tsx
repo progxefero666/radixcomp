@@ -53,19 +53,19 @@ export default function Home() {
         <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
             
             <Flex gridColumn="1/4" gridRow="1" >
-                <Header section={actmodule} />    
+                <Header module={actmodule} />    
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
-                <PrimaryBar section={actmodule} onselection={onSelection} />
+                <PrimaryBar module={actmodule} onselection={onSelection} />
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" > 
-                <MainContent section={actmodule} />
+                <MainContent module={actmodule} />
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" >
-                <SecondBar section={actmodule} />
+                <SecondBar module={actmodule} />
             </Flex>
 
         </Grid>

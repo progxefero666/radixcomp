@@ -11,10 +11,10 @@ const primaryBarStyle = {
     background: 'rgb(24, 24, 27)',
 };
 interface PrimaryBarProps {
-    section: string;
+    module: string;
     onselection: (sectionId:string) => void;
 }
-export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
+export default function PrimaryBar({onselection,module}: PrimaryBarProps) {
 
     //className="bg-gray-1 dark:bg-gray-2 border border-gray-6"
     return (
@@ -23,7 +23,7 @@ export default function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
             <MenuButtons options={AppConfig.MODULES}
                 onclick={onselection} 
-                actoption={section} />	
+                actoption={module} />	
 
         </Flex>
     );
