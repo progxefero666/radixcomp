@@ -1,54 +1,42 @@
 //src\common\dbmodels\dbconfig.ts
 
+import { DbUtil } from "@/db/dbutils";
+
 /**
  * class DbConfigUtil
  */
-export class DbConfigUtil {
-
-    public static getDbUrl(name:string,motor:string,
-                           host:string,port:number,                           
-                           username:string,userpassword:string): string {
-        let url: string = motor+"://"
-            .concat(username).concat(":").concat(userpassword)
-            .concat("@").concat(host).concat(":").concat(String(port))
-            .concat("/").concat(name);
-        return url;
-    }
-
-}//end class 
-
 /**
  * Class DbConfig
  */
 export class DbConfig {
 
     public motor: string;
-    public version: string = "postgresql";
+    public version: string|null;
     public name: string;
     public username: string;
     public userpassword: string;
     public host: string;
     public port: number;
     public url: string;
-    public useSSL: boolean = false;
+    public security: boolean = false;
     
-
-    constructor(name:string,
-                motor:string,
-                username:string,
-                userpassword:string,
-                host:string,
-                port:number,
-                useSSL:boolean|null) {
+    constructor(name:string,motor:string,version:string|null,
+                username:string,userpassword:string,
+                host:string,port:number,security:boolean|null) {
 
         this.name = name;
+        this.motor = motor;
+        this.version = version ?? null;        
         this.username = username;
         this.userpassword = userpassword;
         this.host = host;
         this.port = port;
-        this.useSSL = useSSL ?? false; // Default to false if not provided
-        this.motor = motor;
-        this.url = `postgresql://${this.username}:${this.userpassword}@${this.host}:${this.port}/${this.name}`;
+        this.security = security ?? false;
+
+        this.url = DbUtil.getDbUrl(
+            this.name,this.motor,
+            this.host,this.port,
+            this.username,this.userpassword);
     }
 
 }//end class DbConfig
