@@ -15,7 +15,7 @@ interface CompProps {
     section: string|null;
     navback?:()=>void;
 }
-export function PageHeader({section,navback}:CompProps) {
+export function Header({section,navback}:CompProps) {
 
     const pathname = usePathname();
 

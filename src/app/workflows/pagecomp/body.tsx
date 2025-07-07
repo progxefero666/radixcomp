@@ -22,11 +22,6 @@ export  function MainContent({section}: CompProps) {
 
     const appRef = useRef<AppWorkflows>(null);
 
-    const template = (data: string): string => {
-		let result: string = "";
-        return result;        
-    }	
-	    
     let initialized: boolean = false;
     useEffect(() => {
         if(initialized) {return;}         
@@ -39,21 +34,61 @@ export  function MainContent({section}: CompProps) {
         init();
     }, []);    
 
-    const renderMainContent = () => {
+    if(!initialized){
+        return (
+            <Flex width="100%" height="100vh" align="center" justify="center">
+                <p>Loading...</p>
+            </Flex>
+        );
+    }
+    
+    const renderTaskTypes = () => {
         if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
             return (
                 <p>
-                    SDASDASDASD
+                    renderTaskTypes
                 </p>
             );
         }
-        return null;
-    };
+    }
+
+    const renderSql = () => {
+        if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
+            return (
+                <p>
+                    renderSql
+                </p>
+            );
+        }
+    }
+
+    const renderJson = () => {
+        if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
+            return (
+                <p>
+                    renderJson
+                </p>
+            );
+        }
+    }
+
+    const renderManWorkflows = () => {
+        if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
+            return (
+                <p>
+                    SC_WORKFLOWS
+                </p>
+            );
+        }
+    }
 
     return (
         <Flex width="100%" direction="column" gapY="2" style={mainContentStyle} >
-            {initialized ? renderMainContent() : null}
+            {section==WorkflowsConfig.SC_WORKFLOWS.id ? renderManWorkflows() : null}
+            {section==WorkflowsConfig.SC_TASKTYPES.id ? renderTaskTypes() : null}
+            {section==WorkflowsConfig.SC_WORKFLOW_SQL.id ? renderSql() : null}
+            {section==WorkflowsConfig.SC_WORKFLOW_JSON.id ? renderJson() : null}
         </Flex>
     );
 
-}
+}//end component

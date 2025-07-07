@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
 import { WorkflowsConfig }  from "@/app/workflows/config";
-import { PageHeader }       from "@/app/workflows/pagecomp/wfheader";
-import { PrimaryBar }       from "@/app/workflows/pagecomp/wfprimarybar";
-import { MainContent }      from "@/app/workflows/pagecomp/wfmain";
-import { SecondBar }        from "@/app/workflows/pagecomp/wfsecomdbar";
+import { Header }       from "@/app/workflows/pagecomp/header";
+import { PrimaryBar }       from "@/app/workflows/pagecomp/primarybar";
+import { MainContent }      from "@/app/workflows/pagecomp/body";
+import { SecondBar }        from "@/app/workflows/pagecomp/secondbar";
 
 
 const layoutStyle = {
@@ -31,7 +31,7 @@ export default function PageWorkflows() {
         <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
             
             <Flex gridColumn="1/4" gridRow="1" >
-                <PageHeader section={actsection} />   
+                <Header section={actsection} />   
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
