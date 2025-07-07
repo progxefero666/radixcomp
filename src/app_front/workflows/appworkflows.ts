@@ -6,7 +6,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/dmmodels/codelang";
 
 import { JSonConsole } from "@/common/util/jsonhelper";
-import { getAll } from "@/db/services/read/srvreadcmcollections";
+import { getAll } from "@/db/services/generic/srvreadcmcollections";
 
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { parseCollection } from "@/common/parsers/javascriptparser";
@@ -22,6 +22,26 @@ import { Apptype } from "@/db/dmmodels/apptype";
  *    - Include load init collections and display them.
  */
 export class AppWorkflows {
+
+    public codelangs: Codelang[] = [];
+
+    constructor() {}
+
+    public async loadInitCollections(): Promise<boolean> {
+
+        const codelang_response = await getAll(DbTables.codelang);
+        const codelang_coll:Codelang[]|null= parseCollection<Codelang>(codelang_response);        
+        if(codelang_coll === null) {return false;}
+        JSonConsole.logArray(codelang_coll);
+        return true;
+    }
+  
+}//end class
+
+/**
+ * class AppIndexCode
+ */
+export class AppIndexCode {
 
     public codelangs: Codelang[] = [];
 
@@ -48,30 +68,8 @@ export class AppWorkflows {
         const task_response = await getAll(DbTables.task);
         const task_coll = parseCollection<Apptype>(task_response);  
         if(task_coll === null) {return false;}      
-        
-        
+                
         JSonConsole.logArray(task_coll);
-        return true;
-    }
-  
-}//end class
-
-/**
- * class AppIndexCode
- */
-export class AppIndexCode {
-    public codelangs: Codelang[] = [];
-
-    constructor() {}
-    public async loadInitCollections(): Promise<boolean> {
-
-
-
-
-        const application_response = await getAll(DbTables.application);
-        const application_coll = parseCollection<Apptype>(application_response); 
-        if(application_coll === null) {return false;}
-
         return true;
     }
 

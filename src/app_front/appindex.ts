@@ -6,7 +6,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/dmmodels/codelang";
 
 import { JSonConsole } from "@/common/util/jsonhelper";
-import { getAll } from "@/db/services/read/srvreadcmcollections";
+import { getAll } from "@/db/services/generic/srvreadcmcollections";
 
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { parseCollection } from "@/common/parsers/javascriptparser";
