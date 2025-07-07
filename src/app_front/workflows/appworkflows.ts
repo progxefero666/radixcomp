@@ -39,13 +39,8 @@ export class AppWorkflows {
         const apptype_response = await GetAll(DbTables.apptype);
         const apptype_coll = parseCollection<Apptype>(apptype_response);        
         if(apptype_coll === null) {return false;}       
-        JSonConsole.logArray(apptype_coll);
-        /*
-        const workflow_response = await GetAll(DbTables.workflow);
-        const workflow_coll = parseCollection<Workflow>(workflow_response);        
-        if(workflow_coll === null) {return false;}
-        */
-        //JSonConsole.logArray(tasktype_coll);
+ 
+        //JSonConsole.logArray(apptype_coll);
         return true;
     }
   
@@ -60,22 +55,9 @@ export class AppIndexCode {
     constructor() {}
     public async loadInitCollections(): Promise<boolean> {
 
-        const codelang_response = await GetAll(DbTables.codelang);
-        const codelang_coll= parseCollection<Codelang>(codelang_response);        
-        if(codelang_coll === null) {return false;}
-
-        const tasktype_response = await GetAll(DbTables.tasktype);
-        const tasktype_coll = parseCollection<Tasktype>(tasktype_response);        
-        if(tasktype_coll === null) {return false;}
-         
         const workflow_response = await GetAll(DbTables.workflow);
         const workflow_coll = parseCollection<Workflow>(workflow_response);        
         if(workflow_coll === null) {return false;}
-
-         
-        const apptype_response = await GetAll(DbTables.apptype);
-        const apptype_coll = parseCollection<Apptype>(apptype_response);        
-        if(apptype_coll === null) {return false;}
 
         const task_response = await GetAll(DbTables.task);
         const task_coll = parseCollection<Apptype>(task_response);  
