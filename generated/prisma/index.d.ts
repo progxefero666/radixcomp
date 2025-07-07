@@ -33,6 +33,16 @@ export type Workflow = $Result.DefaultSelection<Prisma.$WorkflowPayload>
  * 
  */
 export type Task = $Result.DefaultSelection<Prisma.$TaskPayload>
+/**
+ * Model AppType
+ * 
+ */
+export type AppType = $Result.DefaultSelection<Prisma.$AppTypePayload>
+/**
+ * Model Application
+ * 
+ */
+export type Application = $Result.DefaultSelection<Prisma.$ApplicationPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -198,6 +208,26 @@ export class PrismaClient<
     * ```
     */
   get task(): Prisma.TaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.appType`: Exposes CRUD operations for the **AppType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AppTypes
+    * const appTypes = await prisma.appType.findMany()
+    * ```
+    */
+  get appType(): Prisma.AppTypeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.application`: Exposes CRUD operations for the **Application** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Applications
+    * const applications = await prisma.application.findMany()
+    * ```
+    */
+  get application(): Prisma.ApplicationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -641,7 +671,9 @@ export namespace Prisma {
     CodeLang: 'CodeLang',
     TaskType: 'TaskType',
     Workflow: 'Workflow',
-    Task: 'Task'
+    Task: 'Task',
+    AppType: 'AppType',
+    Application: 'Application'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +692,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "codeLang" | "taskType" | "workflow" | "task"
+      modelProps: "codeLang" | "taskType" | "workflow" | "task" | "appType" | "application"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -960,6 +992,154 @@ export namespace Prisma {
           }
         }
       }
+      AppType: {
+        payload: Prisma.$AppTypePayload<ExtArgs>
+        fields: Prisma.AppTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AppTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AppTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>
+          }
+          findFirst: {
+            args: Prisma.AppTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AppTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>
+          }
+          findMany: {
+            args: Prisma.AppTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>[]
+          }
+          create: {
+            args: Prisma.AppTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>
+          }
+          createMany: {
+            args: Prisma.AppTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AppTypeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>[]
+          }
+          delete: {
+            args: Prisma.AppTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>
+          }
+          update: {
+            args: Prisma.AppTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.AppTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AppTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AppTypeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>[]
+          }
+          upsert: {
+            args: Prisma.AppTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppTypePayload>
+          }
+          aggregate: {
+            args: Prisma.AppTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAppType>
+          }
+          groupBy: {
+            args: Prisma.AppTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AppTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AppTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<AppTypeCountAggregateOutputType> | number
+          }
+        }
+      }
+      Application: {
+        payload: Prisma.$ApplicationPayload<ExtArgs>
+        fields: Prisma.ApplicationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ApplicationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ApplicationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>
+          }
+          findFirst: {
+            args: Prisma.ApplicationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ApplicationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>
+          }
+          findMany: {
+            args: Prisma.ApplicationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>[]
+          }
+          create: {
+            args: Prisma.ApplicationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>
+          }
+          createMany: {
+            args: Prisma.ApplicationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ApplicationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>[]
+          }
+          delete: {
+            args: Prisma.ApplicationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>
+          }
+          update: {
+            args: Prisma.ApplicationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ApplicationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ApplicationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ApplicationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ApplicationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ApplicationPayload>
+          }
+          aggregate: {
+            args: Prisma.ApplicationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateApplication>
+          }
+          groupBy: {
+            args: Prisma.ApplicationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ApplicationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ApplicationCountArgs<ExtArgs>
+            result: $Utils.Optional<ApplicationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1048,6 +1228,8 @@ export namespace Prisma {
     taskType?: TaskTypeOmit
     workflow?: WorkflowOmit
     task?: TaskOmit
+    appType?: AppTypeOmit
+    application?: ApplicationOmit
   }
 
   /* Types for Logging */
@@ -1143,10 +1325,12 @@ export namespace Prisma {
 
   export type CodeLangCountOutputType = {
     tasks: number
+    applications: number
   }
 
   export type CodeLangCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasks?: boolean | CodeLangCountOutputTypeCountTasksArgs
+    applications?: boolean | CodeLangCountOutputTypeCountApplicationsArgs
   }
 
   // Custom InputTypes
@@ -1165,6 +1349,13 @@ export namespace Prisma {
    */
   export type CodeLangCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TaskWhereInput
+  }
+
+  /**
+   * CodeLangCountOutputType without action
+   */
+  export type CodeLangCountOutputTypeCountApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApplicationWhereInput
   }
 
 
@@ -1227,6 +1418,37 @@ export namespace Prisma {
    */
   export type WorkflowCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TaskWhereInput
+  }
+
+
+  /**
+   * Count Type AppTypeCountOutputType
+   */
+
+  export type AppTypeCountOutputType = {
+    applications: number
+  }
+
+  export type AppTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | AppTypeCountOutputTypeCountApplicationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AppTypeCountOutputType without action
+   */
+  export type AppTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppTypeCountOutputType
+     */
+    select?: AppTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AppTypeCountOutputType without action
+   */
+  export type AppTypeCountOutputTypeCountApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApplicationWhereInput
   }
 
 
@@ -1417,6 +1639,7 @@ export namespace Prisma {
     cgname?: boolean
     description?: boolean
     tasks?: boolean | CodeLang$tasksArgs<ExtArgs>
+    applications?: boolean | CodeLang$applicationsArgs<ExtArgs>
     _count?: boolean | CodeLangCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["codeLang"]>
 
@@ -1441,6 +1664,7 @@ export namespace Prisma {
   export type CodeLangOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cgname" | "description", ExtArgs["result"]["codeLang"]>
   export type CodeLangInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasks?: boolean | CodeLang$tasksArgs<ExtArgs>
+    applications?: boolean | CodeLang$applicationsArgs<ExtArgs>
     _count?: boolean | CodeLangCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CodeLangIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1450,6 +1674,7 @@ export namespace Prisma {
     name: "CodeLang"
     objects: {
       tasks: Prisma.$TaskPayload<ExtArgs>[]
+      applications: Prisma.$ApplicationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1850,6 +2075,7 @@ export namespace Prisma {
   export interface Prisma__CodeLangClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tasks<T extends CodeLang$tasksArgs<ExtArgs> = {}>(args?: Subset<T, CodeLang$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    applications<T extends CodeLang$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, CodeLang$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2291,6 +2517,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TaskScalarFieldEnum | TaskScalarFieldEnum[]
+  }
+
+  /**
+   * CodeLang.applications
+   */
+  export type CodeLang$applicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    where?: ApplicationWhereInput
+    orderBy?: ApplicationOrderByWithRelationInput | ApplicationOrderByWithRelationInput[]
+    cursor?: ApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ApplicationScalarFieldEnum | ApplicationScalarFieldEnum[]
   }
 
   /**
@@ -5697,6 +5947,2400 @@ export namespace Prisma {
 
 
   /**
+   * Model AppType
+   */
+
+  export type AggregateAppType = {
+    _count: AppTypeCountAggregateOutputType | null
+    _avg: AppTypeAvgAggregateOutputType | null
+    _sum: AppTypeSumAggregateOutputType | null
+    _min: AppTypeMinAggregateOutputType | null
+    _max: AppTypeMaxAggregateOutputType | null
+  }
+
+  export type AppTypeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AppTypeSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AppTypeMinAggregateOutputType = {
+    id: number | null
+    aename: string | null
+    description: string | null
+  }
+
+  export type AppTypeMaxAggregateOutputType = {
+    id: number | null
+    aename: string | null
+    description: string | null
+  }
+
+  export type AppTypeCountAggregateOutputType = {
+    id: number
+    aename: number
+    description: number
+    _all: number
+  }
+
+
+  export type AppTypeAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AppTypeSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AppTypeMinAggregateInputType = {
+    id?: true
+    aename?: true
+    description?: true
+  }
+
+  export type AppTypeMaxAggregateInputType = {
+    id?: true
+    aename?: true
+    description?: true
+  }
+
+  export type AppTypeCountAggregateInputType = {
+    id?: true
+    aename?: true
+    description?: true
+    _all?: true
+  }
+
+  export type AppTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AppType to aggregate.
+     */
+    where?: AppTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppTypes to fetch.
+     */
+    orderBy?: AppTypeOrderByWithRelationInput | AppTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AppTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AppTypes
+    **/
+    _count?: true | AppTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AppTypeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AppTypeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AppTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AppTypeMaxAggregateInputType
+  }
+
+  export type GetAppTypeAggregateType<T extends AppTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateAppType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAppType[P]>
+      : GetScalarType<T[P], AggregateAppType[P]>
+  }
+
+
+
+
+  export type AppTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AppTypeWhereInput
+    orderBy?: AppTypeOrderByWithAggregationInput | AppTypeOrderByWithAggregationInput[]
+    by: AppTypeScalarFieldEnum[] | AppTypeScalarFieldEnum
+    having?: AppTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AppTypeCountAggregateInputType | true
+    _avg?: AppTypeAvgAggregateInputType
+    _sum?: AppTypeSumAggregateInputType
+    _min?: AppTypeMinAggregateInputType
+    _max?: AppTypeMaxAggregateInputType
+  }
+
+  export type AppTypeGroupByOutputType = {
+    id: number
+    aename: string
+    description: string
+    _count: AppTypeCountAggregateOutputType | null
+    _avg: AppTypeAvgAggregateOutputType | null
+    _sum: AppTypeSumAggregateOutputType | null
+    _min: AppTypeMinAggregateOutputType | null
+    _max: AppTypeMaxAggregateOutputType | null
+  }
+
+  type GetAppTypeGroupByPayload<T extends AppTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AppTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AppTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AppTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], AppTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AppTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    aename?: boolean
+    description?: boolean
+    applications?: boolean | AppType$applicationsArgs<ExtArgs>
+    _count?: boolean | AppTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["appType"]>
+
+  export type AppTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    aename?: boolean
+    description?: boolean
+  }, ExtArgs["result"]["appType"]>
+
+  export type AppTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    aename?: boolean
+    description?: boolean
+  }, ExtArgs["result"]["appType"]>
+
+  export type AppTypeSelectScalar = {
+    id?: boolean
+    aename?: boolean
+    description?: boolean
+  }
+
+  export type AppTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "aename" | "description", ExtArgs["result"]["appType"]>
+  export type AppTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | AppType$applicationsArgs<ExtArgs>
+    _count?: boolean | AppTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AppTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AppTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AppTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AppType"
+    objects: {
+      applications: Prisma.$ApplicationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      aename: string
+      description: string
+    }, ExtArgs["result"]["appType"]>
+    composites: {}
+  }
+
+  type AppTypeGetPayload<S extends boolean | null | undefined | AppTypeDefaultArgs> = $Result.GetResult<Prisma.$AppTypePayload, S>
+
+  type AppTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AppTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AppTypeCountAggregateInputType | true
+    }
+
+  export interface AppTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AppType'], meta: { name: 'AppType' } }
+    /**
+     * Find zero or one AppType that matches the filter.
+     * @param {AppTypeFindUniqueArgs} args - Arguments to find a AppType
+     * @example
+     * // Get one AppType
+     * const appType = await prisma.appType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AppTypeFindUniqueArgs>(args: SelectSubset<T, AppTypeFindUniqueArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AppType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AppTypeFindUniqueOrThrowArgs} args - Arguments to find a AppType
+     * @example
+     * // Get one AppType
+     * const appType = await prisma.appType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AppTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, AppTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AppType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppTypeFindFirstArgs} args - Arguments to find a AppType
+     * @example
+     * // Get one AppType
+     * const appType = await prisma.appType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AppTypeFindFirstArgs>(args?: SelectSubset<T, AppTypeFindFirstArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AppType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppTypeFindFirstOrThrowArgs} args - Arguments to find a AppType
+     * @example
+     * // Get one AppType
+     * const appType = await prisma.appType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AppTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, AppTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AppTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AppTypes
+     * const appTypes = await prisma.appType.findMany()
+     * 
+     * // Get first 10 AppTypes
+     * const appTypes = await prisma.appType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const appTypeWithIdOnly = await prisma.appType.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AppTypeFindManyArgs>(args?: SelectSubset<T, AppTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AppType.
+     * @param {AppTypeCreateArgs} args - Arguments to create a AppType.
+     * @example
+     * // Create one AppType
+     * const AppType = await prisma.appType.create({
+     *   data: {
+     *     // ... data to create a AppType
+     *   }
+     * })
+     * 
+     */
+    create<T extends AppTypeCreateArgs>(args: SelectSubset<T, AppTypeCreateArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AppTypes.
+     * @param {AppTypeCreateManyArgs} args - Arguments to create many AppTypes.
+     * @example
+     * // Create many AppTypes
+     * const appType = await prisma.appType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AppTypeCreateManyArgs>(args?: SelectSubset<T, AppTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AppTypes and returns the data saved in the database.
+     * @param {AppTypeCreateManyAndReturnArgs} args - Arguments to create many AppTypes.
+     * @example
+     * // Create many AppTypes
+     * const appType = await prisma.appType.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AppTypes and only return the `id`
+     * const appTypeWithIdOnly = await prisma.appType.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AppTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, AppTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AppType.
+     * @param {AppTypeDeleteArgs} args - Arguments to delete one AppType.
+     * @example
+     * // Delete one AppType
+     * const AppType = await prisma.appType.delete({
+     *   where: {
+     *     // ... filter to delete one AppType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AppTypeDeleteArgs>(args: SelectSubset<T, AppTypeDeleteArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AppType.
+     * @param {AppTypeUpdateArgs} args - Arguments to update one AppType.
+     * @example
+     * // Update one AppType
+     * const appType = await prisma.appType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AppTypeUpdateArgs>(args: SelectSubset<T, AppTypeUpdateArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AppTypes.
+     * @param {AppTypeDeleteManyArgs} args - Arguments to filter AppTypes to delete.
+     * @example
+     * // Delete a few AppTypes
+     * const { count } = await prisma.appType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AppTypeDeleteManyArgs>(args?: SelectSubset<T, AppTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AppTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AppTypes
+     * const appType = await prisma.appType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AppTypeUpdateManyArgs>(args: SelectSubset<T, AppTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AppTypes and returns the data updated in the database.
+     * @param {AppTypeUpdateManyAndReturnArgs} args - Arguments to update many AppTypes.
+     * @example
+     * // Update many AppTypes
+     * const appType = await prisma.appType.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AppTypes and only return the `id`
+     * const appTypeWithIdOnly = await prisma.appType.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AppTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, AppTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AppType.
+     * @param {AppTypeUpsertArgs} args - Arguments to update or create a AppType.
+     * @example
+     * // Update or create a AppType
+     * const appType = await prisma.appType.upsert({
+     *   create: {
+     *     // ... data to create a AppType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AppType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AppTypeUpsertArgs>(args: SelectSubset<T, AppTypeUpsertArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AppTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppTypeCountArgs} args - Arguments to filter AppTypes to count.
+     * @example
+     * // Count the number of AppTypes
+     * const count = await prisma.appType.count({
+     *   where: {
+     *     // ... the filter for the AppTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends AppTypeCountArgs>(
+      args?: Subset<T, AppTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AppTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AppType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AppTypeAggregateArgs>(args: Subset<T, AppTypeAggregateArgs>): Prisma.PrismaPromise<GetAppTypeAggregateType<T>>
+
+    /**
+     * Group by AppType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AppTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AppTypeGroupByArgs['orderBy'] }
+        : { orderBy?: AppTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AppTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAppTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AppType model
+   */
+  readonly fields: AppTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AppType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AppTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    applications<T extends AppType$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, AppType$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AppType model
+   */
+  interface AppTypeFieldRefs {
+    readonly id: FieldRef<"AppType", 'Int'>
+    readonly aename: FieldRef<"AppType", 'String'>
+    readonly description: FieldRef<"AppType", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AppType findUnique
+   */
+  export type AppTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AppType to fetch.
+     */
+    where: AppTypeWhereUniqueInput
+  }
+
+  /**
+   * AppType findUniqueOrThrow
+   */
+  export type AppTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AppType to fetch.
+     */
+    where: AppTypeWhereUniqueInput
+  }
+
+  /**
+   * AppType findFirst
+   */
+  export type AppTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AppType to fetch.
+     */
+    where?: AppTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppTypes to fetch.
+     */
+    orderBy?: AppTypeOrderByWithRelationInput | AppTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AppTypes.
+     */
+    cursor?: AppTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AppTypes.
+     */
+    distinct?: AppTypeScalarFieldEnum | AppTypeScalarFieldEnum[]
+  }
+
+  /**
+   * AppType findFirstOrThrow
+   */
+  export type AppTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AppType to fetch.
+     */
+    where?: AppTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppTypes to fetch.
+     */
+    orderBy?: AppTypeOrderByWithRelationInput | AppTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AppTypes.
+     */
+    cursor?: AppTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AppTypes.
+     */
+    distinct?: AppTypeScalarFieldEnum | AppTypeScalarFieldEnum[]
+  }
+
+  /**
+   * AppType findMany
+   */
+  export type AppTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AppTypes to fetch.
+     */
+    where?: AppTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppTypes to fetch.
+     */
+    orderBy?: AppTypeOrderByWithRelationInput | AppTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AppTypes.
+     */
+    cursor?: AppTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppTypes.
+     */
+    skip?: number
+    distinct?: AppTypeScalarFieldEnum | AppTypeScalarFieldEnum[]
+  }
+
+  /**
+   * AppType create
+   */
+  export type AppTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AppType.
+     */
+    data: XOR<AppTypeCreateInput, AppTypeUncheckedCreateInput>
+  }
+
+  /**
+   * AppType createMany
+   */
+  export type AppTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AppTypes.
+     */
+    data: AppTypeCreateManyInput | AppTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AppType createManyAndReturn
+   */
+  export type AppTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * The data used to create many AppTypes.
+     */
+    data: AppTypeCreateManyInput | AppTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AppType update
+   */
+  export type AppTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AppType.
+     */
+    data: XOR<AppTypeUpdateInput, AppTypeUncheckedUpdateInput>
+    /**
+     * Choose, which AppType to update.
+     */
+    where: AppTypeWhereUniqueInput
+  }
+
+  /**
+   * AppType updateMany
+   */
+  export type AppTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AppTypes.
+     */
+    data: XOR<AppTypeUpdateManyMutationInput, AppTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which AppTypes to update
+     */
+    where?: AppTypeWhereInput
+    /**
+     * Limit how many AppTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AppType updateManyAndReturn
+   */
+  export type AppTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * The data used to update AppTypes.
+     */
+    data: XOR<AppTypeUpdateManyMutationInput, AppTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which AppTypes to update
+     */
+    where?: AppTypeWhereInput
+    /**
+     * Limit how many AppTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AppType upsert
+   */
+  export type AppTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AppType to update in case it exists.
+     */
+    where: AppTypeWhereUniqueInput
+    /**
+     * In case the AppType found by the `where` argument doesn't exist, create a new AppType with this data.
+     */
+    create: XOR<AppTypeCreateInput, AppTypeUncheckedCreateInput>
+    /**
+     * In case the AppType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AppTypeUpdateInput, AppTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * AppType delete
+   */
+  export type AppTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+    /**
+     * Filter which AppType to delete.
+     */
+    where: AppTypeWhereUniqueInput
+  }
+
+  /**
+   * AppType deleteMany
+   */
+  export type AppTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AppTypes to delete
+     */
+    where?: AppTypeWhereInput
+    /**
+     * Limit how many AppTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AppType.applications
+   */
+  export type AppType$applicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    where?: ApplicationWhereInput
+    orderBy?: ApplicationOrderByWithRelationInput | ApplicationOrderByWithRelationInput[]
+    cursor?: ApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ApplicationScalarFieldEnum | ApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * AppType without action
+   */
+  export type AppTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppType
+     */
+    select?: AppTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppType
+     */
+    omit?: AppTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppTypeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Application
+   */
+
+  export type AggregateApplication = {
+    _count: ApplicationCountAggregateOutputType | null
+    _avg: ApplicationAvgAggregateOutputType | null
+    _sum: ApplicationSumAggregateOutputType | null
+    _min: ApplicationMinAggregateOutputType | null
+    _max: ApplicationMaxAggregateOutputType | null
+  }
+
+  export type ApplicationAvgAggregateOutputType = {
+    id: number | null
+    apptypeId: number | null
+    codelangId: number | null
+  }
+
+  export type ApplicationSumAggregateOutputType = {
+    id: number | null
+    apptypeId: number | null
+    codelangId: number | null
+  }
+
+  export type ApplicationMinAggregateOutputType = {
+    id: number | null
+    apptypeId: number | null
+    codelangId: number | null
+    anname: string | null
+    description: string | null
+    repository: string | null
+    author: string | null
+    osystem: string | null
+    appurl: string | null
+    apppath: string | null
+    localdev: boolean | null
+    usedocker: boolean | null
+    controlusers: boolean | null
+    useui: boolean | null
+    useagents: boolean | null
+    consumedb: boolean | null
+    consumeapi: boolean | null
+    consumeai: boolean | null
+    exposedb: boolean | null
+    exposeapi: boolean | null
+    updated: Date | null
+  }
+
+  export type ApplicationMaxAggregateOutputType = {
+    id: number | null
+    apptypeId: number | null
+    codelangId: number | null
+    anname: string | null
+    description: string | null
+    repository: string | null
+    author: string | null
+    osystem: string | null
+    appurl: string | null
+    apppath: string | null
+    localdev: boolean | null
+    usedocker: boolean | null
+    controlusers: boolean | null
+    useui: boolean | null
+    useagents: boolean | null
+    consumedb: boolean | null
+    consumeapi: boolean | null
+    consumeai: boolean | null
+    exposedb: boolean | null
+    exposeapi: boolean | null
+    updated: Date | null
+  }
+
+  export type ApplicationCountAggregateOutputType = {
+    id: number
+    apptypeId: number
+    codelangId: number
+    anname: number
+    description: number
+    repository: number
+    author: number
+    osystem: number
+    appurl: number
+    apppath: number
+    localdev: number
+    usedocker: number
+    controlusers: number
+    useui: number
+    useagents: number
+    consumedb: number
+    consumeapi: number
+    consumeai: number
+    exposedb: number
+    exposeapi: number
+    updated: number
+    _all: number
+  }
+
+
+  export type ApplicationAvgAggregateInputType = {
+    id?: true
+    apptypeId?: true
+    codelangId?: true
+  }
+
+  export type ApplicationSumAggregateInputType = {
+    id?: true
+    apptypeId?: true
+    codelangId?: true
+  }
+
+  export type ApplicationMinAggregateInputType = {
+    id?: true
+    apptypeId?: true
+    codelangId?: true
+    anname?: true
+    description?: true
+    repository?: true
+    author?: true
+    osystem?: true
+    appurl?: true
+    apppath?: true
+    localdev?: true
+    usedocker?: true
+    controlusers?: true
+    useui?: true
+    useagents?: true
+    consumedb?: true
+    consumeapi?: true
+    consumeai?: true
+    exposedb?: true
+    exposeapi?: true
+    updated?: true
+  }
+
+  export type ApplicationMaxAggregateInputType = {
+    id?: true
+    apptypeId?: true
+    codelangId?: true
+    anname?: true
+    description?: true
+    repository?: true
+    author?: true
+    osystem?: true
+    appurl?: true
+    apppath?: true
+    localdev?: true
+    usedocker?: true
+    controlusers?: true
+    useui?: true
+    useagents?: true
+    consumedb?: true
+    consumeapi?: true
+    consumeai?: true
+    exposedb?: true
+    exposeapi?: true
+    updated?: true
+  }
+
+  export type ApplicationCountAggregateInputType = {
+    id?: true
+    apptypeId?: true
+    codelangId?: true
+    anname?: true
+    description?: true
+    repository?: true
+    author?: true
+    osystem?: true
+    appurl?: true
+    apppath?: true
+    localdev?: true
+    usedocker?: true
+    controlusers?: true
+    useui?: true
+    useagents?: true
+    consumedb?: true
+    consumeapi?: true
+    consumeai?: true
+    exposedb?: true
+    exposeapi?: true
+    updated?: true
+    _all?: true
+  }
+
+  export type ApplicationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Application to aggregate.
+     */
+    where?: ApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Applications to fetch.
+     */
+    orderBy?: ApplicationOrderByWithRelationInput | ApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Applications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Applications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Applications
+    **/
+    _count?: true | ApplicationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ApplicationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ApplicationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ApplicationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ApplicationMaxAggregateInputType
+  }
+
+  export type GetApplicationAggregateType<T extends ApplicationAggregateArgs> = {
+        [P in keyof T & keyof AggregateApplication]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateApplication[P]>
+      : GetScalarType<T[P], AggregateApplication[P]>
+  }
+
+
+
+
+  export type ApplicationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApplicationWhereInput
+    orderBy?: ApplicationOrderByWithAggregationInput | ApplicationOrderByWithAggregationInput[]
+    by: ApplicationScalarFieldEnum[] | ApplicationScalarFieldEnum
+    having?: ApplicationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ApplicationCountAggregateInputType | true
+    _avg?: ApplicationAvgAggregateInputType
+    _sum?: ApplicationSumAggregateInputType
+    _min?: ApplicationMinAggregateInputType
+    _max?: ApplicationMaxAggregateInputType
+  }
+
+  export type ApplicationGroupByOutputType = {
+    id: number
+    apptypeId: number
+    codelangId: number
+    anname: string
+    description: string
+    repository: string
+    author: string | null
+    osystem: string | null
+    appurl: string | null
+    apppath: string | null
+    localdev: boolean
+    usedocker: boolean
+    controlusers: boolean
+    useui: boolean
+    useagents: boolean
+    consumedb: boolean
+    consumeapi: boolean
+    consumeai: boolean
+    exposedb: boolean
+    exposeapi: boolean
+    updated: Date
+    _count: ApplicationCountAggregateOutputType | null
+    _avg: ApplicationAvgAggregateOutputType | null
+    _sum: ApplicationSumAggregateOutputType | null
+    _min: ApplicationMinAggregateOutputType | null
+    _max: ApplicationMaxAggregateOutputType | null
+  }
+
+  type GetApplicationGroupByPayload<T extends ApplicationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ApplicationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ApplicationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ApplicationGroupByOutputType[P]>
+            : GetScalarType<T[P], ApplicationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ApplicationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    apptypeId?: boolean
+    codelangId?: boolean
+    anname?: boolean
+    description?: boolean
+    repository?: boolean
+    author?: boolean
+    osystem?: boolean
+    appurl?: boolean
+    apppath?: boolean
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: boolean
+    apptype?: boolean | AppTypeDefaultArgs<ExtArgs>
+    codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["application"]>
+
+  export type ApplicationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    apptypeId?: boolean
+    codelangId?: boolean
+    anname?: boolean
+    description?: boolean
+    repository?: boolean
+    author?: boolean
+    osystem?: boolean
+    appurl?: boolean
+    apppath?: boolean
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: boolean
+    apptype?: boolean | AppTypeDefaultArgs<ExtArgs>
+    codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["application"]>
+
+  export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    apptypeId?: boolean
+    codelangId?: boolean
+    anname?: boolean
+    description?: boolean
+    repository?: boolean
+    author?: boolean
+    osystem?: boolean
+    appurl?: boolean
+    apppath?: boolean
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: boolean
+    apptype?: boolean | AppTypeDefaultArgs<ExtArgs>
+    codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["application"]>
+
+  export type ApplicationSelectScalar = {
+    id?: boolean
+    apptypeId?: boolean
+    codelangId?: boolean
+    anname?: boolean
+    description?: boolean
+    repository?: boolean
+    author?: boolean
+    osystem?: boolean
+    appurl?: boolean
+    apppath?: boolean
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: boolean
+  }
+
+  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "apptypeId" | "codelangId" | "anname" | "description" | "repository" | "author" | "osystem" | "appurl" | "apppath" | "localdev" | "usedocker" | "controlusers" | "useui" | "useagents" | "consumedb" | "consumeapi" | "consumeai" | "exposedb" | "exposeapi" | "updated", ExtArgs["result"]["application"]>
+  export type ApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    apptype?: boolean | AppTypeDefaultArgs<ExtArgs>
+    codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
+  }
+  export type ApplicationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    apptype?: boolean | AppTypeDefaultArgs<ExtArgs>
+    codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
+  }
+  export type ApplicationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    apptype?: boolean | AppTypeDefaultArgs<ExtArgs>
+    codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
+  }
+
+  export type $ApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Application"
+    objects: {
+      apptype: Prisma.$AppTypePayload<ExtArgs>
+      codelang: Prisma.$CodeLangPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      apptypeId: number
+      codelangId: number
+      anname: string
+      description: string
+      repository: string
+      author: string | null
+      osystem: string | null
+      appurl: string | null
+      apppath: string | null
+      localdev: boolean
+      usedocker: boolean
+      controlusers: boolean
+      useui: boolean
+      useagents: boolean
+      consumedb: boolean
+      consumeapi: boolean
+      consumeai: boolean
+      exposedb: boolean
+      exposeapi: boolean
+      updated: Date
+    }, ExtArgs["result"]["application"]>
+    composites: {}
+  }
+
+  type ApplicationGetPayload<S extends boolean | null | undefined | ApplicationDefaultArgs> = $Result.GetResult<Prisma.$ApplicationPayload, S>
+
+  type ApplicationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ApplicationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ApplicationCountAggregateInputType | true
+    }
+
+  export interface ApplicationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Application'], meta: { name: 'Application' } }
+    /**
+     * Find zero or one Application that matches the filter.
+     * @param {ApplicationFindUniqueArgs} args - Arguments to find a Application
+     * @example
+     * // Get one Application
+     * const application = await prisma.application.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ApplicationFindUniqueArgs>(args: SelectSubset<T, ApplicationFindUniqueArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Application that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ApplicationFindUniqueOrThrowArgs} args - Arguments to find a Application
+     * @example
+     * // Get one Application
+     * const application = await prisma.application.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ApplicationFindUniqueOrThrowArgs>(args: SelectSubset<T, ApplicationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Application that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApplicationFindFirstArgs} args - Arguments to find a Application
+     * @example
+     * // Get one Application
+     * const application = await prisma.application.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ApplicationFindFirstArgs>(args?: SelectSubset<T, ApplicationFindFirstArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Application that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApplicationFindFirstOrThrowArgs} args - Arguments to find a Application
+     * @example
+     * // Get one Application
+     * const application = await prisma.application.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ApplicationFindFirstOrThrowArgs>(args?: SelectSubset<T, ApplicationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Applications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApplicationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Applications
+     * const applications = await prisma.application.findMany()
+     * 
+     * // Get first 10 Applications
+     * const applications = await prisma.application.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const applicationWithIdOnly = await prisma.application.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ApplicationFindManyArgs>(args?: SelectSubset<T, ApplicationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Application.
+     * @param {ApplicationCreateArgs} args - Arguments to create a Application.
+     * @example
+     * // Create one Application
+     * const Application = await prisma.application.create({
+     *   data: {
+     *     // ... data to create a Application
+     *   }
+     * })
+     * 
+     */
+    create<T extends ApplicationCreateArgs>(args: SelectSubset<T, ApplicationCreateArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Applications.
+     * @param {ApplicationCreateManyArgs} args - Arguments to create many Applications.
+     * @example
+     * // Create many Applications
+     * const application = await prisma.application.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ApplicationCreateManyArgs>(args?: SelectSubset<T, ApplicationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Applications and returns the data saved in the database.
+     * @param {ApplicationCreateManyAndReturnArgs} args - Arguments to create many Applications.
+     * @example
+     * // Create many Applications
+     * const application = await prisma.application.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Applications and only return the `id`
+     * const applicationWithIdOnly = await prisma.application.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ApplicationCreateManyAndReturnArgs>(args?: SelectSubset<T, ApplicationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Application.
+     * @param {ApplicationDeleteArgs} args - Arguments to delete one Application.
+     * @example
+     * // Delete one Application
+     * const Application = await prisma.application.delete({
+     *   where: {
+     *     // ... filter to delete one Application
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ApplicationDeleteArgs>(args: SelectSubset<T, ApplicationDeleteArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Application.
+     * @param {ApplicationUpdateArgs} args - Arguments to update one Application.
+     * @example
+     * // Update one Application
+     * const application = await prisma.application.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ApplicationUpdateArgs>(args: SelectSubset<T, ApplicationUpdateArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Applications.
+     * @param {ApplicationDeleteManyArgs} args - Arguments to filter Applications to delete.
+     * @example
+     * // Delete a few Applications
+     * const { count } = await prisma.application.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ApplicationDeleteManyArgs>(args?: SelectSubset<T, ApplicationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Applications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApplicationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Applications
+     * const application = await prisma.application.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ApplicationUpdateManyArgs>(args: SelectSubset<T, ApplicationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Applications and returns the data updated in the database.
+     * @param {ApplicationUpdateManyAndReturnArgs} args - Arguments to update many Applications.
+     * @example
+     * // Update many Applications
+     * const application = await prisma.application.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Applications and only return the `id`
+     * const applicationWithIdOnly = await prisma.application.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ApplicationUpdateManyAndReturnArgs>(args: SelectSubset<T, ApplicationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Application.
+     * @param {ApplicationUpsertArgs} args - Arguments to update or create a Application.
+     * @example
+     * // Update or create a Application
+     * const application = await prisma.application.upsert({
+     *   create: {
+     *     // ... data to create a Application
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Application we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ApplicationUpsertArgs>(args: SelectSubset<T, ApplicationUpsertArgs<ExtArgs>>): Prisma__ApplicationClient<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Applications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApplicationCountArgs} args - Arguments to filter Applications to count.
+     * @example
+     * // Count the number of Applications
+     * const count = await prisma.application.count({
+     *   where: {
+     *     // ... the filter for the Applications we want to count
+     *   }
+     * })
+    **/
+    count<T extends ApplicationCountArgs>(
+      args?: Subset<T, ApplicationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ApplicationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Application.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApplicationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ApplicationAggregateArgs>(args: Subset<T, ApplicationAggregateArgs>): Prisma.PrismaPromise<GetApplicationAggregateType<T>>
+
+    /**
+     * Group by Application.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ApplicationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ApplicationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ApplicationGroupByArgs['orderBy'] }
+        : { orderBy?: ApplicationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ApplicationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetApplicationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Application model
+   */
+  readonly fields: ApplicationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Application.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ApplicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    apptype<T extends AppTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AppTypeDefaultArgs<ExtArgs>>): Prisma__AppTypeClient<$Result.GetResult<Prisma.$AppTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    codelang<T extends CodeLangDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CodeLangDefaultArgs<ExtArgs>>): Prisma__CodeLangClient<$Result.GetResult<Prisma.$CodeLangPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Application model
+   */
+  interface ApplicationFieldRefs {
+    readonly id: FieldRef<"Application", 'Int'>
+    readonly apptypeId: FieldRef<"Application", 'Int'>
+    readonly codelangId: FieldRef<"Application", 'Int'>
+    readonly anname: FieldRef<"Application", 'String'>
+    readonly description: FieldRef<"Application", 'String'>
+    readonly repository: FieldRef<"Application", 'String'>
+    readonly author: FieldRef<"Application", 'String'>
+    readonly osystem: FieldRef<"Application", 'String'>
+    readonly appurl: FieldRef<"Application", 'String'>
+    readonly apppath: FieldRef<"Application", 'String'>
+    readonly localdev: FieldRef<"Application", 'Boolean'>
+    readonly usedocker: FieldRef<"Application", 'Boolean'>
+    readonly controlusers: FieldRef<"Application", 'Boolean'>
+    readonly useui: FieldRef<"Application", 'Boolean'>
+    readonly useagents: FieldRef<"Application", 'Boolean'>
+    readonly consumedb: FieldRef<"Application", 'Boolean'>
+    readonly consumeapi: FieldRef<"Application", 'Boolean'>
+    readonly consumeai: FieldRef<"Application", 'Boolean'>
+    readonly exposedb: FieldRef<"Application", 'Boolean'>
+    readonly exposeapi: FieldRef<"Application", 'Boolean'>
+    readonly updated: FieldRef<"Application", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Application findUnique
+   */
+  export type ApplicationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which Application to fetch.
+     */
+    where: ApplicationWhereUniqueInput
+  }
+
+  /**
+   * Application findUniqueOrThrow
+   */
+  export type ApplicationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which Application to fetch.
+     */
+    where: ApplicationWhereUniqueInput
+  }
+
+  /**
+   * Application findFirst
+   */
+  export type ApplicationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which Application to fetch.
+     */
+    where?: ApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Applications to fetch.
+     */
+    orderBy?: ApplicationOrderByWithRelationInput | ApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Applications.
+     */
+    cursor?: ApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Applications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Applications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Applications.
+     */
+    distinct?: ApplicationScalarFieldEnum | ApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * Application findFirstOrThrow
+   */
+  export type ApplicationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which Application to fetch.
+     */
+    where?: ApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Applications to fetch.
+     */
+    orderBy?: ApplicationOrderByWithRelationInput | ApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Applications.
+     */
+    cursor?: ApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Applications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Applications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Applications.
+     */
+    distinct?: ApplicationScalarFieldEnum | ApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * Application findMany
+   */
+  export type ApplicationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which Applications to fetch.
+     */
+    where?: ApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Applications to fetch.
+     */
+    orderBy?: ApplicationOrderByWithRelationInput | ApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Applications.
+     */
+    cursor?: ApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Applications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Applications.
+     */
+    skip?: number
+    distinct?: ApplicationScalarFieldEnum | ApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * Application create
+   */
+  export type ApplicationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Application.
+     */
+    data: XOR<ApplicationCreateInput, ApplicationUncheckedCreateInput>
+  }
+
+  /**
+   * Application createMany
+   */
+  export type ApplicationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Applications.
+     */
+    data: ApplicationCreateManyInput | ApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Application createManyAndReturn
+   */
+  export type ApplicationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Applications.
+     */
+    data: ApplicationCreateManyInput | ApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Application update
+   */
+  export type ApplicationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Application.
+     */
+    data: XOR<ApplicationUpdateInput, ApplicationUncheckedUpdateInput>
+    /**
+     * Choose, which Application to update.
+     */
+    where: ApplicationWhereUniqueInput
+  }
+
+  /**
+   * Application updateMany
+   */
+  export type ApplicationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Applications.
+     */
+    data: XOR<ApplicationUpdateManyMutationInput, ApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which Applications to update
+     */
+    where?: ApplicationWhereInput
+    /**
+     * Limit how many Applications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Application updateManyAndReturn
+   */
+  export type ApplicationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to update Applications.
+     */
+    data: XOR<ApplicationUpdateManyMutationInput, ApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which Applications to update
+     */
+    where?: ApplicationWhereInput
+    /**
+     * Limit how many Applications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Application upsert
+   */
+  export type ApplicationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Application to update in case it exists.
+     */
+    where: ApplicationWhereUniqueInput
+    /**
+     * In case the Application found by the `where` argument doesn't exist, create a new Application with this data.
+     */
+    create: XOR<ApplicationCreateInput, ApplicationUncheckedCreateInput>
+    /**
+     * In case the Application was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ApplicationUpdateInput, ApplicationUncheckedUpdateInput>
+  }
+
+  /**
+   * Application delete
+   */
+  export type ApplicationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+    /**
+     * Filter which Application to delete.
+     */
+    where: ApplicationWhereUniqueInput
+  }
+
+  /**
+   * Application deleteMany
+   */
+  export type ApplicationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Applications to delete
+     */
+    where?: ApplicationWhereInput
+    /**
+     * Limit how many Applications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Application without action
+   */
+  export type ApplicationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Application
+     */
+    select?: ApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Application
+     */
+    omit?: ApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ApplicationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5754,6 +8398,42 @@ export namespace Prisma {
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+  export const AppTypeScalarFieldEnum: {
+    id: 'id',
+    aename: 'aename',
+    description: 'description'
+  };
+
+  export type AppTypeScalarFieldEnum = (typeof AppTypeScalarFieldEnum)[keyof typeof AppTypeScalarFieldEnum]
+
+
+  export const ApplicationScalarFieldEnum: {
+    id: 'id',
+    apptypeId: 'apptypeId',
+    codelangId: 'codelangId',
+    anname: 'anname',
+    description: 'description',
+    repository: 'repository',
+    author: 'author',
+    osystem: 'osystem',
+    appurl: 'appurl',
+    apppath: 'apppath',
+    localdev: 'localdev',
+    usedocker: 'usedocker',
+    controlusers: 'controlusers',
+    useui: 'useui',
+    useagents: 'useagents',
+    consumedb: 'consumedb',
+    consumeapi: 'consumeapi',
+    consumeai: 'consumeai',
+    exposedb: 'exposedb',
+    exposeapi: 'exposeapi',
+    updated: 'updated'
+  };
+
+  export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5859,6 +8539,7 @@ export namespace Prisma {
     cgname?: StringFilter<"CodeLang"> | string
     description?: StringFilter<"CodeLang"> | string
     tasks?: TaskListRelationFilter
+    applications?: ApplicationListRelationFilter
   }
 
   export type CodeLangOrderByWithRelationInput = {
@@ -5866,6 +8547,7 @@ export namespace Prisma {
     cgname?: SortOrder
     description?: SortOrder
     tasks?: TaskOrderByRelationAggregateInput
+    applications?: ApplicationOrderByRelationAggregateInput
   }
 
   export type CodeLangWhereUniqueInput = Prisma.AtLeast<{
@@ -5876,6 +8558,7 @@ export namespace Prisma {
     NOT?: CodeLangWhereInput | CodeLangWhereInput[]
     description?: StringFilter<"CodeLang"> | string
     tasks?: TaskListRelationFilter
+    applications?: ApplicationListRelationFilter
   }, "id" | "cgname">
 
   export type CodeLangOrderByWithAggregationInput = {
@@ -6095,10 +8778,198 @@ export namespace Prisma {
     final?: BoolWithAggregatesFilter<"Task"> | boolean
   }
 
+  export type AppTypeWhereInput = {
+    AND?: AppTypeWhereInput | AppTypeWhereInput[]
+    OR?: AppTypeWhereInput[]
+    NOT?: AppTypeWhereInput | AppTypeWhereInput[]
+    id?: IntFilter<"AppType"> | number
+    aename?: StringFilter<"AppType"> | string
+    description?: StringFilter<"AppType"> | string
+    applications?: ApplicationListRelationFilter
+  }
+
+  export type AppTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    aename?: SortOrder
+    description?: SortOrder
+    applications?: ApplicationOrderByRelationAggregateInput
+  }
+
+  export type AppTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    aename?: string
+    AND?: AppTypeWhereInput | AppTypeWhereInput[]
+    OR?: AppTypeWhereInput[]
+    NOT?: AppTypeWhereInput | AppTypeWhereInput[]
+    description?: StringFilter<"AppType"> | string
+    applications?: ApplicationListRelationFilter
+  }, "id" | "aename">
+
+  export type AppTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    aename?: SortOrder
+    description?: SortOrder
+    _count?: AppTypeCountOrderByAggregateInput
+    _avg?: AppTypeAvgOrderByAggregateInput
+    _max?: AppTypeMaxOrderByAggregateInput
+    _min?: AppTypeMinOrderByAggregateInput
+    _sum?: AppTypeSumOrderByAggregateInput
+  }
+
+  export type AppTypeScalarWhereWithAggregatesInput = {
+    AND?: AppTypeScalarWhereWithAggregatesInput | AppTypeScalarWhereWithAggregatesInput[]
+    OR?: AppTypeScalarWhereWithAggregatesInput[]
+    NOT?: AppTypeScalarWhereWithAggregatesInput | AppTypeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AppType"> | number
+    aename?: StringWithAggregatesFilter<"AppType"> | string
+    description?: StringWithAggregatesFilter<"AppType"> | string
+  }
+
+  export type ApplicationWhereInput = {
+    AND?: ApplicationWhereInput | ApplicationWhereInput[]
+    OR?: ApplicationWhereInput[]
+    NOT?: ApplicationWhereInput | ApplicationWhereInput[]
+    id?: IntFilter<"Application"> | number
+    apptypeId?: IntFilter<"Application"> | number
+    codelangId?: IntFilter<"Application"> | number
+    anname?: StringFilter<"Application"> | string
+    description?: StringFilter<"Application"> | string
+    repository?: StringFilter<"Application"> | string
+    author?: StringNullableFilter<"Application"> | string | null
+    osystem?: StringNullableFilter<"Application"> | string | null
+    appurl?: StringNullableFilter<"Application"> | string | null
+    apppath?: StringNullableFilter<"Application"> | string | null
+    localdev?: BoolFilter<"Application"> | boolean
+    usedocker?: BoolFilter<"Application"> | boolean
+    controlusers?: BoolFilter<"Application"> | boolean
+    useui?: BoolFilter<"Application"> | boolean
+    useagents?: BoolFilter<"Application"> | boolean
+    consumedb?: BoolFilter<"Application"> | boolean
+    consumeapi?: BoolFilter<"Application"> | boolean
+    consumeai?: BoolFilter<"Application"> | boolean
+    exposedb?: BoolFilter<"Application"> | boolean
+    exposeapi?: BoolFilter<"Application"> | boolean
+    updated?: DateTimeFilter<"Application"> | Date | string
+    apptype?: XOR<AppTypeScalarRelationFilter, AppTypeWhereInput>
+    codelang?: XOR<CodeLangScalarRelationFilter, CodeLangWhereInput>
+  }
+
+  export type ApplicationOrderByWithRelationInput = {
+    id?: SortOrder
+    apptypeId?: SortOrder
+    codelangId?: SortOrder
+    anname?: SortOrder
+    description?: SortOrder
+    repository?: SortOrder
+    author?: SortOrderInput | SortOrder
+    osystem?: SortOrderInput | SortOrder
+    appurl?: SortOrderInput | SortOrder
+    apppath?: SortOrderInput | SortOrder
+    localdev?: SortOrder
+    usedocker?: SortOrder
+    controlusers?: SortOrder
+    useui?: SortOrder
+    useagents?: SortOrder
+    consumedb?: SortOrder
+    consumeapi?: SortOrder
+    consumeai?: SortOrder
+    exposedb?: SortOrder
+    exposeapi?: SortOrder
+    updated?: SortOrder
+    apptype?: AppTypeOrderByWithRelationInput
+    codelang?: CodeLangOrderByWithRelationInput
+  }
+
+  export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    anname?: string
+    AND?: ApplicationWhereInput | ApplicationWhereInput[]
+    OR?: ApplicationWhereInput[]
+    NOT?: ApplicationWhereInput | ApplicationWhereInput[]
+    apptypeId?: IntFilter<"Application"> | number
+    codelangId?: IntFilter<"Application"> | number
+    description?: StringFilter<"Application"> | string
+    repository?: StringFilter<"Application"> | string
+    author?: StringNullableFilter<"Application"> | string | null
+    osystem?: StringNullableFilter<"Application"> | string | null
+    appurl?: StringNullableFilter<"Application"> | string | null
+    apppath?: StringNullableFilter<"Application"> | string | null
+    localdev?: BoolFilter<"Application"> | boolean
+    usedocker?: BoolFilter<"Application"> | boolean
+    controlusers?: BoolFilter<"Application"> | boolean
+    useui?: BoolFilter<"Application"> | boolean
+    useagents?: BoolFilter<"Application"> | boolean
+    consumedb?: BoolFilter<"Application"> | boolean
+    consumeapi?: BoolFilter<"Application"> | boolean
+    consumeai?: BoolFilter<"Application"> | boolean
+    exposedb?: BoolFilter<"Application"> | boolean
+    exposeapi?: BoolFilter<"Application"> | boolean
+    updated?: DateTimeFilter<"Application"> | Date | string
+    apptype?: XOR<AppTypeScalarRelationFilter, AppTypeWhereInput>
+    codelang?: XOR<CodeLangScalarRelationFilter, CodeLangWhereInput>
+  }, "id" | "anname">
+
+  export type ApplicationOrderByWithAggregationInput = {
+    id?: SortOrder
+    apptypeId?: SortOrder
+    codelangId?: SortOrder
+    anname?: SortOrder
+    description?: SortOrder
+    repository?: SortOrder
+    author?: SortOrderInput | SortOrder
+    osystem?: SortOrderInput | SortOrder
+    appurl?: SortOrderInput | SortOrder
+    apppath?: SortOrderInput | SortOrder
+    localdev?: SortOrder
+    usedocker?: SortOrder
+    controlusers?: SortOrder
+    useui?: SortOrder
+    useagents?: SortOrder
+    consumedb?: SortOrder
+    consumeapi?: SortOrder
+    consumeai?: SortOrder
+    exposedb?: SortOrder
+    exposeapi?: SortOrder
+    updated?: SortOrder
+    _count?: ApplicationCountOrderByAggregateInput
+    _avg?: ApplicationAvgOrderByAggregateInput
+    _max?: ApplicationMaxOrderByAggregateInput
+    _min?: ApplicationMinOrderByAggregateInput
+    _sum?: ApplicationSumOrderByAggregateInput
+  }
+
+  export type ApplicationScalarWhereWithAggregatesInput = {
+    AND?: ApplicationScalarWhereWithAggregatesInput | ApplicationScalarWhereWithAggregatesInput[]
+    OR?: ApplicationScalarWhereWithAggregatesInput[]
+    NOT?: ApplicationScalarWhereWithAggregatesInput | ApplicationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Application"> | number
+    apptypeId?: IntWithAggregatesFilter<"Application"> | number
+    codelangId?: IntWithAggregatesFilter<"Application"> | number
+    anname?: StringWithAggregatesFilter<"Application"> | string
+    description?: StringWithAggregatesFilter<"Application"> | string
+    repository?: StringWithAggregatesFilter<"Application"> | string
+    author?: StringNullableWithAggregatesFilter<"Application"> | string | null
+    osystem?: StringNullableWithAggregatesFilter<"Application"> | string | null
+    appurl?: StringNullableWithAggregatesFilter<"Application"> | string | null
+    apppath?: StringNullableWithAggregatesFilter<"Application"> | string | null
+    localdev?: BoolWithAggregatesFilter<"Application"> | boolean
+    usedocker?: BoolWithAggregatesFilter<"Application"> | boolean
+    controlusers?: BoolWithAggregatesFilter<"Application"> | boolean
+    useui?: BoolWithAggregatesFilter<"Application"> | boolean
+    useagents?: BoolWithAggregatesFilter<"Application"> | boolean
+    consumedb?: BoolWithAggregatesFilter<"Application"> | boolean
+    consumeapi?: BoolWithAggregatesFilter<"Application"> | boolean
+    consumeai?: BoolWithAggregatesFilter<"Application"> | boolean
+    exposedb?: BoolWithAggregatesFilter<"Application"> | boolean
+    exposeapi?: BoolWithAggregatesFilter<"Application"> | boolean
+    updated?: DateTimeWithAggregatesFilter<"Application"> | Date | string
+  }
+
   export type CodeLangCreateInput = {
     cgname: string
     description: string
     tasks?: TaskCreateNestedManyWithoutCodelangInput
+    applications?: ApplicationCreateNestedManyWithoutCodelangInput
   }
 
   export type CodeLangUncheckedCreateInput = {
@@ -6106,12 +8977,14 @@ export namespace Prisma {
     cgname: string
     description: string
     tasks?: TaskUncheckedCreateNestedManyWithoutCodelangInput
+    applications?: ApplicationUncheckedCreateNestedManyWithoutCodelangInput
   }
 
   export type CodeLangUpdateInput = {
     cgname?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUpdateManyWithoutCodelangNestedInput
+    applications?: ApplicationUpdateManyWithoutCodelangNestedInput
   }
 
   export type CodeLangUncheckedUpdateInput = {
@@ -6119,6 +8992,7 @@ export namespace Prisma {
     cgname?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUncheckedUpdateManyWithoutCodelangNestedInput
+    applications?: ApplicationUncheckedUpdateManyWithoutCodelangNestedInput
   }
 
   export type CodeLangCreateManyInput = {
@@ -6330,6 +9204,212 @@ export namespace Prisma {
     final?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type AppTypeCreateInput = {
+    aename: string
+    description?: string
+    applications?: ApplicationCreateNestedManyWithoutApptypeInput
+  }
+
+  export type AppTypeUncheckedCreateInput = {
+    id?: number
+    aename: string
+    description?: string
+    applications?: ApplicationUncheckedCreateNestedManyWithoutApptypeInput
+  }
+
+  export type AppTypeUpdateInput = {
+    aename?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applications?: ApplicationUpdateManyWithoutApptypeNestedInput
+  }
+
+  export type AppTypeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    aename?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applications?: ApplicationUncheckedUpdateManyWithoutApptypeNestedInput
+  }
+
+  export type AppTypeCreateManyInput = {
+    id?: number
+    aename: string
+    description?: string
+  }
+
+  export type AppTypeUpdateManyMutationInput = {
+    aename?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AppTypeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    aename?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ApplicationCreateInput = {
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+    apptype: AppTypeCreateNestedOneWithoutApplicationsInput
+    codelang: CodeLangCreateNestedOneWithoutApplicationsInput
+  }
+
+  export type ApplicationUncheckedCreateInput = {
+    id?: number
+    apptypeId: number
+    codelangId: number
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+  }
+
+  export type ApplicationUpdateInput = {
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    apptype?: AppTypeUpdateOneRequiredWithoutApplicationsNestedInput
+    codelang?: CodeLangUpdateOneRequiredWithoutApplicationsNestedInput
+  }
+
+  export type ApplicationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    apptypeId?: IntFieldUpdateOperationsInput | number
+    codelangId?: IntFieldUpdateOperationsInput | number
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApplicationCreateManyInput = {
+    id?: number
+    apptypeId: number
+    codelangId: number
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+  }
+
+  export type ApplicationUpdateManyMutationInput = {
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApplicationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    apptypeId?: IntFieldUpdateOperationsInput | number
+    codelangId?: IntFieldUpdateOperationsInput | number
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -6362,7 +9442,17 @@ export namespace Prisma {
     none?: TaskWhereInput
   }
 
+  export type ApplicationListRelationFilter = {
+    every?: ApplicationWhereInput
+    some?: ApplicationWhereInput
+    none?: ApplicationWhereInput
+  }
+
   export type TaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ApplicationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6633,6 +9723,121 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type AppTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    aename?: SortOrder
+    description?: SortOrder
+  }
+
+  export type AppTypeAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AppTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    aename?: SortOrder
+    description?: SortOrder
+  }
+
+  export type AppTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    aename?: SortOrder
+    description?: SortOrder
+  }
+
+  export type AppTypeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AppTypeScalarRelationFilter = {
+    is?: AppTypeWhereInput
+    isNot?: AppTypeWhereInput
+  }
+
+  export type ApplicationCountOrderByAggregateInput = {
+    id?: SortOrder
+    apptypeId?: SortOrder
+    codelangId?: SortOrder
+    anname?: SortOrder
+    description?: SortOrder
+    repository?: SortOrder
+    author?: SortOrder
+    osystem?: SortOrder
+    appurl?: SortOrder
+    apppath?: SortOrder
+    localdev?: SortOrder
+    usedocker?: SortOrder
+    controlusers?: SortOrder
+    useui?: SortOrder
+    useagents?: SortOrder
+    consumedb?: SortOrder
+    consumeapi?: SortOrder
+    consumeai?: SortOrder
+    exposedb?: SortOrder
+    exposeapi?: SortOrder
+    updated?: SortOrder
+  }
+
+  export type ApplicationAvgOrderByAggregateInput = {
+    id?: SortOrder
+    apptypeId?: SortOrder
+    codelangId?: SortOrder
+  }
+
+  export type ApplicationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    apptypeId?: SortOrder
+    codelangId?: SortOrder
+    anname?: SortOrder
+    description?: SortOrder
+    repository?: SortOrder
+    author?: SortOrder
+    osystem?: SortOrder
+    appurl?: SortOrder
+    apppath?: SortOrder
+    localdev?: SortOrder
+    usedocker?: SortOrder
+    controlusers?: SortOrder
+    useui?: SortOrder
+    useagents?: SortOrder
+    consumedb?: SortOrder
+    consumeapi?: SortOrder
+    consumeai?: SortOrder
+    exposedb?: SortOrder
+    exposeapi?: SortOrder
+    updated?: SortOrder
+  }
+
+  export type ApplicationMinOrderByAggregateInput = {
+    id?: SortOrder
+    apptypeId?: SortOrder
+    codelangId?: SortOrder
+    anname?: SortOrder
+    description?: SortOrder
+    repository?: SortOrder
+    author?: SortOrder
+    osystem?: SortOrder
+    appurl?: SortOrder
+    apppath?: SortOrder
+    localdev?: SortOrder
+    usedocker?: SortOrder
+    controlusers?: SortOrder
+    useui?: SortOrder
+    useagents?: SortOrder
+    consumedb?: SortOrder
+    consumeapi?: SortOrder
+    consumeai?: SortOrder
+    exposedb?: SortOrder
+    exposeapi?: SortOrder
+    updated?: SortOrder
+  }
+
+  export type ApplicationSumOrderByAggregateInput = {
+    id?: SortOrder
+    apptypeId?: SortOrder
+    codelangId?: SortOrder
+  }
+
   export type TaskCreateNestedManyWithoutCodelangInput = {
     create?: XOR<TaskCreateWithoutCodelangInput, TaskUncheckedCreateWithoutCodelangInput> | TaskCreateWithoutCodelangInput[] | TaskUncheckedCreateWithoutCodelangInput[]
     connectOrCreate?: TaskCreateOrConnectWithoutCodelangInput | TaskCreateOrConnectWithoutCodelangInput[]
@@ -6640,11 +9845,25 @@ export namespace Prisma {
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
   }
 
+  export type ApplicationCreateNestedManyWithoutCodelangInput = {
+    create?: XOR<ApplicationCreateWithoutCodelangInput, ApplicationUncheckedCreateWithoutCodelangInput> | ApplicationCreateWithoutCodelangInput[] | ApplicationUncheckedCreateWithoutCodelangInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutCodelangInput | ApplicationCreateOrConnectWithoutCodelangInput[]
+    createMany?: ApplicationCreateManyCodelangInputEnvelope
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+  }
+
   export type TaskUncheckedCreateNestedManyWithoutCodelangInput = {
     create?: XOR<TaskCreateWithoutCodelangInput, TaskUncheckedCreateWithoutCodelangInput> | TaskCreateWithoutCodelangInput[] | TaskUncheckedCreateWithoutCodelangInput[]
     connectOrCreate?: TaskCreateOrConnectWithoutCodelangInput | TaskCreateOrConnectWithoutCodelangInput[]
     createMany?: TaskCreateManyCodelangInputEnvelope
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+  }
+
+  export type ApplicationUncheckedCreateNestedManyWithoutCodelangInput = {
+    create?: XOR<ApplicationCreateWithoutCodelangInput, ApplicationUncheckedCreateWithoutCodelangInput> | ApplicationCreateWithoutCodelangInput[] | ApplicationUncheckedCreateWithoutCodelangInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutCodelangInput | ApplicationCreateOrConnectWithoutCodelangInput[]
+    createMany?: ApplicationCreateManyCodelangInputEnvelope
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6663,6 +9882,20 @@ export namespace Prisma {
     update?: TaskUpdateWithWhereUniqueWithoutCodelangInput | TaskUpdateWithWhereUniqueWithoutCodelangInput[]
     updateMany?: TaskUpdateManyWithWhereWithoutCodelangInput | TaskUpdateManyWithWhereWithoutCodelangInput[]
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
+  }
+
+  export type ApplicationUpdateManyWithoutCodelangNestedInput = {
+    create?: XOR<ApplicationCreateWithoutCodelangInput, ApplicationUncheckedCreateWithoutCodelangInput> | ApplicationCreateWithoutCodelangInput[] | ApplicationUncheckedCreateWithoutCodelangInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutCodelangInput | ApplicationCreateOrConnectWithoutCodelangInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutCodelangInput | ApplicationUpsertWithWhereUniqueWithoutCodelangInput[]
+    createMany?: ApplicationCreateManyCodelangInputEnvelope
+    set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutCodelangInput | ApplicationUpdateWithWhereUniqueWithoutCodelangInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutCodelangInput | ApplicationUpdateManyWithWhereWithoutCodelangInput[]
+    deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -6685,6 +9918,20 @@ export namespace Prisma {
     update?: TaskUpdateWithWhereUniqueWithoutCodelangInput | TaskUpdateWithWhereUniqueWithoutCodelangInput[]
     updateMany?: TaskUpdateManyWithWhereWithoutCodelangInput | TaskUpdateManyWithWhereWithoutCodelangInput[]
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
+  }
+
+  export type ApplicationUncheckedUpdateManyWithoutCodelangNestedInput = {
+    create?: XOR<ApplicationCreateWithoutCodelangInput, ApplicationUncheckedCreateWithoutCodelangInput> | ApplicationCreateWithoutCodelangInput[] | ApplicationUncheckedCreateWithoutCodelangInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutCodelangInput | ApplicationCreateOrConnectWithoutCodelangInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutCodelangInput | ApplicationUpsertWithWhereUniqueWithoutCodelangInput[]
+    createMany?: ApplicationCreateManyCodelangInputEnvelope
+    set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutCodelangInput | ApplicationUpdateWithWhereUniqueWithoutCodelangInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutCodelangInput | ApplicationUpdateManyWithWhereWithoutCodelangInput[]
+    deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
   }
 
   export type TaskCreateNestedManyWithoutTasktypeInput = {
@@ -6823,6 +10070,76 @@ export namespace Prisma {
     upsert?: WorkflowUpsertWithoutTasksInput
     connect?: WorkflowWhereUniqueInput
     update?: XOR<XOR<WorkflowUpdateToOneWithWhereWithoutTasksInput, WorkflowUpdateWithoutTasksInput>, WorkflowUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type ApplicationCreateNestedManyWithoutApptypeInput = {
+    create?: XOR<ApplicationCreateWithoutApptypeInput, ApplicationUncheckedCreateWithoutApptypeInput> | ApplicationCreateWithoutApptypeInput[] | ApplicationUncheckedCreateWithoutApptypeInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutApptypeInput | ApplicationCreateOrConnectWithoutApptypeInput[]
+    createMany?: ApplicationCreateManyApptypeInputEnvelope
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+  }
+
+  export type ApplicationUncheckedCreateNestedManyWithoutApptypeInput = {
+    create?: XOR<ApplicationCreateWithoutApptypeInput, ApplicationUncheckedCreateWithoutApptypeInput> | ApplicationCreateWithoutApptypeInput[] | ApplicationUncheckedCreateWithoutApptypeInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutApptypeInput | ApplicationCreateOrConnectWithoutApptypeInput[]
+    createMany?: ApplicationCreateManyApptypeInputEnvelope
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+  }
+
+  export type ApplicationUpdateManyWithoutApptypeNestedInput = {
+    create?: XOR<ApplicationCreateWithoutApptypeInput, ApplicationUncheckedCreateWithoutApptypeInput> | ApplicationCreateWithoutApptypeInput[] | ApplicationUncheckedCreateWithoutApptypeInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutApptypeInput | ApplicationCreateOrConnectWithoutApptypeInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutApptypeInput | ApplicationUpsertWithWhereUniqueWithoutApptypeInput[]
+    createMany?: ApplicationCreateManyApptypeInputEnvelope
+    set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutApptypeInput | ApplicationUpdateWithWhereUniqueWithoutApptypeInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutApptypeInput | ApplicationUpdateManyWithWhereWithoutApptypeInput[]
+    deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
+  }
+
+  export type ApplicationUncheckedUpdateManyWithoutApptypeNestedInput = {
+    create?: XOR<ApplicationCreateWithoutApptypeInput, ApplicationUncheckedCreateWithoutApptypeInput> | ApplicationCreateWithoutApptypeInput[] | ApplicationUncheckedCreateWithoutApptypeInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutApptypeInput | ApplicationCreateOrConnectWithoutApptypeInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutApptypeInput | ApplicationUpsertWithWhereUniqueWithoutApptypeInput[]
+    createMany?: ApplicationCreateManyApptypeInputEnvelope
+    set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutApptypeInput | ApplicationUpdateWithWhereUniqueWithoutApptypeInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutApptypeInput | ApplicationUpdateManyWithWhereWithoutApptypeInput[]
+    deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
+  }
+
+  export type AppTypeCreateNestedOneWithoutApplicationsInput = {
+    create?: XOR<AppTypeCreateWithoutApplicationsInput, AppTypeUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: AppTypeCreateOrConnectWithoutApplicationsInput
+    connect?: AppTypeWhereUniqueInput
+  }
+
+  export type CodeLangCreateNestedOneWithoutApplicationsInput = {
+    create?: XOR<CodeLangCreateWithoutApplicationsInput, CodeLangUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: CodeLangCreateOrConnectWithoutApplicationsInput
+    connect?: CodeLangWhereUniqueInput
+  }
+
+  export type AppTypeUpdateOneRequiredWithoutApplicationsNestedInput = {
+    create?: XOR<AppTypeCreateWithoutApplicationsInput, AppTypeUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: AppTypeCreateOrConnectWithoutApplicationsInput
+    upsert?: AppTypeUpsertWithoutApplicationsInput
+    connect?: AppTypeWhereUniqueInput
+    update?: XOR<XOR<AppTypeUpdateToOneWithWhereWithoutApplicationsInput, AppTypeUpdateWithoutApplicationsInput>, AppTypeUncheckedUpdateWithoutApplicationsInput>
+  }
+
+  export type CodeLangUpdateOneRequiredWithoutApplicationsNestedInput = {
+    create?: XOR<CodeLangCreateWithoutApplicationsInput, CodeLangUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: CodeLangCreateOrConnectWithoutApplicationsInput
+    upsert?: CodeLangUpsertWithoutApplicationsInput
+    connect?: CodeLangWhereUniqueInput
+    update?: XOR<XOR<CodeLangUpdateToOneWithWhereWithoutApplicationsInput, CodeLangUpdateWithoutApplicationsInput>, CodeLangUncheckedUpdateWithoutApplicationsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7007,6 +10324,61 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ApplicationCreateWithoutCodelangInput = {
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+    apptype: AppTypeCreateNestedOneWithoutApplicationsInput
+  }
+
+  export type ApplicationUncheckedCreateWithoutCodelangInput = {
+    id?: number
+    apptypeId: number
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+  }
+
+  export type ApplicationCreateOrConnectWithoutCodelangInput = {
+    where: ApplicationWhereUniqueInput
+    create: XOR<ApplicationCreateWithoutCodelangInput, ApplicationUncheckedCreateWithoutCodelangInput>
+  }
+
+  export type ApplicationCreateManyCodelangInputEnvelope = {
+    data: ApplicationCreateManyCodelangInput | ApplicationCreateManyCodelangInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TaskUpsertWithWhereUniqueWithoutCodelangInput = {
     where: TaskWhereUniqueInput
     update: XOR<TaskUpdateWithoutCodelangInput, TaskUncheckedUpdateWithoutCodelangInput>
@@ -7037,6 +10409,49 @@ export namespace Prisma {
     files?: StringNullableFilter<"Task"> | string | null
     folders?: StringNullableFilter<"Task"> | string | null
     final?: BoolFilter<"Task"> | boolean
+  }
+
+  export type ApplicationUpsertWithWhereUniqueWithoutCodelangInput = {
+    where: ApplicationWhereUniqueInput
+    update: XOR<ApplicationUpdateWithoutCodelangInput, ApplicationUncheckedUpdateWithoutCodelangInput>
+    create: XOR<ApplicationCreateWithoutCodelangInput, ApplicationUncheckedCreateWithoutCodelangInput>
+  }
+
+  export type ApplicationUpdateWithWhereUniqueWithoutCodelangInput = {
+    where: ApplicationWhereUniqueInput
+    data: XOR<ApplicationUpdateWithoutCodelangInput, ApplicationUncheckedUpdateWithoutCodelangInput>
+  }
+
+  export type ApplicationUpdateManyWithWhereWithoutCodelangInput = {
+    where: ApplicationScalarWhereInput
+    data: XOR<ApplicationUpdateManyMutationInput, ApplicationUncheckedUpdateManyWithoutCodelangInput>
+  }
+
+  export type ApplicationScalarWhereInput = {
+    AND?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
+    OR?: ApplicationScalarWhereInput[]
+    NOT?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
+    id?: IntFilter<"Application"> | number
+    apptypeId?: IntFilter<"Application"> | number
+    codelangId?: IntFilter<"Application"> | number
+    anname?: StringFilter<"Application"> | string
+    description?: StringFilter<"Application"> | string
+    repository?: StringFilter<"Application"> | string
+    author?: StringNullableFilter<"Application"> | string | null
+    osystem?: StringNullableFilter<"Application"> | string | null
+    appurl?: StringNullableFilter<"Application"> | string | null
+    apppath?: StringNullableFilter<"Application"> | string | null
+    localdev?: BoolFilter<"Application"> | boolean
+    usedocker?: BoolFilter<"Application"> | boolean
+    controlusers?: BoolFilter<"Application"> | boolean
+    useui?: BoolFilter<"Application"> | boolean
+    useagents?: BoolFilter<"Application"> | boolean
+    consumedb?: BoolFilter<"Application"> | boolean
+    consumeapi?: BoolFilter<"Application"> | boolean
+    consumeai?: BoolFilter<"Application"> | boolean
+    exposedb?: BoolFilter<"Application"> | boolean
+    exposeapi?: BoolFilter<"Application"> | boolean
+    updated?: DateTimeFilter<"Application"> | Date | string
   }
 
   export type TaskCreateWithoutTasktypeInput = {
@@ -7156,12 +10571,14 @@ export namespace Prisma {
   export type CodeLangCreateWithoutTasksInput = {
     cgname: string
     description: string
+    applications?: ApplicationCreateNestedManyWithoutCodelangInput
   }
 
   export type CodeLangUncheckedCreateWithoutTasksInput = {
     id?: number
     cgname: string
     description: string
+    applications?: ApplicationUncheckedCreateNestedManyWithoutCodelangInput
   }
 
   export type CodeLangCreateOrConnectWithoutTasksInput = {
@@ -7227,12 +10644,14 @@ export namespace Prisma {
   export type CodeLangUpdateWithoutTasksInput = {
     cgname?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    applications?: ApplicationUpdateManyWithoutCodelangNestedInput
   }
 
   export type CodeLangUncheckedUpdateWithoutTasksInput = {
     id?: IntFieldUpdateOperationsInput | number
     cgname?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    applications?: ApplicationUncheckedUpdateManyWithoutCodelangNestedInput
   }
 
   export type WorkflowUpsertWithoutTasksInput = {
@@ -7263,6 +10682,157 @@ export namespace Prisma {
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ApplicationCreateWithoutApptypeInput = {
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+    codelang: CodeLangCreateNestedOneWithoutApplicationsInput
+  }
+
+  export type ApplicationUncheckedCreateWithoutApptypeInput = {
+    id?: number
+    codelangId: number
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+  }
+
+  export type ApplicationCreateOrConnectWithoutApptypeInput = {
+    where: ApplicationWhereUniqueInput
+    create: XOR<ApplicationCreateWithoutApptypeInput, ApplicationUncheckedCreateWithoutApptypeInput>
+  }
+
+  export type ApplicationCreateManyApptypeInputEnvelope = {
+    data: ApplicationCreateManyApptypeInput | ApplicationCreateManyApptypeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ApplicationUpsertWithWhereUniqueWithoutApptypeInput = {
+    where: ApplicationWhereUniqueInput
+    update: XOR<ApplicationUpdateWithoutApptypeInput, ApplicationUncheckedUpdateWithoutApptypeInput>
+    create: XOR<ApplicationCreateWithoutApptypeInput, ApplicationUncheckedCreateWithoutApptypeInput>
+  }
+
+  export type ApplicationUpdateWithWhereUniqueWithoutApptypeInput = {
+    where: ApplicationWhereUniqueInput
+    data: XOR<ApplicationUpdateWithoutApptypeInput, ApplicationUncheckedUpdateWithoutApptypeInput>
+  }
+
+  export type ApplicationUpdateManyWithWhereWithoutApptypeInput = {
+    where: ApplicationScalarWhereInput
+    data: XOR<ApplicationUpdateManyMutationInput, ApplicationUncheckedUpdateManyWithoutApptypeInput>
+  }
+
+  export type AppTypeCreateWithoutApplicationsInput = {
+    aename: string
+    description?: string
+  }
+
+  export type AppTypeUncheckedCreateWithoutApplicationsInput = {
+    id?: number
+    aename: string
+    description?: string
+  }
+
+  export type AppTypeCreateOrConnectWithoutApplicationsInput = {
+    where: AppTypeWhereUniqueInput
+    create: XOR<AppTypeCreateWithoutApplicationsInput, AppTypeUncheckedCreateWithoutApplicationsInput>
+  }
+
+  export type CodeLangCreateWithoutApplicationsInput = {
+    cgname: string
+    description: string
+    tasks?: TaskCreateNestedManyWithoutCodelangInput
+  }
+
+  export type CodeLangUncheckedCreateWithoutApplicationsInput = {
+    id?: number
+    cgname: string
+    description: string
+    tasks?: TaskUncheckedCreateNestedManyWithoutCodelangInput
+  }
+
+  export type CodeLangCreateOrConnectWithoutApplicationsInput = {
+    where: CodeLangWhereUniqueInput
+    create: XOR<CodeLangCreateWithoutApplicationsInput, CodeLangUncheckedCreateWithoutApplicationsInput>
+  }
+
+  export type AppTypeUpsertWithoutApplicationsInput = {
+    update: XOR<AppTypeUpdateWithoutApplicationsInput, AppTypeUncheckedUpdateWithoutApplicationsInput>
+    create: XOR<AppTypeCreateWithoutApplicationsInput, AppTypeUncheckedCreateWithoutApplicationsInput>
+    where?: AppTypeWhereInput
+  }
+
+  export type AppTypeUpdateToOneWithWhereWithoutApplicationsInput = {
+    where?: AppTypeWhereInput
+    data: XOR<AppTypeUpdateWithoutApplicationsInput, AppTypeUncheckedUpdateWithoutApplicationsInput>
+  }
+
+  export type AppTypeUpdateWithoutApplicationsInput = {
+    aename?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AppTypeUncheckedUpdateWithoutApplicationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    aename?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CodeLangUpsertWithoutApplicationsInput = {
+    update: XOR<CodeLangUpdateWithoutApplicationsInput, CodeLangUncheckedUpdateWithoutApplicationsInput>
+    create: XOR<CodeLangCreateWithoutApplicationsInput, CodeLangUncheckedCreateWithoutApplicationsInput>
+    where?: CodeLangWhereInput
+  }
+
+  export type CodeLangUpdateToOneWithWhereWithoutApplicationsInput = {
+    where?: CodeLangWhereInput
+    data: XOR<CodeLangUpdateWithoutApplicationsInput, CodeLangUncheckedUpdateWithoutApplicationsInput>
+  }
+
+  export type CodeLangUpdateWithoutApplicationsInput = {
+    cgname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    tasks?: TaskUpdateManyWithoutCodelangNestedInput
+  }
+
+  export type CodeLangUncheckedUpdateWithoutApplicationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    cgname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    tasks?: TaskUncheckedUpdateManyWithoutCodelangNestedInput
+  }
+
   export type TaskCreateManyCodelangInput = {
     id?: number
     tasktypeId: number
@@ -7273,6 +10843,29 @@ export namespace Prisma {
     files?: string | null
     folders?: string | null
     final?: boolean
+  }
+
+  export type ApplicationCreateManyCodelangInput = {
+    id?: number
+    apptypeId: number
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
   }
 
   export type TaskUpdateWithoutCodelangInput = {
@@ -7308,6 +10901,74 @@ export namespace Prisma {
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
     final?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ApplicationUpdateWithoutCodelangInput = {
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    apptype?: AppTypeUpdateOneRequiredWithoutApplicationsNestedInput
+  }
+
+  export type ApplicationUncheckedUpdateWithoutCodelangInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    apptypeId?: IntFieldUpdateOperationsInput | number
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApplicationUncheckedUpdateManyWithoutCodelangInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    apptypeId?: IntFieldUpdateOperationsInput | number
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskCreateManyTasktypeInput = {
@@ -7402,6 +11063,97 @@ export namespace Prisma {
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
     final?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ApplicationCreateManyApptypeInput = {
+    id?: number
+    codelangId: number
+    anname: string
+    description?: string
+    repository?: string
+    author?: string | null
+    osystem?: string | null
+    appurl?: string | null
+    apppath?: string | null
+    localdev?: boolean
+    usedocker?: boolean
+    controlusers?: boolean
+    useui?: boolean
+    useagents?: boolean
+    consumedb?: boolean
+    consumeapi?: boolean
+    consumeai?: boolean
+    exposedb?: boolean
+    exposeapi?: boolean
+    updated?: Date | string
+  }
+
+  export type ApplicationUpdateWithoutApptypeInput = {
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    codelang?: CodeLangUpdateOneRequiredWithoutApplicationsNestedInput
+  }
+
+  export type ApplicationUncheckedUpdateWithoutApptypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    codelangId?: IntFieldUpdateOperationsInput | number
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApplicationUncheckedUpdateManyWithoutApptypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    codelangId?: IntFieldUpdateOperationsInput | number
+    anname?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    repository?: StringFieldUpdateOperationsInput | string
+    author?: NullableStringFieldUpdateOperationsInput | string | null
+    osystem?: NullableStringFieldUpdateOperationsInput | string | null
+    appurl?: NullableStringFieldUpdateOperationsInput | string | null
+    apppath?: NullableStringFieldUpdateOperationsInput | string | null
+    localdev?: BoolFieldUpdateOperationsInput | boolean
+    usedocker?: BoolFieldUpdateOperationsInput | boolean
+    controlusers?: BoolFieldUpdateOperationsInput | boolean
+    useui?: BoolFieldUpdateOperationsInput | boolean
+    useagents?: BoolFieldUpdateOperationsInput | boolean
+    consumedb?: BoolFieldUpdateOperationsInput | boolean
+    consumeapi?: BoolFieldUpdateOperationsInput | boolean
+    consumeai?: BoolFieldUpdateOperationsInput | boolean
+    exposedb?: BoolFieldUpdateOperationsInput | boolean
+    exposeapi?: BoolFieldUpdateOperationsInput | boolean
+    updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

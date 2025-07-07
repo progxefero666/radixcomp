@@ -24,7 +24,6 @@ export default function Home() {
     const router = useRouter();
     const appRef = useRef<AppIndex>(null);
     const actmodRef = useRef<string>(AppConfig.INDEX.id);
-    //const [actmodule, setActModule] = useState<string>(AppConfig.INDEX.id);
     const [initialized, setInitialized] = useState<boolean>(false);
 
     useEffect(() => {          

@@ -15,14 +15,13 @@ datasource db {
 }
 
 // CodeLang excluded fields:
-//   tasks Task[]
-//   applications Application[]
-
+// 
 model CodeLang {
     id          Int          @id @default(autoincrement())
     cgname      String       @unique @db.VarChar(20)
     description String       @db.VarChar(150)
     tasks Task[] 
+    applications Application[]
     @@map("codelang")
 }
 
@@ -36,6 +35,7 @@ model TaskType {
     @@map("tasktype")
 }
 
+// Workflow excluded fields:
 //
 model Workflow {
     id          Int    @id @default(autoincrement())
@@ -48,6 +48,8 @@ model Workflow {
     @@map("workflow")
 }
 
+// Task excluded fields:
+//
 model Task {
     id          Int       @id @default(autoincrement())
     tasktype    TaskType  @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
@@ -65,10 +67,41 @@ model Task {
     @@map("tasks")
 }
 
+// AppType excluded fields:
+//
 model AppType {
     id          Int            @id @default(autoincrement())
     aename      String         @unique @db.VarChar(50)
     description String         @default("undefined") @db.VarChar(255)   
+    applications Application[]
     @@map("apptype") 
 }
 
+// Application excluded fields:
+//
+model Application {
+    id            Int       @id @default(autoincrement())
+    apptype       AppType   @relation(fields: [apptypeId], references: [id], onDelete: Cascade)
+    apptypeId     Int
+    codelang      CodeLang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
+    codelangId    Int
+    anname        String    @unique @db.VarChar(50)
+    description   String    @default("undefined") @db.VarChar(255)
+    repository    String    @default("undefined") @db.VarChar(250)
+    author        String?   @db.VarChar(100)
+    osystem       String?   @db.VarChar(100)
+    appurl        String?   @db.VarChar(500)
+    apppath       String?   @db.VarChar(500)
+    localdev      Boolean   @default(true)
+    usedocker     Boolean   @default(false)
+    controlusers  Boolean   @default(false)
+    useui         Boolean   @default(false)
+    useagents     Boolean   @default(false)
+    consumedb     Boolean   @default(false)
+    consumeapi    Boolean   @default(false)
+    consumeai     Boolean   @default(false)
+    exposedb      Boolean   @default(false)
+    exposeapi     Boolean   @default(false)
+    updated       DateTime  @default(dbgenerated("CURRENT_DATE"))
+    @@map("application") 
+}

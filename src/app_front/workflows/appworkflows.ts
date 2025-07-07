@@ -1,4 +1,4 @@
-//src\app_front\manapplications\manappscfg.ts
+//src\app_front\workflows\appworkflows.ts
 
 
 import { Option } from "@/common/model/option";
@@ -19,7 +19,7 @@ import { Apptype } from "@/db/dmmodels/apptype";
  *    - This class is responsible for managing the application index,
  *    - Include load init collections and display them.
  */
-export class AppIndex {
+export class AppWorkflows {
 
     public codelangs: Codelang[] = [];
 
@@ -35,14 +35,17 @@ export class AppIndex {
         const tasktype_coll:Tasktype[]|null = parseCollection<Tasktype>(tasktype_response);        
         if(tasktype_coll === null) {return false;}
          
-        JSonConsole.logArray(tasktype_coll);
-        
+         
+        const apptype_response = await GetAll(DbTables.apptype);
+        const apptype_coll = parseCollection<Apptype>(apptype_response);        
+        if(apptype_coll === null) {return false;}       
+        JSonConsole.logArray(apptype_coll);
         /*
         const workflow_response = await GetAll(DbTables.workflow);
         const workflow_coll = parseCollection<Workflow>(workflow_response);        
         if(workflow_coll === null) {return false;}
         */
-
+        //JSonConsole.logArray(tasktype_coll);
         return true;
     }
   
@@ -86,6 +89,3 @@ export class AppIndexCode {
     }
 
 }//end class
-
-
-

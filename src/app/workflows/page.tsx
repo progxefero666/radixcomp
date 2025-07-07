@@ -10,9 +10,10 @@ import { PageHeader } from "@/app/workflows/pagecomp/wfheader";
 import { PrimaryBar } from "@/app/workflows/pagecomp/wfprimarybar";
 import MainContent from "./pagecomp/wfmain";
 import { WorkflowsConfig } from "./config";
-import { AppIndex } from "@/app_front/appindex";
+
 import { readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
 import { AppContext } from "@/app_front/appcontext";
+import { AppWorkflows } from "@/app_front/workflows/appworkflows";
 
 //import MainContent from "../index/maincontent";
 
@@ -28,7 +29,7 @@ const layoutStyle = {
  */
 export default function PageWorkflows() {
     let initialized: boolean = false;
-    const appRef = useRef<AppIndex>(null);
+    const appRef = useRef<AppWorkflows>(null);
     
     const router = useRouter();
 
@@ -38,7 +39,7 @@ export default function PageWorkflows() {
         if(initialized) {return;}         
         const init = async () => {
             //const dbSquema = await readDbSqlScriptFile("dbsquema");
-            appRef.current = new AppIndex();
+            appRef.current = new AppWorkflows();
             const res: boolean = await appRef.current.loadInitCollections();
             if(!res) {return;}            
             initialized =true;

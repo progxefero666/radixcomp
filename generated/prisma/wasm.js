@@ -154,6 +154,36 @@ exports.Prisma.TaskScalarFieldEnum = {
   final: 'final'
 };
 
+exports.Prisma.AppTypeScalarFieldEnum = {
+  id: 'id',
+  aename: 'aename',
+  description: 'description'
+};
+
+exports.Prisma.ApplicationScalarFieldEnum = {
+  id: 'id',
+  apptypeId: 'apptypeId',
+  codelangId: 'codelangId',
+  anname: 'anname',
+  description: 'description',
+  repository: 'repository',
+  author: 'author',
+  osystem: 'osystem',
+  appurl: 'appurl',
+  apppath: 'apppath',
+  localdev: 'localdev',
+  usedocker: 'usedocker',
+  controlusers: 'controlusers',
+  useui: 'useui',
+  useagents: 'useagents',
+  consumedb: 'consumedb',
+  consumeapi: 'consumeapi',
+  consumeai: 'consumeai',
+  exposedb: 'exposedb',
+  exposeapi: 'exposeapi',
+  updated: 'updated'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -174,7 +204,9 @@ exports.Prisma.ModelName = {
   CodeLang: 'CodeLang',
   TaskType: 'TaskType',
   Workflow: 'Workflow',
-  Task: 'Task'
+  Task: 'Task',
+  AppType: 'AppType',
+  Application: 'Application'
 };
 
 /**
