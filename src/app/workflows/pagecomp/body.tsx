@@ -9,6 +9,8 @@ import { WorkflowsConfig } from "@/app/workflows/config";
 import { getAll } from "@/db/services/read/srvreadcodelangs";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
+import { Codelang } from "@/db/model/codelang";
+import { parseCollection } from "@/common/parsers/javascriptparser";
 
 const mainContentStyle = {
     background: 'rgb(30, 40, 63)',
@@ -18,33 +20,32 @@ const mainContentStyle = {
     borderRight: '1px solid rgb(125, 134, 145)',
 };
 
+// const appRef = useRef<AppWorkflows>(null);
 interface CompProps { 
     section:string;
 }
 export  function MainContent({section}: CompProps) {
 
-    const appRef = useRef<AppWorkflows>(null);
+    const [compReady,setCompReady] = useState<boolean>(false);
+    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
 
     let initialized: boolean = false;
     useEffect(() => {
+        /*
         if(initialized) {return;}
 
         const init = async () => {                      
-            const codelang_response = await getAllByTable(DbTables.codelang);
-            if(codelang_response === null) {return false;}
-  
-            initialized =true;
+            const response = await getAllByTable(DbTables.codelang);
+            if(response === null) {return false;}            
+            setCodelangs(parseCollection<Codelang>(response));
+            setCompReady(true);
+            //alert("init end");
         };
         init();
+        */
     }, []);    
 
-    if(!initialized){
-        return (
-            <Flex width="100%" height="100vh" align="center" justify="center">
-                <p>Loading...</p>
-            </Flex>
-        );
-    }
+
 
     const renderTaskTypes = () => {
         if(section==WorkflowsConfig.SC_WORKFLOWS.id) {

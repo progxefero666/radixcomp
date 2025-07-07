@@ -11,6 +11,10 @@ import { Header }       from "@/app/workflows/pagecomp/header";
 import { PrimaryBar }       from "@/app/workflows/pagecomp/primarybar";
 import { MainContent }      from "@/app/workflows/pagecomp/body";
 import { SecondBar }        from "@/app/workflows/pagecomp/secondbar";
+import { Codelang } from "@/db/model/codelang";
+import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
+import { DbTables } from "@/db/dbcatalog";
+import { parseCollection } from "@/common/parsers/javascriptparser";
 
 
 const layoutStyle = {
@@ -23,9 +27,25 @@ const layoutStyle = {
  *  const router = useRouter();
  */
 export default function PageWorkflows() {
+    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
     
+    const [ready,setReady] = useState<boolean>(false);
+
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
     const onSelection = (section:string) => {setActSection(section);};
+
+    useEffect(() => {
+        if(ready) {return;}
+
+        const init = async () => {                      
+            const response = await getAllByTable(DbTables.codelang);
+            if(response === null) {return false;}            
+            setCodelangs(parseCollection<Codelang>(response));
+            setReady(true);
+            //alert("init end");
+        };
+        init();
+    }, []);    
 
     return (
         <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >

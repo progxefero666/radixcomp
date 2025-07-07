@@ -1,5 +1,6 @@
 //src\db\model\codelang.ts
 
+//public static readonly DEF: Codelang = new Codelang(0,"typescript", "undefined");
 /**
  * Class Codelang
  * Represents a Codelang entity with various properties and methods.
