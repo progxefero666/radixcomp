@@ -1,3 +1,4 @@
+"user server";
 
 import path from "path";
 
@@ -8,25 +9,24 @@ export default class ServerConfig {
     
     public static ENV_DEV:string         = "development";
     public static ENV_PROD:string        = "production";
-    public static ROOTFOLDER_DEV: string = "C:\\claudeapps\\nextapps\\aigenerator\\public"; 
-    public static ROOTFOLDER_PROD:string = "C:\\claudeapps\\nextapps\\aigenerator\\public"; 
-    //static ROOTFOLDER_PROD:string ="/nextapps/data";
-    //dbsquema.sql
+    public static SUBFOLDER_DATA: string = "data";
 
-    public static getRootFolderPath(env:string):string {
-         //const env:string = process.env.NODE_ENV;
-        if(env === ServerConfig.ENV_DEV){return ServerConfig.ROOTFOLDER_DEV;}
-        else                            {return ServerConfig.ROOTFOLDER_PROD;}
+    public static getRootPath():string {//env:string
+        const ROOTFOLDER_DEV: string = "C:\\claudeapps\\nextapps\\aigenerator\\public"; 
+        const ROOTFOLDER_PROD:string = "/var/www/aigenerator";
+        const environment:string = process.env.NODE_ENV;
+        console.log(environment);
+        if(environment === ServerConfig.ENV_DEV){return ROOTFOLDER_DEV;}
+        else                            {return ROOTFOLDER_PROD;}
     }
+    public static FOLDER_ROOT:string = ServerConfig.getRootPath();
 
-    //public static ROOT_FOLDER:string = ServerPaths.getRootFolderPath(process.env.NODE_ENV);
-    public static FOLDER_ROOT:string = ServerConfig.getRootFolderPath(ServerConfig.ENV_DEV);
-    public static XEFERODB_PATH =  path.join(ServerConfig.FOLDER_ROOT,"data");
-
+    public static XEFERODB_PATH =  path
+        .join(ServerConfig.FOLDER_ROOT,ServerConfig.SUBFOLDER_DATA);
    
-
 }//end class
 
+//ServerConfig.ENV_DEV
 //ServerReader.getXeferoDbPath
 export class ServerReader {
 
