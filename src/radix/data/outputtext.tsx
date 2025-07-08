@@ -16,8 +16,8 @@ const comppStyle = {
 
 const dataStyle = {
     background: ' rgba(25, 25, 25, 0.9)',    
-    borderRadius: 'large',
-    border: '2px solid rgba(233, 226, 223, 0.9)',
+    borderRadius: '8px',
+    border: '1px solid rgba(233, 226, 223, 0.9)',
 };
 
 interface CompProps {
