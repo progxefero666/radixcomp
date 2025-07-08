@@ -15,7 +15,7 @@ import CardWorkflow from "../cards/cardworkflow";
 import { Workflow } from "@/db/model/workflow";
 
 const mainContentStyle = {
-    background: 'rgb(30, 40, 63)',
+    background: 'rgb(56, 56, 56)',
     borderTop: 'none',    
     borderBottom: 'none',   
     borderLeft: '1px solid rgb(167, 176, 188)', 

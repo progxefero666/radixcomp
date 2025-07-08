@@ -8,16 +8,16 @@ import { RadixConf } from "@/radix/radixconf";
 
 const labelBoxStyle = {
     borderRadius: '4px',
-    border: '1px  rgba(24, 176, 24, 0.9)',
+    borderBottom: '1px solid rgba(54, 56, 54, 0.9)',
 };
-
-
 const comppStyle = {
     padding: '0px',
 };
+
 const dataStyle = {
-    borderRadius: '4px',
-    border: '1px  rgba(121, 119, 118, 0.9)',
+    background: ' rgba(25, 25, 25, 0.9)',    
+    borderRadius: 'large',
+    border: '2px solid rgba(233, 226, 223, 0.9)',
 };
 
 interface CompProps {
@@ -45,13 +45,22 @@ export function OutputText ({bigsize,inline,label,data}: CompProps) {
                         {label}                    
                     </Label.Root> 
                 </Box>
-            :null}                
-            <Flex as="div" width="100%" direction="column" style={dataStyle}>
-                {!isTextArea ?
-                    <Text size={data_size}>{data}</Text>:
-                    <TextArea size={data_size}>{data}</TextArea>}
-            </Flex>                         
+            :null}       
+
+            <Flex width="100%" direction="column" style={dataStyle}>
+                <Text size={data_size}>{data}</Text>
+            </Flex>                    
+        
+                     
         </Flex>
     )
 
 }//end component
+
+/*
+            <Flex width="100%" direction="column">
+                {!isTextArea ?                
+                    <Text size={data_size}>{data}</Text>:
+                    <TextArea size={data_size}>{data}</TextArea>}
+            </Flex>                         
+*/
