@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useRef, useState } from "react";
-import { Flex} from "@radix-ui/themes";
+import { Flex, Text} from "@radix-ui/themes";
 
 import { AppWorkflows } from "@/app_front/workflows/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
@@ -30,22 +30,19 @@ interface CompProps {
 export  function MainContent({codelangs,section}: CompProps) {
 
     const [ready,setReady] = useState<boolean>(false);
-
-    const [workflows,setWorkflows] = useState<Workflow[]>([]);
+    const [workflows,setWorkflows] = useState<Workflow[]|null>([]);
     
-   
-
-    useEffect(() => {
-        /*
+    useEffect(() => {        
         if(ready) {return;}
-        const init = async () => {                      
+        const init = async () => {     
+            const response = await getAllByTable(DbTables.workflow);       
+            if(response === null) {return false;}  
+            setWorkflows(parseCollection<Workflow>(response));                      
             setReady(true);
         };
         init();
-        */
+        
     }, []);    
-
-
 
     const renderTaskTypes = () => {
         if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
@@ -78,37 +75,22 @@ export  function MainContent({codelangs,section}: CompProps) {
     }
 
     const renderManWorkflows = () => {
-        // const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
-        
-        //CardWorkflow
-        /*       
+
+        if(workflows==null || workflows.length==0) {
+            return (
+                <Text size="2" color="gray">
+                    not workflows defined
+                </Text>                
+            );
+        } 
+        console.log("renderManWorkflows workflows:", workflows);
         return (
             <>
-                {apps.map((app, index) => (
-
-                    <ContCollapsible id={index} key={index.toString()}
-                        barbuttonscfg={barConfig}
-                        title={app.anname}
-                        intro={app.repository!}
-                        opened={false}>
-
-                        <Text size="2">
-                            {app.description}
-                        </Text>
-                    </ContCollapsible>
-                    
+                {workflows.map((workflow, index) => (
+                    <CardWorkflow workflow={workflow} />                    
                 ))}
             </>
         )
-        */
-
-        if(section==WorkflowsConfig.SC_WORKFLOWS.id) {
-            return (
-                <p>
-                    SC_WORKFLOWS
-                </p>
-            );
-        }
     }
 
     return (

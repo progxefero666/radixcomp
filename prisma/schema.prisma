@@ -44,7 +44,7 @@ model Workflow {
     application String? @db.VarChar(50)
     fpath       String? @db.VarChar(500)
     updated     DateTime @default(dbgenerated("CURRENT_DATE"))  
-    context String @db.Text
+    context     String?  @db.Text
     tasks task[]  
     @@map("workflow")
 }

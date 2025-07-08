@@ -19,7 +19,7 @@ const compStyle = {
     border: '2px solid var(--blue-7)',
     boxShadow: '0px 0px 1px rgba(69, 69, 69, 0.9)' 
 };
-interface CompProps {
+interface CompProps {    
     workflow: Workflow;  
 }
 export default function CardWorkflow({workflow}: CompProps) {
@@ -31,7 +31,7 @@ export default function CardWorkflow({workflow}: CompProps) {
     };
 
     return (
-        <Flex as="div" direction="column" width="100%" px="4" py="2" style={compStyle}  >
+        <Flex as="div" key={workflow.wwname} direction="column" width="100%" px="4" py="2" style={compStyle}  >
        
             <Collapsible.Root
                 className="CollapsibleRoot"
