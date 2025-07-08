@@ -14,7 +14,7 @@ export class Task {
     public description: string;
     public files: string;
     public folders: string;
-    public final: boolean = false;
+    public wgroup: string | null = null;
 
     constructor(id: number,
                 tasktype_id: number,
@@ -25,7 +25,7 @@ export class Task {
                 description: string,
                 files: string,
                 folders: string,
-                final: boolean) {
+                wgroup: string| null ) {
 
         this.id = id;
         this.tasktype_id = tasktype_id;
@@ -36,7 +36,7 @@ export class Task {
         this.description = description;
         this.files = files;
         this.folders = folders;
-        this.final = final;
+        this.wgroup = wgroup;
     }
 
     /**
@@ -82,6 +82,9 @@ export class Task {
         if (fieldName === "folders") {
             return -1; // unlimited length
         }
+        if (fieldName === "wgroup") {
+            return 100; 
+        }        
         return 0;
     }
 

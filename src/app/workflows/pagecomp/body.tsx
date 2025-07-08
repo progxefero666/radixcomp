@@ -79,15 +79,13 @@ export  function MainContent({codelangs,section}: CompProps) {
     }
 
     const renderManWorkflows = () => {
-
         if(workflows==null || workflows.length==0) {
             return (
                 <Text size="2" color="gray">
-                    not workflows defined
+                    not defined
                 </Text>                
             );
         } 
-        //console.log("renderManWorkflows workflows:", workflows);
         return (
             <>
                 {workflows.map((workflow, index) => (

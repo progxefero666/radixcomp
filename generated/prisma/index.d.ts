@@ -4808,7 +4808,7 @@ export namespace Prisma {
     description: string | null
     files: string | null
     folders: string | null
-    final: boolean | null
+    wgroup: string | null
   }
 
   export type TaskMaxAggregateOutputType = {
@@ -4821,7 +4821,7 @@ export namespace Prisma {
     description: string | null
     files: string | null
     folders: string | null
-    final: boolean | null
+    wgroup: string | null
   }
 
   export type TaskCountAggregateOutputType = {
@@ -4834,7 +4834,7 @@ export namespace Prisma {
     description: number
     files: number
     folders: number
-    final: number
+    wgroup: number
     _all: number
   }
 
@@ -4865,7 +4865,7 @@ export namespace Prisma {
     description?: true
     files?: true
     folders?: true
-    final?: true
+    wgroup?: true
   }
 
   export type TaskMaxAggregateInputType = {
@@ -4878,7 +4878,7 @@ export namespace Prisma {
     description?: true
     files?: true
     folders?: true
-    final?: true
+    wgroup?: true
   }
 
   export type TaskCountAggregateInputType = {
@@ -4891,7 +4891,7 @@ export namespace Prisma {
     description?: true
     files?: true
     folders?: true
-    final?: true
+    wgroup?: true
     _all?: true
   }
 
@@ -4991,7 +4991,7 @@ export namespace Prisma {
     description: string | null
     files: string | null
     folders: string | null
-    final: boolean
+    wgroup: string
     _count: TaskCountAggregateOutputType | null
     _avg: TaskAvgAggregateOutputType | null
     _sum: TaskSumAggregateOutputType | null
@@ -5023,7 +5023,7 @@ export namespace Prisma {
     description?: boolean
     files?: boolean
     folders?: boolean
-    final?: boolean
+    wgroup?: boolean
     tasktype?: boolean | TaskTypeDefaultArgs<ExtArgs>
     codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
@@ -5039,7 +5039,7 @@ export namespace Prisma {
     description?: boolean
     files?: boolean
     folders?: boolean
-    final?: boolean
+    wgroup?: boolean
     tasktype?: boolean | TaskTypeDefaultArgs<ExtArgs>
     codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
@@ -5055,7 +5055,7 @@ export namespace Prisma {
     description?: boolean
     files?: boolean
     folders?: boolean
-    final?: boolean
+    wgroup?: boolean
     tasktype?: boolean | TaskTypeDefaultArgs<ExtArgs>
     codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
@@ -5071,10 +5071,10 @@ export namespace Prisma {
     description?: boolean
     files?: boolean
     folders?: boolean
-    final?: boolean
+    wgroup?: boolean
   }
 
-  export type taskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tasktypeId" | "codelangId" | "workflowId" | "orden" | "tkname" | "description" | "files" | "folders" | "final", ExtArgs["result"]["task"]>
+  export type taskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tasktypeId" | "codelangId" | "workflowId" | "orden" | "tkname" | "description" | "files" | "folders" | "wgroup", ExtArgs["result"]["task"]>
   export type taskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasktype?: boolean | TaskTypeDefaultArgs<ExtArgs>
     codelang?: boolean | CodeLangDefaultArgs<ExtArgs>
@@ -5108,7 +5108,7 @@ export namespace Prisma {
       description: string | null
       files: string | null
       folders: string | null
-      final: boolean
+      wgroup: string
     }, ExtArgs["result"]["task"]>
     composites: {}
   }
@@ -5544,7 +5544,7 @@ export namespace Prisma {
     readonly description: FieldRef<"task", 'String'>
     readonly files: FieldRef<"task", 'String'>
     readonly folders: FieldRef<"task", 'String'>
-    readonly final: FieldRef<"task", 'Boolean'>
+    readonly wgroup: FieldRef<"task", 'String'>
   }
     
 
@@ -8408,7 +8408,7 @@ export namespace Prisma {
     description: 'description',
     files: 'files',
     folders: 'folders',
-    final: 'final'
+    wgroup: 'wgroup'
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
@@ -8722,7 +8722,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"task"> | string | null
     files?: StringNullableFilter<"task"> | string | null
     folders?: StringNullableFilter<"task"> | string | null
-    final?: BoolFilter<"task"> | boolean
+    wgroup?: StringFilter<"task"> | string
     tasktype?: XOR<TaskTypeScalarRelationFilter, TaskTypeWhereInput>
     codelang?: XOR<CodeLangScalarRelationFilter, CodeLangWhereInput>
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
@@ -8738,7 +8738,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     files?: SortOrderInput | SortOrder
     folders?: SortOrderInput | SortOrder
-    final?: SortOrder
+    wgroup?: SortOrder
     tasktype?: TaskTypeOrderByWithRelationInput
     codelang?: CodeLangOrderByWithRelationInput
     workflow?: WorkflowOrderByWithRelationInput
@@ -8747,6 +8747,7 @@ export namespace Prisma {
   export type taskWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     tkname?: string
+    wgroup?: string
     AND?: taskWhereInput | taskWhereInput[]
     OR?: taskWhereInput[]
     NOT?: taskWhereInput | taskWhereInput[]
@@ -8757,11 +8758,10 @@ export namespace Prisma {
     description?: StringNullableFilter<"task"> | string | null
     files?: StringNullableFilter<"task"> | string | null
     folders?: StringNullableFilter<"task"> | string | null
-    final?: BoolFilter<"task"> | boolean
     tasktype?: XOR<TaskTypeScalarRelationFilter, TaskTypeWhereInput>
     codelang?: XOR<CodeLangScalarRelationFilter, CodeLangWhereInput>
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
-  }, "id" | "tkname">
+  }, "id" | "tkname" | "wgroup">
 
   export type taskOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8773,7 +8773,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     files?: SortOrderInput | SortOrder
     folders?: SortOrderInput | SortOrder
-    final?: SortOrder
+    wgroup?: SortOrder
     _count?: taskCountOrderByAggregateInput
     _avg?: taskAvgOrderByAggregateInput
     _max?: taskMaxOrderByAggregateInput
@@ -8794,7 +8794,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"task"> | string | null
     files?: StringNullableWithAggregatesFilter<"task"> | string | null
     folders?: StringNullableWithAggregatesFilter<"task"> | string | null
-    final?: BoolWithAggregatesFilter<"task"> | boolean
+    wgroup?: StringWithAggregatesFilter<"task"> | string
   }
 
   export type AppTypeWhereInput = {
@@ -9151,7 +9151,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
     tasktype: TaskTypeCreateNestedOneWithoutTasksInput
     codelang: CodeLangCreateNestedOneWithoutTasksInput
     workflow: WorkflowCreateNestedOneWithoutTasksInput
@@ -9167,7 +9167,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type taskUpdateInput = {
@@ -9176,7 +9176,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
     tasktype?: TaskTypeUpdateOneRequiredWithoutTasksNestedInput
     codelang?: CodeLangUpdateOneRequiredWithoutTasksNestedInput
     workflow?: WorkflowUpdateOneRequiredWithoutTasksNestedInput
@@ -9192,7 +9192,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type taskCreateManyInput = {
@@ -9205,7 +9205,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type taskUpdateManyMutationInput = {
@@ -9214,7 +9214,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type taskUncheckedUpdateManyInput = {
@@ -9227,7 +9227,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type AppTypeCreateInput = {
@@ -9669,11 +9669,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type TaskTypeScalarRelationFilter = {
     is?: TaskTypeWhereInput
     isNot?: TaskTypeWhereInput
@@ -9699,7 +9694,7 @@ export namespace Prisma {
     description?: SortOrder
     files?: SortOrder
     folders?: SortOrder
-    final?: SortOrder
+    wgroup?: SortOrder
   }
 
   export type taskAvgOrderByAggregateInput = {
@@ -9720,7 +9715,7 @@ export namespace Prisma {
     description?: SortOrder
     files?: SortOrder
     folders?: SortOrder
-    final?: SortOrder
+    wgroup?: SortOrder
   }
 
   export type taskMinOrderByAggregateInput = {
@@ -9733,7 +9728,7 @@ export namespace Prisma {
     description?: SortOrder
     files?: SortOrder
     folders?: SortOrder
-    final?: SortOrder
+    wgroup?: SortOrder
   }
 
   export type taskSumOrderByAggregateInput = {
@@ -9742,14 +9737,6 @@ export namespace Prisma {
     codelangId?: SortOrder
     workflowId?: SortOrder
     orden?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type AppTypeCountOrderByAggregateInput = {
@@ -9776,6 +9763,11 @@ export namespace Prisma {
 
   export type AppTypeSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type AppTypeScalarRelationFilter = {
@@ -9865,6 +9857,14 @@ export namespace Prisma {
     id?: SortOrder
     apptypeId?: SortOrder
     codelangId?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type taskCreateNestedManyWithoutCodelangInput = {
@@ -10073,10 +10073,6 @@ export namespace Prisma {
     connect?: WorkflowWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type TaskTypeUpdateOneRequiredWithoutTasksNestedInput = {
     create?: XOR<TaskTypeCreateWithoutTasksInput, TaskTypeUncheckedCreateWithoutTasksInput>
     connectOrCreate?: TaskTypeCreateOrConnectWithoutTasksInput
@@ -10153,6 +10149,10 @@ export namespace Prisma {
     create?: XOR<CodeLangCreateWithoutApplicationsInput, CodeLangUncheckedCreateWithoutApplicationsInput>
     connectOrCreate?: CodeLangCreateOrConnectWithoutApplicationsInput
     connect?: CodeLangWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type AppTypeUpdateOneRequiredWithoutApplicationsNestedInput = {
@@ -10326,7 +10326,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
     tasktype: TaskTypeCreateNestedOneWithoutTasksInput
     workflow: WorkflowCreateNestedOneWithoutTasksInput
   }
@@ -10340,7 +10340,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type taskCreateOrConnectWithoutCodelangInput = {
@@ -10437,7 +10437,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"task"> | string | null
     files?: StringNullableFilter<"task"> | string | null
     folders?: StringNullableFilter<"task"> | string | null
-    final?: BoolFilter<"task"> | boolean
+    wgroup?: StringFilter<"task"> | string
   }
 
   export type ApplicationUpsertWithWhereUniqueWithoutCodelangInput = {
@@ -10489,7 +10489,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
     codelang: CodeLangCreateNestedOneWithoutTasksInput
     workflow: WorkflowCreateNestedOneWithoutTasksInput
   }
@@ -10503,7 +10503,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type taskCreateOrConnectWithoutTasktypeInput = {
@@ -10538,7 +10538,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
     tasktype: TaskTypeCreateNestedOneWithoutTasksInput
     codelang: CodeLangCreateNestedOneWithoutTasksInput
   }
@@ -10552,7 +10552,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type taskCreateOrConnectWithoutWorkflowInput = {
@@ -10875,7 +10875,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type ApplicationCreateManyCodelangInput = {
@@ -10907,7 +10907,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
     tasktype?: TaskTypeUpdateOneRequiredWithoutTasksNestedInput
     workflow?: WorkflowUpdateOneRequiredWithoutTasksNestedInput
   }
@@ -10921,7 +10921,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type taskUncheckedUpdateManyWithoutCodelangInput = {
@@ -10933,7 +10933,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type ApplicationUpdateWithoutCodelangInput = {
@@ -11013,7 +11013,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type taskUpdateWithoutTasktypeInput = {
@@ -11022,7 +11022,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
     codelang?: CodeLangUpdateOneRequiredWithoutTasksNestedInput
     workflow?: WorkflowUpdateOneRequiredWithoutTasksNestedInput
   }
@@ -11036,7 +11036,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type taskUncheckedUpdateManyWithoutTasktypeInput = {
@@ -11048,7 +11048,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type taskCreateManyWorkflowInput = {
@@ -11060,7 +11060,7 @@ export namespace Prisma {
     description?: string | null
     files?: string | null
     folders?: string | null
-    final?: boolean
+    wgroup: string
   }
 
   export type taskUpdateWithoutWorkflowInput = {
@@ -11069,7 +11069,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
     tasktype?: TaskTypeUpdateOneRequiredWithoutTasksNestedInput
     codelang?: CodeLangUpdateOneRequiredWithoutTasksNestedInput
   }
@@ -11083,7 +11083,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type taskUncheckedUpdateManyWithoutWorkflowInput = {
@@ -11095,7 +11095,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
     folders?: NullableStringFieldUpdateOperationsInput | string | null
-    final?: BoolFieldUpdateOperationsInput | boolean
+    wgroup?: StringFieldUpdateOperationsInput | string
   }
 
   export type ApplicationCreateManyApptypeInput = {

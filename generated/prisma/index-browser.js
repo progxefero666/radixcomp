@@ -152,7 +152,7 @@ exports.Prisma.TaskScalarFieldEnum = {
   description: 'description',
   files: 'files',
   folders: 'folders',
-  final: 'final'
+  wgroup: 'wgroup'
 };
 
 exports.Prisma.AppTypeScalarFieldEnum = {

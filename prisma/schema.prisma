@@ -64,7 +64,7 @@ model task {
     description String?   @db.Text
     files       String?   @db.Text
     folders     String?   @db.Text
-    final       Boolean   @default(false)
+    wgroup      String @unique @db.VarChar(100)
     @@map("task")
 }
 
