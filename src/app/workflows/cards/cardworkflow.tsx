@@ -14,20 +14,19 @@ import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
 
 
-const headerStyle = {
-    with: '100%',
-    background: ' rgba(32, 32, 41, 0.9)',
-    borderRadius: '4px',
-    border: '1px solid rgba(144, 138, 137, 0.9)',
-    font: '15px normal sans-serif rgba(250,250,250,1.0)',
-};
-
 const compStyle = {
     background: ' rgba(23, 23, 23, 0.9)',
     borderRadius: 'var(--radius-1)',
     border: '2px solid var(--blue-7)',
     boxShadow: '0px 0px 1px rgba(69, 69, 69, 0.9)'
 };
+const headerStyle = {
+    with: '100%',
+    background: ' rgba(32, 32, 41, 0.9)',
+    borderRadius: '4px',
+    border: '1px solid rgba(144, 138, 137, 0.9)'
+};
+
 interface CompProps {
     workflow: Workflow;
 }
@@ -40,13 +39,10 @@ export default function CardWorkflow({ workflow }: CompProps) {
         alert(item);
     };
 
-    //key={workflow.wwname}
     return (
         <Flex direction="column" width="100%" px="2" pt="0" pb="2" style={compStyle}  >
 
-            <Collapsible.Root
-                open={open}
-                onOpenChange={setOpen}>
+            <Collapsible.Root open={open} onOpenChange={setOpen}>
 
                 <Flex align="start" direction="row" width="100%" pt="1" pb="1" gapX={"2"} >
                     <Collapsible.Trigger asChild >

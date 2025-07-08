@@ -2,42 +2,11 @@
 
 import { Option } from "@/common/model/option";
 import { Flex, Box } from "@radix-ui/themes";
-
 import { StringsHelper } from "@/common/util/stringshelper";
-
 import { renderOptionButton } from "@/radix/radixbuttons";
-import { ThemeCompStyle} from "@/radix/radixtheme";
-//import { ThemeMenusStyle } from "@/radix/radixtheme";
-//import { radixTypeComp } from "@/radix/radixtypes";
+import { ThemeCompStyle, ThemeMenusStyle} from "@/radix/radixtheme";
 
 
-const headerStyle = {
-    with: '100%',
-    background: ' rgba(32, 32, 41, 0.9)',
-    borderRadius: '4px',
-    border: '1px solid rgba(144, 138, 137, 0.9)',
-    font: '15px normal sans-serif rgba(250,250,250,1.0) border  rgba(241, 56, 24, 0.9) ',
-};
-
-const OPT_DEF_CSS = {
-     width: '100%',
-    variant: "soft",
-    backgroundColor: "var(--blue-9)",          
-    borderRadius: "var(--radius-3)"
-};
-
-const OPT_ACT_CSS = {
-     width: '100%',
-    variant: "soft",
-    backgroundColor: "var(--red-9)",          
-    borderRadius: "var(--radius-3)"
-};
-
-
-
-/**
- * MenuButtons Column menu
- */
 export interface MenuProp {
     inline?: boolean;
     disabled?: boolean;
@@ -57,10 +26,10 @@ export default function MenuButtons({options,actoption,onclick: onselection}: Me
             <Box width="100%" key={index.toString()} px="3"  >
                 {StringsHelper.equals(section.id, actoption) ?
                     renderOptionButton(section.id,onselection,section.text,
-                        OPT_ACT_CSS)
+                        ThemeMenusStyle.OPT_ACT_CSS)
                     :
                     renderOptionButton(section.id,onselection,section.text,
-                        OPT_DEF_CSS)
+                        ThemeMenusStyle.OPT_ACT_CSS)
                 }
             </Box>
             ))}

@@ -142,11 +142,13 @@ export class ThemeMenusStyle {
     public static readonly OPT_SIZE: any = RadixConf.SIZES.size_2;
 
     public static readonly OPT_CSS = {
+        width: '100%',
         backgroundColor: "var(--blue-9)",          
         borderRadius: "var(--radius-3)"
     };
 
     public static readonly OPT_ACT_CSS = {
+        width: '100%',
         variant: "soft",
         backgroundColor: "var(--red-9)",          
         borderRadius: "var(--radius-3)"
