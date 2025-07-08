@@ -47,7 +47,7 @@ export function OutputText ({bigsize,inline,label,data}: CompProps) {
                 </Box>
             :null}       
 
-            <Flex width="100%" direction="column" style={dataStyle}>
+            <Flex width="100%" direction="column" px="2" py="2" style={dataStyle}>
                 <Text size={data_size}>{data}</Text>
             </Flex>                    
         
