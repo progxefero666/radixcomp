@@ -30,13 +30,15 @@ interface CompProps {
 export  function MainContent({codelangs,section}: CompProps) {
 
     const [ready,setReady] = useState<boolean>(false);
-    const [workflows,setWorkflows] = useState<Workflow[]|null>([]);
+    const [workflows,setWorkflows] = useState<Workflow[]|null>(null);
     
     useEffect(() => {        
         if(ready) {return;}
         const init = async () => {     
             const response = await getAllByTable(DbTables.workflow);       
             if(response === null) {return false;}  
+            const collection:Workflow[]|null = parseCollection<Workflow>(response);
+
             setWorkflows(parseCollection<Workflow>(response));                      
             setReady(true);
         };

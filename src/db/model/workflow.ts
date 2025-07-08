@@ -8,17 +8,18 @@ export class Workflow {
     public id: number;
     public wwname: string;
     public description: string = '';
-    public context: string = '';
+
     public application: string;
     public fpath: string;
     public updated: Date;
-
+    public context: string|null = '';
     constructor(id: number,
                 wwname: string,
                 description: string,
                 application: string,
                 fpath: string,
-                updated: Date) {
+                updated: Date,
+                context:string|null) {
 
         this.id = id;
         this.wwname = wwname;
@@ -26,6 +27,7 @@ export class Workflow {
         this.application = application;
         this.fpath = fpath;
         this.updated = updated;
+        this.context = context;
     }
 
     /**

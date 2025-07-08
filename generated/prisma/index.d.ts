@@ -3824,7 +3824,7 @@ export namespace Prisma {
     application: string | null
     fpath: string | null
     updated: Date
-    context: string
+    context: string | null
     _count: WorkflowCountAggregateOutputType | null
     _avg: WorkflowAvgAggregateOutputType | null
     _sum: WorkflowSumAggregateOutputType | null
@@ -3908,7 +3908,7 @@ export namespace Prisma {
       application: string | null
       fpath: string | null
       updated: Date
-      context: string
+      context: string | null
     }, ExtArgs["result"]["workflow"]>
     composites: {}
   }
@@ -8652,7 +8652,7 @@ export namespace Prisma {
     application?: StringNullableFilter<"Workflow"> | string | null
     fpath?: StringNullableFilter<"Workflow"> | string | null
     updated?: DateTimeFilter<"Workflow"> | Date | string
-    context?: StringFilter<"Workflow"> | string
+    context?: StringNullableFilter<"Workflow"> | string | null
     tasks?: TaskListRelationFilter
   }
 
@@ -8663,7 +8663,7 @@ export namespace Prisma {
     application?: SortOrderInput | SortOrder
     fpath?: SortOrderInput | SortOrder
     updated?: SortOrder
-    context?: SortOrder
+    context?: SortOrderInput | SortOrder
     tasks?: taskOrderByRelationAggregateInput
   }
 
@@ -8677,7 +8677,7 @@ export namespace Prisma {
     application?: StringNullableFilter<"Workflow"> | string | null
     fpath?: StringNullableFilter<"Workflow"> | string | null
     updated?: DateTimeFilter<"Workflow"> | Date | string
-    context?: StringFilter<"Workflow"> | string
+    context?: StringNullableFilter<"Workflow"> | string | null
     tasks?: TaskListRelationFilter
   }, "id" | "wwname">
 
@@ -8688,7 +8688,7 @@ export namespace Prisma {
     application?: SortOrderInput | SortOrder
     fpath?: SortOrderInput | SortOrder
     updated?: SortOrder
-    context?: SortOrder
+    context?: SortOrderInput | SortOrder
     _count?: WorkflowCountOrderByAggregateInput
     _avg?: WorkflowAvgOrderByAggregateInput
     _max?: WorkflowMaxOrderByAggregateInput
@@ -8706,7 +8706,7 @@ export namespace Prisma {
     application?: StringNullableWithAggregatesFilter<"Workflow"> | string | null
     fpath?: StringNullableWithAggregatesFilter<"Workflow"> | string | null
     updated?: DateTimeWithAggregatesFilter<"Workflow"> | Date | string
-    context?: StringWithAggregatesFilter<"Workflow"> | string
+    context?: StringNullableWithAggregatesFilter<"Workflow"> | string | null
   }
 
   export type taskWhereInput = {
@@ -9080,7 +9080,7 @@ export namespace Prisma {
     application?: string | null
     fpath?: string | null
     updated?: Date | string
-    context: string
+    context?: string | null
     tasks?: taskCreateNestedManyWithoutWorkflowInput
   }
 
@@ -9091,7 +9091,7 @@ export namespace Prisma {
     application?: string | null
     fpath?: string | null
     updated?: Date | string
-    context: string
+    context?: string | null
     tasks?: taskUncheckedCreateNestedManyWithoutWorkflowInput
   }
 
@@ -9101,7 +9101,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
-    context?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: taskUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -9112,7 +9112,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
-    context?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: taskUncheckedUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -9123,7 +9123,7 @@ export namespace Prisma {
     application?: string | null
     fpath?: string | null
     updated?: Date | string
-    context: string
+    context?: string | null
   }
 
   export type WorkflowUpdateManyMutationInput = {
@@ -9132,7 +9132,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
-    context?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkflowUncheckedUpdateManyInput = {
@@ -9142,7 +9142,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
-    context?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type taskCreateInput = {
@@ -10621,7 +10621,7 @@ export namespace Prisma {
     application?: string | null
     fpath?: string | null
     updated?: Date | string
-    context: string
+    context?: string | null
   }
 
   export type WorkflowUncheckedCreateWithoutTasksInput = {
@@ -10631,7 +10631,7 @@ export namespace Prisma {
     application?: string | null
     fpath?: string | null
     updated?: Date | string
-    context: string
+    context?: string | null
   }
 
   export type WorkflowCreateOrConnectWithoutTasksInput = {
@@ -10702,7 +10702,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
-    context?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkflowUncheckedUpdateWithoutTasksInput = {
@@ -10712,7 +10712,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
-    context?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ApplicationCreateWithoutApptypeInput = {
