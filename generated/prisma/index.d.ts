@@ -3667,6 +3667,7 @@ export namespace Prisma {
     application: string | null
     fpath: string | null
     updated: Date | null
+    context: string | null
   }
 
   export type WorkflowMaxAggregateOutputType = {
@@ -3676,6 +3677,7 @@ export namespace Prisma {
     application: string | null
     fpath: string | null
     updated: Date | null
+    context: string | null
   }
 
   export type WorkflowCountAggregateOutputType = {
@@ -3685,6 +3687,7 @@ export namespace Prisma {
     application: number
     fpath: number
     updated: number
+    context: number
     _all: number
   }
 
@@ -3704,6 +3707,7 @@ export namespace Prisma {
     application?: true
     fpath?: true
     updated?: true
+    context?: true
   }
 
   export type WorkflowMaxAggregateInputType = {
@@ -3713,6 +3717,7 @@ export namespace Prisma {
     application?: true
     fpath?: true
     updated?: true
+    context?: true
   }
 
   export type WorkflowCountAggregateInputType = {
@@ -3722,6 +3727,7 @@ export namespace Prisma {
     application?: true
     fpath?: true
     updated?: true
+    context?: true
     _all?: true
   }
 
@@ -3818,6 +3824,7 @@ export namespace Prisma {
     application: string | null
     fpath: string | null
     updated: Date
+    context: string
     _count: WorkflowCountAggregateOutputType | null
     _avg: WorkflowAvgAggregateOutputType | null
     _sum: WorkflowSumAggregateOutputType | null
@@ -3846,6 +3853,7 @@ export namespace Prisma {
     application?: boolean
     fpath?: boolean
     updated?: boolean
+    context?: boolean
     tasks?: boolean | Workflow$tasksArgs<ExtArgs>
     _count?: boolean | WorkflowCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflow"]>
@@ -3857,6 +3865,7 @@ export namespace Prisma {
     application?: boolean
     fpath?: boolean
     updated?: boolean
+    context?: boolean
   }, ExtArgs["result"]["workflow"]>
 
   export type WorkflowSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3866,6 +3875,7 @@ export namespace Prisma {
     application?: boolean
     fpath?: boolean
     updated?: boolean
+    context?: boolean
   }, ExtArgs["result"]["workflow"]>
 
   export type WorkflowSelectScalar = {
@@ -3875,9 +3885,10 @@ export namespace Prisma {
     application?: boolean
     fpath?: boolean
     updated?: boolean
+    context?: boolean
   }
 
-  export type WorkflowOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "wwname" | "description" | "application" | "fpath" | "updated", ExtArgs["result"]["workflow"]>
+  export type WorkflowOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "wwname" | "description" | "application" | "fpath" | "updated" | "context", ExtArgs["result"]["workflow"]>
   export type WorkflowInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasks?: boolean | Workflow$tasksArgs<ExtArgs>
     _count?: boolean | WorkflowCountOutputTypeDefaultArgs<ExtArgs>
@@ -3897,6 +3908,7 @@ export namespace Prisma {
       application: string | null
       fpath: string | null
       updated: Date
+      context: string
     }, ExtArgs["result"]["workflow"]>
     composites: {}
   }
@@ -4327,6 +4339,7 @@ export namespace Prisma {
     readonly application: FieldRef<"Workflow", 'String'>
     readonly fpath: FieldRef<"Workflow", 'String'>
     readonly updated: FieldRef<"Workflow", 'DateTime'>
+    readonly context: FieldRef<"Workflow", 'String'>
   }
     
 
@@ -8378,7 +8391,8 @@ export namespace Prisma {
     description: 'description',
     application: 'application',
     fpath: 'fpath',
-    updated: 'updated'
+    updated: 'updated',
+    context: 'context'
   };
 
   export type WorkflowScalarFieldEnum = (typeof WorkflowScalarFieldEnum)[keyof typeof WorkflowScalarFieldEnum]
@@ -8638,6 +8652,7 @@ export namespace Prisma {
     application?: StringNullableFilter<"Workflow"> | string | null
     fpath?: StringNullableFilter<"Workflow"> | string | null
     updated?: DateTimeFilter<"Workflow"> | Date | string
+    context?: StringFilter<"Workflow"> | string
     tasks?: TaskListRelationFilter
   }
 
@@ -8648,6 +8663,7 @@ export namespace Prisma {
     application?: SortOrderInput | SortOrder
     fpath?: SortOrderInput | SortOrder
     updated?: SortOrder
+    context?: SortOrder
     tasks?: taskOrderByRelationAggregateInput
   }
 
@@ -8661,6 +8677,7 @@ export namespace Prisma {
     application?: StringNullableFilter<"Workflow"> | string | null
     fpath?: StringNullableFilter<"Workflow"> | string | null
     updated?: DateTimeFilter<"Workflow"> | Date | string
+    context?: StringFilter<"Workflow"> | string
     tasks?: TaskListRelationFilter
   }, "id" | "wwname">
 
@@ -8671,6 +8688,7 @@ export namespace Prisma {
     application?: SortOrderInput | SortOrder
     fpath?: SortOrderInput | SortOrder
     updated?: SortOrder
+    context?: SortOrder
     _count?: WorkflowCountOrderByAggregateInput
     _avg?: WorkflowAvgOrderByAggregateInput
     _max?: WorkflowMaxOrderByAggregateInput
@@ -8688,6 +8706,7 @@ export namespace Prisma {
     application?: StringNullableWithAggregatesFilter<"Workflow"> | string | null
     fpath?: StringNullableWithAggregatesFilter<"Workflow"> | string | null
     updated?: DateTimeWithAggregatesFilter<"Workflow"> | Date | string
+    context?: StringWithAggregatesFilter<"Workflow"> | string
   }
 
   export type taskWhereInput = {
@@ -9057,20 +9076,22 @@ export namespace Prisma {
 
   export type WorkflowCreateInput = {
     wwname: string
-    description?: string
+    description: string
     application?: string | null
     fpath?: string | null
     updated?: Date | string
+    context: string
     tasks?: taskCreateNestedManyWithoutWorkflowInput
   }
 
   export type WorkflowUncheckedCreateInput = {
     id?: number
     wwname: string
-    description?: string
+    description: string
     application?: string | null
     fpath?: string | null
     updated?: Date | string
+    context: string
     tasks?: taskUncheckedCreateNestedManyWithoutWorkflowInput
   }
 
@@ -9080,6 +9101,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    context?: StringFieldUpdateOperationsInput | string
     tasks?: taskUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -9090,16 +9112,18 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    context?: StringFieldUpdateOperationsInput | string
     tasks?: taskUncheckedUpdateManyWithoutWorkflowNestedInput
   }
 
   export type WorkflowCreateManyInput = {
     id?: number
     wwname: string
-    description?: string
+    description: string
     application?: string | null
     fpath?: string | null
     updated?: Date | string
+    context: string
   }
 
   export type WorkflowUpdateManyMutationInput = {
@@ -9108,6 +9132,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    context?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowUncheckedUpdateManyInput = {
@@ -9117,6 +9142,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    context?: StringFieldUpdateOperationsInput | string
   }
 
   export type taskCreateInput = {
@@ -9580,6 +9606,7 @@ export namespace Prisma {
     application?: SortOrder
     fpath?: SortOrder
     updated?: SortOrder
+    context?: SortOrder
   }
 
   export type WorkflowAvgOrderByAggregateInput = {
@@ -9593,6 +9620,7 @@ export namespace Prisma {
     application?: SortOrder
     fpath?: SortOrder
     updated?: SortOrder
+    context?: SortOrder
   }
 
   export type WorkflowMinOrderByAggregateInput = {
@@ -9602,6 +9630,7 @@ export namespace Prisma {
     application?: SortOrder
     fpath?: SortOrder
     updated?: SortOrder
+    context?: SortOrder
   }
 
   export type WorkflowSumOrderByAggregateInput = {
@@ -10588,19 +10617,21 @@ export namespace Prisma {
 
   export type WorkflowCreateWithoutTasksInput = {
     wwname: string
-    description?: string
+    description: string
     application?: string | null
     fpath?: string | null
     updated?: Date | string
+    context: string
   }
 
   export type WorkflowUncheckedCreateWithoutTasksInput = {
     id?: number
     wwname: string
-    description?: string
+    description: string
     application?: string | null
     fpath?: string | null
     updated?: Date | string
+    context: string
   }
 
   export type WorkflowCreateOrConnectWithoutTasksInput = {
@@ -10671,6 +10702,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    context?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowUncheckedUpdateWithoutTasksInput = {
@@ -10680,6 +10712,7 @@ export namespace Prisma {
     application?: NullableStringFieldUpdateOperationsInput | string | null
     fpath?: NullableStringFieldUpdateOperationsInput | string | null
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
+    context?: StringFieldUpdateOperationsInput | string
   }
 
   export type ApplicationCreateWithoutApptypeInput = {

@@ -138,7 +138,8 @@ exports.Prisma.WorkflowScalarFieldEnum = {
   description: 'description',
   application: 'application',
   fpath: 'fpath',
-  updated: 'updated'
+  updated: 'updated',
+  context: 'context'
 };
 
 exports.Prisma.TaskScalarFieldEnum = {
