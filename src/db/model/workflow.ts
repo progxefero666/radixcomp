@@ -7,7 +7,8 @@ export class Workflow {
 
     public id: number;
     public wwname: string;
-    public description: string = 'undefined';
+    public description: string = '';
+    public context: string = '';
     public application: string;
     public fpath: string;
     public updated: Date;
