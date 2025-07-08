@@ -27,7 +27,7 @@ export default function MenuButtons({options,actoption,onclick: onselection}: Me
     return (
         <Flex direction="column" align="center" gap="2" style={ThemeCompStyle.CONT_CSS_STYLE} >
             {options.map((section, index) => (
-                <Box key={index.toString()} >
+                <Box width="100%" key={index.toString()} >
                     {StringsHelper.equals(section.id, actoption) ?
                         renderOptionButton(section.id, onselection, section.text,
                             ThemeMenusStyle.OPT_ACT_CSS)

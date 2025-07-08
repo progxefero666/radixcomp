@@ -12,7 +12,8 @@ import { Codelang } from "@/db/model/codelang";
 
 const headerStyle = {
     height: 'auto',
-    background: 'rgb(24, 24, 27)',
+    background: 'rgb(29, 30, 32)',
+    borderBottom: '2px solid rgba(126, 131, 126, 0.9)',
 };
 
 const headerLeftStyle = {
@@ -70,15 +71,15 @@ export function Header({codelangs,section,navback}:CompProps) {
     }
 
     return (
-        <Flex width="100%" direction="row" style={headerStyle}  py="2">
+        <Flex width="100%" direction="row" align="center" style={headerStyle}  py="3">
 
             <Flex width="16%" direction="row" gap="2" px="3" justify="between" style={headerLeftStyle} >
-                <Text size="3" >Xefero Tools </Text>   
+                <Text size="6" >Xefero Tools </Text>   
                 <Box>{renderHomeButton()}</Box>        
             </Flex>
 
             <Flex width = "68%" direction="row" px="3" style={headerCenterStyle} >
-                <Text size="3"> Man. WorkFlows</Text>
+                <Text size="6"> Man. WorkFlows</Text>
             </Flex>
 
             <Box width="16%" px="4" style={headerRightStyle}>

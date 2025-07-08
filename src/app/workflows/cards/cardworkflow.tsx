@@ -34,10 +34,10 @@ interface CompProps {
 export default function CardWorkflow({ workflow }: CompProps) {
 
     const barbuttonscfg: BarButtonsCfg = BARCFG_DELETE_OPEN
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const onClick = (item: string, compName?: string) => {
-
+        alert(item);
     };
 
     //key={workflow.wwname}
