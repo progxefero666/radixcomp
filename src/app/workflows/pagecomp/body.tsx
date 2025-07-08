@@ -11,6 +11,8 @@ import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
 import { Codelang } from "@/db/model/codelang";
 import { parseCollection } from "@/common/parsers/javascriptparser";
+import CardWorkflow from "../cards/cardworkflow";
+import { Workflow } from "@/db/model/workflow";
 
 const mainContentStyle = {
     background: 'rgb(30, 40, 63)',
@@ -28,6 +30,10 @@ interface CompProps {
 export  function MainContent({codelangs,section}: CompProps) {
 
     const [ready,setReady] = useState<boolean>(false);
+
+    const [workflows,setWorkflows] = useState<Workflow[]>([]);
+    
+   
 
     useEffect(() => {
         /*
@@ -73,6 +79,8 @@ export  function MainContent({codelangs,section}: CompProps) {
 
     const renderManWorkflows = () => {
         // const barConfig: BarButtonsCfg = BARCFG_DELETE_OPEN;
+        
+        //CardWorkflow
         /*       
         return (
             <>
