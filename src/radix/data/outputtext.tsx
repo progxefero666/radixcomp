@@ -6,6 +6,12 @@ import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 //React.CSSProperties | undefined
 
+const labelBoxStyle = {
+    borderRadius: '4px',
+    border: '1px  rgba(24, 176, 24, 0.9)',
+};
+
+
 const comppStyle = {
     padding: '0px',
 };
@@ -22,7 +28,7 @@ interface CompProps {
 }
 export function OutputText ({bigsize,inline,label,data}: CompProps) {
 
-    if(!data || data==null) {data = '';}
+    if(!data || data==null) {data = 'undefined';}
 
     const label_color   = label ? RadixConf.COLORS.gray : null;
     const data_size    = label ? RadixConf.SIZES.size_2 : null;
@@ -32,11 +38,14 @@ export function OutputText ({bigsize,inline,label,data}: CompProps) {
     const compDirection = showInline ? "row" : "column";
 
     return (
-        <Flex as="div" width="100%" direction={compDirection} style={comppStyle} >
+        <Flex as="div" width="100%" direction={"column"} style={comppStyle} >
             {label ? 
-            <Label.Root htmlFor="firstName"  color={label_color} >
-                {label}
-            </Label.Root>:null}                
+                <Box as="div" width="100%" mb="2" style={labelBoxStyle} >
+                   <Label.Root htmlFor="firstName"  color={label_color} >
+                        {label}                    
+                    </Label.Root> 
+                </Box>
+            :null}                
             <Flex as="div" width="100%" direction="column" style={dataStyle}>
                 {!isTextArea ?
                     <Text size={data_size}>{data}</Text>:

@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useRef, useState } from "react";
-import { Flex, Text} from "@radix-ui/themes";
+import { Box, Flex, Text} from "@radix-ui/themes";
 
 import { AppWorkflows } from "@/app_front/workflows/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
@@ -36,13 +36,13 @@ export  function MainContent({codelangs,section}: CompProps) {
         if(ready) {return;}
         const init = async () => {     
             const response = await getAllByTable(DbTables.workflow);       
-            //console.log(response);
-            if(response === null) {return false;}  
-            const collection:Workflow[]|null = parseResponseCollection<Workflow>(response);
-            console.log(collection![0]);
+            if(response === null) {return false;} 
 
-            //setWorkflows(parseCollection<Workflow>(response));                      
-            //setReady(true);
+            const collection:Workflow[]|null = parseResponseCollection<Workflow>(response);
+            if(collection==null) {return;}
+            
+            setWorkflows(collection);                      
+            setReady(true);
         };
         init();
         
@@ -91,7 +91,9 @@ export  function MainContent({codelangs,section}: CompProps) {
         return (
             <>
                 {workflows.map((workflow, index) => (
-                    <CardWorkflow workflow={workflow} />                    
+                    <Box key={index.toString()}>
+                        <CardWorkflow workflow={workflow} />   
+                    </Box>                 
                 ))}
             </>
         )
