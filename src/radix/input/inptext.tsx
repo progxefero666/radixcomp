@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { forwardRef } from "react";
 import { Box, Flex, TextField } from "@radix-ui/themes";
