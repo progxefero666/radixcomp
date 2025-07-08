@@ -28,10 +28,11 @@ export const renderHomeButton = (isPageIndex:boolean) => {
     )
 }
 
+
 export const renderOptionButton = (id: string, onclick: (name: string) => void,
     text: string, style: any) => {
     return (
-        <Button key={id}
+        <Button key={id} 
             onClick={() => onclick(id)}
             style={style}
             size={ThemeMenusStyle.OPT_SIZE} >

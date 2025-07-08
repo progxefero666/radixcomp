@@ -19,7 +19,7 @@ const headerStyle = {
     background: ' rgba(32, 32, 41, 0.9)',
     borderRadius: '4px',
     border: '1px solid rgba(144, 138, 137, 0.9)',
-    font: '15px normal sans-serif rgba(250,250,250,1.0) '
+    font: '15px normal sans-serif rgba(250,250,250,1.0)',
 };
 
 const compStyle = {
