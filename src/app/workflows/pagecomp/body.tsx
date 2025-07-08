@@ -10,7 +10,7 @@ import { getAll } from "@/db/services/read/srvreadcodelangs";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
 import { Codelang } from "@/db/model/codelang";
-import { parseCollection } from "@/common/parsers/javascriptparser";
+import { parseCollection, parseResponseCollection } from "@/common/parsers/javascriptparser";
 import CardWorkflow from "../cards/cardworkflow";
 import { Workflow } from "@/db/model/workflow";
 
@@ -36,11 +36,13 @@ export  function MainContent({codelangs,section}: CompProps) {
         if(ready) {return;}
         const init = async () => {     
             const response = await getAllByTable(DbTables.workflow);       
+            //console.log(response);
             if(response === null) {return false;}  
-            const collection:Workflow[]|null = parseCollection<Workflow>(response);
+            const collection:Workflow[]|null = parseResponseCollection<Workflow>(response);
+            console.log(collection![0]);
 
-            setWorkflows(parseCollection<Workflow>(response));                      
-            setReady(true);
+            //setWorkflows(parseCollection<Workflow>(response));                      
+            //setReady(true);
         };
         init();
         
@@ -85,7 +87,7 @@ export  function MainContent({codelangs,section}: CompProps) {
                 </Text>                
             );
         } 
-        console.log("renderManWorkflows workflows:", workflows);
+        //console.log("renderManWorkflows workflows:", workflows);
         return (
             <>
                 {workflows.map((workflow, index) => (

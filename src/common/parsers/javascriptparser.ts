@@ -1,11 +1,32 @@
 //src\db\functions\objectsutil.ts
 
+import { JsonResponse } from "../json/models/jsonresponse";
+
+
 /**
- * Utility class for model operations.
- *    - This class provides methods for manipulating 
- *    - Validate model data (not implemented yet).
- *    - Convert Deserialize server response to javascript object.
- * export class ModelUtil {}
+ * - Use por json server responses. 
+ * - null case: If the response is null, return null
+ * - desc: Parse a JSON response item or collection of class T objects.
+ */
+
+export const parseResponseItem = <T>(jsonResponse: string): T | null => {
+    if (jsonResponse == null) {return null;}
+    const jsonParsed:JsonResponse = JSON.parse(jsonResponse) as JsonResponse;
+    if (jsonParsed.data == null) {return null;}
+    return jsonParsed.data as T;
+};
+
+export const parseResponseCollection = <T>(jsonResponse: string|null): Array<T> | null => {
+    if (jsonResponse == null) {return null;}
+    const jsonParsed:JsonResponse = JSON.parse(jsonResponse) as JsonResponse;
+    if (jsonParsed.data == null) {return null;}
+    return jsonParsed.data as Array<T>;
+};
+
+
+
+/**
+ * Normal parser functions for cast item and collection.
  */
 
 export const parseCollection = <T>(coll: string): Array<T> | null => {
@@ -40,5 +61,6 @@ export const parseCollectionWithRelChildrens = <T, R>(coll: string): Array<T & {
     const jsonParsed = JSON.parse(coll);
     return jsonParsed as Array<T & { [key: string]: R[] }>;
 };
+
 
 
