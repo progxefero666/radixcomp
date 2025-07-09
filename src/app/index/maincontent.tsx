@@ -4,7 +4,7 @@ import React from "react";
 import { Flex} from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
 import MenuButtons from "@/radix/cbars/btmenu";
-import { AppConfig } from "@/app_front/appconfig";
+import { AppConfig } from "@/app/index/appconfig";
 
 
 const mainContentStyle = {

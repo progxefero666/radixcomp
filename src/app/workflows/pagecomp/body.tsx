@@ -4,7 +4,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Flex, Text} from "@radix-ui/themes";
 
-import { AppWorkflows } from "@/app_front/workflows/appworkflows";
+import { AppWorkflows } from "@/app/workflows/kernel/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
 import { getAll } from "@/db/services/read/srvreadcodelang";
 import { DbTables } from "@/db/dbcatalog";

@@ -8,8 +8,8 @@ import Header from "@/app/index/header";
 import PrimaryBar from "@/app/index/primarybar";
 import SecondBar from "@/app/index/secondbar";
 import MainContent from "@/app/index/maincontent";
-import { AppConfig } from "@/app_front/appconfig";
-import { AppIndex } from "@/app_front/appindex";
+import { AppConfig } from "@/app/index/appconfig";
+import { AppIndex } from "@/app/index/kernel/appindex";
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',

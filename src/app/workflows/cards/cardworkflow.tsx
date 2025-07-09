@@ -9,7 +9,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { RadixConf } from "@/radix/radixconf";
 import BarButtons from "@/radix/cbars/btbar";
-import { BARCFG_DELETE_OPEN } from "@/app_front/ui/appbars";
+import { BARCFG_DELETE_OPEN } from "@/radix/appbars";
 import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
 

@@ -35,43 +35,4 @@ export class AppConstants {
 
 }//end class
 
-/**
- * class AppUiConst.ICON_COLLAPSE_COLOR
- */
-export class AppUiConst {
 
-    public static readonly COLOR_ACT_OPEN:string     = "btn-info";
-    public static readonly COLOR_DELETE:string       = "btn-success";
-    public static readonly COLOR_MODE_EDITION:string = "btn-success";
-    public static readonly COLOR_ACT_SAVE:string     = "btn-warning";
-    public static readonly COLOR_EXPORT:string     = "btn-info";
-    public static readonly COLOR_RUN:string     = "btn-info";
-    public static readonly COLOR_COPY:string     = "btn-info";
-    
-    public static readonly ICON_COLLAPSE_OFF:string = "ti-angle-up"; 
-    public static readonly ICON_COLLAPSE_ON:string = "ti-angle-down"; 
-    public static readonly ICON_COLLAPSE_COLOR:string = "black"; 
-
-    public static readonly ICON_OPEN:string = "ti-eye";
-    public static readonly ICON_DELETE:string = "ti-trash";
-    public static readonly ICON_MODE_EDITION:string = "ti-write";
-    public static readonly ICON_ACT_SAVE:string = "ti-save";
-    public static readonly ICON_RUN:string = "ti-control-play";
-    public static readonly ICON_EXPORT:string = "ti-export";
-    public static readonly ICON_COPY:string = "ti-save";
-
-}//end class
-
-/**
- * AppTexts.SAVE
- */
-export class AppTexts {
-    
-    public static readonly OPEN : string = "Open";
-    public static readonly SAVE : string = "Save";
-    public static readonly RUN : string = "Run";
-    public static readonly EXPORT: string = "Export";   
-
-    public static readonly COPY: string = "Copy";  
-
-}//end class

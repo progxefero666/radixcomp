@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { AppConfig } from "@/app_front/appconfig";
+import { AppConfig } from "@/app/index/appconfig";
 
 interface IndexHeaderProps {
     module?: string;

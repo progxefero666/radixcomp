@@ -27,7 +27,7 @@ interface PopupIfViewJson {
 export const PopupViewJson = ({ jsonobj, onClose, isOpen }: PopupIfViewJson) => {
 
 
-    const modalClass: string = AppUI.getModalCompWidthClass()
+    const modalClass: string = "";//AppUI.getModalCompWidthClass()
     const btniconClass: string = "h-8 w-8"; //AppIcons.getIconSizeClass();
 
     return (
@@ -45,8 +45,7 @@ export const PopupViewJson = ({ jsonobj, onClose, isOpen }: PopupIfViewJson) => 
 
                         <button className="btn btn-primary mr-2"
                             onClick={(e) => { e.preventDefault(); onClose(); }} >
-                            {RenderIcon("CheckIcon", btniconClass)}    
-                            {CmOperation.OPID_OK}
+                            OK
                 
                         </button>
 

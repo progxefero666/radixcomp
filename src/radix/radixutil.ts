@@ -2,6 +2,16 @@
 
 import { Option } from "@/common/model/option";
 
+/*
+
+export type radixTysspeComp = {
+    color: any; 
+    size: any;
+    variant: any;
+    radius: any;
+}
+
+*/
 /**
  * RadixUtil is a utility class for Radix components.
  * RadixUtil.getArrayChar

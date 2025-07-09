@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
-import { AppIndex } from "@/app_front/appindex";
+import { AppIndex } from "@/app/index/kernel/appindex";
 import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
