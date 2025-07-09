@@ -62,3 +62,17 @@ export class RadixKeys {
 
 
 }//end class 
+
+
+/**
+ * class DbOperations
+ */
+export class DbOperations {   
+
+    public static readonly OP_UPDATE: string = "edit";
+    public static readonly OP_DELETE: string = "delete";
+    public static readonly OP_MOVEUP: string = "moveup";
+    public static readonly OP_MOVEDOWN: string = "movedown";
+
+
+}//end class 
