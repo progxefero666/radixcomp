@@ -1,5 +1,5 @@
 //src\app\workflows\cards\cardworkflow.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 import { Label } from "radix-ui";
@@ -32,17 +32,29 @@ interface CompProps {
     callback: (workflowId:number,action:string) => void;
 }
 export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
-
+    const [ready,setReady] = useState<boolean>(false);
     const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);
 
+    useEffect(() => {        
+        if(ready) {return;}
+        const init = async () => {     
+            if(workflow) {
+                alert("CardWorkflowPreview: " + workflow.wwname);
+            }           
+            setReady(true);
+        };
+        init();
+        
+    }, []);        
+    
     const onClick = (item: string, compName?: string) => {
         //callback(workflow.id, item);
     };
 
     return (
         <Flex direction="column" width="100%" px="2" pt="0" pb="2" style={compStyle}  >
-            {/*
+            
             
             <Collapsible.Root open={open} onOpenChange={setOpen}>
 
@@ -56,7 +68,7 @@ export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
                     </Collapsible.Trigger>
                     <Flex width="100%" justify="between" align="start" >
                         <Box width="100%" mt="1" py="1" px="2" mr="2" style={headerStyle}>
-                            <Text size="3" >{workflow.wwname}</Text>
+                            <Text size="3" >{workflow!.wwname}</Text>
                         </Box>
                         <Box pt="1">
                             <BarButtons barconfig={barbuttonscfg} onclick={onClick} />
@@ -67,13 +79,13 @@ export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
                 <Separator orientation="horizontal" size="4" mb="2" />
 
                 <Box width="100%" px="2" py="1" >
-                    <OutputText label="Description" data={workflow.description} />
+                    <OutputText label="Description" data={workflow!.description} />
                 </Box>
 
                 <Collapsible.Content>
                     <Flex direction="column" gapY="2" px="2" py="1" >
-                        <OutputText label="File Path" data={workflow.fpath} />
-                        <OutputText label="Context" data={workflow.context} />
+                        <OutputText label="File Path" data={workflow!.fpath} />
+                        <OutputText label="Context" data={workflow!.context} />
                     </Flex>
                 </Collapsible.Content>
 
@@ -81,7 +93,7 @@ export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
 
             
             
-            */}
+            
         </Flex>
     );
 

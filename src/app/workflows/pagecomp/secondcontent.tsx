@@ -23,7 +23,7 @@ export const SecondContent = ({workflow,section,actpanel}: CompProps) => {
         const init = async () => {     
             if(section!=null && section == MOD_SECTIONS.WORKFLOWS) {
                 if(actpanel== UiSecondPanels.WORKFLOW_PREVIEW && workflow!=null) {
-                //await appRef.current?.loadWorkflow(workflowid);
+               
                 }
             }   
             setReady(true);
@@ -36,11 +36,19 @@ export const SecondContent = ({workflow,section,actpanel}: CompProps) => {
         alert(action);
     }
 
+    if(!workflow) {
+        return (
+            <Flex width="100%" direction="column" px="2" pt="0" pb="2" >
+                <p>No workflow selected</p>
+            </Flex>
+        )    
+    }
+    
     return (
         <Flex width="100%" direction="column" >
            {currentPanel == UiSecondPanels.TASKGROUPS? <PanelTaskgroups />: null}
            {currentPanel == UiSecondPanels.WORKFLOW_PREVIEW? 
-            <CardWorkflowPreview callback={callback} />
+            <CardWorkflowPreview workflow={workflow} callback={callback} />
         : null}           
         </Flex>
     );

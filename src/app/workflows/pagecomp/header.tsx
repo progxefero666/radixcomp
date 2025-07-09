@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { Box, Grid, Flex, Text, Button, Link } from "@radix-ui/themes";
+import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 
 import { Option } from "@/common/models";
@@ -13,6 +13,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { DbModelUtil } from "@/db/dbmodelutil";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 
 const headerStyle = {
@@ -75,6 +76,9 @@ export function Header({ section, navback }: CompProps) {
     const onchange = (value: string,name?:string) =>{
     }
 
+    const onFilterchange = (value: string) =>{
+    }
+
     const renderHomeButton = () => {
         return (
             <Link href="/" >
@@ -90,9 +94,7 @@ export function Header({ section, navback }: CompProps) {
         )
     }
 
-    /*
 
-    */
     return (
         <Grid width="100%" py="2" rows="auto" columns="14% 41% 45%" style={headerStyle} >
 
@@ -105,6 +107,16 @@ export function Header({ section, navback }: CompProps) {
             <Flex gridColumn="2" gridRow="1"
                 direction="row" px="3" style={headerCenterStyle} >
                 
+                <TextField.Root placeholder="Search workflows…" size="2"
+                                onChange={(e) => {onFilterchange(e.target.value);}} >
+                    <TextField.Slot>
+                        <MagnifyingGlassIcon height="20" width="20" />
+                    </TextField.Slot>
+                </TextField.Root>
+
+            </Flex>
+
+            <Flex gridColumn="3" gridRow="1" px="3" >
                 {clangSelected !== null &&
                     <XInputSelect
                             inline={true}
@@ -112,11 +124,7 @@ export function Header({ section, navback }: CompProps) {
                             collection={clangs!}
                             default={clangSelected}
                             onchange={onchange}
-                            disabled={false} />  }                   
-            </Flex>
-
-            <Flex gridColumn="3" gridRow="1" px="3" >
-                header right
+                            disabled={false} />  }   
             </Flex>
 
         </Grid>
