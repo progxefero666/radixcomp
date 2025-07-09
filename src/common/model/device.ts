@@ -1,12 +1,11 @@
 //src\common\model\device.ts
 
-import { AppConstants } from "@/app_front/appconstants";
 
 /**
  * class Device
  */
 export class Device {
-    public size: string = AppConstants.NOT_DEF;
+    public size: string = "undefined";
     public platform: string | null = null;
     public width: number = 0;
     public height: number = 0;

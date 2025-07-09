@@ -24,6 +24,8 @@ export class HttpConst {
  */
 export class CodeGenConfig {
 
+    public static readonly NOT_DEF:string = "undefined";
+    
     public static readonly DEF_CLASS_NAMEADD: string = "Def"
     public static readonly TAB_4:string = "    ";
     public static readonly RETURN:string = "\n";

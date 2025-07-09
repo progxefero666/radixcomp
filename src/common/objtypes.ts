@@ -2,9 +2,6 @@ import path from "path";
 
 import { FileHelper } from "../common/util/filehelper";
 import { Dimension } from "./model/dimension";
-import { AppConstants } from "@/app_front/appconstants";
-
-
 
 export enum MediaType {
     TYPE_VIDEO = "VIDEO",
@@ -119,13 +116,13 @@ export class MMBase {
     public static getTextAppMimeType(filePath: string): string {
         const ext: string = path.extname(filePath).slice(1);
         const lowerExt = ext.toLowerCase();
-        return MMBase.TEXT_APP_MT_MAP[lowerExt] || AppConstants.NOT_DEF;
+        return MMBase.TEXT_APP_MT_MAP[lowerExt] || "undefined";
     }
 
     public static getAudioMimeType(filePath: string): string {
         const ext: string = FileHelper.getFileExtension(filePath);
        
-        return MMBase.AUDIO_MT_MAP[ext] || AppConstants.NOT_DEF;
+        return MMBase.AUDIO_MT_MAP[ext] || "undefined";
     }
 
     public static getImageFileMimeType(filePath: string): string {
@@ -136,12 +133,12 @@ export class MMBase {
 
     public static getImageExtMimeType(ext: string): string {
         const lowerExt = ext.toLowerCase();
-        return MMBase.IMAGE_MT_MAP[lowerExt] || AppConstants.NOT_DEF;
+        return MMBase.IMAGE_MT_MAP[lowerExt] || "undefined";
     }
     
     public static getVideoExtMimeType(ext: string): string {
         const lowerExt = ext.toLowerCase();
-        return MMBase.VIDEO_MT_MAP[lowerExt] || AppConstants.NOT_DEF;
+        return MMBase.VIDEO_MT_MAP[lowerExt] || "undefined";
     }
     
     
@@ -150,7 +147,7 @@ export class MMBase {
         const ext: string = path.extname(filePath).slice(1);
         
         const lowerExt = ext.toLowerCase();
-        return MMBase.VIDEO_MT_MAP[lowerExt] || AppConstants.NOT_DEF;
+        return MMBase.VIDEO_MT_MAP[lowerExt] || "undefined";
     }
     
 }//end class

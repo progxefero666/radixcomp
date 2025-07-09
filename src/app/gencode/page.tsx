@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
 import { AppIndex } from "@/app/index/kernel/appindex";
-import { AppConstants } from "@/app_front/appconstants";
 import { AppContext } from "@/app_front/appcontext";
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
@@ -31,7 +30,7 @@ export default function PageGenCode() {
 
     let initialized: boolean = false;
     const appRef = useRef<AppIndex>(null);
-    const [code, setCode] = useState<string>(AppConstants.NOT_DEF);
+    const [code, setCode] = useState<string>("undefined");
     const [section, setSection] = useState<string|null>(null);
 
     useEffect(() => {

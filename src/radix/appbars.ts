@@ -2,6 +2,15 @@
 
 import { AppConstants } from "@/app_front/appconstants";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { DbOps } from "@/db/dboperations";
+
+const MODE_EDITION:string = "edit";
+const ACT_OPEN:string = "open";
+const ACT_SAVE:string = "copy";    
+const ACT_EXPORT:string = "export";
+const ACT_COPY:string = "copy";   
+
+
 
 
 export class AppUiConst {
@@ -40,8 +49,8 @@ export class AppTexts {
 }//end class
 
 export const BARCFG_DELETE_OPEN: BarButtonsCfg = new BarButtonsCfg(
-    [AppConstants.ACT_ITEM__DELETE,AppConstants.ACT_OPEN],
-    [AppConstants.ACT_ITEM__DELETE,AppTexts.OPEN],
+    [DbOps.ACT_ITEM__DELETE,ACT_OPEN],
+    [DbOps.ACT_ITEM__DELETE,AppTexts.OPEN],
     [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN],
     [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN],
     [false,false],
@@ -49,7 +58,7 @@ export const BARCFG_DELETE_OPEN: BarButtonsCfg = new BarButtonsCfg(
 );
 
 export const BARCFG_EXPORT: BarButtonsCfg = new BarButtonsCfg(
-    [AppConstants.ACT_EXPORT],
+    [ACT_EXPORT],
     [AppTexts.EXPORT],
     [AppUiConst.COLOR_EXPORT],
     [AppUiConst.ICON_EXPORT],
@@ -57,7 +66,7 @@ export const BARCFG_EXPORT: BarButtonsCfg = new BarButtonsCfg(
     [true]
 );
 export const BARCFG_EXPORT_COPY: BarButtonsCfg = new BarButtonsCfg(
-    [AppConstants.ACT_EXPORT,AppConstants.ACT_COPY],
+    [ACT_EXPORT,ACT_COPY],
     [AppTexts.EXPORT,AppTexts.COPY],
     [AppUiConst.COLOR_EXPORT,AppUiConst.COLOR_COPY],
     [AppUiConst.ICON_EXPORT,AppUiConst.ICON_COPY],
@@ -66,8 +75,8 @@ export const BARCFG_EXPORT_COPY: BarButtonsCfg = new BarButtonsCfg(
 );
 
 export const BARCFG_EDITION: BarButtonsCfg = new BarButtonsCfg(
-    [AppConstants.MODE_EDITION,     AppConstants.ACT_SAVE],
-    [AppConstants.MODE_EDITION,     AppTexts.SAVE],
+    [MODE_EDITION,     ACT_SAVE],
+    [MODE_EDITION,     AppTexts.SAVE],
     [AppUiConst.COLOR_MODE_EDITION, AppUiConst.COLOR_ACT_SAVE],
     [AppUiConst.ICON_MODE_EDITION,  AppUiConst.ICON_ACT_SAVE],
     [false,false],

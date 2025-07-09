@@ -3,7 +3,6 @@
 import { StorageService } from "@/common/context/sessionstorage";
 import { Device } from "@/common/model/device";
 
-import { AppConstants } from "@/app_front/appconstants";
 import { Codelang } from "@/db/model/codelang";
 
 export class AppContext {
@@ -19,7 +18,7 @@ export class AppContext {
     }
     public static readDbSquema(): string {
         if(!StorageService.exist(AppContext.DB_ESQUEMA)){
-            return AppConstants.NOT_DEF; 
+            return "undefined"; 
         }
         return StorageService.read(AppContext.DB_ESQUEMA)!;
     }
@@ -31,7 +30,7 @@ export class AppContext {
 
     public static readCodelangs(): string {
         if(!StorageService.exist(AppContext.CODE_LANGS)){
-            return AppConstants.NOT_DEF; 
+            return "undefined"; 
         }
         return StorageService.read(AppContext.CODE_LANGS)!;
     }

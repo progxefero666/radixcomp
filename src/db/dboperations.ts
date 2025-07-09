@@ -4,6 +4,11 @@
  * class DbOps.ERROR_BADFORMAT
  */
 export class DbOps {
+    
+    public static readonly ACT_COLLECTION_CLEAR:string = "insert";
+    public static readonly ACT_ITEM_INSERT:string = "insert";
+    public static readonly ACT_ITEM__UPDATE:string = "update";
+    public static readonly ACT_ITEM__DELETE:string = "delete";
 
     public static readonly SUCCESS: string = "success";
     public static readonly ERROR: string = "error";
