@@ -3,7 +3,7 @@
 //src\db\services\crud\srvcrudtasktypes.ts
 "use server";
 
-import { JsonResponse } from "@/common/jsonresponse";
+import { JsonResponse } from "@/common/jsonmodels";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
 import { Tasktype } from "@/db/model/tasktype";

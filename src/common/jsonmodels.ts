@@ -7,7 +7,6 @@ import { DbOps } from "@/db/dboperations";
  *    for back services responses.
  */
 export class JsonResponse {
-
     
     public static readonly TAB: number = 4;
 

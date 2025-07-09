@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 import { Box, Separator, Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
-import { Option } from "@/common/option";
+import { Option } from "@/common/models";
 import { AppConfig } from "@/app/index/appconfig";
 import { AppIndex } from "@/app/index/kernel/appindex";
 import MenuButtons from "@/radix/cbars/btmenu";

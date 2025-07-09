@@ -8,7 +8,7 @@ import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 import Home from "./page";
 import PageGenCode from "../gencode/page";
 import PageTest from "../testcomp/page";
-import { Option } from "@/common/option";
+import { Option } from "@/common/models";
 
 /**
  * Main app view page component

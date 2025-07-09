@@ -3,10 +3,10 @@
 import { forwardRef, useEffect, useState } from "react";
 import { Flex, Text, RadioGroup, CheckboxGroup, Box } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { Option } from "@/common/option";
+import { Option } from "@/common/models";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
-import { StringsHelper } from "@/common/stringshelper";
-import { ModelHelper } from "@/common/collectionutil";
+import { StringsHelper } from "@/markdown/mkdstrings";
+import { CollectionHelper } from "@/common/collhelper";
 import { RadixUtil } from "../radixutil";
 import { TOption, TSelected, TSelection } from "@/radix/radixtypes";
 import { RadixConstants } from "../radixconstants";
@@ -70,7 +70,7 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
 
  
     const onSelect = (value: string) => {
-        const itemIndex: number = ModelHelper.getTOptionIndex(options, value);
+        const itemIndex: number = CollectionHelper.getTOptionIndex(options, value);
         let coll_values:boolean[] = collValues;
         coll_values[itemIndex] = !coll_values[itemIndex];
         options[itemIndex].selected = coll_values[itemIndex];

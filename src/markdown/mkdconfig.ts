@@ -7,6 +7,7 @@
  */
 export class MarkdownConfig {
     
+    
     // ========================================
     // BASIC FORMATTING MARKS
     // ========================================

@@ -1,8 +1,8 @@
 //src\client\metadata\schemaservice.ts
 
 import { ModelTable } from "@/codegen/kernel/cgmodel";
-import { Option } from "@/common/option";
-import { ModelHelper } from "@/common/collectionutil";
+import { Option } from "@/common/models";
+import { CollectionHelper } from "@/common/collhelper";
 import { TOption, TSelection } from "@/radix/radixtypes";
 
 /**
@@ -48,7 +48,7 @@ export class SchemaService {
             "task",
             "tasktype",
             "workflow"];
-        return Promise.resolve(ModelHelper.getOptionsFromList(dummyTables));
+        return Promise.resolve(CollectionHelper.getOptionsFromList(dummyTables));
     }
 
     public static getListTables(): string[] {

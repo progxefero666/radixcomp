@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Flex} from "@radix-ui/themes";
-import { Option } from "@/common/option";
+import { Option } from "@/common/models";
 import MenuButtons from "@/radix/cbars/btmenu";
 import { AppConfig } from "@/app/index/appconfig";
 

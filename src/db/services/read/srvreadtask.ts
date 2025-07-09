@@ -1,7 +1,7 @@
 //src\db\services\read\srvreadtasks.ts
 "use server";
 
-import { JsonResponse } from "@/common/jsonresponse";
+import { JsonResponse } from "@/common/jsonmodels";
 import { Prisma, PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
 import { DB_TABLES } from "@/db/dbcatalog";

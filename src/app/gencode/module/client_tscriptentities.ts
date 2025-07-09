@@ -5,7 +5,7 @@ import { GenCodeModuleControl } from "@/app/gencode/module/gcmodcontrol";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
 import { TOption, TSelection } from "@/radix/radixtypes";
-import { ModelHelper } from "@/common/collectionutil";
+import { CollectionHelper } from "@/common/collhelper";
 import { JsonHelper } from "@/common/jsonhelper";
 
 
@@ -39,7 +39,7 @@ export class ServClientTScriptEntities extends GenCodeModuleControl {
         } 
         else if( (operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id) ||
                  (operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id) ){   
-            const selectTables:string[] = ModelHelper.getListFromTOptions(tables!);
+            const selectTables:string[] = CollectionHelper.getListFromTOptions(tables!);
             const namesjoined:string = CodeGenHelper.getStringsJoined(selectTables!);
             code = await getTypeScriptArrayTableContent(this.sqlsquema,operationId,namesjoined);  
         }               

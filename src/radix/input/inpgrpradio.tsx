@@ -3,10 +3,10 @@
 import { forwardRef } from "react";
 import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { Option } from "@/common/option";
+import { Option } from "@/common/models";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
-import { StringsHelper } from "@/common/stringshelper";
-import { ModelHelper } from "@/common/collectionutil";
+import { StringsHelper } from "@/markdown/mkdstrings";
+import { CollectionHelper } from "@/common/collhelper";
 
 
 /*
@@ -50,7 +50,7 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
     }
         
     const onSelect = (value:string) => {
-        const itemIndex:number = ModelHelper.getElementIndex(options,value);        
+        const itemIndex:number = CollectionHelper.getElementIndex(options,value);        
         if(auto) {
             if(name){onselect(itemIndex,name);}
             else    {onselect(itemIndex);}           

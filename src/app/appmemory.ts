@@ -1,6 +1,6 @@
 // File: src/app/appstorage.service.ts
 
-import { StorageService } from "@/common/sessionstorage";
+import { StorageService } from "@/common/storage";
 import { Codelang } from "@/db/model/codelang";
 
 export class AppMemmory {

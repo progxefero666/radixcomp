@@ -1,7 +1,9 @@
 //src\common\util\stringshelper.ts
 
+import { MarkdownConfig } from "./mkdconfig";
 
-import { CodeGenConfig } from "@/codegen/cgconfig";
+
+
 
 /**
  * class StringsHelper.capitalize
@@ -39,7 +41,7 @@ export class StringsHelper {
     }//end  
 
     public static getTabsSpace(countTabs:number): string {
-        return CodeGenConfig.TAB_4.repeat(countTabs);
+        return MarkdownConfig.TAB_4.repeat(countTabs);
     }
 
     public static applyTabsToStringBlock(text:string,countTabs:number): string {
@@ -47,7 +49,7 @@ export class StringsHelper {
         //calculate total identation characters
         let spaceApply:string = "";
         for (let idx=0;idx<countTabs;idx++) {
-            spaceApply += CodeGenConfig.TAB_4;
+            spaceApply += MarkdownConfig.TAB_4;
         }
 
         // apply indentation to each line

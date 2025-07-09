@@ -1,13 +1,13 @@
 //src\common\util\modelhelper.ts
 
-import { Option } from "@/common/option";
+import { Option } from "@/common/models";
 import { TOption, TSelection } from "@/radix/radixtypes";
 
 /**
  *  class ModelHelper.getListFromTOptions
  *      provides utility methods to work with model data.
  */
-export class ModelHelper {
+export class CollectionHelper {
 
     public static getOptionsFromList(collection: string[]): Option[] {
         const options: Option[] = [];

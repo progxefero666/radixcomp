@@ -1,7 +1,7 @@
 //src\db\services\crud\srvcrudapptypes.ts
 "use server";
 
-import { JsonResponse } from "@/common/jsonresponse";
+import { JsonResponse } from "@/common/jsonmodels";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
 import { Apptype } from "@/db/model/apptype";
