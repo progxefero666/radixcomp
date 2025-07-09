@@ -10,6 +10,10 @@ interface CompProps {
    text?: string;
     children?: React.ReactNode;
 }
+
+export const XPopOverA = ({ children, barbuttonscfg, text }: CompProps) => {
+}
+
 export const XPopOver = ({ children, barbuttonscfg,text }: CompProps) => {
 
 
