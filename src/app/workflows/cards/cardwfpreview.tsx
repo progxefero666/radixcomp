@@ -36,18 +36,35 @@ export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
     const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);
 
+    /*
+    import { Tabs } from "radix-ui";
+
+    export default () => (
+        <Tabs.Root defaultValue="tab1" orientation="vertical">
+            <Tabs.List aria-label="tabs example">
+                <Tabs.Trigger value="tab1">One</Tabs.Trigger>
+                <Tabs.Trigger value="tab2">Two</Tabs.Trigger>
+                <Tabs.Trigger value="tab3">Three</Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="tab1">Tab one content</Tabs.Content>
+            <Tabs.Content value="tab2">Tab two content</Tabs.Content>
+            <Tabs.Content value="tab3">Tab three content</Tabs.Content>
+        </Tabs.Root>
+    );
+
+    */
     useEffect(() => {        
         if(ready) {return;}
         const init = async () => {     
             if(workflow) {
-                alert("CardWorkflowPreview: " + workflow.wwname);
+                //alert("CardWorkflowPreview: " + workflow.wwname);
             }           
             setReady(true);
         };
         init();
         
     }, []);        
-    
+
     const onClick = (item: string, compName?: string) => {
         //callback(workflow.id, item);
     };

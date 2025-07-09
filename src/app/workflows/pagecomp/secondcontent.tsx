@@ -21,11 +21,7 @@ export const SecondContent = ({workflow,section,actpanel}: CompProps) => {
     useEffect(() => {        
         if(ready) {return;}
         const init = async () => {     
-            if(section!=null && section == MOD_SECTIONS.WORKFLOWS) {
-                if(actpanel== UiSecondPanels.WORKFLOW_PREVIEW && workflow!=null) {
-               
-                }
-            }   
+            //if(section!=null && section == MOD_SECTIONS.WORKFLOWS) {}   
             setReady(true);
         };
         init();
@@ -33,7 +29,7 @@ export const SecondContent = ({workflow,section,actpanel}: CompProps) => {
     }, []);    
 
     const callback = (workflowId:number,action:string) => {
-        alert(action);
+        //alert(action);
     }
 
     if(!workflow) {
@@ -43,13 +39,12 @@ export const SecondContent = ({workflow,section,actpanel}: CompProps) => {
             </Flex>
         )    
     }
-    
+
     return (
         <Flex width="100%" direction="column" >
            {currentPanel == UiSecondPanels.TASKGROUPS? <PanelTaskgroups />: null}
            {currentPanel == UiSecondPanels.WORKFLOW_PREVIEW? 
-            <CardWorkflowPreview workflow={workflow} callback={callback} />
-        : null}           
+            <CardWorkflowPreview workflow={workflow} callback={callback} />: null}           
         </Flex>
     );
 	 

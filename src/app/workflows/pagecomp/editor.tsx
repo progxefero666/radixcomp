@@ -52,8 +52,7 @@ export  function WorkflowEditor({section,showwfpreview}: CompProps) {
     }, []);    
 
     const execWfItemCardOperation = (itemIndex:number,action:string) =>    {
-        alert(workflows![itemIndex].id);
-        
+                
         if(action == DB_ITEM_COMMAND.SELECT) {
             showwfpreview(workflows![itemIndex]);
             return;
