@@ -9,34 +9,34 @@ export class Task {
     public tasktype_id: number;
     public codelang_id: number;
     public workflow_id: number;
+    public taskgroup_id: string;    
     public orden: number;
     public tkname: string;
     public description: string;
     public files: string;
     public folders: string;
-    public wgroup: string | null = null;
 
     constructor(id: number,
                 tasktype_id: number,
                 codelang_id: number,
                 workflow_id: number,
+                taskgroup_id: string,
                 orden: number,
                 tkname: string,
                 description: string,
                 files: string,
-                folders: string,
-                wgroup: string| null ) {
+                folders: string) {
 
         this.id = id;
         this.tasktype_id = tasktype_id;
         this.codelang_id = codelang_id;
         this.workflow_id = workflow_id;
+        this.taskgroup_id = taskgroup_id;
         this.orden = orden;
         this.tkname = tkname;
         this.description = description;
         this.files = files;
         this.folders = folders;
-        this.wgroup = wgroup;
     }
 
     /**
@@ -55,36 +55,23 @@ export class Task {
      * @returns The maximum length of the field or null if not applicable.
      */
     public maxlen(fieldName: string): number | null {
-        if (fieldName === "id") {
-            return 15; // max digits for numeric
-        }
-        if (fieldName === "tasktype_id") {
-            return 15; // max digits for numeric
-        }
-        if (fieldName === "codelang_id") {
-            return 15; // max digits for numeric
-        }
-        if (fieldName === "workflow_id") {
-            return 15; // max digits for numeric
-        }
+
+
         if (fieldName === "orden") {
             return 15; // max digits for numeric
         }
-        if (fieldName === "tkname") {
+        else if (fieldName === "tkname") {
             return 255;
         }
-        if (fieldName === "description") {
+        else if  (fieldName === "description") {
             return -1; // unlimited length
         }
-        if (fieldName === "files") {
+        else if (fieldName === "files") {
             return -1; // unlimited length
         }
-        if (fieldName === "folders") {
+        else if (fieldName === "folders") {
             return -1; // unlimited length
         }
-        if (fieldName === "wgroup") {
-            return 100; 
-        }        
         return 0;
     }
 
