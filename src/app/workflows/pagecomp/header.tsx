@@ -8,9 +8,11 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { Option } from "@/common/models";
 import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
 import { Codelang } from "@/db/model/codelang";
-import { parseCollection } from "@/front/parser/javascriptparser";
+import { parseCollection, parseResponseCollection } from "@/front/parser/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
+import { XInputSelect } from "@/radix/input/inpselect";
+import { DbModelUtil } from "@/db/dbmodelutil";
 
 
 const headerStyle = {
@@ -34,15 +36,9 @@ const headerRightStyle = {
     height: 'auto',
 };
 
-/*
-<XInputSelect
-    inline={true}
-    label="Operation: "
-    collection={operations}
-    default={operationId}
-    onchange={onOpSelected}
-    disabled={false} />
-*/
+
+
+
 
 /**
  * Page WorkFlows Header
@@ -56,7 +52,9 @@ export function Header({ section, navback }: CompProps) {
     const pathname = usePathname();
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
     const [ready, setReady] = useState<boolean>(false);
-    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
+    
+    const [clangs,setClangs] = useState<Option[]|null>(null);
+    const [clangSelected,setClangSelected] = useState<string|null>(null);
 
     useEffect(() => {
         if (ready) { return; }
@@ -64,13 +62,18 @@ export function Header({ section, navback }: CompProps) {
 
         const init = async () => {
             const response = await getAllByTable(DbTables.codelang);
-            if (response === null) { return false; }
-         
-            setCodelangs(parseCollection<Codelang>(response));
+            if (response === null) { return false; }         
+            const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
+            if (collection === null) { return; }
+            setClangs(DbModelUtil.getCodelangsOptions(collection));
+            setClangSelected(collection[0].id.toString());
             setReady(true);
         }
         init();
     }, []);
+
+    const onchange = (value: string,name?:string) =>{
+    }
 
     const renderHomeButton = () => {
         return (
@@ -87,6 +90,9 @@ export function Header({ section, navback }: CompProps) {
         )
     }
 
+    /*
+
+    */
     return (
         <Grid width="100%" py="2" rows="auto" columns="14% 41% 45%" style={headerStyle} >
 
@@ -98,7 +104,15 @@ export function Header({ section, navback }: CompProps) {
 
             <Flex gridColumn="2" gridRow="1"
                 direction="row" px="3" style={headerCenterStyle} >
-                <Text size="5"> Man. WorkFlows</Text>
+                
+                {clangSelected !== null &&
+                    <XInputSelect
+                            inline={true}
+                            label="Code Langs: "
+                            collection={clangs!}
+                            default={clangSelected}
+                            onchange={onchange}
+                            disabled={false} />  }                   
             </Flex>
 
             <Flex gridColumn="3" gridRow="1" px="3" >
@@ -111,6 +125,7 @@ export function Header({ section, navback }: CompProps) {
 }//end PrimaryBar
 
 /*
+<Text size="5"> Man. WorkFlows</Text>
 return (
     <Flex width="100%" direction="row" align="center" style={headerStyle}  py="3">
 
