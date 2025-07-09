@@ -2,7 +2,7 @@
 "use server";
 
 import { JsonResponse } from "@/common/json/models/jsonresponse";
-import { PrismaClient } from "@generated/prisma";
+import { Prisma, PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
 import { DB_TABLES } from "@/db/dbcatalog";
 
@@ -27,6 +27,36 @@ export async function getAll(): Promise<string> {
     finally {await prisma.$disconnect();}
     return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
 } //end function
+
+export async function getByParent(commandSql:string,workflow_id:number,taskgroup_id:number): Promise<string> {
+    const prisma = new PrismaClient();
+    let result = null;
+    try {
+        result = await prisma.$queryRawUnsafe(
+            commandSql);
+    }
+    catch (error) {return JsonResponse.ERROR(OpUtil.getErrMessage(error));}
+    finally {await prisma.$disconnect();}
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
+} //end function
+
+export async function executeQuery(commandSql:string,params:any[]= []): Promise<string> {
+	
+    const prisma = new PrismaClient();
+    let result = null;
+
+    try {
+        result = await prisma.$queryRaw(Prisma.sql`${commandSql}`, ...params);
+    } 
+	catch (error) {
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+    } 
+	finally {
+        await prisma.$disconnect();
+    }
+
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
+}
 
 
 export async function getByParents(
