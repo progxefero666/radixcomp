@@ -9,7 +9,7 @@ import { WorkflowsConfig } from "@/app/workflows/config";
 
 import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
 import { Codelang } from "@/db/model/codelang";
-import { getAllByTable } from "@/db/services/generic/srvreadcmcollection";
+import { getAllByTable } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
 import { parseCollection } from "@/common/parsers/javascriptparser";
 

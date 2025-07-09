@@ -1,13 +1,48 @@
-//src\db\services\read\srvreadcmcollections.ts
+//src\db\services\generic\serviceread.ts
 "use server";
 
 import { JsonResponse } from "@/common/json/models/jsonresponse";
-import { PrismaClient } from "@generated/prisma";
+import { Prisma, PrismaClient } from "@generated/prisma";
 
 import { DbOps, OpUtil } from "@/db/dboperations";
-import { DbTables } from "@/db/dbcatalog";
+import { DB_TABLES, DbTables } from "@/db/dbcatalog";
 
+export async function executeReadQuery(commandSql:string,params:any[]= []): Promise<string> {
+	
+    const prisma = new PrismaClient();
+    let result = null;
+    try {
+        result = await prisma.$queryRaw(Prisma.sql`${commandSql}`, ...params);
+    } 
+	catch (error) {
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+    } 
+	finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
+}//end function
 
+export async function getCountByParents(workflow_id:number,taskgroup_id:number): Promise<string> {
+
+    const prisma = new PrismaClient();
+    let count = 0; 
+    try {
+        count = await prisma.task.count({
+            where: {
+                workflowId: workflow_id,
+                taskgroupId: taskgroup_id,
+            },
+        });
+    }
+    catch (error) {        
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+    } 
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.COUNT_ROWS), count);
+}
 
 /**
  * Server Action for Read Commom Tables

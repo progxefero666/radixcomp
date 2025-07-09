@@ -8,7 +8,7 @@ import { AppWorkflows } from "@/app_front/workflows/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
 import { getAll } from "@/db/services/read/srvreadcodelang";
 import { DbTables } from "@/db/dbcatalog";
-import { getAllByTable } from "@/db/services/generic/srvreadcmcollection";
+import { getAllByTable } from "@/db/services/generic/serviceread";
 import { Codelang } from "@/db/model/codelang";
 import { parseCollection, parseResponseCollection } from "@/common/parsers/javascriptparser";
 import CardWorkflow from "../cards/cardworkflow";

@@ -40,23 +40,6 @@ export async function getByParent(commandSql:string,workflow_id:number,taskgroup
     return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
 } //end function
 
-export async function executeQuery(commandSql:string,params:any[]= []): Promise<string> {
-	
-    const prisma = new PrismaClient();
-    let result = null;
-
-    try {
-        result = await prisma.$queryRaw(Prisma.sql`${commandSql}`, ...params);
-    } 
-	catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
-    } 
-	finally {
-        await prisma.$disconnect();
-    }
-
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
-}
 
 
 export async function getByParents(
@@ -105,6 +88,8 @@ export async function getByParents(
 }//end function
 
 
+
+
 /**
  * Server Action: Get Tasks by Workflow id   
  *    desc: read all rows in table tasktypes
@@ -128,7 +113,6 @@ export async function getByWorkflowGroupOld(workflow_id: number, taskgroup_id: n
         });
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.task, DbOps.GET_BY_FK));
         return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {
