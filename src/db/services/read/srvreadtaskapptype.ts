@@ -16,7 +16,7 @@ export async function get(id:number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.appType.findFirst({where:{id:id}});
+        result = await prisma.apptype.findFirst({where:{id:id}});
         if (result === null) {
             return JsonResponse.ERROR
                 (OpUtil.getErrNotFoundMessage(DbOps.GET_BY_ID,DB_TABLES.apptype));
@@ -41,7 +41,7 @@ export async function getAll(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.appType.findMany();        
+        result = await prisma.apptype.findMany();        
     }
     catch (error) {
         return JsonResponse.ERROR(OpUtil.getErrMessage(error));

@@ -68,7 +68,7 @@ export async function getAll(): Promise<string> {
  * Server Action: Get Tasks by Workflow id   
  *    desc: read all rows in table tasktypes
  */
-export async function getByWorkflow(workflow_id:number): Promise<string> {
+export async function getByWorkflowGroup(workflow_id:number,taskgroup_id:number): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
@@ -76,9 +76,10 @@ export async function getByWorkflow(workflow_id:number): Promise<string> {
         result = await prisma.task.findMany({
             where: {id:workflow_id},
             include: {
+                codelang: true,                
                 tasktype: true,
                 workflow: true,
-                codelang: true,
+                taskgroup: true
             }
         });
     }
@@ -92,3 +93,35 @@ export async function getByWorkflow(workflow_id:number): Promise<string> {
     return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_BY_FK), result);
 
 } //end function
+
+
+/**
+ * Server Action: Get Tasks by Workflow id   
+ *    desc: read all rows in table tasktypes
+ */
+export async function getByWorkflow(workflow_id:number): Promise<string> {
+
+    const prisma = new PrismaClient();
+    let result = null;
+    try {
+        result = await prisma.task.findMany({
+            where: {id:workflow_id},
+            include: {
+                codelang: true,                
+                tasktype: true,
+                workflow: true,
+                taskgroup: true
+            }
+        });
+    }
+    catch (error) {
+        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.task, DbOps.GET_BY_FK));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_BY_FK), result);
+
+} //end function
+

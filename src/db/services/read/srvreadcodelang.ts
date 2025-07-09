@@ -21,7 +21,7 @@ export async function get(id:number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.codeLang.findFirst(
+        result = await prisma.codelang.findFirst(
             {
                 where:{id:id},
             }
@@ -47,7 +47,7 @@ export async function getAll(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.codeLang.findMany();
+        result = await prisma.codelang.findMany();
     }
     catch (error) {
         OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL));

@@ -6,9 +6,9 @@ import { Box, Flex, Text} from "@radix-ui/themes";
 
 import { AppWorkflows } from "@/app_front/workflows/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
-import { getAll } from "@/db/services/read/srvreadcodelangs";
+import { getAll } from "@/db/services/read/srvreadcodelang";
 import { DbTables } from "@/db/dbcatalog";
-import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
+import { getAllByTable } from "@/db/services/generic/srvreadcmcollection";
 import { Codelang } from "@/db/model/codelang";
 import { parseCollection, parseResponseCollection } from "@/common/parsers/javascriptparser";
 import CardWorkflow from "../cards/cardworkflow";

@@ -6,14 +6,14 @@ import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 
 import { JSonConsole } from "@/common/util/jsonhelper";
-import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
+import { getAllByTable } from "@/db/services/generic/srvreadcmcollection";
 
 import { JsonResponse } from "@/common/json/models/jsonresponse";
 import { parseCollection } from "@/common/parsers/javascriptparser";
 import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";
 import { Apptype } from "@/db/model/apptype";
-import { insert } from "@/db/services/crud/srvcrudapptypes";
+import { insert } from "@/db/services/crud/srvcrudapptype";
 
 //const dbSquema = await readDbSqlScriptFile("dbsquema");  
 //if(codelang_coll === null) {return false;}

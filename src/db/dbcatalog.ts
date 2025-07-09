@@ -16,6 +16,7 @@ export type TypeTableMap = {
     codeLang:   DbTables.codelang;
     tasktype:   DbTables.tasktype;
     workflow:   DbTables.workflow;
+    taskgroup: DbTables.taskgroup;
     task:       DbTables.task;
     apptype:    DbTables.apptype;
     application:DbTables.application;
@@ -25,6 +26,7 @@ export const DB_TABLES: TypeTableMap = {
     codeLang:   DbTables.codelang,
     tasktype:   DbTables.tasktype,
     workflow:   DbTables.workflow,
+    taskgroup: DbTables.taskgroup,
     task:       DbTables.task,
     apptype:    DbTables.apptype,
     application:DbTables.application,

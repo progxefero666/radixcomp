@@ -12,7 +12,7 @@ import { PrimaryBar }       from "@/app/workflows/pagecomp/primarybar";
 import { MainContent }      from "@/app/workflows/pagecomp/body";
 import { SecondBar }        from "@/app/workflows/pagecomp/secondbar";
 import { Codelang } from "@/db/model/codelang";
-import { getAllByTable } from "@/db/services/generic/srvreadcmcollections";
+import { getAllByTable } from "@/db/services/generic/srvreadcmcollection";
 import { DbTables } from "@/db/dbcatalog";
 import { parseCollection } from "@/common/parsers/javascriptparser";
 
