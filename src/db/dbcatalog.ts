@@ -6,6 +6,7 @@ export enum DbTables {
     codelang    = "codelang",
     tasktype    = "tasktype",
     workflow    = "workflow",
+    taskgroup  = "taskgroup",
     task        = "task",
     apptype     = "apptype",
     application = "application"

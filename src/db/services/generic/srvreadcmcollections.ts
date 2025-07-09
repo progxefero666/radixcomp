@@ -29,6 +29,9 @@ export async function getAllByTable(table: string): Promise<string> {
         else if( table === DbTables.workflow ) {
             result = await prisma.workflow.findMany();
         }
+        else if( table === DbTables.taskgroup ) {
+            result = await prisma.taskgroup.findMany();
+        }        
         else if( table === DbTables.task ) {
             result = await prisma.task.findMany();
         }        

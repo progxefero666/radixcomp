@@ -7,18 +7,18 @@ export class Workflow {
 
     public id: number;
     public wwname: string;
+    public context: string|null = null;    
     public description: string = '';
-    public context: string|null = null;
-    public application: string;
-    public fpath: string;
+    public application: string|null = null;   
+    public fpath: string|null;
     public readonly updated: Date;
 
     constructor(id: number,
                 wwname: string,
                 context:string|null,
                 description: string,
-                application: string,
-                fpath: string,
+                application: string|null,
+                fpath: string|null,
                 updated: Date ) {
 
         this.id = id;
