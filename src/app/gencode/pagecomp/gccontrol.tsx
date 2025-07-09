@@ -16,7 +16,7 @@ import { XInputSelect } from "@/radix/input/inpselect";
 import { SeparatorH } from "@/radix/container/separatorh";
 
 import { AppMemmory } from "@/app/appmemory";
-import { XPopOver } from "@/radix/container/popover";
+import { PopupBase } from "@/radix/container/popupbase";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
@@ -241,14 +241,14 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                             onchange={onSelectTable} /> : null}
                     {showCheckList ?
                         <Box mr="2">
-                            <XPopOver text="select">
+                            <PopupBase label="select">
                                 <XCheckGroup
                                     name="selectTables"
                                     autocommit={true}
                                     inline={true}
                                     collection={menuListTables}
                                     onselect={onSelectTables} />
-                            </XPopOver>
+                            </PopupBase>
                         </Box> : null}
                 </Flex>
             </Flex>

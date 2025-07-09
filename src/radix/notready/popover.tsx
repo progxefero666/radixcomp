@@ -7,11 +7,8 @@ import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 
 interface CompProps {
     barbuttonscfg?: BarButtonsCfg;
-   text?: string;
+    text?: string;
     children?: React.ReactNode;
-}
-
-export const XPopOverA = ({ children, barbuttonscfg, text }: CompProps) => {
 }
 
 export const XPopOver = ({ children, barbuttonscfg,text }: CompProps) => {
@@ -28,7 +25,7 @@ export const XPopOver = ({ children, barbuttonscfg,text }: CompProps) => {
     const triggerButtonText: string = "open";
 
     return (
-        <Popover.Root onOpenChange={(open) => { onOpen(open) }} >
+        <Popover.Root onOpenChange={(open) => { onOpen(open) }} open={false} >
             <Popover.Trigger >
                 <Button >
                     {triggerButtonText}

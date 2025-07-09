@@ -30,3 +30,34 @@ export class Option {
     }
 
 }//end class
+
+/**
+ * class Editable Option
+ */
+export class EditableOption {
+
+    public id:   string;
+    public orden: number;
+    public text: string;
+
+    constructor(id:string,orden: number,text:string){
+        this.id = id;
+        this.orden = orden;
+        this.text = text;
+    }
+
+}//end component
+
+export class EditableCollection {
+
+    public id:   string;
+    public label: string|null=null;
+    public collection:EditableOption[];
+
+    constructor(id:string,collection:EditableOption[],label:string|null){
+        this.id = id;        
+        this.collection = collection;
+        this.label = label;
+    }
+
+}//end component

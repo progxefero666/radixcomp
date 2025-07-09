@@ -10,12 +10,14 @@ import { ThemeCompStyle } from "@/radix/radixtheme";
 //color: 'white'   
 //padding: '0px 0px 0px 0px ', 
 
-const compStyle={
-    borderRadius: '8px',
-    background: 'rgb(132, 208, 10)',
- 
-};
+/*
+ const compStyle={
+        borderRadius: '8px',
+        background: 'rgb(132, 208, 10)',
+    };
+*/
 
+//'rgb(132, 208, 10)'
 interface CompProps {
     color: string;
     text: string;
@@ -24,9 +26,13 @@ interface CompProps {
 }
 export const Pill = ({color,text,children,childalign}: CompProps) => {
 
-    const text_size    = RadixConf.SIZES.size_2;
-    const radius  = ThemeCompStyle.CONT_RADIUS;
-    const variant = RadixConf.VARIANTS.surface;
+    //const radius  = ThemeCompStyle.CONT_RADIUS;
+    const compStyle={
+        borderRadius: "8px",
+        background: color,
+    };
+    const text_size = RadixConf.SIZES.size_2;
+
     const showIcon: boolean = !!children;
     const alignIcon: string = childalign ? "left" : "right";
 
