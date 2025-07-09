@@ -45,37 +45,6 @@ export class RadixConf {
         full: "full" as any,
     };
 
-   static readonly COLORS = {
-        gray: "gray" as any,
-        mauve: "mauve" as any,
-        slate: "slate" as any,
-        sage: "sage" as any,
-        olive: "olive" as any,
-        sand: "sand" as any,
-
-        tomato: "tomato" as any,
-        red: "red" as any,
-        ruby: "ruby" as any,
-        crimson: "crimson" as any,
-        pink: "pink" as any,
-        plum: "plum" as any,
-        purple: "purple" as any,
-        violet: "violet" as any,
-        iris: "iris" as any,
-        indigo: "indigo" as any,
-        blue: "blue" as any,
-        cyan: "cyan" as any,
-        teal: "teal" as any,
-        jade: "jade" as any,
-        green: "green" as any,
-        grass: "grass" as any,
-        lime: "lime" as any,
-        yellow: "yellow" as any,
-        amber: "amber" as any,
-        orange: "orange" as any,
-        brown: "brown" as any,
-        sky: "sky-7" as any, // experimental
-    };
 
     //placeholder = "Enter text..." 
     public static readonly INPUT_TEXT_TYPES = {

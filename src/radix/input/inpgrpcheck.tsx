@@ -9,7 +9,7 @@ import { StringsHelper } from "@/markdown/mkdstrings";
 import { CollectionHelper } from "@/common/collhelper";
 import { RadixUtil } from "../radixutil";
 import { TOption, TSelected, TSelection } from "@/radix/radixtypes";
-import { RadixConstants } from "../radixconstants";
+import { RADIX_COLORS, RadixConstants } from "../radixconstants";
 
 /*
 <CheckboxGroup.Root defaultValue={["1"]} name="example">
@@ -47,7 +47,7 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
     if(inline) {compDirection = "row";}
 
     const compStyle: radixTypeComp = {
-        color: RadixConf.COLORS.gray,
+        color: RADIX_COLORS.gray,
         size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
         radius: RadixConf.RADIUS.medium

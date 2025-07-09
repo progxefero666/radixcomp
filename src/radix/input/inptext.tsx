@@ -4,7 +4,7 @@ import { Box, Flex, TextField } from "@radix-ui/themes";
 import { ThemeCompStyle, ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
-import { RadixKeys } from "../radixconstants";
+import { RADIX_COLORS, RadixKeys } from "../radixconstants";
 
 
 /**
@@ -32,7 +32,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const [value, setValue] = useState<string|null>(defaul ?? null);
 
-    const color   = RadixConf.COLORS.gray;
+    const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
     const radius  = ThemeCompStyle.CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;

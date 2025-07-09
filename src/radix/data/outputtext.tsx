@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Flex,Text,TextArea  } from "@radix-ui/themes";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
+import { RADIX_COLORS } from "../radixconstants";
 
 const labelBoxStyle = {
     borderBottom: '1px solid rgba(54, 56, 54, 0.9)',
@@ -23,7 +24,7 @@ export function OutputText ({bigsize,inline,label,data}: CompProps) {
 
     if(!data || data==null) {data = 'undefined';}
 
-    const label_color   = label ? RadixConf.COLORS.orange : null;
+    const label_color   = label ? RADIX_COLORS.orange : null;
     const data_size    = label ? RadixConf.SIZES.size_2 : null;
     let showInline: boolean = inline ?? false;
     let isTextArea: boolean = false;
@@ -35,7 +36,7 @@ export function OutputText ({bigsize,inline,label,data}: CompProps) {
             {label ? 
                 <Box as="div" width="100%" mb="2" style={labelBoxStyle} >
                    <Label.Root htmlFor="firstName">
-                        <Text color={label_color} >
+                        <Text color={label_color!} >
                             {label}
                         </Text>                    
                     </Label.Root> 

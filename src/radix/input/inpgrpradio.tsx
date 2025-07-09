@@ -7,6 +7,7 @@ import { Option } from "@/common/models";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
 import { StringsHelper } from "@/markdown/mkdstrings";
 import { CollectionHelper } from "@/common/collhelper";
+import { RADIX_COLORS } from "../radixconstants";
 
 
 /*
@@ -43,7 +44,7 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
     const compDirection: radixTypeDirection = direction ?? "row";
 
     const compStyle: radixTypeComp = {
-        color: RadixConf.COLORS.gray,
+        color: RADIX_COLORS.gray,
         size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
         radius: RadixConf.RADIUS.medium

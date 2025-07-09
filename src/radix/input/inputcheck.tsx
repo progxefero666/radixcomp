@@ -6,6 +6,7 @@ import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
 import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
+import { RADIX_COLORS } from "../radixconstants";
 
 interface CompProps {
     autocommit?: boolean;
@@ -23,7 +24,7 @@ export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
-    const color = RadixConf.COLORS.gray;
+    const color = RADIX_COLORS.gray;
 
     const showInline: boolean = inline ?? false;
     const isReadOnly: boolean = readonly ?? false;

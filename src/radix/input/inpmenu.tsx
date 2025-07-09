@@ -9,6 +9,7 @@ import { Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
 import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
+import { RADIX_COLORS } from "../radixconstants";
 
 /*
 <Flex direction="column" gap="4">
@@ -65,7 +66,7 @@ export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
-    const color = RadixConf.COLORS.gray;
+    const color = RADIX_COLORS.gray;
 
     const showInline: boolean = inline ?? false;
     const isReadOnly: boolean = readonly ?? false;

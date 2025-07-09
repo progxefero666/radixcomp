@@ -52,27 +52,66 @@ export class RadixConstants {
 
 }//end class 
 
+export enum RADIX_COLORS {
+    gray= "gray",
+    mauve= "mauve" ,
+    slate= "slate" ,
+    sage= "sage" ,
+    olive= "olive" ,
+    sand= "sand" ,
+    tomato= "tomato" ,
+    red= "red" ,
+    ruby= "ruby" ,
+    crimson= "crimson" ,
+    pink= "pink" ,
+    plum= "plum" ,
+    purple= "purple" ,
+    violet= "violet" ,
+    iris= "iris" ,
+    indigo= "indigo" ,
+    blue= "blue" ,
+    cyan= "cyan" ,
+    teal= "teal" ,
+    jade= "jade" ,
+    green= "green" ,
+    grass= "grass" ,
+    lime= "lime" ,
+    yellow= "yellow" ,
+    amber= "amber" ,
+    orange= "orange" ,
+    brown= "brown" ,
+    sky= "sky-7" , 
+};
+
+/**
+ * class DbOperations
+ */
+export class DbOperations {   
+
+}//end class 
+
 
 /**
  * class RadixKeys.KEY_INTRO
  */
 export class RadixKeys {   
     public static readonly KEY_INTRO: string = "Enter";
-
 }//end class 
 
 export enum DB_ITEM_ACTION {    
     EDIT    = "edit",
     OPEN    = "open",
-    UPDATE    = "update",
+    UPDATE  = "update",
     DELETE  = "delete",
     SELECT  = "select",
     MOVEUP  = "moveup",
     MOVEDOWN= "movedown"
 }
 
-/**
- * class DbOperations
-export class DbOperations {   
-}//end class 
- */
+export enum DB_ITEM_ACTION_TEXT {    
+    EDIT    = "edit",
+    OPEN    = "open",
+    SAVE    = "Save",
+    DELETE  = "delete",
+    SELECT  = "select",
+}

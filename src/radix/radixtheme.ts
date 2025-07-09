@@ -2,6 +2,7 @@
 
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "./radixtypes";
+import { RADIX_COLORS } from "./radixconstants";
 
 
 /**
@@ -73,7 +74,7 @@ export class ThemeCompStyle {
     public static readonly CONT_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly CONT_RADIUS: any = RadixConf.RADIUS.medium;
     public static readonly CONT_VARIANT: any = RadixConf.VARIANTS.soft;
-    public static readonly CONT_COLOR: any = RadixConf.COLORS.gray;
+    public static readonly CONT_COLOR: any = RADIX_COLORS.gray;
 
     public static readonly CONT_STYLE: radixTypeComp = {
         size: ThemeCompStyle.CONT_SIZE,
@@ -137,8 +138,8 @@ export class ThemeDataStyle {
  */
 export class ThemeMenusStyle {
 
-    public static readonly OPT_ACT_COLOR: any = RadixConf.COLORS.indigo;
-    public static readonly OPT_COLOR: any = RadixConf.COLORS.blue;
+    public static readonly OPT_ACT_COLOR: any = RADIX_COLORS.indigo;
+    public static readonly OPT_COLOR: any = RADIX_COLORS.blue;
 
     public static readonly OPT_SIZE: any = RadixConf.SIZES.size_2;
 

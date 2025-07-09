@@ -14,6 +14,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { es } from 'date-fns/locale/es';
+import { RADIX_COLORS } from "../radixconstants";
 registerLocale('es', es);
 
 //returnFormat?: 'iso' | 'local'; 
@@ -35,7 +36,7 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
-    const color = RadixConf.COLORS.gray;
+    const color = RADIX_COLORS.gray;
             
     const showInline: boolean = inline ?? false;
     const isReadOnly: boolean = readonly ?? false;
