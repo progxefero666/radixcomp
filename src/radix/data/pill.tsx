@@ -1,32 +1,68 @@
 //src\radix\data\pill.tsx
 
-import { RadixConf } from "../radixconf";
-import { ThemeCompStyle } from "../radixtheme";
-import { TValueProps } from "../radixtypes";
+import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
+import { RadixConf } from "@/radix/radixconf";
+import { ThemeCompStyle } from "@/radix/radixtheme";
+
+//import { TValueProps } from "@/radix/radixtypes";
+//cstyle?: React.CSSProperties;
+//color: 'white'   
+//padding: '0px 0px 0px 0px ', 
 
 const compStyle={
-    borderRadius: '1.5rem',
-    padding: '0px 0px 0px 0px ',  
-    background: 'rgb(56, 56, 56)',
-    color: 'white'    
+    borderRadius: '8px',
+    background: 'rgb(132, 208, 10)',
+ 
 };
-//cstyle?: React.CSSProperties;
+
 interface CompProps {
     color: string;
     text: string;
-    icon: string;
+    children?: React.ReactNode;
+    childalign?: string;
 }
-export const Pill = ({color,text,icon}: CompProps) => {
+export const Pill = ({color,text,children,childalign}: CompProps) => {
 
-    const size    = RadixConf.SIZES.size_2;
+    const text_size    = RadixConf.SIZES.size_2;
     const radius  = ThemeCompStyle.CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
-    
+    const showIcon: boolean = !!children;
+    const alignIcon: string = childalign ? "left" : "right";
+
+    const renderText = () => {
+        return (
+            <Box >
+                <Text size={text_size}  >
+                    {text}
+                </Text>
+            </Box>    
+        )   
+    }    
+
+    const renderTextAndIcon = () => {
+        if(alignIcon === "left") {
+            return (
+                <>
+                    <Box>{children}</Box>         
+                    {renderText()}
+                </>
+            );    
+        }
+        else {
+            return (
+                <>
+                    {renderText()}
+                    <Box>{children}</Box>
+                </>
+            );
+        }
+    }    
+
     return (
-        <div style={compStyle}>
-            {icon && <span className={`mr-1 ${icon}`}></span>}
-            {text}
-        </div>
+        <Flex width="100%" direction="row" style={compStyle}>
+            {showIcon ? renderTextAndIcon(): renderText()}          
+        </Flex>
     );
+
 }//end Pill
