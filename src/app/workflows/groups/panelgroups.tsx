@@ -8,6 +8,7 @@ import { Taskgroup } from "@generated/prisma";
 import { EditableCollection, EditableOption } from "@/common/models";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
+import { PopupBase } from "@/radix/container/popupbase";
 
 const compStyle={background: 'rgb(56, 56, 56)'};
 
@@ -48,7 +49,8 @@ export const PanelTaskgroups = ({onedition}: CompProps) => {
 
     return (
         <Flex direction="column" height="100vh" style={compStyle}>
-
+            <PopupBase label="Groups Tasks">
+            </PopupBase>
         </Flex>
     );
 
