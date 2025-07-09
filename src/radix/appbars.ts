@@ -2,8 +2,8 @@
 
 
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
-import { DbOps } from "@/db/dboperations";
-import { DB_ITEM_ACTION, DB_ITEM_ACTION_TEXT } from "./radixconstants";
+import { DB_ITEM_ACTION_TEXT, DB_ITEM_COMMAND, DbOps } from "@/db/dboperations";
+
 
 const MODE_EDITION:string = "edit";
 const ACT_OPEN:string = "open";
@@ -50,7 +50,7 @@ export class AppTexts {
 }//end class
 
 export const BARCFG_DOS: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_ACTION.DELETE,DB_ITEM_ACTION.OPEN,DB_ITEM_ACTION.SELECT],
+    [DB_ITEM_COMMAND.DELETE,DB_ITEM_COMMAND.OPEN,DB_ITEM_COMMAND.SELECT],
     [DB_ITEM_ACTION_TEXT.DELETE,DB_ITEM_ACTION_TEXT.OPEN,DB_ITEM_ACTION_TEXT.SELECT],
     [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN,AppUiConst.COLOR_EXPORT],
     [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN,AppUiConst.ICON_RUN],

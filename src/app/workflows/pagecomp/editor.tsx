@@ -28,6 +28,7 @@ const mainContentStyle = {
 interface CompProps { 
     section:string;
     codelangs:Codelang[]|null;
+    showwfpreview: (workflowId:number) => void;
 }
 export  function WorkflowEditor({codelangs,section}: CompProps) {
 
@@ -50,17 +51,18 @@ export  function WorkflowEditor({codelangs,section}: CompProps) {
         
     }, []);    
 
-    const execWfItemCardOperation = (action:string) =>    {
+    const execWfItemCardOperation = (workflowId:number,action:string) =>    {
+        alert(workflowId);
         if(action == DB_ITEM_COMMAND.DELETE) {
-            console.log("delete workflow");
+     
             return;
         }
         else if(action == DB_ITEM_COMMAND.OPEN) {
-            console.log("open workflow");
+    
             return;
         }   
         else if(action == DB_ITEM_COMMAND.SELECT) {
-            console.log("select workflow");
+        
             return;
         }                
     }

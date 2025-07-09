@@ -77,11 +77,14 @@ export default function PageWorkflows() {
 
             <Flex gridColumn="2" gridRow="2" > 
                 <WorkflowEditor codelangs={codelangs}
-                             section={actsection} />
+                                section={actsection} 
+                                showwfpreview={showWfPreview}/>
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" > 
-                <SecondContent section={actsection} actpanel={activePanel} />
+                <SecondContent workflowid={wfSelectedId}
+                               section={actsection} 
+                               actpanel={activePanel} />
             </Flex>   
 
             <Flex gridColumn="4" gridRow="2" >

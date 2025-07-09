@@ -29,7 +29,7 @@ const headerStyle = {
 
 interface CompProps {
     workflow: Workflow;
-    callback: (action:string) => void;
+    callback: (workflowId:number,action:string) => void;
 }
 export default function CardWorkflow({ workflow , callback}: CompProps) {
 
@@ -37,7 +37,7 @@ export default function CardWorkflow({ workflow , callback}: CompProps) {
     const [open, setOpen] = React.useState(false);
 
     const onClick = (item: string, compName?: string) => {
-        callback(item);
+        callback(workflow.id, item);
     };
 
     return (

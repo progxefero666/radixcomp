@@ -7,11 +7,12 @@ import { UiSecondPanels } from "../config";
 
 
 interface CompProps {
+    workflowid?: number|null;
     section:string;
     actpanel?: string;
     onedition?: () => void;
 }
-export const SecondContent = ({section,actpanel}: CompProps) => {
+export const SecondContent = ({workflowid,section,actpanel}: CompProps) => {
 
     const currentPanel = actpanel ? actpanel : UiSecondPanels.EMPTY;
     //const currentPanel = actpanel ? actpanel : UiSecondPanels.TASKGROUPS;
