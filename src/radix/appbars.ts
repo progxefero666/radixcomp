@@ -1,7 +1,7 @@
 //src\app_front\ui\appbars.ts
 
-import { AppConstants } from "@/app_front/appconstants";
-import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { DbOps } from "@/db/dboperations";
 
 const MODE_EDITION:string = "edit";

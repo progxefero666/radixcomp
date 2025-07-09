@@ -6,7 +6,7 @@ import { Label } from "radix-ui";
 import { Button, Box, Text, Flex, Separator, IconButton, Container, Section, Heading } from "@radix-ui/themes";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 
-import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { RadixConf } from "@/radix/radixconf";
 import BarButtons from "@/radix/cbars/btbar";
 import { BARCFG_DELETE_OPEN } from "@/radix/appbars";

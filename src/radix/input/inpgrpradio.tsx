@@ -6,7 +6,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { Option } from "@/common/model/option";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
 import { StringsHelper } from "@/common/util/stringshelper";
-import { ModelHelper } from "@/common/util/modelhelper";
+import { ModelHelper } from "@/common/modelhelper";
 
 
 /*

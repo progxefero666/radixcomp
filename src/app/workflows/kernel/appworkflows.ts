@@ -5,7 +5,7 @@ import { Option } from "@/common/model/option";
 import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 
-import { JSonConsole } from "@/common/util/jsonhelper";
+import { JSonConsole } from "@/common/jsonhelper";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 
 import { JsonResponse } from "@/common/jsonresponse";

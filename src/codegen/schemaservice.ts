@@ -2,7 +2,7 @@
 
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { Option } from "@/common/model/option";
-import { ModelHelper } from "@/common/util/modelhelper";
+import { ModelHelper } from "@/common/modelhelper";
 import { TOption, TSelection } from "@/radix/radixtypes";
 
 /**

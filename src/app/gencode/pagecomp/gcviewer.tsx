@@ -12,11 +12,12 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import CardCode from "@/app/gencode/comp/cardcode";
-import { AppConstants } from "@/app_front/appconstants";
+
 import { BARCFG_EXPORT, BARCFG_EXPORT_COPY } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
-import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { FilesMimeTypes } from "@/codegen/kernel/cgconstants";
+import { GenCodeModuleConfig } from "../config";
 
 
 interface CompProps {
@@ -26,11 +27,11 @@ interface CompProps {
     fileName?: string;
 }
 export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
-    const [alertMessage, setAlertMessage] = useState<string>(AppConstants.NOT_DEF);
+    const [alertMessage, setAlertMessage] = useState<string>(GenCodeModuleConfig.NOT_DEF);
     const [codeCharged, setCodeCharged] = useState<boolean>(false);
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
 
-    const expFileName: string = fileName ?? AppConstants.NOT_DEF;
+    const expFileName: string = fileName ?? GenCodeModuleConfig.NOT_DEF;
     const codeFormat: string = format ?? FilesMimeTypes.TYPESCRIPT;
 
     useEffect(() => {
@@ -80,12 +81,12 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
             showAlert("not code charged");
             return; 
         }
-        if (opId==AppConstants.ACT_COPY) {
+        if (opId==GenCodeModuleConfig.ACT_COPY) {
             navigator.clipboard.writeText(code!);
             showAlert("Code copied to clipboard");
             return; 
         }
-        if (opId==AppConstants.ACT_EXPORT) {
+        if (opId==GenCodeModuleConfig.ACT_EXPORT) {
             if(!fileName){
                 showAlert("not file name defined");
                 return;                 
@@ -116,6 +117,11 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
 
 }//end component
 
+
+
+function exportFile(arg0: string, arg1: string, fileName: string) {
+    throw new Error("Function not implemented.");
+}
 //{(alertMessage !== AppConstants.NOT_DEF) ? renderAlert(alertMessage) : null}    
 
 

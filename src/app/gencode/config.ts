@@ -19,6 +19,15 @@ import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
  */
 export class GenCodeModuleConfig {
 
+    public static readonly ACT_OPEN:string = "open";
+public static readonly ACT_SAVE:string = "copy";    
+public static readonly ACT_EXPORT:string = "export";
+public static readonly ACT_COPY:string = "copy";   
+
+
+
+    public static readonly NOT_DEF:string = "NOT_DEFINED";
+
     public static readonly INDEX: Option
         = new Option("./", "Home", null, null, null);
 

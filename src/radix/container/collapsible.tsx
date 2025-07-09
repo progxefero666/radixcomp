@@ -6,7 +6,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { Button, Box, Text, Flex, Separator, IconButton, Container, Section } from "@radix-ui/themes";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { radixTypeComp } from "../radixtypes";
-import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import BarButtons from "../cbars/btbar";
 import { RadixConf } from "../radixconf";
 

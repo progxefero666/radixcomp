@@ -2,7 +2,7 @@
 
 import React, { MouseEventHandler } from "react";
 import { Button, Flex, Popover } from "@radix-ui/themes";
-import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 
 
 interface CompProps {

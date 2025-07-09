@@ -5,7 +5,7 @@ import { Option } from "@/common/model/option";
 import { Flex, Button, } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { ThemeButtonsStyle } from "../radixtheme";
-import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 
 /**
  * MenuButtons Column menu
