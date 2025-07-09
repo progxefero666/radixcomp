@@ -120,13 +120,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.CodeLangScalarFieldEnum = {
+exports.Prisma.CodelangScalarFieldEnum = {
   id: 'id',
   cgname: 'cgname',
   description: 'description'
 };
 
-exports.Prisma.TaskTypeScalarFieldEnum = {
+exports.Prisma.TasktypeScalarFieldEnum = {
   id: 'id',
   tename: 'tename',
   description: 'description'
@@ -135,11 +135,18 @@ exports.Prisma.TaskTypeScalarFieldEnum = {
 exports.Prisma.WorkflowScalarFieldEnum = {
   id: 'id',
   wwname: 'wwname',
+  context: 'context',
   description: 'description',
   application: 'application',
   fpath: 'fpath',
-  updated: 'updated',
-  context: 'context'
+  updated: 'updated'
+};
+
+exports.Prisma.TaskgroupScalarFieldEnum = {
+  id: 'id',
+  workflowId: 'workflowId',
+  tpname: 'tpname',
+  description: 'description'
 };
 
 exports.Prisma.TaskScalarFieldEnum = {
@@ -147,15 +154,15 @@ exports.Prisma.TaskScalarFieldEnum = {
   tasktypeId: 'tasktypeId',
   codelangId: 'codelangId',
   workflowId: 'workflowId',
+  taskgroupId: 'taskgroupId',
   orden: 'orden',
   tkname: 'tkname',
   description: 'description',
   files: 'files',
-  folders: 'folders',
-  wgroup: 'wgroup'
+  folders: 'folders'
 };
 
-exports.Prisma.AppTypeScalarFieldEnum = {
+exports.Prisma.ApptypeScalarFieldEnum = {
   id: 'id',
   aename: 'aename',
   description: 'description'
@@ -202,11 +209,12 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  CodeLang: 'CodeLang',
-  TaskType: 'TaskType',
+  Codelang: 'Codelang',
+  Tasktype: 'Tasktype',
   Workflow: 'Workflow',
-  task: 'task',
-  AppType: 'AppType',
+  Taskgroup: 'Taskgroup',
+  Task: 'Task',
+  Apptype: 'Apptype',
   Application: 'Application'
 };
 
