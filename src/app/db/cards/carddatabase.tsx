@@ -6,7 +6,7 @@ import { Option } from "@/common/model/option";
 import { Box,Text, Flex, Select, TextField, Button } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
-import { BARCFG_EXPORT } from "../ui/appbars";
+import { BARCFG_EXPORT } from "../../../app_front/ui/appbars";
 import ContCollapsible from "@/radix/container/collapsible";
 import { Label } from "@radix-ui/react-label";
 import { SeparatorH } from "@/radix/container/separatorh";

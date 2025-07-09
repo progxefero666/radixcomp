@@ -28,7 +28,7 @@ import { ServiceClientJsxForms } from "../module/client_jsxforms";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
 import { Label } from "@radix-ui/react-context-menu";
 import { AppConfig } from "@/app_front/appconfig";
-import { CardDatabase } from "@/app_front/comp/carddatabase";
+import { CardDatabase } from "@/app/db/cards/carddatabase";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
 import {DbConfig} from "@/common/dbmodels/dbconfig";

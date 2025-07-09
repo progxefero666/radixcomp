@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/app_front/theme/themecontext";
-import { AppThemeWrapper } from "@/app_front/theme/themewrapper";
+import { ThemeProvider } from "@/radix/themes/themecontext";
+import { AppThemeWrapper } from "@/radix/themes/themewrapper";
 
 // Global styles
 import "./globals.css";

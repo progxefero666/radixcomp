@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Flex, Separator } from "@radix-ui/themes";
-import ThemeSwitcher from "@/app_front/theme/themeswitcher";
+import ThemeSwitcher from "@/radix/themes/themeswitcher";
 
 
 const secondBarStyle = {
