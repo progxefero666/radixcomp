@@ -1,7 +1,7 @@
 //src\common\util\modelhelper.ts
 
 import { Option } from "@/common/model/option";
-import { TOption, TSelection } from "@/common/types";
+import { TOption, TSelection } from "@/radix/types";
 
 /**
  *  class ModelHelper.getListFromTOptions

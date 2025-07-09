@@ -8,7 +8,7 @@ import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
 import { StringsHelper } from "@/common/util/stringshelper";
 import { ModelHelper } from "@/common/util/modelhelper";
 import { RadixUtil } from "../radixutil";
-import { TOption, TSelected, TSelection } from "@/common/types";
+import { TOption, TSelected, TSelection } from "@/radix/types";
 import { RadixConstants } from "../radixconstants";
 
 /*

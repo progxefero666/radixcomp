@@ -1,7 +1,7 @@
 import path from "path";
 
-import { FileHelper } from "../common/util/filehelper";
-import { Dimension } from "./model/dimension";
+import { FileHelper } from "../util/filehelper";
+import { Dimension } from "../model/dimension";
 
 export enum MediaType {
     TYPE_VIDEO = "VIDEO",

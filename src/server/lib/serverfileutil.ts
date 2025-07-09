@@ -1,6 +1,6 @@
 //src\app_server\serverfileutil.ts
 
-import { MMBase } from "@/common/objtypes";
+import { MMBase } from "@/common/mmedia/objtypes";
 import * as fs from "fs/promises";
 
 

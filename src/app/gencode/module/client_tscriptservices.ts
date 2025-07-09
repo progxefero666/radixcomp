@@ -4,7 +4,7 @@ import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
 import { GenCodeModuleControl } from "@/app/gencode/module/gcmodcontrol";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
-import { TSelection } from "@/common/types";
+import { TSelection } from "@/radix/types";
 import { ModelHelper } from "@/common/util/modelhelper";
 import { JsonHelper } from "@/common/util/jsonhelper";
 

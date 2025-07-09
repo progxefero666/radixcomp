@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-import { TOption } from "@/common/types";
+import { TOption } from "@/radix/types";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 import { ThemePagesStyles } from "@/radix/radixtheme";

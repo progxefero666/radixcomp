@@ -1,6 +1,6 @@
 // File: src/app/appstorage.service.ts
 
-import { StorageService } from "@/common/context/sessionstorage";
+import { StorageService } from "@/common/sessionstorage";
 import { Device } from "@/common/model/device";
 
 import { Codelang } from "@/db/model/codelang";
