@@ -17,7 +17,7 @@ import { BARCFG_EXPORT, BARCFG_EXPORT_COPY } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 import { FilesMimeTypes } from "@/codegen/kernel/cgconstants";
-import { exportFile } from "@/app_front/common/filesmanager";
+
 
 interface CompProps {
     section: string|null;

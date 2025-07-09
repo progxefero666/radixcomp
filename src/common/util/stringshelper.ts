@@ -1,6 +1,6 @@
 //src\common\util\stringshelper.ts
 
-import { AppConstants } from "@/app_front/appconstants";
+
 import { CodeGenConfig } from "@/codegen/cgconfig";
 
 /**

@@ -10,8 +10,6 @@ import PageGenCode from "../gencode/page";
 import PageTest from "../testcomp/page";
 import { Option } from "@/common/model/option";
 
-import { AppConstants } from "@/app_front/appconstants"
-
 /**
  * Main app view page component
  * 

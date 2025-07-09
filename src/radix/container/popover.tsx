@@ -7,10 +7,10 @@ import { BarButtonsCfg } from "@/common/modelui/barbuttonscfg";
 
 interface CompProps {
     barbuttonscfg?: BarButtonsCfg;
-   
+   text?: string;
     children?: React.ReactNode;
 }
-export const XPopOver = ({ children, barbuttonscfg }: CompProps) => {
+export const XPopOver = ({ children, barbuttonscfg,text }: CompProps) => {
 
 
     const onOpen = (open: boolean) => {

@@ -5,7 +5,7 @@ import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "@/radix/radixtypes";
-import { AppConstants } from "@/app_front/appconstants";
+
 import { RadixKeys } from "../radixconstants";
 
 
