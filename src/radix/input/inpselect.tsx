@@ -28,7 +28,7 @@ interface CompProps {
 }                  
 export const XInputSelect = forwardRef<HTMLSelectElement, CompProps>(({    
     autocommit,name, collection, label, default: defaultvalue,
-    inline, readonly, disabled, autofocus, onchange }, ref) => {
+    inline, readonly, disabled, autofocus, onchange }, ref?) => {
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;

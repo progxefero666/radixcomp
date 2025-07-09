@@ -13,9 +13,8 @@ const secondBarStyle = {
 
 interface CompProps {
     section: string|null;
-    codelangs:Codelang[]|null;
 }
-export function SecondBar({section,codelangs}: CompProps) {
+export function SecondBar({section}: CompProps) {
     
 //collection: TOption[]
 
@@ -23,9 +22,7 @@ export function SecondBar({section,codelangs}: CompProps) {
     }
 
     useEffect(() => {
-        if(codelangs !== null) {
-
-        }   
+   
     }, []);    
 
     return (

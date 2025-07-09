@@ -30,7 +30,7 @@ const layoutStyle = {
  *  const router = useRouter();
  */
 export default function PageWorkflows() {
-    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
+    //const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
     
     const [ready,setReady] = useState<boolean>(false);
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
@@ -51,13 +51,13 @@ export default function PageWorkflows() {
 
     useEffect(() => {
         if(ready) {return;}
-        const init = async () => {                      
+        const init = async () => {                     
+            /* 
             const response = await getAllByTable(DbTables.codelang);
             if(response === null) {return false;}            
-
             const coll_codelang:Codelang[]|null =parseCollection<Codelang>(response)
-
             setCodelangs(parseCollection<Codelang>(response));
+            */
             setReady(true);
             alert("init end");
         };
@@ -69,8 +69,7 @@ export default function PageWorkflows() {
         <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
             
             <Flex gridColumn="1/5" gridRow="1" >
-                <Header codelangs={codelangs}
-                        section={actsection} />   
+                <Header section={actsection} />   
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
@@ -79,8 +78,7 @@ export default function PageWorkflows() {
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" > 
-                <WorkflowEditor codelangs={codelangs}
-                                section={actsection} 
+                <WorkflowEditor section={actsection} 
                                 showwfpreview={showWfPreview}/>
             </Flex>
             
@@ -94,8 +92,7 @@ export default function PageWorkflows() {
             </Flex>   
 
             <Flex gridColumn="4" gridRow="2" >
-                <SecondBar codelangs={codelangs}
-                           section={actsection} />
+                <SecondBar section={actsection} />
             </Flex>
 
         </Grid>

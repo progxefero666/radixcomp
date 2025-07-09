@@ -27,10 +27,10 @@ const mainContentStyle = {
 // const appRef = useRef<AppWorkflows>(null);
 interface CompProps { 
     section:string;
-    codelangs:Codelang[]|null;
+    //codelangs:Codelang[]|null;
     showwfpreview: (workflow:Workflow) => void;
 }
-export  function WorkflowEditor({codelangs,section,showwfpreview}: CompProps) {
+export  function WorkflowEditor({section,showwfpreview}: CompProps) {
 
     const [ready,setReady] = useState<boolean>(false);
     const [workflows,setWorkflows] = useState<Workflow[]|null>(null);

@@ -6,8 +6,9 @@ import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes
 import {Form,FormField,FormLabel,FormControl,
         createFormScope,Root,Field,Control,Label,Submit,
         Message,FormValidityState,ValidityState} from '@/radix/forms/form';
+import { FormMessage } from "@radix-ui/react-form";
 
-import { FormMessage } from "@/radix/forms/formmsg";
+
 
 
 export const layoutStyle = {
