@@ -1,6 +1,6 @@
 // File: src/common/util/jsonhelper.ts
 
-import { TSelection } from "../../radix/types";
+import { TSelection } from "../../radix/radixtypes";
 
 
 /**

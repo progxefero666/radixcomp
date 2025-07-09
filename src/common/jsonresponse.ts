@@ -1,6 +1,5 @@
 //src\common\json\models\jsonresponse.ts
 
-import { JsonOpConstants } from "@/common/json/jsonconstant";
 import { DbOps } from "@/db/dboperations";
 
 /**
@@ -8,6 +7,9 @@ import { DbOps } from "@/db/dboperations";
  *    for back services responses.
  */
 export class JsonResponse {
+
+    
+    public static readonly TAB: number = 4;
 
     public result: string;
     public message: string | null = null;
@@ -20,7 +22,7 @@ export class JsonResponse {
     }
 
     public toJson(): string {
-        return JSON.stringify(this,null,JsonOpConstants.TAB);
+        return JSON.stringify(this,null,JsonResponse.TAB);
     }
 
     public isSuccess(): boolean {

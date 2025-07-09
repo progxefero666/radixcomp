@@ -1,7 +1,7 @@
 //src\db\services\generic\serviceread.ts
 "use server";
 
-import { JsonResponse } from "@/common/json/models/jsonresponse";
+import { JsonResponse } from "@/common/jsonresponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
 
 import { DbOps, OpUtil } from "@/db/dboperations";

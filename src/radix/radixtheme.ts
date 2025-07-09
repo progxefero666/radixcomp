@@ -1,7 +1,7 @@
 //src\radix\radixcolors.ts
 
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "./types";
+import { radixTypeComp } from "./radixtypes";
 
 
 /**

@@ -1,6 +1,6 @@
 //src\common\util\showalerts.ts
 
-import { TSelection } from "../../radix/types";
+import { TSelection } from "../../radix/radixtypes";
 import { JsonHelper } from "./jsonhelper";
 
 /**

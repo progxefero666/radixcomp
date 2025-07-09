@@ -8,7 +8,7 @@ import { Codelang } from "@/db/model/codelang";
 import { JSonConsole } from "@/common/util/jsonhelper";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 
-import { JsonResponse } from "@/common/json/models/jsonresponse";
+import { JsonResponse } from "@/common/jsonresponse";
 import { parseCollection } from "@/common/parsers/javascriptparser";
 import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";

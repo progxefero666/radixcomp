@@ -2,7 +2,7 @@
 //src\db\services\crud\srvcrudtasks.ts
 "use server";
 
-import { JsonResponse } from "@/common/json/models/jsonresponse";
+import { JsonResponse } from "@/common/jsonresponse";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, OpUtil } from "@/db/dboperations";
 import { Taskgroup } from "@/db/model/taskgroup";

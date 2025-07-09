@@ -1,6 +1,6 @@
 //import {DbUtil} "@/db/dbutils"
 
-import {DbConfig} from "@/common/dbmodels/dbconfig";
+import {DbConfig} from "@/app/db/kernel/dbconfig";
 import {DbOps} from "@/db/dboperations";
 
 /**

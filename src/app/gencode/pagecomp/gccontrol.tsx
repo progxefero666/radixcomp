@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-import { TOption } from "@/radix/types";
+import { TOption } from "@/radix/radixtypes";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 import { ThemePagesStyles } from "@/radix/radixtheme";
@@ -31,7 +31,7 @@ import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
-import {DbConfig} from "@/common/dbmodels/dbconfig";
+import {DbConfig} from "@/app/db/kernel/dbconfig";
 import {DbUtil} from "@/db/dbutils"
 import {DbOps} from "@/db/dboperations";
 
