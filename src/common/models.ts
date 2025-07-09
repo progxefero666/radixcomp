@@ -31,6 +31,30 @@ export class Option {
 
 }//end class
 
+export class OptionId {
+
+    public id:   number;
+    public text: string;
+    public icon: string|null = null;
+
+    constructor(id:number,text:string,icon?:string) {
+        this.id = id;
+        this.text = text;
+        this.icon = icon ?? null;    
+    }
+
+    public toJsonString(): string {
+        return JSON.stringify(this, null, 4);
+    }
+
+    /*
+    public static build(jsonString: string): OptionId {
+        const obj = JSON.parse(jsonString);
+        return new OptionId(obj.id, obj.text, obj.icon);
+    }*/
+
+}//end class
+
 /**
  * class Editable Option
  */

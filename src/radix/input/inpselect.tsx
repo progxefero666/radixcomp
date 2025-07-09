@@ -12,26 +12,14 @@ import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
 
-
-/*
-export interface GroupCompProps {
-    autocommit?: boolean;
-    name?: string;
-    options: Option[];
-    label?: string;
-    direction?: radixTypeDirection;
-    value?: any;
-    onselect: (value: string,compname?:string) => void;
-    autofocus?: boolean;
-}
-*/
+//only collection required
 interface CompProps {
+    collection: Option[];    
     autocommit?: boolean;
     name?: string;
     inline?: boolean;
     readonly?: boolean;
     disabled?: boolean;
-    collection: Option[];
     label?: string;
     default?: string;
     maxlen?: number;
