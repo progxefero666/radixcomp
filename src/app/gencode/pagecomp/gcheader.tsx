@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";

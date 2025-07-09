@@ -1,7 +1,7 @@
 //src\codegen\controldatabase.ts
 
 
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 
 /**
  * class ControlDatabase

@@ -1,7 +1,7 @@
 //src\db\functions\markdownutil.ts
 
 import { MarkdownConfig } from "@/markdown/mkdconfig";
-import { StringsHelper } from "@/common/util/stringshelper";
+import { StringsHelper } from "@/common/stringshelper";
 import {MarkdownFunctions} from "@/markdown/mkdfunctions"
 
 

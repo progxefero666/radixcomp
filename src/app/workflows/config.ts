@@ -1,6 +1,6 @@
 //src\app\workflows\config.ts
 
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 
 /**
  * class ModuleConfig.ACTIVE_SECTION

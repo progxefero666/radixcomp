@@ -1,7 +1,7 @@
 //src\app_front\manapplications\manappscfg.ts
 
 
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 

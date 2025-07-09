@@ -3,7 +3,7 @@
 
 import { forwardRef, useEffect, useState } from "react";
 
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 import React from "react";
 import { Box,Text, Flex, Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";

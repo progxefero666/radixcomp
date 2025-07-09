@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Box, Separator, Flex, Text, Button, Link, Grid, Container } from "@radix-ui/themes";
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 
 import { SeparatorH } from "@/radix/container/separatorh";
 import {PrimaryBar} from "@/app/testcomp/testprimarybar";

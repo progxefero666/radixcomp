@@ -1,6 +1,6 @@
 //src\codegen\operations\tsentservicefilesops.ts
 
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 
 /**
  * class TsEntityFiles

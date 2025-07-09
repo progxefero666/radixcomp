@@ -1,8 +1,8 @@
 //src\client\metadata\schemaservice.ts
 
 import { ModelTable } from "@/codegen/kernel/cgmodel";
-import { Option } from "@/common/model/option";
-import { ModelHelper } from "@/common/modelhelper";
+import { Option } from "@/common/option";
+import { ModelHelper } from "@/common/collectionutil";
 import { TOption, TSelection } from "@/radix/radixtypes";
 
 /**

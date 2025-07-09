@@ -1,10 +1,10 @@
 //src\app\gencode\pagecomp\gcprimarybar.tsx
 
 import { useState, useEffect, useRef } from "react";
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 
-import { AppConstants } from "@/app_front/appconstants";
+
 import MenuButtons from "@/radix/cbars/btmenu";
 
 

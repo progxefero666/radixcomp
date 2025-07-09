@@ -3,10 +3,10 @@
 import { forwardRef, useEffect, useState } from "react";
 import { Flex, Text, RadioGroup, CheckboxGroup, Box } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { Option } from "@/common/model/option";
+import { Option } from "@/common/option";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
-import { StringsHelper } from "@/common/util/stringshelper";
-import { ModelHelper } from "@/common/modelhelper";
+import { StringsHelper } from "@/common/stringshelper";
+import { ModelHelper } from "@/common/collectionutil";
 import { RadixUtil } from "../radixutil";
 import { TOption, TSelected, TSelection } from "@/radix/radixtypes";
 import { RadixConstants } from "../radixconstants";
