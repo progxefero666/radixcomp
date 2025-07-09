@@ -28,9 +28,9 @@ const mainContentStyle = {
 interface CompProps { 
     section:string;
     codelangs:Codelang[]|null;
-    showwfpreview: (workflowId:number) => void;
+    showwfpreview: (workflow:Workflow) => void;
 }
-export  function WorkflowEditor({codelangs,section}: CompProps) {
+export  function WorkflowEditor({codelangs,section,showwfpreview}: CompProps) {
 
     const [ready,setReady] = useState<boolean>(false);
     const [workflows,setWorkflows] = useState<Workflow[]|null>(null);
@@ -51,9 +51,14 @@ export  function WorkflowEditor({codelangs,section}: CompProps) {
         
     }, []);    
 
-    const execWfItemCardOperation = (workflowId:number,action:string) =>    {
-        alert(workflowId);
-        if(action == DB_ITEM_COMMAND.DELETE) {
+    const execWfItemCardOperation = (itemIndex:number,action:string) =>    {
+        alert(workflows![itemIndex].id);
+        
+        if(action == DB_ITEM_COMMAND.SELECT) {
+            showwfpreview(workflows![itemIndex]);
+            return;
+        }           
+        else if(action == DB_ITEM_COMMAND.DELETE) {
      
             return;
         }
@@ -61,10 +66,7 @@ export  function WorkflowEditor({codelangs,section}: CompProps) {
     
             return;
         }   
-        else if(action == DB_ITEM_COMMAND.SELECT) {
-        
-            return;
-        }                
+             
     }
 
 
@@ -80,7 +82,10 @@ export  function WorkflowEditor({codelangs,section}: CompProps) {
             <>
                 {workflows.map((workflow, index) => (
                     <Box key={index.toString()}>
-                        <CardWorkflowMin workflow={workflow} callback={execWfItemCardOperation} />   
+                        <CardWorkflowMin 
+                            index={index} 
+                            workflow={workflow} 
+                            callback={execWfItemCardOperation} />   
                     </Box>                 
                 ))}
             </>

@@ -17,6 +17,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { parseCollection } from "@/front/parser/javascriptparser";
 import { PanelTaskgroups } from "@/app/workflows/groups/panelgroups";
 import { SecondContent } from "./workflows/pagecomp/secondcontent";
+import { Workflow } from "@/db/model/workflow";
 
 
 const layoutStyle = {
@@ -34,17 +35,19 @@ export default function PageWorkflows() {
     const [ready,setReady] = useState<boolean>(false);
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
     const [activePanel, setActivePanel] = useState<string>(UiSecondPanels.EMPTY);
-    const [wfSelectedId,setWfSelectedId] = useState<number|null>(null);
+
+    const [wfCharged,setWfCharged] = useState<boolean>(false);
+    const [wfSelected,setWfSelected] = useState<Workflow|null>(null);
 
     const onSelection = (section:string) => {
         setActSection(section);
     };
 
-    const showWfPreview = (workflowId:number) => {
-        setWfSelectedId(workflowId);
+    const showWfPreview = (workflow:Workflow) => {
+        setWfSelected(workflow);
+        setWfCharged(true);
+        setActivePanel(UiSecondPanels.WORKFLOW_PREVIEW);
     };
-
-    //onchange?: (value: string, name?: string) => void;
 
     useEffect(() => {
         if(ready) {return;}
@@ -82,9 +85,12 @@ export default function PageWorkflows() {
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" > 
-                <SecondContent workflowid={wfSelectedId}
-                               section={actsection} 
-                               actpanel={activePanel} />
+                {wfCharged ? 
+                    <SecondContent workflow={wfSelected}
+                                section={actsection} 
+                                actpanel={activePanel} />                
+                :   <Box width="100%">not data charged</Box> }
+
             </Flex>   
 
             <Flex gridColumn="4" gridRow="2" >

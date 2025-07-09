@@ -28,7 +28,7 @@ const headerStyle = {
 };
 
 interface CompProps {
-    workflow: Workflow;
+    workflow?: Workflow;
     callback: (workflowId:number,action:string) => void;
 }
 export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
@@ -37,12 +37,13 @@ export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
     const [open, setOpen] = React.useState(false);
 
     const onClick = (item: string, compName?: string) => {
-        callback(workflow.id, item);
+        //callback(workflow.id, item);
     };
 
     return (
         <Flex direction="column" width="100%" px="2" pt="0" pb="2" style={compStyle}  >
-
+            {/*
+            
             <Collapsible.Root open={open} onOpenChange={setOpen}>
 
                 <Flex align="start" direction="row" width="100%" pt="1" pb="1" gapX={"2"} >
@@ -78,6 +79,9 @@ export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
 
             </Collapsible.Root>
 
+            
+            
+            */}
         </Flex>
     );
 

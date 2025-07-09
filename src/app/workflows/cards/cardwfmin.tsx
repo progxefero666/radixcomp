@@ -28,16 +28,17 @@ const headerStyle = {
 };
 
 interface CompProps {
+    index: number;
     workflow: Workflow;
-    callback: (workflowId:number,action:string) => void;
+    callback: (index:number,action:string) => void;
 }
-export default function CardWorkflowMin({ workflow , callback}: CompProps) {
+export default function CardWorkflowMin({ index,workflow , callback}: CompProps) {
 
     const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);
 
-    const onClick = (item: string, compName?: string) => {
-        callback(workflow.id, item);
+    const onClick = (action: string, compName?: string) => {
+        callback(index, action);
     };
 
     return (
