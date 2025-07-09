@@ -3,7 +3,6 @@
 import { EditableOption } from "@/common/models";
 import { ArrowDownIcon, ArrowUpIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Flex,Box,Text,IconButton } from "@radix-ui/themes";
-import { DbOperations } from "../radixconstants";
 
 
 /**
@@ -36,16 +35,16 @@ export const EditOption = ({option,onclick}: CompProps) => {
             </Flex>
 
             <Flex direction="row" gap="2" >
-                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_UPDATE) }} >
+                <IconButton onClick={() => { handlerOnclick("edit") }} >
 	                <Pencil2Icon />
                 </IconButton>
-                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_DELETE) }} >
+                <IconButton onClick={() => { handlerOnclick("delete") }} >
 	                <TrashIcon />
                 </IconButton>
-                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_MOVEUP) }} >
+                <IconButton onClick={() => { handlerOnclick("moveup") }} >
 	                <ArrowUpIcon />
                 </IconButton>             
-                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_MOVEDOWN) }} >
+                <IconButton onClick={() => { handlerOnclick("movedown") }} >
 	                <ArrowDownIcon />
                 </IconButton>                     
             </Flex>

@@ -12,12 +12,12 @@ export class Option {
     public url:  string|null = null;
 
     constructor(name:string,text:string,
-                icon:string|null,path:string|null,url:string|null) {
+                icon:string|null,path?:string|null,url?:string|null) {
         this.id = name;
         this.text = text;
         this.icon = icon;
-        this.path = path;
-        this.url = url;
+        this.path = path ?? null;
+        this.url = url ?? null;
     }
 
     public toJsonString(): string {
