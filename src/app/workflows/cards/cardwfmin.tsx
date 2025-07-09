@@ -31,7 +31,7 @@ interface CompProps {
     workflow: Workflow;
     callback: (workflowId:number,action:string) => void;
 }
-export default function CardWorkflow({ workflow , callback}: CompProps) {
+export default function CardWorkflowMin({ workflow , callback}: CompProps) {
 
     const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);

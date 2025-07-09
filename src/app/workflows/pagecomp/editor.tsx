@@ -11,7 +11,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { Codelang } from "@/db/model/codelang";
 
-import CardWorkflow from "../cards/cardworkflow";
+import CardWorkflowMin from "../cards/cardwfmin";
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
 import { DB_ITEM_COMMAND } from "@/db/dboperations";
@@ -80,7 +80,7 @@ export  function WorkflowEditor({codelangs,section}: CompProps) {
             <>
                 {workflows.map((workflow, index) => (
                     <Box key={index.toString()}>
-                        <CardWorkflow workflow={workflow} callback={execWfItemCardOperation} />   
+                        <CardWorkflowMin workflow={workflow} callback={execWfItemCardOperation} />   
                     </Box>                 
                 ))}
             </>

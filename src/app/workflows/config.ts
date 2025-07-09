@@ -4,6 +4,12 @@ import { Option } from "@/common/models";
 
 //seState<string>("taskgroups");
 
+export enum MOD_SECTIONS {
+    WORKFLOWS       = "workflows" ,
+    TASKTYPES       = "tasktypes",
+    WORKFLOW_EDITOR = "workflow_editor"
+}
+
 export enum UiSecondPanels {
     EMPTY       = "empty",
     TASKGROUPS       = "taskgroups",
@@ -12,35 +18,39 @@ export enum UiSecondPanels {
     WORKFLOW_SQL     = "workflow_sql"
 }
 
+
+/*
+    Option = new Option("workflow_json","JSon Viewer",null,null,null);
+    Option = new Option("workflow_sql","Sql Script",null,null,null);
+*/
+
 /**
- * class ModuleConfig.ACTIVE_SECTION
+ * class Workflows Config
  */
 export class WorkflowsConfig {
 
     public static readonly SC_WORKFLOWS:Option 
-        = new Option("workflows","Workflows",null,null,null);
+        = new Option(MOD_SECTIONS.WORKFLOWS,"Workflows",null,null,null);
 
     public static readonly SC_TASKTYPES:Option 
-        = new Option("tasktypes","Task Types",null,null,null);
+        = new Option(MOD_SECTIONS.TASKTYPES,"Task Types",null,null,null);
 
-    public static readonly SC_WORKFLOW_JSON:Option 
-        = new Option("workflow_json","JSon Viewer",null,null,null);
-
-    public static readonly SC_WORKFLOW_SQL:Option 
-        = new Option("workflow_sql","Sql Script",null,null,null);
+    public static readonly SC_EDITOR:Option 
+        = new Option(MOD_SECTIONS.WORKFLOW_EDITOR,"Task Types",null,null,null);
 
     public static readonly MODULES: Option[] = [
         WorkflowsConfig.SC_WORKFLOWS,        
-        WorkflowsConfig.SC_TASKTYPES,
-        WorkflowsConfig.SC_WORKFLOW_JSON,
-        WorkflowsConfig.SC_WORKFLOW_SQL   
+        WorkflowsConfig.SC_TASKTYPES
     ]
 
-    public static getSectionOperations(sectionName: string): Option[]|null {
-        if (sectionName === WorkflowsConfig.SC_WORKFLOWS.id) {
+    public static getSectionOperations(sectionName: any): Option[]|null {
+        if (sectionName === MOD_SECTIONS.WORKFLOWS) {
             return [];
         }
-        else if (sectionName === WorkflowsConfig.SC_TASKTYPES.id) {
+        else if (sectionName === MOD_SECTIONS.TASKTYPES) {            
+            return [];
+        }
+        else if (sectionName === MOD_SECTIONS.WORKFLOW_EDITOR) {
             return [];
         }
         return null;
