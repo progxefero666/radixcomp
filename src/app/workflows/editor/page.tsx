@@ -1,54 +1,76 @@
 //src\app\workflows\editor\page.tsx
-"use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
-import { WorkflowsConfig } from "@/app/workflows/config";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Flex, Grid, Text} from "@radix-ui/themes";
+import { parseResponseCollection } from "@/front/parser/javascriptparser";
+import { DB_ITEM_COMMAND } from "@/db/dboperations";
 
-import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
-import { Codelang } from "@/db/model/codelang";
-import { getAllByTable } from "@/db/services/generic/serviceread";
+//db models
 import { DbTables } from "@/db/dbcatalog";
-import { parseCollection } from "@/common/parsers/javascriptparser";
+//import { Codelang } from "@/db/model/codelang";
+import { Workflow } from "@/db/model/workflow";
+import { Header } from "@radix-ui/react-accordion";
+import { WorkflowsConfig, UiSecondPanels } from "../config";
+import { PrimaryBar } from "../pagecomp/primarybar";
+import { SecondBar } from "../pagecomp/secondbar";
+import { SecondContent } from "../pagecomp/secondcontent";
 
+
+
+const layoutStyle = {
+    background: 'rgb(153, 17, 62)',
+    padding: '0',
+};
 
 
 /**
- * @returns Page Workflows Editor
- * This component is the main entry point for the workflow editor.
+ * Page Workflows Manegement
+ *  const router = useRouter();
  */
-export default function WorkFlowEditor() {
+export default function WorkflowEditor() {
+    //const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
+    
+    const [ready,setReady] = useState<boolean>(false);
 
+ 
+    const test = (value:string) => {
+    };
+
+    useEffect(() => {
+        /*
+        if(ready) {return;}
+        const init = async () => {                     
+            setReady(true);     
+        };init();
+        */
+    }, []);    
+
+	    
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" >
-
-
-        </Grid>
-    );
-}
-
-
-/*
-//import { Header } from "@/app/workflows/pagecomp/header";
-//import { PrimaryBar } from "@/app/workflows/pagecomp/primarybar";
-//import { MainContent } from "@/app/workflows/pagecomp/body";
-            <Flex gridColumn="1/4" gridRow="1" >
-                <Header codelangs={null}
-                    section={WorkflowsConfig.MODULES[0].id} />
+        <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
+            
+            <Flex gridColumn="1/5" gridRow="1" >
+              
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
-                <PrimaryBar section={WorkflowsConfig.MODULES[0].id}
-                    onselection={() => { }} />
+
             </Flex>
 
-            <Flex gridColumn="2" gridRow="2" >
-                <MainContent codelangs={null} section={WorkflowsConfig.MODULES[0].id} />
+            <Flex gridColumn="2" gridRow="2" > 
+
+            </Flex>
+            
+            <Flex gridColumn="3" gridRow="2" > 
+ 
+            </Flex>   
+
+            <Flex gridColumn="4" gridRow="2" >
+ 
             </Flex>
 
-            <Flex gridColumn="3" gridRow="2" >
-            <SecondBar />
-            </Flex>
-*/
+        </Grid>
+    );
+
+}//end page
