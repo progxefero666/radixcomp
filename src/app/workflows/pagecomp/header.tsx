@@ -21,9 +21,9 @@ const headerLeftStyle = {
 };
 
 const headerCenterStyle = {
-    borderTop: 'none',    
-    borderBottom: 'none',   
-    borderLeft: '1px solid rgb(167, 176, 188)', 
+    borderTop: 'none',
+    borderBottom: 'none',
+    borderLeft: '1px solid rgb(167, 176, 188)',
     borderRight: '1px solid rgb(125, 134, 145)',
 };
 
@@ -36,31 +36,31 @@ const headerRightStyle = {
  * Page WorkFlows Header
  */
 interface CompProps {
-    section: string|null;
-    navback?:()=>void;
-    codelangs:Codelang[]|null;
+    section: string | null;
+    navback?: () => void;
+    codelangs: Codelang[] | null;
 }
-export function Header({codelangs,section,navback}:CompProps) {
+export function Header({ codelangs, section, navback }: CompProps) {
 
     const pathname = usePathname();
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
     const [ready, setReady] = useState<boolean>(false);
 
     useEffect(() => {
-        if(ready) {return;}
+        if (ready) { return; }
 
-        if(pathname === "/"){setIsIndexPage(true);}        
-        if(codelangs !== null) {
+        if (pathname === "/") { setIsIndexPage(true); }
+        if (codelangs !== null) {
             setReady(true);
-        }   
-    }, []);    
+        }
+    }, []);
 
     const renderHomeButton = () => {
         return (
             <Link href="/" >
                 <Button
                     variant={pathname === "/" ? RadixConf.VARIANTS.solid :
-                                                RadixConf.VARIANTS.soft}
+                        RadixConf.VARIANTS.soft}
                     color={ThemeButtonsStyle.BTN_HOME_COLOR}
                     className={ThemeButtonsStyle.BTN_HOME_STYLE}
                     size={ThemeButtonsStyle.BTN_DEF_SIZE} >
@@ -71,23 +71,45 @@ export function Header({codelangs,section,navback}:CompProps) {
     }
 
     return (
-        <Flex width="100%" direction="row" align="center" style={headerStyle}  py="3">
+        <Grid  width="100%" py="2" rows="auto" columns="14% 41% 45%" style={headerStyle} >
 
-            <Flex width="16%" direction="row" gap="2" px="3" justify="between" style={headerLeftStyle} >
-                <Text size="6" >Xefero Tools </Text>   
-                <Box>{renderHomeButton()}</Box>        
+            <Flex gridColumn="1" gridRow="1"
+                direction="row" gap="2" px="3" justify="between" style={headerLeftStyle} >
+                <Text size="5" >Tools </Text>
+                <Box>{renderHomeButton()}</Box>
             </Flex>
 
-            <Flex width = "68%" direction="row" px="3" style={headerCenterStyle} >
-                <Text size="6"> Man. WorkFlows</Text>
+            <Flex gridColumn="2" gridRow="1"
+                direction="row" px="3" style={headerCenterStyle} >
+                <Text size="5"> Man. WorkFlows</Text>
             </Flex>
 
-            <Box width="16%" px="4" style={headerRightStyle}>
+            <Flex gridColumn="3" gridRow="1" px="3" >
                 header right
-            </Box>
+            </Flex>
 
-        </Flex>
-    );
+        </Grid>
+    )
 
 }//end PrimaryBar
 
+/*
+return (
+    <Flex width="100%" direction="row" align="center" style={headerStyle}  py="3">
+
+        <Flex width="16%" direction="row" gap="2" px="3" justify="between" style={headerLeftStyle} >
+            <Text size="6" >Xefero Tools </Text>   
+            <Box>{renderHomeButton()}</Box>        
+        </Flex>
+
+        <Flex width = "68%" direction="row" px="3" style={headerCenterStyle} >
+            <Text size="6"> Man. WorkFlows</Text>
+        </Flex>
+
+        <Box width="16%" px="4" style={headerRightStyle}>
+            header right
+        </Box>
+
+    </Flex>
+);
+*/

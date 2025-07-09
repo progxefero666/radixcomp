@@ -7,23 +7,29 @@ import { Codelang } from "@/db/model/codelang";
 
 import { JSonConsole } from "@/common/jsonhelper";
 import { getAllByTable } from "@/db/services/generic/serviceread";
-
-import { JsonResponse } from "@/common/jsonmodels";
-import { parseCollection } from "@/common/parsers/javascriptparser";
 import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";
+
+import { parseCollection } from "@/front/parser/javascriptparser";
 import { Apptype } from "@/db/model/apptype";
-import { insert } from "@/db/services/crud/srvcrudapptype";
 
-//const dbSquema = await readDbSqlScriptFile("dbsquema");  
-//if(codelang_coll === null) {return false;}
-
-/**
- * App Main in Home Page
- *    - This class is responsible for managing the application index,
- *    - Include load init collections and display them.
- * //parseItem = <T>(obj: string): T | null => {     
- */
+/*
+	
+	- Create Context
+	- Add Main Task
+	- Add Final Task	
+	- Update Context	
+	- Update Main Task
+	- Update Final Task
+	- Delete Main Task
+	- Delete Final Task
+	- Move Main Task
+	- Move Final Task		
+	- Duplicate Main Task
+	- Duplicate Final Task		
+	- Clear Main Tasks
+	- Clear Final Tasks	
+*/
 export class AppWorkflows {
 
     public codelangs: Codelang[] = [];
@@ -50,21 +56,9 @@ export class AppWorkflows {
   
 }//end class
 
-/**
- * class AppIndexCode
- */
+/*
 export class AppIndexCode {
-
-    /*
-        //const appType:Apptype = new Apptype("test_2","nuevo registro 2");
-        //const appType_obj = JSON.stringify(appType);
-        //const op_response = await insert(appType_obj);
-        //const op_response = await insert("item");
-        
-        //JSonConsole.logArray(codelang_coll);alert("finish");    
-    */
     public codelangs: Codelang[] = [];
-
     constructor() {}
 
     public async loadInitCollections(): Promise<boolean> {
@@ -92,5 +86,5 @@ export class AppIndexCode {
         JSonConsole.logArray(task_coll);
         return true;
     }
-
 }//end class
+ */

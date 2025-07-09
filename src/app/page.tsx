@@ -15,7 +15,7 @@ import { Codelang } from "@/db/model/codelang";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
 import { parseCollection } from "@/front/parser/javascriptparser";
-
+import { PanelTaskgroups } from "@/app/workflows/groups/panelgroups";
 
 
 const layoutStyle = {
@@ -32,8 +32,11 @@ export default function PageWorkflows() {
     
     const [ready,setReady] = useState<boolean>(false);
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
-    const onSelection = (section:string) => {setActSection(section);};
     const [activePanel, setActivePanel] = useState<string>("taskgroups");
+
+    const onSelection = (section:string) => {
+        setActSection(section);
+    };
 
     useEffect(() => {
         if(ready) {return;}
@@ -52,11 +55,10 @@ export default function PageWorkflows() {
 
 
     const renderSecondContent = () => {
-        if(actsection==WorkflowsConfig.SC_WORKFLOWS.id) {
+        //<PanelTaskgroups />
+        if(activePanel  =="taskgroups") {
             return (
-                <p>
-                    renderTaskTypes
-                </p>
+                <div>SecondContent</div>
             );
         }
     }	
@@ -64,7 +66,7 @@ export default function PageWorkflows() {
     return (
         <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
             
-            <Flex gridColumn="1/4" gridRow="1" >
+            <Flex gridColumn="1/5" gridRow="1" >
                 <Header codelangs={codelangs}
                         section={actsection} />   
             </Flex>
@@ -78,11 +80,12 @@ export default function PageWorkflows() {
                 <WorkflowEditor codelangs={codelangs}
                              section={actsection} />
             </Flex>
-            <Flex gridColumn="2" gridRow="2" > 
-                <WorkflowEditor codelangs={codelangs}
-                             section={actsection} />
-            </Flex>            
-            <Flex gridColumn="3" gridRow="2" >
+            
+            <Flex gridColumn="3" gridRow="2" > 
+                {renderSecondContent()}
+            </Flex>   
+
+            <Flex gridColumn="4" gridRow="2" >
                 <SecondBar codelangs={codelangs}
                            section={actsection} />
             </Flex>

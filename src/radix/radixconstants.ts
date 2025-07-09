@@ -64,15 +64,18 @@ export class RadixKeys {
 }//end class 
 
 
+export enum DB_ITEM_ACTION {    
+    EDIT    = "edit",
+    OPEN    = "open",
+    UPDATE    = "update",
+    DELETE  = "delete",
+    SELECT  = "select",
+    MOVEUP  = "moveup",
+    MOVEDOWN= "movedown"
+}
+
 /**
  * class DbOperations
- */
 export class DbOperations {   
-
-    public static readonly OP_UPDATE: string = "edit";
-    public static readonly OP_DELETE: string = "delete";
-    public static readonly OP_MOVEUP: string = "moveup";
-    public static readonly OP_MOVEDOWN: string = "movedown";
-
-
 }//end class 
+ */

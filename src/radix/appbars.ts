@@ -48,6 +48,15 @@ export class AppTexts {
 
 }//end class
 
+export const BARCFG_DELETE_OPEN_SELECT: BarButtonsCfg = new BarButtonsCfg(
+    [DbOps.ACT_ITEM__DELETE,ACT_OPEN],
+    [DbOps.ACT_ITEM__DELETE,AppTexts.OPEN],
+    [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN],
+    [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN],
+    [false,false],
+    [true,true]
+);
+
 export const BARCFG_DELETE_OPEN: BarButtonsCfg = new BarButtonsCfg(
     [DbOps.ACT_ITEM__DELETE,ACT_OPEN],
     [DbOps.ACT_ITEM__DELETE,AppTexts.OPEN],

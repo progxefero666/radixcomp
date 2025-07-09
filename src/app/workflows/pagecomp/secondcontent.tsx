@@ -2,7 +2,7 @@
 
 import { Flex } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
-import { PanelTaskgroups } from "../groups/panelgroups";
+import { PanelTaskgroups } from "@/app/workflows/groups/panelgroups";
 
 
 interface CompProps {
