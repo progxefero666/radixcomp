@@ -50,12 +50,12 @@ export class AppTexts {
 }//end class
 
 export const BARCFG_DOS: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_ACTION.DELETE,DB_ITEM_ACTION.OPEN],
-    [DB_ITEM_ACTION_TEXT.DELETE,DB_ITEM_ACTION_TEXT.OPEN],
-    [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN],
-    [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN],
-    [false,false],
-    [true,true]
+    [DB_ITEM_ACTION.DELETE,DB_ITEM_ACTION.OPEN,DB_ITEM_ACTION.SELECT],
+    [DB_ITEM_ACTION_TEXT.DELETE,DB_ITEM_ACTION_TEXT.OPEN,DB_ITEM_ACTION_TEXT.SELECT],
+    [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN,AppUiConst.COLOR_EXPORT],
+    [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN,AppUiConst.ICON_RUN],
+    [false,false,false],
+    [true,true,true]
 );
 
 export const BARCFG_DELETE_OPEN: BarButtonsCfg = new BarButtonsCfg(

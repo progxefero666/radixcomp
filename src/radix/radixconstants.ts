@@ -113,20 +113,3 @@ export class RadixKeys {
     public static readonly KEY_INTRO: string = "Enter";
 }//end class 
 
-export enum DB_ITEM_ACTION {    
-    EDIT    = "edit",
-    OPEN    = "open",
-    UPDATE  = "update",
-    DELETE  = "delete",
-    SELECT  = "select",
-    MOVEUP  = "moveup",
-    MOVEDOWN= "movedown"
-}
-
-export enum DB_ITEM_ACTION_TEXT {    
-    EDIT    = "edit",
-    OPEN    = "open",
-    SAVE    = "Save",
-    DELETE  = "delete",
-    SELECT  = "select",
-}

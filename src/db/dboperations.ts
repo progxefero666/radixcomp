@@ -1,5 +1,24 @@
 //src\db\dboperation.ts
 
+export enum DB_ITEM_COMMAND {    
+    EDIT    = "edit",
+    OPEN    = "open",
+    UPDATE  = "update",
+    DELETE  = "delete",
+    SELECT  = "select",
+    MOVEUP  = "moveup",
+    MOVEDOWN= "movedown"
+}
+
+export enum DB_ITEM_ACTION_TEXT {    
+    EDIT    = "edit",
+    OPEN    = "open",
+    SAVE    = "Save",
+    DELETE  = "delete",
+    SELECT  = "select",
+}
+
+
 /**
  * class DbOps.ERROR_BADFORMAT
  */

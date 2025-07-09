@@ -9,7 +9,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { RadixConf } from "@/radix/radixconf";
 import BarButtons from "@/radix/cbars/btbar";
-import { BARCFG_DELETE_OPEN } from "@/radix/appbars";
+import { BARCFG_DELETE_OPEN, BARCFG_DOS } from "@/radix/appbars";
 import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
 
@@ -29,14 +29,15 @@ const headerStyle = {
 
 interface CompProps {
     workflow: Workflow;
+    callback: (action:string) => void;
 }
-export default function CardWorkflow({ workflow }: CompProps) {
+export default function CardWorkflow({ workflow , callback}: CompProps) {
 
-    const barbuttonscfg: BarButtonsCfg = BARCFG_DELETE_OPEN
+    const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);
 
     const onClick = (item: string, compName?: string) => {
-        alert(item);
+        callback(item);
     };
 
     return (
