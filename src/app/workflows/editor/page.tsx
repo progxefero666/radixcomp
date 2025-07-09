@@ -15,6 +15,9 @@ import { WorkflowsConfig, UiSecondPanels } from "../config";
 import { PrimaryBar } from "../pagecomp/primarybar";
 import { SecondBar } from "../pagecomp/secondbar";
 import { SecondContent } from "../pagecomp/secondcontent";
+import { Codelang } from "@/db/model/codelang";
+import { AppMemmory } from "@/app/appmemory";
+import { set } from "date-fns";
 
 
 
@@ -32,18 +35,25 @@ export default function WorkflowEditor() {
     //const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
     
     const [ready,setReady] = useState<boolean>(false);
+    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
 
- 
     const test = (value:string) => {
     };
 
     useEffect(() => {
-        /*
         if(ready) {return;}
-        const init = async () => {                     
-            setReady(true);     
-        };init();
-        */
+        const init =  () => {   
+            const codelangsJson = AppMemmory.readCodelangs();
+            if(codelangsJson!=null) {
+                setCodelangs(parseResponseCollection<Codelang>(codelangsJson));
+                setReady(true);  
+            }
+            else {
+                alert("No codelangs found.");
+            }               
+        };
+        init();
+        
     }, []);    
 
 	    

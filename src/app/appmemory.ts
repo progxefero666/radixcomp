@@ -15,6 +15,8 @@ export class AppMemmory {
 
     static DB_ESQUEMA:string  = "dbsquema";
     static CODE_LANGS:string  = "codelangs";
+    static WORKFLOW_ID:string  = "workflowid";
+    
 
     public static isUserLogin(): boolean {
        return StorageService.exist(AppMemmory.DB_ESQUEMA);
@@ -33,13 +35,28 @@ export class AppMemmory {
         StorageService.save(AppMemmory.CODE_LANGS,codelangs);
     }
 
-    public static readCodelangs(): string {
+    public static readCodelangs(): string|null {
         if(!StorageService.exist(AppMemmory.CODE_LANGS)){
-            return AppMemmory.NOT_FOUND; 
+            return null; 
         }
         return StorageService.read(AppMemmory.CODE_LANGS)!;
     }
 
+    public static saveWorkflowId(id: number): void {
+        const obj = {value: id};
+        StorageService.save(AppMemmory.WORKFLOW_ID,JSON.stringify(obj));
+    }
+    public static readWorkflowId(): number|null {
+        if(!StorageService.exist(AppMemmory.WORKFLOW_ID)){
+            return null; 
+        }
+        const objString = StorageService.read(AppMemmory.WORKFLOW_ID);
+        if (objString) {
+            const obj = JSON.parse(objString);
+            return obj.value;
+        }
+        return null;
+    }    
 } //end class
 
 

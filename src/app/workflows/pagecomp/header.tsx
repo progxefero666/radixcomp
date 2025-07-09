@@ -14,6 +14,7 @@ import { getAllByTable } from "@/db/services/generic/serviceread";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { DbModelUtil } from "@/db/dbmodelutil";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { AppMemmory } from "@/app/appmemory";
 
 
 const headerStyle = {
@@ -66,6 +67,8 @@ export function Header({ section, navback }: CompProps) {
             if (response === null) { return false; }         
             const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
             if (collection === null) { return; }
+
+            AppMemmory.saveCodelangs(JSON.stringify(collection,null,4));            
             setClangs(DbModelUtil.getCodelangsOptions(collection));
             setClangSelected(collection[0].id.toString());
             setReady(true);

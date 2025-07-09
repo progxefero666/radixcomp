@@ -15,6 +15,8 @@ import CardWorkflowMin from "../cards/cardwfmin";
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
 import { DB_ITEM_COMMAND } from "@/db/dboperations";
+import { AppMemmory } from "@/app/appmemory";
+import { useRouter } from "next/navigation";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -31,7 +33,7 @@ interface CompProps {
     showwfpreview: (workflow:Workflow) => void;
 }
 export  function WorkflowsManager({section,showwfpreview}: CompProps) {
-
+const router = useRouter();
     const [ready,setReady] = useState<boolean>(false);
     const [workflows,setWorkflows] = useState<Workflow[]|null>(null);
     
@@ -62,7 +64,8 @@ export  function WorkflowsManager({section,showwfpreview}: CompProps) {
             return;
         }
         else if(action == DB_ITEM_COMMAND.OPEN) {
-    
+            AppMemmory.saveWorkflowId(workflows![itemIndex].id);
+            router.push(`/workflows/editor/${workflows![itemIndex].id}`);
             return;
         }   
              
