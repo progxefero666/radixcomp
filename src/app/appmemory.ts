@@ -1,7 +1,13 @@
 // File: src/app/appstorage.service.ts
 
 import { StorageService } from "@/common/storage";
-import { Codelang } from "@/db/model/codelang";
+
+
+/**
+ * class AppMemmory.saveCodelangs
+ * - manage application memory
+ * 
+ */
 
 export class AppMemmory {
 
@@ -23,9 +29,8 @@ export class AppMemmory {
         return StorageService.read(AppMemmory.DB_ESQUEMA)!;
     }
 
-    public static saveCodelangs(collection:Codelang[]): void {
-        const json = JSON.stringify(collection,null,4  );
-        StorageService.save(AppMemmory.CODE_LANGS,json);
+    public static saveCodelangs(codelangs:string): void {
+        StorageService.save(AppMemmory.CODE_LANGS,codelangs);
     }
 
     public static readCodelangs(): string {

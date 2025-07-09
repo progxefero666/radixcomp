@@ -30,7 +30,7 @@ interface CompProps {
     //codelangs:Codelang[]|null;
     showwfpreview: (workflow:Workflow) => void;
 }
-export  function WorkflowEditor({section,showwfpreview}: CompProps) {
+export  function WorkflowsManager({section,showwfpreview}: CompProps) {
 
     const [ready,setReady] = useState<boolean>(false);
     const [workflows,setWorkflows] = useState<Workflow[]|null>(null);

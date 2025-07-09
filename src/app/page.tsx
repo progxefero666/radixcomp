@@ -9,7 +9,7 @@ import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 import { UiSecondPanels, WorkflowsConfig }  from "@/app/workflows/config";
 import { Header }       from "@/app/workflows/pagecomp/header";
 import { PrimaryBar }       from "@/app/workflows/pagecomp/primarybar";
-import { WorkflowEditor }      from "@/app/workflows/pagecomp/editor";
+import { WorkflowsManager }      from "@/app/workflows/pagecomp/wfsmanager";
 import { SecondBar }        from "@/app/workflows/pagecomp/secondbar";
 import { Codelang } from "@/db/model/codelang";
 import { getAllByTable } from "@/db/services/generic/serviceread";
@@ -80,7 +80,7 @@ export default function PageWorkflows() {
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" > 
-                <WorkflowEditor section={actsection} 
+                <WorkflowsManager section={actsection} 
                                 showwfpreview={showWfPreview}/>
             </Flex>
             
