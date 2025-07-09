@@ -14,8 +14,8 @@ import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { GenCodeModuleConfig } from "@/app/gencode/config";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { SeparatorH } from "@/radix/container/separatorh";
-import { AppConstants } from "@/app_front/appconstants";
-import { AppContext } from "@/app_front/appcontext";
+
+import { AppMemmory } from "@/app/appmemory";
 import { XPopOver } from "@/radix/container/popover";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
@@ -60,7 +60,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
-    const [operationId, setOperationId] = useState<string>(AppConstants.NOT_DEF);
+    const [operationId, setOperationId] = useState<string>("undefined");
     const operationsRef = useRef<HTMLSelectElement>(null);
 
     // service clients
@@ -79,7 +79,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (section == null) { return; }
 
         //load modeltables
-        const db_squema = AppContext.readDbSquema();
+        const db_squema = AppMemmory.readDbSquema();
         const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
         setMenuListTables(SchemaService.getListTablesAsTOptions(db_modeltables));
 

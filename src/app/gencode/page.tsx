@@ -5,13 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
 import { AppIndex } from "@/app/index/kernel/appindex";
-import { AppContext } from "@/app_front/appcontext";
+import { AppMemmory } from "@/app/appmemory";
 import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
 
-import { readDbSqlScriptFile } from "@/app_server/xeferodb/sqlscripts";
+
 import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
+import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 
 
 //const router = useRouter();
@@ -40,7 +41,7 @@ export default function PageGenCode() {
         const init = async () => {
             
             const dbSquema = await readDbSqlScriptFile("dbsquema");
-            if(dbSquema!== null) {AppContext.saveDbSquema(dbSquema);}            
+            if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}            
             
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
