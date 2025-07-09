@@ -39,6 +39,9 @@ export default function PageWorkflows() {
         const init = async () => {                      
             const response = await getAllByTable(DbTables.codelang);
             if(response === null) {return false;}            
+
+            const coll_codelang:Codelang[]|null =parseCollection<Codelang>(response)
+
             setCodelangs(parseCollection<Codelang>(response));
             setReady(true);
             alert("init end");
