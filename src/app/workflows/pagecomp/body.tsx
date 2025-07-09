@@ -10,9 +10,10 @@ import { getAll } from "@/db/services/read/srvreadcodelang";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { Codelang } from "@/db/model/codelang";
-import { parseCollection, parseResponseCollection } from "@/common/parsers/javascriptparser";
+
 import CardWorkflow from "../cards/cardworkflow";
 import { Workflow } from "@/db/model/workflow";
+import { parseResponseCollection } from "@/front/parser/javascriptparser";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',

@@ -14,7 +14,8 @@ import { SecondBar }        from "@/app/workflows/pagecomp/secondbar";
 import { Codelang } from "@/db/model/codelang";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
-import { parseCollection } from "@/common/parsers/javascriptparser";
+import { parseCollection } from "@/front/parser/javascriptparser";
+
 
 
 const layoutStyle = {
@@ -40,7 +41,7 @@ export default function PageWorkflows() {
             if(response === null) {return false;}            
             setCodelangs(parseCollection<Codelang>(response));
             setReady(true);
-            //alert("init end");
+            alert("init end");
         };
         init();
     }, []);    
