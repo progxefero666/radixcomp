@@ -2,6 +2,15 @@
 import { Flex } from '@radix-ui/themes';
 import type { ComponentProps } from 'react';
 
+export type TValueProps = {
+    tvalue: string,
+    tcolor: string,
+    iname: string,
+    icolor: string,
+    ialign: string
+};
+
+
 export type TSelected = {
     id: string,
     value: boolean

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { forwardRef } from "react";
 import { Box, Flex, TextField } from "@radix-ui/themes";
-import { ThemeCompStyleOld } from "@/radix/radixtheme";
+import { ThemeCompStyle, ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "@/radix/radixtypes";
-
 import { RadixKeys } from "../radixconstants";
 
 
@@ -36,7 +34,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const color   = RadixConf.COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
-    const radius  = ThemeCompStyleOld.COMP_CONT_RADIUS;
+    const radius  = ThemeCompStyle.CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
 
     const showInline: boolean = inline ?? false;
