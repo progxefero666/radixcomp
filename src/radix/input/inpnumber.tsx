@@ -9,7 +9,7 @@ import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
-import { RadixKeys } from "../radixconstants";
+import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
 /**
  * InputTextComponent
  *  format: string; //"numdefdigits:numdecdigits"

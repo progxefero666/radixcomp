@@ -9,7 +9,7 @@ import { Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
 import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS } from "../radixconstants";
+import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
 
 /*
 <Flex direction="column" gap="4">

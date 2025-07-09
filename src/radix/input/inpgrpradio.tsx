@@ -7,7 +7,7 @@ import { Option } from "@/common/models";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
 import { StringsHelper } from "@/markdown/mkdstrings";
 import { CollectionHelper } from "@/common/collhelper";
-import { RADIX_COLORS } from "../radixconstants";
+import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS } from "../radixconstants";
 
 
 /*
@@ -47,7 +47,7 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
         color: RADIX_COLORS.gray,
         size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
-        radius: RadixConf.RADIUS.medium
+        radius: RADIX_RADIUS.medium
     }
         
     const onSelect = (value:string) => {

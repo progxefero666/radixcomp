@@ -9,7 +9,7 @@ import { StringsHelper } from "@/markdown/mkdstrings";
 import { CollectionHelper } from "@/common/collhelper";
 import { RadixUtil } from "../radixutil";
 import { TOption, TSelected, TSelection } from "@/radix/radixtypes";
-import { RADIX_COLORS, RadixConstants } from "../radixconstants";
+import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS, RadixConstants } from "../radixconstants";
 
 /*
 <CheckboxGroup.Root defaultValue={["1"]} name="example">
@@ -50,7 +50,7 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
         color: RADIX_COLORS.gray,
         size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
-        radius: RadixConf.RADIUS.medium
+        radius: RADIX_RADIUS.medium
     }
     
     useEffect(() => {      
