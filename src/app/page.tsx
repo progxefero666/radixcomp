@@ -9,7 +9,7 @@ import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 import { WorkflowsConfig }  from "@/app/workflows/config";
 import { Header }       from "@/app/workflows/pagecomp/header";
 import { PrimaryBar }       from "@/app/workflows/pagecomp/primarybar";
-import { MainContent }      from "@/app/workflows/pagecomp/body";
+import { WorkflowEditor }      from "@/app/workflows/pagecomp/editor";
 import { SecondBar }        from "@/app/workflows/pagecomp/secondbar";
 import { Codelang } from "@/db/model/codelang";
 import { getAllByTable } from "@/db/services/generic/serviceread";
@@ -33,6 +33,7 @@ export default function PageWorkflows() {
     const [ready,setReady] = useState<boolean>(false);
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
     const onSelection = (section:string) => {setActSection(section);};
+    const [activePanel, setActivePanel] = useState<string>("taskgroups");
 
     useEffect(() => {
         if(ready) {return;}
@@ -49,8 +50,19 @@ export default function PageWorkflows() {
         init();
     }, []);    
 
+
+    const renderSecondContent = () => {
+        if(actsection==WorkflowsConfig.SC_WORKFLOWS.id) {
+            return (
+                <p>
+                    renderTaskTypes
+                </p>
+            );
+        }
+    }	
+	    
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
+        <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
             
             <Flex gridColumn="1/4" gridRow="1" >
                 <Header codelangs={codelangs}
@@ -63,10 +75,13 @@ export default function PageWorkflows() {
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" > 
-                <MainContent codelangs={codelangs}
+                <WorkflowEditor codelangs={codelangs}
                              section={actsection} />
             </Flex>
-            
+            <Flex gridColumn="2" gridRow="2" > 
+                <WorkflowEditor codelangs={codelangs}
+                             section={actsection} />
+            </Flex>            
             <Flex gridColumn="3" gridRow="2" >
                 <SecondBar codelangs={codelangs}
                            section={actsection} />

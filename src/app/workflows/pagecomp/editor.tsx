@@ -28,7 +28,7 @@ interface CompProps {
     section:string;
     codelangs:Codelang[]|null;
 }
-export  function MainContent({codelangs,section}: CompProps) {
+export  function WorkflowEditor({codelangs,section}: CompProps) {
 
     const [ready,setReady] = useState<boolean>(false);
     const [workflows,setWorkflows] = useState<Workflow[]|null>(null);
@@ -100,10 +100,12 @@ export  function MainContent({codelangs,section}: CompProps) {
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
+
             {section==WorkflowsConfig.SC_WORKFLOWS.id ? renderManWorkflows() : null}
             {section==WorkflowsConfig.SC_TASKTYPES.id ? renderTaskTypes() : null}
             {section==WorkflowsConfig.SC_WORKFLOW_SQL.id ? renderSql() : null}
             {section==WorkflowsConfig.SC_WORKFLOW_JSON.id ? renderJson() : null}
+            
         </Flex>
     );
 

@@ -52,11 +52,11 @@ export class EditableCollection {
 
     public id:   string;
     public label: string|null=null;
-    public collection:EditableOption[];
+    public items:EditableOption[];
 
-    constructor(id:string,collection:EditableOption[],label:string|null){
+    constructor(id:string,items:EditableOption[],label:string|null){
         this.id = id;        
-        this.collection = collection;
+        this.items = items;
         this.label = label;
     }
 

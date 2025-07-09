@@ -3,42 +3,49 @@
 import { EditableOption } from "@/common/models";
 import { ArrowDownIcon, ArrowUpIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Flex,Box,Text,IconButton } from "@radix-ui/themes";
+import { DbOperations } from "../radixconstants";
 
 
+/**
+ * Component to edit an option in a collection
+ * @param option EditableOption to edit
+ */
 interface CompProps {
     option: EditableOption;
-    onclick: (action:string) => void;
+    onclick: (id:string,action:string) => void;
 }
-/*
-export class EditableOption {
-    public id:   string;
-    public orden: number;
-    public text: string;
-*/
 export const EditOption = ({option,onclick}: CompProps) => {
 
     const handlerOnclick = (action:string) => {
-        onclick(action);
+        onclick(option.id,action);
     }
 
     return (
         <Flex direction="row" align="center" justify="between">
-            <Box>
-                <Text size="2">
-                    {option.text}
-                </Text>
-            </Box>
+            <Flex direction="row" >
+                <Box width="50px">
+                    <Text size="2">
+                        {option.orden.toString()}
+                    </Text>
+                </Box>            
+                <Box width="auto" >
+                    <Text size="2">
+                        {option.text}
+                    </Text>
+                </Box>
+            </Flex>
+
             <Flex direction="row" gap="2" >
-                <IconButton onClick={() => { handlerOnclick("edit") }} >
+                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_UPDATE) }} >
 	                <Pencil2Icon />
                 </IconButton>
-                <IconButton onClick={() => { handlerOnclick("delete") }} >
+                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_DELETE) }} >
 	                <TrashIcon />
                 </IconButton>
-                <IconButton onClick={() => { handlerOnclick("up") }} >
+                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_MOVEUP) }} >
 	                <ArrowUpIcon />
                 </IconButton>             
-                <IconButton onClick={() => { handlerOnclick("down") }} >
+                <IconButton onClick={() => { handlerOnclick(DbOperations.OP_MOVEDOWN) }} >
 	                <ArrowDownIcon />
                 </IconButton>                     
             </Flex>
