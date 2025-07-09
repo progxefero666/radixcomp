@@ -3,19 +3,22 @@
 import { Flex } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import { PanelTaskgroups } from "@/app/workflows/groups/panelgroups";
+import { UiSecondPanels } from "../config";
 
 
 interface CompProps {
     section:string;
+    actpanel?: string;
     onedition?: () => void;
 }
-export const SecondContent = ({ section }: CompProps) => {
+export const SecondContent = ({section,actpanel}: CompProps) => {
 
-    const [activePanel, setActivePanel] = useState<string>("taskgroups");
+    const currentPanel = actpanel ? actpanel : UiSecondPanels.EMPTY;
+    //const currentPanel = actpanel ? actpanel : UiSecondPanels.TASKGROUPS;
 
     return (
         <Flex width="100%" direction="column" >
-           {activePanel == "taskgroups" ? <PanelTaskgroups />: null}
+           {currentPanel == UiSecondPanels.TASKGROUPS? <PanelTaskgroups />: null}
         </Flex>
     );
 	

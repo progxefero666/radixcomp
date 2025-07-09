@@ -2,6 +2,16 @@
 
 import { Option } from "@/common/models";
 
+//seState<string>("taskgroups");
+
+export enum UiSecondPanels {
+    EMPTY       = "empty",
+    TASKGROUPS       = "taskgroups",
+    WORKFLOW_PREVIEW = "workflow",
+    WORKFLOW_JSON    = "workflow_json",
+    WORKFLOW_SQL     = "workflow_sql"
+}
+
 /**
  * class ModuleConfig.ACTIVE_SECTION
  */

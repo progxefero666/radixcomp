@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
-import { WorkflowsConfig }  from "@/app/workflows/config";
+import { UiSecondPanels, WorkflowsConfig }  from "@/app/workflows/config";
 import { Header }       from "@/app/workflows/pagecomp/header";
 import { PrimaryBar }       from "@/app/workflows/pagecomp/primarybar";
 import { WorkflowEditor }      from "@/app/workflows/pagecomp/editor";
@@ -16,6 +16,7 @@ import { getAllByTable } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
 import { parseCollection } from "@/front/parser/javascriptparser";
 import { PanelTaskgroups } from "@/app/workflows/groups/panelgroups";
+import { SecondContent } from "./workflows/pagecomp/secondcontent";
 
 
 const layoutStyle = {
@@ -32,11 +33,18 @@ export default function PageWorkflows() {
     
     const [ready,setReady] = useState<boolean>(false);
     const [actsection, setActSection] = useState<string>(WorkflowsConfig.MODULES[0].id);
-    const [activePanel, setActivePanel] = useState<string>("taskgroups");
+    const [activePanel, setActivePanel] = useState<string>(UiSecondPanels.EMPTY);
+    const [wfSelectedId,setWfSelectedId] = useState<number|null>(null);
 
     const onSelection = (section:string) => {
         setActSection(section);
     };
+
+    const showWfPreview = (workflowId:number) => {
+        setWfSelectedId(workflowId);
+    };
+
+    //onchange?: (value: string, name?: string) => void;
 
     useEffect(() => {
         if(ready) {return;}
@@ -53,15 +61,6 @@ export default function PageWorkflows() {
         init();
     }, []);    
 
-
-    const renderSecondContent = () => {
-        //<PanelTaskgroups />
-        if(activePanel  =="taskgroups") {
-            return (
-                <div>SecondContent</div>
-            );
-        }
-    }	
 	    
     return (
         <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
@@ -82,7 +81,7 @@ export default function PageWorkflows() {
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" > 
-                {renderSecondContent()}
+                <SecondContent section={actsection} actpanel={activePanel} />
             </Flex>   
 
             <Flex gridColumn="4" gridRow="2" >
