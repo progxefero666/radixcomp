@@ -21,7 +21,7 @@ export async function insert(item_serial:string): Promise<string> {
     const prisma = new PrismaClient();
     let result: object|null = null;
     try {
-        result = await prisma.codeLang.create({data:item});
+        result = await prisma.codelang.create({data:item});
         if (result === null) {
             return JsonResponse.ERROR
                 (OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.codelang));
@@ -43,7 +43,7 @@ export async function update(item:Codelang): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.codeLang.update({where:{id:item.id!},data:item!});        
+        result = await prisma.codelang.update({where:{id:item.id!},data:item!});        
         if (result === null) {
             return JsonResponse.ERROR
                 (OpUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.codelang));
@@ -64,7 +64,7 @@ export async function delette(id: number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.codeLang.delete({where:{id:id}});
+        result = await prisma.codelang.delete({where:{id:id}});
         if (result === null) {
             return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.codelang));
         }          
@@ -84,7 +84,7 @@ export async function deleteAll(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.codeLang.deleteMany({});
+        result = await prisma.codelang.deleteMany({});
         if (result === null) {
             return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE_ALL,DbTables.codelang));
         }          

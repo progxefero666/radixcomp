@@ -20,7 +20,7 @@ export async function insert(item_serial:string): Promise<string> {
     const prisma = new PrismaClient();
     let result: object|null = null;
     try {
-        result = await prisma.appType.create({data:item});
+        result = await prisma.apptype.create({data:item});
         if (result === null) {
             return JsonResponse.ERROR
                 (OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
@@ -42,7 +42,7 @@ export async function update(item:Apptype): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.appType.update({where:{id:item.id!},data:item!});        
+        result = await prisma.apptype.update({where:{id:item.id!},data:item!});        
         if (result === null) {
             return JsonResponse.ERROR
                 (OpUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.apptype));
@@ -63,7 +63,7 @@ export async function delette(id: number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.appType.delete({where:{id:id}});
+        result = await prisma.apptype.delete({where:{id:id}});
         if (result === null) {
             return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.apptype));
         }          
@@ -83,7 +83,7 @@ export async function deleteAll(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.appType.deleteMany({});
+        result = await prisma.apptype.deleteMany({});
         if (result === null) {
             return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.apptype));
         }          

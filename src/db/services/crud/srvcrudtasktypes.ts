@@ -22,7 +22,7 @@ export async function insert(item_serial:string): Promise<string> {
     const prisma = new PrismaClient();
     let result: object|null = null;
     try {
-        result = await prisma.taskType.create({data:item});
+        result = await prisma.tasktype.create({data:item});
         if (result === null) {
             return JsonResponse.ERROR
                 (OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.tasktype));
@@ -44,7 +44,7 @@ export async function update(item:Tasktype): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.taskType.update({where:{id:item.id!},data:item!});        
+        result = await prisma.tasktype.update({where:{id:item.id!},data:item!});        
         if (result === null) {
             return JsonResponse.ERROR
                 (OpUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.tasktype));
@@ -65,7 +65,7 @@ export async function delette(id: number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.taskType.delete({where:{id:id}});
+        result = await prisma.tasktype.delete({where:{id:id}});
         if (result === null) {
             return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.tasktype));
         }          
@@ -85,7 +85,7 @@ export async function deleteAll(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.taskType.deleteMany({});
+        result = await prisma.tasktype.deleteMany({});
         if (result === null) {
             return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.tasktype));
         }          

@@ -21,10 +21,10 @@ export async function getAllByTable(table: string): Promise<string> {
     let result = null;
     try {
         if( table === DbTables.codelang ) {
-            result = await prisma.codeLang.findMany();
+            result = await prisma.codelang.findMany();
         }        
         else if( table === DbTables.tasktype ) {
-            result = await prisma.taskType.findMany();
+            result = await prisma.tasktype.findMany();
         }
         else if( table === DbTables.workflow ) {
             result = await prisma.workflow.findMany();
@@ -33,7 +33,7 @@ export async function getAllByTable(table: string): Promise<string> {
             result = await prisma.task.findMany();
         }        
         else if( table === DbTables.apptype ) {
-            result = await prisma.appType.findMany();
+            result = await prisma.apptype.findMany();
         }     
         else if( table === DbTables.application ) {
             result = await prisma.application.findMany();

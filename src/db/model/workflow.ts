@@ -8,26 +8,26 @@ export class Workflow {
     public id: number;
     public wwname: string;
     public description: string = '';
-
+    public context: string|null = null;
     public application: string;
     public fpath: string;
-    public updated: Date;
-    public context: string|null = '';
+    public readonly updated: Date;
+
     constructor(id: number,
                 wwname: string,
+                context:string|null,
                 description: string,
                 application: string,
                 fpath: string,
-                updated: Date,
-                context:string|null) {
+                updated: Date ) {
 
         this.id = id;
         this.wwname = wwname;
+        this.context = context;        
         this.description = description;
         this.application = application;
         this.fpath = fpath;
         this.updated = updated;
-        this.context = context;
     }
 
     /**
@@ -46,14 +46,12 @@ export class Workflow {
      * @returns The maximum length of the field or null if not applicable.
      */
     public maxlen(fieldName: string): number | null {
-        if (fieldName === "id") {
-            return 15; // max digits for numeric
-        }
+
         if (fieldName === "wwname") {
             return 100;
         }
         if (fieldName === "description") {
-            return 500;
+            return -1; // unlimited length
         }
         if (fieldName === "application") {
             return 50;
@@ -72,6 +70,7 @@ export class Workflow {
 export type TypeWorkflow = {
     id: number;
     wwname: string;
+    context: string;
     description: string;
     application: string;
     fpath: string;
