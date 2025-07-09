@@ -57,12 +57,9 @@ export class RadixConstants {
  * class RadixKeys.KEY_INTRO
  */
 export class RadixKeys {   
-
     public static readonly KEY_INTRO: string = "Enter";
 
-
 }//end class 
-
 
 export enum DB_ITEM_ACTION {    
     EDIT    = "edit",
