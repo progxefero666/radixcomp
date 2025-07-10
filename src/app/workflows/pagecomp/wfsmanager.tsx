@@ -63,15 +63,14 @@ const router = useRouter();
      
             return;
         }
-        else if(action == DB_ITEM_COMMAND.OPEN) {
-            AppMemmory.saveWorkflowId(workflows![itemIndex].id);
+        else if(action == DB_ITEM_COMMAND.OPEN) {            
             router.push(`/workflows/editor/${workflows![itemIndex].id}`);
             return;
         }   
              
     }
 
-
+    //AppMemmory.saveWorkflowId(workflows![itemIndex].id);
     const renderManWorkflows = () => {
         if(workflows==null || workflows.length==0) {
             return (
