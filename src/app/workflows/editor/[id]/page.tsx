@@ -1,34 +1,22 @@
 //src\app\workflows\editor\page.tsx
-
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from 'next/navigation';
-
-
 import { Box, Flex, Grid, Text} from "@radix-ui/themes";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
-import { DB_ITEM_COMMAND } from "@/db/dboperations";
 
 //db models
 import { DbTables } from "@/db/dbcatalog";
-//import { Codelang } from "@/db/model/codelang";
-import { Workflow } from "@/db/model/workflow";
-import { Header } from "@radix-ui/react-accordion";
-import { WorkflowsConfig, UiSecondPanels } from "../../config";
-import { PrimaryBar } from "../../pagecomp/primarybar";
-import { SecondBar } from "../../pagecomp/secondbar";
-import { SecondContent } from "../../pagecomp/secondcontent";
 import { Codelang } from "@/db/model/codelang";
+import { Workflow } from "@/db/model/workflow";
 import { AppMemmory } from "@/app/appmemory";
-import { set } from "date-fns";
-
 
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',
     padding: '0',
 };
-
 
 /**
  * Page Workflows Manegement
@@ -68,7 +56,7 @@ export default function WorkflowEditor() {
             </Box>
         );
     }
-       
+
     return (
         <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
             
@@ -96,3 +84,5 @@ export default function WorkflowEditor() {
     );
 
 }//end page
+
+
