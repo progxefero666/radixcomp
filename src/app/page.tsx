@@ -4,12 +4,12 @@
 
 import { useEffect, useState } from "react";
 import { Box, Grid, Flex } from "@radix-ui/themes";
-import { UiSecondPanels, WorkflowsConfig } from "@/app/workflows/config";
+import { MOD_SECTIONS, VIEWER_MODE } from "@/front/workflows/config";
 import { Header } from "@/app/workflows/pagecomp/header";
 import { PrimaryBar } from "@/app/workflows/pagecomp/primarybar";
 import { WorkflowsManager } from "@/app/workflows/pagecomp/wfsmanager";
 import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
-import { SecondContent } from "./workflows/pagecomp/secondcontent";
+import { WorkflowViewer } from "./workflows/pagecomp/wfviewer";
 import { Workflow } from "@/db/model/workflow";
 import { AppMemmory } from "@/front/appmemory";
 
@@ -25,8 +25,8 @@ const layoutStyle = {
  */
 export default function PageWorkflows() {
 
-    const [actsection, setActSection]   = useState<string>(WorkflowsConfig.MODULES[0].id);
-    const [activePanel, setActivePanel] = useState<string>(UiSecondPanels.EMPTY);
+    const [actsection, setActSection]   = useState<string>(MOD_SECTIONS.MANAGER_WORKFLOWS.id);
+    const [activePanel, setActivePanel] = useState<string>(VIEWER_MODE.EMPTY);
     const [wfCharged, setWfCharged]     = useState<boolean>(false);
     const [wfSelected, setWfSelected]   = useState<Workflow | null>(null);
 
@@ -41,7 +41,7 @@ export default function PageWorkflows() {
     const showWfPreview = (workflow: Workflow) => {
         setWfSelected(workflow);
         setWfCharged(true);
-        setActivePanel(UiSecondPanels.WORKFLOW_PREVIEW);
+        setActivePanel(VIEWER_MODE.WORKFLOW_PREVIEW);
     };
 
     return (
@@ -63,8 +63,7 @@ export default function PageWorkflows() {
 
             <Flex gridColumn="3" gridRow="2" >
                 {wfCharged ?
-                    <SecondContent workflow={wfSelected}
-                        section={actsection}
+                    <WorkflowViewer workflow={wfSelected}
                         actpanel={activePanel} />
                     : <Box width="100%">not data charged</Box>}
 
