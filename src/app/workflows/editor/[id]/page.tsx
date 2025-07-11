@@ -32,21 +32,19 @@ export default function WorkflowEditor() {
         workflowId = Number(params.id);
     }
 
-    const loadInitCollections = async () => {  
+    const init = async () => {  
         const codelangsJson = AppMemmory.readCodelangs();
-        if(codelangsJson!=null) {
-            setCodelangs(parseResponseCollection<Codelang>(codelangsJson));
-            setReady(true);  
-        }          
+        if(codelangsJson==null){return;};
+
+        setCodelangs(parseResponseCollection<Codelang>(codelangsJson));
+        
+        setReady(true);  
     };
 
     useEffect(() => {
         alert(workflowId);
         if(ready) {return;}
-        loadInitCollections().then(() => {setReady(true);})
-        .catch((error) => {
-            console.error("Error loading initial collections:", error);
-        })
+        init();      
     },[]);    
 
 	if(!ready) {    

@@ -10,11 +10,8 @@ export class Taskgroup {
     public tpname: string;
     public description: string;
 
-
-    constructor(id: number,
-                workflow_id: number,
-                tpname: string,
-                description: string) {
+    constructor(id:number,workflow_id: number,
+                tpname: string, description: string) {
         this.id = id;
         this.workflow_id = workflow_id;
         this.tpname = tpname;
@@ -24,8 +21,6 @@ export class Taskgroup {
 
     /**
      * Returns the minimum length of the field.
-     * @param fieldName The name of the field.
-     * @returns The minimum length of the field or null if not applicable.
      */
     public minlen(fieldName: string): number | null {
         return 0;
@@ -34,8 +29,6 @@ export class Taskgroup {
     /**
      * Returns the max length of the field.
      * Returns -1 if has unlimited length.
-     * @param fieldName The name of the field.
-     * @returns The maximum length of the field or null if not applicable.
      */
     public maxlen(fieldName: string): number | null {
         if (fieldName === "id") {

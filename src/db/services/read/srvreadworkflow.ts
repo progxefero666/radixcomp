@@ -7,7 +7,7 @@ import { DbOps, OpUtil } from "@/db/dboperations";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
-export async function get(id:number): Promise<string> {
+export async function getWorkflow(id:number): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
@@ -15,11 +15,15 @@ export async function get(id:number): Promise<string> {
         result = await prisma.workflow.findFirst(
             {
                 where:{id:id},
+                include: {
+                    tasks: false,
+                    taskgroups: false
+                }                   
             }
         );
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_BY_ID));
+        //OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_BY_ID));
         return JsonResponse.ERROR(OpUtil.getErrMessage(error));
     }
     finally {

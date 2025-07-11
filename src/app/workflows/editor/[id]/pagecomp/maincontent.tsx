@@ -32,7 +32,7 @@ const mainContentStyle = {
 interface CompProps { 
     workflow:Workflow;
 }
-export  function WorkflowsManager({workflow}: CompProps) {
+export  function MainContent({workflow}: CompProps) {
     const router = useRouter();
     const [ready,setReady] = useState<boolean>(false);
     
