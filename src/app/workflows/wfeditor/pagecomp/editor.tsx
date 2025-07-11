@@ -15,6 +15,9 @@ import { NEW_WK, TASKGROUP_DEFAULT } from "@/front/appworkflows";
 import { Codelang } from "@/db/model/codelang";
 import { Taskgroup } from "@/db/model/taskgroup";
 import CardWorkflowMain from "../cards/cardwfmain";
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
+import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
+import BarButtons from "@/radix/cbars/btbar";
 
 
 const mainContentStyle = {
@@ -56,6 +59,8 @@ export  function WorkflowEditor({onCharge}: CompProps) {
         
     }, []);    
 
+
+
     const execOperation = (itemIndex:number,action:string) => {
     };
 
@@ -79,9 +84,19 @@ interface CompProps {
     onCharge?: (workflow:Workflow,taskgroups:Taskgroup[]) => void;
 }
 export  function WorkflowEditorHeader({onCharge}: CompProps) {
+    
+    const [barbuttons,setBarbuttonsCfg] = useState<BarButtonsCfg>(BARCFG_SAVE_CLOSE);
+    
+    const onBarbuttonsClick = (operation:string) => {
+        
+    };
+
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
-          
+            <Box width={"100%"} >
+                <BarButtons barconfig={barbuttons}
+                            onclick={onBarbuttonsClick} />
+            </Box>
                               
         </Flex>
     );

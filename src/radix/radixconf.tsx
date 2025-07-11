@@ -10,14 +10,34 @@ import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react
 | "3"  | grande               | \~16px font, \~12px padding   |
 | "4"  | XL (solo en algunos) | \~18px+ font                  |*/
 
-export enum INPUT_TEXT_TYPES  {
-        text    = "text" as any,
-        email   = "email" as any,
-        password= "password" as any,
-        search  = "search" as any,
-        url     = "url" as any,
-        tel     = "tel" as any,
-    };
+export enum INPUT_TEXT_TYPES {
+    text = "text" as any,
+    email = "email" as any,
+    password = "password" as any,
+    search = "search" as any,
+    url = "url" as any,
+    tel = "tel" as any,
+};
+
+export enum INPUT_TEXT_ICONS {
+    search = "search" as any,
+    person = "person" as any,
+    lock = "lock" as any
+};
+
+
+export const getInputTextIcon = (inputType: any) => {
+    switch (inputType) {
+        case "search":
+            return () => <MagnifyingGlassIcon height="16" width="16" />;
+        case "person":
+            return () => <PersonIcon height="16" width="16" />;
+        case "lock":
+            return () => <LockClosedIcon height="16" width="16" />;
+        default:
+            return null;
+    }
+};
 /**
  * RadixConf.COLORS
  */
@@ -42,41 +62,21 @@ export class RadixConf {
         subtle: "subtle" as any,
     };
 
-
-
-    public static readonly INPUT_TEXT_ICONS = {
-        search: "search" as any,
-        person: "person" as any,
-        lock: "lock" as any
-    };
-
     public static readonly ALERT_SUCCESS_STYLE: string
         = "alert alert-success w-auto flex justify-center fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50";
 
 
-    public static getIcon = (inputType: any) => {
-        switch (inputType) {
-            case "search":
-                return () => <MagnifyingGlassIcon height="16" width="16" />;
-            case "person":
-                return () => <PersonIcon height="16" width="16" />;
-            case "lock":
-                return () => <LockClosedIcon height="16" width="16" />;
-            default:
-                return null;
-        }
-    };
-   
-    public static readonly ICON_COLLAPSE_OFF:string = "ti-angle-up"; 
-    public static readonly ICON_COLLAPSE_ON:string = "ti-angle-down"; 
-    public static readonly ICON_COLLAPSE_COLOR:string = "black"; 
-    public static readonly ICON_OPEN:string = "ti-eye";
-    public static readonly ICON_DELETE:string = "ti-trash";
-    public static readonly ICON_MODE_EDITION:string = "ti-write";
-    public static readonly ICON_ACT_SAVE:string = "ti-save";
-    public static readonly ICON_RUN:string = "ti-control-play";
-    public static readonly ICON_EXPORT:string = "ti-export";
-    public static readonly ICON_COPY:string = "ti-save";
+
+    public static readonly ICON_COLLAPSE_OFF: string = "ti-angle-up";
+    public static readonly ICON_COLLAPSE_ON: string = "ti-angle-down";
+    public static readonly ICON_COLLAPSE_COLOR: string = "black";
+    public static readonly ICON_OPEN: string = "ti-eye";
+    public static readonly ICON_DELETE: string = "ti-trash";
+    public static readonly ICON_MODE_EDITION: string = "ti-write";
+    public static readonly ICON_SAVE: string = "ti-save";
+    public static readonly ICON_RUN: string = "ti-control-play";
+    public static readonly ICON_EXPORT: string = "ti-export";
+    public static readonly ICON_COPY: string = "ti-save";
 
 }//end class
 

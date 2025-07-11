@@ -1,10 +1,13 @@
 //src\common\constants.ts
 
 
+export enum OPERATIONS {
+    OPEN= "open",
+    CLOSE= "close",
+}
 
-/**
- * Application Constants
- */
-export class AppConstants {
-    public static readonly MODE_EDITION:string = "edition";
-}//end class
+export enum OPERATIONS_TEXT {
+    OPEN= "Open",
+    CLOSE= "Close",
+}
+
