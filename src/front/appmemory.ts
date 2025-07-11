@@ -1,6 +1,10 @@
 // File: src/app/appstorage.service.ts
 
 import { StorageService } from "@/common/storage";
+import { DbTables } from "@/db/dbcatalog";
+import { Codelang } from "@/db/model/codelang";
+import { getAllByTable } from "@/db/services/generic/serviceread";
+import { parseResponseCollection } from "@/front/parser/javascriptparser";
 
 
 /**
@@ -9,7 +13,7 @@ import { StorageService } from "@/common/storage";
  * 
  */
 
-export class AppMemmory {
+export class AppSessionStorage {
 
     static NOT_FOUND:string  = "not_found";
 
@@ -19,38 +23,38 @@ export class AppMemmory {
     
 
     public static isUserLogin(): boolean {
-       return StorageService.exist(AppMemmory.DB_ESQUEMA);
+       return StorageService.exist(AppSessionStorage.DB_ESQUEMA);
     }
     public static saveDbSquema(sql_script: string): void {
-        StorageService.save(AppMemmory.DB_ESQUEMA,sql_script);
+        StorageService.save(AppSessionStorage.DB_ESQUEMA,sql_script);
     }
     public static readDbSquema(): string {
-        if(!StorageService.exist(AppMemmory.DB_ESQUEMA)){
-            return AppMemmory.NOT_FOUND; 
+        if(!StorageService.exist(AppSessionStorage.DB_ESQUEMA)){
+            return AppSessionStorage.NOT_FOUND; 
         }
-        return StorageService.read(AppMemmory.DB_ESQUEMA)!;
+        return StorageService.read(AppSessionStorage.DB_ESQUEMA)!;
     }
 
     public static saveCodelangs(codelangs:string): void {
-        StorageService.save(AppMemmory.CODE_LANGS,codelangs);
+        StorageService.save(AppSessionStorage.CODE_LANGS,codelangs);
     }
 
     public static readCodelangs(): string|null {
-        if(!StorageService.exist(AppMemmory.CODE_LANGS)){
+        if(!StorageService.exist(AppSessionStorage.CODE_LANGS)){
             return null; 
         }
-        return StorageService.read(AppMemmory.CODE_LANGS)!;
+        return StorageService.read(AppSessionStorage.CODE_LANGS)!;
     }
 
     public static saveWorkflowId(id: number): void {
         const obj = {value: id};
-        StorageService.save(AppMemmory.WORKFLOW_ID,JSON.stringify(obj));
+        StorageService.save(AppSessionStorage.WORKFLOW_ID,JSON.stringify(obj));
     }
     public static readWorkflowId(): number|null {
-        if(!StorageService.exist(AppMemmory.WORKFLOW_ID)){
+        if(!StorageService.exist(AppSessionStorage.WORKFLOW_ID)){
             return null; 
         }
-        const objString = StorageService.read(AppMemmory.WORKFLOW_ID);
+        const objString = StorageService.read(AppSessionStorage.WORKFLOW_ID);
         if (objString) {
             const obj = JSON.parse(objString);
             return obj.value;
@@ -59,54 +63,16 @@ export class AppMemmory {
     }    
 } //end class
 
-
 /**
- * class Device
+ * class AppMemmory.saveCodelangs()
  */
-export class Device {
-    public size: string = "undefined";
-    public platform: string | null = null;
-    public width: number = 0;
-    public height: number = 0;
-    public pixelratio: number | null = null;
-    public resolution: string | null = null;
-    public os: string | null = null;
-    public useragent: string | null = null;
-    public istouchdevice: boolean = false;
-    public devicetype: string | null = null;
-    public model: string | null = null;
+export class AppMemmory {
 
-    //not modify
-    constructor() {}
-
-    getJsonString = ():any => {
-        const jsonString = JSON.stringify(this);
-        return jsonString
-    }    
-
-    public static fromJson(jsonString: string): Device {
-        const parsedData = JSON.parse(jsonString);
-        const device = new Device();
-        
-        // Copia todas las propiedades del JSON al objeto
-        Object.assign(device, parsedData);
-        
-        return device;
+    public static async saveCodelangs(): Promise<void>  {
+        const response = await getAllByTable(DbTables.codelang);
+        if (response === null) {return;}
+        const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
+        AppSessionStorage.saveCodelangs(JSON.stringify(collection, null, 4)); 
     }
 
-}//end class
-
-    /*.........................................................................
-    static DEVICE:string  = "device";
-    public static isDeviceCharged(): boolean {
-        return StorageService.exist(AppContext.DEVICE);
-    }    
-    public static saveDevice(device: Device): void {
-        StorageService.save(AppContext.DEVICE,device.getJsonString());
-    }
-    public static readDevice(): Device {
-        const device =  StorageService.read(AppContext.DEVICE);
-        if(device){return Device.fromJson(device??null);}
-        else {return new Device();}       
-    }
-    .........................................................................*/
+}//end class 

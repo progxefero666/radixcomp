@@ -14,7 +14,7 @@ import { getAllByTable } from "@/db/services/generic/serviceread";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { CodelangUtil } from "@/db/modelutil/codelangutil";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { AppMemmory } from "@/front/appmemory";
+import { AppSessionStorage } from "@/front/appmemory";
 
 
 const headerStyle = {
@@ -52,23 +52,7 @@ export function Header({ section, navback }: CompProps) {
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
     
     useEffect(() => {
-        //if (ready) { return; }
         if (pathname === "/") { setIsIndexPage(true); }
-
-        /*
-        const init = async () => {
-            const response = await getAllByTable(DbTables.codelang);
-            if (response === null) { return false; }         
-            const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
-            if (collection === null) { return; }
-
-            AppMemmory.saveCodelangs(JSON.stringify(collection,null,4));            
-            setClangs(CodelangUtil.getCodelangsAsOptions(collection));
-            setClangSelected(collection[0].id.toString());
-            setReady(true);
-        }
-        init();
-        */
     }, []);
 
     const onchange = (value: string,name?:string) =>{

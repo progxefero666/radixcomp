@@ -18,16 +18,10 @@ import { CodelangUtil } from "@/db/modelutil/codelangutil";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
 import { Codelang } from "@generated/prisma";
-import { AppMemmory } from "../front/appmemory";
+import { AppMemmory } from "@/front/appmemory";
 
 
-export const saveAppMemmCodelangs = async () => {
-    const response = await getAllByTable(DbTables.codelang);
-    if (response === null) { return false; }
-    const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
-    if (collection === null) { return; }
-    AppMemmory.saveCodelangs(JSON.stringify(collection, null, 4));        
-}
+
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',
@@ -46,14 +40,8 @@ export default function PageWorkflows() {
     const [wfCharged, setWfCharged] = useState<boolean>(false);
     const [wfSelected, setWfSelected] = useState<Workflow | null>(null);
 
-
-
     useEffect(() => {
-        /*if(ready) {return;}
-        const init = async () => {                     
-            setReady(true);
-        };*/
-        saveAppMemmCodelangs();
+        AppMemmory.saveCodelangs();
     }, []);
 
     const onSelection = (section: string) => {
@@ -100,3 +88,7 @@ export default function PageWorkflows() {
     );
 
 }//end page
+
+function saveAppMemmCodelangs() {
+    throw new Error("Function not implemented.");
+}

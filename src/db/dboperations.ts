@@ -7,15 +7,19 @@ export enum DB_ITEM_COMMAND {
     DELETE  = "delete",
     SELECT  = "select",
     MOVEUP  = "moveup",
-    MOVEDOWN= "movedown"
+    MOVEDOWN= "movedown",
+    COPY    = "copy",
+    EXPORT  = "export",
 }
 
 export enum DB_ITEM_ACTION_TEXT {    
-    EDIT    = "edit",
+    UPDATE    = "edit",
     OPEN    = "open",
     SAVE    = "Save",
     DELETE  = "delete",
     SELECT  = "select",
+    EXPORT  = "export",
+    COPY    = "copy",
 }
 
 

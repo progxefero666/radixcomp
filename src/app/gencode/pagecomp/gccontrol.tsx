@@ -15,7 +15,7 @@ import { GenCodeModuleConfig } from "@/app/gencode/config";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { SeparatorH } from "@/radix/container/separatorh";
 
-import { AppMemmory } from "@/front/appmemory";
+import { AppSessionStorage } from "@/front/appmemory";
 import { PopupBase } from "@/radix/container/popupbase";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
@@ -79,7 +79,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (section == null) { return; }
 
         //load modeltables
-        const db_squema = AppMemmory.readDbSquema();
+        const db_squema = AppSessionStorage.readDbSquema();
         const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
         setMenuListTables(SchemaService.getListTablesAsTOptions(db_modeltables));
 

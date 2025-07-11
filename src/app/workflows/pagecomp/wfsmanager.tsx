@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Flex, Text} from "@radix-ui/themes";
+import { Box, Flex, Text, TextField} from "@radix-ui/themes";
 
 import { AppWorkflows } from "@/app/workflows/kernel/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
@@ -15,8 +15,9 @@ import CardWorkflowMin from "../cards/cardwfmin";
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
 import { DB_ITEM_COMMAND } from "@/db/dboperations";
-import { AppMemmory } from "@/front/appmemory";
+import { AppSessionStorage } from "@/front/appmemory";
 import { useRouter } from "next/navigation";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -52,6 +53,9 @@ const router = useRouter();
         init();
         
     }, []);    
+
+    const onFilterchange = (value: string) =>{
+    }
 
     const execWfItemCardOperation = (itemIndex:number,action:string) =>    {
                 
@@ -95,6 +99,17 @@ const router = useRouter();
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
+            <Flex direction="row" justify="between" align="center" >
+                <TextField.Root placeholder="Search workflows…" size="2"
+                                onChange={(e) => {onFilterchange(e.target.value);}} >
+                    <TextField.Slot>
+                        <MagnifyingGlassIcon height="20" width="20" />
+                    </TextField.Slot>
+                </TextField.Root>
+                <Box>
+                    
+                </Box>            
+            </Flex>
             {section==WorkflowsConfig.SC_WORKFLOWS.id ? renderManWorkflows() : null}            
         </Flex>
     );
