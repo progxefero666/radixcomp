@@ -12,7 +12,7 @@ import { parseCollection, parseResponseCollection } from "@/front/parser/javascr
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { XInputSelect } from "@/radix/input/inpselect";
-import { DbModelUtil } from "@/db/dbmodelutil";
+import { CodelangUtil } from "@/db/modelutil/codelangutil";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { AppMemmory } from "@/app/appmemory";
 
@@ -69,7 +69,7 @@ export function Header({ section, navback }: CompProps) {
             if (collection === null) { return; }
 
             AppMemmory.saveCodelangs(JSON.stringify(collection,null,4));            
-            setClangs(DbModelUtil.getCodelangsOptions(collection));
+            setClangs(CodelangUtil.getCodelangsAsOptions(collection));
             setClangSelected(collection[0].id.toString());
             setReady(true);
         }

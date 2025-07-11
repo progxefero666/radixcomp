@@ -6,10 +6,9 @@ import { parseCollection } from "@/front/parser/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
 
-export class DbModelUtil {
+export class CodelangUtil {
 
-
-    public static getCodelangsOptions (codelangs:Codelang[]): Option[] {
+    public static getCodelangsAsOptions (codelangs:Codelang[]): Option[] {
         const options: Option[] = [];
         for (const item of codelangs) {
             const option = new Option(item.id.toString(),item.cgname,null,null,null);

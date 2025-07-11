@@ -86,38 +86,3 @@ export async function getByParents(
     return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
 
 }//end function
-
-
-
-
-/**
- * Server Action: Get Tasks by Workflow id   
- *    desc: read all rows in table tasktypes
- */
-export async function getByWorkflowGroupOld(workflow_id: number, taskgroup_id: number): Promise<string> {
-
-    const prisma = new PrismaClient();
-    let result = null;
-    try {
-        result = await prisma.task.findMany({
-            where: {
-                workflowId: workflow_id,
-                taskgroupId: taskgroup_id
-            },
-            include: {
-                codelang: true,
-                tasktype: true,
-                workflow: true,
-                taskgroup: true
-            }
-        });
-    }
-    catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
-    }
-    finally {
-        await prisma.$disconnect();
-    }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DbOps.GET_BY_FK), result);
-
-} //end function
