@@ -2,20 +2,19 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, useRouter } from 'next/navigation';
 import { Box, Flex, Grid, Text} from "@radix-ui/themes";
 import { parseResponseCollection, parseResponseItem } from "@/front/parser/javascriptparser";
-import { AppMemmory } from "@/front/appmemory";
-
 //db models
 import { Codelang } from "@/db/model/codelang";
 import { Workflow } from "@/db/model/workflow";
 import { Taskgroup } from "@generated/prisma";
 import { Task } from "@/db/model/task";
-
 import { getWorkflow,getTaskgroups,getTasks} from "@/db/services/read/srvworkflow";
-import { WorkflowEditor } from "./pagecomp/editor";
-
+import { WorkflowEditor } from "@/app/workflows/wfeditor/pagecomp/editor";
+import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
+import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
+import { AppMemmory, readMemmoryCodelangs } from "@/front/appmemory";
+import { NEW_WORKFLOW } from "@/front/workflows/appworkflows";
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',
@@ -28,38 +27,15 @@ const layoutStyle = {
  */
 export default function WorkflowEditorPage() {
 
-    const params = useParams();
-    let workflowId:number = -1;
-    if(params && params.id) {
-        workflowId = Number(params.id);
-    }
-
-    const router = useRef(useRouter());
     const [ready,setReady] = useState<boolean>(false);
 
-    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
     const [taskgroups,setTaskgroups] = useState<Taskgroup[]|null>(null);
-    const [tasks,setTasks] = useState<Task[]|null>(null); 
 
     const init = async () => {  
-        const codelangsJson = AppMemmory.readCodelangs();
-        if(codelangsJson==null){return;};
-
-        setCodelangs(parseResponseCollection<Codelang>(codelangsJson));
-        const workflow_resp = await getWorkflow(workflowId);
-        if(workflow_resp === null) {return;}
-
-        const taskgroups_resp = await getTaskgroups(workflowId);
-        if(taskgroups_resp === null) {return;}
-        setTaskgroups(parseResponseCollection<Taskgroup>(taskgroups_resp));
-
-        const tasks_resp = await getTasks(workflowId);
-        if(tasks_resp === null) {return;}
-        const tasks = parseResponseCollection<Task>(tasks_resp);
-        console.log("Tasks: ", tasks);
-        //setTasks(parseResponseCollection<Task>(tasks_resp));
-
+     
+  
+       
         setReady(true);  
     };
 
@@ -68,6 +44,14 @@ export default function WorkflowEditorPage() {
         init();      
     },[]);    
 
+    const onCharge = (workflow:Workflow) => {
+        return (
+            <Text size="5" weight="bold" className="text-gray-12">
+                Section B Content
+            </Text>
+        );
+    };
+	    
 	if(!ready) {    
         return (
             <Box style={layoutStyle} >
@@ -80,15 +64,15 @@ export default function WorkflowEditorPage() {
         <Grid height="100vh" rows="auto 1fr" columns="56% 40% 4%" style={layoutStyle} >
             
             <Flex gridColumn="1/4" gridRow="1" >
-                header
+                <WorkflowHeader />
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" > 
-                <WorkflowEditor workflow={workflow} />
+                <WorkflowEditor onCharge={onCharge} />
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" > 
-                Second Content
+                <WorkflowViewer  workflow={workflow}/>
             </Flex>   
 
             <Flex gridColumn="4" gridRow="2" >

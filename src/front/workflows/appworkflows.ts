@@ -7,27 +7,22 @@ import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";
 import { Taskgroup } from "@/db/model/taskgroup";
 import { Task } from "@/db/model/task";
-import { DB_CONSTANTS } from "@/db/dboperations";
+import { DB_CONSTANTS, NEW_ROW_ID } from "@/db/dboperations";
 
 
+export const NEW_WORKFLOW: Workflow = new Workflow(
+	Number(NEW_ROW_ID),
+	DB_CONSTANTS.NOT_DEF, 
+	DB_CONSTANTS.NOT_DEF,
+	DB_CONSTANTS.NOT_DEF, 
+	null, null);
 
-/**
- * class AppWorkflows.getNewWorkflow
- */
-export class AppWorkflows {
-
-    public static getNewWorkflow(): Workflow {
-        return new Workflow(
-            Number(DB_CONSTANTS.NEW_ROW_ID),
-            DB_CONSTANTS.NOT_DEF, 
-            DB_CONSTANTS.NOT_DEF,
-            DB_CONSTANTS.NOT_DEF, 
-            null, null);
-    }
-
-}//end class
+//	constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) 	
+export const TASKGOUP_DEFAULT : Taskgroup = new Taskgroup(
+	0,0,"tpname","description");
 
 /*
+export class AppWorkflows {}//end class
     -------------------------------------------------------
 	## Workflow Operations
     - Create Workflow

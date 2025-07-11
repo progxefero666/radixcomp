@@ -9,7 +9,7 @@ import CardWorkflowPreview from "../../cards/cardwfpreview";
 
 
 interface CompProps {
-    workflow?: Workflow | null;
+    workflow: Workflow | null;
 }
 export const WorkflowViewer = ({ workflow }: CompProps) => {
 

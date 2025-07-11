@@ -5,8 +5,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Flex, Text} from "@radix-ui/themes";
 
 import { Workflow } from "@/db/model/workflow";
-import { parseResponseCollection } from "@/front/parser/javascriptparser";
-import { DB_ITEM_CMD } from "@/db/dboperations";
+import { parseResponseCollection, parseResponseItem } from "@/front/parser/javascriptparser";
+import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
+import { Task } from "@/db/model/task";
+import { getTaskgroups, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
+import { NEW_WORKFLOW } from "@/front/workflows/appworkflows";
+import { readMemmoryCodelangs, AppMemmory } from "@/front/appmemory";
+import { Codelang, Taskgroup } from "@generated/prisma";
 
 
 const mainContentStyle = {
@@ -19,15 +24,35 @@ const mainContentStyle = {
 
 // const appRef = useRef<AppWorkflows>(null);
 interface CompProps { 
-    workflow:Workflow|null;
+    onCharge?: (workflow:Workflow) => void;
 }
-export  function WorkflowEditor({workflow}: CompProps) {
+export  function WorkflowEditor({onCharge}: CompProps) {
     const router = useRouter();
     const [ready,setReady] = useState<boolean>(false);
     
+    
+    const workflowId:number = AppMemmory.readWorkflowId()!;
+    let isNewWorkflow:boolean = true;
+    if (workflowId !== Number(NEW_ROW_ID)) {
+        isNewWorkflow = false;
+    }
+
+    const codelangs:Codelang[]=readMemmoryCodelangs();
+    const [workflow,setWorkflow] = useState<Workflow>(NEW_WORKFLOW);
+    const [taskgroups,setTaskgroups] = useState<Taskgroup[]>([]);
+    const [tasks,setTasks] = useState<Task[]>([]); 
+        
     useEffect(() => {        
         if(ready) {return;}
-        const init = async () => {                        
+        const init = async () => {   
+            if(isNewWorkflow) {
+                setTasks([]);
+            }
+            else {
+                setWorkflow(parseResponseItem<Workflow>(await getWorkflow(workflowId))!);
+                setTaskgroups(parseResponseCollection<Taskgroup>(await getTaskgroups(workflowId))!);                
+                setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id))!);   
+            }            
             setReady(true);
         };
         init();

@@ -63,3 +63,8 @@ export  async function saveMemmoryCodelangs(): Promise<void>  {
     const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
     AppMemmory.saveCodelangs(JSON.stringify(collection, null, 4)); 
 }
+
+export function readMemmoryCodelangs(): Codelang[]  {
+    const codelangsJson = AppMemmory.readCodelangs();
+    return parseResponseCollection<Codelang>(codelangsJson)!;
+}

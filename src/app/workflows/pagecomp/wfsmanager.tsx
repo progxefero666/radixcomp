@@ -8,13 +8,12 @@ import { BARCFG_ADD_IMPORT } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
-import { DB_CONSTANTS, DB_ITEM_CMD } from "@/db/dboperations";
+import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
 import { Workflow } from "@/db/model/workflow";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import {CardWorkflowMin} from "../cards/cardwfmin";
 import { MOD_SECTIONS } from "@/front/workflows/config";
-import { AppWorkflows } from "@/front/workflows/appworkflows";
 import { AppMemmory } from "@/front/appmemory";
 
 const mainContentStyle = {
@@ -60,7 +59,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     const onBarButtonClick = (command: string) => {
         alert(command);
         if (command == DB_ITEM_CMD.INSERT) {
-            AppMemmory.saveWorkflowId(Number(DB_CONSTANTS.NEW_ROW_ID));
+            AppMemmory.saveWorkflowId(Number(NEW_ROW_ID));
             router.push("/workflows/wfeditor");
             return;
         }

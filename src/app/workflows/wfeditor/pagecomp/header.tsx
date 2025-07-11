@@ -1,7 +1,8 @@
 //src\app\workflows\pagecomp\gcheader.tsx
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
+
+import { usePathname, useRouter } from 'next/navigation';
 import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 
@@ -45,8 +46,8 @@ const headerRightStyle = {
 interface CompProps {
     navback?: () => void;
 }
-export function WorkflowEditorHeader({ navback }: CompProps) {
-
+export function WorkflowHeader({ navback }: CompProps) {
+    const router = useRef(useRouter());
     const pathname = usePathname();
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
     

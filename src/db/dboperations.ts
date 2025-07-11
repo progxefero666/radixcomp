@@ -41,6 +41,8 @@ export enum DB_CONSTANTS {
     NEW_ROW_ID="0"
 }
 
+export const NEW_ROW_ID:number = 0;
+
 export enum DB_ERROR {   
     NOT_FOUND = "not_found",
     BAD_FORMAT = "bad_format",

@@ -12,14 +12,14 @@ export class Taskgroup {
     public tpname: string;
     public description: string;
 
-    public tasks:Task[];
+    public tasks?:Task[];
     
-    constructor(id:number,workflow_id:number,tpname:string,description:string,tasks:Task[]) {
+    constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) {
         this.id = id;
         this.workflow_id = workflow_id;
         this.tpname = tpname;
         this.description = description;
-        this.tasks = tasks;
+        if(tasks) { this.tasks = tasks;}
     }
 
     /**
