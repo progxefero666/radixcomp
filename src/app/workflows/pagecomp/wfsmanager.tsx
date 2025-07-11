@@ -6,7 +6,7 @@ import { Box, Flex, Text} from "@radix-ui/themes";
 
 import { AppWorkflows } from "@/app/workflows/kernel/appworkflows";
 import { WorkflowsConfig } from "@/app/workflows/config";
-import { getAll } from "@/db/services/read/srvreadcodelang";
+import { getAll } from "@/db/services/read/srvcodelang";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { Codelang } from "@/db/model/codelang";

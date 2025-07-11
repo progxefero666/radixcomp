@@ -11,7 +11,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { Workflow } from "@/db/model/workflow";
 import { AppMemmory } from "@/app/appmemory";
-import { getWorkflow } from "@/db/services/read/srvreadtaskgroup";
+import { getWorkflow } from "@/db/services/read/srvworkflow";
 
 
 
@@ -44,6 +44,8 @@ export default function WorkflowEditor() {
         setCodelangs(parseResponseCollection<Codelang>(codelangsJson));
         const workflow_resp = await getWorkflow(workflowId);
         if(workflow_resp === null) {return;}
+
+        //getTaskgroups
 
         console.log(parseResponseItem<Workflow>(workflow_resp));        
         //setWorkflow(parseResponseItem<Workflow>(workflow_resp));

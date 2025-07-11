@@ -64,7 +64,7 @@ export async function get(id:number): Promise<string> {
  * Server Action: Get Tasks by Workflow id   
  *    desc: read all rows in table tasktypes
  */
-export async function getByWorkflow(workflow_id:number): Promise<string> {
+export async function getTaskgroups(workflow_id:number): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
