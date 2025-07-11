@@ -41,7 +41,7 @@ export class AppMemmory {
     }
 
     public static saveWorkflowId(id: number): void {
-        const obj = {value: id};
+        const obj = {value: id.toString};
         StorageService.save(AppMemmory.WORKFLOW_ID,JSON.stringify(obj));
     }
     public static readWorkflowId(): number|null {

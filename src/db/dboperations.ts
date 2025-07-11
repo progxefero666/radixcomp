@@ -26,10 +26,12 @@ export enum DB_ITEM_CMD_TEXT {
     COPY    = "copy",
 }
 
-export enum DB_COLLECTION_CMD {   
+export enum DB_COLL_CMD {   
     COUNT_ROWS  = "count_rows", 
     GET_ALL     = "get_all",
     GET_BY_ID   = "get_by_id",
+    GET_BY_FK = "get_by_fk",
+    GET_BY_NAME = "get_by_name",
 }
 
 export enum DB_CONSTANTS {   
