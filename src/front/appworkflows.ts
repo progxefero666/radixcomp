@@ -6,28 +6,6 @@ import { Taskgroup } from "@/db/model/taskgroup";
 import { Workflow } from "@/db/model/workflow";
 
 
-/*
-export class AppWorkflows {}//end class
-    -------------------------------------------------------
-	## Workflow Operations
-    - Create Workflow
-    -------------------------------------------------------
-	- Create Context
-	- Add Main Task
-	- Add Final Task	
-	- Update Context	
-	- Update Main Task
-	- Update Final Task
-	- Delete Main Task
-	- Delete Final Task
-	- Move Main Task
-	- Move Final Task		
-	- Duplicate Main Task
-	- Duplicate Final Task		
-	- Clear Main Tasks
-	- Clear Final Tasks	
-     -------------------------------------------------------
-*/
 
 
 //	constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) 	
@@ -71,3 +49,30 @@ export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
     EDITOR_VIEW_TASKGROUPS: new Option("manager_taskgroups", "Task Groups", null)
 } as const;
+
+export enum WF_EDITOR_TASK_ACTION {
+    UPDATE_MAIN = "update_main",
+    ADD_TASK = "add_task",
+    DELETE_TASK = "delete_task",
+    COPY_TASK = "copy_task",
+    MOVEUP_TASK = "moveup_task",
+    MOVEDOWN_TASK = "movedown_task", 
+    UPDATE_TASK = "update_task",   
+}
+
+/*
+export class AppWorkflows {}//end class
+    -------------------------------------------------------
+	## Workflow Operations
+    - Create Workflow
+    -------------------------------------------------------
+	- Create Context
+	- Add Main Task
+	- Update Context	
+	- Update Main Task
+	- Delete Main Task
+	- Move Main Task
+	- Duplicate Main Task
+	- Clear Main Tasks
+     -------------------------------------------------------
+*/
