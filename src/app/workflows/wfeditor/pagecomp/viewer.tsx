@@ -1,28 +1,19 @@
 //src\app\workflows\editor\[id]\pagecomp\secondcontent.tsx
 
-import { Flex, Tabs,Box, Text } from "@radix-ui/themes";
+import { Flex, Tabs, Box, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
 import { Workflow } from "@/db/model/workflow";
+import { VIEWER_MODE } from "@/front/workflows/config";
+import CardWorkflowPreview from "../../cards/cardwfpreview";
 
 
 interface CompProps {
     workflow?: Workflow | null;
 }
-export const SecondContent = ({ workflow }: CompProps) => {
+export const WorkflowViewer = ({ workflow }: CompProps) => {
 
     const [ready, setReady] = useState<boolean>(true);
-
-    useEffect(() => {
-        /*
-        if (ready) { return; }
-        const init = async () => {
-            setReady(true);
-        };
-        init();
-        */
-
-    }, []);
 
     if (!workflow) {
         return (
@@ -31,11 +22,41 @@ export const SecondContent = ({ workflow }: CompProps) => {
             </Flex>
         )
     }
+    const renderWorkflow = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
+
+    const renderJson = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
+
+    const renderPrompt = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
+
+    const renderSql = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
+
+    const renderGraph = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
 
     return (
         <Flex width="100%" direction="column" >
             <Tabs.Root defaultValue="account">
                 <Tabs.List>
+                    <Tabs.Trigger value="workflow">Workflow</Tabs.Trigger>
                     <Tabs.Trigger value="graph">Graph</Tabs.Trigger>
                     <Tabs.Trigger value="prompt">Prompt</Tabs.Trigger>
                     <Tabs.Trigger value="json">JSon</Tabs.Trigger>
@@ -43,20 +64,24 @@ export const SecondContent = ({ workflow }: CompProps) => {
                 </Tabs.List>
 
                 <Box pt="3">
+                    <Tabs.Content value="workflow">
+                        {renderWorkflow()}
+                    </Tabs.Content>
+
                     <Tabs.Content value="graph">
-                        <Text size="2">graph content.</Text>
+                        {renderGraph()}
                     </Tabs.Content>
 
                     <Tabs.Content value="prompt">
-                        <Text size="2">prompt content.</Text>
+                        {renderPrompt()}
                     </Tabs.Content>
 
                     <Tabs.Content value="json">
-                        <Text size="2">Json content.</Text>
+                        {renderJson()}
                     </Tabs.Content>
 
                     <Tabs.Content value="sql">
-                        <Text size="2">SqlContent.</Text>
+                        {renderSql()}
                     </Tabs.Content>
                 </Box>
             </Tabs.Root>
@@ -65,9 +90,3 @@ export const SecondContent = ({ workflow }: CompProps) => {
     );
 
 }//end comp
-
-/*
-       {currentPanel == UiSecondPanels.TASKGROUPS? <PanelTaskgroups />: null}
-       {currentPanel == UiSecondPanels.WORKFLOW_PREVIEW? 
-        <CardWorkflowPreview workflow={workflow} callback={callback} />: null}             
-*/

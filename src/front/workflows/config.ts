@@ -11,10 +11,16 @@ export enum VIEWER_MODE {
     DEFAULT = "default",
     JSON = "json",
     SQL = "sql",
-    PROMPT = "prompt"
+    PROMPT = "prompt",
+    GRAPH = "go_graph"
 }
 
 export const MOD_SECTIONS_ARRAY: Option[] = [
     MOD_SECTIONS.MANAGER_WORKFLOWS,
     MOD_SECTIONS.MANAGER_TASKTYPES
 ];
+
+export const EDITOR_SECTIONS = {
+    MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
+    MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
+} as const;

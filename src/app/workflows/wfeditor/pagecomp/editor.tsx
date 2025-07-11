@@ -1,23 +1,12 @@
-//src\app\workflows\editor\[id]\pagecomp\wfeditor.tsx
+//src\app\workflows\wfeditor\pagecomp\maincontent.tsx
 
-
-//src\app\workflows\pagecomp\wfmain.tsx
-
-
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Flex, Text} from "@radix-ui/themes";
-
-
-import { DbTables } from "@/db/dbcatalog";
-import { getAllByTable } from "@/db/services/generic/serviceread";
-import { Codelang } from "@/db/model/codelang";
-
 
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
 import { DB_ITEM_CMD } from "@/db/dboperations";
-
-import { useRouter } from "next/navigation";
 
 
 const mainContentStyle = {
@@ -30,22 +19,15 @@ const mainContentStyle = {
 
 // const appRef = useRef<AppWorkflows>(null);
 interface CompProps { 
-    workflow:Workflow;
+    workflow:Workflow|null;
 }
-export  function MainContent({workflow}: CompProps) {
+export  function WorkflowEditor({workflow}: CompProps) {
     const router = useRouter();
     const [ready,setReady] = useState<boolean>(false);
     
     useEffect(() => {        
         if(ready) {return;}
-        const init = async () => {     
-            /*
-            const response = await getAllByTable(DbTables.workflow);       
-            if(response === null) {return false;} 
-            const collection:Workflow[]|null = parseResponseCollection<Workflow>(response);
-            if(collection==null) {return;}
-            */
-                   
+        const init = async () => {                        
             setReady(true);
         };
         init();
@@ -63,8 +45,7 @@ export  function MainContent({workflow}: CompProps) {
         )
     };
 
-    //AppMemmory.saveWorkflowId(workflows![itemIndex].id);
-    const renderAux = () => {
+    const renderMainContent = () => {
         return (
             <>
             </>

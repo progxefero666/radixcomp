@@ -43,10 +43,9 @@ const headerRightStyle = {
  * Page WorkFlows Header
  */
 interface CompProps {
-    section: string | null;
     navback?: () => void;
 }
-export function Header({ section, navback }: CompProps) {
+export function WorkflowEditorHeader({ navback }: CompProps) {
 
     const pathname = usePathname();
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
@@ -83,10 +82,7 @@ export function Header({ section, navback }: CompProps) {
 
             <Flex gridColumn="2" gridRow="1"
                 direction="row" px="3" style={headerCenterStyle} >
-
             </Flex>
-
-
 
         </Grid>
     )

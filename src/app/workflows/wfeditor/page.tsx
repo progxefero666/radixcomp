@@ -14,6 +14,7 @@ import { Taskgroup } from "@generated/prisma";
 import { Task } from "@/db/model/task";
 
 import { getWorkflow,getTaskgroups,getTasks} from "@/db/services/read/srvworkflow";
+import { WorkflowEditor } from "./pagecomp/editor";
 
 
 const layoutStyle = {
@@ -25,7 +26,7 @@ const layoutStyle = {
  * Page Workflows Manegement
  *  const router = useRouter();
  */
-export default function WorkflowEditor() {
+export default function WorkflowEditorPage() {
 
     const params = useParams();
     let workflowId:number = -1;
@@ -76,18 +77,14 @@ export default function WorkflowEditor() {
     }
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
+        <Grid height="100vh" rows="auto 1fr" columns="56% 40% 4%" style={layoutStyle} >
             
-            <Flex gridColumn="1/5" gridRow="1" >
+            <Flex gridColumn="1/4" gridRow="1" >
                 header
             </Flex>
 
-            <Flex gridColumn="1" gridRow="2" >
-                Primary bar
-            </Flex>
-
             <Flex gridColumn="2" gridRow="2" > 
-                Main Content
+                <WorkflowEditor workflow={workflow} />
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" > 
