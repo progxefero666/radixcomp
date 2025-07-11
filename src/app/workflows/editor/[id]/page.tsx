@@ -2,15 +2,17 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Box, Flex, Grid, Text} from "@radix-ui/themes";
-import { parseResponseCollection } from "@/front/parser/javascriptparser";
+import { parseResponseCollection, parseResponseItem } from "@/front/parser/javascriptparser";
 
 //db models
 import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { Workflow } from "@/db/model/workflow";
 import { AppMemmory } from "@/app/appmemory";
+import { getWorkflow } from "@/db/services/read/srvreadtaskgroup";
+
 
 
 const layoutStyle = {
@@ -23,9 +25,12 @@ const layoutStyle = {
  *  const router = useRouter();
  */
 export default function WorkflowEditor() {
+    const router = useRef(useRouter());
     const [ready,setReady] = useState<boolean>(false);
+
     const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
-    
+    const [workflow,setWorkflow] = useState<Workflow|null>(null);
+
     const params = useParams();
     let workflowId:number = -1;
     if(params && params.id) {
@@ -37,12 +42,15 @@ export default function WorkflowEditor() {
         if(codelangsJson==null){return;};
 
         setCodelangs(parseResponseCollection<Codelang>(codelangsJson));
-        
-        setReady(true);  
+        const workflow_resp = await getWorkflow(workflowId);
+        if(workflow_resp === null) {return;}
+
+        console.log(parseResponseItem<Workflow>(workflow_resp));        
+        //setWorkflow(parseResponseItem<Workflow>(workflow_resp));
+        //setReady(true);  
     };
 
     useEffect(() => {
-        alert(workflowId);
         if(ready) {return;}
         init();      
     },[]);    

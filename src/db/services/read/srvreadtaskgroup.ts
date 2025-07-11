@@ -9,15 +9,32 @@ import { DB_TABLES }     from "@/db/dbcatalog";
 
 
 
-/**
- * Server Action: get -> by id
-    include: {
-        tasktype: true,
-        workflow: true,
-        codelang: true,
-    },
- *    
- */
+export async function getWorkflow(id:number): Promise<string> {
+
+    const prisma = new PrismaClient();
+    let result = null;
+    try {
+        result = await prisma.workflow.findFirst(
+            {
+                where:{id:id},
+                /*include: {
+                    taskgroups: true,
+                    tasks: true                    
+                }*/                   
+            }
+        );
+    }
+    catch (error) {
+        //OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_BY_ID));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_BY_ID), result);
+
+} //end function
+
 export async function get(id:number): Promise<string> {
 
     const prisma = new PrismaClient();
@@ -41,27 +58,6 @@ export async function get(id:number): Promise<string> {
 } //end function
 
 
-/**
- * Server Action: Get All TaskTypesS
- *    desc: read all rows in table tasktypes
- */
-export async function getAll(): Promise<string> {
-
-    const prisma = new PrismaClient();
-    let result = null;
-    try {
-        result = await prisma.taskgroup.findMany();
-    }
-    catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.taskgroup, DbOps.GET_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
-    }
-    finally {
-        await prisma.$disconnect();
-    }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.taskgroup, DbOps.GET_ALL), result);
-
-} //end function
 
 
 /**
@@ -90,3 +86,25 @@ export async function getByWorkflow(workflow_id:number): Promise<string> {
     return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.taskgroup, DbOps.GET_BY_FK), result);
 
 } //end function
+
+
+/*
+
+export async function getAll(): Promise<string> {
+
+    const prisma = new PrismaClient();
+    let result = null;
+    try {
+        result = await prisma.taskgroup.findMany();
+    }
+    catch (error) {
+        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.taskgroup, DbOps.GET_ALL));
+        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.taskgroup, DbOps.GET_ALL), result);
+
+} //end function
+ */

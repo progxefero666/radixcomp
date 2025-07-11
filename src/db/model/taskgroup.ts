@@ -1,5 +1,7 @@
 //src\db\model\task.ts
 
+import { Task } from "@generated/prisma";
+
 /**
  * Db Table Entity Class Task
  **/
@@ -10,13 +12,14 @@ export class Taskgroup {
     public tpname: string;
     public description: string;
 
-    constructor(id:number,workflow_id: number,
-                tpname: string, description: string) {
+    public task:Task[];
+    
+    constructor(id:number,workflow_id:number,tpname:string,description:string,task:Task[]) {
         this.id = id;
         this.workflow_id = workflow_id;
         this.tpname = tpname;
         this.description = description;
-
+        this.task = task;
     }
 
     /**

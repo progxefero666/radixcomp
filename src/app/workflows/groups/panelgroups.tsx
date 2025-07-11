@@ -50,8 +50,8 @@ export const PanelTaskgroups = ({onedition}: CompProps) => {
 
     const execAction = (id:string,action:string) => {
         alert(`id: ${id} - Action: ${action}`);
-
     }    
+    
     return (
         <Flex width ="100%" direction="column" style={compStyle}>
             {collection.map((item, index) => (
