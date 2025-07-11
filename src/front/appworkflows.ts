@@ -6,6 +6,28 @@ import { Taskgroup } from "@/db/model/taskgroup";
 import { Workflow } from "@/db/model/workflow";
 
 
+/*
+export class AppWorkflows {}//end class
+    -------------------------------------------------------
+	## Workflow Operations
+    - Create Workflow
+    -------------------------------------------------------
+	- Create Context
+	- Add Main Task
+	- Add Final Task	
+	- Update Context	
+	- Update Main Task
+	- Update Final Task
+	- Delete Main Task
+	- Delete Final Task
+	- Move Main Task
+	- Move Final Task		
+	- Duplicate Main Task
+	- Duplicate Final Task		
+	- Clear Main Tasks
+	- Clear Final Tasks	
+     -------------------------------------------------------
+*/
 
 
 //	constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) 	

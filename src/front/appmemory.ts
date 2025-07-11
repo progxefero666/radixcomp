@@ -44,17 +44,13 @@ export class AppMemmory {
         const obj = {value: id.toString};
         StorageService.save(AppMemmory.WORKFLOW_ID,JSON.stringify(obj));
     }
-    public static readWorkflowId(): number|null {
-        if(!StorageService.exist(AppMemmory.WORKFLOW_ID)){
-            return null; 
-        }
-        const objString = StorageService.read(AppMemmory.WORKFLOW_ID);
-        if (objString) {
-            const obj = JSON.parse(objString);
-            return obj.value;
-        }
-        return null;
+
+    public static readWorkflowId(): number {
+        const objString = StorageService.read(AppMemmory.WORKFLOW_ID)!;
+        const obj = JSON.parse(objString);
+        return obj.value;
     }    
+    
 } //end class
 
 export  async function saveMemmoryCodelangs(): Promise<void>  {

@@ -27,7 +27,7 @@ export default function WorkflowEditorPage() {
     const [taskgroups,setTaskgroups] = useState<Taskgroup[]|null>(null);
 
 
-    const onCharge = (workflow:Workflow) => {
+    const onWorkflowCharged = (workflow:Workflow) => {
         return (
             <Text size="5" weight="bold" className="text-gray-12">
                 Section B Content
@@ -35,7 +35,6 @@ export default function WorkflowEditorPage() {
         );
     };
 	    
-
     return (
         <Grid height="100vh" rows="auto 1fr" columns="56% 40% 4%" style={layoutStyle} >
             
@@ -44,11 +43,11 @@ export default function WorkflowEditorPage() {
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" > 
-                <WorkflowEditor onCharge={onCharge} />
+                <WorkflowEditor onCharge={onWorkflowCharged} />
             </Flex>
             
             <Flex gridColumn="3" gridRow="2" > 
-                <WorkflowViewer  workflow={workflow}/>
+                {workflow ?<WorkflowViewer  workflow={workflow}/>:null}                
             </Flex>   
 
             <Flex gridColumn="4" gridRow="2" >

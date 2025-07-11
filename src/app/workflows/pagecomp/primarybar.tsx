@@ -5,7 +5,7 @@ import { Option } from "@/common/models";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 
 import MenuButtons from "@/radix/cbars/btmenu";
-import { MOD_SECTIONS_ARRAY } from "@/front/workflows/config";
+import { MOD_SECTIONS_ARRAY } from "@/front/appworkflows";
 
 
 const primaryBarStyle = {

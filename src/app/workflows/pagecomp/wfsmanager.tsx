@@ -13,7 +13,7 @@ import { Workflow } from "@/db/model/workflow";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import {CardWorkflowMin} from "../cards/cardwfmin";
-import { MOD_SECTIONS } from "@/front/workflows/config";
+import { MOD_SECTIONS } from "@/front/appworkflows";
 import { AppMemmory } from "@/front/appmemory";
 
 const mainContentStyle = {

@@ -2,7 +2,7 @@
 
 import { Flex } from "@radix-ui/themes";
 import { useState } from "react";
-import { VIEWER_MODE } from "@/front/workflows/config";
+import { VIEWER_MODE } from "@/front/appworkflows";
 import { Workflow } from "@/db/model/workflow";
 import CardWorkflowPreview from "@/app/workflows/cards/cardwfpreview";
 
