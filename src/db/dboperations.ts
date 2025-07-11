@@ -1,23 +1,27 @@
 //src\db\dboperation.ts
 
-export enum DB_ITEM_COMMAND {    
+export enum DB_ITEM_CMD {   
+    INSERT  = "insert", 
     EDIT    = "edit",
     OPEN    = "open",
     UPDATE  = "update",
     DELETE  = "delete",
     SELECT  = "select",
     MOVEUP  = "moveup",
-    MOVEDOWN= "movedown",
-    COPY    = "copy",
+    MOVEDOWN= "movedown",    
+    IMPORT  = "import",
     EXPORT  = "export",
+    COPY    = "copy",
 }
 
-export enum DB_ITEM_ACTION_TEXT {    
+export enum DB_ITEM_CMD_TEXT {   
+    INSERT    = "new", 
     UPDATE    = "edit",
     OPEN    = "open",
     SAVE    = "Save",
     DELETE  = "delete",
     SELECT  = "select",
+    IMPORT  = "import",
     EXPORT  = "export",
     COPY    = "copy",
 }

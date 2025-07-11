@@ -15,7 +15,7 @@ import { Codelang } from "@/db/model/codelang";
 
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
-import { DB_ITEM_COMMAND } from "@/db/dboperations";
+import { DB_ITEM_CMD } from "@/db/dboperations";
 
 import { useRouter } from "next/navigation";
 

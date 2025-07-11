@@ -2,7 +2,7 @@
 
 
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
-import { DB_ITEM_ACTION_TEXT, DB_ITEM_COMMAND } from "@/db/dboperations";
+import { DB_ITEM_CMD_TEXT, DB_ITEM_CMD } from "@/db/dboperations";
 
 
 //const MODE_EDITION:string = "edit";
@@ -31,20 +31,11 @@ export class AppUiConst {
 
 }//end class
 
-export class AppTexts {
-    
-    public static readonly OPEN : string = "Open";
-    public static readonly SAVE : string = "Save";
-    public static readonly RUN : string = "Run";
-    public static readonly EXPORT: string = "Export";   
 
-    public static readonly COPY: string = "Copy";  
-
-}//end class
 
 export const BARCFG_ADD_IMPORT: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_COMMAND.DELETE,DB_ITEM_COMMAND.OPEN],
-    [DB_ITEM_ACTION_TEXT.DELETE,DB_ITEM_ACTION_TEXT.OPEN],
+    [DB_ITEM_CMD.INSERT,DB_ITEM_CMD.IMPORT],
+    [DB_ITEM_CMD_TEXT.INSERT,DB_ITEM_CMD_TEXT.IMPORT],
     [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN],
     [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN],
     [false,false],
@@ -52,8 +43,8 @@ export const BARCFG_ADD_IMPORT: BarButtonsCfg = new BarButtonsCfg(
 );
 
 export const BARCFG_DOS: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_COMMAND.DELETE,DB_ITEM_COMMAND.OPEN,DB_ITEM_COMMAND.SELECT],
-    [DB_ITEM_ACTION_TEXT.DELETE,DB_ITEM_ACTION_TEXT.OPEN,DB_ITEM_ACTION_TEXT.SELECT],
+    [DB_ITEM_CMD.DELETE,DB_ITEM_CMD.OPEN,DB_ITEM_CMD.SELECT],
+    [DB_ITEM_CMD_TEXT.DELETE,DB_ITEM_CMD_TEXT.OPEN,DB_ITEM_CMD_TEXT.SELECT],
     [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN,AppUiConst.COLOR_EXPORT],
     [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN,AppUiConst.ICON_RUN],
     [false,false,false],
@@ -61,8 +52,8 @@ export const BARCFG_DOS: BarButtonsCfg = new BarButtonsCfg(
 );
 
 export const BARCFG_DELETE_OPEN: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_COMMAND.DELETE,DB_ITEM_COMMAND.OPEN],
-    [DB_ITEM_ACTION_TEXT.DELETE,DB_ITEM_ACTION_TEXT.OPEN],
+    [DB_ITEM_CMD.DELETE,DB_ITEM_CMD.OPEN],
+    [DB_ITEM_CMD_TEXT.DELETE,DB_ITEM_CMD_TEXT.OPEN],
     [AppUiConst.COLOR_DELETE,AppUiConst.COLOR_ACT_OPEN],
     [AppUiConst.ICON_DELETE,AppUiConst.ICON_OPEN],
     [false,false],
@@ -70,16 +61,16 @@ export const BARCFG_DELETE_OPEN: BarButtonsCfg = new BarButtonsCfg(
 );
 
 export const BARCFG_EXPORT: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_COMMAND.EXPORT],
-    [AppTexts.EXPORT],
+    [DB_ITEM_CMD.EXPORT],
+    [DB_ITEM_CMD_TEXT.EXPORT],
     [AppUiConst.COLOR_EXPORT],
     [AppUiConst.ICON_EXPORT],
     [false],
     [true]
 );
 export const BARCFG_EXPORT_COPY: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_COMMAND.EXPORT,DB_ITEM_COMMAND.COPY],
-    [DB_ITEM_ACTION_TEXT.EXPORT,DB_ITEM_ACTION_TEXT.COPY],
+    [DB_ITEM_CMD.EXPORT,DB_ITEM_CMD.COPY],
+    [DB_ITEM_CMD_TEXT.EXPORT,DB_ITEM_CMD_TEXT.COPY],
     [AppUiConst.COLOR_EXPORT,AppUiConst.COLOR_COPY],
     [AppUiConst.ICON_EXPORT,AppUiConst.ICON_COPY],
     [false,false],

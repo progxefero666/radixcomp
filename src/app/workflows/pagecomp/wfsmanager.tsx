@@ -14,10 +14,12 @@ import { Codelang } from "@/db/model/codelang";
 import CardWorkflowMin from "../cards/cardwfmin";
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
-import { DB_ITEM_COMMAND } from "@/db/dboperations";
+import { DB_ITEM_CMD } from "@/db/dboperations";
 import { AppSessionStorage } from "@/front/appmemory";
 import { useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { BARCFG_ADD_IMPORT } from "@/radix/appbars";
+import BarButtons from "@/radix/cbars/btbar";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -38,6 +40,7 @@ const router = useRouter();
     const [ready,setReady] = useState<boolean>(false);
     const [workflows,setWorkflows] = useState<Workflow[]|null>(null);
     
+    const barButtonsCfg = BARCFG_ADD_IMPORT;
     useEffect(() => {        
         if(ready) {return;}
         const init = async () => {     
@@ -57,17 +60,21 @@ const router = useRouter();
     const onFilterchange = (value: string) =>{
     }
 
+    const onBarButtonClick = (command: string) =>{
+        alert(command);
+    }
+
     const execWfItemCardOperation = (itemIndex:number,action:string) =>    {
                 
-        if(action == DB_ITEM_COMMAND.SELECT) {
+        if(action == DB_ITEM_CMD.SELECT) {
             showwfpreview(workflows![itemIndex]);
             return;
         }           
-        else if(action == DB_ITEM_COMMAND.DELETE) {
+        else if(action == DB_ITEM_CMD.DELETE) {
      
             return;
         }
-        else if(action == DB_ITEM_COMMAND.OPEN) {            
+        else if(action == DB_ITEM_CMD.OPEN) {            
             router.push(`/workflows/editor/${workflows![itemIndex].id}`);
             return;
         }   
@@ -107,7 +114,8 @@ const router = useRouter();
                     </TextField.Slot>
                 </TextField.Root>
                 <Box>
-                    
+                    <BarButtons barconfig={barButtonsCfg}
+                                onclick={onBarButtonClick}  />
                 </Box>            
             </Flex>
             {section==WorkflowsConfig.SC_WORKFLOWS.id ? renderManWorkflows() : null}            
