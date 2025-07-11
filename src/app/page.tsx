@@ -11,8 +11,9 @@ import { WorkflowsManager } from "@/app/workflows/pagecomp/wfsmanager";
 import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
 import { WorkflowViewer } from "./workflows/pagecomp/wfviewer";
 import { Workflow } from "@/db/model/workflow";
-import { AppMemmory } from "@/front/appmemory";
+
 import { Tasktype } from "@/db/model/tasktype";
+import { AppSessionStorage, saveCodelangs } from "@/front/appmemory";
 
 
 const layoutStyle = {
@@ -33,7 +34,7 @@ export default function PageWorkflows() {
     const [tasktypes, setTasktypes] = useState<Tasktype[] | null>(null);
         
     useEffect(() => {
-        AppMemmory.saveCodelangs();
+        saveCodelangs();
     }, []);
 
     const onSelection = (section: string) => {

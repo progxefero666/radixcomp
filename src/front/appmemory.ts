@@ -16,18 +16,14 @@ import { parseResponseCollection } from "@/front/parser/javascriptparser";
 export class AppSessionStorage {
 
     static NOT_FOUND:string  = "not_found";
-
     static DB_ESQUEMA:string  = "dbsquema";
     static CODE_LANGS:string  = "codelangs";
     static WORKFLOW_ID:string  = "workflowid";
     
-
-    public static isUserLogin(): boolean {
-       return StorageService.exist(AppSessionStorage.DB_ESQUEMA);
-    }
     public static saveDbSquema(sql_script: string): void {
         StorageService.save(AppSessionStorage.DB_ESQUEMA,sql_script);
     }
+
     public static readDbSquema(): string {
         if(!StorageService.exist(AppSessionStorage.DB_ESQUEMA)){
             return AppSessionStorage.NOT_FOUND; 
@@ -63,16 +59,9 @@ export class AppSessionStorage {
     }    
 } //end class
 
-/**
- * class AppMemmory.saveCodelangs()
- */
-export class AppMemmory {
-
-    public static async saveCodelangs(): Promise<void>  {
-        const response = await getAllByTable(DbTables.codelang);
-        if (response === null) {return;}
-        const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
-        AppSessionStorage.saveCodelangs(JSON.stringify(collection, null, 4)); 
-    }
-
-}//end class 
+export  async function saveCodelangs(): Promise<void>  {
+    const response = await getAllByTable(DbTables.codelang);
+    if (response === null) {return;}
+    const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
+    AppSessionStorage.saveCodelangs(JSON.stringify(collection, null, 4)); 
+}

@@ -60,7 +60,6 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
         alert(command);
         if (command == DB_ITEM_CMD.INSERT) {
             router.push(`/workflows/editor/0`);
-
             return;
         }
         else if (command == DB_ITEM_CMD.IMPORT) {
@@ -82,7 +81,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
         }
         else if (action == DB_ITEM_CMD.OPEN) {
             //router.push(`/workflows/editor/${workflows![itemIndex].id}`);
-            router.push(`/workflows/[id]/${workflows![itemIndex].id}`);
+            router.push("/workflows/editor");
             return;
         }
 
