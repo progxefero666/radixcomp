@@ -9,9 +9,11 @@ import { Codelang } from "@/db/model/codelang";
 import { Task } from "@/db/model/task";
 import { Taskgroup } from "@/db/model/taskgroup";
 import { Tasktype } from "@/db/model/tasktype";
-import { CodelangUtil } from "@/db/modelutil/codelangutil";
+import { getCodelangsAsOptions } from "@/db/modelutil/codelangutil";
 import { OutputText } from "@/radix/data/outputtext";
 import { RadixConf } from "@/radix/radixconf";
+import { XInputSelect } from "@/radix/input/inpselect";
+import { getTaskgroupsAsOptions, getTasktypeAsOptions } from "@/db/modelutil/workflowutil";
 
 const compStyle = {
     background: ' rgba(23, 23, 23, 0.9)',
@@ -38,10 +40,16 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                                    onsave, oncancel }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
+    const codelangsColl: Option[] = getCodelangsAsOptions(codelangs);
+    const tasktypesColl: Option[] = getTasktypeAsOptions(tasktypes);
+    const taskgroupsColl: Option[] =getTaskgroupsAsOptions(taskgroups);
+
     const onClick = (command: string) => {
         //callback(workflow.id, item);
     };
-
+    const onCodelangSelected = (command: string,name?:string) => {
+        //callback(workflow.id, item);
+    };    
     //tasktype_id
     //codelang_id
     //taskgroup_id
@@ -74,7 +82,13 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                     <Flex direction="column" gapY="2" px="2" py="1" >
 
                         <OutputText label="Application" data={null} />
-
+                        <XInputSelect
+                                inline={true}
+                                label="Code Langs: "
+                                collection={codelangsColl}
+                                default={codelangsColl[0].id}
+                                onchange={onCodelangSelected}
+                                disabled={false} />  
                         
                     </Flex>
                 </Collapsible.Content>
