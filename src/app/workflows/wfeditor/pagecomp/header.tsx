@@ -9,7 +9,7 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { Option } from "@/common/models";
 import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
 import { Codelang } from "@/db/model/codelang";
-import { parseResponseCollection } from "@/front/parser/javascriptparser";
+import { parseResponseCollection } from "@/common/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { XInputSelect } from "@/radix/input/inpselect";

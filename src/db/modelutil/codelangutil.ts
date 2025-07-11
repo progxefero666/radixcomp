@@ -2,7 +2,7 @@
 
 import { Option } from "@/common/models";
 import { Codelang } from "@/db/model/codelang";
-import { parseCollection } from "@/front/parser/javascriptparser";
+import { parseCollection } from "@/common/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
 /*

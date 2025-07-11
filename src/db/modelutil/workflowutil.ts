@@ -4,7 +4,7 @@ import { Option } from "@/common/models";
 import { Workflow } from "@/db/model/workflow";
 import { Taskgroup } from "@/db/model/taskgroup";
 import { Task } from "@/db/model/task";
-import { parseCollection } from "@/front/parser/javascriptparser";
+import { parseCollection } from "@/common/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
 

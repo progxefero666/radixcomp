@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Flex, Text} from "@radix-ui/themes";
 
 import { Workflow } from "@/db/model/workflow";
-import { parseResponseCollection, parseResponseItem } from "@/front/parser/javascriptparser";
+import { parseResponseCollection, parseResponseItem } from "@/common/javascriptparser";
 import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
 import { Task } from "@/db/model/task";
 import { getTaskgroups, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
@@ -14,6 +14,7 @@ import { readMemmoryCodelangs, AppMemmory } from "@/front/appmemory";
 import { NEW_WORKFLOW, TASKGROUP_DEFAULT } from "@/front/appworkflows";
 import { Codelang } from "@/db/model/codelang";
 import { Taskgroup } from "@/db/model/taskgroup";
+import CardWorkflowMain from "../cards/cardwfmain";
 
 
 const mainContentStyle = {
@@ -75,7 +76,8 @@ export  function WorkflowEditor({onCharge}: CompProps) {
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
-                      
+            <CardWorkflowMain workflow={workflow} />
+                              
         </Flex>
     );
 

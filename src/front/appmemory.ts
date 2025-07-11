@@ -4,7 +4,7 @@ import { StorageService } from "@/common/storage";
 import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { getAllByTable } from "@/db/services/generic/serviceread";
-import { parseResponseCollection } from "@/front/parser/javascriptparser";
+import { parseResponseCollection } from "@/common/javascriptparser";
 
 
 /**
@@ -50,7 +50,7 @@ export class AppMemmory {
         const obj = JSON.parse(objString);
         return obj.value;
     }    
-    
+
 } //end class
 
 export  async function saveMemmoryCodelangs(): Promise<void>  {
