@@ -63,7 +63,17 @@ const router = useRouter();
 
     const onBarButtonClick = (command: string) =>{
         alert(command);
-    }
+        if(command == DB_ITEM_CMD.INSERT) {            
+            router.push(`/workflows/editor/0`);
+
+            return;
+        }
+        else if(command == DB_ITEM_CMD.IMPORT) {
+            alert("import");
+            return;
+        }
+
+    }//end
 
     const execWfItemCardOperation = (itemIndex:number,action:string) =>    {
                 
@@ -76,7 +86,9 @@ const router = useRouter();
             return;
         }
         else if(action == DB_ITEM_CMD.OPEN) {            
+            //router.push(`/workflows/editor/${workflows![itemIndex].id}`);
             router.push(`/workflows/editor/${workflows![itemIndex].id}`);
+            
             return;
         }   
              

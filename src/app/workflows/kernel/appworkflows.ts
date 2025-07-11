@@ -7,21 +7,23 @@ import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";
 import { Taskgroup } from "@/db/model/taskgroup";
 import { Task } from "@/db/model/task";
+import { DbConstants } from "@/db/dboperations";
 
 
+/**
+ * class AppWorkflows.getNewWorkflow
+ */
 export class AppWorkflows {
 
-    public static readonly NOT_DEF: string = "undefined";
-
     public static getNewWorkflow(): Workflow {
-        return new Workflow(0,
-            AppWorkflows.NOT_DEF, 
-            AppWorkflows.NOT_DEF,
-            AppWorkflows.NOT_DEF, 
-            null, 
-            null, 
-            new Date());
+        return new Workflow(
+            DbConstants.NEW_ROW_ID,
+            DbConstants.NOT_DEF, 
+            DbConstants.NOT_DEF,
+            DbConstants.NOT_DEF, 
+            null, null);
     }
+
 }//end class
 
 /*

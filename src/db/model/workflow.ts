@@ -11,15 +11,11 @@ export class Workflow {
     public context: string|null = null;        
     public application: string|null = null;   
     public fpath: string|null;
-    public readonly updated?: Date;
+    public readonly updated?: Date|null;
 
-    constructor(id: number,
-                wwname: string,
-                context:string|null,
-                description: string,
-                application: string|null,
-                fpath: string|null,
-                updated?: Date ) {
+    constructor(id:number,wwname:string,
+                context:string|null,description:string,
+                application:string|null,fpath:string|null,updated?:Date ) {
 
         this.id = id;
         this.wwname = wwname;
@@ -27,7 +23,7 @@ export class Workflow {
         this.description = description;
         this.application = application;
         this.fpath = fpath;
-        this.updated = updated;
+        if(updated !== null){this.updated = updated;}
     }
 
     /**

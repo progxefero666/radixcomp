@@ -28,42 +28,20 @@ export enum DB_ITEM_CMD_TEXT {
 
 
 /**
- * class DbOps.ERROR_BADFORMAT
+ * class DbConstants.NEW_ROW_ID
  */
-export class DbOps {
+export class DbConstants {
     
-    public static readonly ACT_COLLECTION_CLEAR:string = "insert";
-    public static readonly ACT_ITEM_INSERT:string = "insert";
-    public static readonly ACT_ITEM__UPDATE:string = "update";
-    public static readonly ACT_ITEM__DELETE:string = "delete";
-
+    public static readonly NEW_ROW_ID: number = 0;
+    public static readonly NOT_DEF: string = "undefined";
+    
     public static readonly SUCCESS: string = "success";
-    public static readonly ERROR: string = "error";
-    public static readonly ERROR_UNKNOWN: unknown = "Unknown error";
 
-    public static readonly INSERT: string = "insert";
-    public static readonly UPDATE: string = "update";
-    public static readonly DELETE: string = "delete";
-    public static readonly DELETE_ALL: string = "deleteAll";
-
-    public static readonly GET_ALL: string = "getAll";
-    public static readonly GET_BY_ID: string = "get";
-    public static readonly GET_BY_NAME: string = "get";
-    public static readonly GET_BY_FK: string = "getByFk";
-
-    public static readonly COUNT_ROWS: string = "getAll";
-
-    public static readonly ROW_ID: string = "getAll";
-    public static readonly CREATED_AT: string = "created";
-    public static readonly UPDATED_AT: string = "updated";
-
-    public static readonly ERR_NOTFOUND: string = "not found ";
     public static readonly ERR_BADFORMAT: string = "invalid format";
-
-    public static readonly TYPE_TABLE: string = "table";
-
-}//end class
-
+    public static readonly ERR_UNKNOWN: unknown = "Unknown error";
+    public static readonly ERR_NOTFOUND: string = "not found ";    
+    public static readonly ERR: string = "error";
+}
 export class OpUtil {
 
     public static getOpName(table:string,command:string): string {
@@ -74,7 +52,7 @@ export class OpUtil {
         if(error instanceof Error) {
             return error.message;
         }        
-        return DbOps.ERROR_UNKNOWN;
+        return DbConstants.ERR_UNKNOWN;
     }    
 
     public static getErrMessage(error: unknown): string {        
@@ -82,14 +60,14 @@ export class OpUtil {
     }    
     
     public static getOpErrMessage(table:string,command:string): string {
-        const result:string = DbOps.ERROR.concat("=> ")
+        const result:string = DbConstants.ERR.concat("=> ")
                              .concat(table).concat(" : ").concat(command);
         return result;
 
     }
 
     public static getErrNotFoundMessage(name:string|null,tipe:string|null): string {        
-        let message:string = DbOps.ERR_NOTFOUND;
+        let message:string = DbConstants.ERR_NOTFOUND;
         if(name) {
             message += "name:".concat(name).concat("");
         }
@@ -129,3 +107,25 @@ export class OpUtil {
 
 
 }//end class 
+
+/*
+export class DbOps {
+    
+    public static readonly GET_ALL: string = "getAll";
+    public static readonly GET_BY_ID: string = "get";
+    public static readonly GET_BY_NAME: string = "get";
+    public static readonly GET_BY_FK: string = "getByFk";
+
+    public static readonly COUNT_ROWS: string = "getAll";
+
+    public static readonly ROW_ID: string = "getAll";
+    public static readonly CREATED_AT: string = "created";
+    public static readonly UPDATED_AT: string = "updated";
+
+    public static readonly ERR_NOTFOUND: string = "not found ";
+    public static readonly ERR_BADFORMAT: string = "invalid format";
+
+    public static readonly TYPE_TABLE: string = "table";
+
+}//end class
+*/
