@@ -10,6 +10,8 @@ import { Task } from "@/db/model/task";
 import { WorkflowEditor } from "@/app/workflows/wfeditor/pagecomp/editor";
 import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
 import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
+import ManWfTaskGroups from "./pagecomp/mantaskgroups";
+import { WK_EDITOR_VIEWS } from "@/front/appworkflows";
 
 
 const layoutStyle = {
@@ -23,10 +25,18 @@ const layoutStyle = {
  */
 export default function WorkflowEditorPage() {
 
+    const [view,setView] = useState<string>(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
+
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
     const [taskgroups,setTaskgroups] = useState<Taskgroup[]|null>(null);
 
+    const showManTaskgroups = () => {
+        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id);
+    }
 
+   const onCloseManTaskgroups = () => {
+        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
+    }    
     const onWorkflowCharged = (workflow:Workflow) => {
         return (
             <Text size="5" weight="bold" className="text-gray-12">
@@ -48,6 +58,7 @@ export default function WorkflowEditorPage() {
             
             <Flex gridColumn="3" gridRow="2" > 
                 {workflow ?<WorkflowViewer  workflow={workflow}/>:null}                
+                <ManWfTaskGroups taskgroups={[]} />
             </Flex>   
 
             <Flex gridColumn="4" gridRow="2" >

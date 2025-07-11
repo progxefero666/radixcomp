@@ -11,7 +11,7 @@ import { Task } from "@/db/model/task";
 import { getTaskgroups, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { readMemmoryCodelangs, AppMemmory } from "@/front/appmemory";
 
-import { NEW_WORKFLOW, TASKGROUP_DEFAULT } from "@/front/appworkflows";
+import { NEW_WK, TASKGROUP_DEFAULT } from "@/front/appworkflows";
 import { Codelang } from "@/db/model/codelang";
 import { Taskgroup } from "@/db/model/taskgroup";
 import CardWorkflowMain from "../cards/cardwfmain";
@@ -38,7 +38,7 @@ export  function WorkflowEditor({onCharge}: CompProps) {
     if ((AppMemmory.readWorkflowId()!) !== Number(NEW_ROW_ID)) {isNewWorkflow = false;}
 
     const [workflowId,setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
-    const [workflow,setWorkflow] = useState<Workflow>(NEW_WORKFLOW);
+    const [workflow,setWorkflow] = useState<Workflow>(NEW_WK);
     const [taskgroups,setTaskgroups] = useState<Taskgroup[]>([TASKGROUP_DEFAULT]);
     const [tasks,setTasks] = useState<Task[]>([]); 
         
@@ -59,15 +59,7 @@ export  function WorkflowEditor({onCharge}: CompProps) {
     const execOperation = (itemIndex:number,action:string) => {
     };
 
-    if (!workflow) {
-        return (
-            <Flex width="100%" direction="column" px="2" pt="0" pb="2" >
-                <p>No workflow selected</p>
-            </Flex>
-        )
-    };
-
-    const renderMainContent = () => {
+    const renderListTasks = () => {
         return (
             <>
             </>

@@ -50,18 +50,24 @@ export enum VIEWER_MODE {
     GRAPH = "go_graph"
 }
 
-export const MOD_SECTIONS_ARRAY: Option[] = [
+export const MAN_WFS_SECTIONS_ARRAY: Option[] = [
     MOD_SECTIONS.MANAGER_WORKFLOWS,
     MOD_SECTIONS.MANAGER_TASKTYPES
 ];
 
-export const EDITOR_SECTIONS = {
+export const MAN_WFS_SECTIONS = {
     MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
     MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
 } as const;
-export const NEW_WORKFLOW: Workflow = new Workflow(
+
+export const NEW_WK: Workflow = new Workflow(
     Number(NEW_ROW_ID),
     DB_CONSTANTS.NOT_DEF, 
     DB_CONSTANTS.NOT_DEF,
     DB_CONSTANTS.NOT_DEF, 
     null, null);
+
+export const WK_EDITOR_VIEWS = {
+    EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
+    EDITOR_VIEW_TASKGROUPS: new Option("manager_taskgroups", "Task Groups", null)
+} as const;
