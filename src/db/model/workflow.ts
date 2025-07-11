@@ -7,11 +7,11 @@ export class Workflow {
 
     public id: number;
     public wwname: string;
-    public context: string|null = null;    
     public description: string = '';
+    public context: string|null = null;        
     public application: string|null = null;   
     public fpath: string|null;
-    public readonly updated: Date;
+    public readonly updated?: Date;
 
     constructor(id: number,
                 wwname: string,
@@ -19,7 +19,7 @@ export class Workflow {
                 description: string,
                 application: string|null,
                 fpath: string|null,
-                updated: Date ) {
+                updated?: Date ) {
 
         this.id = id;
         this.wwname = wwname;

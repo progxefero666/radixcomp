@@ -55,11 +55,6 @@ export function Header({ section, navback }: CompProps) {
         if (pathname === "/") { setIsIndexPage(true); }
     }, []);
 
-    const onchange = (value: string,name?:string) =>{
-    }
-
-    const onFilterchange = (value: string) =>{
-    }
 
     const renderHomeButton = () => {
         return (
@@ -88,13 +83,6 @@ export function Header({ section, navback }: CompProps) {
 
             <Flex gridColumn="2" gridRow="1"
                 direction="row" px="3" style={headerCenterStyle} >
-                
-                <TextField.Root placeholder="Search workflows…" size="2"
-                                onChange={(e) => {onFilterchange(e.target.value);}} >
-                    <TextField.Slot>
-                        <MagnifyingGlassIcon height="20" width="20" />
-                    </TextField.Slot>
-                </TextField.Root>
 
             </Flex>
 
