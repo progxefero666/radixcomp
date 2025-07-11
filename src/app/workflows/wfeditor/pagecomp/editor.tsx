@@ -9,9 +9,9 @@ import { parseResponseCollection, parseResponseItem } from "@/front/parser/javas
 import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
 import { Task } from "@/db/model/task";
 import { getTaskgroups, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
-import { NEW_WORKFLOW } from "@/front/workflows/appworkflows";
 import { readMemmoryCodelangs, AppMemmory } from "@/front/appmemory";
 import { Codelang, Taskgroup } from "@generated/prisma";
+import { NEW_WORKFLOW } from "@/front/workflows/config";
 
 
 const mainContentStyle = {

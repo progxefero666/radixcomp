@@ -1,9 +1,17 @@
 //src\app\workflows\config.ts
 
 import { Option } from "@/common/models";
+import { NEW_ROW_ID, DB_CONSTANTS } from "@/db/dboperations";
 import { Taskgroup } from "@/db/model/taskgroup";
-import { Task } from "public/data/AllClases";
+import { Workflow } from "@/db/model/workflow";
 
+
+
+
+//	constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) 	
+export const TASKGOUP_DEFAULT : Taskgroup = new Taskgroup(
+	0,0,"tpname","description");
+    
 export const TASKGROUP_DEFAULT: Taskgroup = new Taskgroup(
     0, 0, "default", "taskgroup default");
 
@@ -29,3 +37,9 @@ export const EDITOR_SECTIONS = {
     MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
     MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
 } as const;
+export const NEW_WORKFLOW: Workflow = new Workflow(
+    Number(NEW_ROW_ID),
+    DB_CONSTANTS.NOT_DEF, 
+    DB_CONSTANTS.NOT_DEF,
+    DB_CONSTANTS.NOT_DEF, 
+    null, null);

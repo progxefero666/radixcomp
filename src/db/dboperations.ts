@@ -37,8 +37,7 @@ export enum DB_COLL_CMD {
 export enum DB_CONSTANTS {   
     SUCCESS  = "success", 
     ERROR     = "gerror",    
-    NOT_DEF   = "not_defined",
-    NEW_ROW_ID="0"
+    NOT_DEF   = "not_defined"
 }
 
 export const NEW_ROW_ID:number = 0;

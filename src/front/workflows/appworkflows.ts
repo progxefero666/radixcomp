@@ -10,13 +10,6 @@ import { Task } from "@/db/model/task";
 import { DB_CONSTANTS, NEW_ROW_ID } from "@/db/dboperations";
 
 
-export const NEW_WORKFLOW: Workflow = new Workflow(
-	Number(NEW_ROW_ID),
-	DB_CONSTANTS.NOT_DEF, 
-	DB_CONSTANTS.NOT_DEF,
-	DB_CONSTANTS.NOT_DEF, 
-	null, null);
-
 //	constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) 	
 export const TASKGOUP_DEFAULT : Taskgroup = new Taskgroup(
 	0,0,"tpname","description");
