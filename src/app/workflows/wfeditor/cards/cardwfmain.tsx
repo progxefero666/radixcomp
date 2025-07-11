@@ -18,6 +18,7 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { XInputText } from "@/radix/input/inptext";
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { RADIX_COLORS } from "@/radix/radixconstants";
+import { DB_ITEM_CMD_TEXT } from "@/db/dboperations";
 
 
 const compStyle = {
@@ -69,14 +70,14 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                             </IconButton>
                         </Box>
                     </Collapsible.Trigger>
-                    <Flex width="100%" justify="between" pt="2" mb="1" align="start" >
+                    <Flex width="100%" justify="between" pt="2" mb="1" align="center" >
                         <Box width="100%"  py="1" px="2" mr="2" style={headerStyle}>
                             <Text size="3" >Main</Text>
                         </Box>    
                         <Box>
                             <Button variant="solid" color={ThemeButtonsStyle.COLOR_IMPORT}
                                 size="2" onClick={importMain}  >
-                                import
+                                {DB_ITEM_CMD_TEXT.IMPORT}   
                             </Button>
                         </Box>    
                     </Flex>
@@ -88,41 +89,44 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                     
                 </Box>
 
-                <Collapsible.Content>
-                    <Flex direction="column" gapY="2" px="2" py="1" >
+                <Collapsible.Content >
+                    <Flex direction="column" gapY="2" pl="2" py="1" >
 
-                        <Flex width="100%" direction="row" justify="between" align="center" >
-                            <Box width="100%"  height="120px">
-                                <XInputTextArea label="Description" 
+                        <Flex width="100%" direction="row" justify="between"  >
+                            <Box width="100%" >
+                                <XInputTextArea 
+                                            label="Description" 
                                             defaul={workflow.description} 
+                                            height="120px"
                                             maxlen={Workflow.maxlen("description")} 
                                             placeholder="input description" />                                   
                             </Box>
-                            <Box>
+                            <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
                                         color={RADIX_COLORS.green}
                                         size="2" onClick={importDescription}  >
+                                    {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        
-                            </Box>
+                            </Flex>
                         </Flex>
 
-                        <Flex width="100%" direction="row" justify="between" align="center" >
-                            <Box width="100%" height="120px" >
+                        <Flex width="100%" direction="row" justify="between"  >
+                            <Box width="100%" >
                                 <XInputTextArea label="Context"
+                                            height="120px"
                                             defaul={workflow.context!} 
                                             maxlen={Workflow.maxlen("context")} 
-                                            placeholder="input context" />                                   
+                                            placeholder="input context" />                                     
                             </Box>
-                            <Box>
+                            <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
                                         color={RADIX_COLORS.green}
-                                        size="2" 
-                                        onClick={importContext}  >
+                                        size="2" onClick={importContext}  >
+                                    {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        
-                            </Box>
+                            </Flex>
                         </Flex>
-                           
-                        
+
                         <XInputText name="application" 
                                     label="Application" 
                                     defaul={workflow.application!} 
@@ -133,8 +137,7 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                                     label="File Path" 
                                     defaul={workflow.fpath!} 
                                     maxlen={Workflow.maxlen("fpath")} 
-                                    placeholder="File path/s" />                                    
-
+                                    placeholder="File path/s" />  
                     </Flex>
                 </Collapsible.Content>
 
@@ -144,4 +147,3 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
     );
 
 }//end component
-

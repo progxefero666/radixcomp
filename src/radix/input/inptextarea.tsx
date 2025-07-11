@@ -26,18 +26,21 @@ interface CompProps {
     autofocus?: boolean;
     minlen?: number;
     maxlen?: number;
+    height?: string;
 }
 
 const areaStyle = {
     width: '100%',   
-    height: '600px',
-     
+    height: '200px',     
     border: '2px solid rgb(28, 28, 43)',
     padding: '2px'
 };
 
 export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
-        (({ inline, label,maxlen, placeholder, defaul: value, onsubmmit, readonly, disabled }, ref) => {        
+        (({ inline, label,maxlen,height, placeholder, defaul: value, onsubmmit, readonly, disabled }, ref) => {        
+
+    if(height) {areaStyle.height = height;}
+
 
     const color = "gray";
     const size = RadixConf.SIZES.size_2;

@@ -27,10 +27,7 @@ import { RADIX_COLORS } from "@/radix/radixconstants";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
-    borderTop: 'none',
-    borderBottom: 'none',
-    borderLeft: '1px solid rgb(167, 176, 188)',
-    borderRight: '1px solid rgb(125, 134, 145)',
+    border: '1px solid rgb(167, 176, 188)'
 };
 
 // const appRef = useRef<AppWorkflows>(null);
@@ -188,11 +185,11 @@ function WorkflowEditorHeader({ state }: CompProps) {
     };
 
     return (
-        <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
-            <Box width={"100%"} >
+        <Flex  direction="row" justify="end" px="3" py="1" style={mainContentStyle} >
+    
                 <BarButtons barconfig={barbuttons}
                     onclick={onBarbuttonsClick} />
-            </Box>
+           
 
         </Flex>
     );
