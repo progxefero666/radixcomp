@@ -8,12 +8,10 @@ import { parseResponseCollection } from "@/front/parser/javascriptparser";
 
 
 /**
- * class AppMemmory.saveCodelangs
- * - manage application memory
- * 
+ * class AppMemmory.
  */
 
-export class AppSessionStorage {
+export class AppMemmory {
 
     static NOT_FOUND:string  = "not_found";
     static DB_ESQUEMA:string  = "dbsquema";
@@ -21,36 +19,36 @@ export class AppSessionStorage {
     static WORKFLOW_ID:string  = "workflowid";
     
     public static saveDbSquema(sql_script: string): void {
-        StorageService.save(AppSessionStorage.DB_ESQUEMA,sql_script);
+        StorageService.save(AppMemmory.DB_ESQUEMA,sql_script);
     }
 
     public static readDbSquema(): string {
-        if(!StorageService.exist(AppSessionStorage.DB_ESQUEMA)){
-            return AppSessionStorage.NOT_FOUND; 
+        if(!StorageService.exist(AppMemmory.DB_ESQUEMA)){
+            return AppMemmory.NOT_FOUND; 
         }
-        return StorageService.read(AppSessionStorage.DB_ESQUEMA)!;
+        return StorageService.read(AppMemmory.DB_ESQUEMA)!;
     }
 
     public static saveCodelangs(codelangs:string): void {
-        StorageService.save(AppSessionStorage.CODE_LANGS,codelangs);
+        StorageService.save(AppMemmory.CODE_LANGS,codelangs);
     }
 
     public static readCodelangs(): string|null {
-        if(!StorageService.exist(AppSessionStorage.CODE_LANGS)){
+        if(!StorageService.exist(AppMemmory.CODE_LANGS)){
             return null; 
         }
-        return StorageService.read(AppSessionStorage.CODE_LANGS)!;
+        return StorageService.read(AppMemmory.CODE_LANGS)!;
     }
 
     public static saveWorkflowId(id: number): void {
         const obj = {value: id};
-        StorageService.save(AppSessionStorage.WORKFLOW_ID,JSON.stringify(obj));
+        StorageService.save(AppMemmory.WORKFLOW_ID,JSON.stringify(obj));
     }
     public static readWorkflowId(): number|null {
-        if(!StorageService.exist(AppSessionStorage.WORKFLOW_ID)){
+        if(!StorageService.exist(AppMemmory.WORKFLOW_ID)){
             return null; 
         }
-        const objString = StorageService.read(AppSessionStorage.WORKFLOW_ID);
+        const objString = StorageService.read(AppMemmory.WORKFLOW_ID);
         if (objString) {
             const obj = JSON.parse(objString);
             return obj.value;
@@ -59,9 +57,9 @@ export class AppSessionStorage {
     }    
 } //end class
 
-export  async function saveCodelangs(): Promise<void>  {
+export  async function saveMemmoryCodelangs(): Promise<void>  {
     const response = await getAllByTable(DbTables.codelang);
     if (response === null) {return;}
     const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
-    AppSessionStorage.saveCodelangs(JSON.stringify(collection, null, 4)); 
+    AppMemmory.saveCodelangs(JSON.stringify(collection, null, 4)); 
 }

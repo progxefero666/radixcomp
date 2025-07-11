@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from 'next/navigation';
 import { Box, Flex, Grid, Text} from "@radix-ui/themes";
 import { parseResponseCollection, parseResponseItem } from "@/front/parser/javascriptparser";
-import { AppSessionStorage } from "@/front/appmemory";
+import { AppMemmory } from "@/front/appmemory";
 
 //db models
 import { Codelang } from "@/db/model/codelang";
@@ -42,7 +42,7 @@ export default function WorkflowEditor() {
     const [tasks,setTasks] = useState<Task[]|null>(null); 
 
     const init = async () => {  
-        const codelangsJson = AppSessionStorage.readCodelangs();
+        const codelangsJson = AppMemmory.readCodelangs();
         if(codelangsJson==null){return;};
 
         setCodelangs(parseResponseCollection<Codelang>(codelangsJson));
