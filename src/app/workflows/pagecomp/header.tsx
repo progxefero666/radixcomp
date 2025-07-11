@@ -1,6 +1,6 @@
 //src\app\workflows\pagecomp\gcheader.tsx
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
@@ -8,13 +8,13 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { Option } from "@/common/models";
 import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
 import { Codelang } from "@/db/model/codelang";
-import { parseCollection, parseResponseCollection } from "@/front/parser/javascriptparser";
+import { parseResponseCollection } from "@/front/parser/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { CodelangUtil } from "@/db/modelutil/codelangutil";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { AppMemmory } from "@/app/appmemory";
+import { AppMemmory } from "@/front/appmemory";
 
 
 const headerStyle = {
@@ -39,9 +39,6 @@ const headerRightStyle = {
 };
 
 
-
-
-
 /**
  * Page WorkFlows Header
  */
@@ -53,15 +50,12 @@ export function Header({ section, navback }: CompProps) {
 
     const pathname = usePathname();
     const [isIndexPage, setIsIndexPage] = useState<boolean>(false);
-    const [ready, setReady] = useState<boolean>(false);
     
-    const [clangs,setClangs] = useState<Option[]|null>(null);
-    const [clangSelected,setClangSelected] = useState<string|null>(null);
-
     useEffect(() => {
-        if (ready) { return; }
+        //if (ready) { return; }
         if (pathname === "/") { setIsIndexPage(true); }
 
+        /*
         const init = async () => {
             const response = await getAllByTable(DbTables.codelang);
             if (response === null) { return false; }         
@@ -74,6 +68,7 @@ export function Header({ section, navback }: CompProps) {
             setReady(true);
         }
         init();
+        */
     }, []);
 
     const onchange = (value: string,name?:string) =>{
@@ -119,16 +114,7 @@ export function Header({ section, navback }: CompProps) {
 
             </Flex>
 
-            <Flex gridColumn="3" gridRow="1" px="3" >
-                {clangSelected !== null &&
-                    <XInputSelect
-                            inline={true}
-                            label="Code Langs: "
-                            collection={clangs!}
-                            default={clangSelected}
-                            onchange={onchange}
-                            disabled={false} />  }   
-            </Flex>
+
 
         </Grid>
     )

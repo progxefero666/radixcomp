@@ -5,6 +5,18 @@ import { Codelang } from "@/db/model/codelang";
 import { parseCollection } from "@/front/parser/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
+/*
+    const [clangs,setClangs] = useState<Option[]|null>(null);
+    const [clangSelected,setClangSelected] = useState<string|null>(null);
+    {clangSelected !== null &&
+        <XInputSelect
+                inline={true}
+                label="Code Langs: "
+                collection={clangs!}
+                default={clangSelected}
+                onchange={onchange}
+                disabled={false} />  } 
+*/
 
 export class CodelangUtil {
 

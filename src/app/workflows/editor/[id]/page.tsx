@@ -5,15 +5,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from 'next/navigation';
 import { Box, Flex, Grid, Text} from "@radix-ui/themes";
 import { parseResponseCollection, parseResponseItem } from "@/front/parser/javascriptparser";
+import { AppMemmory } from "@/front/appmemory";
 
 //db models
-import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { Workflow } from "@/db/model/workflow";
-import { AppMemmory } from "@/app/appmemory";
-import { getTaskgroups, getWorkflow } from "@/db/services/read/srvworkflow";
 import { Taskgroup } from "@generated/prisma";
+import { Task } from "@/db/model/task";
 
+import { getWorkflow,getTaskgroups,getTasks} from "@/db/services/read/srvworkflow";
 
 
 const layoutStyle = {
@@ -26,17 +26,20 @@ const layoutStyle = {
  *  const router = useRouter();
  */
 export default function WorkflowEditor() {
-    const router = useRef(useRouter());
-    const [ready,setReady] = useState<boolean>(false);
-
-    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
-    const [workflow,setWorkflow] = useState<Workflow|null>(null);
 
     const params = useParams();
     let workflowId:number = -1;
     if(params && params.id) {
         workflowId = Number(params.id);
     }
+
+    const router = useRef(useRouter());
+    const [ready,setReady] = useState<boolean>(false);
+
+    const [codelangs,setCodelangs] = useState<Codelang[]|null>(null);
+    const [workflow,setWorkflow] = useState<Workflow|null>(null);
+    const [taskgroups,setTaskgroups] = useState<Taskgroup[]|null>(null);
+    const [tasks,setTasks] = useState<Task[]|null>(null); 
 
     const init = async () => {  
         const codelangsJson = AppMemmory.readCodelangs();
@@ -46,14 +49,17 @@ export default function WorkflowEditor() {
         const workflow_resp = await getWorkflow(workflowId);
         if(workflow_resp === null) {return;}
 
-        const taskgroups_resp = await getTaskgroups(workflowId,true);
+        const taskgroups_resp = await getTaskgroups(workflowId);
         if(taskgroups_resp === null) {return;}
+        setTaskgroups(parseResponseCollection<Taskgroup>(taskgroups_resp));
 
-        const taskgroups = parseResponseCollection<Taskgroup>(taskgroups_resp);
-        console.log( taskgroups);
-     
-        //setWorkflow(parseResponseItem<Workflow>(workflow_resp));
-        //setReady(true);  
+        const tasks_resp = await getTasks(workflowId);
+        if(tasks_resp === null) {return;}
+        const tasks = parseResponseCollection<Task>(tasks_resp);
+        console.log("Tasks: ", tasks);
+        //setTasks(parseResponseCollection<Task>(tasks_resp));
+
+        setReady(true);  
     };
 
     useEffect(() => {

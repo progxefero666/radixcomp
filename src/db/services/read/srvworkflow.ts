@@ -62,14 +62,15 @@ export async function get(id:number): Promise<string> {
  * Server Action: Get Tasks by Workflow id   
  *    desc: read all rows in table tasktypes
  */
-export async function getTaskgroups(workflow_id:number,includeTasks:boolean): Promise<string> {
+export async function getTaskgroups(workflow_id:number,includeTasks?:boolean): Promise<string> {
 
+    const loadTasks = includeTasks ?? false;
     const prisma = new PrismaClient();
     let result = null;
     try {
         result = await prisma.taskgroup.findMany({
             where: {id:workflow_id},
-            include: {tasks:includeTasks}
+            include: {tasks:loadTasks}
         });
     }
     catch (error) {

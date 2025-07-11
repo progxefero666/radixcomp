@@ -15,7 +15,7 @@ import CardWorkflowMin from "../cards/cardwfmin";
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection } from "@/front/parser/javascriptparser";
 import { DB_ITEM_COMMAND } from "@/db/dboperations";
-import { AppMemmory } from "@/app/appmemory";
+import { AppMemmory } from "@/front/appmemory";
 import { useRouter } from "next/navigation";
 
 const mainContentStyle = {

@@ -15,7 +15,7 @@ import { GenCodeModuleConfig } from "@/app/gencode/config";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { SeparatorH } from "@/radix/container/separatorh";
 
-import { AppMemmory } from "@/app/appmemory";
+import { AppMemmory } from "@/front/appmemory";
 import { PopupBase } from "@/radix/container/popupbase";
 import { InputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
