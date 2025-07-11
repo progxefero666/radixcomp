@@ -5,15 +5,21 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 import { Button, Box, Text, Flex, Separator, IconButton, Container, Section, Heading } from "@radix-ui/themes";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { Option } from "@/common/models";
+
+import { RadixConf } from "@/radix/radixconf";
+
+import { XInputTextArea } from "@/radix/input/inptextarea";
+import { XInputText } from "@/radix/input/inptext";
+import { XInputSelect } from "@/radix/input/inpselect";
+
+
 import { Codelang } from "@/db/model/codelang";
 import { Task } from "@/db/model/task";
 import { Taskgroup } from "@/db/model/taskgroup";
 import { Tasktype } from "@/db/model/tasktype";
 import { getCodelangsAsOptions } from "@/db/modelutil/codelangutil";
-import { OutputText } from "@/radix/data/outputtext";
-import { RadixConf } from "@/radix/radixconf";
-import { XInputSelect } from "@/radix/input/inpselect";
 import { getTaskgroupsAsOptions, getTasktypeAsOptions } from "@/db/modelutil/workflowutil";
+
 
 const compStyle = {
     background: ' rgba(23, 23, 23, 0.9)',
@@ -40,24 +46,23 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                                    onsave, oncancel }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
+    //orden
     const codelangsColl: Option[] = getCodelangsAsOptions(codelangs);
     const tasktypesColl: Option[] = getTasktypeAsOptions(tasktypes);
     const taskgroupsColl: Option[] =getTaskgroupsAsOptions(taskgroups);
 
-    const onClick = (command: string) => {
-        //callback(workflow.id, item);
-    };
-    const onCodelangSelected = (command: string,name?:string) => {
-        //callback(workflow.id, item);
+
+    const onCodelangSelected = (value: string,name?:string) => {
+        alert("onCodelangSelected: " + value + " name: " + name);
     };    
-    //tasktype_id
-    //codelang_id
-    //taskgroup_id
-    //orden
-    //tkname
-    //description
-    //files
-    //folders
+
+    const onTasktypeSelected = (value: string,name?:string) => {
+        alert("onTasktypeSelected: " + value + " name: " + name);
+    };    
+
+    const onTaskgroupSelected = (value: string,name?:string) => {
+        alert("onTaskgroupSelected: " + value + " name: " + name);
+    };  
 
     return (
         <Flex direction="column" width="100%" px="2" pt="0" pb="2" style={compStyle}  >
@@ -78,22 +83,70 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                     </Flex>
                 </Flex>
                 <Separator orientation="horizontal" size="4" mb="2" />
+
                 <Collapsible.Content>
+
                     <Flex direction="column" gapY="2" px="2" py="1" >
 
-                        <OutputText label="Application" data={null} />
+                        {/* tkname */}
+                        <XInputText 
+                            label="Name" 
+                            defaul={task.tkname} 
+                            maxlen={task.maxlen("tkname")!} 
+                            placeholder="task name" />   
+
+                        {/* tasktype_id */}
                         <XInputSelect
-                                inline={true}
-                                label="Code Langs: "
+                                label="Type: "
+                                collection={tasktypesColl}
+                                default={task.tasktype_id.toString()}
+                                onchange={onTasktypeSelected}
+                                disabled={false} />  
+
+                        {/* codelang_id */}
+                        <XInputSelect
+                                label="Code Lang: "
                                 collection={codelangsColl}
-                                default={codelangsColl[0].id}
+                                default={task.codelang_id.toString()}
                                 onchange={onCodelangSelected}
                                 disabled={false} />  
                         
+                        {/* taskgroup_id */}
+                        <XInputSelect
+                                label="Group: "
+                                collection={taskgroupsColl}
+                                default={task.taskgroup_id.toString()}
+                                onchange={onTaskgroupSelected}
+                                disabled={false} />  
+
+                        {/* description */}
+                        <XInputTextArea label="Description" 
+                            defaul={task.description} 
+                            maxlen={task.maxlen("description")!} 
+                            placeholder="input description" />   
+
+
+                        {/* files */}
+                        <XInputText label="Files" 
+                            defaul={task.files} 
+                            maxlen={task.maxlen("files")!} 
+                            placeholder="input files" />   
+
+                        {/* folders */}
+                        <XInputText label="Folders" 
+                            defaul={task.folders} 
+                            maxlen={task.maxlen("folders")!} 
+                            placeholder="input folders" />   
+                    
                     </Flex>
+
                 </Collapsible.Content>
+
             </Collapsible.Root>            
+
         </Flex>
     );
 
 }//end component
+
+    //const onClick = (command: string) => { };

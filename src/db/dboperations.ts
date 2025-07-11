@@ -6,6 +6,7 @@ export enum DB_ITEM_CMD {
     OPEN    = "open",
     UPDATE  = "update",
     DELETE  = "delete",
+    CANCEL    = "cancel",
     SELECT  = "select",
     MOVEUP  = "moveup",
     MOVEDOWN= "movedown",    

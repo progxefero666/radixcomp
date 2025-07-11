@@ -20,6 +20,7 @@ import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { OPERATIONS } from "@/common/constants";
 import { Tasktype } from "@/db/model/tasktype";
+import CardTask from "../cards/cardwftask";
 
 
 const mainContentStyle = {
@@ -67,12 +68,27 @@ export  function WorkflowEditor({onCharge}: WorkflowEditorProps) {
 
 
 
-    const execOperation = (itemIndex:number,action:string) => {
+    const onSaveTaskEdition = () => {
+        alert("onSaveTaskEdition");
     };
 
-    const renderHeader = () => {
+    const onCancelTaskEdition = () => {
+        alert("onCancelTaskEdition");
+    };    
+
+    const renderTasks = () => {
         return (
             <>
+                {tasks.map((task, index) => (
+                    <Box key={index.toString()}>
+                        <CardTask codelangs={[]}
+                                      tasktypes={tasktypes}
+                                        taskgroups={taskgroups}
+                                        task={task}
+                                        onsave={() => onSaveTaskEdition()}
+                                        oncancel={() => onCancelTaskEdition()} />                             
+                    </Box>                 
+                ))}            
             </>
         )
     };
@@ -81,7 +97,7 @@ export  function WorkflowEditor({onCharge}: WorkflowEditorProps) {
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
             <WorkflowEditorHeader state={barState}  />
             <CardWorkflowMain workflow={workflow} />
-                              
+            {renderTasks()}                  
         </Flex>
     );
 

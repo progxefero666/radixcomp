@@ -55,7 +55,7 @@ export class Task {
      * @returns The maximum length of the field or null if not applicable.
      */
     public maxlen(fieldName: string): number | null {
-
+        //return -1; -> unlimited length
 
         if (fieldName === "orden") {
             return 15; // max digits for numeric
@@ -64,13 +64,13 @@ export class Task {
             return 255;
         }
         else if  (fieldName === "description") {
-            return -1; // unlimited length
+            return 50000; // unlimited length
         }
         else if (fieldName === "files") {
-            return -1; // unlimited length
+            return 50000; // unlimited length
         }
         else if (fieldName === "folders") {
-            return -1; // unlimited length
+            return 50000; // unlimited length
         }
         return 0;
     }
