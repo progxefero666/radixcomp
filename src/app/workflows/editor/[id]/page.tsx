@@ -11,7 +11,8 @@ import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { Workflow } from "@/db/model/workflow";
 import { AppMemmory } from "@/app/appmemory";
-import { getWorkflow } from "@/db/services/read/srvworkflow";
+import { getTaskgroups, getWorkflow } from "@/db/services/read/srvworkflow";
+import { Taskgroup } from "@generated/prisma";
 
 
 
@@ -45,9 +46,12 @@ export default function WorkflowEditor() {
         const workflow_resp = await getWorkflow(workflowId);
         if(workflow_resp === null) {return;}
 
-        //getTaskgroups
+        const taskgroups_resp = await getTaskgroups(workflowId,true);
+        if(taskgroups_resp === null) {return;}
 
-        console.log(parseResponseItem<Workflow>(workflow_resp));        
+        const taskgroups = parseResponseCollection<Taskgroup>(taskgroups_resp);
+        console.log( taskgroups);
+     
         //setWorkflow(parseResponseItem<Workflow>(workflow_resp));
         //setReady(true);  
     };

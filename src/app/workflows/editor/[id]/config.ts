@@ -31,6 +31,7 @@
 */
 export class WorkflowEditorConfig {
 
+	public static readonly TASKGROUP_DEFAULT = "default";
 
-
+	
 }//end class
