@@ -25,7 +25,7 @@ export class Taskgroup {
     /**
      * Returns the minimum length of the field.
      */
-    public minlen(fieldName: string): number | null {
+    public minlen(fieldName: string): number{
         return 0;
     }
 
@@ -33,7 +33,7 @@ export class Taskgroup {
      * Returns the max length of the field.
      * Returns -1 if has unlimited length.
      */
-    public maxlen(fieldName: string): number | null {
+    public maxlen(fieldName: string): number  {
         if (fieldName === "id") {
             return 15; // max digits for numeric
         }

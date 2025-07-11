@@ -158,13 +158,13 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             </Flex>
         )
     };
-
+    // {renderTasks()}
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
             <WorkflowEditorHeader state={barState} />
             <CardWorkflowMain workflow={workflow} />
             {renderMainCommands()}
-            {renderTasks()}
+           
         </Flex>
     );
 

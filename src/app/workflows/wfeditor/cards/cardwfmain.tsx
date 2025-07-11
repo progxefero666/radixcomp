@@ -14,6 +14,10 @@ import BarButtons from "@/radix/cbars/btbar";
 import { BARCFG_DOS } from "@/radix/appbars";
 import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
+import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { XInputText } from "@/radix/input/inptext";
+import { XInputTextArea } from "@/radix/input/inptextarea";
+import { RADIX_COLORS } from "@/radix/radixconstants";
 
 
 const compStyle = {
@@ -36,11 +40,19 @@ interface CompProps {
 export default function CardWorkflowMain({workflow,onsave}:CompProps) {
 
     //const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
 
-    const onClick = (item: string, compName?: string) => {
-        //callback(workflow.id, item);
+    const importMain = () => {
+        console.log("import main");
+    };
+
+    const importDescription = () => {
+        console.log("import description");
+    };
+
+    const importContext = () => {
+        console.log("import description");
     };
 
     return (
@@ -57,10 +69,16 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                             </IconButton>
                         </Box>
                     </Collapsible.Trigger>
-                    <Flex width="100%" justify="between" align="start" >
-                        <Box width="100%" mt="1" py="1" px="2" mr="2" style={headerStyle}>
+                    <Flex width="100%" justify="between" pt="2" mb="1" align="start" >
+                        <Box width="100%"  py="1" px="2" mr="2" style={headerStyle}>
                             <Text size="3" >Main</Text>
-                        </Box>        
+                        </Box>    
+                        <Box>
+                            <Button variant="solid" color={ThemeButtonsStyle.COLOR_IMPORT}
+                                size="2" onClick={importMain}  >
+                                import
+                            </Button>
+                        </Box>    
                     </Flex>
                 </Flex>
 
@@ -73,12 +91,50 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                 <Collapsible.Content>
                     <Flex direction="column" gapY="2" px="2" py="1" >
 
-                        <OutputText label="Application" data={workflow.application} />
-                        <OutputText label="File Path" data={workflow.fpath} />
-                        <OutputText label="Description" data={workflow.description} />
-                        <OutputText label="Context" data={workflow.context} />
+                        <Flex width="100%" direction="row" justify="between" align="center" >
+                            <Box width="100%"  height="120px">
+                                <XInputTextArea label="Description" 
+                                            defaul={workflow.description} 
+                                            maxlen={workflow.maxlen("description")!} 
+                                            placeholder="input description" />                                   
+                            </Box>
+                            <Box>
+                                <Button variant="solid" 
+                                        color={RADIX_COLORS.green}
+                                        size="2" onClick={importDescription}  >
+                                </Button>        
+                            </Box>
+                        </Flex>
+
+                        <Flex width="100%" direction="row" justify="between" align="center" >
+                            <Box width="100%" height="120px" >
+                                <XInputTextArea label="Context"
+                                            defaul={workflow.context!} 
+                                            maxlen={workflow.maxlen("context")!} 
+                                            placeholder="input context" />                                   
+                            </Box>
+                            <Box>
+                                <Button variant="solid" 
+                                        color={RADIX_COLORS.green}
+                                        size="2" 
+                                        onClick={importContext}  >
+                                </Button>        
+                            </Box>
+                        </Flex>
+                           
                         
-                        
+                        <XInputText name="application" 
+                                    label="Application" 
+                                    defaul={workflow.application!} 
+                                    maxlen={workflow.maxlen("application")} 
+                                    placeholder="Application name" />
+
+                        <XInputText name="fpath" 
+                                    label="File Path" 
+                                    defaul={workflow.fpath!} 
+                                    maxlen={workflow.maxlen("fpath")} 
+                                    placeholder="File path/s" />                                    
+
                     </Flex>
                 </Collapsible.Content>
 

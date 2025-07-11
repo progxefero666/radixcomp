@@ -24,7 +24,7 @@ export class Codelang {
      * @param fieldName The name of the field.
      * @returns The minimum length of the field or null if not applicable.
      */
-    public minlen(fieldName: string): number | null {
+    public minlen(fieldName: string): number {
         return 0;
     }
 
@@ -34,7 +34,7 @@ export class Codelang {
      * @param fieldName The name of the field.
      * @returns The maximum length of the field or null if not applicable.
      */
-    public maxlen(fieldName: string): number | null {
+    public maxlen(fieldName: string): number{
         if (fieldName === "id") {
             return 15; // max digits for numeric
         }

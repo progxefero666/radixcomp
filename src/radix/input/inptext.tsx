@@ -28,7 +28,7 @@ interface InputTextProps {
     maxlen?: number;
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
-    name, defaul, autocommit, type, inline, label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
+    name, defaul, maxlen,autocommit, type, inline, label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
 
     const [value, setValue] = useState<string|null>(defaul ?? null);
 
