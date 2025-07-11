@@ -10,7 +10,14 @@ import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react
 | "3"  | grande               | \~16px font, \~12px padding   |
 | "4"  | XL (solo en algunos) | \~18px+ font                  |*/
 
-
+export enum INPUT_TEXT_TYPES  {
+        text    = "text" as any,
+        email   = "email" as any,
+        password= "password" as any,
+        search  = "search" as any,
+        url     = "url" as any,
+        tel     = "tel" as any,
+    };
 /**
  * RadixConf.COLORS
  */
@@ -35,15 +42,7 @@ export class RadixConf {
         subtle: "subtle" as any,
     };
 
-    //placeholder = "Enter text..." 
-    public static readonly INPUT_TEXT_TYPES = {
-        text: "text" as any,
-        email: "email" as any,
-        password: "password" as any,
-        search: "search" as any,
-        url: "url" as any,
-        tel: "tel" as any,
-    };
+
 
     public static readonly INPUT_TEXT_ICONS = {
         search: "search" as any,
@@ -67,6 +66,17 @@ export class RadixConf {
                 return null;
         }
     };
+   
+    public static readonly ICON_COLLAPSE_OFF:string = "ti-angle-up"; 
+    public static readonly ICON_COLLAPSE_ON:string = "ti-angle-down"; 
+    public static readonly ICON_COLLAPSE_COLOR:string = "black"; 
+    public static readonly ICON_OPEN:string = "ti-eye";
+    public static readonly ICON_DELETE:string = "ti-trash";
+    public static readonly ICON_MODE_EDITION:string = "ti-write";
+    public static readonly ICON_ACT_SAVE:string = "ti-save";
+    public static readonly ICON_RUN:string = "ti-control-play";
+    public static readonly ICON_EXPORT:string = "ti-export";
+    public static readonly ICON_COPY:string = "ti-save";
 
 }//end class
 

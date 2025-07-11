@@ -27,7 +27,7 @@ const mainContentStyle = {
 
 // const appRef = useRef<AppWorkflows>(null);
 interface CompProps { 
-    onCharge?: (workflow:Workflow) => void;
+    onCharge?: (workflow:Workflow,taskgroups:Taskgroup[]) => void;
 }
 export  function WorkflowEditor({onCharge}: CompProps) {
    
@@ -59,7 +59,7 @@ export  function WorkflowEditor({onCharge}: CompProps) {
     const execOperation = (itemIndex:number,action:string) => {
     };
 
-    const renderListTasks = () => {
+    const renderHeader = () => {
         return (
             <>
             </>
@@ -75,3 +75,15 @@ export  function WorkflowEditor({onCharge}: CompProps) {
 
 }//end component
 
+interface CompProps { 
+    onCharge?: (workflow:Workflow,taskgroups:Taskgroup[]) => void;
+}
+export  function WorkflowEditorHeader({onCharge}: CompProps) {
+    return (
+        <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
+          
+                              
+        </Flex>
+    );
+
+}

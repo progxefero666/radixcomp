@@ -55,15 +55,17 @@ export class ThemeButtonsStyle {
     public static readonly BTN_HOME_COLOR: any = "gray";
     public static readonly BTN_HOME_STYLE: any = "w-full justify-start";
 
-    /*
-         backgroundColor: 'var(--gray-a2)',    
-         border: '2px solid var(--blue-7)',
-         padding: '0px 8px',
-         boxShadow: '0px 0px 5px rgba(222, 251, 137, 0.9)'     
-     */
     public static readonly BTN_DEF_STYLE = {
         borderRadius: "var(--blue-9)"
     };
+
+    public static readonly COLOR_ACT_OPEN     = RADIX_COLORS.green;
+    public static readonly COLOR_DELETE   = RADIX_COLORS.yellow;
+
+    public static readonly COLOR_EXPORT:string     = RADIX_COLORS.iris;
+    public static readonly COLOR_RUN:string     = RADIX_COLORS.red;
+    public static readonly COLOR_COPY:string     = RADIX_COLORS.jade;
+
 }
 
 /**

@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { Box, Flex, TextField } from "@radix-ui/themes";
 import { ThemeCompStyle, ThemeCompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
-import { RadixConf } from "@/radix/radixconf";
+import { INPUT_TEXT_TYPES, RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
 
 
@@ -39,7 +39,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const showInline: boolean = inline ?? false;
     const auto: boolean = autocommit ?? false;
-    const input_type = type ?? RadixConf.INPUT_TEXT_TYPES.text;
+    const input_type = type ?? INPUT_TEXT_TYPES.text;
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
