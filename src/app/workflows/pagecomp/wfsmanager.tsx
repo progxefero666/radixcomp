@@ -1,27 +1,20 @@
 //src\app\workflows\pagecomp\wfmain.tsx
 
-
-import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Box, Flex, Text, TextField } from "@radix-ui/themes";
-
-import { AppWorkflows } from "@/front/workflows/appworkflows";
-
-import { getAll } from "@/db/services/read/srvcodelang";
-import { DbTables } from "@/db/dbcatalog";
-import { getAllByTable } from "@/db/services/generic/serviceread";
-
-
-import CardWorkflowMin from "../cards/cardwfmin";
-import { Workflow } from "@/db/model/workflow";
-import { parseResponseCollection } from "@/front/parser/javascriptparser";
-import { DB_ITEM_CMD } from "@/db/dboperations";
-import { useRouter } from "next/navigation";
-
 import { BARCFG_ADD_IMPORT } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
-import { MOD_SECTIONS } from "@/front/workflows/config";
 
+import { parseResponseCollection } from "@/front/parser/javascriptparser";
+import { DB_ITEM_CMD } from "@/db/dboperations";
+import { Workflow } from "@/db/model/workflow";
+import { DbTables } from "@/db/dbcatalog";
+import { getAllByTable } from "@/db/services/generic/serviceread";
+import {CardWorkflowMin} from "../cards/cardwfmin";
+import { MOD_SECTIONS } from "@/front/workflows/config";
+import { AppWorkflows } from "@/front/workflows/appworkflows";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -41,6 +34,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     const router = useRouter();
     const [ready, setReady] = useState<boolean>(false);
     const [workflows, setWorkflows] = useState<Workflow[] | null>(null);
+
 
     const barButtonsCfg = BARCFG_ADD_IMPORT;
     useEffect(() => {
@@ -88,8 +82,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
         }
         else if (action == DB_ITEM_CMD.OPEN) {
             //router.push(`/workflows/editor/${workflows![itemIndex].id}`);
-            router.push(`/workflows/editor/${workflows![itemIndex].id}`);
-
+            router.push(`/workflows/[id]/${workflows![itemIndex].id}`);
             return;
         }
 
@@ -103,12 +96,6 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             );
         }
 
-        if (section == MOD_SECTIONS.MANAGER_WORKFLOWS.id) {
-
-        }
-        else if (section == MOD_SECTIONS.TASKTYPES) {
-
-        }
         return (
             <>
                 {workflows.map((workflow, index) => (
@@ -124,21 +111,12 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     }
 
     //AppMemmory.saveWorkflowId(workflows![itemIndex].id);
-    const renderMainContent = () => {
+    const renderTasktypes = () => {
 
-        if (section == MOD_SECTIONS.MANAGER_WORKFLOWS.id) {
-            if (workflows == null || workflows.length == 0) {
-                return (
-                    <Text size="2" color="gray">not defined</Text>
-                );
-            }
-        }
-        else if (section == MOD_SECTIONS.TASKTYPES) {
-            if (workflows == null || workflows.length == 0) {
-                return (
-                    <Text size="2" color="gray">not defined</Text>
-                );
-            }
+        if (workflows == null || workflows.length == 0) {
+            return (
+                <Text size="2" color="gray">not defined</Text>
+            );
         }
         return (
             <>
@@ -173,6 +151,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
 
             {/*body */}
             {section == MOD_SECTIONS.MANAGER_WORKFLOWS.id ? renderManWorkflows() : null}
+            {section == MOD_SECTIONS.MANAGER_TASKTYPES.id ? renderTasktypes() : null}
         </Flex>
     );
 

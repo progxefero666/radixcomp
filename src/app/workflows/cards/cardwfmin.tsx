@@ -32,7 +32,7 @@ interface CompProps {
     workflow: Workflow;
     callback: (index:number,action:string) => void;
 }
-export default function CardWorkflowMin({ index,workflow , callback}: CompProps) {
+export function CardWorkflowMin({ index,workflow , callback}: CompProps) {
 
     const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);

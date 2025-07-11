@@ -29,9 +29,8 @@ const headerStyle = {
 
 interface CompProps {
     workflow?: Workflow;
-    callback: (workflowId:number,action:string) => void;
 }
-export default function CardWorkflowPreview({ workflow , callback}: CompProps) {
+export default function CardWorkflowPreview({ workflow }: CompProps) {
     const [ready,setReady] = useState<boolean>(false);
     const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);

@@ -5,7 +5,8 @@ import { Option } from "@/common/models";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 
 import MenuButtons from "@/radix/cbars/btmenu";
-import { WorkflowsConfig } from "../../../front/workflows/config";
+import { MOD_SECTIONS_ARRAY } from "@/front/workflows/config";
+
 
 const primaryBarStyle = {
     background: 'rgb(24, 24, 27)',
@@ -18,7 +19,7 @@ interface CompProps {
     onselection:(sectionId:string) => void;
 }
 export function PrimaryBar({onselection,section}: CompProps) {
-    const sections:Option[] = WorkflowsConfig.MODULES;
+    const sections:Option[] = MOD_SECTIONS_ARRAY;
 
     return (
         <Flex width="100%"  height="100vh" align="center" 

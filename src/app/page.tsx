@@ -12,6 +12,7 @@ import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
 import { WorkflowViewer } from "./workflows/pagecomp/wfviewer";
 import { Workflow } from "@/db/model/workflow";
 import { AppMemmory } from "@/front/appmemory";
+import { Tasktype } from "@/db/model/tasktype";
 
 
 const layoutStyle = {
@@ -26,10 +27,11 @@ const layoutStyle = {
 export default function PageWorkflows() {
 
     const [actsection, setActSection]   = useState<string>(MOD_SECTIONS.MANAGER_WORKFLOWS.id);
-    const [activePanel, setActivePanel] = useState<string>(VIEWER_MODE.EMPTY);
-    const [wfCharged, setWfCharged]     = useState<boolean>(false);
+      const [wfCharged, setWfCharged]     = useState<boolean>(false);
     const [wfSelected, setWfSelected]   = useState<Workflow | null>(null);
 
+    const [tasktypes, setTasktypes] = useState<Tasktype[] | null>(null);
+        
     useEffect(() => {
         AppMemmory.saveCodelangs();
     }, []);
@@ -41,7 +43,6 @@ export default function PageWorkflows() {
     const showWfPreview = (workflow: Workflow) => {
         setWfSelected(workflow);
         setWfCharged(true);
-        setActivePanel(VIEWER_MODE.WORKFLOW_PREVIEW);
     };
 
     return (
@@ -63,8 +64,7 @@ export default function PageWorkflows() {
 
             <Flex gridColumn="3" gridRow="2" >
                 {wfCharged ?
-                    <WorkflowViewer workflow={wfSelected}
-                        actpanel={activePanel} />
+                    <WorkflowViewer workflow={wfSelected}/>
                     : <Box width="100%">not data charged</Box>}
 
             </Flex>

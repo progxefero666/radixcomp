@@ -26,21 +26,42 @@ export enum DB_ITEM_CMD_TEXT {
     COPY    = "copy",
 }
 
+export enum DB_COLLECTION_CMD {   
+    COUNT_ROWS  = "count_rows", 
+    GET_ALL     = "get_all",
+    GET_BY_ID   = "get_by_id",
+}
+
+export enum DB_CONSTANTS {   
+    SUCCESS  = "success", 
+    ERROR     = "gerror",    
+    
+}
+
+export enum DB_ERROR {   
+    NOT_FOUND = "not_found",
+    BAD_FORMAT = "bad_format",
+    UNKNOWN = "unknown_error"
+}   
+
+
 
 /**
  * class DbConstants.NEW_ROW_ID
  */
 export class DbConstants {
     
+    /*
     public static readonly NEW_ROW_ID: number = 0;
     public static readonly NOT_DEF: string = "undefined";
     
-    public static readonly SUCCESS: string = "success";
+    //public static readonly SUCCESS: string = "success";
 
     public static readonly ERR_BADFORMAT: string = "invalid format";
     public static readonly ERR_UNKNOWN: unknown = "Unknown error";
     public static readonly ERR_NOTFOUND: string = "not found ";    
     public static readonly ERR: string = "error";
+    */
 }
 export class OpUtil {
 
@@ -52,7 +73,7 @@ export class OpUtil {
         if(error instanceof Error) {
             return error.message;
         }        
-        return DbConstants.ERR_UNKNOWN;
+        return DB_ERROR.UNKNOWN;
     }    
 
     public static getErrMessage(error: unknown): string {        
@@ -60,14 +81,14 @@ export class OpUtil {
     }    
     
     public static getOpErrMessage(table:string,command:string): string {
-        const result:string = DbConstants.ERR.concat("=> ")
+        const result:string = DB_CONSTANTS.ERROR.concat("=> ")
                              .concat(table).concat(" : ").concat(command);
         return result;
 
     }
 
     public static getErrNotFoundMessage(name:string|null,tipe:string|null): string {        
-        let message:string = DbConstants.ERR_NOTFOUND;
+        let message:string = DB_ERROR.NOT_FOUND;
         if(name) {
             message += "name:".concat(name).concat("");
         }

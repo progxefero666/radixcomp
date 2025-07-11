@@ -3,29 +3,22 @@
 import { Option } from "@/common/models";
 
 export const MOD_SECTIONS = {
-    MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null, null, null),
-    TASKTYPES: "tasktypes"
+    MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
+    MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
 } as const;
 
 export enum VIEWER_MODE {
-    EMPTY       = "empty",
-    TASKGROUPS       = "taskgroups",
-    WORKFLOW_PREVIEW = "workflow_preview",
-    WORKFLOW_JSON    = "workflow_json",
-    WORKFLOW_SQL     = "workflow_sql"
+    DEFAULT = "default",
+    JSON = "json",
+    SQL = "sql",
+    PROMPT = "prompt"
 }
 
-/*
+export const MOD_SECTIONS_ARRAY: Option[] = [
+    MOD_SECTIONS.MANAGER_WORKFLOWS,
+    MOD_SECTIONS.MANAGER_TASKTYPES
+];
+
 export class WorkflowsConfig {
-    public static getSectionOperations(sectionName: any): Option[]|null {
-        if (sectionName === MOD_SECTIONS.WORKFLOWS) {
-            return [];
-        }
-        else if (sectionName === MOD_SECTIONS.TASKTYPES) {            
-            return [];
-        }
-        return null;
-    }
 
 }//end class
-*/

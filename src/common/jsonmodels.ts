@@ -1,6 +1,8 @@
 //src\common\json\models\jsonresponse.ts
 
-import { DbOps } from "@/db/dboperations";
+import { DB_CONSTANTS } from "@/db/dboperations";
+
+
 
 /**
  * Model: JsonResponse
@@ -25,20 +27,20 @@ export class JsonResponse {
     }
 
     public isSuccess(): boolean {
-        return this.result === DbOps.SUCCESS;
+        return this.result === DB_CONSTANTS.SUCCESS;
     }
 
     public isError(): boolean {
-        return this.result === DbOps.ERROR;
+        return this.result === DB_CONSTANTS.ERROR;
     }
 
     public static SUCCESS(message:string|null,data:any|null): string {
-        const jsonResponse:JsonResponse = new JsonResponse(DbOps.SUCCESS, message, data);
+        const jsonResponse:JsonResponse = new JsonResponse(DB_CONSTANTS.SUCCESS, message, data);
         return jsonResponse.toJson();
     }
 
     public static ERROR(message:string|null): string {
-        const jsonResponse:JsonResponse = new JsonResponse(DbOps.ERROR, message, null);
+        const jsonResponse:JsonResponse = new JsonResponse(DB_CONSTANTS.ERROR, message, null);
         return jsonResponse.toJson();
     }
 

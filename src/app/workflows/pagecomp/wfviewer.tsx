@@ -1,50 +1,58 @@
-//src\app\workflows\pagecomp\secondcontent.tsx
+//src\app\workflows\pagecomp\wfviewer.tsx
 
 import { Flex } from "@radix-ui/themes";
-import { useEffect, useState } from "react";
-import { PanelTaskgroups } from "@/app/workflows/pagecomp/panelgroups";
-import { MOD_SECTIONS, VIEWER_MODE } from "@/front/workflows/config";
-import CardWorkflowPreview from "@/app/workflows/cards/cardwfpreview";
+import { useState } from "react";
+import { VIEWER_MODE } from "@/front/workflows/config";
 import { Workflow } from "@/db/model/workflow";
-
+import CardWorkflowPreview from "@/app/workflows/cards/cardwfpreview";
 
 interface CompProps {
-    workflow?: Workflow|null;
-    actpanel?: string;
+    workflow?: Workflow | null;
+    mode?: string;
     onedition?: () => void;
 }
-export const WorkflowViewer = ({workflow,actpanel}: CompProps) => {
-    const [ready,setReady] = useState<boolean>(false);
-    const currentPanel = actpanel ? actpanel : VIEWER_MODE.EMPTY;
-   
-    useEffect(() => {        
-        if(ready) {return;}
-        const init = async () => {     
-            //if(section!=null && section == MOD_SECTIONS.WORKFLOWS) {}   
-            setReady(true);
-        };
-        init();
-        
-    }, []);    
+export const WorkflowViewer = ({ workflow, mode: actpanel }: CompProps) => {
+    const [mode, setMode] = useState<string>(VIEWER_MODE.DEFAULT);
 
-    const callback = (workflowId:number,action:string) => {
-        //alert(action);
-    }
-
-    if(!workflow) {
+    if (!workflow) {
         return (
             <Flex width="100%" direction="column" px="2" pt="0" pb="2" >
                 <p>No workflow selected</p>
             </Flex>
-        )    
+        )
     }
 
+    const renderWorkflow = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
+
+    const renderJson = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }    
+
+    const renderPrompt = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
+
+    const renderSql = () => {
+        return (
+            <CardWorkflowPreview workflow={workflow} />
+        )
+    }
+    
     return (
         <Flex width="100%" direction="column" >
-           {currentPanel == VIEWER_MODE.TASKGROUPS? <PanelTaskgroups />: null}
-           {currentPanel == VIEWER_MODE.WORKFLOW_PREVIEW? 
-            <CardWorkflowPreview workflow={workflow} callback={callback} />: null}           
+            {mode == VIEWER_MODE.DEFAULT ? renderWorkflow() : null}
+            {mode == VIEWER_MODE.JSON ? renderJson() : null}
+            {mode == VIEWER_MODE.SQL ? renderSql() : null}
+            {mode == VIEWER_MODE.PROMPT ? renderPrompt() : null}
         </Flex>
     );
-	 
+
 }//end comp
