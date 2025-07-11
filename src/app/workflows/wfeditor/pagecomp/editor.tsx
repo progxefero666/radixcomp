@@ -23,6 +23,7 @@ import { Tasktype } from "@/db/model/tasktype";
 import CardTask from "../cards/cardwftask";
 
 import { RADIX_COLORS } from "@/radix/radixconstants";
+import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 
 
 const mainContentStyle = {
@@ -34,6 +35,7 @@ const mainContentStyle = {
 interface WorkflowEditorProps {
     onCharge: (workflow: Workflow, taskgroups: Taskgroup[]) => void;
 }
+
 export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const [ready, setReady] = useState<boolean>(false);
@@ -64,33 +66,56 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         init();
     }, []);
 
-
-    const execCommand = (id:string) => {
-       
-        if (id == WF_EDITOR_TASK_ACTION.UPDATE_MAIN) {
-            alert("Update main");
+    //Task
+    
+    const getNewTask = (orden:number):Task => {
+               
+        return new Task(
+            NEW_ROW_ID,tasktypes[0].id,codelangs[0].id, 
+            workflow.id, taskgroups[0].id,
+            orden,"","","","");    
+    }
+    
+    const execMainCommand = (id: string) => {
+        if (id == WF_EDITOR_TASK_ACTION.ADD_TASK) {
+            let task_orden = 0;
+            if( tasks.length > 0) {
+                task_orden = tasks.length;
+            }          
+            const newTask = getNewTask(task_orden);
+            setTasks([...tasks, newTask]); 
             return;
-        }
-        else if (id == WF_EDITOR_TASK_ACTION.ADD_TASK) {
+        }        
+        else if (id == WF_EDITOR_TASK_ACTION.CLEAR_TASKS) {
+            setTasks([]);
+            return;
+        }        
+    }
+
+    const execTaskCommand = (id: string,index:number) => {
+
+        if (id == WF_EDITOR_TASK_ACTION.ADD_TASK) {
             alert("Add task");
             return;
         }
-        else if( id == WF_EDITOR_TASK_ACTION.UPDATE_TASK) {
-            alert("Update task");
-        }        
-        else if( id == WF_EDITOR_TASK_ACTION.DELETE_TASK) {
-            alert("Delete task");
-        }
-        else if( id == WF_EDITOR_TASK_ACTION.COPY_TASK) {
+        else if (id == WF_EDITOR_TASK_ACTION.COPY_TASK) {
             alert("Copy task");
         }
-        else if( id == WF_EDITOR_TASK_ACTION.MOVEUP_TASK) {
-            alert("Move up task");    
+        
+        
+        else if (id == WF_EDITOR_TASK_ACTION.UPDATE_TASK) {
+            alert("Update task");
         }
-        else if( id == WF_EDITOR_TASK_ACTION.MOVEDOWN_TASK) {
+        else if (id == WF_EDITOR_TASK_ACTION.DELETE_TASK) {
+            alert("Delete task");
+        }
+        else if (id == WF_EDITOR_TASK_ACTION.MOVEUP_TASK) {
+            alert("Move up task");
+        }
+        else if (id == WF_EDITOR_TASK_ACTION.MOVEDOWN_TASK) {
             alert("Move down task");
         }
-  
+
     };
 
     const onSaveTaskEdition = () => {
@@ -101,6 +126,38 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         alert("onCancelTaskEdition");
     };
 
+    const renderMainCommands = () => {
+        return (
+            <Flex width="100%" direction="row" justify="center" align="center"
+                px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
+                <Button variant="solid" color={RADIX_COLORS.green}
+                    size="2" onClick={() => execMainCommand("add_task")} value="add task" >
+                    add task
+                </Button>
+                <Button variant="solid" color={RADIX_COLORS.green}
+                    size="2" onClick={() => execMainCommand("clear_tasks")} value="add task" >
+                    clear task
+                </Button>
+            </Flex>
+        )
+    };
+
+    const renderTasksCommands = (index:number) => {
+        return (
+            <Flex width="100%" direction="row" justify="center" align="center"
+                px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
+
+                <Button variant="solid" color={RADIX_COLORS.green}
+                    size="2" onClick={() => execTaskCommand(WF_EDITOR_TASK_ACTION.ADD_TASK,index)} >
+                    add task
+                </Button>
+                <Button variant="solid" color={RADIX_COLORS.blue}
+                    size="2" onClick={() => execTaskCommand(WF_EDITOR_TASK_ACTION.COPY_TASK,index)} >
+                    clear task
+                </Button>
+            </Flex>
+        )
+    };
 
     const renderTasks = () => {
         if (tasks.length == 0) {
@@ -114,54 +171,25 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             <>
                 {tasks.map((task, index) => (
                     <Box key={index.toString()}>
-                        <CardTask codelangs={[]}
+                        <CardTask codelangs={codelangs}
                             tasktypes={tasktypes}
                             taskgroups={taskgroups}
                             task={task}
                             onsave={() => onSaveTaskEdition()}
                             oncancel={() => onCancelTaskEdition()} />
+                        {renderTasksCommands(index)}    
                     </Box>
                 ))}
             </>
         )
     };
 
-    const renderMainCommands = () => {
-        return (
-            <Flex width="100%" direction="row" px="3" py="1" align="center" gapX="2" >
-                <Button variant="solid" color={RADIX_COLORS.green}
-                    size="2" onClick={() => execCommand("add_task")} value="add task" >
-                    add task
-                </Button>
-                <Button variant="solid" color={RADIX_COLORS.green}
-                    size="2" onClick={() => execCommand("clear_tasks")} value="add task" >
-                    clear task
-                </Button>                
-            </Flex>
-        )
-    };
-
-    const renderTasksCommands = () => {
-        return (
-            <Flex width="100%" direction="row" px="3" py="1" align="center" gapX="2" >
-                <Button variant="solid" color={RADIX_COLORS.green}
-                    size="2" onClick={() => execCommand("add_task")} value="add task" >
-                    add task
-                </Button>
-                <Button variant="solid" color={RADIX_COLORS.green}
-                    size="2" onClick={() => execCommand("clear_tasks")} value="add task" >
-                    add task
-                </Button>                
-            </Flex>
-        )
-    };
-    // {renderTasks()}
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
             <WorkflowEditorHeader state={barState} />
             <CardWorkflowMain workflow={workflow} />
             {renderMainCommands()}
-           
+            {renderTasks()}
         </Flex>
     );
 
@@ -185,13 +213,20 @@ function WorkflowEditorHeader({ state }: CompProps) {
     };
 
     return (
-        <Flex  direction="row" justify="end" px="3" py="1" style={mainContentStyle} >
-    
-                <BarButtons barconfig={barbuttons}
-                    onclick={onBarbuttonsClick} />
-           
+        <Flex direction="row" justify="end" px="3" py="1" style={mainContentStyle} >
+
+            <BarButtons barconfig={barbuttons}
+                onclick={onBarbuttonsClick} />
+
 
         </Flex>
     );
 
-}
+}//end component
+
+/*
+        if (id == WF_EDITOR_TASK_ACTION.UPDATE_MAIN) {
+            alert("Update main");
+            return;
+        }
+*/

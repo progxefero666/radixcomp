@@ -9,7 +9,7 @@ export class Task {
     public tasktype_id: number;
     public codelang_id: number;
     public workflow_id: number;
-    public taskgroup_id: string;    
+    public taskgroup_id: number;    
     public orden: number;
     public tkname: string;
     public description: string;
@@ -20,7 +20,7 @@ export class Task {
                 tasktype_id: number,
                 codelang_id: number,
                 workflow_id: number,
-                taskgroup_id: string,
+                taskgroup_id: number,
                 orden: number,
                 tkname: string,
                 description: string,

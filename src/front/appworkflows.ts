@@ -58,6 +58,7 @@ export enum WF_EDITOR_TASK_ACTION {
     MOVEUP_TASK = "moveup_task",
     MOVEDOWN_TASK = "movedown_task", 
     UPDATE_TASK = "update_task",   
+    CLEAR_TASKS = "clear_tasks"
 }
 
 /*

@@ -4,6 +4,12 @@ import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "./radixtypes";
 import { RADIX_COLORS, RADIX_RADIUS } from "./radixconstants";
 
+export const COMP_BORDER_STYLE = {
+    background: 'rgb(56, 56, 56)',
+    border: '1px solid rgb(167, 176, 188)'
+};
+
+
 
 /**
  * class  ThemeStyle.SEPARATOR_V_STYLE
@@ -19,12 +25,8 @@ export class ThemeStyle {
     };
 
     public static boxStyle = {
-        margin: '20px',
-        background: '#00ff00',
-        borderRadius: 20,
-        border: '2px solid #ff00ff',
-        padding: 'var(--space-2)',
-        boxShadow: '0px 0px 10px #ffff00'
+        background: 'rgb(56, 56, 56)',
+        border: '1px solid rgb(167, 176, 188)'
     };
 
 
