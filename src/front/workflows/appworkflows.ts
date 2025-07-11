@@ -7,7 +7,8 @@ import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";
 import { Taskgroup } from "@/db/model/taskgroup";
 import { Task } from "@/db/model/task";
-import { DbConstants } from "@/db/dboperations";
+import { DB_CONSTANTS } from "@/db/dboperations";
+
 
 
 /**
@@ -17,10 +18,10 @@ export class AppWorkflows {
 
     public static getNewWorkflow(): Workflow {
         return new Workflow(
-            DbConstants.NEW_ROW_ID,
-            DbConstants.NOT_DEF, 
-            DbConstants.NOT_DEF,
-            DbConstants.NOT_DEF, 
+            Number(DB_CONSTANTS.NEW_ROW_ID),
+            DB_CONSTANTS.NOT_DEF, 
+            DB_CONSTANTS.NOT_DEF,
+            DB_CONSTANTS.NOT_DEF, 
             null, null);
     }
 

@@ -4,7 +4,7 @@
 
 import { JsonResponse } from "@/common/jsonmodels";
 import { PrismaClient } from "@generated/prisma";
-import { DbOps, OpUtil } from "@/db/dboperations";
+import { DbOps, DpOperationUtil } from "@/db/dboperations";
 import { Workflow } from "@/db/model/workflow";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
@@ -24,16 +24,16 @@ export async function insert(item_serial:string): Promise<string> {
         result = await prisma.workflow.create({data:item});
         if (result === null) {
             return JsonResponse.ERROR
-                (OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.workflow));
+                (DpOperationUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.workflow));
         }
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DbTables.workflow,DbOps.INSERT), null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.workflow,DbOps.INSERT), null);
 }//end
 
 /**
@@ -46,15 +46,15 @@ export async function update(item:Workflow): Promise<string> {
         result = await prisma.workflow.update({where:{id:item.id!},data:item!});        
         if (result === null) {
             return JsonResponse.ERROR
-                (OpUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.workflow));
+                (DpOperationUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.workflow));
         }        
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(OpUtil.getOpName("workflow", DbOps.UPDATE), null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("workflow", DbOps.UPDATE), null);
 }//end
 
 /**
@@ -66,15 +66,15 @@ export async function delette(id: number): Promise<string> {
     try {
         result = await prisma.workflow.delete({where:{id:id}});
         if (result === null) {
-            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.workflow));
+            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.workflow));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(OpUtil.getOpName("workflow", DbOps.DELETE),null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("workflow", DbOps.DELETE),null);
 }//end
 
 /**
@@ -86,14 +86,14 @@ export async function deleteAll(): Promise<string> {
     try {
         result = await prisma.workflow.deleteMany({});
         if (result === null) {
-            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.workflow));
+            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.workflow));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(OpUtil.getOpName("workflow", DbOps.DELETE_ALL),null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("workflow", DbOps.DELETE_ALL),null);
 }//end
 

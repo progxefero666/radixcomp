@@ -18,7 +18,3 @@ export const MOD_SECTIONS_ARRAY: Option[] = [
     MOD_SECTIONS.MANAGER_WORKFLOWS,
     MOD_SECTIONS.MANAGER_TASKTYPES
 ];
-
-export class WorkflowsConfig {
-
-}//end class

@@ -35,7 +35,8 @@ export enum DB_COLLECTION_CMD {
 export enum DB_CONSTANTS {   
     SUCCESS  = "success", 
     ERROR     = "gerror",    
-    
+    NOT_DEF   = "not_defined",
+    NEW_ROW_ID="0"
 }
 
 export enum DB_ERROR {   
@@ -44,26 +45,7 @@ export enum DB_ERROR {
     UNKNOWN = "unknown_error"
 }   
 
-
-
-/**
- * class DbConstants.NEW_ROW_ID
- */
-export class DbConstants {
-    
-    /*
-    public static readonly NEW_ROW_ID: number = 0;
-    public static readonly NOT_DEF: string = "undefined";
-    
-    //public static readonly SUCCESS: string = "success";
-
-    public static readonly ERR_BADFORMAT: string = "invalid format";
-    public static readonly ERR_UNKNOWN: unknown = "Unknown error";
-    public static readonly ERR_NOTFOUND: string = "not found ";    
-    public static readonly ERR: string = "error";
-    */
-}
-export class OpUtil {
+export class DpOperationUtil {
 
     public static getOpName(table:string,command:string): string {
         return table.concat("_", command);
@@ -77,7 +59,7 @@ export class OpUtil {
     }    
 
     public static getErrMessage(error: unknown): string {        
-        return String(OpUtil.getUnknowErrMessage(error));
+        return String(DpOperationUtil.getUnknowErrMessage(error));
     }    
     
     public static getOpErrMessage(table:string,command:string): string {
@@ -98,10 +80,8 @@ export class OpUtil {
         return message;
     }  
 
-
-
     public static consoleSuccess(opId:string|null,data:string|null,table?:string):void {   
-        let message:string = "Operation succeess:";
+        let message:string = "Operation success:";
         if(table) {
             message += "table:".concat(table).concat("");
         }
@@ -129,24 +109,3 @@ export class OpUtil {
 
 }//end class 
 
-/*
-export class DbOps {
-    
-    public static readonly GET_ALL: string = "getAll";
-    public static readonly GET_BY_ID: string = "get";
-    public static readonly GET_BY_NAME: string = "get";
-    public static readonly GET_BY_FK: string = "getByFk";
-
-    public static readonly COUNT_ROWS: string = "getAll";
-
-    public static readonly ROW_ID: string = "getAll";
-    public static readonly CREATED_AT: string = "created";
-    public static readonly UPDATED_AT: string = "updated";
-
-    public static readonly ERR_NOTFOUND: string = "not found ";
-    public static readonly ERR_BADFORMAT: string = "invalid format";
-
-    public static readonly TYPE_TABLE: string = "table";
-
-}//end class
-*/

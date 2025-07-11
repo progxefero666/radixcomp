@@ -5,7 +5,7 @@ import { Option } from "@/common/models";
 import { JsonResponse } from "@/common/jsonmodels";
 import { Prisma, PrismaClient } from "@generated/prisma";
 
-import { DB_COLLECTION_CMD, OpUtil } from "@/db/dboperations";
+import { DB_COLLECTION_CMD, DpOperationUtil } from "@/db/dboperations";
 import { DB_TABLES, DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 
@@ -19,12 +19,12 @@ export async function executeReadQuery(commandSql: string, params: any[] = []): 
         result = await prisma.$queryRaw(Prisma.sql`${commandSql}`, ...params);
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DB_COLLECTION_CMD.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DB_COLLECTION_CMD.GET_ALL), result);
 }//end function
 
 export async function getCountByParents(workflow_id: number, taskgroup_id: number): Promise<string> {
@@ -40,12 +40,12 @@ export async function getCountByParents(workflow_id: number, taskgroup_id: numbe
         });
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.task, DB_COLLECTION_CMD.COUNT_ROWS), count);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DB_COLLECTION_CMD.COUNT_ROWS), count);
 }
 
 /**
@@ -85,13 +85,13 @@ export async function getAllByTable(table: string): Promise<string> {
         }
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(table, DB_COLLECTION_CMD.GET_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        DpOperationUtil.consoleErr(error, DpOperationUtil.getOpName(table, DB_COLLECTION_CMD.GET_ALL));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(table, DB_COLLECTION_CMD.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(table, DB_COLLECTION_CMD.GET_ALL), result);
 
 }//end server action
 

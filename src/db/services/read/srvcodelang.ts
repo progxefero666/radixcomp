@@ -3,7 +3,7 @@
 
 import { JsonResponse }  from "@/common/jsonmodels";
 import { PrismaClient }  from "@generated/prisma";
-import { DbOps, OpUtil } from "@/db/dboperations";
+import { DbOps, DpOperationUtil } from "@/db/dboperations";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
@@ -28,13 +28,13 @@ export async function get(id:number): Promise<string> {
         );
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_BY_ID));
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        DpOperationUtil.consoleErr(error, DpOperationUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_BY_ID));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_BY_ID), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_BY_ID), result);
 
 } //end function
 
@@ -50,12 +50,12 @@ export async function getAll(): Promise<string> {
         result = await prisma.codelang.findMany();
     }
     catch (error) {
-        OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL));
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        DpOperationUtil.consoleErr(error, DpOperationUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.codeLang, DbOps.GET_ALL), result);
 
 } //end function

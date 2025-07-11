@@ -5,7 +5,7 @@
 
 import { JsonResponse } from "@/common/jsonmodels";
 import { PrismaClient } from "@generated/prisma";
-import { DbOps, OpUtil } from "@/db/dboperations";
+import { DbOps, DpOperationUtil } from "@/db/dboperations";
 import { Application } from "@/db/model/application";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
@@ -25,16 +25,16 @@ export async function insert(item_serial:string): Promise<string> {
         result = await prisma.application.create({data:item as any});
         if (result === null) {
             return JsonResponse.ERROR
-                (OpUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.application));
+                (DpOperationUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.application));
         }
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(OpUtil.getOpName(DbTables.application,DbOps.INSERT), null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.application,DbOps.INSERT), null);
 }//end
 
 /**
@@ -47,15 +47,15 @@ export async function update(item:Application): Promise<string> {
         result = await prisma.application.update({where:{id:item.id!},data:item!});        
         if (result === null) {
             return JsonResponse.ERROR
-                (OpUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.application));
+                (DpOperationUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.application));
         }        
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(OpUtil.getOpName("application", DbOps.UPDATE), null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("application", DbOps.UPDATE), null);
 }//end
 
 /**
@@ -67,15 +67,15 @@ export async function delette(id: number): Promise<string> {
     try {
         result = await prisma.application.delete({where:{id:id}});
         if (result === null) {
-            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.application));
+            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.application));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(OpUtil.getOpName("application", DbOps.DELETE),null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("application", DbOps.DELETE),null);
 }//end
 
 /**
@@ -87,14 +87,14 @@ export async function deleteAll(): Promise<string> {
     try {
         result = await prisma.application.deleteMany({});
         if (result === null) {
-            return JsonResponse.ERROR(OpUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.application));
+            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.application));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(OpUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(OpUtil.getOpName("application", DbOps.DELETE_ALL),null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("application", DbOps.DELETE_ALL),null);
 }//end
 
