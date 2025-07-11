@@ -3,7 +3,7 @@
 import React from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { Button, Box, Text, Flex, Separator, IconButton, Container, Section, Heading } from "@radix-ui/themes";
-import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
+import { ArrowDownIcon, ArrowUpIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { Option } from "@/common/models";
 
 import { RadixConf } from "@/radix/radixconf";
@@ -19,6 +19,11 @@ import { Taskgroup } from "@/db/model/taskgroup";
 import { Tasktype } from "@/db/model/tasktype";
 import { getCodelangsAsOptions } from "@/db/modelutil/codelangutil";
 import { getTaskgroupsAsOptions, getTasktypeAsOptions } from "@/db/modelutil/workflowutil";
+import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
+import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/db/dboperations";
+import { OPERATIONS, OPERATIONS_TEXT } from "@/common/constants";
+import BarButtons from "@/radix/cbars/btbar";
+import { ThemeButtonsStyle } from "@/radix/radixtheme";
 
 
 const compStyle = {
@@ -34,6 +39,15 @@ const headerStyle = {
     border: '1px solid rgba(144, 138, 137, 0.9)'
 };
 
+const barbuttonscfg: BarButtonsCfg  = new BarButtonsCfg(
+    [DB_ITEM_CMD.DELETE,     DB_ITEM_CMD.MOVEUP,     DB_ITEM_CMD.MOVEDOWN],
+    [DB_ITEM_CMD_TEXT.DELETE,DB_ITEM_CMD_TEXT.MOVEUP,DB_ITEM_CMD_TEXT.MOVEDOWN],
+    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_MOVEUP,ThemeButtonsStyle.COLOR_MOVEDOWN],
+    [RadixConf.ICON_SAVE,RadixConf.ICON_OPEN],
+    [false,false],
+    [true,true]
+);
+
 interface CardTaskProps {
     codelangs: Codelang[];
     tasktypes: Tasktype[];
@@ -46,10 +60,16 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                                    onsave, oncancel }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
+
     //orden
     const codelangsColl: Option[] = getCodelangsAsOptions(codelangs);
     const tasktypesColl: Option[] = getTasktypeAsOptions(tasktypes);
     const taskgroupsColl: Option[] =getTaskgroupsAsOptions(taskgroups);
+
+
+    const onBarButtonClick = (operation:string) => {
+        alert(operation);
+    };    
 
 
     const onCodelangSelected = (value: string,name?:string) => {
@@ -76,24 +96,28 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                             </IconButton>
                         </Box>
                     </Collapsible.Trigger>
-                    <Flex width="100%" justify="between" align="start" >
-                        <Box width="100%" mt="1" py="1" px="2" mr="2" style={headerStyle}>
-                            <Text size="3" >Main</Text>
-                        </Box>        
-                    </Flex>
+                    <Flex  width={"100%"} justify="between" align="center" style={headerStyle}>
+                        <XInputText 
+                            label="Name" 
+                            defaul={task.tkname} 
+                            maxlen={task.maxlen("tkname")!} 
+                            placeholder="task name" />     
+                        <BarButtons  barconfig={barbuttonscfg} onclick={onBarButtonClick}/>
+                        <Flex direction="row" gapX="2" >
+                             <IconButton variant={RadixConf.VARIANTS.solid} >
+                                <ArrowUpIcon />
+                            </IconButton>
+                             <IconButton variant={RadixConf.VARIANTS.solid} >
+                                <ArrowDownIcon />
+                            </IconButton>                            
+                        </Flex>
+                    </Flex>            
                 </Flex>
                 <Separator orientation="horizontal" size="4" mb="2" />
 
                 <Collapsible.Content>
 
                     <Flex direction="column" gapY="2" px="2" py="1" >
-
-                        {/* tkname */}
-                        <XInputText 
-                            label="Name" 
-                            defaul={task.tkname} 
-                            maxlen={task.maxlen("tkname")!} 
-                            placeholder="task name" />   
 
                         {/* tasktype_id */}
                         <XInputSelect

@@ -131,7 +131,16 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const renderMainCommands = () => {
         return (
-            <></>
+            <Flex width="100%" direction="row" px="3" py="1" align="center" gapX="2" >
+                <Button variant="solid" color={RADIX_COLORS.green}
+                    size="2" onClick={() => execCommand("add_task")} value="add task" >
+                    add task
+                </Button>
+                <Button variant="solid" color={RADIX_COLORS.green}
+                    size="2" onClick={() => execCommand("clear_tasks")} value="add task" >
+                    clear task
+                </Button>                
+            </Flex>
         )
     };
 

@@ -24,6 +24,8 @@ export enum DB_ITEM_CMD_TEXT {
     IMPORT  = "import",
     EXPORT  = "export",
     COPY    = "copy",
+    MOVEUP  = "move up",
+    MOVEDOWN= "move down",
 }
 
 export enum DB_COLL_CMD {   
