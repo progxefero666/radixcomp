@@ -95,7 +95,7 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                             <Box width="100%"  height="120px">
                                 <XInputTextArea label="Description" 
                                             defaul={workflow.description} 
-                                            maxlen={workflow.maxlen("description")!} 
+                                            maxlen={Workflow.maxlen("description")} 
                                             placeholder="input description" />                                   
                             </Box>
                             <Box>
@@ -110,7 +110,7 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                             <Box width="100%" height="120px" >
                                 <XInputTextArea label="Context"
                                             defaul={workflow.context!} 
-                                            maxlen={workflow.maxlen("context")!} 
+                                            maxlen={Workflow.maxlen("context")} 
                                             placeholder="input context" />                                   
                             </Box>
                             <Box>
@@ -126,13 +126,13 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                         <XInputText name="application" 
                                     label="Application" 
                                     defaul={workflow.application!} 
-                                    maxlen={workflow.maxlen("application")} 
+                                    maxlen={Workflow.maxlen("application")} 
                                     placeholder="Application name" />
 
                         <XInputText name="fpath" 
                                     label="File Path" 
                                     defaul={workflow.fpath!} 
-                                    maxlen={workflow.maxlen("fpath")} 
+                                    maxlen={Workflow.maxlen("fpath")} 
                                     placeholder="File path/s" />                                    
 
                     </Flex>

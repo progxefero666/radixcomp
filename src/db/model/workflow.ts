@@ -31,7 +31,7 @@ export class Workflow {
      * @param fieldName The name of the field.
      * @returns The minimum length of the field or null if not applicable.
      */
-    public minlen(fieldName: string): number | null {
+    public static minlen(fieldName: string): number | null {
         return 0;
     }
 
@@ -41,13 +41,13 @@ export class Workflow {
      * @param fieldName The name of the field.
      * @returns The maximum length of the field or null if not applicable.
      */
-    public maxlen(fieldName: string): number  {
+    public static maxlen(fieldName: string): number  {
 
         if (fieldName === "wwname") {
             return 100;
         }
         if (fieldName === "description") {
-            return -1; // unlimited length
+            return 50000; // unlimited length
         }
         if (fieldName === "application") {
             return 50;

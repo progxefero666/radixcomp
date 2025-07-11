@@ -37,7 +37,7 @@ const areaStyle = {
 };
 
 export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
-        (({ inline, label, placeholder, defaul: value, onsubmmit, readonly, disabled }, ref) => {        
+        (({ inline, label,maxlen, placeholder, defaul: value, onsubmmit, readonly, disabled }, ref) => {        
 
     const color = "gray";
     const size = RadixConf.SIZES.size_2;

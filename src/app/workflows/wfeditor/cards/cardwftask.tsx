@@ -100,7 +100,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                         <XInputText 
                             label="Name" 
                             defaul={task.tkname} 
-                            maxlen={task.maxlen("tkname")!} 
+                            maxlen={Task.maxlen("tkname")!} 
                             placeholder="task name" />     
                         <BarButtons  barconfig={barbuttonscfg} onclick={onBarButtonClick}/>
                         <Flex direction="row" gapX="2" >
@@ -146,20 +146,20 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                         {/* description */}
                         <XInputTextArea label="Description" 
                             defaul={task.description} 
-                            maxlen={task.maxlen("description")!} 
+                            maxlen={Task.maxlen("description")!} 
                             placeholder="input description" />   
 
 
                         {/* files */}
                         <XInputText label="Files" 
                             defaul={task.files} 
-                            maxlen={task.maxlen("files")!} 
+                            maxlen={Task.maxlen("files")!} 
                             placeholder="input files" />   
 
                         {/* folders */}
                         <XInputText label="Folders" 
                             defaul={task.folders} 
-                            maxlen={task.maxlen("folders")!} 
+                            maxlen={Task.maxlen("folders")!} 
                             placeholder="input folders" />   
                     
                     </Flex>

@@ -44,7 +44,7 @@ export class Task {
      * @param fieldName The name of the field.
      * @returns The minimum length of the field or null if not applicable.
      */
-    public minlen(fieldName: string): number {
+    public static minlen(fieldName: string): number {
         return 0;
     }
 
@@ -54,7 +54,7 @@ export class Task {
      * @param fieldName The name of the field.
      * @returns The maximum length of the field or null if not applicable.
      */
-    public maxlen(fieldName: string): number  {
+    public static maxlen(fieldName: string): number  {
         //return -1; -> unlimited length
 
         if (fieldName === "orden") {
