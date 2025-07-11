@@ -18,6 +18,7 @@ import CardWorkflowMain from "../cards/cardwfmain";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
+import { OPERATIONS } from "@/common/constants";
 
 
 const mainContentStyle = {
@@ -29,12 +30,14 @@ const mainContentStyle = {
 };
 
 // const appRef = useRef<AppWorkflows>(null);
-interface CompProps { 
-    onCharge?: (workflow:Workflow,taskgroups:Taskgroup[]) => void;
+interface WorkflowEditorProps { 
+    onCharge: (workflow:Workflow,taskgroups:Taskgroup[]) => void;
 }
-export  function WorkflowEditor({onCharge}: CompProps) {
+export  function WorkflowEditor({onCharge}: WorkflowEditorProps) {
    
     const [ready,setReady] = useState<boolean>(false);
+    const [barState,setBarState] = useState<string>("default");
+
     const codelangs:Codelang[]=readMemmoryCodelangs();
 
     let isNewWorkflow:boolean = true;
@@ -54,6 +57,7 @@ export  function WorkflowEditor({onCharge}: CompProps) {
                 setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id))!);   
             }            
             setReady(true);
+            onCharge(workflow,taskgroups);
         };
         init();
         
@@ -73,6 +77,7 @@ export  function WorkflowEditor({onCharge}: CompProps) {
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
+            <WorkflowEditorHeader state={barState}  />
             <CardWorkflowMain workflow={workflow} />
                               
         </Flex>
@@ -81,14 +86,20 @@ export  function WorkflowEditor({onCharge}: CompProps) {
 }//end component
 
 interface CompProps { 
-    onCharge?: (workflow:Workflow,taskgroups:Taskgroup[]) => void;
+    state?:string;
 }
-export  function WorkflowEditorHeader({onCharge}: CompProps) {
+function WorkflowEditorHeader({state}: CompProps) {
     
     const [barbuttons,setBarbuttonsCfg] = useState<BarButtonsCfg>(BARCFG_SAVE_CLOSE);
     
     const onBarbuttonsClick = (operation:string) => {
-        
+        alert("Operation: " + operation);
+        if(operation==DB_ITEM_CMD.UPDATE) { 
+
+        }
+        else if(operation==OPERATIONS.CLOSE) {
+            
+        }        
     };
 
     return (

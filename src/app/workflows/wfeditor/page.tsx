@@ -51,32 +51,29 @@ export default function WorkflowEditorPage() {
         )
     }
 
+    const renderMainContent = () => {
+        if(view==WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id ){
+            return (
+                <WorkflowEditor onCharge={onWorkflowCharged} />
+            );
+        }
+        else if(view==WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id ){
+            if(!taskgroups){
+                return null;
+            }
+            return (
+                <ManWfTaskGroups taskgroups={taskgroups} />
+            );
+        }        
+  
+    };
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="56% 40% 4%" style={layoutStyle} >
-            
-            <Flex gridColumn="1/4" gridRow="1" >
-                <WorkflowHeader />
-            </Flex>
-
-            <Flex gridColumn="2" gridRow="2" > 
-                <WorkflowEditor onCharge={onWorkflowCharged} />
-            </Flex>
-            
-            <Flex gridColumn="3" gridRow="2" > 
-
-                {view==WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id ?
-                    <WorkflowEditor  />:null}
-
-                {view==WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id ?
-                    <ManWfTaskGroups taskgroups={taskgroups} />:null}        
-                
-            </Flex>   
-
-            <Flex gridColumn="4" gridRow="2" >
-                aux
-            </Flex>
-
+        <Grid height="100vh" rows="auto 1fr" columns="56% 40% 4%" style={layoutStyle} >            
+            <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
+            <Flex gridColumn="2" gridRow="2" >{renderMainContent()}</Flex>
+            <Flex gridColumn="3" gridRow="2" >viewer</Flex>   
+            <Flex gridColumn="4" gridRow="2" >aux</Flex>
         </Grid>
     );
 
