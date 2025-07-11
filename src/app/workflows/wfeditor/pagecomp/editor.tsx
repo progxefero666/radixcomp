@@ -9,7 +9,7 @@ import { parseResponseCollection, parseResponseItem } from "@/common/javascriptp
 import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
 import { Task } from "@/db/model/task";
 import { getTaskgroups, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
-import { readMemmoryCodelangs, AppMemmory } from "@/front/appmemory";
+import { readMemmoryCodelangs, AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
 
 import { NEW_WK, TASKGROUP_DEFAULT } from "@/front/appworkflows";
 import { Codelang } from "@/db/model/codelang";
@@ -19,6 +19,7 @@ import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { OPERATIONS } from "@/common/constants";
+import { Tasktype } from "@/db/model/tasktype";
 
 
 const mainContentStyle = {
@@ -38,8 +39,9 @@ export  function WorkflowEditor({onCharge}: WorkflowEditorProps) {
     const [ready,setReady] = useState<boolean>(false);
     const [barState,setBarState] = useState<string>("default");
 
-    const codelangs:Codelang[]=readMemmoryCodelangs();
-
+    const codelangs:Codelang[] = readMemmoryCodelangs();
+    const tasktypes:Tasktype[] = readMemmoryTasktypes();
+    
     let isNewWorkflow:boolean = true;
     if ((AppMemmory.readWorkflowId()!) !== Number(NEW_ROW_ID)) {isNewWorkflow = false;}
 

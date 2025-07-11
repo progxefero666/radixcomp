@@ -2,7 +2,7 @@
 
 import { Button, Box, Text, Flex, Separator, IconButton } from "@radix-ui/themes";
 import { Application } from "@/db/model/application";
-import ContCollapsible from "@/radix/container/collapsible";
+import ContCollapsible from "@/radix/container/collap";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { BARCFG_DELETE_OPEN } from "@/radix/appbars";
 

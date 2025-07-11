@@ -35,7 +35,7 @@ interface CompProps {
 }
 export default function CardWorkflowMain({workflow,onsave}:CompProps) {
 
-    const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
+    //const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);
 
 
@@ -59,31 +59,30 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                     </Collapsible.Trigger>
                     <Flex width="100%" justify="between" align="start" >
                         <Box width="100%" mt="1" py="1" px="2" mr="2" style={headerStyle}>
-                            <Text size="3" >{workflow!.wwname}</Text>
-                        </Box>
-                        <Box pt="1">
-                            <BarButtons barconfig={barbuttonscfg} onclick={onClick} />
-                        </Box>
+                            <Text size="3" >Main</Text>
+                        </Box>        
                     </Flex>
                 </Flex>
 
                 <Separator orientation="horizontal" size="4" mb="2" />
 
                 <Box width="100%" px="2" py="1" >
-                    <OutputText label="Description" data={workflow!.description} />
+                    
                 </Box>
 
                 <Collapsible.Content>
                     <Flex direction="column" gapY="2" px="2" py="1" >
-                        <OutputText label="File Path" data={workflow!.fpath} />
-                        <OutputText label="Context" data={workflow!.context} />
+
+                        <OutputText label="Application" data={workflow.application} />
+                        <OutputText label="File Path" data={workflow.fpath} />
+                        <OutputText label="Description" data={workflow.description} />
+                        <OutputText label="Context" data={workflow.context} />
+                        
+                        
                     </Flex>
                 </Collapsible.Content>
 
             </Collapsible.Root>
-
-            
-            
             
         </Flex>
     );

@@ -13,6 +13,8 @@ import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
 import ManWfTaskGroups from "./pagecomp/mantaskgroups";
 import { WK_EDITOR_VIEWS } from "@/front/appworkflows";
 import { Taskgroup } from "@/db/model/taskgroup";
+import { Tasktype } from "@/db/model/tasktype";
+
 
 
 const layoutStyle = {
@@ -27,6 +29,9 @@ const layoutStyle = {
 export default function WorkflowEditorPage() {
 
     const [view,setView] = useState<string>(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
+
+    
+    const [tasktypes,setTasktypes] = useState<Tasktype[]>([]);
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
     const [taskgroups,setTaskgroups] = useState<Taskgroup[]|null>(null);
 
@@ -43,13 +48,6 @@ export default function WorkflowEditorPage() {
         setView(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
     }    
 
-    if(!workflow || !taskgroups) {
-        return (
-            <Flex width="100%" direction="column" px="2" pt="0" pb="2" >
-                <p>No workflow charged yet</p>
-            </Flex>
-        )
-    }
 
     const renderMainContent = () => {
         if(view==WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id ){
@@ -71,9 +69,9 @@ export default function WorkflowEditorPage() {
     return (
         <Grid height="100vh" rows="auto 1fr" columns="56% 40% 4%" style={layoutStyle} >            
             <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
-            <Flex gridColumn="2" gridRow="2" >{renderMainContent()}</Flex>
-            <Flex gridColumn="3" gridRow="2" >viewer</Flex>   
-            <Flex gridColumn="4" gridRow="2" >aux</Flex>
+            <Flex gridColumn="1" gridRow="2" >{renderMainContent()}</Flex>
+            <Flex gridColumn="2" gridRow="2" >viewer</Flex>   
+            <Flex gridColumn="3" gridRow="2" >aux</Flex>
         </Grid>
     );
 

@@ -16,9 +16,8 @@ export enum DB_ITEM_CMD {
 
 export enum DB_ITEM_CMD_TEXT {   
     INSERT    = "new", 
-    UPDATE    = "edit",
+    UPDATE    = "Save",
     OPEN    = "open",
-    SAVE    = "Save",
     DELETE  = "delete",
     SELECT  = "select",
     IMPORT  = "import",

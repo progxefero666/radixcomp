@@ -5,6 +5,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { parseResponseCollection } from "@/common/javascriptparser";
+import { Tasktype } from "@/db/model/tasktype";
 
 
 /**
@@ -15,7 +16,8 @@ export class AppMemmory {
 
     static NOT_FOUND:string  = "not_found";
     static DB_ESQUEMA:string  = "dbsquema";
-    static CODE_LANGS:string  = "codelangs";
+    static CODELANGS:string  = "codelangs";
+    static TASKTYPES:string  = "tasktypes";
     static WORKFLOW_ID:string  = "workflowid";
     
     public static saveDbSquema(sql_script: string): void {
@@ -30,16 +32,26 @@ export class AppMemmory {
     }
 
     public static saveCodelangs(codelangs:string): void {
-        StorageService.save(AppMemmory.CODE_LANGS,codelangs);
+        StorageService.save(AppMemmory.CODELANGS,codelangs);
     }
 
     public static readCodelangs(): string|null {
-        if(!StorageService.exist(AppMemmory.CODE_LANGS)){
+        if(!StorageService.exist(AppMemmory.CODELANGS)){
             return null; 
         }
-        return StorageService.read(AppMemmory.CODE_LANGS)!;
+        return StorageService.read(AppMemmory.CODELANGS)!;
     }
 
+    public static saveTasktypes(tasktypes:string): void {
+        StorageService.save(AppMemmory.TASKTYPES,tasktypes);
+    }
+
+    public static readTasktypes(): string|null {
+        if(!StorageService.exist(AppMemmory.TASKTYPES)){
+            return null; 
+        }
+        return StorageService.read(AppMemmory.TASKTYPES)!;
+    }
     public static saveWorkflowId(id: number): void {
         const obj = {value: id.toString};
         StorageService.save(AppMemmory.WORKFLOW_ID,JSON.stringify(obj));
@@ -63,4 +75,16 @@ export  async function saveMemmoryCodelangs(): Promise<void>  {
 export function readMemmoryCodelangs(): Codelang[]  {
     const codelangsJson = AppMemmory.readCodelangs();
     return parseResponseCollection<Codelang>(codelangsJson)!;
+}
+
+export  async function saveMemmoryTasktypes(): Promise<void>  {
+    const response = await getAllByTable(DbTables.tasktype);
+    if (response === null) {return;}
+    const collection: Tasktype[] | null = parseResponseCollection<Tasktype>(response);
+    AppMemmory.saveTasktypes(JSON.stringify(collection, null, 4)); 
+}
+
+export function readMemmoryTasktypes(): Tasktype[]  {
+    const tasktypesJson = AppMemmory.readTasktypes();
+    return parseResponseCollection<Tasktype>(tasktypesJson)!;
 }
