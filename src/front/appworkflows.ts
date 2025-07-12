@@ -6,13 +6,7 @@ import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
 
 
-
-
-//	constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) 	
-export const TASKGOUP_DEFAULT : Taskcategory = new Taskcategory(
-	0,0,"tpname","description");
-    
-export const TASKGROUP_DEFAULT: Taskcategory = new Taskcategory(
+export const TASKCATEGORY_DEFAULT: Taskcategory = new Taskcategory(
     0, 0, "default", "taskgroup default");
 
 export const MOD_SECTIONS = {

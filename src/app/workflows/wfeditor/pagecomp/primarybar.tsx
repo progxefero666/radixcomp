@@ -1,14 +1,18 @@
 //src\app\workflows\wfeditor\pagecomp\primarybar.tsx
 
 import { Taskcategory } from "@/db/model/taskcategory";
+import { useRef } from "react";
+import { ManagerTaskcategories } from "../categories/mantaskcats";
+import React from "react";
 
 
 interface CompProps {
-    taskgroups: Taskcategory[];
+    collection: Taskcategory[];
     onsave?: () => void;
 }
-export default function WorkflowPrimaryBar({taskgroups,onsave}:CompProps) {
-
+export default function WorkflowPrimaryBar({collection: taskgroups,onsave}:CompProps) {
+    
+    const ref = React.useRef<ManagerTaskcategories>(null);
     return (
         <div>
             Manager Task Groups

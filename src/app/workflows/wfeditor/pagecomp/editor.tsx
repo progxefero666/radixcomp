@@ -11,7 +11,7 @@ import { Task } from "@/db/model/task";
 import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
 
-import { NEW_WK, TASKGROUP_DEFAULT, WF_EDITOR_TASK_ACTION } from "@/front/appworkflows";
+import { NEW_WK, TASKCATEGORY_DEFAULT, WF_EDITOR_TASK_ACTION } from "@/front/appworkflows";
 import BarButtons from "@/radix/cbars/btbar";
 
 
@@ -55,7 +55,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
     const [workflow, setWorkflow] = useState<Workflow>(NEW_WK);
-    const [taskgroups, setTaskgroups] = useState<Taskcategory[]>([TASKGROUP_DEFAULT]);
+    const [taskcats, setTaskcats] = useState<Taskcategory[]>([TASKCATEGORY_DEFAULT]);
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
@@ -70,11 +70,11 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             
             if (!isNewWorkflow) {
                 setWorkflow(parseResponseItem<Workflow>(await getWorkflow(workflowId))!);
-                setTaskgroups(parseResponseCollection<Taskcategory>(await getTaskcategories(workflowId))!);
+                setTaskcats(parseResponseCollection<Taskcategory>(await getTaskcategories(workflowId))!);
                 setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id))!);
             }
             setReady(true);
-            onCharge(workflow, taskgroups);
+            onCharge(workflow, taskcats);
         };
         init();
     }, []);
@@ -83,7 +83,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     const getNewTask = (orden:number):Task => {               
         return new Task(
             NEW_ROW_ID,tasktypes[0].id,codelangs[0].id, 
-            workflow.id, taskgroups[0].id,
+            workflow.id, taskcats[0].id,
             orden,"","",0,"","");    
     };//end
     
@@ -182,7 +182,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                     <Box key={index.toString()}>
                         <CardTask codelangs={codelangs}
                             tasktypes={tasktypes}
-                            taskcategories={taskgroups}
+                            taskcategories={taskcats}
                             task={task}
                             onsave={() => onSaveTaskEdition()}
                             oncancel={() => onCancelTaskEdition()} />

@@ -14,6 +14,7 @@ import PanelWfTaskcategories from "./categories/paneltaskcats";
 import { WK_EDITOR_VIEWS } from "@/front/appworkflows";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
+import WorkflowPrimaryBar from "./pagecomp/primarybar";
 
 
 
@@ -30,7 +31,6 @@ export default function WorkflowEditorPage() {
 
     const [view,setView] = useState<string>(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
 
-    
     const [tasktypes,setTasktypes] = useState<Tasktype[]>([]);
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
     const [taskcategories,setTaskcategories] = useState<Taskcategory[]|null>(null);
@@ -61,7 +61,9 @@ export default function WorkflowEditorPage() {
     return (
         <Grid height="100vh" rows="auto 1fr" columns="10% 50% 40%" style={layoutStyle} >            
             <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
-            <Flex gridColumn="1" gridRow="2" >{renderMainContent()}</Flex>
+            <Flex gridColumn="1" gridRow="2" >
+                <WorkflowPrimaryBar collection={taskcategories!} />
+            </Flex>
             <Flex gridColumn="2" gridRow="2" >{renderMainContent()}</Flex>
             <Flex gridColumn="3" gridRow="2" >
                 {workflow ? <WorkflowViewer workflow={workflow} />:null}                

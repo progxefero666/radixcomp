@@ -25,15 +25,18 @@ export class ManagerTaskcategories extends ManagerCollectionById<Taskcategory> {
     public execOpCollection = (opId: string,id?:number): boolean => {
         let result = false;
 
-
         if (opId == DB_ITEM_CMD.DELETE) {
             result = super.delete(id!);
         } 
-
         else if (opId == DB_COLL_CMD.DELETE_ALL) {
             result = super.deleteAll();
         }
-        
+        else if (opId == DB_ITEM_CMD.MOVEUP) {
+            super.moveUp(id!);
+        }        
+        else if (opId == DB_ITEM_CMD.MOVEDOWN) {
+            super.moveDown(id!);
+        }            
         return result;
     }//end 
 

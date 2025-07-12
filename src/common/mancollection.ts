@@ -46,6 +46,22 @@ export class ManagerCollectionById<T> {
         return true;
     }
 
+    public moveUp(id:number) {
+        const index = this.findIndexById(id);
+        if (index > 0) {
+            [this.elements[index], this.elements[index - 1]] = 
+            [this.elements[index - 1], this.elements[index]];            
+        }
+    }    
+
+    public moveDown(id:number) {
+        const index = this.findIndexById(id);
+        if (index !== -1 && index < this.elements.length - 1) {
+            [this.elements[index], this.elements[index + 1]] = 
+            [this.elements[index + 1], this.elements[index]];
+        }
+    }
+
     // read operations
     //..........................................................................................
     public getAll(): Array<T> {
