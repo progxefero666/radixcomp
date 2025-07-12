@@ -10,21 +10,19 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { InputItem, Option } from "@/common/models";
 
 interface CompProps {
+    title:string;
     items: InputItem[];
     onsave: (values: InputItem[]) => void;
     oncancel?: () => void;
 }
 
-export const DialogForm = ({ items, onsave, oncancel }: CompProps) => {
+export const DialogForm = ({title, items, onsave, oncancel }: CompProps) => {
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const val0 = formData.get("item_0")?.toString();
         const val1 = formData.get("item_1")?.toString();
-
-        console.log(val0);
-        console.log(val1);
 
         items[0].value = val0;
         items[1].value = val1;
@@ -45,13 +43,10 @@ export const DialogForm = ({ items, onsave, oncancel }: CompProps) => {
 
             <Dialog.Content className="DialogContent">
 
-                <Dialog.Title className="DialogTitle">Edit profile</Dialog.Title>
+                <Dialog.Title className="DialogTitle">{title}</Dialog.Title>
 
-                <Dialog.Description className="DialogDescription">
-                    Make changes to your profile here. Click save when you're done.
-                </Dialog.Description>
+                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => {onSubmit(event);}}>
 
-                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { onSubmit(event); }}>
                     <fieldset className="Fieldset">
                         <Label.Root htmlFor="item_0">
                             {items[0].label}
@@ -96,3 +91,9 @@ export const DialogForm = ({ items, onsave, oncancel }: CompProps) => {
 
 }//end component
 
+/*
+
+<Dialog.Description className="DialogDescription">
+    Make changes
+</Dialog.Description>
+*/

@@ -73,25 +73,13 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
         }
     };//end
 
-    const execCollOperation = (action: string) => {
-
-        if (action === DB_ITEM_CMD.INSERT) {
-            alert("INSERT");
-
-            const item_0 = new InputItem("item_0", "0", "nacho", "Name", 50);
-            const item_1 = new InputItem("item_1", "1", "desadasdas", "Descripcion", 100);
-            const items: InputItem[] = [item_0, item_1];
-
-        }
-        else if (action === DB_COLL_CMD.DELETE_ALL) {
-            alert("DELETE_ALL");
-        }
+    const clearCollection = () => {
+        alert("clearCollection");
     };//end
 
 
     const onSaveNewItem = (values: InputItem[]) => {
         alert("onSaveNewItem");
-        //execCollOperation(DB_ITEM_CMD.INSERT)
     };//end
 
     const onCancelNewItem = () => {
@@ -132,11 +120,11 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
             {collOptions.length > 0 ? renderList() : null}
 
             <Flex width="100%" direction="row" px="2" py="1" gapX="2" justify="center"
-                style={COMP_BORDER_STYLE} >
+                  style={COMP_BORDER_STYLE} >
 
-                <DialogForm items={NEW_TASKCAT_FIELDS} onsave={onSaveNewItem} />
+                <DialogForm title="new task category" items={NEW_TASKCAT_FIELDS} onsave={onSaveNewItem} />
 
-                <Button color="blue" size="2" onClick={() => execCollOperation(DB_COLL_CMD.DELETE_ALL)}>
+                <Button color="blue" size="2" onClick={() => clearCollection()}>
                     <CrossCircledIcon />
                     clear
                 </Button>

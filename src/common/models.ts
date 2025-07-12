@@ -4,13 +4,15 @@ export class InputItem {
 
     public id: string;
     public itype: string;
+    public placeholder: string;
     public value: any;
     public label: string|null = null;
     public maxlength: number|null = null;
 
-    constructor(id: string,itype:string,value:string,label:string|null,maxlength?: number) {
+    constructor(id: string,itype:string,placeholder: string,value:string,label:string|null,maxlength?: number) {
         this.id = id;
         this.itype = itype;
+        this.placeholder = placeholder;
         this.value = value;
         this.label = label;
         if(maxlength){this.maxlength = maxlength}
