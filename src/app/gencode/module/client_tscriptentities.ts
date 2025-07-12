@@ -3,10 +3,11 @@
 import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
 import { GenCodeModuleControl } from "@/app/gencode/module/gcmodcontrol";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
-import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/app_server/xeferodb/tsclasses";
+
 import { TOption, TSelection } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/collhelper";
 import { JsonHelper } from "@/common/jsonhelper";
+import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/server/xeferodb/tsclasses";
 
 
 /**

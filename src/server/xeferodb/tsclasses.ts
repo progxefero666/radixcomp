@@ -3,9 +3,10 @@
 
 import { CodeGenTsMotor } from "@/codegen/kernel/cgtsmotor";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
-import { getDbSqlSquema } from "./sqlscripts";
+
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
+import { readDbSqlScriptFile } from "./sqlscripts";
 
 
 /* ........................................................................................
@@ -17,18 +18,18 @@ import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 export async function getTypeScriptTableContent
     (orgsquema:string|null,operationId:string,table:string): Promise<string|null> {
 
-    let dbsquema: string = ""; 
+    let dbsquema: string|null = ""; 
     if(orgsquema != null) {dbsquema=orgsquema}
     else{
-        dbsquema = await getDbSqlSquema();
+        dbsquema = await readDbSqlScriptFile("dbsquema");
     }
     
     let content:string|null = null;
     if(operationId === "get_def_class") {
-        content = getTableDefEntityClass(dbsquema,table);
+        content = getTableDefEntityClass(dbsquema!,table);
     }
     else if(operationId === "get_entity_class") {
-        content = getTableEntityClass(dbsquema,table);
+        content = getTableEntityClass(dbsquema!,table);
     }
     if(content!=null) {return content;}
     return null;
@@ -62,26 +63,25 @@ function getTableEntityClass(dbsquema: string,table:string): string|null {
 export async function getTypeScriptArrayTableContent
     (orgsquema:string,operationId:string,arraytables?:string): Promise<string|null> {
 
-    let dbsquema: string = ""; 
+    let dbsquema: string|null = ""; 
     if(orgsquema != null) {dbsquema=orgsquema}
     else{
-        dbsquema = await getDbSqlSquema();
-    }    
-    
+        dbsquema = await readDbSqlScriptFile("dbsquema");
+    }
     let content:string|null = null;
     if(operationId === "get_all_def_class") {
-        content = getAllTablesDefEntityClass(dbsquema);
+        content = getAllTablesDefEntityClass(dbsquema!);
     }
     else if(operationId === "get_all_entity_class") {
-        content =  getAllTablesEntityClass(dbsquema);
+        content =  getAllTablesEntityClass(dbsquema!);
     }
     else if(operationId === "get_list_def_class") {
-        const modelTables:ModelTable[] =  CodeGenSql.getEsquemaTables(dbsquema);
+        const modelTables:ModelTable[] =  CodeGenSql.getEsquemaTables(dbsquema!);
         const tablenames:string[] = arraytables!.split("|"); 
         content = getListTablesDefEntityClass(modelTables,tablenames);
     }
     else if(operationId === "get_list_entity_class") {
-        const modelTables:ModelTable[] =  CodeGenSql.getEsquemaTables(dbsquema);
+        const modelTables:ModelTable[] =  CodeGenSql.getEsquemaTables(dbsquema!);
         const tablenames:string[] = arraytables!.split("|"); 
         content = getListTablesEntityClass(modelTables,tablenames);           
     }

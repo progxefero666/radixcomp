@@ -31,9 +31,6 @@ import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
-import {DbConfig} from "@/app/db/kernel/dbconfig";
-import {DbUtil} from "@/db/dbutils"
-import {DbOps} from "@/db/dboperations";
 
 //---------------------------------------------------------------------------------------
 /**
