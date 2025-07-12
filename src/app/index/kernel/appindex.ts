@@ -31,8 +31,7 @@ export class AppIndex {
         const tasktype_coll:Tasktype[]|null = parseCollection<Tasktype>(tasktype_response);        
         if(tasktype_coll === null) {return false;}
          
-        JSonConsole.logArray(tasktype_coll);
-        
+               
         /*
         const workflow_response = await GetAll(DbTables.workflow);
         const workflow_coll = parseCollection<Workflow>(workflow_response);        

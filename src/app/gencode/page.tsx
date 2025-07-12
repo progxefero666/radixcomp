@@ -43,7 +43,6 @@ export default function PageGenCode() {
             const dbSquema = await readDbSqlScriptFile("dbsquema");
             if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}            
             
-            console.log(dbSquema);
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
             if(!res) {return;}            

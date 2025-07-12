@@ -6,6 +6,7 @@ import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes
 
 
 import MenuButtons from "@/radix/cbars/btmenu";
+import { GenCodeModuleConfig } from "@/app/gencode/config";
 
 
 /**
@@ -16,8 +17,8 @@ interface PrimaryBarProps {
     onselection:(sectionId:string) => void;
 }
 export function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
-    const sections:Option[] = [];
-    //GenCodeModuleConfig.CLIENT_SERVICES
+    const sections:Option[] = GenCodeModuleConfig.CLIENT_SERVICES;
+    //
 
     return (
         <Flex direction="column" p="3" >            
