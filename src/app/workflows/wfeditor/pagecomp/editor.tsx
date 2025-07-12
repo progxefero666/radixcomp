@@ -24,6 +24,8 @@ import CardTask from "../cards/cardwftask";
 
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { DbTables } from "@/db/dbcatalog";
+import { getAllByTable } from "@/db/services/generic/serviceread";
 
 
 const mainContentStyle = {
@@ -41,8 +43,9 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     const [ready, setReady] = useState<boolean>(false);
     const [barState, setBarState] = useState<string>("default");
 
-    const codelangs: Codelang[] = readMemmoryCodelangs();
-    const tasktypes: Tasktype[] = readMemmoryTasktypes();
+    const [codelangs, setCodelangs] = useState<Codelang[]>([]);
+    const [tasktypes, setTasktypes] = useState<Tasktype[]>([]);
+
 
     let isNewWorkflow: boolean = true;
     if ((AppMemmory.readWorkflowId()!) !== Number(NEW_ROW_ID)) { isNewWorkflow = false; }
@@ -55,6 +58,13 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     useEffect(() => {
         if (ready) { return; }
         const init = async () => {
+
+            setCodelangs(parseResponseCollection<Codelang>
+                    (await getAllByTable(DbTables.codelang))!);
+
+            setTasktypes(parseResponseCollection<Tasktype>
+                    (await getAllByTable(DbTables.tasktype))!);
+            
             if (!isNewWorkflow) {
                 setWorkflow(parseResponseItem<Workflow>(await getWorkflow(workflowId))!);
                 setTaskgroups(parseResponseCollection<Taskgroup>(await getTaskgroups(workflowId))!);
@@ -66,15 +76,13 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         init();
     }, []);
 
-    //Task
     
-    const getNewTask = (orden:number):Task => {
-               
+    const getNewTask = (orden:number):Task => {               
         return new Task(
             NEW_ROW_ID,tasktypes[0].id,codelangs[0].id, 
             workflow.id, taskgroups[0].id,
             orden,"","","","");    
-    }
+    };//end
     
     const execMainCommand = (id: string) => {
         if (id == WF_EDITOR_TASK_ACTION.ADD_TASK) {
@@ -90,10 +98,11 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             setTasks([]);
             return;
         }        
-    }
+    };//end
 
     const execTaskCommand = (id: string,index:number) => {
 
+        // from row commands
         if (id == WF_EDITOR_TASK_ACTION.ADD_TASK) {
             alert("Add task");
             return;
@@ -101,11 +110,8 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         else if (id == WF_EDITOR_TASK_ACTION.COPY_TASK) {
             alert("Copy task");
         }
-        
-        
-        else if (id == WF_EDITOR_TASK_ACTION.UPDATE_TASK) {
-            alert("Update task");
-        }
+                
+        // from card commands
         else if (id == WF_EDITOR_TASK_ACTION.DELETE_TASK) {
             alert("Delete task");
         }
@@ -116,15 +122,15 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             alert("Move down task");
         }
 
-    };
+    };//end
 
     const onSaveTaskEdition = () => {
         alert("onSaveTaskEdition");
-    };
+    };//end
 
     const onCancelTaskEdition = () => {
         alert("onCancelTaskEdition");
-    };
+    };//end
 
     const renderMainCommands = () => {
         return (
@@ -140,7 +146,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                 </Button>
             </Flex>
         )
-    };
+    };//end
 
     const renderTasksCommands = (index:number) => {
         return (
@@ -157,7 +163,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                 </Button>
             </Flex>
         )
-    };
+    };//end
 
     const renderTasks = () => {
         if (tasks.length == 0) {
@@ -182,7 +188,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                 ))}
             </>
         )
-    };
+    };//end
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >

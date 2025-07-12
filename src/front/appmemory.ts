@@ -81,6 +81,7 @@ export  async function saveMemmoryTasktypes(): Promise<void>  {
     const response = await getAllByTable(DbTables.tasktype);
     if (response === null) {return;}
     const collection: Tasktype[] | null = parseResponseCollection<Tasktype>(response);
+    console.log("saveMemmoryTasktypes", collection);
     AppMemmory.saveTasktypes(JSON.stringify(collection, null, 4)); 
 }
 

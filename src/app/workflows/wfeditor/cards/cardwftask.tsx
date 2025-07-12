@@ -96,9 +96,9 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                             </IconButton>
                         </Box>
                     </Collapsible.Trigger>
-                    <Flex  width={"100%"} justify="between" align="center" style={headerStyle}>
+                    <Flex direction="row" width={"100%"} justify="between" align="center" style={headerStyle}>
                         <XInputText 
-                            label="Name" 
+
                             defaul={task.tkname} 
                             maxlen={Task.maxlen("tkname")!} 
                             placeholder="task name" />     
