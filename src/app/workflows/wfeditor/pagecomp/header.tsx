@@ -13,7 +13,7 @@ import { parseResponseCollection } from "@/common/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { XInputSelect } from "@/radix/input/inpselect";
-import { CodelangUtil } from "@/db/modelutil/codelangutil";
+
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { AppMemmory } from "@/front/appmemory";
 

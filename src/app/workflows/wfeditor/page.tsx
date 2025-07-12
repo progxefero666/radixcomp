@@ -59,13 +59,14 @@ export default function WorkflowEditorPage() {
     };
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="56% 40% 4%" style={layoutStyle} >            
+        <Grid height="100vh" rows="auto 1fr" columns="10% 50% 40%" style={layoutStyle} >            
             <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
             <Flex gridColumn="1" gridRow="2" >{renderMainContent()}</Flex>
-            <Flex gridColumn="2" gridRow="2" >
+            <Flex gridColumn="2" gridRow="2" >{renderMainContent()}</Flex>
+            <Flex gridColumn="3" gridRow="2" >
                 {workflow ? <WorkflowViewer workflow={workflow} />:null}                
             </Flex>   
-            <Flex gridColumn="3" gridRow="2" >aux</Flex>
+
         </Grid>
     );
 
