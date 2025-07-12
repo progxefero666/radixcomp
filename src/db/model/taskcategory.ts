@@ -48,7 +48,7 @@ export class Taskcategory {
 /**
  * Type definition for Task entity
  */
-export type TypeTascategory = {
+export type TypeTaskcategory = {
     id: number;
     workflow_id: number;
     tpname: string;

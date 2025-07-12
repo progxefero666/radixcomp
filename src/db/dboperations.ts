@@ -29,6 +29,7 @@ export enum DB_ITEM_CMD_TEXT {
 }
 
 export enum DB_COLL_CMD {   
+    DELETE_ALL = "delete_all",
     COUNT_ROWS  = "count_rows", 
     GET_ALL     = "get_all",
     GET_BY_ID   = "get_by_id",

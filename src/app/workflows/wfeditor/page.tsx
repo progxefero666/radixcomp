@@ -10,7 +10,7 @@ import { Task } from "@/db/model/task";
 import { WorkflowEditor } from "@/app/workflows/wfeditor/pagecomp/editor";
 import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
 import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
-import ManWfTaskcategories from "./categories/mantaskcategories";
+import PanelWfTaskcategories from "./categories/paneltaskcats";
 import { WK_EDITOR_VIEWS } from "@/front/appworkflows";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
@@ -54,7 +54,7 @@ export default function WorkflowEditorPage() {
         }
         else if(view==WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id ){
             if(!taskcategories){return null;}
-            return (<ManWfTaskcategories taskgroups={taskcategories} />);
+            return (<PanelWfTaskcategories taskgroups={taskcategories} />);
         }        
     };
 
