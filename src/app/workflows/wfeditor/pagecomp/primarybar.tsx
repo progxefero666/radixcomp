@@ -9,11 +9,13 @@ import { Task } from "@/db/model/task";
 import { useRef } from "react";
 import { ManagerTaskcategories } from "../categories/mantaskcats";
 import { EditOptionId } from "@/radix/collection/editoption";
-import { EditableOption, EditableOptionId } from "@/common/models";
+import { EditableOption, EditableOptionId, InputItem } from "@/common/models";
 import { getTaskcatsAsEditableOptions } from "@/db/modelutil/workflowutil";
 import { InfoNotdata } from "@/radix/data/infonotdata";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { DB_COLL_CMD, DB_ITEM_CMD } from "@/db/dboperations";
+import { showDialogForm } from "@/radix/dialog/dlginputoption";
 
 
 
@@ -49,8 +51,38 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
     const [collOptions, setCollOptions]
         = useState<EditableOptionId[]>(getTaskcatsAsEditableOptions(initcollection));
 
-    const handlerOnclick = (id: number, action: string) => {
-        alert(`id: ${id} - Action: ${action}`);
+    const execItemOperation = (id: number, action: string) => {
+        alert(id);
+
+        if (action === DB_ITEM_CMD.EDIT) {
+            alert("EDIT");
+        }
+        else if (action === DB_ITEM_CMD.DELETE) {
+            alert("DELETE");
+        }        
+        else if (action === DB_ITEM_CMD.MOVEUP) {
+            alert("MOVEUP");
+        }
+        else if (action === DB_ITEM_CMD.MOVEDOWN) {
+            alert("MOVEDOWN");
+        }
+    };//end
+
+    const execCollOperation = (action: string) => {
+
+        if (action === DB_ITEM_CMD.INSERT) {
+            alert("INSERT");
+
+            const items: InputItem[] =[];
+            showDialogForm(items).then((result) => {
+                if (result) {
+             
+                }
+            });
+        }
+        else if (action === DB_COLL_CMD.DELETE_ALL) {     
+            alert("DELETE_ALL");     
+        }              
     };//end
 
     const handlerOnOpen = () => {
@@ -65,11 +97,11 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
             <Flex width="100%" direction="column" gapY="2" >
                 {collOptions.map((item, index) => (
                     <Box key={index.toString()}>
-                        {index==0 ? 
-                            <EditOptionId option={item}  />
-                        : 
-                           <EditOptionId option={item} onclick={handlerOnclick} />
-                        }                        
+                        {index == 0 ?
+                            <EditOptionId option={item} />
+                            :
+                            <EditOptionId option={item} onclick={execItemOperation} />
+                        }
                     </Box>
                 ))}
             </Flex>
@@ -89,12 +121,12 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
             <Flex width="100%" direction="row" px="2" py="1" gapX="2" justify="center"
                 style={COMP_BORDER_STYLE} >
 
-                <Button color="green" size="2">
+                <Button color="green" size="2" onClick={() => execCollOperation(DB_ITEM_CMD.INSERT)}>
                     <FilePlusIcon />
                     add
                 </Button>
 
-                <Button color="blue" size="2">
+                <Button color="blue" size="2" onClick={() => execCollOperation(DB_COLL_CMD.DELETE_ALL)}>
                     <CrossCircledIcon />
                     clear
                 </Button>
