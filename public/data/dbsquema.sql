@@ -17,22 +17,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
---
-
-CREATE SCHEMA public;
-
-
-ALTER SCHEMA public OWNER TO pg_database_owner;
-
---
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -45,7 +29,7 @@ CREATE TABLE public.application (
     id integer NOT NULL,
     apptype_id integer DEFAULT 0 NOT NULL,
     codelang_id integer NOT NULL,
-    name character varying(50) NOT NULL,
+    anname character varying(50) NOT NULL,
     description character varying(255) DEFAULT 'undefined'::character varying NOT NULL,
     repository character varying(250) DEFAULT 'undefined'::character varying NOT NULL,
     author character varying(100),
@@ -62,17 +46,17 @@ CREATE TABLE public.application (
     consumeai boolean DEFAULT false NOT NULL,
     exposedb boolean DEFAULT false NOT NULL,
     exposeapi boolean DEFAULT false NOT NULL,
-    updated date DEFAULT CURRENT_DATE NOT NULL
+    updated date NOT NULL
 );
 
 
 ALTER TABLE public.application OWNER TO postgres;
 
 --
--- Name: aplication_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: application_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.aplication_id_seq
+CREATE SEQUENCE public.application_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -81,13 +65,13 @@ CREATE SEQUENCE public.aplication_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.aplication_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.application_id_seq OWNER TO postgres;
 
 --
--- Name: aplication_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: application_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.aplication_id_seq OWNED BY public.application.id;
+ALTER SEQUENCE public.application_id_seq OWNED BY public.application.id;
 
 
 --
@@ -96,7 +80,7 @@ ALTER SEQUENCE public.aplication_id_seq OWNED BY public.application.id;
 
 CREATE TABLE public.apptype (
     id integer NOT NULL,
-    name character varying(50) NOT NULL,
+    aename character varying(50) NOT NULL,
     description character varying(255) DEFAULT 'undefined'::character varying NOT NULL
 );
 
@@ -131,7 +115,7 @@ ALTER SEQUENCE public.apptype_id_seq OWNED BY public.apptype.id;
 
 CREATE TABLE public.codelang (
     id integer NOT NULL,
-    name character varying(20) NOT NULL,
+    cgname character varying(20) NOT NULL,
     description character varying(150) NOT NULL
 );
 
@@ -169,12 +153,13 @@ CREATE TABLE public.task (
     tasktype_id integer NOT NULL,
     codelang_id integer NOT NULL,
     workflow_id integer NOT NULL,
+    taskcategory_id integer NOT NULL,
     orden integer NOT NULL,
-    name character varying(255) NOT NULL,
+    tkname character varying(255) NOT NULL,
     description text,
+    tkgroup integer NOT NULL,
     files text,
-    folders text,
-    final boolean DEFAULT false
+    folders text
 );
 
 
@@ -203,12 +188,84 @@ ALTER SEQUENCE public.task_id_seq OWNED BY public.task.id;
 
 
 --
+-- Name: taskcategory; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.taskcategory (
+    id integer NOT NULL,
+    workflow_id integer NOT NULL,
+    tyname character varying(100) NOT NULL,
+    description character varying(100)
+);
+
+
+ALTER TABLE public.taskcategory OWNER TO postgres;
+
+--
+-- Name: taskcategory_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.taskcategory_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.taskcategory_id_seq OWNER TO postgres;
+
+--
+-- Name: taskcategory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.taskcategory_id_seq OWNED BY public.taskcategory.id;
+
+
+--
+-- Name: taskgroup; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.taskgroup (
+    id integer NOT NULL,
+    workflow_id integer NOT NULL,
+    tpname character varying(100) NOT NULL,
+    description character varying(100)
+);
+
+
+ALTER TABLE public.taskgroup OWNER TO postgres;
+
+--
+-- Name: taskgroup_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.taskgroup_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.taskgroup_id_seq OWNER TO postgres;
+
+--
+-- Name: taskgroup_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.taskgroup_id_seq OWNED BY public.taskgroup.id;
+
+
+--
 -- Name: tasktype; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tasktype (
     id integer NOT NULL,
-    name character varying(100) NOT NULL,
+    tename character varying(100) NOT NULL,
     description character varying(200) NOT NULL
 );
 
@@ -243,11 +300,12 @@ ALTER SEQUENCE public.tasktype_id_seq OWNED BY public.tasktype.id;
 
 CREATE TABLE public.workflow (
     id integer NOT NULL,
-    name character varying(100) NOT NULL,
-    description character varying(500) DEFAULT 'undefined'::character varying NOT NULL,
+    wwname character varying(100) NOT NULL,
+    context text,
+    description text DEFAULT 'undefined'::text NOT NULL,
     application character varying(50),
     fpath character varying(500),
-    updated date DEFAULT CURRENT_DATE NOT NULL
+    updated date NOT NULL
 );
 
 
@@ -279,7 +337,7 @@ ALTER SEQUENCE public.workflow_id_seq OWNED BY public.workflow.id;
 -- Name: application id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.application ALTER COLUMN id SET DEFAULT nextval('public.aplication_id_seq'::regclass);
+ALTER TABLE ONLY public.application ALTER COLUMN id SET DEFAULT nextval('public.application_id_seq'::regclass);
 
 
 --
@@ -304,6 +362,20 @@ ALTER TABLE ONLY public.task ALTER COLUMN id SET DEFAULT nextval('public.task_id
 
 
 --
+-- Name: taskcategory id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.taskcategory ALTER COLUMN id SET DEFAULT nextval('public.taskcategory_id_seq'::regclass);
+
+
+--
+-- Name: taskgroup id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.taskgroup ALTER COLUMN id SET DEFAULT nextval('public.taskgroup_id_seq'::regclass);
+
+
+--
 -- Name: tasktype id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -322,7 +394,7 @@ ALTER TABLE ONLY public.workflow ALTER COLUMN id SET DEFAULT nextval('public.wor
 --
 
 ALTER TABLE ONLY public.application
-    ADD CONSTRAINT aplication_name_key UNIQUE (name);
+    ADD CONSTRAINT aplication_name_key UNIQUE (anname);
 
 
 --
@@ -338,7 +410,7 @@ ALTER TABLE ONLY public.application
 --
 
 ALTER TABLE ONLY public.apptype
-    ADD CONSTRAINT apptypes_name_key UNIQUE (name);
+    ADD CONSTRAINT apptypes_name_key UNIQUE (aename);
 
 
 --
@@ -354,7 +426,7 @@ ALTER TABLE ONLY public.apptype
 --
 
 ALTER TABLE ONLY public.codelang
-    ADD CONSTRAINT codelang_name_key UNIQUE (name);
+    ADD CONSTRAINT codelang_name_key UNIQUE (cgname);
 
 
 --
@@ -370,7 +442,7 @@ ALTER TABLE ONLY public.codelang
 --
 
 ALTER TABLE ONLY public.task
-    ADD CONSTRAINT task_name_key UNIQUE (name);
+    ADD CONSTRAINT task_name_key UNIQUE (tkname);
 
 
 --
@@ -382,11 +454,27 @@ ALTER TABLE ONLY public.task
 
 
 --
+-- Name: taskcategory taskcategory_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.taskcategory
+    ADD CONSTRAINT taskcategory_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taskgroup taskgroup_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.taskgroup
+    ADD CONSTRAINT taskgroup_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: tasktype tasktype_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.tasktype
-    ADD CONSTRAINT tasktype_name_key UNIQUE (name);
+    ADD CONSTRAINT tasktype_name_key UNIQUE (tename);
 
 
 --
@@ -402,7 +490,7 @@ ALTER TABLE ONLY public.tasktype
 --
 
 ALTER TABLE ONLY public.workflow
-    ADD CONSTRAINT workflow_name_key UNIQUE (name);
+    ADD CONSTRAINT workflow_name_key UNIQUE (wwname);
 
 
 --
@@ -451,6 +539,30 @@ ALTER TABLE ONLY public.task
 
 ALTER TABLE ONLY public.task
     ADD CONSTRAINT task_workflow_id_fkey FOREIGN KEY (workflow_id) REFERENCES public.workflow(id) ON DELETE CASCADE;
+
+
+--
+-- Name: task taskcategory_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.task
+    ADD CONSTRAINT taskcategory_id_fkey FOREIGN KEY (taskcategory_id) REFERENCES public.taskgroup(id) ON DELETE CASCADE;
+
+
+--
+-- Name: taskcategory taskcategory_workflow_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.taskcategory
+    ADD CONSTRAINT taskcategory_workflow_id_fkey FOREIGN KEY (workflow_id) REFERENCES public.workflow(id) ON DELETE CASCADE;
+
+
+--
+-- Name: taskgroup taskgroup_workflow_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.taskgroup
+    ADD CONSTRAINT taskgroup_workflow_id_fkey FOREIGN KEY (workflow_id) REFERENCES public.workflow(id) ON DELETE CASCADE;
 
 
 --
