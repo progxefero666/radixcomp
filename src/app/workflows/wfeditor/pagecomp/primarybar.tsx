@@ -91,6 +91,7 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
 
     const onSaveNewItem = (values: InputItem[]) => {
         alert("onSaveNewItem");
+        //execCollOperation(DB_ITEM_CMD.INSERT)
     };//end
 
     const onCancelNewItem = () => {
@@ -133,13 +134,7 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
             <Flex width="100%" direction="row" px="2" py="1" gapX="2" justify="center"
                 style={COMP_BORDER_STYLE} >
 
-                <Button color="green" size="2" onClick={() => execCollOperation(DB_ITEM_CMD.INSERT)}>
-                    <FilePlusIcon />
-                    add
-                </Button>
-                <DialogForm items={NEW_TASKCAT_FIELDS}
-                    onsave={onSaveNewItem }
-                    oncancel={() => { console.log("cancel") }} />
+                <DialogForm items={NEW_TASKCAT_FIELDS} onsave={onSaveNewItem} />
 
                 <Button color="blue" size="2" onClick={() => execCollOperation(DB_COLL_CMD.DELETE_ALL)}>
                     <CrossCircledIcon />
