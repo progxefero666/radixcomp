@@ -1,7 +1,7 @@
 //src\app\workflows\wfeditor\pagecomp\primarybar.tsx
 
 import React, { useState } from "react";
-import { Box, Flex } from "@radix-ui/themes";
+import { Box, Flex,Text} from "@radix-ui/themes";
 
 
 import { Taskcategory } from "@/db/model/taskcategory";
@@ -12,13 +12,15 @@ import { EditOptionId } from "@/radix/collection/editoption";
 import { EditableOption, EditableOptionId } from "@/common/models";
 import { getTaskcatsAsEditableOptions } from "@/db/modelutil/workflowutil";
 
+const primaryBarStyle = {
+    background: 'rgb(24, 24, 27)',
+};
 
 interface CompProps {
     collection: Taskcategory[] | null;
     onsave?: () => void;
 }
 export default function WorkflowPrimaryBar({ collection }: CompProps) {
-
 
 
     return (
@@ -47,8 +49,15 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
     }
 
     const renderList = () => {
+        if(collOptions.length === 0) {
+            return (
+                <Flex width="100%" direction="column" justify="center" gapY="2" >
+                    <Text size="2">No categories defined</Text>
+                </Flex>
+            );
+        }
         return (
-            <Flex width="100%" direction="column" gapY="2" >
+            <Flex width="100%" direction="column" gapY="2" style={primaryBarStyle} >
                     {collOptions.map((item, index) => (
                         <Box key={index.toString()}>
                             <EditOptionId 

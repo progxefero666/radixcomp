@@ -34,8 +34,8 @@ export default function PageWorkflows() {
     const [tasktypes, setTasktypes] = useState<Tasktype[] | null>(null);
         
     useEffect(() => {
-        saveMemmoryCodelangs();
-        saveMemmoryTasktypes();
+        //saveMemmoryCodelangs();
+        //saveMemmoryTasktypes();
     }, []);
 
     const onSelection = (section: string) => {

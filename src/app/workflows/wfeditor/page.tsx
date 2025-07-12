@@ -33,39 +33,27 @@ export default function WorkflowEditorPage() {
 
     const [tasktypes,setTasktypes] = useState<Tasktype[]>([]);
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
-    const [taskcategories,setTaskcategories] = useState<Taskcategory[]|null>(null);
+    const [taskcats,setTaskcats] = useState<Taskcategory[]|null>(null);
 
-    const onWorkflowCharged = (workflow:Workflow,taskgroups:Taskcategory[]) => {
+    const onWorkflowCharged = (workflow:Workflow,taskcats:Taskcategory[]) => {
+        console.log(taskcats);
         setWorkflow(workflow);
-        setTaskcategories(taskgroups);
+        //setTaskcats(taskgroups);
     }
-	
-    const showManTaskgroups = () => {
-        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id);
-    }
-
-    const onCloseManTaskgroups = () => {
-        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
-    }    
-
-    const renderMainContent = () => {
-        if(view==WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id ){
-            return (<WorkflowEditor onCharge={onWorkflowCharged} />);
-        }
-        else if(view==WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id ){
-            if(!taskcategories){return null;}
-            return (<PanelWfTaskcategories taskgroups={taskcategories} />);
-        }        
-    };
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="10% 50% 40%" style={layoutStyle} >            
+        <Grid height="100vh" rows="auto 1fr" columns="13% 50% 37%" style={layoutStyle} >   
+
             <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
-            <Flex gridColumn="1" gridRow="2" >
-            
-                <WorkflowPrimaryBar collection={taskcategories} />
+
+            <Flex gridColumn="1" gridRow="2" >            
+                <WorkflowPrimaryBar collection={taskcats} />
             </Flex>
-            <Flex gridColumn="2" gridRow="2" >{renderMainContent()}</Flex>
+
+            <Flex gridColumn="2" gridRow="2" >
+                <WorkflowEditor onCharge={onWorkflowCharged} />
+            </Flex>
+
             <Flex gridColumn="3" gridRow="2" >
                 {workflow ? <WorkflowViewer workflow={workflow} />:null}                
             </Flex>   
@@ -75,4 +63,14 @@ export default function WorkflowEditorPage() {
 
 }//end page
 
+/*
+	
+    const showManTaskgroups = () => {
+        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id);
+    }
 
+    const onCloseManTaskgroups = () => {
+        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
+    }    
+
+*/
