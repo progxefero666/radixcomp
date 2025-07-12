@@ -1,17 +1,22 @@
 //src\common\model\option.ts
 
+import { TypeInput } from "./types";
+
 export class InputItem {
 
     public id: string;
-    public itype: string;
+    public itype: TypeInput;
     public placeholder: string;
     public value: any;
     public label: string|null = null;
     public maxlength: number|null = null;
 
-    constructor(id: string,itype:string,placeholder: string,value:string,label:string|null,maxlength?: number) {
+    constructor(itype:TypeInput,id: string,
+                placeholder: string,value:string,
+                label:string|null,maxlength?: number) {
+this.itype = itype;
         this.id = id;
-        this.itype = itype;
+        
         this.placeholder = placeholder;
         this.value = value;
         this.label = label;

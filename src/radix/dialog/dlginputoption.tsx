@@ -29,6 +29,17 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
         onsave(items);
     };//end
 
+    const renderInput = (input:InputItem) => {
+        return(
+            <fieldset>
+                <Label.Root>{input.label}</Label.Root>
+                <TextField.Root name={input.id} 
+                                placeholder={input.placeholder}
+                                radius="small" />
+            </fieldset>                   
+        )
+    };//end
+
     return (
         <Dialog.Root>
 
@@ -43,21 +54,18 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
             </Dialog.Trigger>
 
             {/*<Dialog.Description>description</Dialog.Description>*/}
-            <Dialog.Content className="DialogContent">
-                <Dialog.Title className="DialogTitle">
+            <Dialog.Content>
+
+                <Dialog.Title>
                     <Text size={ThemeTextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
                 </Dialog.Title>
+
                 <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => 
                                 {event.preventDefault();onSubmit(event);}}>
                     <Flex width="100%" direction="column" gapY="2" >
                         {items.map((item, index) => (
                             <Box key={index.toString()}>
-                                <fieldset>
-                                    <Label.Root>{items[index].label}</Label.Root>
-                                    <TextField.Root name={items[index].id} 
-                                                    placeholder={items[index].placeholder}
-                                        radius="small" />
-                                </fieldset>                          
+                                {renderInput(item)}                        
                             </Box>                 
                         ))}
                     </Flex>

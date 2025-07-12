@@ -59,12 +59,13 @@ export const NEW_WK: Workflow = new Workflow(
     null, null);
 
 export const NEW_TASKCAT_FIELDS:InputItem[] = [
-    new InputItem("item_0", "0","placeholder", "nacho", "Name", 50),
-    new InputItem("item_1", "1","placeholder", "desadasdas", "Descripcion", 100)
+    new InputItem("text","item_0", "placeholder", "nacho", "Name", 50),
+    new InputItem("text","item_1", "placeholder", "desadasdas", "Descripcion", 100)
 ];
 
 
 /*
+ModelField
 export class AppWorkflows {}//end class
 
     -------------------------------------------------------
