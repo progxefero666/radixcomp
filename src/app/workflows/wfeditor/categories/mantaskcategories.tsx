@@ -8,7 +8,7 @@ interface CompProps {
     taskgroups: Taskcategory[];
     onsave?: () => void;
 }
-export default function ManWfTaskGroups({taskgroups,onsave}:CompProps) {
+export default function ManWfTaskcategories({taskgroups,onsave}:CompProps) {
 
     return (
         <div>
