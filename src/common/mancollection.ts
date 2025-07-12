@@ -3,12 +3,13 @@
 /**
  * class CtrlCollectionByKey
  */
-export class CtrlCollectionByKey<T extends { [id: number]: any }> {
+export class ManagerCollectionById<T> {
 
     public elements: Array<T> = [];
 
     // Constructor
-    constructor() {
+    constructor(elements: Array<T>) {
+        this.elements = elements;
     }
 
     // crud operations
@@ -52,7 +53,7 @@ export class CtrlCollectionByKey<T extends { [id: number]: any }> {
     }
 
     private findIndexById(id: number): number {
-        return this.elements.findIndex((element) => element[id] === id);
+        return this.elements.findIndex((element) => (element as any).id === id);
     }
 
     public getById(id: number): T {

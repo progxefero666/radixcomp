@@ -1,14 +1,15 @@
 //src\app\workflows\wfeditor\categories\mantasscats.ts
 
-import { CtrlCollectionByKey } from "@/common/mancollection";
+import { ManagerCollectionById } from "@/common/mancollection";
 import { DB_COLL_CMD, DB_ITEM_CMD } from "@/db/dboperations";
 import { Taskcategory, TypeTaskcategory } from "@/db/model/taskcategory";
 
-export class ManagerServers extends CtrlCollectionByKey<TypeTaskcategory> {
+export class ManagerTaskcategories extends ManagerCollectionById<Taskcategory> {
 
-    constructor(){
-        super();
+    constructor(collection: Taskcategory[]) {
+        super(collection);
     }
+
     public execOp = (id: string,item:Taskcategory): boolean => {
         let result = false;
 
