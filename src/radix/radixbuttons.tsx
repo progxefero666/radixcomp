@@ -39,14 +39,4 @@ export const renderOptionButton = (id: string, onclick: (name: string) => void,
             {text}
         </Button>
     )
-}
-
-/*
-<IconButton>
-	<MagnifyingGlassIcon width="18" height="18" />
-</IconButton>
-
-<Card key={index.toString()} >
-    {renderButton(section)}
-</Card>
-*/
+};//end
