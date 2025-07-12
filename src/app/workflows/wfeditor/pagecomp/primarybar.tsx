@@ -11,6 +11,7 @@ import { ManagerTaskcategories } from "../categories/mantaskcats";
 import { EditOptionId } from "@/radix/collection/editoption";
 import { EditableOption, EditableOptionId } from "@/common/models";
 import { getTaskcatsAsEditableOptions } from "@/db/modelutil/workflowutil";
+import { InfoNotdata } from "@/radix/data/infonotdata";
 
 const primaryBarStyle = {
     background: 'rgb(24, 24, 27)',
@@ -49,13 +50,6 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
     }
 
     const renderList = () => {
-        if(collOptions.length === 0) {
-            return (
-                <Flex width="100%" direction="column" justify="center" gapY="2" >
-                    <Text size="2">No categories defined</Text>
-                </Flex>
-            );
-        }
         return (
             <Flex width="100%" direction="column" gapY="2" style={primaryBarStyle} >
                     {collOptions.map((item, index) => (
@@ -69,11 +63,12 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
         );
     }
     
-
+    
     return (
         <Flex width="100%" direction="column" justify="center" gapY="2" >
-            {/*renderList()*/}
-            Manager Categories
+            {collOptions.length > 0 ?
+                renderList():
+                <InfoNotdata message="Not categories def" />}
         </Flex>
     );
 
