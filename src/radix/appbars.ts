@@ -62,13 +62,3 @@ export const BARCFG_EXPORT_COPY: BarButtonsCfg = new BarButtonsCfg(
     [true, true]
 );
 
-/*
-export const BARCFG_EDITION: BarButtonsCfg = new BarButtonsCfg(
-    [MODE_EDITION,     DB_ITEM_COMMAND.UPDATE],
-    [MODE_EDITION,     DB_ITEM_ACTION_TEXT.UPDATE],
-    [AppUiConst.COLOR_MODE_EDITION, AppUiConst.COLOR_ACT_SAVE],
-    [AppUiConst.ICON_MODE_EDITION,  AppUiConst.ICON_ACT_SAVE],
-    [false,false],
-    [true, false]
-);
-*/

@@ -6,6 +6,7 @@ import { Flex, Box, Text, IconButton } from "@radix-ui/themes";
 import { useState } from "react";
 import { XInputText } from "../input/inptext";
 import { COMP_BORDER_STYLE } from "../radixtheme";
+import { DB_ITEM_CMD } from "@/db/dboperations";
 
 
 /**
@@ -18,43 +19,48 @@ const optionStyle = {
 };
 
 interface CompProps {
+    disabled?: boolean;
     option: EditableOptionId;
-    onclick: (id: number, action: string) => void;
+    onclick?: (id: number, action: string) => void;
 }
-export const EditOptionId = ({ option, onclick }: CompProps) => {
+export const EditOptionId = ({ disabled, option, onclick }: CompProps) => {
 
-    const [editable,setEditable] = useState<boolean>(false);
+    let isDisabled: boolean = true;
+    if (disabled) { isDisabled = false; }
 
     const handlerOnclick = (action: string) => {
-        onclick(option.id, action);
+        if (onclick) { onclick(option.id, action); }
     }
 
     return (
-        <Flex width="100%" direction="row"  justify="between" align="center" px="2" py="1"
-        style={COMP_BORDER_STYLE}  >
+        <Flex width="100%" direction="row" justify="between" align="center"
+              px="2" py="1" style={COMP_BORDER_STYLE}  >
+
             <Box width="auto">
-                <Text size="2">
-                    {option.orden.toString()}
-                </Text>
+                <Text size="2">{option.orden.toString()}</Text>
             </Box>
+
             <Flex width="146px" direction="row" gap="2" >
-                <XInputText inline={true} defaul={option.value} 
-                            disabled={editable} />
+                <XInputText inline={true} defaul={option.value}
+                    disabled={isDisabled} />
             </Flex>
-             <Box width="auto" >
-                <IconButton size="1" onClick={() => { handlerOnclick("edit") }} >
+
+            {!isDisabled ?
+            <Box width="auto" >
+                <IconButton size="1" onClick={() => { handlerOnclick(DB_ITEM_CMD.EDIT)}} >
                     <Pencil2Icon />
                 </IconButton>
-                <IconButton size="1" onClick={() => { handlerOnclick("delete") }} >
+                <IconButton size="1" onClick={() => { handlerOnclick(DB_ITEM_CMD.DELETE) }} >
                     <TrashIcon />
                 </IconButton>
-                <IconButton size="1" onClick={() => { handlerOnclick("moveup") }} >
+                <IconButton size="1" onClick={() => { handlerOnclick(DB_ITEM_CMD.MOVEUP) }} >
                     <ArrowUpIcon />
-                </IconButton>             
-                <IconButton size="1" onClick={() => { handlerOnclick("movedown") }} >
+                </IconButton>
+                <IconButton size="1" onClick={() => { handlerOnclick(DB_ITEM_CMD.MOVEDOWN) }} >
                     <ArrowDownIcon />
-                </IconButton>                    
-             </Box>
+                </IconButton>
+            </Box> : null}
+
         </Flex>
     );
 
