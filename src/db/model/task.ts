@@ -9,10 +9,11 @@ export class Task {
     public tasktype_id: number;
     public codelang_id: number;
     public workflow_id: number;
-    public taskgroup_id: number;    
+    public taskcategory_id: number;    
     public orden: number;
     public tkname: string;
     public description: string;
+    public tkgroup: number;
     public files: string;
     public folders: string;
 
@@ -20,10 +21,11 @@ export class Task {
                 tasktype_id: number,
                 codelang_id: number,
                 workflow_id: number,
-                taskgroup_id: number,
+                taskcategory_id: number,
                 orden: number,
                 tkname: string,
                 description: string,
+                tkgroup: number,
                 files: string,
                 folders: string) {
 
@@ -31,10 +33,11 @@ export class Task {
         this.tasktype_id = tasktype_id;
         this.codelang_id = codelang_id;
         this.workflow_id = workflow_id;
-        this.taskgroup_id = taskgroup_id;
+        this.taskcategory_id = taskcategory_id;
         this.orden = orden;
         this.tkname = tkname;
         this.description = description;
+        this.tkgroup = tkgroup;
         this.files = files;
         this.folders = folders;
     }
