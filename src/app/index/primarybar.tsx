@@ -16,7 +16,6 @@ interface PrimaryBarProps {
 }
 export default function PrimaryBar({onselection,module}: PrimaryBarProps) {
 
-    //className="bg-gray-1 dark:bg-gray-2 border border-gray-6"
     return (
         <Flex width="100%"  height="100vh" align="center" 
               direction="column" py="4" style={primaryBarStyle} >

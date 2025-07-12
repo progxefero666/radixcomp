@@ -1,20 +1,15 @@
-//src\app\workflows\page.tsx
-
 "use client";
 
-import { useEffect, useState } from "react";
-import { Box, Grid, Flex } from "@radix-ui/themes";
-import { MOD_SECTIONS, VIEWER_MODE } from "@/front/appworkflows";
-import { Header } from "@/app/workflows/pagecomp/header";
-import { PrimaryBar } from "@/app/workflows/pagecomp/primarybar";
-import { WorkflowsManager } from "@/app/workflows/pagecomp/wfsmanager";
-import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
-import { WorkflowViewer } from "./workflows/pagecomp/wfviewer";
-import { Workflow } from "@/db/model/workflow";
+import { useRouter } from "next/navigation";
+import { Box, Grid, Flex ,Text} from "@radix-ui/themes";
+import { useEffect, useRef, useState } from "react";
 
-import { Tasktype } from "@/db/model/tasktype";
-import { AppMemmory, saveMemmoryCodelangs, saveMemmoryTasktypes } from "@/front/appmemory";
-
+import Header from "@/app/index/header";
+import PrimaryBar from "@/app/index/primarybar";
+import SecondBar from "@/app/index/secondbar";
+import MainContent from "@/app/index/maincontent";
+import { AppConfig } from "@/app/index/appconfig";
+import { AppIndex } from "@/app/index/kernel/appindex";
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',
@@ -22,64 +17,54 @@ const layoutStyle = {
 };
 
 /**
- * Page Workflows Manegement
- *  const router = useRouter();
+ * Application Main page 
  */
-export default function PageWorkflows() {
+export default function Home() {
 
-    const [actsection, setActSection]   = useState<string>(MOD_SECTIONS.MANAGER_WORKFLOWS.id);
-      const [wfCharged, setWfCharged]     = useState<boolean>(false);
-    const [wfSelected, setWfSelected]   = useState<Workflow | null>(null);
+    const router = useRouter();
+    const appRef = useRef<AppIndex>(null);
+    const actmodRef = useRef<string>(AppConfig.INDEX.id);
+    const [initialized, setInitialized] = useState<boolean>(false);
 
-    const [tasktypes, setTasktypes] = useState<Tasktype[] | null>(null);
-        
-    useEffect(() => {
-        //saveMemmoryCodelangs();
-        //saveMemmoryTasktypes();
+    useEffect(() => {          
+        const init = async () => {
+            setInitialized(true);
+        };
+        init();
     }, []);
 
-    const onSelection = (section: string) => {
-        setActSection(section);
+    const onSelection = (sectionId: string) => {    
+        router.push(`/${sectionId}`);
     };
 
-    const showWfPreview = (workflow: Workflow) => {
-        setWfSelected(workflow);
-        setWfCharged(true);
-    };
-
+    if(!initialized) {
+        return (
+            <Box style={layoutStyle} >
+                <Text>Loading...</Text>
+            </Box>
+        );
+    }
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
-
-            <Flex gridColumn="1/5" gridRow="1" >
-                <Header section={actsection} />
+        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
+            
+            <Flex gridColumn="1/4" gridRow="1" >
+                <Header module={actmodRef.current} />    
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
-                <PrimaryBar section={actsection}
-                    onselection={onSelection} />
+                <PrimaryBar module={actmodRef.current} onselection={onSelection} />
             </Flex>
 
-            <Flex gridColumn="2" gridRow="2" >
-                <WorkflowsManager section={actsection}
-                    showwfpreview={showWfPreview} />
+            <Flex gridColumn="2" gridRow="2" > 
+                <MainContent module={actmodRef.current} />
             </Flex>
-
+            
             <Flex gridColumn="3" gridRow="2" >
-                {wfCharged ?
-                    <WorkflowViewer workflow={wfSelected}/>
-                    : <Box width="100%">not data charged</Box>}
-
-            </Flex>
-
-            <Flex gridColumn="4" gridRow="2" >
-                <SecondBar section={actsection} />
+                <SecondBar module={actmodRef.current} />
             </Flex>
 
         </Grid>
     );
 
-}//end page
 
-function saveAppMemmCodelangs() {
-    throw new Error("Function not implemented.");
-}
+}//end class

@@ -15,6 +15,9 @@ export class AppConfig {
     public static readonly INDEX: Option = new Option("./","Home",null,null,null);
 
     // list modules
+    public static readonly MOD_GENCODE: Option 
+        = new Option("./gencode","Gen. Code",null,null,null);
+
     public static readonly MOD_WORKFLOWS: Option 
         = new Option("./workflows","WorkFlows Man.",null,null,null);
 
@@ -25,6 +28,7 @@ export class AppConfig {
         = new Option("./platform","Pc Platform",null,null,null);
 
     public static readonly MODULES: Option[] = [
+        AppConfig.MOD_GENCODE, 
         AppConfig.MOD_WORKFLOWS,        
         AppConfig.MOD_APPLICATIONS,        
         AppConfig.MOD_PLATFORM        
@@ -32,14 +36,3 @@ export class AppConfig {
     
 }//export class AppConfig
 
-
-/*
-    public static readonly MOD_SERVICES: Option 
-        = new Option("./services","Services",null,null,null);
-
-    public static readonly MOD_SERVERS: Option 
-        = new Option("./servers","Servers",null,null,null);
-
-      public static readonly MOD_AGENTS: Option 
-        = new Option("./agents","Agents",null,null,null);
-*/
