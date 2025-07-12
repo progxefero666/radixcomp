@@ -43,9 +43,27 @@ export class ThemePagesStyles {
 
 }//end class
 
+/**
+ * class ThemeTextStyle.DIALOG_TITLE_SIZE
+ */
+export class ThemeTextStyle {
+    
+    public static readonly DIALOG_TITLE_SIZE: any = RadixConf.SIZES.size_2;
+
+}
 
 /**
- * class ThemeButtonsStyle.BTN_DEF_VAR
+ * class ThemeIconsStyle.ICON_DEF_SIZE
+ */
+export class ThemeIconsStyle {
+    public static readonly ICON_DEF_SIZE = {
+        width: "20px",
+        height: "20px"
+    };
+}
+
+/**
+ * class ThemeButtonsStyle.BTN_TEXT_SIZE
  */
 export class ThemeButtonsStyle {
 
@@ -53,6 +71,8 @@ export class ThemeButtonsStyle {
     public static readonly BTN_DEF_VAR: any = RadixConf.VARIANTS.soft;
     public static readonly BTN_DEF_RADIUS: any = RADIX_RADIUS.medium;
     public static readonly BTN_DEF_COLOR: any = "gray";
+
+    public static readonly BTN_TEXT_SIZE: any = RadixConf.SIZES.size_2;
 
     public static readonly BTN_HOME_COLOR: any = "gray";
     public static readonly BTN_HOME_STYLE: any = "w-full justify-start";
