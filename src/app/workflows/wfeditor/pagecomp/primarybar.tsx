@@ -12,6 +12,8 @@ import { EditOptionId } from "@/radix/collection/editoption";
 import { EditableOption, EditableOptionId } from "@/common/models";
 import { getTaskcatsAsEditableOptions } from "@/db/modelutil/workflowutil";
 import { InfoNotdata } from "@/radix/data/infonotdata";
+import { SeparatorH } from "@/radix/container/separatorh";
+import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 
 const primaryBarStyle = {
     background: 'rgb(24, 24, 27)',
@@ -25,7 +27,7 @@ export default function WorkflowPrimaryBar({ collection }: CompProps) {
 
 
     return (
-        <Flex width="100%" direction="column" justify="center" gapY="2" >
+        <Flex width="100%"  direction="column"  px="3" py="3" style={primaryBarStyle} >
             {collection ? <PanelWfTaskcategories initcollection={collection} /> : null}
         </Flex>
     );
@@ -51,7 +53,7 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
 
     const renderList = () => {
         return (
-            <Flex width="100%" direction="column" gapY="2" style={primaryBarStyle} >
+            <Flex width="100%" direction="column" gapY="2" >
                     {collOptions.map((item, index) => (
                         <Box key={index.toString()}>
                             <EditOptionId 
@@ -63,12 +65,18 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
         );
     }
     
-    
+    //<InfoNotdata message="Not categories def" />
     return (
-        <Flex width="100%" direction="column" justify="center" gapY="2" >
+        <Flex direction="column" gapY="2" >
+            <Flex width="100%" direction="row" style={COMP_BORDER_STYLE} >
+                <Text size="2">
+                    T. Categories
+                </Text>
+            </Flex>
+            <SeparatorH />
             {collOptions.length > 0 ?
                 renderList():
-                <InfoNotdata message="Not categories def" />}
+                null}
         </Flex>
     );
 

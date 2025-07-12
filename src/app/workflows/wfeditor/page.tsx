@@ -20,7 +20,7 @@ import WorkflowPrimaryBar from "./pagecomp/primarybar";
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',
-    padding: '0',
+    
 };
 
 /**
@@ -38,11 +38,11 @@ export default function WorkflowEditorPage() {
     const onWorkflowCharged = (workflow:Workflow,taskcats:Taskcategory[]) => {
         console.log(taskcats);
         setWorkflow(workflow);
-        //setTaskcats(taskgroups);
+        setTaskcats(taskcats);
     }
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="13% 50% 37%" style={layoutStyle} >   
+        <Grid height="100vh" rows="auto 1fr" columns="20% 50% 30%" style={layoutStyle} >   
 
             <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
 
