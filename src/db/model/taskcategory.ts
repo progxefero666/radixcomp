@@ -5,7 +5,7 @@ import { Task } from "@generated/prisma";
 /**
  * Db Table Entity Class Task
  **/
-export class Taskgroup {
+export class Taskcategory {
 
     public id: number;
     public workflow_id: number;
@@ -48,7 +48,7 @@ export class Taskgroup {
 /**
  * Type definition for Task entity
  */
-export type TypeTaskgroup = {
+export type TypeTascategory = {
     id: number;
     workflow_id: number;
     tpname: string;

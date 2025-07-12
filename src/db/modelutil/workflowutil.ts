@@ -4,7 +4,7 @@ import { Option } from "@/common/models";
 //import { DbTables } from "@/db/dbcatalog";
 
 import { Workflow } from "@/db/model/workflow";
-import { Taskgroup } from "@/db/model/taskgroup";
+import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 import { Task } from "@/db/model/task";
 
@@ -28,7 +28,7 @@ export const getWorkflowsAsOptions = (taskgroups: Workflow[]): Option[] => {
 }//end 
 
 
-export const getTaskgroupsAsOptions = (codelangs: Taskgroup[]): Option[] => {
+export const getTaskgroupsAsOptions = (codelangs: Taskcategory[]): Option[] => {
     const options: Option[] = [];
     for (const item of codelangs) {
         const option = new Option(item.id.toString(), item.tpname, null);

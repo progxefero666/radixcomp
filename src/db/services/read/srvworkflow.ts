@@ -40,7 +40,7 @@ export async function get(id:number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.taskgroup.findFirst(
+        result = await prisma.taskcategory.findFirst(
             {
                 where:{id:id},
             }
@@ -62,13 +62,13 @@ export async function get(id:number): Promise<string> {
  * Server Action: Get Tasks by Workflow id   
  *    desc: read all rows in table tasktypes
  */
-export async function getTaskgroups(workflow_id:number,includeTasks?:boolean): Promise<string> {
+export async function getTaskcategories(workflow_id:number,includeTasks?:boolean): Promise<string> {
 
     const loadTasks = includeTasks ?? false;
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.taskgroup.findMany({
+        result = await prisma.taskcategory.findMany({
             where: {id:workflow_id},
             include: {tasks:loadTasks}
         });
@@ -104,7 +104,7 @@ export async function getTasks(workflow_id:number): Promise<string> {
 
 } //end function
 
-export async function getTasksByTaskgroup(workflow_id:number,taskgroup_id:number): Promise<string> {
+export async function getTasksByTaskcategory(workflow_id:number,taskcategory_id:number): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
@@ -112,7 +112,7 @@ export async function getTasksByTaskgroup(workflow_id:number,taskgroup_id:number
         result = await prisma.task.findMany({
             where: {
                 workflowId: workflow_id,
-                taskgroupId: taskgroup_id
+                taskcategoryId: taskcategory_id
             }
         });
     }

@@ -2,17 +2,17 @@
 
 import { Option } from "@/common/models";
 import { NEW_ROW_ID, DB_CONSTANTS } from "@/db/dboperations";
-import { Taskgroup } from "@/db/model/taskgroup";
+import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
 
 
 
 
 //	constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) 	
-export const TASKGOUP_DEFAULT : Taskgroup = new Taskgroup(
+export const TASKGOUP_DEFAULT : Taskcategory = new Taskcategory(
 	0,0,"tpname","description");
     
-export const TASKGROUP_DEFAULT: Taskgroup = new Taskgroup(
+export const TASKGROUP_DEFAULT: Taskcategory = new Taskcategory(
     0, 0, "default", "taskgroup default");
 
 export const MOD_SECTIONS = {

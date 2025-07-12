@@ -8,12 +8,12 @@ import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection, parseResponseItem } from "@/common/javascriptparser";
 import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
 import { Task } from "@/db/model/task";
-import { getTaskgroups, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
+import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { readMemmoryCodelangs, AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
 
 import { NEW_WK, TASKGROUP_DEFAULT, WF_EDITOR_TASK_ACTION } from "@/front/appworkflows";
 import { Codelang } from "@/db/model/codelang";
-import { Taskgroup } from "@/db/model/taskgroup";
+import { Taskcategory } from "@/db/model/taskcategory";
 import CardWorkflowMain from "../cards/cardwfmain";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
@@ -35,7 +35,7 @@ const mainContentStyle = {
 
 // const appRef = useRef<AppWorkflows>(null);
 interface WorkflowEditorProps {
-    onCharge: (workflow: Workflow, taskgroups: Taskgroup[]) => void;
+    onCharge: (workflow: Workflow, taskgroups: Taskcategory[]) => void;
 }
 
 export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
@@ -52,7 +52,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
     const [workflow, setWorkflow] = useState<Workflow>(NEW_WK);
-    const [taskgroups, setTaskgroups] = useState<Taskgroup[]>([TASKGROUP_DEFAULT]);
+    const [taskgroups, setTaskgroups] = useState<Taskcategory[]>([TASKGROUP_DEFAULT]);
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             
             if (!isNewWorkflow) {
                 setWorkflow(parseResponseItem<Workflow>(await getWorkflow(workflowId))!);
-                setTaskgroups(parseResponseCollection<Taskgroup>(await getTaskgroups(workflowId))!);
+                setTaskgroups(parseResponseCollection<Taskcategory>(await getTaskcategories(workflowId))!);
                 setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id))!);
             }
             setReady(true);

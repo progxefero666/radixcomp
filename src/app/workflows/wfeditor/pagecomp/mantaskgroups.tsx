@@ -1,11 +1,11 @@
 //src\app\workflows\wfeditor\pagecomp\mantaskgroups.tsx
 
-import { Taskgroup } from "@/db/model/taskgroup";
+import { Taskcategory } from "@/db/model/taskcategory";
 import { Task } from "@/db/model/task";
 
 
 interface CompProps {
-    taskgroups: Taskgroup[];
+    taskgroups: Taskcategory[];
     onsave?: () => void;
 }
 export default function ManWfTaskGroups({taskgroups,onsave}:CompProps) {

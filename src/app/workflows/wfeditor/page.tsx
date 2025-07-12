@@ -12,7 +12,7 @@ import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
 import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
 import ManWfTaskGroups from "./pagecomp/mantaskgroups";
 import { WK_EDITOR_VIEWS } from "@/front/appworkflows";
-import { Taskgroup } from "@/db/model/taskgroup";
+import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 
 
@@ -33,9 +33,9 @@ export default function WorkflowEditorPage() {
     
     const [tasktypes,setTasktypes] = useState<Tasktype[]>([]);
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
-    const [taskgroups,setTaskgroups] = useState<Taskgroup[]|null>(null);
+    const [taskgroups,setTaskgroups] = useState<Taskcategory[]|null>(null);
 
-    const onWorkflowCharged = (workflow:Workflow,taskgroups:Taskgroup[]) => {
+    const onWorkflowCharged = (workflow:Workflow,taskgroups:Taskcategory[]) => {
         setWorkflow(workflow);
         setTaskgroups(taskgroups);
     }

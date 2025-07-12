@@ -35,7 +35,7 @@ export async function getCountByParents(workflow_id: number, taskgroup_id: numbe
         count = await prisma.task.count({
             where: {
                 workflowId: workflow_id,
-                taskgroupId: taskgroup_id,
+                taskcategoryId: taskgroup_id,
             },
         });
     }
@@ -68,8 +68,8 @@ export async function getAllByTable(table: string): Promise<string> {
         else if (table === DbTables.workflow) {
             result = await prisma.workflow.findMany();
         }
-        else if (table === DbTables.taskgroup) {
-            result = await prisma.taskgroup.findMany();
+        else if (table === DbTables.taskcategory) {
+            result = await prisma.taskcategory.findMany();
         }
         else if (table === DbTables.task) {
             result = await prisma.task.findMany();

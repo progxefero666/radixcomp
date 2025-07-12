@@ -15,7 +15,7 @@ import { XInputSelect } from "@/radix/input/inpselect";
 
 import { Codelang } from "@/db/model/codelang";
 import { Task } from "@/db/model/task";
-import { Taskgroup } from "@/db/model/taskgroup";
+import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 import { getCodelangsAsOptions } from "@/db/modelutil/codelangutil";
 import { getTaskgroupsAsOptions, getTasktypeAsOptions } from "@/db/modelutil/workflowutil";
@@ -51,7 +51,7 @@ const barbuttonscfg: BarButtonsCfg  = new BarButtonsCfg(
 interface CardTaskProps {
     codelangs: Codelang[];
     tasktypes: Tasktype[];
-    taskgroups: Taskgroup[];
+    taskgroups: Taskcategory[];
     task: Task;
     onsave?: () => void;
     oncancel?: () => void;
@@ -96,9 +96,9 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                             </IconButton>
                         </Box>
                     </Collapsible.Trigger>
-                    <Flex direction="row" width={"100%"} justify="between" align="center" style={headerStyle}>
-                        <XInputText 
 
+                    <Flex direction="row" width={"100%"} justify="between" align="center" style={headerStyle}>
+                        <XInputText name="tkname" inline={true}
                             defaul={task.tkname} 
                             maxlen={Task.maxlen("tkname")!} 
                             placeholder="task name" />     

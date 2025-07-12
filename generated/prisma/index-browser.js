@@ -142,10 +142,10 @@ exports.Prisma.WorkflowScalarFieldEnum = {
   updated: 'updated'
 };
 
-exports.Prisma.TaskgroupScalarFieldEnum = {
+exports.Prisma.TaskcategoryScalarFieldEnum = {
   id: 'id',
   workflowId: 'workflowId',
-  tpname: 'tpname',
+  tyname: 'tyname',
   description: 'description'
 };
 
@@ -154,9 +154,10 @@ exports.Prisma.TaskScalarFieldEnum = {
   tasktypeId: 'tasktypeId',
   codelangId: 'codelangId',
   workflowId: 'workflowId',
-  taskgroupId: 'taskgroupId',
+  taskcategoryId: 'taskcategoryId',
   orden: 'orden',
   tkname: 'tkname',
+  tkgroup: 'tkgroup',
   description: 'description',
   files: 'files',
   folders: 'folders'
@@ -212,7 +213,7 @@ exports.Prisma.ModelName = {
   Codelang: 'Codelang',
   Tasktype: 'Tasktype',
   Workflow: 'Workflow',
-  Taskgroup: 'Taskgroup',
+  Taskcategory: 'Taskcategory',
   Task: 'Task',
   Apptype: 'Apptype',
   Application: 'Application'

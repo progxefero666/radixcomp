@@ -30,45 +30,46 @@ model Tasktype {
 }
 
 model Workflow {
-  id          Int         @id @default(autoincrement())
-  wwname      String      @unique @db.VarChar(100)
-  context     String?     @db.Text
-  description String      @default("undefined") @db.Text
-  application String?     @db.VarChar(50)
-  fpath       String?     @db.VarChar(500)
-  updated     DateTime
-  tasks       Task[]
-  taskgroups  Taskgroup[]
+  id            Int            @id @default(autoincrement())
+  wwname        String         @unique @db.VarChar(100)
+  context       String?        @db.Text
+  description   String         @default("undefined") @db.Text
+  application   String?        @db.VarChar(50)
+  fpath         String?        @db.VarChar(500)
+  updated       DateTime
+  tasks         Task[]
+  taskcategorys Taskcategory[]
 
   @@map("workflow")
 }
 
-model Taskgroup {
+model Taskcategory {
   id          Int      @id @default(autoincrement())
   workflow    Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
   workflowId  Int      @map("workflow_id")
-  tpname      String   @db.VarChar(100)
+  tyname      String   @db.VarChar(100)
   description String?  @db.VarChar(100)
   tasks       Task[]
 
-  @@map("taskgroup")
+  @@map("taskcategory")
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
-  tasktype    Tasktype  @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
-  tasktypeId  Int       @map("tasktype_id")
-  codelang    Codelang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
-  codelangId  Int       @map("codelang_id")
-  workflow    Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  workflowId  Int       @map("workflow_id")
-  taskgroup   Taskgroup @relation(fields: [taskgroupId], references: [id], onDelete: Cascade)
-  taskgroupId Int       @map("taskgroup_id")
-  orden       Int
-  tkname      String    @unique @db.VarChar(255)
-  description String?   @db.Text
-  files       String?   @db.Text
-  folders     String?   @db.Text
+  id             Int          @id @default(autoincrement())
+  tasktype       Tasktype     @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
+  tasktypeId     Int          @map("tasktype_id")
+  codelang       Codelang     @relation(fields: [codelangId], references: [id], onDelete: Cascade)
+  codelangId     Int          @map("codelang_id")
+  workflow       Workflow     @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  workflowId     Int          @map("workflow_id")
+  taskcategory   Taskcategory @relation(fields: [taskcategoryId], references: [id], onDelete: Cascade)
+  taskcategoryId Int          @map("taskcategory_id")
+  orden          Int
+  tkname         String       @unique @db.VarChar(255)
+  tkgroup        Int
+  description    String?      @db.Text
+  files          String?      @db.Text
+  folders        String?      @db.Text
 
   @@map("task")
 }
