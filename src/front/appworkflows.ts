@@ -1,13 +1,12 @@
 //src\app\workflows\config.ts
 
-import { Option } from "@/common/models";
+import { InputItem, Option } from "@/common/models";
 import { NEW_ROW_ID, DB_CONSTANTS } from "@/db/dboperations";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
 
 
-export const TASKCATEGORY_DEFAULT: Taskcategory = new Taskcategory(
-    0, 0, "default", "taskgroup default");
+
 
 export const MOD_SECTIONS = {
     MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
@@ -32,12 +31,6 @@ export const MAN_WFS_SECTIONS = {
     MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
 } as const;
 
-export const NEW_WK: Workflow = new Workflow(
-    Number(NEW_ROW_ID),
-    DB_CONSTANTS.NOT_DEF, 
-    DB_CONSTANTS.NOT_DEF,
-    DB_CONSTANTS.NOT_DEF, 
-    null, null);
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -55,8 +48,25 @@ export enum WF_EDITOR_TASK_ACTION {
     CLEAR_TASKS = "clear_tasks"
 }
 
+export const TASKCATEGORY_DEFAULT: Taskcategory = new Taskcategory(
+    0, 0, "default", "taskgroup default");
+
+export const NEW_WK: Workflow = new Workflow(
+    Number(NEW_ROW_ID),
+    DB_CONSTANTS.NOT_DEF, 
+    DB_CONSTANTS.NOT_DEF,
+    DB_CONSTANTS.NOT_DEF, 
+    null, null);
+
+export const NEW_TASKCAT_FIELDS:InputItem[] = [
+    new InputItem("item_0", "0", "nacho", "Name", 50),
+    new InputItem("item_1", "1", "desadasdas", "Descripcion", 100)
+];
+
+
 /*
 export class AppWorkflows {}//end class
+
     -------------------------------------------------------
 	## Workflow Operations
     - Create Workflow

@@ -15,7 +15,8 @@ import { InfoNotdata } from "@/radix/data/infonotdata";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import { DB_COLL_CMD, DB_ITEM_CMD } from "@/db/dboperations";
-import { DialogForm, showDialogForm } from "@/radix/dialog/dlginputoption";
+import { DialogForm} from "@/radix/dialog/dlginputoption";
+import { NEW_TASKCAT_FIELDS } from "@/front/appworkflows";
 
 
 
@@ -136,10 +137,9 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
                     <FilePlusIcon />
                     add
                 </Button>
-                <DialogForm items={[]}
+                <DialogForm items={NEW_TASKCAT_FIELDS}
                     onsave={onSaveNewItem }
-                    oncancel={() => { console.log("cancel") }}
-                    isOpen={true} />
+                    oncancel={() => { console.log("cancel") }} />
 
                 <Button color="blue" size="2" onClick={() => execCollOperation(DB_COLL_CMD.DELETE_ALL)}>
                     <CrossCircledIcon />
