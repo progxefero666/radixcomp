@@ -9,15 +9,18 @@ import { parseResponseCollection, parseResponseItem } from "@/common/javascriptp
 import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
 import { Task } from "@/db/model/task";
 import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
-import { readMemmoryCodelangs, AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
+import { AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
 
 import { NEW_WK, TASKGROUP_DEFAULT, WF_EDITOR_TASK_ACTION } from "@/front/appworkflows";
+import BarButtons from "@/radix/cbars/btbar";
+
+
 import { Codelang } from "@/db/model/codelang";
 import { Taskcategory } from "@/db/model/taskcategory";
 import CardWorkflowMain from "../cards/cardwfmain";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
-import BarButtons from "@/radix/cbars/btbar";
+
 import { OPERATIONS } from "@/common/constants";
 import { Tasktype } from "@/db/model/tasktype";
 import CardTask from "../cards/cardwftask";
@@ -81,7 +84,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         return new Task(
             NEW_ROW_ID,tasktypes[0].id,codelangs[0].id, 
             workflow.id, taskgroups[0].id,
-            orden,"","","","");    
+            orden,"","",0,"","");    
     };//end
     
     const execMainCommand = (id: string) => {
@@ -179,7 +182,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                     <Box key={index.toString()}>
                         <CardTask codelangs={codelangs}
                             tasktypes={tasktypes}
-                            taskgroups={taskgroups}
+                            taskcategories={taskgroups}
                             task={task}
                             onsave={() => onSaveTaskEdition()}
                             oncancel={() => onCancelTaskEdition()} />

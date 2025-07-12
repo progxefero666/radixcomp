@@ -18,7 +18,7 @@ import { Task } from "@/db/model/task";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 import { getCodelangsAsOptions } from "@/db/modelutil/codelangutil";
-import { getTaskgroupsAsOptions, getTasktypeAsOptions } from "@/db/modelutil/workflowutil";
+import { getTaskcategoriessAsOptions, getTasktypeAsOptions } from "@/db/modelutil/workflowutil";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/db/dboperations";
 import { OPERATIONS, OPERATIONS_TEXT } from "@/common/constants";
@@ -51,12 +51,12 @@ const barbuttonscfg: BarButtonsCfg  = new BarButtonsCfg(
 interface CardTaskProps {
     codelangs: Codelang[];
     tasktypes: Tasktype[];
-    taskgroups: Taskcategory[];
+    taskcategories: Taskcategory[];
     task: Task;
     onsave?: () => void;
     oncancel?: () => void;
 }
-export default function CardTask({ task, codelangs, tasktypes, taskgroups,
+export default function CardTask({ task, codelangs, tasktypes, taskcategories: taskgroups,
                                    onsave, oncancel }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
@@ -64,7 +64,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
     //orden
     const codelangsColl: Option[] = getCodelangsAsOptions(codelangs);
     const tasktypesColl: Option[] = getTasktypeAsOptions(tasktypes);
-    const taskgroupsColl: Option[] =getTaskgroupsAsOptions(taskgroups);
+    const taskcategoriesColl: Option[] =getTaskcategoriessAsOptions(taskgroups);
 
 
     const onBarButtonClick = (operation:string) => {
@@ -80,8 +80,8 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
         alert("onTasktypeSelected: " + value + " name: " + name);
     };    
 
-    const onTaskgroupSelected = (value: string,name?:string) => {
-        alert("onTaskgroupSelected: " + value + " name: " + name);
+    const onTaskcategorySelected = (value: string,name?:string) => {
+        alert("onTaskcategorySelected: " + value + " name: " + name);
     };  
 
     return (
@@ -137,10 +137,10 @@ export default function CardTask({ task, codelangs, tasktypes, taskgroups,
                         
                         {/* taskgroup_id */}
                         <XInputSelect
-                                label="Group: "
-                                collection={taskgroupsColl}
-                                default={task.taskgroup_id.toString()}
-                                onchange={onTaskgroupSelected}
+                                label="Category: "
+                                collection={taskcategoriesColl}
+                                default={task.taskcategory_id.toString()}
+                                onchange={onTaskcategorySelected}
                                 disabled={false} />  
 
                         {/* description */}

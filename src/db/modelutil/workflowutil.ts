@@ -28,7 +28,7 @@ export const getWorkflowsAsOptions = (taskgroups: Workflow[]): Option[] => {
 }//end 
 
 
-export const getTaskgroupsAsOptions = (codelangs: Taskcategory[]): Option[] => {
+export const getTaskcategoriessAsOptions = (codelangs: Taskcategory[]): Option[] => {
     const options: Option[] = [];
     for (const item of codelangs) {
         const option = new Option(item.id.toString(), item.tpname, null);

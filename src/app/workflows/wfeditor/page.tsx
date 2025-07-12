@@ -33,11 +33,11 @@ export default function WorkflowEditorPage() {
     
     const [tasktypes,setTasktypes] = useState<Tasktype[]>([]);
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
-    const [taskgroups,setTaskgroups] = useState<Taskcategory[]|null>(null);
+    const [taskcategories,setTaskcategories] = useState<Taskcategory[]|null>(null);
 
     const onWorkflowCharged = (workflow:Workflow,taskgroups:Taskcategory[]) => {
         setWorkflow(workflow);
-        setTaskgroups(taskgroups);
+        setTaskcategories(taskgroups);
     }
 	
     const showManTaskgroups = () => {
@@ -53,8 +53,8 @@ export default function WorkflowEditorPage() {
             return (<WorkflowEditor onCharge={onWorkflowCharged} />);
         }
         else if(view==WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id ){
-            if(!taskgroups){return null;}
-            return (<ManWfTaskGroups taskgroups={taskgroups} />);
+            if(!taskcategories){return null;}
+            return (<ManWfTaskGroups taskgroups={taskcategories} />);
         }        
     };
 
