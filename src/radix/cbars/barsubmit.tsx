@@ -11,9 +11,20 @@ import { OPERATIONS } from '@/common/constants';
 export const BarSubmit = () => {
 
     return (
-        <Flex width="100%" justify="center" align="center"
-                px="3" py="2" >
-         
+        <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
+            <Button type="submit"
+                color={ThemeButtonsStyle.COLOR_SAVE}
+                size={ThemeButtonsStyle.BTN_DEF_SIZE}>
+                {OPERATIONS.SAVE}
+                <CheckIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
+                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+            </Button>
+            <Button color={ThemeButtonsStyle.COLOR_CLOSE}
+                size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                {OPERATIONS.CANCEL}
+                <Cross2Icon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
+                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+            </Button>
         </Flex>
     );
 
