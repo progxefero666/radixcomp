@@ -31,27 +31,21 @@ export class Option {
 
 }//end class
 
-export class OptionId {
+export class EditableOptionId {
 
     public id:   number;
-    public text: string;
-    public icon: string|null = null;
+    public orden: number;
+    public value: string;
 
-    constructor(id:number,text:string,icon?:string) {
+    constructor(id:number,orden: number,value:string){
         this.id = id;
-        this.text = text;
-        this.icon = icon ?? null;    
+        this.orden = orden;
+        this.value = value;
     }
 
     public toJsonString(): string {
         return JSON.stringify(this, null, 4);
     }
-
-    /*
-    public static build(jsonString: string): OptionId {
-        const obj = JSON.parse(jsonString);
-        return new OptionId(obj.id, obj.text, obj.icon);
-    }*/
 
 }//end class
 

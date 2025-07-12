@@ -1,8 +1,8 @@
 //src\radix\collection\editcollection.tsx
 
 import { Button,Box, Flex, Popover } from "@radix-ui/themes";
-import { EditableCollection, EditableOption } from "@/common/models";
-import { EditOption } from "./editoption";
+import { EditableCollection, EditableOption, EditableOptionId } from "@/common/models";
+import { EditOptionId } from "./editoption";
 
 
 /**
@@ -10,12 +10,12 @@ import { EditOption } from "./editoption";
  * @param collection EditableCollection to edit
  */
 interface CompProps {    
-    collection: EditableOption[];
+    collection: EditableOptionId[];
     label?: string;
 }
 export const EditCollection = ({collection,label}: CompProps) => {
 
-    const handlerOnclick = (id:string,action:string) => {
+    const handlerOnclick = (id:number,action:string) => {
         alert(`id: ${id} - Action: ${action}`);
 
     }
@@ -24,7 +24,7 @@ export const EditCollection = ({collection,label}: CompProps) => {
         <Flex width="100%" direction="column" gapY="2" >
                 {collection.map((item, index) => (
                     <Box key={index.toString()}>
-                        <EditOption 
+                        <EditOptionId 
                             option={item} 
                             onclick={handlerOnclick} />
                     </Box>                 

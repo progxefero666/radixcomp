@@ -1,6 +1,6 @@
 //src\db\dbmodelutil.ts
 
-import { Option } from "@/common/models";
+import { EditableOption, EditableOptionId, Option } from "@/common/models";
 //import { DbTables } from "@/db/dbcatalog";
 
 import { Workflow } from "@/db/model/workflow";
@@ -27,7 +27,6 @@ export const getWorkflowsAsOptions = (taskgroups: Workflow[]): Option[] => {
     return options;
 }//end 
 
-
 export const getTaskcategoriessAsOptions = (codelangs: Taskcategory[]): Option[] => {
     const options: Option[] = [];
     for (const item of codelangs) {
@@ -36,6 +35,17 @@ export const getTaskcategoriessAsOptions = (codelangs: Taskcategory[]): Option[]
     }
     return options;
 }//end     
+
+export const getTaskcatsAsEditableOptions = (collection: Taskcategory[]): EditableOptionId[] => {
+    const options: EditableOptionId[] = [];
+    for (let idx=0;idx<collection.length;idx++) {
+        const option = new EditableOptionId(collection[idx].id,idx,collection[idx].tpname);
+        options.push(option);
+    }
+    return options;
+}//end     
+
+
 
 /*
     const [clangs,setClangs] = useState<Option[]|null>(null);

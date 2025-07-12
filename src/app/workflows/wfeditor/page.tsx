@@ -62,7 +62,8 @@ export default function WorkflowEditorPage() {
         <Grid height="100vh" rows="auto 1fr" columns="10% 50% 40%" style={layoutStyle} >            
             <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
             <Flex gridColumn="1" gridRow="2" >
-                <WorkflowPrimaryBar collection={taskcategories!} />
+            
+                <WorkflowPrimaryBar collection={taskcategories} />
             </Flex>
             <Flex gridColumn="2" gridRow="2" >{renderMainContent()}</Flex>
             <Flex gridColumn="3" gridRow="2" >

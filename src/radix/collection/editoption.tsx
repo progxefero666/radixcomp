@@ -1,6 +1,6 @@
 //src\radix\collection\editoption.tsx
 
-import { EditableOption } from "@/common/models";
+import { EditableOption, EditableOptionId } from "@/common/models";
 import { ArrowDownIcon, ArrowUpIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Flex,Box,Text,IconButton } from "@radix-ui/themes";
 
@@ -10,10 +10,10 @@ import { Flex,Box,Text,IconButton } from "@radix-ui/themes";
  * @param option EditableOption to edit
  */
 interface CompProps {
-    option: EditableOption;
-    onclick: (id:string,action:string) => void;
+    option: EditableOptionId;
+    onclick: (id:number,action:string) => void;
 }
-export const EditOption = ({option,onclick}: CompProps) => {
+export const EditOptionId = ({option,onclick}: CompProps) => {
 
     const handlerOnclick = (action:string) => {
         onclick(option.id,action);
@@ -29,7 +29,7 @@ export const EditOption = ({option,onclick}: CompProps) => {
                 </Box>            
                 <Box width="auto" >
                     <Text size="2">
-                        {option.text}
+                        {option.value}
                     </Text>
                 </Box>
             </Flex>
