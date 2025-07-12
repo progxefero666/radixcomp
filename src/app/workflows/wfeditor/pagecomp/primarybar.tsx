@@ -15,7 +15,7 @@ import { InfoNotdata } from "@/radix/data/infonotdata";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import { DB_COLL_CMD, DB_ITEM_CMD } from "@/db/dboperations";
-import { showDialogForm } from "@/radix/dialog/dlginputoption";
+import { DialogForm, showDialogForm } from "@/radix/dialog/dlginputoption";
 
 
 
@@ -51,6 +51,10 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
     const [collOptions, setCollOptions]
         = useState<EditableOptionId[]>(getTaskcatsAsEditableOptions(initcollection));
 
+    const [formDefItems, setFormDefItems] = useState<InputItem[]>([]);
+
+        
+
     const execItemOperation = (id: number, action: string) => {
         alert(id);
 
@@ -59,7 +63,7 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
         }
         else if (action === DB_ITEM_CMD.DELETE) {
             alert("DELETE");
-        }        
+        }
         else if (action === DB_ITEM_CMD.MOVEUP) {
             alert("MOVEUP");
         }
@@ -73,16 +77,23 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
         if (action === DB_ITEM_CMD.INSERT) {
             alert("INSERT");
 
-            const items: InputItem[] =[];
-            showDialogForm(items).then((result) => {
-                if (result) {
-             
-                }
-            });
+            const item_0 = new InputItem("item_0", "0", "nacho", "Name", 50);
+            const item_1 = new InputItem("item_1", "1", "desadasdas", "Descripcion", 100);
+            const items: InputItem[] = [item_0, item_1];
+
         }
-        else if (action === DB_COLL_CMD.DELETE_ALL) {     
-            alert("DELETE_ALL");     
-        }              
+        else if (action === DB_COLL_CMD.DELETE_ALL) {
+            alert("DELETE_ALL");
+        }
+    };//end
+
+
+    const onSaveNewItem = (values: InputItem[]) => {
+        alert("onSaveNewItem");
+    };//end
+
+    const onCancelNewItem = () => {
+        alert("onCancelNewItem");
     };//end
 
     const handlerOnOpen = () => {
@@ -125,6 +136,10 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
                     <FilePlusIcon />
                     add
                 </Button>
+                <DialogForm items={[]}
+                    onsave={onSaveNewItem }
+                    oncancel={() => { console.log("cancel") }}
+                    isOpen={true} />
 
                 <Button color="blue" size="2" onClick={() => execCollOperation(DB_COLL_CMD.DELETE_ALL)}>
                     <CrossCircledIcon />

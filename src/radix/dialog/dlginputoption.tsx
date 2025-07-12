@@ -18,17 +18,19 @@ interface CompProps {
 
 export const DialogForm = ({ items, onsave, oncancel, isOpen }: CompProps) => {
 
-    /*
-    <Dialog.Trigger asChild>
-        <button className="Button violet">Edit profile</button>
-    </Dialog.Trigger>    
-    */
-    const [values, setValues] = useState<any[]>([]);
-
-    //onSubmit={(event)
-    const onSubmit = (event: any) => {
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    }
+        const formData = new FormData(event.currentTarget);
+        const val0 = formData.get("item_0")?.toString();
+        const val1 = formData.get("item_1")?.toString();
+
+        console.log(val0);
+        console.log(val1);
+
+        items[0].value = val0;
+        items[1].value = val1;
+        onsave(items);
+    };
 
     return (
         <Dialog.Root open={isOpen} >
@@ -44,26 +46,28 @@ export const DialogForm = ({ items, onsave, oncancel, isOpen }: CompProps) => {
                         Make changes to your profile here. Click save when you're done.
                     </Dialog.Description>
 
-                    <form onSubmit={(event) => { onSubmit(event); }}>
+                    <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { onSubmit(event); }}>
                         <fieldset className="Fieldset">
-                            <Label.Root htmlFor={items[0].id}>
+                            <Label.Root htmlFor="item_0">
                                 {items[0].label}
                             </Label.Root>
-                            <TextField.Root name={items[0].id} id={items[0].id}
+                            <TextField.Root name="item_0" id="item_0"
+                                defaultValue={items[0].value}
                                 radius="small" placeholder="input ..." />
                         </fieldset>
 
                         <fieldset className="Fieldset">
-                            <Label.Root htmlFor={items[1].id}>
+                            <Label.Root htmlFor="item_1">
                                 {items[1].label}
                             </Label.Root>
-                            <TextField.Root name={items[1].id} id={items[1].id}
+                            <TextField.Root name="item_1" id="item_1"
+                                defaultValue={items[1].value}
                                 radius="small" placeholder="input ..." />
                         </fieldset>
 
                         <div style={{ display: "flex", marginTop: 25, justifyContent: "flex-end" }}>
                             <Dialog.Close asChild>
-                                <Button color="green" size="2" onClick={() => onsave(items)} >
+                                <Button type="submit" color="green" size="2" >
                                     Save
                                     <Cross2Icon />
                                 </Button>
@@ -109,6 +113,7 @@ export const showDialogForm = (items: InputItem[]): Promise<{ confirmed: boolean
                 resolve({ confirmed: false });
             };
 
+            /*
             useEffect(() => {
                 if (!isOpen) {
                     setTimeout(() => {
@@ -117,7 +122,7 @@ export const showDialogForm = (items: InputItem[]): Promise<{ confirmed: boolean
                     }, 0);
                 }
             }, [isOpen]);
-
+            */
             return (
                 <DialogForm items={items}
                     onsave={handleConfirm}
