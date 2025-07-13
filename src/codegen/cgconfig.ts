@@ -23,7 +23,7 @@ export class HttpConst {
 }
 
 /**
- * class CodeGenConfig.CODE_FORMATS
+ * class CodeGenConfig.FORMAT_TYPESCRIPT
  */
 export class CodeGenConfig {
 
@@ -104,10 +104,9 @@ export class CodeGeneration {
             fname += "js";
         }
         return fname;
-    }
+    };
 
     public static getMimetype(format:string): string {
-
         let mimetype: string = CodeGenConfig.TXT_MIMETYPE;
         if(format === CodeGenConfig.FORMAT_TYPESCRIPT) {
             mimetype = CodeGenConfig.TYPESCRIPT_MIMETYPE;
@@ -122,7 +121,7 @@ export class CodeGeneration {
             mimetype = CodeGenConfig.JAVASCRIPT_MIMETYPE;
         }
         return mimetype;
-    }
+    };
 
     public static generateFile(id:string,format:string): boolean{        
         let fname: string = CodeGeneration.getFilename(id,format);
@@ -132,37 +131,4 @@ export class CodeGeneration {
         return true;
     }
 
-};//end class
-
-/*
-    
-    const getExportFileMimetype = () => {
-        let mimetype: string = "";
-        if(codeFormat === FilesMimeTypes.TYPESCRIPT) {
-            mimetype = FilesMimeTypes.TYPESCRIPT;
-        }      
-        else if(codeFormat === FilesMimeTypes.JSON) {
-            mimetype = FilesMimeTypes.JSON; 
-        }          
-        else if(codeFormat === FilesMimeTypes.JAVASCRIPT) {
-            mimetype = FilesMimeTypes.JAVASCRIPT;
-        } 
-        else if(codeFormat === FilesMimeTypes.PYTHON) {
-            mimetype = FilesMimeTypes.PYTHON;
-        }
-        else if(codeFormat === FilesMimeTypes.SQL) {
-            mimetype = FilesMimeTypes.SQL;
-        }        
-        else if(codeFormat === FilesMimeTypes.HTML) {
-            mimetype = FilesMimeTypes.HTML;
-        }
-        else if(codeFormat === FilesMimeTypes.CSS) {
-            mimetype = FilesMimeTypes.CSS;
-        }
-        else {
-            mimetype = FilesMimeTypes.TXT; 
-        }
-        return mimetype;
-    }
-
-*/
+}//end class

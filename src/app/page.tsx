@@ -31,11 +31,14 @@ export default function PageGenCode() {
 
     let initialized: boolean = false;
     const appRef = useRef<AppIndex>(null);
-    const [code, setCode] = useState<string>("undefined");
-    const [section, setSection] = useState<string|null>(null);
     
-    const [filename, setFilename] = useState<string>("default.ts");
+    const [section, setSection] = useState<string|null>(null);
 
+    const [dataCode,   setDataCode] = useState<string>("undefined");
+    const [dataId,     setDataId] = useState<string>("default");
+    const [dataFormat, setDataFormat] = useState<string>("typescript");
+
+    
     useEffect(() => {
         //AppContext.saveCodelangs(appRef.current.codelangs);
         if(initialized) {return;} 
@@ -54,9 +57,35 @@ export default function PageGenCode() {
         init();
     }, []);
 
-    const onCodeResult= (datacode: string) => {setCode(datacode);}
+    const onCodeResult= (dataFormat:string,datacode:string,fileid?:string) => {
+        setDataFormat(dataFormat);
+        setDataCode(datacode);
+        setDataId(fileid ?? "default");
+    }
+    
     const loadSection = (sectionId: string) => {setSection(sectionId);}
 
+    const exportFile = () => {
+
+    };
+
+    /*
+   const exportFile = () => {
+        if (dataCode === "undefined" || dataCode === null) {
+            alert("No code to export");
+            return;
+        }
+        const blob = new Blob([dataCode], { type: dataFormat });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = dataId + '.' + dataFormat;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }    
+    */
     return (
         <Flex direction="column" height="100vh">
 
@@ -75,7 +104,7 @@ export default function PageGenCode() {
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
-                    <GenCodeViewer section={section} code={code} />
+                    <GenCodeViewer code={dataCode} exportdata={exportFile} />
                 </Box>
 
                 <Box width="4%" style={boxStyle}>

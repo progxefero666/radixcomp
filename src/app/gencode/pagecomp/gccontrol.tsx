@@ -30,7 +30,7 @@ import { CodeGenConfig } from "@/codegen/cgconfig";
 //---------------------------------------------------------------------------------------
 interface CompProps {
     section?: string | null;
-    ondataresult: (data: string) => void;
+    ondataresult: (dataFormat:string,datacode:string,fileid?:string) => void;
 }
 export function GenCodeControl({ section, ondataresult }: CompProps) {
 
@@ -84,35 +84,44 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         let codecont: string | null = null;
 
         if (format === "typescript") {
+            let fileId: string = "default";
+
             if (operationId === "get_def_class" || operationId === "get_entity_class") {
                 codecont = await clientTScriptEntities.current!
-                    .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);                
+                    .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);
+                fileId = dbSquemaControl.current!.activeTableName;                    
             }
             else {
                 codecont = await clientTScriptEntities.current!
-                    .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);                     
+                    .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
+                fileId = "list_tables";         
             }
+            if(codecont !== null) {ondataresult(codecont,CodeGenConfig.FORMAT_TYPESCRIPT,fileId);}
         }
 
         else if (format === "json") {
-           
+            let fileId: string = "default";
             if (operationId === "get_def_class" || operationId === "get_entity_class") {
                 const selTable:ModelTable=dbSquemaControl.current!.getActiveTable()!;
                 codecont = await clientTScriptEntities
                     .current!.execItemJsonOperation(operationId,selTable);    
+                fileId = dbSquemaControl.current!.activeTableName;       
             }
             else if (operationId === "get_list_def_class" || operationId === "get_list_entity_class"){
                 const select_tables:  ModelTable[] = [];
                 codecont = await clientTScriptEntities
                     .current!.execArrayJsonOperation(operationId,select_tables);    
+                fileId = "list_tables";    
             }
             else if (operationId === "get_all_def_class" || operationId === "get_all_entity_class"){
                 codecont = await clientTScriptEntities
                     .current!.execArrayJsonOperation(operationId,dbSquemaControl.current!.tables);    
+                fileId = "list_tables";    
             }
+            if(codecont !== null) {ondataresult(codecont,CodeGenConfig.FORMAT_JSON,fileId);}
         }
 
-        if(codecont !== null) {ondataresult(codecont);}
+        
 
     };//end
 

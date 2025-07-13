@@ -10,20 +10,19 @@ import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { GenCodeModuleConfig } from "../config";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 
+//
 
 interface CompProps {
-    section: string|null;
+
     format?: string;
     code?: string | null;
     fileName?: string;
+    exportdata: () => void;
 }
-export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
-    const [alertMessage, setAlertMessage] = useState<string>(GenCodeModuleConfig.NOT_DEF);
+export function GenCodeViewer({ format, code,exportdata }: CompProps) {
+
     const [codeCharged, setCodeCharged] = useState<boolean>(false);
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
-
-    //const expFileName: string = fileName ?? GenCodeModuleConfig.NOT_DEF;
-    //const codeFormat: string = format ?? CodeGenConfig.FORMAT_TYPESCRIPT.key;
 
     useEffect(() => {
         const init = (): void => {
@@ -41,18 +40,14 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
             showAlert("not code charged");
             return; 
         }
+
         if (opId==GenCodeModuleConfig.ACT_COPY) {
             navigator.clipboard.writeText(code!);
             showAlert("Code copied to clipboard");
             return; 
         }
-        if (opId==GenCodeModuleConfig.ACT_EXPORT) {
-            if(!fileName){
-                showAlert("not file name defined");
-                return;                 
-            }   
-            //exportFile(getExportFileMimetype(),code!,fileName);
-            return;      
+        else if (opId==GenCodeModuleConfig.ACT_EXPORT) {
+            exportdata();
         }                   
     }//end
 
