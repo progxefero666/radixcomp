@@ -83,7 +83,7 @@ export class CanvasPainter {
 
     public drawLine2d(line2d: Line2d,color: string) {
         this.drawLine(line2d.point_0,line2d.point_1,color);
-    }
+    };//end
 
     // rectangles
     //.................................................................................
@@ -93,16 +93,16 @@ export class CanvasPainter {
         this.ctx.strokeStyle = color;
         this.ctx.strokeRect(point.x,point.y,dim.width,dim.height);
         this.ctx.stroke();
-    }
+    };//end
 
     public fillRect(point:Point2d,dim:Dim2d,color:string) {  
         this.ctx.fillStyle = color;
         this.ctx.fillRect(point.x,point.y,dim.width,dim.height);
-    }
+    };//end
     
     public drawRectangle(rect2d: Rectangle2d) {
         this.drawRect(rect2d.position,rect2d.dim,rect2d.color);
-    }
+    };//end
 
     // polygons
     //.................................................................................
@@ -117,7 +117,7 @@ export class CanvasPainter {
         }
         this.ctx.closePath();
         this.ctx.stroke();
-    }//end
+    };//end
 
     public fillPolygon(points: Point2d[],color:string) {
         if (points.length < 3) return; 
@@ -130,7 +130,7 @@ export class CanvasPainter {
         }
         this.ctx.closePath();
         this.ctx.fill();
-    }//end    
+    };//end   
 
     public drawfillPolygon(points: Point2d[],backcolor:string,bordercolor:string) {
         if (points.length < 3) return; 
@@ -145,7 +145,26 @@ export class CanvasPainter {
         this.ctx.closePath();
         this.ctx.fill();
         this.ctx.stroke();
-    }//end  
+    };//end 
+
+    // elipses
+    //.................................................................................
+
+    public drawEllipse(position:Point2d,width:number,height:number, 
+                       startAngle:number,endAngle:number, 
+                       color: string) {
+        this.ctx.beginPath();
+        this.ctx.ellipse(position.x, position.y,width,height, 0,startAngle, Math.PI*2);
+        this.ctx.strokeStyle = color; 
+        this.ctx.stroke();    
+    };//end
+
+    public drawHalfEllipse(position:Point2d,width:number,height:number,color: string) {
+        this.ctx.beginPath();
+        this.ctx.ellipse(position.x, position.y,width,height, 0, 0, Math.PI);
+        this.ctx.strokeStyle = color; 
+        this.ctx.stroke();    
+    };//end
 
     // curves
     //.................................................................................
@@ -160,6 +179,6 @@ export class CanvasPainter {
         this.ctx.lineWidth = 2; 
         this.ctx.stroke();
         this.ctx.closePath();
-    }//end  
+    };//end 
 
 }//end class

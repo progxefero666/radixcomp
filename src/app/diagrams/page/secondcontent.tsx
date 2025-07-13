@@ -36,7 +36,7 @@ export function SecondContent({value}: CompProps) {
 
 
     const test = () => {
-        ctrlCanvas?.render_a({x: 200, y: 200}, "red");
+        ctrlCanvas?.render_a();
     }
 
     return (

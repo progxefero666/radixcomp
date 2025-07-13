@@ -27,25 +27,12 @@ export class DiagramCanvas {
         this.ctx.clearRect(0, 0, this.dim.width, this.dim.height);
     };
 
-    public render_a(point: Point2d, color: string) {
+    public render_a() {
+    
+        const position: Point2d = { x: 200, y: 200 };
+        const color: string = "red";
 
-        /*
-          context.ellipse(
-            centerX,
-            centerY,
-            radiusX,
-            radiusY,
-            0, // rotation
-            startAngle,
-            endAngle,
-            anticlockwise
-        );
-        */
-        this.ctx.beginPath();
-        this.ctx.ellipse(point.x, point.y,100,30, 0, 0, Math.PI * 2);
-        this.ctx.strokeStyle = color;
-        this.ctx.stroke();    
-
+        this.painter.drawHalfEllipse(position, 50, 20, color);
         //this.painter.fillPoint(point, color);
     };
 
