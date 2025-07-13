@@ -19,11 +19,13 @@ const cardStyle = {
     boxShadow: '0px 0px 1px rgba(253, 72, 6, 0.9)' 
 };
 interface CompProps {
-    squemaPath: string;
+    initsquemapath: string;
 }
-export function CardDatabase({squemaPath}: CompProps) {
+export function CardDatabase({initsquemapath}: CompProps) {
     const barbuttonscfg: BarButtonsCfg = BARCFG_EXPORT;
  
+    const [squemaPath, setSquemaPath] = useState<string>(initsquemapath); 
+        
     //const [squemaPath, setSquemaPath] = useState<string>(squemaInitPath);
     //useEffect(() => { }, []);
 
