@@ -4,7 +4,7 @@
 
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { PrismaClient } from "@generated/prisma";
-import { DbOps, DpOperationUtil } from "@/common/database/dbkernel";
+import { DB_ERROR, DbOps, DpOperationUtil } from "@/common/database/dbkernel";
 import { Task } from "@/db/model/task";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
@@ -16,7 +16,7 @@ import { DbTables } from "@/db/dbcatalog";
 export async function insert(item_serial:string): Promise<string> {
     
     const item: Task|null = parseItem<Task>(item_serial);
-    if(item===null){return JsonResponse.ERROR(DbOps.ERR_BADFORMAT);}
+    if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
 
     const prisma = new PrismaClient();
     let result: object|null = null;

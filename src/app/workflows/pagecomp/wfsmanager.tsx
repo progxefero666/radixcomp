@@ -7,7 +7,7 @@ import { Box, Flex, Text, TextField } from "@radix-ui/themes";
 import { BARCFG_ADD_IMPORT } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 
-import { parseResponseCollection } from "@/common/parser/javascriptparser";
+import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/common/database/dbkernel";
 import { Workflow } from "@/db/model/workflow";
 import { DbTables } from "@/db/dbcatalog";

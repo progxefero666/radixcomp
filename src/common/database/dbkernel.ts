@@ -51,6 +51,17 @@ export enum DB_ERROR {
     UNKNOWN = "unknown_error"
 }   
 
+export class DbOps{
+    public static INSERT = "insert";
+    public static UPDATE = "update";
+    public static GET_BY_ID = "get_by_id";
+    public static GET_ALL = "get_all";
+    public static GET_BY_FK = "get_by_fk";
+    public static GET_BY_NAME = "get_by_name";
+    public static DELETE_ALL = "delete_all";
+    public static COUNT_ROWS = "count_rows";
+    public static DELETE = "delete";
+}
 export class DpOperationUtil {
 
     public static getOpName(table:string,command:string): string {
