@@ -31,6 +31,9 @@ import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { XSelect } from "@/radix/keyvalue/inpselect";
+import { Keyvalue } from "@/common/model/keyvalue";
+import { CodeGenConfig } from "@/codegen/cgconfig";
+
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
 
@@ -51,8 +54,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     //const fileInputRef = useRef<HTMLInputElement>(null);
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    // list tables
-    
+    const [formats,setFormats] = useState<Keyvalue[]>(CodeGenConfig.CODE_FORMATS);
+
+    // list tables    
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
 
     const [menuListTables, setMenuListTables] = useState<TOption[]>([]);
@@ -108,6 +112,10 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (initialized) { return; }
         init();
     }, []);
+
+    const onSelectCodeFormat = (value:string,compName?: string) => {
+        //selTableName.current = tableName;
+    };//end
 
     const onSelectTable = (tableName: string, compName?: string) => {
         selTableName.current = tableName;
@@ -228,6 +236,11 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const renderMainContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
+                CodeGenConfig.CODE_FORMATS
+                <Flex width="100%" direction="row"  >
+                    <XSelect  collection={formats} onchange={onSelectCodeFormat}/>
+                </Flex>
+
                 <Flex width="100%" direction="row"  >
                     <Box mr="2">
                         <Label>Select Tables: </Label>

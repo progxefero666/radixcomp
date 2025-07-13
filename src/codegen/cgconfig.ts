@@ -1,5 +1,7 @@
 //src\codegen\kernel\cgconfig.ts
 
+import { Keyvalue } from "@/common/model/keyvalue";
+
 
 export enum OP_CATEGORIES {
     python_serverfiles      = "python_serverfiles",
@@ -20,12 +22,21 @@ export class HttpConst {
 }
 
 /**
- * class CodeGenConfig.getSectionOperations
+ * class CodeGenConfig.CODE_FORMATS
  */
 export class CodeGenConfig {
 
     public static readonly NOT_DEF:string = "undefined";
     
+    public static readonly CODE_FORMATS: Keyvalue[] = [
+        new Keyvalue("json", "JSON"),
+        new Keyvalue("ts", "TypeScript"),
+        new Keyvalue("jsx", "JSX"),
+        new Keyvalue("sql", "SQL"),
+        new Keyvalue("js", "JavaScript")
+    ]; 
+
+
     public static readonly DEF_CLASS_NAMEADD: string = "Def"
     public static readonly TAB_4:string = "    ";
     public static readonly RETURN:string = "\n";
