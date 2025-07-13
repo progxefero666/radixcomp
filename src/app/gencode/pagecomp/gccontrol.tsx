@@ -54,7 +54,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     //const fileInputRef = useRef<HTMLInputElement>(null);
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    const [formats,setFormats] = useState<Keyvalue[]>(CodeGenConfig.CODE_FORMATS);
+    const [format,setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
 
     // list tables    
     const [modelTables, setModelTables] = useState<ModelTable[]>([]);
@@ -76,7 +76,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const clientJson = useRef<ServiceClientJson>(null);
 
     // UI
-    const [includeDefs, setIncludeDefs] = useState<boolean>(false);
     const [showIncludeDefs, setShowIncludeDefs] = useState<boolean>(false);
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
@@ -113,8 +112,19 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         init();
     }, []);
 
-    const onSelectCodeFormat = (value:string,compName?: string) => {
-        //selTableName.current = tableName;
+    const getTableIndex = (): number =>{
+        let index:number = -1;      
+        for (let idx=0;idx<modelTables.length;idx++) {
+            if (modelTables[idx].name == selTableName.current) {
+                index = idx;
+                break;
+            }
+        }
+        return index;
+    }
+
+    const onSelectCodeFormat = (formatKey:string,compName?: string) => {
+        setFormat(formatKey);
     };//end
 
     const onSelectTable = (tableName: string, compName?: string) => {
@@ -123,12 +133,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const onSelectTables = (selecction: TOption[]) => {
         selGroupTableNames.current = selecction;
-    };//end
-
-    const onParameterChange = (value: boolean, name?: string) => {
-        if (name === "opt_includedef") {
-            setIncludeDefs(value);
-        }
     };//end
 
     const onOpSelected = (operationId: string) => {
@@ -169,49 +173,24 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const runOperation = async () => {
 
-        const code:string= CodeGenJson.getJsonEntDef(modelTables[0]);
-        ondataresult(code!);
-
-        /*
         if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
-            const codecont: string | null = await clientTScriptEntities.current!.executeOperation(
-                operationId,
-                selTableName.current,
-                selGroupTableNames.current);
-
-            ondataresult(codecont!);
+            if(format === "typescript") {
+                const codecont: string | null = await clientTScriptEntities.current!.executeOperation(
+                    operationId,
+                    selTableName.current,
+                    selGroupTableNames.current);
+                ondataresult(codecont!);
+            }
+            else if(format === "json") {
+                const code:string= CodeGenJson.getJsonEntDef(modelTables[getTableIndex()]);
+                ondataresult(code!);
+            }
         }
-        else if (section === GenCodeModuleConfig.CLIENT_JSX_FORMS.id) {
-        }
-        else if (section === GenCodeModuleConfig.CLIENT_JSON.id) { }
+        else if (section === GenCodeModuleConfig.CLIENT_JSX_FORMS.id) {}
         else if (section === GenCodeModuleConfig.CLIENT_TS_SERVICES.id) { }
         else if (section === GenCodeModuleConfig.CLIENT_SQL_SCRIPTS.id) { }
-        */
-
-
+        
     };//end
-
-    const renderParamsContent = () => {
-        return (
-            <Box>
-                {showIncludeDefs ?
-                    <XInputCheck name="opt_includedef"
-                        onchange={onParameterChange}
-                        inline={true}
-                        label="Include Def. Class"
-                        value={false} /> : null}
-            </Box>
-        )
-    };//end
-
-    const renderSelection = () => {
-        return (
-            <Box>
-                <p>as</p>
-            </Box>
-        )
-    };//end
-
 
 
     const renderHeader = () => {
@@ -229,16 +208,15 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 </Button>
             </Flex>
         );
-    };//end  
-
-    //XSelect
+    };//end
     
     const renderMainContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
         
                 <Flex width="100%" direction="row" pb="2" >
-                    <XSelect label="Format" collection={formats} onchange={onSelectCodeFormat}/>
+                    <XSelect label="Format" collection={CodeGenConfig.CODE_FORMATS} 
+                             onchange={onSelectCodeFormat}/>
                 </Flex>
                 
                 <SeparatorH />
@@ -279,11 +257,33 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     {renderHeader()} 
                     <SeparatorH />
                     {renderMainContent()}
-                    <SeparatorH />     
-                    {renderSelection()}       
+                    <SeparatorH />           
                 </>
                 : null}
         </Flex>
     );
 
 }//end component
+
+
+/*
+    //const [includeDefs, setIncludeDefs] = useState<boolean>(false);
+    const onParameterChange = (value: boolean, name?: string) => {
+        if (name === "opt_includedef") {
+            setIncludeDefs(value);
+        }
+    };//end
+
+    const renderParamsContent = () => {
+        return (
+            <Box>
+                {showIncludeDefs ?
+                    <XInputCheck name="opt_includedef"
+                        onchange={onParameterChange}
+                        inline={true}
+                        label="Include Def. Class"
+                        value={false} /> : null}
+            </Box>
+        )
+    };//end
+*/

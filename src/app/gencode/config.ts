@@ -33,10 +33,6 @@ public static readonly ACT_COPY:string = "copy";
 
     public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
 
-    public static readonly CLIENT_JSON: Option
-        = new Option(ServiceClientJson.ID,
-            ServiceClientJson.OPTION_VALUE, null, null, null);
-
     public static readonly CLIENT_TS_ENTITY_FILES: Option
         = new Option(ServClientTScriptEntities.ID,
             ServClientTScriptEntities.OPTION_VALUE, null, null, null);
@@ -58,7 +54,6 @@ public static readonly ACT_COPY:string = "copy";
 
     public static readonly CLIENT_SERVICES: Option[] = [
         GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES,
-        GenCodeModuleConfig.CLIENT_JSON,
         GenCodeModuleConfig.CLIENT_JSX_FORMS,
         GenCodeModuleConfig.CLIENT_TS_SERVICES,
         GenCodeModuleConfig.CLIENT_SQL_SCRIPTS,
