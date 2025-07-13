@@ -12,7 +12,7 @@ import { Task } from "@/db/model/task";
 export const getTasktypeAsOptions = (codelangs: Tasktype[]): Option[] => {
     const options: Option[] = [];
     for (const item of codelangs) {
-        const option = new Option(item.id.toString(), item.tename, null);
+        const option = new Option(item.id.toString(), item.name, null);
         options.push(option);
     }
     return options;
@@ -21,7 +21,7 @@ export const getTasktypeAsOptions = (codelangs: Tasktype[]): Option[] => {
 export const getWorkflowsAsOptions = (taskgroups: Workflow[]): Option[] => {
     const options: Option[] = [];
     for (const item of taskgroups) {
-        const option = new Option(item.id.toString(), item.wwname, null);
+        const option = new Option(item.id.toString(), item.name, null);
         options.push(option);
     }
     return options;
@@ -30,7 +30,7 @@ export const getWorkflowsAsOptions = (taskgroups: Workflow[]): Option[] => {
 export const getTaskcategoriessAsOptions = (codelangs: Taskcategory[]): Option[] => {
     const options: Option[] = [];
     for (const item of codelangs) {
-        const option = new Option(item.id.toString(), item.tpname, null);
+        const option = new Option(item.id.toString(), item.name, null);
         options.push(option);
     }
     return options;
@@ -39,7 +39,7 @@ export const getTaskcategoriessAsOptions = (codelangs: Taskcategory[]): Option[]
 export const getTaskcatsAsEditableOptions = (collection: Taskcategory[]): EditableOptionId[] => {
     const options: EditableOptionId[] = [];
     for (let idx=0;idx<collection.length;idx++) {
-        const option = new EditableOptionId(collection[idx].id,idx,collection[idx].tpname);
+        const option = new EditableOptionId(collection[idx].id,idx,collection[idx].name);
         options.push(option);
     }
     return options;

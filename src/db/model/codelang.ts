@@ -10,12 +10,12 @@
 export class Codelang {
 
     public id: number;
-    public cgname: string;
+    public name: string;
     public description: string;
 
-    constructor(id:number,cgname:string,description:string) {
+    constructor(id:number,name:string,description:string) {
         this.id = id;
-        this.cgname = cgname;
+        this.name = name;
         this.description = description;
     }
 
@@ -38,7 +38,7 @@ export class Codelang {
         if (fieldName === "id") {
             return 15; // max digits for numeric
         }
-        if (fieldName === "cgname") {
+        if (fieldName === "name") {
             return 20;
         }
         if (fieldName === "description") {

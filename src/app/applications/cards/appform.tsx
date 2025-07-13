@@ -90,7 +90,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="name"
                 label="Name"
                 ref={nameRef}                
-                defaul={item.anname}
+                defaul={item.name}
                 maxlen={5}
                 readonly={readonly} 
                 disabled={disabled} />

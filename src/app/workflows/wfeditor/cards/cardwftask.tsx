@@ -99,7 +99,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
                     <Flex direction="row" width={"100%"} justify="between" align="center" style={headerStyle}>
                         <XInputText name="tkname" inline={true}
-                            defaul={task.tkname} 
+                            defaul={task.name} 
                             maxlen={Task.maxlen("tkname")!} 
                             placeholder="task name" />     
                         <BarButtons  barconfig={barbuttonscfg} onclick={onBarButtonClick}/>

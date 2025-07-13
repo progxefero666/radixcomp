@@ -13,7 +13,7 @@ export const ListApplications = (apps: Application[]) => {
             {apps.map((app, index) => (
                 <ContCollapsible id={index} key={index.toString()}
                     barbuttonscfg={barConfig}
-                    title={app.anname}
+                    title={app.name}
                     intro={app.repository!}
                     opened={false}>
                     {/* children */}

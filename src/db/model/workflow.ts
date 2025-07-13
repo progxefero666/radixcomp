@@ -6,19 +6,19 @@
 export class Workflow {
 
     public id: number;
-    public wwname: string;
+    public name: string;
     public description: string = '';
     public context: string|null = null;        
     public application: string|null = null;   
     public fpath: string|null;
     public readonly updated?: Date|null;
 
-    constructor(id:number,wwname:string,
+    constructor(id:number,name:string,
                 context:string|null,description:string,
                 application:string|null,fpath:string|null,updated?:Date ) {
 
         this.id = id;
-        this.wwname = wwname;
+        this.name = name;
         this.context = context;        
         this.description = description;
         this.application = application;

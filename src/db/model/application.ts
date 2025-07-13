@@ -8,7 +8,7 @@ export class Application {
     public id: number;
     public apptype_id: number = 0;
     public codelang_id: number;
-    public anname: string;
+    public name: string;
     public description: string = 'undefined';
     public repository: string = 'undefined';
     public author: string;
@@ -27,7 +27,7 @@ export class Application {
     public exposeapi: boolean = false;
     public updated: Date;
 
-    constructor(id:number,apptype_id:number,codelang_id:number,anname:string,
+    constructor(id:number,apptype_id:number,codelang_id:number,name:string,
                 description:string,repository:string,author:string,osystem:string,
                 appurl:string,apppath:string,localdev:boolean,usedocker:boolean,
                 controlusers:boolean,useui:boolean,useagents:boolean,consumedb:boolean,
@@ -37,7 +37,7 @@ export class Application {
         this.id = id;
         this.apptype_id = apptype_id;
         this.codelang_id = codelang_id;
-        this.anname = anname;
+        this.name = name;
         this.description = description;
         this.repository = repository;
         this.author = author;
@@ -82,7 +82,7 @@ export class Application {
         if (fieldName === "codelang_id") {
             return 15; // max digits for numeric
         }
-        if (fieldName === "anname") {
+        if (fieldName === "name") {
             return 50;
         }
         if (fieldName === "description") {

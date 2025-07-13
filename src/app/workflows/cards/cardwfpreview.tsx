@@ -84,7 +84,7 @@ export default function CardWorkflowPreview({ workflow }: CompProps) {
                     </Collapsible.Trigger>
                     <Flex width="100%" justify="between" align="start" >
                         <Box width="100%" mt="1" py="1" px="2" mr="2" style={headerStyle}>
-                            <Text size="3" >{workflow!.wwname}</Text>
+                            <Text size="3" >{workflow!.name}</Text>
                         </Box>
                         <Box pt="1">
                             <BarButtons barconfig={barbuttonscfg} onclick={onClick} />

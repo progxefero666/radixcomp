@@ -11,7 +11,7 @@ export class Task {
     public workflow_id: number;
     public taskcategory_id: number;    
     public orden: number;
-    public tkname: string;
+    public name: string;
     public description: string;
     public tkgroup: number;
     public files: string;
@@ -23,7 +23,7 @@ export class Task {
                 workflow_id: number,
                 taskcategory_id: number,
                 orden: number,
-                tkname: string,
+                name: string,
                 description: string,
                 tkgroup: number,
                 files: string,
@@ -35,7 +35,7 @@ export class Task {
         this.workflow_id = workflow_id;
         this.taskcategory_id = taskcategory_id;
         this.orden = orden;
-        this.tkname = tkname;
+        this.name = name;
         this.description = description;
         this.tkgroup = tkgroup;
         this.files = files;
@@ -63,7 +63,7 @@ export class Task {
         if (fieldName === "orden") {
             return 15; // max digits for numeric
         }
-        else if (fieldName === "tkname") {
+        else if (fieldName === "name") {
             return 255;
         }
         else if  (fieldName === "description") {

@@ -9,15 +9,15 @@ export class Taskcategory {
 
     public id: number;
     public workflow_id: number;
-    public tpname: string;
+    public name: string;
     public description: string;
 
     public tasks?:Task[];
     
-    constructor(id:number,workflow_id:number,tpname:string,description:string,tasks?:Task[]) {
+    constructor(id:number,workflow_id:number,name:string,description:string,tasks?:Task[]) {
         this.id = id;
         this.workflow_id = workflow_id;
-        this.tpname = tpname;
+        this.name = name;
         this.description = description;
         if(tasks) { this.tasks = tasks;}
     }
@@ -37,7 +37,7 @@ export class Taskcategory {
         if (fieldName === "id") {
             return 15; // max digits for numeric
         }
-        else if (fieldName === "tpname") {
+        else if (fieldName === "name") {
             return 100; // max digits for numeric
         }
         return 0;
