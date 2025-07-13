@@ -59,19 +59,12 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     //db squema       
     const dbSquema = useRef<CodeGenSquema|null>(null);
-
-    //const [modelTables, setModelTables] = useState<ModelTable[]>([]);
-    //const modelsTableOptions = useRef<Option[]>([]);
-    //const [menuListTables, setMenuListTables] = useState<TOption[]>([]);
-
     const selTableName = useRef<string | null>(null);
     const selGroupTableNames = useRef<TOption[] | null>(null);
     
-
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
     const [operationId, setOperationId] = useState<string>("undefined");
-    const operationsRef = useRef<HTMLSelectElement>(null);
 
     // service clients
     const clientTScriptEntities = useRef<ServClientTScriptEntities>(null);
@@ -87,11 +80,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         if (section == null) { return; }
 
         dbSquema.current = new CodeGenSquema(AppMemmory.readDbSquema());
-
-        //const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
-        //setModelTables(db_modeltables);
-        //setMenuListTables(SchemaService.getListTablesAsTOptions(db_modeltables));
-        //modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
         selTableName.current = dbSquema.current.tables[0].name;
 
         //active service clients
@@ -201,31 +189,26 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         );
     };//end
     
-    /*
-    <XInputSelect name="selectTable"
-                            inline={true}
-                            autocommit={true}
-                            collection={dbSquema.current!.toptions}
-                            defaul={modelsTableOptions.current[0].id}
-                            onchange={onSelectTable} /> 
-    */
+
     const renderMainContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
         
                 <Flex width="100%" direction="row" pb="2" >
-                    <XSelect label="Format" collection={CodeGenConfig.CODE_FORMATS} 
-                             onchange={onSelectCodeFormat}/>
+                    <XSelect label="Format:" collection={CodeGenConfig.CODE_FORMATS} 
+                             onchange={onSelectTable}/>
                 </Flex>
                 
                 <SeparatorH />
 
-                <Flex width="100%" direction="row"  >
+                <Flex width="100%" direction="row" pt="2"  >
                     <Box mr="2">
-                        <Label>Select Tables: </Label>
+                        <Label>Tables: </Label>
                     </Box>
                     {showRadioList ?
-                        <p>asas</p>: null}
+                    <XSelect collection={dbSquema.current!.tcollection}
+                             onchange={onSelectCodeFormat}/>
+                    : null}
 
                     {showCheckList ?
                         <Box mr="2">
