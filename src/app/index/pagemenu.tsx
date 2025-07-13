@@ -6,10 +6,10 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
-import PageGenCode from "../gencode/page";
+import PageGenCode from "../page";
 import PageTest from "../testcomp/page";
 import { Option } from "@/common/models";
-import Home from "../page";
+import Home from "./page";
 
 /**
  * Main app view page component
