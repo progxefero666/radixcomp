@@ -104,4 +104,4 @@ function SecondBar({actsection}: SecondBarProps) {
         </Flex>
     );
 
-}//end PrimaryBar
+};//end PrimaryBar
