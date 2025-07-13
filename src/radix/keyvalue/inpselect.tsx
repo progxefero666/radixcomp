@@ -23,7 +23,10 @@ export function XSelect({name,onchange,collection,values,label,disabled}:CompPro
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
     const color = RADIX_COLORS.gray;
-    const handleOnChange = (value:string) => {onchange(value,(name??"select"));}
+
+    const handleOnChange = (value:string) => {
+        onchange(value,(name??"select"));
+    }
 
     let inp_collection: Keyvalue[] = [];
     if(collection)  {inp_collection=collection;}

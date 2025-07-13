@@ -6,6 +6,7 @@ import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { TOption } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/server/xeferodb/tsclasses";
+import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 
 
 export class GenCodeModuleControl {
@@ -59,17 +60,25 @@ export class ServClientEntities extends GenCodeModuleControl {
         return code;
     };//end
 
-    public async execItemJsonOperation(operationId: string,
-                                      table: string | null,
-                                      tables: TOption[] | null): Promise<string | null> {
+    public async execItemJsonOperation(operationId: string,table: ModelTable): Promise<string | null> {
         let code: string | null = null;
+        if (operationId === "get_def_class") {
+            code = CodeGenJson.getJsonEntDef(table);
+        }
+        else if (operationId === "get_entity_class") {
+            code = JSON.stringify(table, null, 4);
+        }        
         return code;
     };//end
 
-    public async execArrayJsonOperation(operationId: string,
-                                      table: string | null,
-                                      tables: TOption[] | null): Promise<string | null> {
+    public async execArrayJsonOperation(operationId:string,tables:ModelTable[]): Promise<string | null> {
         let code: string | null = null;
+        if (operationId == "get_all_def_class" || operationId == "get_list_def_class") {
+            code =CodeGenJson.getJsonArrayEntDef(tables);
+        }   
+        else if (operationId == "get_all_entity_class" || operationId == "get_list_entity_class") {
+            code = JSON.stringify(tables, null, 4);
+        }
         return code;
     };//end
     

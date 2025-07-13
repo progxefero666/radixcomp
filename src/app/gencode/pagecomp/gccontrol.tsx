@@ -18,6 +18,7 @@ import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { XSelect } from "@/radix/keyvalue/inpselect";
 import { CodeGenSquema } from "@/codegen/model/cgschema";
 import { CodeGenOperations } from "@/codegen/cgoperations";
+import { ModelTable } from "@/codegen/kernel/cgmodel";
 
 
 //---------------------------------------------------------------------------------------
@@ -78,26 +79,42 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = async () => {
+
+        let codecont: string | null = null;
+
         if (format === "typescript") {
-            let codecont: string | null = null;
             if (operationId === "get_def_class" || operationId === "get_entity_class") {
                 codecont = await clientTScriptEntities.current!
                     .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);                
-             }
-             else {
+            }
+            else {
                 codecont = await clientTScriptEntities.current!
                     .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);                     
-             }
-             if(codecont !== null) {
-                ondataresult("Error: no code generated.");
-             }
+            }
         }
+
         else if (format === "json") {
-            const code: string = CodeGenJson
-                .getJsonEntDef(dbSquemaControl.current!.getActiveTable()!);
-            ondataresult(code!);
+           
+            if (operationId === "get_def_class" || operationId === "get_entity_class") {
+                const selTable:ModelTable=dbSquemaControl.current!.getActiveTable()!;
+                codecont = await clientTScriptEntities
+                    .current!.execItemJsonOperation(operationId,selTable);    
+            }
+            else if (operationId === "get_list_def_class" || operationId === "get_list_entity_class"){
+                const select_tables:  ModelTable[] = [];
+                codecont = await clientTScriptEntities
+                    .current!.execArrayJsonOperation(operationId,select_tables);    
+            }
+            else if (operationId === "get_all_def_class" || operationId === "get_all_entity_class"){
+                codecont = await clientTScriptEntities
+                    .current!.execArrayJsonOperation(operationId,dbSquemaControl.current!.tables);    
+            }
         }
+
+        if(codecont !== null) {ondataresult(codecont);}
+
     };//end
+
 
     const renderHeader = () => {
         return (
@@ -110,7 +127,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     </Box>
                     <Box>
                         <XSelect label="Format:" collection={CodeGenOperations.CODE_FORMATS}
-                            onchange={onSelectTable} />                    
+                            onchange={onSelectCodeFormat} />                    
                     </Box>
                 </Flex>
                 <Button onClick={runOperation} color="green">
@@ -127,7 +144,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     <Box mr="2"><Label>Tables:</Label></Box>
                     {showRadioList ?
                         <XSelect collection={dbSquemaControl.current!.tcollection}
-                            onchange={onSelectCodeFormat} /> : null}
+                            onchange={onSelectTable} /> : null}
                     {showCheckList ?                                              
                         <XCheckGroup name="selectTables"
                                     autocommit={true}

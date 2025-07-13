@@ -8,7 +8,7 @@ import { Keyvalue } from "@/common/model/keyvalue";
 
 
 /**
- * class CodeGenSchema
+ * class CodeGenSchema tables[activeTableIndex]
  */
 export class CodeGenSquema{
 
@@ -31,9 +31,11 @@ export class CodeGenSquema{
 
     public setActiveTable(tableName: string) {
         const index = this.getTableIndex(tableName);
+        //alert(index);
         if (index >= 0) {
             this.activeTableIndex = index;
             this.activeTableName = this.tables[this.activeTableIndex].name;
+            alert("Active table: " + this.activeTableName);
         }
     };//end
 

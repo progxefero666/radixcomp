@@ -55,7 +55,8 @@ export class SchemaService {
     public static getCollectionTables(modeltables:ModelTable[]):  Keyvalue[]{
         const collection: Keyvalue[] = [];
         for (let idx = 0; idx < modeltables.length; idx++) {
-            collection.push(new Keyvalue(idx.toString(),modeltables[idx].name));
+            //collection.push(new Keyvalue(idx.toString(),modeltables[idx].name));
+            collection.push(new Keyvalue(modeltables[idx].name,modeltables[idx].name));
         }
         return collection;
     }
