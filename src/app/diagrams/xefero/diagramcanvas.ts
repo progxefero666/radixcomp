@@ -1,6 +1,7 @@
 //src\app\diagrams\xefero\diagramcanvas.ts
 
 import { CanvasPainter } from "@/graph2d/canvaspaint";
+import { ShapeCylinder } from "@/graph2d/shape/shapecylinder";
 import { Dim2d, Point2d } from "@/graph2d/types2d";
 
 /**
@@ -27,13 +28,20 @@ export class DiagramCanvas {
         this.ctx.clearRect(0, 0, this.dim.width, this.dim.height);
     };
 
-    public render_a() {
+    public render_c() {
     
-        const position: Point2d = { x: 200, y: 200 };
+        const position: Point2d = {x:200,y:200};
         const color: string = "red";
-
-        this.painter.drawHalfEllipse(position, 50, 20, color);
-        //this.painter.fillPoint(point, color);
+        
+        const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:100},color);
     };
+
+
+    public render_a() {
+        const position: Point2d = {x:200,y:200};
+        const color: string = "blue";
+        this.painter.drawHalfEllipse(position, 50, 20,false, color);
+    };
+
 
 }//end class

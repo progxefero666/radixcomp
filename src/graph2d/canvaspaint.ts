@@ -1,8 +1,10 @@
 //src\graph2d\canvaspaint.ts
 
 import { Dim2d, Point2d } from "@/graph2d/types2d";
-import { Line2d } from "./model/line2d";
-import { Rectangle2d } from "./model/rectangle2d";
+import { Line2d }         from "@/graph2d/model/line2d";
+import { Rectangle2d }    from "@/graph2d/model/rectangle2d";
+import { ShapeCylinder }  from "@/graph2d/shape/shapecylinder"
+
 
 /**
  * CanvasPainter class
@@ -159,9 +161,9 @@ export class CanvasPainter {
         this.ctx.stroke();    
     };//end
 
-    public drawHalfEllipse(position:Point2d,width:number,height:number,color: string) {
+    public drawHalfEllipse(position:Point2d,width:number,height:number,ccw:boolean,color: string) {
         this.ctx.beginPath();
-        this.ctx.ellipse(position.x, position.y,width,height, 0, 0, Math.PI);
+        this.ctx.ellipse(position.x, position.y,width,height, 0, 0, Math.PI, ccw);
         this.ctx.strokeStyle = color; 
         this.ctx.stroke();    
     };//end
@@ -179,6 +181,31 @@ export class CanvasPainter {
         this.ctx.lineWidth = 2; 
         this.ctx.stroke();
         this.ctx.closePath();
+    };//end 
+
+    // shapes   
+    //.................................................................................
+
+    public drawShapeCylinder(shape:ShapeCylinder){
+    
+        this.ctx.beginPath();
+        this.drawHalfEllipse(shape.ellipsesCenter[0],
+                             shape.ellipsesDim.width,
+                             shape.ellipsesDim.height,
+                             false, 
+                             shape.color);
+        this.ctx.lineTo(shape.rectPoints[2].x,shape.rectPoints[2].y);         
+        this.drawHalfEllipse(shape.ellipsesCenter[1],
+                             shape.ellipsesDim.width,
+                             shape.ellipsesDim.height,
+                             true, 
+                             shape.color);        
+        this.ctx.lineTo(shape.rectPoints[0].x,shape.rectPoints[0].y);
+        this.ctx.lineWidth = 1; 
+        this.ctx.strokeStyle = shape.color; 
+        this.ctx.stroke();
+        this.ctx.closePath();
+
     };//end 
 
 }//end class
