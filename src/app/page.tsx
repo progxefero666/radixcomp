@@ -13,6 +13,7 @@ import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
 import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
+import { CodeGeneration } from "@/codegen/cgconfig";
 
 
 //const router = useRouter();
@@ -66,26 +67,9 @@ export default function PageGenCode() {
     const loadSection = (sectionId: string) => {setSection(sectionId);}
 
     const exportFile = () => {
-
+        const result:boolean = CodeGeneration.generateFile(dataId,dataFormat,dataCode);
     };
 
-    /*
-   const exportFile = () => {
-        if (dataCode === "undefined" || dataCode === null) {
-            alert("No code to export");
-            return;
-        }
-        const blob = new Blob([dataCode], { type: dataFormat });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = dataId + '.' + dataFormat;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }    
-    */
     return (
         <Flex direction="column" height="100vh">
 

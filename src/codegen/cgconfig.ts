@@ -85,7 +85,7 @@ export class CodeGenConfig {
 };//end class
 
 /**
- * class CodeGeneration
+ * class CodeGeneration.generateFile
  */
 export class CodeGeneration {
 
@@ -123,7 +123,7 @@ export class CodeGeneration {
         return mimetype;
     };
 
-    public static generateFile(id:string,format:string): boolean{        
+    public static generateFile(id:string,format:string,content:string): boolean{        
         let fname: string = CodeGeneration.getFilename(id,format);
         let mimetype: string = CodeGeneration.getMimetype(format);
         // Here you would implement the logic to generate the file
@@ -131,4 +131,23 @@ export class CodeGeneration {
         return true;
     }
 
+
+    /*
+   const exportFile = () => {
+        if (dataCode === "undefined" || dataCode === null) {
+            alert("No code to export");
+            return;
+        }
+        const blob = new Blob([dataCode], { type: dataFormat });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = dataId + '.' + dataFormat;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }    
+    */
+       
 }//end class
