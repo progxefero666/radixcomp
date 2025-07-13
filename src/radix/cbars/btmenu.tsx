@@ -2,9 +2,10 @@
 
 import { Option } from "@/common/model/option";
 import { Flex, Box } from "@radix-ui/themes";
-import { StringsHelper } from "@/markdown/mkdstrings";
+
 import { renderOptionButton } from "@/radix/radixbuttons";
 import { ThemeCompStyle, ThemeMenusStyle} from "@/radix/radixtheme";
+import { StringsHelper } from "@/common/markdown/mkdstrings";
 
 
 export interface MenuProp {

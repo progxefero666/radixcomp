@@ -39,13 +39,3 @@ export async function readDbSqlScriptFile(id:string): Promise<string|null> {
    
 }//end action
 
-/*
-export async function getDbSqlSquema(): Promise<string> {
-    const fileName:string = "dbsquema.sql";
-    return path.join(ServerConfig.XEFERODB_PATH, fname);
-    const filePath: string = ServerReader.getFilePath(fileName);
-    console.log("getTextFile: ", filePath);
-    const fileContent: string = await ServerFileUtil.readFile(filePath);
-    return fileContent;
-}//end action
-*/
