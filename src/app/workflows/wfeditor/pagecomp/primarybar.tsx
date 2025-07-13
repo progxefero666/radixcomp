@@ -6,7 +6,7 @@ import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon,  } from "@radix-ui/re
 import { Taskcategory } from "@/db/model/taskcategory";
 import { ManagerTaskcategories } from "../categories/mantaskcats";
 import { EditOptionId } from "@/radix/collection/editoption";
-import { getTaskcatsAsEditableOptions } from "@/db/modelutil/workflowutil";
+import { getTaskcatsAsEditableOptions } from "@/db/services/util/workflowutil";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import {  DB_ITEM_CMD } from "@/db/dboperations";
 import { DialogForm} from "@/radix/dialog/dlginputoption";
