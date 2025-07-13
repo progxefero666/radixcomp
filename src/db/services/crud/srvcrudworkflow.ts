@@ -2,7 +2,7 @@
 //src\db\services\crud\srvcrudworkflows.ts
 "use server";
 
-import { JsonResponse } from "@/common/jsonmodels";
+import { JsonResponse } from "@/common/model/jsonreponse";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, DpOperationUtil } from "@/db/dboperations";
 import { Workflow } from "@/db/model/workflow";

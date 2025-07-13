@@ -2,7 +2,7 @@
 "use server";
 
 import { Option } from "@/common/models";
-import { JsonResponse } from "@/common/jsonmodels";
+import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
 
 import { DB_COLL_CMD, DpOperationUtil } from "@/db/dboperations";

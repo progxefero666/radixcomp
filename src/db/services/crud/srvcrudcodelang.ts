@@ -1,7 +1,7 @@
 //src\db\services\crud\srvcrudcodelangs.ts
 "use server";
 
-import { JsonResponse } from "@/common/jsonmodels";
+import { JsonResponse } from "@/common/model/jsonreponse";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, DpOperationUtil } from "@/db/dboperations";
 

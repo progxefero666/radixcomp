@@ -1,6 +1,6 @@
 //src\db\functions\objectsutil.ts
 
-import { JsonResponse } from "@/common/jsonmodels";
+import { JsonResponse } from "@/common/model/jsonreponse";
 
 
 

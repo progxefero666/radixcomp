@@ -3,7 +3,7 @@
 //src\db\services\crud\srvcrudapplications.ts
 "use server";
 
-import { JsonResponse } from "@/common/jsonmodels";
+import { JsonResponse } from "@/common/model/jsonreponse";
 import { PrismaClient } from "@generated/prisma";
 import { DbOps, DpOperationUtil } from "@/db/dboperations";
 import { Application } from "@/db/model/application";

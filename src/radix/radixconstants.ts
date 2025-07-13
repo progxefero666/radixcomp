@@ -98,13 +98,6 @@ export enum RADIX_COLORS {
     sky= "sky-7" , 
 };
 
-/**
- * class DbOperations
- */
-export class DbOperations {   
-
-}//end class 
-
 
 /**
  * class RadixKeys.KEY_INTRO
@@ -113,3 +106,22 @@ export class RadixKeys {
     public static readonly KEY_INTRO: string = "Enter";
 }//end class 
 
+export class RadixKeyvalue {
+
+    public key: string;
+    public value: string;
+
+    constructor(key: string, value: string) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public toJsonString(): string {
+        return JSON.stringify(this, null, 4);
+    }
+
+    public static build(jsonString: string): RadixKeyvalue {
+        const obj = JSON.parse(jsonString);
+        return new RadixKeyvalue(obj.key, obj.value);
+    }
+}//end class

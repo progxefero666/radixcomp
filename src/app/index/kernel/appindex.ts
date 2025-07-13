@@ -3,7 +3,7 @@
 
 import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
-import { JSonConsole } from "@/common/jsonhelper";
+import { JSonConsole } from "@/common/helper/jsonhelper";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";

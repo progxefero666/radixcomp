@@ -5,8 +5,8 @@ import { GenCodeModuleControl } from "@/app/gencode/module/gcmodcontrol";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 
 import { TOption, TSelection } from "@/radix/radixtypes";
-import { CollectionHelper } from "@/common/collhelper";
-import { JsonHelper } from "@/common/jsonhelper";
+import { CollectionHelper } from "@/common/helper/collhelper";
+import { JsonHelper } from "@/common/helper/jsonhelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/server/xeferodb/tsclasses";
 
 

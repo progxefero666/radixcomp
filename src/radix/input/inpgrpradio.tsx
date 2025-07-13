@@ -6,7 +6,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { Option } from "@/common/models";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
 import { StringsHelper } from "@/markdown/mkdstrings";
-import { CollectionHelper } from "@/common/collhelper";
+import { CollectionHelper } from "@/common/helper/collhelper";
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS } from "../radixconstants";
 
 
