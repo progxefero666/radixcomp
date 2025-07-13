@@ -24,6 +24,11 @@ export class CanvasPainter {
         this.center.y = Math.floor(this.dim.height/2);
     };//end
 
+    public fillback(color: string) {
+        this.ctx.fillStyle = this.backcolor;
+        this.ctx.fillRect(0, 0, this.dim.width, this.dim.height);        
+    }
+
     // points
     //.................................................................................    
 

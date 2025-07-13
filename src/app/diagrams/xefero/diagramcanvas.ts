@@ -23,4 +23,10 @@ export class DiagramCanvas {
         this.painter = new CanvasPainter(ctx, dimension, backcolor);
     };//end
     
+    public clear() {
+        this.ctx.clearRect(0, 0, this.dim.width, this.dim.height);
+    };
+
+
+
 }//end class
