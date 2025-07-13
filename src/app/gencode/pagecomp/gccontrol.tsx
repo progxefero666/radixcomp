@@ -29,6 +29,7 @@ import { ServClientTScriptServices } from "../module/client_tscriptservices";
 import { Label } from "@radix-ui/react-context-menu";
 import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
+import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
 
@@ -50,6 +51,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const [initialized, setInitialized] = useState<boolean>(false);
 
     // list tables
+    
+    const [modelTables, setModelTables] = useState<ModelTable[]>([]);
+
     const [menuListTables, setMenuListTables] = useState<TOption[]>([]);
     const selTableName = useRef<string | null>(null);
     const selGroupTableNames = useRef<TOption[] | null>(null);
@@ -78,6 +82,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         //load modeltables
         const db_squema = AppMemmory.readDbSquema();
         const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
+        setModelTables(db_modeltables);
         setMenuListTables(SchemaService.getListTablesAsTOptions(db_modeltables));
 
         //set basic selections
@@ -154,11 +159,17 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const runOperation = async () => {
+
+        const code:string= CodeGenJson.getJsonEntDef(modelTables[0]);
+        ondataresult(code!);
+
+        /*
         if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
             const codecont: string | null = await clientTScriptEntities.current!.executeOperation(
                 operationId,
                 selTableName.current,
                 selGroupTableNames.current);
+
             ondataresult(codecont!);
         }
         else if (section === GenCodeModuleConfig.CLIENT_JSX_FORMS.id) {
@@ -166,6 +177,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         else if (section === GenCodeModuleConfig.CLIENT_JSON.id) { }
         else if (section === GenCodeModuleConfig.CLIENT_TS_SERVICES.id) { }
         else if (section === GenCodeModuleConfig.CLIENT_SQL_SCRIPTS.id) { }
+        */
+
+
     };//end
 
     const renderParamsContent = () => {
@@ -189,21 +203,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         )
     };//end
 
-    const renderInputPanel = () => {
-        /*
-            <InputFiles
-                ref={fileInputRef}
-                name="inputFileCode"
-                formats=".sql,.json,.ts"
-                multiple={false}
-                onchange={onFileCharged} />
-        */
-        return (
-            <Box>
-                <p>as</p>
-            </Box>
-        )
-    };//end
+
 
     const renderHeader = () => {
         return (
@@ -269,4 +269,3 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     );
 
 }//end component
-

@@ -1609,19 +1609,19 @@ export namespace Prisma {
 
   export type CodelangMinAggregateOutputType = {
     id: number | null
-    cgname: string | null
+    name: string | null
     description: string | null
   }
 
   export type CodelangMaxAggregateOutputType = {
     id: number | null
-    cgname: string | null
+    name: string | null
     description: string | null
   }
 
   export type CodelangCountAggregateOutputType = {
     id: number
-    cgname: number
+    name: number
     description: number
     _all: number
   }
@@ -1637,19 +1637,19 @@ export namespace Prisma {
 
   export type CodelangMinAggregateInputType = {
     id?: true
-    cgname?: true
+    name?: true
     description?: true
   }
 
   export type CodelangMaxAggregateInputType = {
     id?: true
-    cgname?: true
+    name?: true
     description?: true
   }
 
   export type CodelangCountAggregateInputType = {
     id?: true
-    cgname?: true
+    name?: true
     description?: true
     _all?: true
   }
@@ -1742,7 +1742,7 @@ export namespace Prisma {
 
   export type CodelangGroupByOutputType = {
     id: number
-    cgname: string
+    name: string
     description: string
     _count: CodelangCountAggregateOutputType | null
     _avg: CodelangAvgAggregateOutputType | null
@@ -1767,7 +1767,7 @@ export namespace Prisma {
 
   export type CodelangSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    cgname?: boolean
+    name?: boolean
     description?: boolean
     tasks?: boolean | Codelang$tasksArgs<ExtArgs>
     applications?: boolean | Codelang$applicationsArgs<ExtArgs>
@@ -1776,23 +1776,23 @@ export namespace Prisma {
 
   export type CodelangSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    cgname?: boolean
+    name?: boolean
     description?: boolean
   }, ExtArgs["result"]["codelang"]>
 
   export type CodelangSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    cgname?: boolean
+    name?: boolean
     description?: boolean
   }, ExtArgs["result"]["codelang"]>
 
   export type CodelangSelectScalar = {
     id?: boolean
-    cgname?: boolean
+    name?: boolean
     description?: boolean
   }
 
-  export type CodelangOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cgname" | "description", ExtArgs["result"]["codelang"]>
+  export type CodelangOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["codelang"]>
   export type CodelangInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasks?: boolean | Codelang$tasksArgs<ExtArgs>
     applications?: boolean | Codelang$applicationsArgs<ExtArgs>
@@ -1809,7 +1809,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      cgname: string
+      name: string
       description: string
     }, ExtArgs["result"]["codelang"]>
     composites: {}
@@ -2237,7 +2237,7 @@ export namespace Prisma {
    */
   interface CodelangFieldRefs {
     readonly id: FieldRef<"Codelang", 'Int'>
-    readonly cgname: FieldRef<"Codelang", 'String'>
+    readonly name: FieldRef<"Codelang", 'String'>
     readonly description: FieldRef<"Codelang", 'String'>
   }
     
@@ -2715,19 +2715,19 @@ export namespace Prisma {
 
   export type TasktypeMinAggregateOutputType = {
     id: number | null
-    tename: string | null
+    name: string | null
     description: string | null
   }
 
   export type TasktypeMaxAggregateOutputType = {
     id: number | null
-    tename: string | null
+    name: string | null
     description: string | null
   }
 
   export type TasktypeCountAggregateOutputType = {
     id: number
-    tename: number
+    name: number
     description: number
     _all: number
   }
@@ -2743,19 +2743,19 @@ export namespace Prisma {
 
   export type TasktypeMinAggregateInputType = {
     id?: true
-    tename?: true
+    name?: true
     description?: true
   }
 
   export type TasktypeMaxAggregateInputType = {
     id?: true
-    tename?: true
+    name?: true
     description?: true
   }
 
   export type TasktypeCountAggregateInputType = {
     id?: true
-    tename?: true
+    name?: true
     description?: true
     _all?: true
   }
@@ -2848,7 +2848,7 @@ export namespace Prisma {
 
   export type TasktypeGroupByOutputType = {
     id: number
-    tename: string
+    name: string
     description: string
     _count: TasktypeCountAggregateOutputType | null
     _avg: TasktypeAvgAggregateOutputType | null
@@ -2873,7 +2873,7 @@ export namespace Prisma {
 
   export type TasktypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tename?: boolean
+    name?: boolean
     description?: boolean
     tasks?: boolean | Tasktype$tasksArgs<ExtArgs>
     _count?: boolean | TasktypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -2881,23 +2881,23 @@ export namespace Prisma {
 
   export type TasktypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tename?: boolean
+    name?: boolean
     description?: boolean
   }, ExtArgs["result"]["tasktype"]>
 
   export type TasktypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tename?: boolean
+    name?: boolean
     description?: boolean
   }, ExtArgs["result"]["tasktype"]>
 
   export type TasktypeSelectScalar = {
     id?: boolean
-    tename?: boolean
+    name?: boolean
     description?: boolean
   }
 
-  export type TasktypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tename" | "description", ExtArgs["result"]["tasktype"]>
+  export type TasktypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["tasktype"]>
   export type TasktypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasks?: boolean | Tasktype$tasksArgs<ExtArgs>
     _count?: boolean | TasktypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -2912,7 +2912,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      tename: string
+      name: string
       description: string
     }, ExtArgs["result"]["tasktype"]>
     composites: {}
@@ -3339,7 +3339,7 @@ export namespace Prisma {
    */
   interface TasktypeFieldRefs {
     readonly id: FieldRef<"Tasktype", 'Int'>
-    readonly tename: FieldRef<"Tasktype", 'String'>
+    readonly name: FieldRef<"Tasktype", 'String'>
     readonly description: FieldRef<"Tasktype", 'String'>
   }
     
@@ -3793,7 +3793,7 @@ export namespace Prisma {
 
   export type WorkflowMinAggregateOutputType = {
     id: number | null
-    wwname: string | null
+    name: string | null
     context: string | null
     description: string | null
     application: string | null
@@ -3803,7 +3803,7 @@ export namespace Prisma {
 
   export type WorkflowMaxAggregateOutputType = {
     id: number | null
-    wwname: string | null
+    name: string | null
     context: string | null
     description: string | null
     application: string | null
@@ -3813,7 +3813,7 @@ export namespace Prisma {
 
   export type WorkflowCountAggregateOutputType = {
     id: number
-    wwname: number
+    name: number
     context: number
     description: number
     application: number
@@ -3833,7 +3833,7 @@ export namespace Prisma {
 
   export type WorkflowMinAggregateInputType = {
     id?: true
-    wwname?: true
+    name?: true
     context?: true
     description?: true
     application?: true
@@ -3843,7 +3843,7 @@ export namespace Prisma {
 
   export type WorkflowMaxAggregateInputType = {
     id?: true
-    wwname?: true
+    name?: true
     context?: true
     description?: true
     application?: true
@@ -3853,7 +3853,7 @@ export namespace Prisma {
 
   export type WorkflowCountAggregateInputType = {
     id?: true
-    wwname?: true
+    name?: true
     context?: true
     description?: true
     application?: true
@@ -3950,7 +3950,7 @@ export namespace Prisma {
 
   export type WorkflowGroupByOutputType = {
     id: number
-    wwname: string
+    name: string
     context: string | null
     description: string
     application: string | null
@@ -3979,7 +3979,7 @@ export namespace Prisma {
 
   export type WorkflowSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    wwname?: boolean
+    name?: boolean
     context?: boolean
     description?: boolean
     application?: boolean
@@ -3992,7 +3992,7 @@ export namespace Prisma {
 
   export type WorkflowSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    wwname?: boolean
+    name?: boolean
     context?: boolean
     description?: boolean
     application?: boolean
@@ -4002,7 +4002,7 @@ export namespace Prisma {
 
   export type WorkflowSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    wwname?: boolean
+    name?: boolean
     context?: boolean
     description?: boolean
     application?: boolean
@@ -4012,7 +4012,7 @@ export namespace Prisma {
 
   export type WorkflowSelectScalar = {
     id?: boolean
-    wwname?: boolean
+    name?: boolean
     context?: boolean
     description?: boolean
     application?: boolean
@@ -4020,7 +4020,7 @@ export namespace Prisma {
     updated?: boolean
   }
 
-  export type WorkflowOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "wwname" | "context" | "description" | "application" | "fpath" | "updated", ExtArgs["result"]["workflow"]>
+  export type WorkflowOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "context" | "description" | "application" | "fpath" | "updated", ExtArgs["result"]["workflow"]>
   export type WorkflowInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasks?: boolean | Workflow$tasksArgs<ExtArgs>
     taskcategorys?: boolean | Workflow$taskcategorysArgs<ExtArgs>
@@ -4037,7 +4037,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      wwname: string
+      name: string
       context: string | null
       description: string
       application: string | null
@@ -4469,7 +4469,7 @@ export namespace Prisma {
    */
   interface WorkflowFieldRefs {
     readonly id: FieldRef<"Workflow", 'Int'>
-    readonly wwname: FieldRef<"Workflow", 'String'>
+    readonly name: FieldRef<"Workflow", 'String'>
     readonly context: FieldRef<"Workflow", 'String'>
     readonly description: FieldRef<"Workflow", 'String'>
     readonly application: FieldRef<"Workflow", 'String'>
@@ -4954,21 +4954,21 @@ export namespace Prisma {
   export type TaskcategoryMinAggregateOutputType = {
     id: number | null
     workflowId: number | null
-    tyname: string | null
+    name: string | null
     description: string | null
   }
 
   export type TaskcategoryMaxAggregateOutputType = {
     id: number | null
     workflowId: number | null
-    tyname: string | null
+    name: string | null
     description: string | null
   }
 
   export type TaskcategoryCountAggregateOutputType = {
     id: number
     workflowId: number
-    tyname: number
+    name: number
     description: number
     _all: number
   }
@@ -4987,21 +4987,21 @@ export namespace Prisma {
   export type TaskcategoryMinAggregateInputType = {
     id?: true
     workflowId?: true
-    tyname?: true
+    name?: true
     description?: true
   }
 
   export type TaskcategoryMaxAggregateInputType = {
     id?: true
     workflowId?: true
-    tyname?: true
+    name?: true
     description?: true
   }
 
   export type TaskcategoryCountAggregateInputType = {
     id?: true
     workflowId?: true
-    tyname?: true
+    name?: true
     description?: true
     _all?: true
   }
@@ -5095,7 +5095,7 @@ export namespace Prisma {
   export type TaskcategoryGroupByOutputType = {
     id: number
     workflowId: number
-    tyname: string
+    name: string
     description: string | null
     _count: TaskcategoryCountAggregateOutputType | null
     _avg: TaskcategoryAvgAggregateOutputType | null
@@ -5121,7 +5121,7 @@ export namespace Prisma {
   export type TaskcategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     workflowId?: boolean
-    tyname?: boolean
+    name?: boolean
     description?: boolean
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
     tasks?: boolean | Taskcategory$tasksArgs<ExtArgs>
@@ -5131,7 +5131,7 @@ export namespace Prisma {
   export type TaskcategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     workflowId?: boolean
-    tyname?: boolean
+    name?: boolean
     description?: boolean
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["taskcategory"]>
@@ -5139,7 +5139,7 @@ export namespace Prisma {
   export type TaskcategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     workflowId?: boolean
-    tyname?: boolean
+    name?: boolean
     description?: boolean
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["taskcategory"]>
@@ -5147,11 +5147,11 @@ export namespace Prisma {
   export type TaskcategorySelectScalar = {
     id?: boolean
     workflowId?: boolean
-    tyname?: boolean
+    name?: boolean
     description?: boolean
   }
 
-  export type TaskcategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflowId" | "tyname" | "description", ExtArgs["result"]["taskcategory"]>
+  export type TaskcategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflowId" | "name" | "description", ExtArgs["result"]["taskcategory"]>
   export type TaskcategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
     tasks?: boolean | Taskcategory$tasksArgs<ExtArgs>
@@ -5173,7 +5173,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       workflowId: number
-      tyname: string
+      name: string
       description: string | null
     }, ExtArgs["result"]["taskcategory"]>
     composites: {}
@@ -5602,7 +5602,7 @@ export namespace Prisma {
   interface TaskcategoryFieldRefs {
     readonly id: FieldRef<"Taskcategory", 'Int'>
     readonly workflowId: FieldRef<"Taskcategory", 'Int'>
-    readonly tyname: FieldRef<"Taskcategory", 'String'>
+    readonly name: FieldRef<"Taskcategory", 'String'>
     readonly description: FieldRef<"Taskcategory", 'String'>
   }
     
@@ -6081,7 +6081,7 @@ export namespace Prisma {
     workflowId: number | null
     taskcategoryId: number | null
     orden: number | null
-    tkname: string | null
+    name: string | null
     tkgroup: number | null
     description: string | null
     files: string | null
@@ -6095,7 +6095,7 @@ export namespace Prisma {
     workflowId: number | null
     taskcategoryId: number | null
     orden: number | null
-    tkname: string | null
+    name: string | null
     tkgroup: number | null
     description: string | null
     files: string | null
@@ -6109,7 +6109,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: number
+    name: number
     tkgroup: number
     description: number
     files: number
@@ -6145,7 +6145,7 @@ export namespace Prisma {
     workflowId?: true
     taskcategoryId?: true
     orden?: true
-    tkname?: true
+    name?: true
     tkgroup?: true
     description?: true
     files?: true
@@ -6159,7 +6159,7 @@ export namespace Prisma {
     workflowId?: true
     taskcategoryId?: true
     orden?: true
-    tkname?: true
+    name?: true
     tkgroup?: true
     description?: true
     files?: true
@@ -6173,7 +6173,7 @@ export namespace Prisma {
     workflowId?: true
     taskcategoryId?: true
     orden?: true
-    tkname?: true
+    name?: true
     tkgroup?: true
     description?: true
     files?: true
@@ -6274,7 +6274,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description: string | null
     files: string | null
@@ -6307,7 +6307,7 @@ export namespace Prisma {
     workflowId?: boolean
     taskcategoryId?: boolean
     orden?: boolean
-    tkname?: boolean
+    name?: boolean
     tkgroup?: boolean
     description?: boolean
     files?: boolean
@@ -6325,7 +6325,7 @@ export namespace Prisma {
     workflowId?: boolean
     taskcategoryId?: boolean
     orden?: boolean
-    tkname?: boolean
+    name?: boolean
     tkgroup?: boolean
     description?: boolean
     files?: boolean
@@ -6343,7 +6343,7 @@ export namespace Prisma {
     workflowId?: boolean
     taskcategoryId?: boolean
     orden?: boolean
-    tkname?: boolean
+    name?: boolean
     tkgroup?: boolean
     description?: boolean
     files?: boolean
@@ -6361,14 +6361,14 @@ export namespace Prisma {
     workflowId?: boolean
     taskcategoryId?: boolean
     orden?: boolean
-    tkname?: boolean
+    name?: boolean
     tkgroup?: boolean
     description?: boolean
     files?: boolean
     folders?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tasktypeId" | "codelangId" | "workflowId" | "taskcategoryId" | "orden" | "tkname" | "tkgroup" | "description" | "files" | "folders", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tasktypeId" | "codelangId" | "workflowId" | "taskcategoryId" | "orden" | "name" | "tkgroup" | "description" | "files" | "folders", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tasktype?: boolean | TasktypeDefaultArgs<ExtArgs>
     codelang?: boolean | CodelangDefaultArgs<ExtArgs>
@@ -6403,7 +6403,7 @@ export namespace Prisma {
       workflowId: number
       taskcategoryId: number
       orden: number
-      tkname: string
+      name: string
       tkgroup: number
       description: string | null
       files: string | null
@@ -6841,7 +6841,7 @@ export namespace Prisma {
     readonly workflowId: FieldRef<"Task", 'Int'>
     readonly taskcategoryId: FieldRef<"Task", 'Int'>
     readonly orden: FieldRef<"Task", 'Int'>
-    readonly tkname: FieldRef<"Task", 'String'>
+    readonly name: FieldRef<"Task", 'String'>
     readonly tkgroup: FieldRef<"Task", 'Int'>
     readonly description: FieldRef<"Task", 'String'>
     readonly files: FieldRef<"Task", 'String'>
@@ -7282,19 +7282,19 @@ export namespace Prisma {
 
   export type ApptypeMinAggregateOutputType = {
     id: number | null
-    aename: string | null
+    name: string | null
     description: string | null
   }
 
   export type ApptypeMaxAggregateOutputType = {
     id: number | null
-    aename: string | null
+    name: string | null
     description: string | null
   }
 
   export type ApptypeCountAggregateOutputType = {
     id: number
-    aename: number
+    name: number
     description: number
     _all: number
   }
@@ -7310,19 +7310,19 @@ export namespace Prisma {
 
   export type ApptypeMinAggregateInputType = {
     id?: true
-    aename?: true
+    name?: true
     description?: true
   }
 
   export type ApptypeMaxAggregateInputType = {
     id?: true
-    aename?: true
+    name?: true
     description?: true
   }
 
   export type ApptypeCountAggregateInputType = {
     id?: true
-    aename?: true
+    name?: true
     description?: true
     _all?: true
   }
@@ -7415,7 +7415,7 @@ export namespace Prisma {
 
   export type ApptypeGroupByOutputType = {
     id: number
-    aename: string
+    name: string
     description: string
     _count: ApptypeCountAggregateOutputType | null
     _avg: ApptypeAvgAggregateOutputType | null
@@ -7440,7 +7440,7 @@ export namespace Prisma {
 
   export type ApptypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    aename?: boolean
+    name?: boolean
     description?: boolean
     applications?: boolean | Apptype$applicationsArgs<ExtArgs>
     _count?: boolean | ApptypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -7448,23 +7448,23 @@ export namespace Prisma {
 
   export type ApptypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    aename?: boolean
+    name?: boolean
     description?: boolean
   }, ExtArgs["result"]["apptype"]>
 
   export type ApptypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    aename?: boolean
+    name?: boolean
     description?: boolean
   }, ExtArgs["result"]["apptype"]>
 
   export type ApptypeSelectScalar = {
     id?: boolean
-    aename?: boolean
+    name?: boolean
     description?: boolean
   }
 
-  export type ApptypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "aename" | "description", ExtArgs["result"]["apptype"]>
+  export type ApptypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["apptype"]>
   export type ApptypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     applications?: boolean | Apptype$applicationsArgs<ExtArgs>
     _count?: boolean | ApptypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -7479,7 +7479,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      aename: string
+      name: string
       description: string
     }, ExtArgs["result"]["apptype"]>
     composites: {}
@@ -7906,7 +7906,7 @@ export namespace Prisma {
    */
   interface ApptypeFieldRefs {
     readonly id: FieldRef<"Apptype", 'Int'>
-    readonly aename: FieldRef<"Apptype", 'String'>
+    readonly name: FieldRef<"Apptype", 'String'>
     readonly description: FieldRef<"Apptype", 'String'>
   }
     
@@ -8366,7 +8366,7 @@ export namespace Prisma {
     id: number | null
     apptypeId: number | null
     codelangId: number | null
-    anname: string | null
+    name: string | null
     description: string | null
     repository: string | null
     author: string | null
@@ -8390,7 +8390,7 @@ export namespace Prisma {
     id: number | null
     apptypeId: number | null
     codelangId: number | null
-    anname: string | null
+    name: string | null
     description: string | null
     repository: string | null
     author: string | null
@@ -8414,7 +8414,7 @@ export namespace Prisma {
     id: number
     apptypeId: number
     codelangId: number
-    anname: number
+    name: number
     description: number
     repository: number
     author: number
@@ -8452,7 +8452,7 @@ export namespace Prisma {
     id?: true
     apptypeId?: true
     codelangId?: true
-    anname?: true
+    name?: true
     description?: true
     repository?: true
     author?: true
@@ -8476,7 +8476,7 @@ export namespace Prisma {
     id?: true
     apptypeId?: true
     codelangId?: true
-    anname?: true
+    name?: true
     description?: true
     repository?: true
     author?: true
@@ -8500,7 +8500,7 @@ export namespace Prisma {
     id?: true
     apptypeId?: true
     codelangId?: true
-    anname?: true
+    name?: true
     description?: true
     repository?: true
     author?: true
@@ -8611,7 +8611,7 @@ export namespace Prisma {
     id: number
     apptypeId: number
     codelangId: number
-    anname: string
+    name: string
     description: string
     repository: string
     author: string | null
@@ -8654,7 +8654,7 @@ export namespace Prisma {
     id?: boolean
     apptypeId?: boolean
     codelangId?: boolean
-    anname?: boolean
+    name?: boolean
     description?: boolean
     repository?: boolean
     author?: boolean
@@ -8680,7 +8680,7 @@ export namespace Prisma {
     id?: boolean
     apptypeId?: boolean
     codelangId?: boolean
-    anname?: boolean
+    name?: boolean
     description?: boolean
     repository?: boolean
     author?: boolean
@@ -8706,7 +8706,7 @@ export namespace Prisma {
     id?: boolean
     apptypeId?: boolean
     codelangId?: boolean
-    anname?: boolean
+    name?: boolean
     description?: boolean
     repository?: boolean
     author?: boolean
@@ -8732,7 +8732,7 @@ export namespace Prisma {
     id?: boolean
     apptypeId?: boolean
     codelangId?: boolean
-    anname?: boolean
+    name?: boolean
     description?: boolean
     repository?: boolean
     author?: boolean
@@ -8752,7 +8752,7 @@ export namespace Prisma {
     updated?: boolean
   }
 
-  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "apptypeId" | "codelangId" | "anname" | "description" | "repository" | "author" | "osystem" | "appurl" | "apppath" | "localdev" | "usedocker" | "controlusers" | "useui" | "useagents" | "consumedb" | "consumeapi" | "consumeai" | "exposedb" | "exposeapi" | "updated", ExtArgs["result"]["application"]>
+  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "apptypeId" | "codelangId" | "name" | "description" | "repository" | "author" | "osystem" | "appurl" | "apppath" | "localdev" | "usedocker" | "controlusers" | "useui" | "useagents" | "consumedb" | "consumeapi" | "consumeai" | "exposedb" | "exposeapi" | "updated", ExtArgs["result"]["application"]>
   export type ApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     apptype?: boolean | ApptypeDefaultArgs<ExtArgs>
     codelang?: boolean | CodelangDefaultArgs<ExtArgs>
@@ -8776,7 +8776,7 @@ export namespace Prisma {
       id: number
       apptypeId: number
       codelangId: number
-      anname: string
+      name: string
       description: string
       repository: string
       author: string | null
@@ -9222,7 +9222,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Application", 'Int'>
     readonly apptypeId: FieldRef<"Application", 'Int'>
     readonly codelangId: FieldRef<"Application", 'Int'>
-    readonly anname: FieldRef<"Application", 'String'>
+    readonly name: FieldRef<"Application", 'String'>
     readonly description: FieldRef<"Application", 'String'>
     readonly repository: FieldRef<"Application", 'String'>
     readonly author: FieldRef<"Application", 'String'>
@@ -9670,7 +9670,7 @@ export namespace Prisma {
 
   export const CodelangScalarFieldEnum: {
     id: 'id',
-    cgname: 'cgname',
+    name: 'name',
     description: 'description'
   };
 
@@ -9679,7 +9679,7 @@ export namespace Prisma {
 
   export const TasktypeScalarFieldEnum: {
     id: 'id',
-    tename: 'tename',
+    name: 'name',
     description: 'description'
   };
 
@@ -9688,7 +9688,7 @@ export namespace Prisma {
 
   export const WorkflowScalarFieldEnum: {
     id: 'id',
-    wwname: 'wwname',
+    name: 'name',
     context: 'context',
     description: 'description',
     application: 'application',
@@ -9702,7 +9702,7 @@ export namespace Prisma {
   export const TaskcategoryScalarFieldEnum: {
     id: 'id',
     workflowId: 'workflowId',
-    tyname: 'tyname',
+    name: 'name',
     description: 'description'
   };
 
@@ -9716,7 +9716,7 @@ export namespace Prisma {
     workflowId: 'workflowId',
     taskcategoryId: 'taskcategoryId',
     orden: 'orden',
-    tkname: 'tkname',
+    name: 'name',
     tkgroup: 'tkgroup',
     description: 'description',
     files: 'files',
@@ -9728,7 +9728,7 @@ export namespace Prisma {
 
   export const ApptypeScalarFieldEnum: {
     id: 'id',
-    aename: 'aename',
+    name: 'name',
     description: 'description'
   };
 
@@ -9739,7 +9739,7 @@ export namespace Prisma {
     id: 'id',
     apptypeId: 'apptypeId',
     codelangId: 'codelangId',
-    anname: 'anname',
+    name: 'name',
     description: 'description',
     repository: 'repository',
     author: 'author',
@@ -9862,7 +9862,7 @@ export namespace Prisma {
     OR?: CodelangWhereInput[]
     NOT?: CodelangWhereInput | CodelangWhereInput[]
     id?: IntFilter<"Codelang"> | number
-    cgname?: StringFilter<"Codelang"> | string
+    name?: StringFilter<"Codelang"> | string
     description?: StringFilter<"Codelang"> | string
     tasks?: TaskListRelationFilter
     applications?: ApplicationListRelationFilter
@@ -9870,7 +9870,7 @@ export namespace Prisma {
 
   export type CodelangOrderByWithRelationInput = {
     id?: SortOrder
-    cgname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     tasks?: TaskOrderByRelationAggregateInput
     applications?: ApplicationOrderByRelationAggregateInput
@@ -9878,18 +9878,18 @@ export namespace Prisma {
 
   export type CodelangWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    cgname?: string
+    name?: string
     AND?: CodelangWhereInput | CodelangWhereInput[]
     OR?: CodelangWhereInput[]
     NOT?: CodelangWhereInput | CodelangWhereInput[]
     description?: StringFilter<"Codelang"> | string
     tasks?: TaskListRelationFilter
     applications?: ApplicationListRelationFilter
-  }, "id" | "cgname">
+  }, "id" | "name">
 
   export type CodelangOrderByWithAggregationInput = {
     id?: SortOrder
-    cgname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     _count?: CodelangCountOrderByAggregateInput
     _avg?: CodelangAvgOrderByAggregateInput
@@ -9903,7 +9903,7 @@ export namespace Prisma {
     OR?: CodelangScalarWhereWithAggregatesInput[]
     NOT?: CodelangScalarWhereWithAggregatesInput | CodelangScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Codelang"> | number
-    cgname?: StringWithAggregatesFilter<"Codelang"> | string
+    name?: StringWithAggregatesFilter<"Codelang"> | string
     description?: StringWithAggregatesFilter<"Codelang"> | string
   }
 
@@ -9912,31 +9912,31 @@ export namespace Prisma {
     OR?: TasktypeWhereInput[]
     NOT?: TasktypeWhereInput | TasktypeWhereInput[]
     id?: IntFilter<"Tasktype"> | number
-    tename?: StringFilter<"Tasktype"> | string
+    name?: StringFilter<"Tasktype"> | string
     description?: StringFilter<"Tasktype"> | string
     tasks?: TaskListRelationFilter
   }
 
   export type TasktypeOrderByWithRelationInput = {
     id?: SortOrder
-    tename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     tasks?: TaskOrderByRelationAggregateInput
   }
 
   export type TasktypeWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    tename?: string
+    name?: string
     AND?: TasktypeWhereInput | TasktypeWhereInput[]
     OR?: TasktypeWhereInput[]
     NOT?: TasktypeWhereInput | TasktypeWhereInput[]
     description?: StringFilter<"Tasktype"> | string
     tasks?: TaskListRelationFilter
-  }, "id" | "tename">
+  }, "id" | "name">
 
   export type TasktypeOrderByWithAggregationInput = {
     id?: SortOrder
-    tename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     _count?: TasktypeCountOrderByAggregateInput
     _avg?: TasktypeAvgOrderByAggregateInput
@@ -9950,7 +9950,7 @@ export namespace Prisma {
     OR?: TasktypeScalarWhereWithAggregatesInput[]
     NOT?: TasktypeScalarWhereWithAggregatesInput | TasktypeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Tasktype"> | number
-    tename?: StringWithAggregatesFilter<"Tasktype"> | string
+    name?: StringWithAggregatesFilter<"Tasktype"> | string
     description?: StringWithAggregatesFilter<"Tasktype"> | string
   }
 
@@ -9959,7 +9959,7 @@ export namespace Prisma {
     OR?: WorkflowWhereInput[]
     NOT?: WorkflowWhereInput | WorkflowWhereInput[]
     id?: IntFilter<"Workflow"> | number
-    wwname?: StringFilter<"Workflow"> | string
+    name?: StringFilter<"Workflow"> | string
     context?: StringNullableFilter<"Workflow"> | string | null
     description?: StringFilter<"Workflow"> | string
     application?: StringNullableFilter<"Workflow"> | string | null
@@ -9971,7 +9971,7 @@ export namespace Prisma {
 
   export type WorkflowOrderByWithRelationInput = {
     id?: SortOrder
-    wwname?: SortOrder
+    name?: SortOrder
     context?: SortOrderInput | SortOrder
     description?: SortOrder
     application?: SortOrderInput | SortOrder
@@ -9983,7 +9983,7 @@ export namespace Prisma {
 
   export type WorkflowWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    wwname?: string
+    name?: string
     AND?: WorkflowWhereInput | WorkflowWhereInput[]
     OR?: WorkflowWhereInput[]
     NOT?: WorkflowWhereInput | WorkflowWhereInput[]
@@ -9994,11 +9994,11 @@ export namespace Prisma {
     updated?: DateTimeFilter<"Workflow"> | Date | string
     tasks?: TaskListRelationFilter
     taskcategorys?: TaskcategoryListRelationFilter
-  }, "id" | "wwname">
+  }, "id" | "name">
 
   export type WorkflowOrderByWithAggregationInput = {
     id?: SortOrder
-    wwname?: SortOrder
+    name?: SortOrder
     context?: SortOrderInput | SortOrder
     description?: SortOrder
     application?: SortOrderInput | SortOrder
@@ -10016,7 +10016,7 @@ export namespace Prisma {
     OR?: WorkflowScalarWhereWithAggregatesInput[]
     NOT?: WorkflowScalarWhereWithAggregatesInput | WorkflowScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Workflow"> | number
-    wwname?: StringWithAggregatesFilter<"Workflow"> | string
+    name?: StringWithAggregatesFilter<"Workflow"> | string
     context?: StringNullableWithAggregatesFilter<"Workflow"> | string | null
     description?: StringWithAggregatesFilter<"Workflow"> | string
     application?: StringNullableWithAggregatesFilter<"Workflow"> | string | null
@@ -10030,7 +10030,7 @@ export namespace Prisma {
     NOT?: TaskcategoryWhereInput | TaskcategoryWhereInput[]
     id?: IntFilter<"Taskcategory"> | number
     workflowId?: IntFilter<"Taskcategory"> | number
-    tyname?: StringFilter<"Taskcategory"> | string
+    name?: StringFilter<"Taskcategory"> | string
     description?: StringNullableFilter<"Taskcategory"> | string | null
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
     tasks?: TaskListRelationFilter
@@ -10039,7 +10039,7 @@ export namespace Prisma {
   export type TaskcategoryOrderByWithRelationInput = {
     id?: SortOrder
     workflowId?: SortOrder
-    tyname?: SortOrder
+    name?: SortOrder
     description?: SortOrderInput | SortOrder
     workflow?: WorkflowOrderByWithRelationInput
     tasks?: TaskOrderByRelationAggregateInput
@@ -10051,7 +10051,7 @@ export namespace Prisma {
     OR?: TaskcategoryWhereInput[]
     NOT?: TaskcategoryWhereInput | TaskcategoryWhereInput[]
     workflowId?: IntFilter<"Taskcategory"> | number
-    tyname?: StringFilter<"Taskcategory"> | string
+    name?: StringFilter<"Taskcategory"> | string
     description?: StringNullableFilter<"Taskcategory"> | string | null
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
     tasks?: TaskListRelationFilter
@@ -10060,7 +10060,7 @@ export namespace Prisma {
   export type TaskcategoryOrderByWithAggregationInput = {
     id?: SortOrder
     workflowId?: SortOrder
-    tyname?: SortOrder
+    name?: SortOrder
     description?: SortOrderInput | SortOrder
     _count?: TaskcategoryCountOrderByAggregateInput
     _avg?: TaskcategoryAvgOrderByAggregateInput
@@ -10075,7 +10075,7 @@ export namespace Prisma {
     NOT?: TaskcategoryScalarWhereWithAggregatesInput | TaskcategoryScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Taskcategory"> | number
     workflowId?: IntWithAggregatesFilter<"Taskcategory"> | number
-    tyname?: StringWithAggregatesFilter<"Taskcategory"> | string
+    name?: StringWithAggregatesFilter<"Taskcategory"> | string
     description?: StringNullableWithAggregatesFilter<"Taskcategory"> | string | null
   }
 
@@ -10089,7 +10089,7 @@ export namespace Prisma {
     workflowId?: IntFilter<"Task"> | number
     taskcategoryId?: IntFilter<"Task"> | number
     orden?: IntFilter<"Task"> | number
-    tkname?: StringFilter<"Task"> | string
+    name?: StringFilter<"Task"> | string
     tkgroup?: IntFilter<"Task"> | number
     description?: StringNullableFilter<"Task"> | string | null
     files?: StringNullableFilter<"Task"> | string | null
@@ -10107,7 +10107,7 @@ export namespace Prisma {
     workflowId?: SortOrder
     taskcategoryId?: SortOrder
     orden?: SortOrder
-    tkname?: SortOrder
+    name?: SortOrder
     tkgroup?: SortOrder
     description?: SortOrderInput | SortOrder
     files?: SortOrderInput | SortOrder
@@ -10120,7 +10120,7 @@ export namespace Prisma {
 
   export type TaskWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    tkname?: string
+    name?: string
     AND?: TaskWhereInput | TaskWhereInput[]
     OR?: TaskWhereInput[]
     NOT?: TaskWhereInput | TaskWhereInput[]
@@ -10137,7 +10137,7 @@ export namespace Prisma {
     codelang?: XOR<CodelangScalarRelationFilter, CodelangWhereInput>
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
     taskcategory?: XOR<TaskcategoryScalarRelationFilter, TaskcategoryWhereInput>
-  }, "id" | "tkname">
+  }, "id" | "name">
 
   export type TaskOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10146,7 +10146,7 @@ export namespace Prisma {
     workflowId?: SortOrder
     taskcategoryId?: SortOrder
     orden?: SortOrder
-    tkname?: SortOrder
+    name?: SortOrder
     tkgroup?: SortOrder
     description?: SortOrderInput | SortOrder
     files?: SortOrderInput | SortOrder
@@ -10168,7 +10168,7 @@ export namespace Prisma {
     workflowId?: IntWithAggregatesFilter<"Task"> | number
     taskcategoryId?: IntWithAggregatesFilter<"Task"> | number
     orden?: IntWithAggregatesFilter<"Task"> | number
-    tkname?: StringWithAggregatesFilter<"Task"> | string
+    name?: StringWithAggregatesFilter<"Task"> | string
     tkgroup?: IntWithAggregatesFilter<"Task"> | number
     description?: StringNullableWithAggregatesFilter<"Task"> | string | null
     files?: StringNullableWithAggregatesFilter<"Task"> | string | null
@@ -10180,31 +10180,31 @@ export namespace Prisma {
     OR?: ApptypeWhereInput[]
     NOT?: ApptypeWhereInput | ApptypeWhereInput[]
     id?: IntFilter<"Apptype"> | number
-    aename?: StringFilter<"Apptype"> | string
+    name?: StringFilter<"Apptype"> | string
     description?: StringFilter<"Apptype"> | string
     applications?: ApplicationListRelationFilter
   }
 
   export type ApptypeOrderByWithRelationInput = {
     id?: SortOrder
-    aename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     applications?: ApplicationOrderByRelationAggregateInput
   }
 
   export type ApptypeWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    aename?: string
+    name?: string
     AND?: ApptypeWhereInput | ApptypeWhereInput[]
     OR?: ApptypeWhereInput[]
     NOT?: ApptypeWhereInput | ApptypeWhereInput[]
     description?: StringFilter<"Apptype"> | string
     applications?: ApplicationListRelationFilter
-  }, "id" | "aename">
+  }, "id" | "name">
 
   export type ApptypeOrderByWithAggregationInput = {
     id?: SortOrder
-    aename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     _count?: ApptypeCountOrderByAggregateInput
     _avg?: ApptypeAvgOrderByAggregateInput
@@ -10218,7 +10218,7 @@ export namespace Prisma {
     OR?: ApptypeScalarWhereWithAggregatesInput[]
     NOT?: ApptypeScalarWhereWithAggregatesInput | ApptypeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Apptype"> | number
-    aename?: StringWithAggregatesFilter<"Apptype"> | string
+    name?: StringWithAggregatesFilter<"Apptype"> | string
     description?: StringWithAggregatesFilter<"Apptype"> | string
   }
 
@@ -10229,7 +10229,7 @@ export namespace Prisma {
     id?: IntFilter<"Application"> | number
     apptypeId?: IntFilter<"Application"> | number
     codelangId?: IntFilter<"Application"> | number
-    anname?: StringFilter<"Application"> | string
+    name?: StringFilter<"Application"> | string
     description?: StringFilter<"Application"> | string
     repository?: StringFilter<"Application"> | string
     author?: StringNullableFilter<"Application"> | string | null
@@ -10255,7 +10255,7 @@ export namespace Prisma {
     id?: SortOrder
     apptypeId?: SortOrder
     codelangId?: SortOrder
-    anname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     repository?: SortOrder
     author?: SortOrderInput | SortOrder
@@ -10279,7 +10279,7 @@ export namespace Prisma {
 
   export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    anname?: string
+    name?: string
     AND?: ApplicationWhereInput | ApplicationWhereInput[]
     OR?: ApplicationWhereInput[]
     NOT?: ApplicationWhereInput | ApplicationWhereInput[]
@@ -10304,13 +10304,13 @@ export namespace Prisma {
     updated?: DateTimeFilter<"Application"> | Date | string
     apptype?: XOR<ApptypeScalarRelationFilter, ApptypeWhereInput>
     codelang?: XOR<CodelangScalarRelationFilter, CodelangWhereInput>
-  }, "id" | "anname">
+  }, "id" | "name">
 
   export type ApplicationOrderByWithAggregationInput = {
     id?: SortOrder
     apptypeId?: SortOrder
     codelangId?: SortOrder
-    anname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     repository?: SortOrder
     author?: SortOrderInput | SortOrder
@@ -10342,7 +10342,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Application"> | number
     apptypeId?: IntWithAggregatesFilter<"Application"> | number
     codelangId?: IntWithAggregatesFilter<"Application"> | number
-    anname?: StringWithAggregatesFilter<"Application"> | string
+    name?: StringWithAggregatesFilter<"Application"> | string
     description?: StringWithAggregatesFilter<"Application"> | string
     repository?: StringWithAggregatesFilter<"Application"> | string
     author?: StringNullableWithAggregatesFilter<"Application"> | string | null
@@ -10363,7 +10363,7 @@ export namespace Prisma {
   }
 
   export type CodelangCreateInput = {
-    cgname: string
+    name: string
     description: string
     tasks?: TaskCreateNestedManyWithoutCodelangInput
     applications?: ApplicationCreateNestedManyWithoutCodelangInput
@@ -10371,14 +10371,14 @@ export namespace Prisma {
 
   export type CodelangUncheckedCreateInput = {
     id?: number
-    cgname: string
+    name: string
     description: string
     tasks?: TaskUncheckedCreateNestedManyWithoutCodelangInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutCodelangInput
   }
 
   export type CodelangUpdateInput = {
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUpdateManyWithoutCodelangNestedInput
     applications?: ApplicationUpdateManyWithoutCodelangNestedInput
@@ -10386,7 +10386,7 @@ export namespace Prisma {
 
   export type CodelangUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUncheckedUpdateManyWithoutCodelangNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutCodelangNestedInput
@@ -10394,66 +10394,66 @@ export namespace Prisma {
 
   export type CodelangCreateManyInput = {
     id?: number
-    cgname: string
+    name: string
     description: string
   }
 
   export type CodelangUpdateManyMutationInput = {
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type CodelangUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type TasktypeCreateInput = {
-    tename: string
+    name: string
     description: string
     tasks?: TaskCreateNestedManyWithoutTasktypeInput
   }
 
   export type TasktypeUncheckedCreateInput = {
     id?: number
-    tename: string
+    name: string
     description: string
     tasks?: TaskUncheckedCreateNestedManyWithoutTasktypeInput
   }
 
   export type TasktypeUpdateInput = {
-    tename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUpdateManyWithoutTasktypeNestedInput
   }
 
   export type TasktypeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    tename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUncheckedUpdateManyWithoutTasktypeNestedInput
   }
 
   export type TasktypeCreateManyInput = {
     id?: number
-    tename: string
+    name: string
     description: string
   }
 
   export type TasktypeUpdateManyMutationInput = {
-    tename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type TasktypeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    tename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowCreateInput = {
-    wwname: string
+    name: string
     context?: string | null
     description?: string
     application?: string | null
@@ -10465,7 +10465,7 @@ export namespace Prisma {
 
   export type WorkflowUncheckedCreateInput = {
     id?: number
-    wwname: string
+    name: string
     context?: string | null
     description?: string
     application?: string | null
@@ -10476,7 +10476,7 @@ export namespace Prisma {
   }
 
   export type WorkflowUpdateInput = {
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10488,7 +10488,7 @@ export namespace Prisma {
 
   export type WorkflowUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10500,7 +10500,7 @@ export namespace Prisma {
 
   export type WorkflowCreateManyInput = {
     id?: number
-    wwname: string
+    name: string
     context?: string | null
     description?: string
     application?: string | null
@@ -10509,7 +10509,7 @@ export namespace Prisma {
   }
 
   export type WorkflowUpdateManyMutationInput = {
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10519,7 +10519,7 @@ export namespace Prisma {
 
   export type WorkflowUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10528,7 +10528,7 @@ export namespace Prisma {
   }
 
   export type TaskcategoryCreateInput = {
-    tyname: string
+    name: string
     description?: string | null
     workflow: WorkflowCreateNestedOneWithoutTaskcategorysInput
     tasks?: TaskCreateNestedManyWithoutTaskcategoryInput
@@ -10537,13 +10537,13 @@ export namespace Prisma {
   export type TaskcategoryUncheckedCreateInput = {
     id?: number
     workflowId: number
-    tyname: string
+    name: string
     description?: string | null
     tasks?: TaskUncheckedCreateNestedManyWithoutTaskcategoryInput
   }
 
   export type TaskcategoryUpdateInput = {
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     workflow?: WorkflowUpdateOneRequiredWithoutTaskcategorysNestedInput
     tasks?: TaskUpdateManyWithoutTaskcategoryNestedInput
@@ -10552,7 +10552,7 @@ export namespace Prisma {
   export type TaskcategoryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     workflowId?: IntFieldUpdateOperationsInput | number
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: TaskUncheckedUpdateManyWithoutTaskcategoryNestedInput
   }
@@ -10560,25 +10560,25 @@ export namespace Prisma {
   export type TaskcategoryCreateManyInput = {
     id?: number
     workflowId: number
-    tyname: string
+    name: string
     description?: string | null
   }
 
   export type TaskcategoryUpdateManyMutationInput = {
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskcategoryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     workflowId?: IntFieldUpdateOperationsInput | number
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskCreateInput = {
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -10596,7 +10596,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -10605,7 +10605,7 @@ export namespace Prisma {
 
   export type TaskUpdateInput = {
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10623,7 +10623,7 @@ export namespace Prisma {
     workflowId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10637,7 +10637,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -10646,7 +10646,7 @@ export namespace Prisma {
 
   export type TaskUpdateManyMutationInput = {
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10660,7 +10660,7 @@ export namespace Prisma {
     workflowId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10668,50 +10668,50 @@ export namespace Prisma {
   }
 
   export type ApptypeCreateInput = {
-    aename: string
+    name: string
     description?: string
     applications?: ApplicationCreateNestedManyWithoutApptypeInput
   }
 
   export type ApptypeUncheckedCreateInput = {
     id?: number
-    aename: string
+    name: string
     description?: string
     applications?: ApplicationUncheckedCreateNestedManyWithoutApptypeInput
   }
 
   export type ApptypeUpdateInput = {
-    aename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     applications?: ApplicationUpdateManyWithoutApptypeNestedInput
   }
 
   export type ApptypeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    aename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     applications?: ApplicationUncheckedUpdateManyWithoutApptypeNestedInput
   }
 
   export type ApptypeCreateManyInput = {
     id?: number
-    aename: string
+    name: string
     description?: string
   }
 
   export type ApptypeUpdateManyMutationInput = {
-    aename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type ApptypeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    aename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type ApplicationCreateInput = {
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -10737,7 +10737,7 @@ export namespace Prisma {
     id?: number
     apptypeId: number
     codelangId: number
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -10758,7 +10758,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateInput = {
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10784,7 +10784,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     apptypeId?: IntFieldUpdateOperationsInput | number
     codelangId?: IntFieldUpdateOperationsInput | number
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10808,7 +10808,7 @@ export namespace Prisma {
     id?: number
     apptypeId: number
     codelangId: number
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -10829,7 +10829,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateManyMutationInput = {
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10853,7 +10853,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     apptypeId?: IntFieldUpdateOperationsInput | number
     codelangId?: IntFieldUpdateOperationsInput | number
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10921,7 +10921,7 @@ export namespace Prisma {
 
   export type CodelangCountOrderByAggregateInput = {
     id?: SortOrder
-    cgname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -10931,13 +10931,13 @@ export namespace Prisma {
 
   export type CodelangMaxOrderByAggregateInput = {
     id?: SortOrder
-    cgname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
   export type CodelangMinOrderByAggregateInput = {
     id?: SortOrder
-    cgname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -10981,7 +10981,7 @@ export namespace Prisma {
 
   export type TasktypeCountOrderByAggregateInput = {
     id?: SortOrder
-    tename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -10991,13 +10991,13 @@ export namespace Prisma {
 
   export type TasktypeMaxOrderByAggregateInput = {
     id?: SortOrder
-    tename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
   export type TasktypeMinOrderByAggregateInput = {
     id?: SortOrder
-    tename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -11048,7 +11048,7 @@ export namespace Prisma {
 
   export type WorkflowCountOrderByAggregateInput = {
     id?: SortOrder
-    wwname?: SortOrder
+    name?: SortOrder
     context?: SortOrder
     description?: SortOrder
     application?: SortOrder
@@ -11062,7 +11062,7 @@ export namespace Prisma {
 
   export type WorkflowMaxOrderByAggregateInput = {
     id?: SortOrder
-    wwname?: SortOrder
+    name?: SortOrder
     context?: SortOrder
     description?: SortOrder
     application?: SortOrder
@@ -11072,7 +11072,7 @@ export namespace Prisma {
 
   export type WorkflowMinOrderByAggregateInput = {
     id?: SortOrder
-    wwname?: SortOrder
+    name?: SortOrder
     context?: SortOrder
     description?: SortOrder
     application?: SortOrder
@@ -11124,7 +11124,7 @@ export namespace Prisma {
   export type TaskcategoryCountOrderByAggregateInput = {
     id?: SortOrder
     workflowId?: SortOrder
-    tyname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -11136,14 +11136,14 @@ export namespace Prisma {
   export type TaskcategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     workflowId?: SortOrder
-    tyname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
   export type TaskcategoryMinOrderByAggregateInput = {
     id?: SortOrder
     workflowId?: SortOrder
-    tyname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -11174,7 +11174,7 @@ export namespace Prisma {
     workflowId?: SortOrder
     taskcategoryId?: SortOrder
     orden?: SortOrder
-    tkname?: SortOrder
+    name?: SortOrder
     tkgroup?: SortOrder
     description?: SortOrder
     files?: SortOrder
@@ -11198,7 +11198,7 @@ export namespace Prisma {
     workflowId?: SortOrder
     taskcategoryId?: SortOrder
     orden?: SortOrder
-    tkname?: SortOrder
+    name?: SortOrder
     tkgroup?: SortOrder
     description?: SortOrder
     files?: SortOrder
@@ -11212,7 +11212,7 @@ export namespace Prisma {
     workflowId?: SortOrder
     taskcategoryId?: SortOrder
     orden?: SortOrder
-    tkname?: SortOrder
+    name?: SortOrder
     tkgroup?: SortOrder
     description?: SortOrder
     files?: SortOrder
@@ -11231,7 +11231,7 @@ export namespace Prisma {
 
   export type ApptypeCountOrderByAggregateInput = {
     id?: SortOrder
-    aename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -11241,13 +11241,13 @@ export namespace Prisma {
 
   export type ApptypeMaxOrderByAggregateInput = {
     id?: SortOrder
-    aename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
   export type ApptypeMinOrderByAggregateInput = {
     id?: SortOrder
-    aename?: SortOrder
+    name?: SortOrder
     description?: SortOrder
   }
 
@@ -11269,7 +11269,7 @@ export namespace Prisma {
     id?: SortOrder
     apptypeId?: SortOrder
     codelangId?: SortOrder
-    anname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     repository?: SortOrder
     author?: SortOrder
@@ -11299,7 +11299,7 @@ export namespace Prisma {
     id?: SortOrder
     apptypeId?: SortOrder
     codelangId?: SortOrder
-    anname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     repository?: SortOrder
     author?: SortOrder
@@ -11323,7 +11323,7 @@ export namespace Prisma {
     id?: SortOrder
     apptypeId?: SortOrder
     codelangId?: SortOrder
-    anname?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     repository?: SortOrder
     author?: SortOrder
@@ -11924,7 +11924,7 @@ export namespace Prisma {
 
   export type TaskCreateWithoutCodelangInput = {
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -11940,7 +11940,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -11958,7 +11958,7 @@ export namespace Prisma {
   }
 
   export type ApplicationCreateWithoutCodelangInput = {
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -11982,7 +11982,7 @@ export namespace Prisma {
   export type ApplicationUncheckedCreateWithoutCodelangInput = {
     id?: number
     apptypeId: number
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -12038,7 +12038,7 @@ export namespace Prisma {
     workflowId?: IntFilter<"Task"> | number
     taskcategoryId?: IntFilter<"Task"> | number
     orden?: IntFilter<"Task"> | number
-    tkname?: StringFilter<"Task"> | string
+    name?: StringFilter<"Task"> | string
     tkgroup?: IntFilter<"Task"> | number
     description?: StringNullableFilter<"Task"> | string | null
     files?: StringNullableFilter<"Task"> | string | null
@@ -12068,7 +12068,7 @@ export namespace Prisma {
     id?: IntFilter<"Application"> | number
     apptypeId?: IntFilter<"Application"> | number
     codelangId?: IntFilter<"Application"> | number
-    anname?: StringFilter<"Application"> | string
+    name?: StringFilter<"Application"> | string
     description?: StringFilter<"Application"> | string
     repository?: StringFilter<"Application"> | string
     author?: StringNullableFilter<"Application"> | string | null
@@ -12090,7 +12090,7 @@ export namespace Prisma {
 
   export type TaskCreateWithoutTasktypeInput = {
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12106,7 +12106,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12141,7 +12141,7 @@ export namespace Prisma {
 
   export type TaskCreateWithoutWorkflowInput = {
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12157,7 +12157,7 @@ export namespace Prisma {
     codelangId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12175,14 +12175,14 @@ export namespace Prisma {
   }
 
   export type TaskcategoryCreateWithoutWorkflowInput = {
-    tyname: string
+    name: string
     description?: string | null
     tasks?: TaskCreateNestedManyWithoutTaskcategoryInput
   }
 
   export type TaskcategoryUncheckedCreateWithoutWorkflowInput = {
     id?: number
-    tyname: string
+    name: string
     description?: string | null
     tasks?: TaskUncheckedCreateNestedManyWithoutTaskcategoryInput
   }
@@ -12235,12 +12235,12 @@ export namespace Prisma {
     NOT?: TaskcategoryScalarWhereInput | TaskcategoryScalarWhereInput[]
     id?: IntFilter<"Taskcategory"> | number
     workflowId?: IntFilter<"Taskcategory"> | number
-    tyname?: StringFilter<"Taskcategory"> | string
+    name?: StringFilter<"Taskcategory"> | string
     description?: StringNullableFilter<"Taskcategory"> | string | null
   }
 
   export type WorkflowCreateWithoutTaskcategorysInput = {
-    wwname: string
+    name: string
     context?: string | null
     description?: string
     application?: string | null
@@ -12251,7 +12251,7 @@ export namespace Prisma {
 
   export type WorkflowUncheckedCreateWithoutTaskcategorysInput = {
     id?: number
-    wwname: string
+    name: string
     context?: string | null
     description?: string
     application?: string | null
@@ -12267,7 +12267,7 @@ export namespace Prisma {
 
   export type TaskCreateWithoutTaskcategoryInput = {
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12283,7 +12283,7 @@ export namespace Prisma {
     codelangId: number
     workflowId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12312,7 +12312,7 @@ export namespace Prisma {
   }
 
   export type WorkflowUpdateWithoutTaskcategorysInput = {
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12323,7 +12323,7 @@ export namespace Prisma {
 
   export type WorkflowUncheckedUpdateWithoutTaskcategorysInput = {
     id?: IntFieldUpdateOperationsInput | number
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12349,13 +12349,13 @@ export namespace Prisma {
   }
 
   export type TasktypeCreateWithoutTasksInput = {
-    tename: string
+    name: string
     description: string
   }
 
   export type TasktypeUncheckedCreateWithoutTasksInput = {
     id?: number
-    tename: string
+    name: string
     description: string
   }
 
@@ -12365,14 +12365,14 @@ export namespace Prisma {
   }
 
   export type CodelangCreateWithoutTasksInput = {
-    cgname: string
+    name: string
     description: string
     applications?: ApplicationCreateNestedManyWithoutCodelangInput
   }
 
   export type CodelangUncheckedCreateWithoutTasksInput = {
     id?: number
-    cgname: string
+    name: string
     description: string
     applications?: ApplicationUncheckedCreateNestedManyWithoutCodelangInput
   }
@@ -12383,7 +12383,7 @@ export namespace Prisma {
   }
 
   export type WorkflowCreateWithoutTasksInput = {
-    wwname: string
+    name: string
     context?: string | null
     description?: string
     application?: string | null
@@ -12394,7 +12394,7 @@ export namespace Prisma {
 
   export type WorkflowUncheckedCreateWithoutTasksInput = {
     id?: number
-    wwname: string
+    name: string
     context?: string | null
     description?: string
     application?: string | null
@@ -12409,7 +12409,7 @@ export namespace Prisma {
   }
 
   export type TaskcategoryCreateWithoutTasksInput = {
-    tyname: string
+    name: string
     description?: string | null
     workflow: WorkflowCreateNestedOneWithoutTaskcategorysInput
   }
@@ -12417,7 +12417,7 @@ export namespace Prisma {
   export type TaskcategoryUncheckedCreateWithoutTasksInput = {
     id?: number
     workflowId: number
-    tyname: string
+    name: string
     description?: string | null
   }
 
@@ -12438,13 +12438,13 @@ export namespace Prisma {
   }
 
   export type TasktypeUpdateWithoutTasksInput = {
-    tename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type TasktypeUncheckedUpdateWithoutTasksInput = {
     id?: IntFieldUpdateOperationsInput | number
-    tename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
@@ -12460,14 +12460,14 @@ export namespace Prisma {
   }
 
   export type CodelangUpdateWithoutTasksInput = {
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     applications?: ApplicationUpdateManyWithoutCodelangNestedInput
   }
 
   export type CodelangUncheckedUpdateWithoutTasksInput = {
     id?: IntFieldUpdateOperationsInput | number
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     applications?: ApplicationUncheckedUpdateManyWithoutCodelangNestedInput
   }
@@ -12484,7 +12484,7 @@ export namespace Prisma {
   }
 
   export type WorkflowUpdateWithoutTasksInput = {
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12495,7 +12495,7 @@ export namespace Prisma {
 
   export type WorkflowUncheckedUpdateWithoutTasksInput = {
     id?: IntFieldUpdateOperationsInput | number
-    wwname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     context?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     application?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12516,7 +12516,7 @@ export namespace Prisma {
   }
 
   export type TaskcategoryUpdateWithoutTasksInput = {
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     workflow?: WorkflowUpdateOneRequiredWithoutTaskcategorysNestedInput
   }
@@ -12524,12 +12524,12 @@ export namespace Prisma {
   export type TaskcategoryUncheckedUpdateWithoutTasksInput = {
     id?: IntFieldUpdateOperationsInput | number
     workflowId?: IntFieldUpdateOperationsInput | number
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ApplicationCreateWithoutApptypeInput = {
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -12553,7 +12553,7 @@ export namespace Prisma {
   export type ApplicationUncheckedCreateWithoutApptypeInput = {
     id?: number
     codelangId: number
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -12600,13 +12600,13 @@ export namespace Prisma {
   }
 
   export type ApptypeCreateWithoutApplicationsInput = {
-    aename: string
+    name: string
     description?: string
   }
 
   export type ApptypeUncheckedCreateWithoutApplicationsInput = {
     id?: number
-    aename: string
+    name: string
     description?: string
   }
 
@@ -12616,14 +12616,14 @@ export namespace Prisma {
   }
 
   export type CodelangCreateWithoutApplicationsInput = {
-    cgname: string
+    name: string
     description: string
     tasks?: TaskCreateNestedManyWithoutCodelangInput
   }
 
   export type CodelangUncheckedCreateWithoutApplicationsInput = {
     id?: number
-    cgname: string
+    name: string
     description: string
     tasks?: TaskUncheckedCreateNestedManyWithoutCodelangInput
   }
@@ -12645,13 +12645,13 @@ export namespace Prisma {
   }
 
   export type ApptypeUpdateWithoutApplicationsInput = {
-    aename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type ApptypeUncheckedUpdateWithoutApplicationsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    aename?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
@@ -12667,14 +12667,14 @@ export namespace Prisma {
   }
 
   export type CodelangUpdateWithoutApplicationsInput = {
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUpdateManyWithoutCodelangNestedInput
   }
 
   export type CodelangUncheckedUpdateWithoutApplicationsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    cgname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     tasks?: TaskUncheckedUpdateManyWithoutCodelangNestedInput
   }
@@ -12685,7 +12685,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12695,7 +12695,7 @@ export namespace Prisma {
   export type ApplicationCreateManyCodelangInput = {
     id?: number
     apptypeId: number
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -12717,7 +12717,7 @@ export namespace Prisma {
 
   export type TaskUpdateWithoutCodelangInput = {
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12733,7 +12733,7 @@ export namespace Prisma {
     workflowId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12746,7 +12746,7 @@ export namespace Prisma {
     workflowId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12754,7 +12754,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateWithoutCodelangInput = {
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12778,7 +12778,7 @@ export namespace Prisma {
   export type ApplicationUncheckedUpdateWithoutCodelangInput = {
     id?: IntFieldUpdateOperationsInput | number
     apptypeId?: IntFieldUpdateOperationsInput | number
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12801,7 +12801,7 @@ export namespace Prisma {
   export type ApplicationUncheckedUpdateManyWithoutCodelangInput = {
     id?: IntFieldUpdateOperationsInput | number
     apptypeId?: IntFieldUpdateOperationsInput | number
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12827,7 +12827,7 @@ export namespace Prisma {
     workflowId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12836,7 +12836,7 @@ export namespace Prisma {
 
   export type TaskUpdateWithoutTasktypeInput = {
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12852,7 +12852,7 @@ export namespace Prisma {
     workflowId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12865,7 +12865,7 @@ export namespace Prisma {
     workflowId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12878,7 +12878,7 @@ export namespace Prisma {
     codelangId: number
     taskcategoryId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12887,13 +12887,13 @@ export namespace Prisma {
 
   export type TaskcategoryCreateManyWorkflowInput = {
     id?: number
-    tyname: string
+    name: string
     description?: string | null
   }
 
   export type TaskUpdateWithoutWorkflowInput = {
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12909,7 +12909,7 @@ export namespace Prisma {
     codelangId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12922,7 +12922,7 @@ export namespace Prisma {
     codelangId?: IntFieldUpdateOperationsInput | number
     taskcategoryId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12930,21 +12930,21 @@ export namespace Prisma {
   }
 
   export type TaskcategoryUpdateWithoutWorkflowInput = {
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: TaskUpdateManyWithoutTaskcategoryNestedInput
   }
 
   export type TaskcategoryUncheckedUpdateWithoutWorkflowInput = {
     id?: IntFieldUpdateOperationsInput | number
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     tasks?: TaskUncheckedUpdateManyWithoutTaskcategoryNestedInput
   }
 
   export type TaskcategoryUncheckedUpdateManyWithoutWorkflowInput = {
     id?: IntFieldUpdateOperationsInput | number
-    tyname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -12954,7 +12954,7 @@ export namespace Prisma {
     codelangId: number
     workflowId: number
     orden: number
-    tkname: string
+    name: string
     tkgroup: number
     description?: string | null
     files?: string | null
@@ -12963,7 +12963,7 @@ export namespace Prisma {
 
   export type TaskUpdateWithoutTaskcategoryInput = {
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12979,7 +12979,7 @@ export namespace Prisma {
     codelangId?: IntFieldUpdateOperationsInput | number
     workflowId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12992,7 +12992,7 @@ export namespace Prisma {
     codelangId?: IntFieldUpdateOperationsInput | number
     workflowId?: IntFieldUpdateOperationsInput | number
     orden?: IntFieldUpdateOperationsInput | number
-    tkname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     tkgroup?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     files?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13002,7 +13002,7 @@ export namespace Prisma {
   export type ApplicationCreateManyApptypeInput = {
     id?: number
     codelangId: number
-    anname: string
+    name: string
     description?: string
     repository?: string
     author?: string | null
@@ -13023,7 +13023,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateWithoutApptypeInput = {
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13047,7 +13047,7 @@ export namespace Prisma {
   export type ApplicationUncheckedUpdateWithoutApptypeInput = {
     id?: IntFieldUpdateOperationsInput | number
     codelangId?: IntFieldUpdateOperationsInput | number
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13070,7 +13070,7 @@ export namespace Prisma {
   export type ApplicationUncheckedUpdateManyWithoutApptypeInput = {
     id?: IntFieldUpdateOperationsInput | number
     codelangId?: IntFieldUpdateOperationsInput | number
-    anname?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     repository?: StringFieldUpdateOperationsInput | string
     author?: NullableStringFieldUpdateOperationsInput | string | null

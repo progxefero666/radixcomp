@@ -1,90 +1,87 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
-  output = "../generated/prisma"
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
-// CodeLang excluded fields:
-// 
-model CodeLang {
-    id          Int          @id @default(autoincrement())
-    cgname      String       @unique @db.VarChar(20)
-    description String       @db.VarChar(150)
-    tasks task[] 
+// ----------------- MODELS -----------------
+
+model Codelang {
+    id          Int           @id @default(autoincrement())
+    cgname      String        @unique @db.VarChar(20)
+    description String        @db.VarChar(150)
+    tasks       Task[]
     applications Application[]
     @@map("codelang")
 }
 
-// TaskType excluded fields:
-//   
-model TaskType {
+model Tasktype {
     id          Int    @id @default(autoincrement())
     tename      String @unique @db.VarChar(100)
     description String @db.VarChar(200)
-    tasks task[]
+    tasks       Task[]
     @@map("tasktype")
 }
 
-// Workflow excluded fields:
-//
 model Workflow {
-    id          Int    @id @default(autoincrement())
-    wwname      String @unique @db.VarChar(100)
-    description String @db.Text
-    application String? @db.VarChar(50)
-    fpath       String? @db.VarChar(500)
-    updated     DateTime @default(dbgenerated("CURRENT_DATE"))  
-    context     String?  @db.Text
-    tasks task[]  
+    id          Int        @id @default(autoincrement())
+    wwname      String     @unique @db.VarChar(100)
+    context     String?    @db.Text
+    description String     @default("undefined") @db.Text
+    application String?    @db.VarChar(50)
+    fpath       String?    @db.VarChar(500)
+    updated     DateTime
+    tasks       Task[]
+    taskcategorys  Taskcategory[]
     @@map("workflow")
 }
 
-// Task excluded fields:
-//
-model task {
+model Taskcategory {
     id          Int       @id @default(autoincrement())
-    tasktype    TaskType  @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
-    tasktypeId  Int       @map("tasktype_id")
-    codelang    CodeLang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
-    codelangId  Int       @map("codelang_id")
     workflow    Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
     workflowId  Int       @map("workflow_id")
-    orden       Int
-    tkname      String    @unique @db.VarChar(255)
-    description String?   @db.Text
-    files       String?   @db.Text
-    folders     String?   @db.Text
-    wgroup      String @unique @db.VarChar(100)
+    tyname      String    @db.VarChar(100)
+    description String?   @db.VarChar(100)
+    tasks       Task[]
+    @@map("taskcategory")
+}
+
+model Task {
+    id              Int             @id @default(autoincrement())
+    tasktype        Tasktype        @relation(fields: [tasktypeId], references: [id], onDelete: Cascade)
+    tasktypeId      Int             @map("tasktype_id")
+    codelang        Codelang        @relation(fields: [codelangId], references: [id], onDelete: Cascade)
+    codelangId      Int             @map("codelang_id")
+    workflow        Workflow        @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+    workflowId      Int             @map("workflow_id")
+    taskcategory    Taskcategory    @relation(fields: [taskcategoryId], references: [id], onDelete: Cascade)
+    taskcategoryId  Int             @map("taskcategory_id")
+    orden           Int
+    tkname          String          @unique @db.VarChar(255)
+    tkgroup         Int
+    description     String?         @db.Text
+    files           String?         @db.Text
+    folders         String?         @db.Text
     @@map("task")
 }
 
-// AppType excluded fields:
-//
-model AppType {
-    id          Int            @id @default(autoincrement())
-    aename      String         @unique @db.VarChar(50)
-    description String         @default("undefined") @db.VarChar(255)   
-    applications Application[]
-    @@map("apptype") 
+model Apptype {
+    id            Int           @id @default(autoincrement())
+    aename        String        @unique @db.VarChar(50)
+    description   String        @default("undefined") @db.VarChar(255)
+    applications  Application[]
+    @@map("apptype")
 }
 
-// Application excluded fields:
-//
 model Application {
     id            Int       @id @default(autoincrement())
-    apptype       AppType   @relation(fields: [apptypeId], references: [id], onDelete: Cascade)
+    apptype       Apptype   @relation(fields: [apptypeId], references: [id], onDelete: Cascade)
     apptypeId     Int
-    codelang      CodeLang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
+    codelang      Codelang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
     codelangId    Int
     anname        String    @unique @db.VarChar(50)
     description   String    @default("undefined") @db.VarChar(255)
@@ -103,6 +100,6 @@ model Application {
     consumeai     Boolean   @default(false)
     exposedb      Boolean   @default(false)
     exposeapi     Boolean   @default(false)
-    updated       DateTime  @default(dbgenerated("CURRENT_DATE"))
-    @@map("application") 
+    updated       DateTime  @updatedAt
+    @@map("application")
 }
