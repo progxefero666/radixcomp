@@ -29,18 +29,18 @@ export class CodeGenConfig {
 
     public static readonly NOT_DEF:string = "undefined";
     
-    public static FORMAT_TYPESCRIPT:Keyvalue = new Keyvalue("typescript", "TypeScript");
-    public static FORMAT_JSON:Keyvalue = new Keyvalue("json", "JSON");
-    public static FORMAT_JSX:Keyvalue = new Keyvalue("jsx", "JSX");
-    public static FORMAT_SQL:Keyvalue = new Keyvalue("sql", "SQL");
-    public static FORMAT_JAVASCRIPT:Keyvalue = new Keyvalue("javascript", "JavaScript");
+    public static FORMAT_TYPESCRIPT:string = "typescript";
+    public static FORMAT_JSON:string = "json";
+    public static FORMAT_JSX:string = "jsx";
+    public static FORMAT_SQL:string = "sql";
+    public static FORMAT_JAVASCRIPT:string = "javascript";
 
     public static readonly CODE_FORMATS: Keyvalue[] = [
-        CodeGenConfig.FORMAT_TYPESCRIPT,        
-        CodeGenConfig.FORMAT_JSON,
-        CodeGenConfig.FORMAT_JSX,  
-        CodeGenConfig.FORMAT_SQL,
-        CodeGenConfig.FORMAT_JAVASCRIPT
+        new Keyvalue(CodeGenConfig.FORMAT_TYPESCRIPT, "TypeScript"),        
+        new Keyvalue(CodeGenConfig.FORMAT_JSON, "JSON"),
+        new Keyvalue(CodeGenConfig.FORMAT_JSX, "JSX"),  
+        new Keyvalue(CodeGenConfig.FORMAT_SQL, "SQL"),
+        new Keyvalue(CodeGenConfig.FORMAT_JAVASCRIPT, "JavaScript")
     ]; 
 
     public static readonly TYPESCRIPT_MIMETYPE: string = "text/typescript";
@@ -57,10 +57,6 @@ export class CodeGenConfig {
 
  
     public static readonly DEF_FILE_ID:string = "default";
-    public static readonly DEF_FILE_EXT:string = "ts";
-    public static readonly DEF_FILE_MIMETYPE:string = CodeGenConfig.JAVASCRIPT_MIMETYPE;
-    
-
 
     public static readonly DEF_CLASS_NAMEADD: string = "Def"
     public static readonly TAB_4:string = "    ";
@@ -93,12 +89,46 @@ export class CodeGenConfig {
  */
 export class CodeGeneration {
 
-    public static getDefaultFileName(): string {
-        return CodeGenConfig.DEF_FILE_ID + "." + CodeGenConfig.DEF_FILE_EXT;
+    public static getFilename(id:string,format:string): string {
+        let fname: string = id + ".";
+        if(format === CodeGenConfig.FORMAT_TYPESCRIPT) {
+            fname += "ts";
+        }
+        else if(format === CodeGenConfig.FORMAT_JSON) {
+            fname += "json";
+        }
+        else if(format === CodeGenConfig.FORMAT_SQL) {
+            fname += "sql";
+        }
+        else if(format === CodeGenConfig.FORMAT_JAVASCRIPT) {
+            fname += "js";
+        }
+        return fname;
     }
 
-    public static generateFile(id:string,format:string): boolean{
+    public static getMimetype(format:string): string {
 
+        let mimetype: string = CodeGenConfig.TXT_MIMETYPE;
+        if(format === CodeGenConfig.FORMAT_TYPESCRIPT) {
+            mimetype = CodeGenConfig.TYPESCRIPT_MIMETYPE;
+        }
+        else if(format === CodeGenConfig.FORMAT_JSON) {
+            mimetype = CodeGenConfig.JSON_MIMETYPE;
+        }
+        else if(format === CodeGenConfig.FORMAT_SQL) {
+            mimetype = CodeGenConfig.SQL_MIMETYPE;
+        }
+        else if(format === CodeGenConfig.FORMAT_JAVASCRIPT) {
+            mimetype = CodeGenConfig.JAVASCRIPT_MIMETYPE;
+        }
+        return mimetype;
+    }
+
+    public static generateFile(id:string,format:string): boolean{        
+        let fname: string = CodeGeneration.getFilename(id,format);
+        let mimetype: string = CodeGeneration.getMimetype(format);
+        // Here you would implement the logic to generate the file
+        console.log(`Generating file: ${fname} with mimetype: ${mimetype}`);
         return true;
     }
 

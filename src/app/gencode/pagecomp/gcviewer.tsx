@@ -22,8 +22,8 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
     const [codeCharged, setCodeCharged] = useState<boolean>(false);
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
 
-    const expFileName: string = fileName ?? GenCodeModuleConfig.NOT_DEF;
-    const codeFormat: string = format ?? CodeGenConfig.FORMAT_TYPESCRIPT.key;
+    //const expFileName: string = fileName ?? GenCodeModuleConfig.NOT_DEF;
+    //const codeFormat: string = format ?? CodeGenConfig.FORMAT_TYPESCRIPT.key;
 
     useEffect(() => {
         const init = (): void => {
