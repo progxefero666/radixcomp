@@ -1,5 +1,6 @@
 //src\codegen\cgoperations.ts
 
+import { Option } from "@/common/model/option";
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { SchemaService } from "@/codegen/schemaservice";
 import { Keyvalue } from "@/common/model/keyvalue";
@@ -33,3 +34,21 @@ export class CodeGenOperations {
     ];
 
 }//end class
+
+/**
+ * class CodeGenModules
+ */
+export class CodeGenModules {
+
+    public static readonly MODULES: Option[] = [
+        new Option("entity_files", "Entities files",null),
+        new Option("service_files", "Service files",null)
+    ]
+
+}//end class
+
+/*
+    public static getModuleById(id: string): Keyvalue | null {
+        return CodeGenModules.MODULES.find(m => m.key === id) || null;
+    }
+*/

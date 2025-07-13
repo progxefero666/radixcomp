@@ -140,8 +140,18 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const renderHeader = () => {
         return (
             <Flex width="100%" direction="row" justify="between" mt="2" pb="2" align="center" >
-                <XSelect label="Format:" collection={CodeGenOperations.OPS_ENTITIES}
-                    onchange={onOpSelected} />
+                <Flex width="100%" direction="row" gapX="2"  >
+                    <Box>
+                        <XSelect label="Operations:" 
+                                collection={CodeGenOperations.OPS_ENTITIES}
+                                onchange={onOpSelected} />
+                    </Box>
+                    <Box>
+                        <XSelect label="Format:" collection={CodeGenOperations.CODE_FORMATS}
+                            onchange={onSelectTable} />                    
+                    </Box>
+                </Flex>
+
                 <Button onClick={runOperation} color="green">
                     Run
                 </Button>
@@ -150,29 +160,21 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const renderMainContent = () => {
+  
         return (
             <Flex width="100%" direction="column" py="2" >
-                <Flex width="100%" direction="row" pb="2" >
-                    <XSelect label="Format:" collection={CodeGenOperations.CODE_FORMATS}
-                        onchange={onSelectTable} />
-                </Flex>
-                <SeparatorH />
+
                 <Flex width="100%" direction="row" pt="2"  >
                     <Box mr="2"><Label>Tables:</Label></Box>
                     {showRadioList ?
                         <XSelect collection={dbSquema.current!.tcollection}
                             onchange={onSelectCodeFormat} /> : null}
-                    {showCheckList ?
-                        <Box mr="2">
-                            <PopupBase label="select">
-                                <XCheckGroup
-                                    name="selectTables"
+                    {showCheckList ?                                              
+                        <XCheckGroup name="selectTables"
                                     autocommit={true}
                                     inline={true}
                                     collection={dbSquema.current!.toptions}
-                                    onselect={onSelectTables} />
-                            </PopupBase>
-                        </Box> : null}
+                                    onselect={onSelectTables} /> : null}
                 </Flex>
             </Flex>
         );
