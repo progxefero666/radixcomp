@@ -1,11 +1,24 @@
 //src\app\gencode\module\gcmtsentfiles.ts
+import { ModelTable } from "@/codegen/kernel/cgmodel";
+import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
-import { GenCodeModuleControl } from "@/app/gencode/module/gcmodcontrol";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
-import { TOption, TSelection } from "@/radix/radixtypes";
+import { TOption } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/server/xeferodb/tsclasses";
 
+
+export class GenCodeModuleControl {
+
+    public sqlsquema: string = "";
+    public modeltables: ModelTable[] = []; 
+
+    constructor(sqlsquema: string) {
+        this.sqlsquema = sqlsquema;
+        this.modeltables =  CodeGenSql.getEsquemaTables(this.sqlsquema); 
+    }
+
+}//end class
 
 /**
  * ServClientEntities is a class 

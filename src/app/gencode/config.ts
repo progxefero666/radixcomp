@@ -3,7 +3,7 @@
 import { Option } from "@/common/model/option";
 
 import { OP_CATEGORIES } from "@/codegen/cgconfig";
-import { ServClientEntities } from "./module/client_tscriptentities";
+import { ServClientEntities } from "./gcmodentities";
 
 
 
