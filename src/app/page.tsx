@@ -1,122 +1,57 @@
+//src\app\diagrams\page.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-import { usePathname, useRouter } from "next/navigation";
-import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
-import { AppIndex } from "@/app/index/kernel/appindex";
-import { AppMemmory } from "@/front/appmemory";
-import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
-import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
-
-
-import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
-import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
-import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
-import { CodeGeneration } from "@/codegen/cgconfig";
+import { useEffect, useState } from "react";
+import { Box, Grid, Flex } from "@radix-ui/themes";
+import { SecondBar } from "./diagrams/page/secondbar";
+import { Header } from "./diagrams/page/header";
+import { MainBar } from "./diagrams/page/mainbar";
+import { MainContent } from "./diagrams/page/maincontent";
+import { SecondContent } from "./diagrams/page/secondcontent";
 
 
-//const router = useRouter();
-//const val = AppContext.readDbSquema();
-
-/**
- * Application Main page 
- */
-const boxStyle = {
-   background: 'rgb(30, 40, 63)',
-    border: '1px solid rgb(93, 92, 93)',
+const layoutStyle = {
+    background: 'rgb(153, 17, 62)',
     padding: '0',
 };
 
-export default function PageGenCode() {
+export default function PageDiagrams() {
 
-    let initialized: boolean = false;
-    const appRef = useRef<AppIndex>(null);
-    
-    const [section, setSection] = useState<string|null>(null);
-
-    const [dataCode,   setDataCode] = useState<string>("undefined");
-    const [dataId,     setDataId] = useState<string>("default");
-    const [dataFormat, setDataFormat] = useState<string>("typescript");
-
-    
-    useEffect(() => {
-        //AppContext.saveCodelangs(appRef.current.codelangs);
-        if(initialized) {return;} 
+    const [actsection, setActSection]  = useState<string>("section_1");
         
-        const init = async () => {
-            
-            const dbSquema = await readDbSqlScriptFile("dbsquema");
-            if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}            
-            
-            appRef.current = new AppIndex();
-            const res: boolean = await appRef.current.loadInitCollections();
-            if(!res) {return;}            
+    useEffect(() => {
 
-            initialized =true;
-        };
-        init();
     }, []);
 
-    const onCodeResult= (dataFormat:string,datacode:string,fileid?:string) => {
-        setDataFormat(dataFormat);
-        setDataCode(datacode);
-        setDataId(fileid ?? "default");
-    }
-    
-    const loadSection = (sectionId: string) => {setSection(sectionId);}
-
-    const exportFile = () => {
-        const result:boolean = CodeGeneration.generateFile(dataId,dataFormat,dataCode);
+    const onSelection = (section: string) => {
+        setActSection(section);
     };
 
     return (
-        <Flex direction="column" height="100vh">
+        <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
 
-            <PageHeader />
-            
-            <Flex height="100%">
-
-                <Box width="14%" style={boxStyle}>
-                    <PrimaryBar actsection={section}
-                                onselection={loadSection} />
-                </Box>
-
-                <Box  width="41%" style={boxStyle}> 
-                    <GenCodeControl key={section}  section={section}  
-                                    ondataresult={onCodeResult}/>
-                </Box>
-
-                <Box width="41%" style={boxStyle}>
-                    <GenCodeViewer code={dataCode} exportdata={exportFile} />
-                </Box>
-
-                <Box width="4%" style={boxStyle}>
-                    <SecondBar actsection={section} />
-                </Box>
+            <Flex gridColumn="1/5" gridRow="1" >
+                <Header section={actsection} />
             </Flex>
 
-        </Flex>
+            <Flex gridColumn="1" gridRow="2" >
+                <MainBar section={actsection}
+                    onselection={onSelection} />
+            </Flex>
+
+            <Flex gridColumn="2" gridRow="2" >
+                <MainContent  />
+            </Flex>
+
+            <Flex gridColumn="3" gridRow="2" >
+                <SecondContent  />
+            </Flex>
+
+            <Flex gridColumn="4" gridRow="2" >
+                rbd
+            </Flex>
+
+        </Grid>
     );
 
 }//end page
-
-
-/**
- * Page Second Bar
- */
-interface SecondBarProps {
-    actsection: string|null;
-}
-function SecondBar({actsection}: SecondBarProps) {
-
-    const onSelection = (sectionId: string) => {
-        //not implemented yet
-    }
-    return (
-        <Flex direction="column" >
-            <p>Second Bar</p>
-        </Flex>
-    );
-
-};//end PrimaryBar
