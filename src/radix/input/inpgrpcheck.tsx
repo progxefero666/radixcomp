@@ -3,8 +3,7 @@
 import { forwardRef, useEffect, useState } from "react";
 import { Flex, Text, RadioGroup, CheckboxGroup, Box } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { Option } from "@/common/option";
-import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
+import { radixTypeComp } from "@/radix/radixtypes";
 import { StringsHelper } from "@/markdown/mkdstrings";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { RadixUtil } from "../radixutil";

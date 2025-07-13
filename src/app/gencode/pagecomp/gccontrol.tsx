@@ -17,7 +17,7 @@ import { SeparatorH } from "@/radix/container/separatorh";
 
 import { AppMemmory } from "@/front/appmemory";
 import { PopupBase } from "@/radix/container/popupbase";
-import { InputCheck } from "@/radix/input/inputcheck";
+import { XInputCheck } from "@/radix/input/inputcheck";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { SchemaService } from "@/codegen/schemaservice";
@@ -186,7 +186,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         return (
             <Box>
                 {showIncludeDefs ?
-                    <InputCheck name="opt_includedef"
+                    <XInputCheck name="opt_includedef"
                         onchange={onParameterChange}
                         inline={true}
                         label="Include Def. Class"

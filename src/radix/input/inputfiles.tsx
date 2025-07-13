@@ -15,7 +15,7 @@ export interface InputFilesProps {
     formats: string;
     multiple: boolean;
 }
-export const InputFiles = forwardRef<HTMLInputElement, InputFilesProps>
+export const XInputFiles = forwardRef<HTMLInputElement, InputFilesProps>
         (({name,formats,multiple,classname,label,onchange }, ref) => {
 
         const handleOnChange = async (event: ChangeEvent<HTMLInputElement>) => {

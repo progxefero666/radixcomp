@@ -12,8 +12,7 @@ import {  DB_ITEM_CMD } from "@/db/dboperations";
 import { DialogForm} from "@/radix/dialog/dlginputoption";
 import { NEW_TASKCAT_FIELDS } from "@/front/appworkflows";
 import { CollectionItem } from "@/common/model/collitem";
-import { InputItem } from "@/common/model/option";
-
+import { InputField } from "@/common/model/inputfield";
 
 
 const primaryBarStyle = {
@@ -48,7 +47,7 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
     const [collOptions, setCollOptions]
         = useState<CollectionItem[]>(getTaskcatsAsEditableOptions(initcollection));
 
-    const [formDefItems, setFormDefItems] = useState<InputItem[]>([]);
+    const [formDefItems, setFormDefItems] = useState<InputField[]>([]);
 
         
 
@@ -75,7 +74,7 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
 
 
     //const onCancelNewItem = () => {};
-    const onSaveNewItem = (values: InputItem[]) => {
+    const onSaveNewItem = (values: InputField[]) => {
         //alert("onSaveNewItem");
     };//end
 

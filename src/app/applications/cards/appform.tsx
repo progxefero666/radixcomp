@@ -6,7 +6,7 @@ import { format, addDays, differenceInDays } from "date-fns";
 
 import { XInputText } from "@/radix/input/inptext";
 import { XInputSelect } from "@/radix/input/inpselect";
-import { InputCheck } from "@/radix/input/inputcheck";
+import { XInputCheck } from "@/radix/input/inputcheck";
 import { XInputNumber } from "@/radix/input/inpnumber";
 import { XInputDate } from "@/radix/input/inpdate";
 
@@ -196,7 +196,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputCheck
+            <XInputCheck
                 name="localdev"
                 ref={localdevRef}
                 label="local dev"
@@ -204,7 +204,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputCheck
+            <XInputCheck
                 name="usedocker"
                 ref={usedockerRef}
                 label="use docker"
@@ -212,7 +212,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputCheck
+            <XInputCheck
                 name="controlusers"
                 ref={controlusersRef!}
                 label="control users"
@@ -220,7 +220,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputCheck
+            <XInputCheck
                 name="useui"
                 ref={useuiRef}
                 label="use ui"
@@ -228,7 +228,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputCheck
+            <XInputCheck
                 name="useagents"
                 ref={useagentsRef}
                 label="use agents"
@@ -236,28 +236,28 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly}
                 disabled={disabled} />
 
-            <InputCheck
+            <XInputCheck
                 name="consumedb" ref={consumedbRef}
                 label="consume db"
                 value={item.consumedb!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="consumeapi" ref={consumeapiRef}
+            <XInputCheck name="consumeapi" ref={consumeapiRef}
                 label="consume api"
                 value={item.consumeapi!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="consumeai" ref={consumeaiRef}
+            <XInputCheck name="consumeai" ref={consumeaiRef}
                 label="consume ai"
                 value={item.consumeai!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="exposedb" ref={exposedbRef}
+            <XInputCheck name="exposedb" ref={exposedbRef}
                 label="expose db"
                 value={item.exposedb!}
                 readonly={readonly} disabled={disabled} />
 
-            <InputCheck name="exposeapi" ref={exposeapiRef}
+            <XInputCheck name="exposeapi" ref={exposeapiRef}
                 label="expose api"
                 value={item.exposeapi!}
                 readonly={readonly} disabled={disabled} />

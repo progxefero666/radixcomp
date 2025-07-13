@@ -19,7 +19,7 @@ interface CompProps {
     onchange?: (value: boolean, name?: string) => void;
     autofocus?: boolean;
 }
-export const InputCheck = forwardRef<HTMLInputElement, CompProps>(({
+export const XInputCheck = forwardRef<HTMLInputElement, CompProps>(({
     name, label, value, inline, readonly, disabled, autofocus, onchange }, ref) => {
 
     const size = RADIX_SIZES.size_2;

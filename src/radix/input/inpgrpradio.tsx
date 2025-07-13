@@ -3,11 +3,10 @@
 import { forwardRef } from "react";
 import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { Option } from "@/common/option";
+import { Option } from "@/common/model/option";
 import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
-import { StringsHelper } from "@/markdown/mkdstrings";
 import { CollectionHelper } from "@/common/helper/collhelper";
-import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS } from "../radixconstants";
+import { RADIX_COLORS, RADIX_RADIUS } from "../radixconstants";
 
 
 /*
