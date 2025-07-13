@@ -1,0 +1,37 @@
+//src\app\diagrams\page\secondcontent.tsx
+
+//src\app\diagrams\page\maincontent.tsx
+
+import { useState, useEffect } from "react";
+import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
+import { ThemeButtonsStyle } from "@/radix/radixtheme";
+
+const secondContentStyle = {
+    background: 'rgb(56, 56, 56)',
+    borderTop: 'none',
+    borderBottom: 'none',
+    borderLeft: '1px solid rgb(167, 176, 188)',
+    borderRight: '1px solid rgb(125, 134, 145)',
+};
+
+
+interface CompProps {
+    value?: string;
+}
+export function SecondContent({value}: CompProps) {
+    
+
+    const onSelection = (value: string) => {
+    }
+
+    useEffect(() => {
+   
+    }, []);    
+
+    return (
+        <Flex width="100%" direction="column" px="3" py="2" style={secondContentStyle} >
+            <p>Second Bar</p>
+        </Flex>
+    );
+
+}//end PrimaryBar
