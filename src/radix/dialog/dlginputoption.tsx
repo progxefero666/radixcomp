@@ -3,10 +3,11 @@
 import React from "react";
 import { Label } from "radix-ui";
 import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
-import { InputItem } from "@/common/option";
+
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
 import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { FilePlusIcon } from "@radix-ui/react-icons";
+import { InputField } from "@/common/model/inputfield";
 
 
 /**
@@ -15,8 +16,8 @@ import { FilePlusIcon } from "@radix-ui/react-icons";
 interface CompProps {
     buttontext: string;
     title: string;
-    items: InputItem[];
-    onsave: (values: InputItem[]) => void;
+    items: InputField[];
+    onsave: (values: InputField[]) => void;
 }
 export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
 
@@ -29,7 +30,7 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
         onsave(items);
     };//end
 
-    const renderInput = (input:InputItem) => {
+    const renderInput = (input:InputField) => {
         return(
             <fieldset>
                 <Label.Root>{input.label}</Label.Root>

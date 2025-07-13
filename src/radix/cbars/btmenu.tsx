@@ -1,6 +1,6 @@
 //src\radix\cbars\btmenu.tsx
 
-import { Option } from "@/common/option";
+import { Option } from "@/common/model/option";
 import { Flex, Box } from "@radix-ui/themes";
 import { StringsHelper } from "@/markdown/mkdstrings";
 import { renderOptionButton } from "@/radix/radixbuttons";

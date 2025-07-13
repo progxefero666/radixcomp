@@ -1,6 +1,6 @@
 //src\codegen\operations\tsxentformsops.ts
 
-import { Option } from "@/common/option";
+import { Option } from "@/common/model/option";
 
 /**
  * class TsxEntityForms

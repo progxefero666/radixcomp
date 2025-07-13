@@ -1,8 +1,9 @@
 //src\radix\collection\editcollection.tsx
 
 import { Button,Box, Flex, Popover } from "@radix-ui/themes";
-import { EditableCollection, EditableOption, EditableOptionId } from "@/common/option";
+
 import { EditOptionId } from "./editoption";
+import { CollectionItem } from "@/common/model/collitem";
 
 
 /**
@@ -10,7 +11,7 @@ import { EditOptionId } from "./editoption";
  * @param collection EditableCollection to edit
  */
 interface CompProps {    
-    collection: EditableOptionId[];
+    collection: CollectionItem[];
     label?: string;
 }
 export const EditCollection = ({collection,label}: CompProps) => {

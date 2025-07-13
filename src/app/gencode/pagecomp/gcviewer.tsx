@@ -1,19 +1,9 @@
 //src\app\gencode\pagecomp\outputmonitor.tsx
 
-import { useEffect, useRef, useState } from "react";
-
-import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Box, Separator, Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
-import { Option } from "@/common/option";
-import { AppConfig } from "@/app/index/appconfig";
-import { AppIndex } from "@/app/index/kernel/appindex";
-import MenuButtons from "@/radix/cbars/btmenu";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { RadixConf } from "@/radix/radixconf";
-import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
 import CardCode from "@/app/gencode/comp/cardcode";
-
-import { BARCFG_EXPORT, BARCFG_EXPORT_COPY } from "@/radix/appbars";
+import { BARCFG_EXPORT_COPY } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { FilesMimeTypes } from "@/codegen/kernel/cgconstants";

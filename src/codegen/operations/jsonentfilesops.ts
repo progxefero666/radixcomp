@@ -1,6 +1,6 @@
 //src\codegen\operations\jsonentfilesops.ts
 
-import { Option } from "@/common/option";
+import { Option } from "@/common/model/option";
 
 
 /**

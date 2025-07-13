@@ -4,7 +4,6 @@ import { Button, Box, Flex, IconButton, Text, Dialog, TextField } from "@radix-u
 
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 
-import { InputItem, Option } from "@/common/option";
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
 import { OPERATIONS } from '@/common/constants';
 

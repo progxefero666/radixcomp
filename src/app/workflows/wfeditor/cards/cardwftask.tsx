@@ -4,7 +4,7 @@ import React from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { Button, Box, Text, Flex, Separator, IconButton, Container, Section, Heading } from "@radix-ui/themes";
 import { ArrowDownIcon, ArrowUpIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
-import { Option } from "@/common/option";
+import { Option } from "@/common/model/option";
 
 import { RadixConf } from "@/radix/radixconf";
 

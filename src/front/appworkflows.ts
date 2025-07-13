@@ -1,6 +1,7 @@
 //src\app\workflows\config.ts
 
-import { InputItem, Option } from "@/common/option";
+import { InputField } from "@/common/model/inputfield";
+import { Option } from "@/common/model/option";
 import { NEW_ROW_ID, DB_CONSTANTS } from "@/db/dboperations";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
@@ -58,9 +59,9 @@ export const NEW_WK: Workflow = new Workflow(
     DB_CONSTANTS.NOT_DEF, 
     null, null);
 
-export const NEW_TASKCAT_FIELDS:InputItem[] = [
-    new InputItem("text","item_0", "placeholder", "nacho", "Name", 50),
-    new InputItem("text","item_1", "placeholder", "desadasdas", "Descripcion", 100)
+export const NEW_TASKCAT_FIELDS:InputField[] = [
+    new InputField("text","item_0", "placeholder", "nacho", "Name", 50),
+    new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion", 100)
 ];
 
 

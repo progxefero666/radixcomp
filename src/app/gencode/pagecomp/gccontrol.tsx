@@ -30,6 +30,7 @@ import { Label } from "@radix-ui/react-context-menu";
 import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
+import { XSelect } from "@/radix/keyvalue/inpselect";
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
 
@@ -222,6 +223,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         );
     };//end  
 
+    //XSelect
+    
     const renderMainContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >

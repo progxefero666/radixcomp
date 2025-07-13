@@ -1,6 +1,6 @@
 //src\codegen\operations\tsentfilesops.ts
 
-import { Option } from "@/common/option";
+import { Option } from "@/common/model/option";
 
 //allEntitiesClass = CodeGenTsMotor.getArrayEntityClass(model_tables,true);
 
