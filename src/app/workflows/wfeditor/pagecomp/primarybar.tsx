@@ -11,7 +11,7 @@ import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import {  DB_ITEM_CMD } from "@/db/dboperations";
 import { DialogForm} from "@/radix/dialog/dlginputoption";
 import { NEW_TASKCAT_FIELDS } from "@/front/appworkflows";
-import { EditableOptionId } from "@/common/model/editoption";
+import { CollectionItem } from "@/common/model/collitem";
 import { InputItem } from "@/common/model/option";
 
 
@@ -46,7 +46,7 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
     const [open, setOpen] = useState<boolean>(true);
 
     const [collOptions, setCollOptions]
-        = useState<EditableOptionId[]>(getTaskcatsAsEditableOptions(initcollection));
+        = useState<CollectionItem[]>(getTaskcatsAsEditableOptions(initcollection));
 
     const [formDefItems, setFormDefItems] = useState<InputItem[]>([]);
 

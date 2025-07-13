@@ -6,7 +6,7 @@ import { useState } from "react";
 import { XInputText } from "../input/inptext";
 import { COMP_BORDER_STYLE } from "../radixtheme";
 import { DB_ITEM_CMD } from "@/db/dboperations";
-import { EditableOptionId } from "@/common/model/editoption";
+import { CollectionItem } from "@/common/model/collitem";
 
 
 /**
@@ -20,7 +20,7 @@ const optionStyle = {
 
 interface CompProps {
     disabled?: boolean;
-    option: EditableOptionId;
+    option: CollectionItem;
     onclick?: (id: number, action: string) => void;
 }
 export const EditOptionId = ({ disabled, option, onclick }: CompProps) => {

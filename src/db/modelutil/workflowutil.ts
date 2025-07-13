@@ -7,7 +7,7 @@ import { Workflow } from "@/db/model/workflow";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 import { Task } from "@/db/model/task";
-import { EditableOptionId } from "@/common/model/editoption";
+import { CollectionItem } from "@/common/model/collitem";
 
 
 export const getTasktypeAsOptions = (codelangs: Tasktype[]): Option[] => {
@@ -37,10 +37,10 @@ export const getTaskcategoriessAsOptions = (codelangs: Taskcategory[]): Option[]
     return options;
 }//end     
 
-export const getTaskcatsAsEditableOptions = (collection: Taskcategory[]): EditableOptionId[] => {
-    const options: EditableOptionId[] = [];
+export const getTaskcatsAsEditableOptions = (collection: Taskcategory[]): CollectionItem[] => {
+    const options: CollectionItem[] = [];
     for (let idx=0;idx<collection.length;idx++) {
-        const option = new EditableOptionId(collection[idx].id,idx,collection[idx].name);
+        const option = new CollectionItem("text",collection[idx].id,idx,collection[idx].name);
         options.push(option);
     }
     return options;
