@@ -1,7 +1,8 @@
 //src\graph2d\canvaspaint.ts
 
 import { Dim2d, Point2d } from "@/graph2d/types2d";
-
+import { Line2d } from "./model/line2d";
+import { Rectangle2d } from "./model/rectangle2d";
 
 /**
  * CanvasPainter class
@@ -23,13 +24,38 @@ export class CanvasPainter {
         this.center.y = Math.floor(this.dim.height/2);
     };//end
 
-    public drawPoint(center: Point2d,color: string) {
+    // points
+    //.................................................................................    
+
+    public fillPointSmall(point: Point2d,color: string) {
         this.ctx.beginPath();
-        this.ctx.arc(center.x,center.y,CanvasPainter.POINT_RADIUS, 0, Math.PI * 2);
+        this.ctx.arc(point.x,point.y,1,0,Math.PI*2);
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();        
+    }//end    
+
+    public fillPoint(point: Point2d,color: string) {
+        this.ctx.beginPath();
+        this.ctx.arc(point.x,point.y,CanvasPainter.POINT_RADIUS, 0, Math.PI * 2);
         this.ctx.strokeStyle = color;
         this.ctx.stroke();        
     }//end
 
+    public dfillPoints(points: Point2d[],color: string) {
+        this.ctx.fillStyle = color;
+        for (const point of points) {
+            this.fillPoint(point,color);
+        }
+    }//end
+
+    public drawPointsColors(points: Point2d[],colors: string[]) {
+        for (let idx=0;idx<points.length;idx++) {
+            this.fillPoint(points[idx],colors[idx]);
+        } 
+    }//end
+
+    // circunferences
+    //.................................................................................        
     public drawCf(center: Point2d,radius: number,color: string) {
         this.ctx.beginPath();
         this.ctx.arc(center.x,center.y, radius, 0, Math.PI * 2);
@@ -37,5 +63,82 @@ export class CanvasPainter {
         this.ctx.stroke();        
     }//end
     
+    // lines
+    //.................................................................................    
+
+    public drawLine(pointA: Point2d,pointB: Point2d,strokeColor: string) {
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeStyle = strokeColor;
+        this.ctx.beginPath();
+        this.ctx.moveTo(pointA.x, pointA.y); 
+        this.ctx.lineTo(pointB.x, pointB.y);
+        this.ctx.closePath();       
+        this.ctx.stroke();
+    }//end
+
+    public drawLine2d(line2d: Line2d,color: string) {
+        this.drawLine(line2d.point_0,line2d.point_1,color);
+    }
+
+    // rectangles
+    //.................................................................................
+
+    public drawRect(point:Point2d,dim:Dim2d,color:string) {  
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeStyle = color;
+        this.ctx.strokeRect(point.x,point.y,dim.width,dim.height);
+        this.ctx.stroke();
+    }
+
+    public fillRect(point:Point2d,dim:Dim2d,color:string) {  
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(point.x,point.y,dim.width,dim.height);
+    }
     
+    public drawRectangle(rect2d: Rectangle2d) {
+        this.drawRect(rect2d.position,rect2d.dim,rect2d.color);
+    }
+
+    public drawPolygon(points: Point2d[],color:string) {
+        if (points.length < 3) return;
+        this.ctx.strokeStyle = color;
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            this.ctx.lineTo(points[i].x, points[i].y);
+        }
+        this.ctx.closePath();
+        this.ctx.stroke();
+    }//end
+
+    public fillPolygon(points: Point2d[],color:string) {
+        if (points.length < 3) return; 
+        this.ctx.fillStyle = color;
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            this.ctx.lineTo(points[i].x, points[i].y);
+        }
+        this.ctx.closePath();
+        this.ctx.fill();
+    }//end    
+
+    public drawfillPolygon(points: Point2d[],backcolor:string,bordercolor:string) {
+        if (points.length < 3) return; 
+        this.ctx.fillStyle = backcolor;
+        this.ctx.strokeStyle = bordercolor;
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            this.ctx.lineTo(points[i].x, points[i].y);
+        }
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.stroke();
+    }//end  
+
+
 }//end class
