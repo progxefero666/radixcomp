@@ -4,6 +4,7 @@ import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { Option } from "@/common/model/option";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { TOption, TSelection } from "@/radix/radixtypes";
+import { Keyvalue } from "@/common/model/keyvalue";
 
 /**
  * SchemaService.getListTablesAsOptions
@@ -51,9 +52,12 @@ export class SchemaService {
         return Promise.resolve(CollectionHelper.getOptionsFromList(dummyTables));
     }
 
-    public static getListTables(): string[] {
-
-        return [];
+    public static getCollectionTables(modeltables:ModelTable[]):  Keyvalue[]{
+        const collection: Keyvalue[] = [];
+        for (let idx = 0; idx < modeltables.length; idx++) {
+            collection.push(new Keyvalue(idx.toString(),modeltables[idx].name));
+        }
+        return collection;
     }
 
 }//end class

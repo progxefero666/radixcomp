@@ -31,8 +31,9 @@ import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { XSelect } from "@/radix/keyvalue/inpselect";
-
 import { CodeGenConfig } from "@/codegen/cgconfig";
+import { CodeGenSquema } from "@/codegen/model/cgschema";
+
 
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
@@ -56,13 +57,16 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const [format,setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
 
-    // list tables    
-    const [modelTables, setModelTables] = useState<ModelTable[]>([]);
+    //db squema       
+    const dbSquema = useRef<CodeGenSquema|null>(null);
 
-    const [menuListTables, setMenuListTables] = useState<TOption[]>([]);
+    //const [modelTables, setModelTables] = useState<ModelTable[]>([]);
+    //const modelsTableOptions = useRef<Option[]>([]);
+    //const [menuListTables, setMenuListTables] = useState<TOption[]>([]);
+
     const selTableName = useRef<string | null>(null);
     const selGroupTableNames = useRef<TOption[] | null>(null);
-    const modelsTableOptions = useRef<Option[]>([]);
+    
 
     // operations list
     const [operations, setOperations] = useState<Option[]>([]);
@@ -82,20 +86,18 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const init = () => {
         if (section == null) { return; }
 
-        //load modeltables
-        const db_squema = AppMemmory.readDbSquema();
-        const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
-        setModelTables(db_modeltables);
-        setMenuListTables(SchemaService.getListTablesAsTOptions(db_modeltables));
+        dbSquema.current = new CodeGenSquema(AppMemmory.readDbSquema());
 
-        //set basic selections
-        modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
-        selTableName.current = db_modeltables[0].name;
+        //const db_modeltables: ModelTable[] = CodeGenSql.getEsquemaTables(db_squema);
+        //setModelTables(db_modeltables);
+        //setMenuListTables(SchemaService.getListTablesAsTOptions(db_modeltables));
+        //modelsTableOptions.current = CodeGenHelper.getModelsTableOptions(db_modeltables);
+        selTableName.current = dbSquema.current.tables[0].name;
 
         //active service clients
-        clientTScriptEntities.current = new ServClientTScriptEntities(db_squema);
-        clientTScriptServices.current = new ServClientTScriptServices(db_squema);
-        clientJsxForms.current = new ServiceClientJsxForms(db_squema);
+        clientTScriptEntities.current = new ServClientTScriptEntities(dbSquema.current.squema);
+        clientTScriptServices.current = new ServClientTScriptServices(dbSquema.current.squema);
+        clientJsxForms.current = new ServiceClientJsxForms(dbSquema.current.squema);
 
         //load operations for the selected service
         const listOperations: Option[] = GenCodeModuleConfig.getServCliOperations(section!);
@@ -110,16 +112,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         init();
     }, []);
 
-    const getTableIndex = (): number =>{
-        let index:number = -1;      
-        for (let idx=0;idx<modelTables.length;idx++) {
-            if (modelTables[idx].name == selTableName.current) {
-                index = idx;
-                break;
-            }
-        }
-        return index;
-    }
 
     const onSelectCodeFormat = (formatKey:string,compName?: string) => {
         setFormat(formatKey);
@@ -180,7 +172,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                 ondataresult(codecont!);
             }
             else if(format === "json") {
-                const code:string= CodeGenJson.getJsonEntDef(modelTables[getTableIndex()]);
+                const tableIndex: number = dbSquema.current!.getTableIndex(selTableName.current!);
+                const code:string= CodeGenJson.getJsonEntDef(dbSquema.current!.tables[tableIndex]);
                 ondataresult(code!);
             }
         }
@@ -208,6 +201,14 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         );
     };//end
     
+    /*
+    <XInputSelect name="selectTable"
+                            inline={true}
+                            autocommit={true}
+                            collection={dbSquema.current!.toptions}
+                            defaul={modelsTableOptions.current[0].id}
+                            onchange={onSelectTable} /> 
+    */
     const renderMainContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
@@ -224,12 +225,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                         <Label>Select Tables: </Label>
                     </Box>
                     {showRadioList ?
-                        <XInputSelect name="selectTable"
-                            inline={true}
-                            autocommit={true}
-                            collection={modelsTableOptions.current}
-                            defaul={modelsTableOptions.current[0].id}
-                            onchange={onSelectTable} /> : null}
+                        <p>asas</p>: null}
+
                     {showCheckList ?
                         <Box mr="2">
                             <PopupBase label="select">
@@ -237,7 +234,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                                     name="selectTables"
                                     autocommit={true}
                                     inline={true}
-                                    collection={menuListTables}
+                                    collection={dbSquema.current!.toptions}
                                     onselect={onSelectTables} />
                             </PopupBase>
                         </Box> : null}
