@@ -17,13 +17,13 @@ import { SeparatorH } from "@/radix/container/separatorh";
 
 import { AppMemmory } from "@/front/appmemory";
 import { PopupBase } from "@/radix/container/popupbase";
-import { XInputCheck } from "@/radix/input/inputcheck";
+
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { SchemaService } from "@/codegen/schemaservice";
 import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
 import { ServClientTScriptEntities } from "../module/client_tscriptentities";
-import { ServiceClientJson } from "../module/client_json";
+
 import { ServiceClientJsxForms } from "../module/client_jsxforms";
 import { ServClientTScriptServices } from "../module/client_tscriptservices";
 import { Label } from "@radix-ui/react-context-menu";
@@ -31,7 +31,7 @@ import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { XSelect } from "@/radix/keyvalue/inpselect";
-import { Keyvalue } from "@/common/model/keyvalue";
+
 import { CodeGenConfig } from "@/codegen/cgconfig";
 
 //import { SchemaService } from "@/client/metadata/schemaservice";
@@ -73,7 +73,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const clientTScriptEntities = useRef<ServClientTScriptEntities>(null);
     const clientTScriptServices = useRef<ServClientTScriptServices>(null);
     const clientJsxForms = useRef<ServiceClientJsxForms>(null);
-    const clientJson = useRef<ServiceClientJson>(null);
 
     // UI
     const [showIncludeDefs, setShowIncludeDefs] = useState<boolean>(false);
@@ -97,7 +96,6 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         clientTScriptEntities.current = new ServClientTScriptEntities(db_squema);
         clientTScriptServices.current = new ServClientTScriptServices(db_squema);
         clientJsxForms.current = new ServiceClientJsxForms(db_squema);
-        clientJson.current = new ServiceClientJson(db_squema);
 
         //load operations for the selected service
         const listOperations: Option[] = GenCodeModuleConfig.getServCliOperations(section!);

@@ -6,7 +6,7 @@ import { OP_CATEGORIES } from "@/codegen/cgconfig";
 import { ServClientTScriptEntities } from "./module/client_tscriptentities";
 import { ServiceClientJsxForms } from "./module/client_jsxforms";
 import { ServClientTScriptServices } from "./module/client_tscriptservices";
-import { ServiceClientJson } from "./module/client_json";
+
 import { ServiceClientSqlScripts } from "./module/client_sqlscripts";
 import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
 import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
@@ -49,15 +49,13 @@ public static readonly ACT_COPY:string = "copy";
         = new Option(ServiceClientSqlScripts.ID,
             ServiceClientSqlScripts.OPTION_VALUE, null, null, null);
 
-    public static readonly SC_TEST_COMP: Option
-        = new Option(OP_CATEGORIES.test_components, "Test Components", null, null, null);
+
 
     public static readonly CLIENT_SERVICES: Option[] = [
         GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES,
         GenCodeModuleConfig.CLIENT_JSX_FORMS,
         GenCodeModuleConfig.CLIENT_TS_SERVICES,
-        GenCodeModuleConfig.CLIENT_SQL_SCRIPTS,
-        GenCodeModuleConfig.SC_TEST_COMP
+        GenCodeModuleConfig.CLIENT_SQL_SCRIPTS
     ]
 
     public static getServCliOperations(sectionName: string): Option[] {
@@ -71,18 +69,10 @@ public static readonly ACT_COPY:string = "copy";
         else if (sectionName === ServClientTScriptServices.ID) {
             return TsEntServiceFilesOps.Operations;
         }
-        else if (sectionName === ServiceClientJson.ID) {
-            return JsonEntFilesOps.Operations;
-        }
         else if (sectionName === ServiceClientSqlScripts.ID) {
             return JsonEntFilesOps.Operations;
         }
-        /*else if (sectionName === OP_CATEGORIES.python_serverfiles) {
-            return PyEntServiceFilesOps.Operations;
-        }
-        else if (sectionName === OP_CATEGORIES.sql_db_squema) {
-            return ControlDatabase.Operations;
-        }*/
+
         return [];
     }
 }//export class AppConfig

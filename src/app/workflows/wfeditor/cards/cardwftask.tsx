@@ -123,7 +123,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                         <XInputSelect
                                 label="Type: "
                                 collection={tasktypesColl}
-                                default={task.tasktype_id.toString()}
+                                defaul={task.tasktype_id.toString()}
                                 onchange={onTasktypeSelected}
                                 disabled={false} />  
 
@@ -131,7 +131,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                         <XInputSelect
                                 label="Code Lang: "
                                 collection={codelangsColl}
-                                default={task.codelang_id.toString()}
+                                defaul={task.codelang_id.toString()}
                                 onchange={onCodelangSelected}
                                 disabled={false} />  
                         
@@ -139,7 +139,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                         <XInputSelect
                                 label="Category: "
                                 collection={taskcategoriesColl}
-                                default={task.taskcategory_id.toString()}
+                                defaul={task.taskcategory_id.toString()}
                                 onchange={onTaskcategorySelected}
                                 disabled={false} />  
 
