@@ -2,7 +2,7 @@
 
 import { InputField } from "@/common/model/inputfield";
 import { Option } from "@/common/model/option";
-import { NEW_ROW_ID, DB_CONSTANTS } from "@/db/dbkernel";
+import { NEW_ROW_ID, DB_CONSTANTS } from "@/common/database/dbkernel";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
 

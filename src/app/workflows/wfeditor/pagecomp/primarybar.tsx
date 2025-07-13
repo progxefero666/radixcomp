@@ -8,7 +8,7 @@ import { ManagerTaskcategories } from "../categories/mantaskcats";
 import { EditOptionId } from "@/radix/collection/editoption";
 import { getTaskcatsAsEditableOptions } from "@/db/services/util/workflowutil";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
-import {  DB_ITEM_CMD } from "@/db/dbkernel";
+import {  DB_ITEM_CMD } from "@/common/database/dbkernel";
 import { DialogForm} from "@/radix/dialog/dlginputoption";
 import { NEW_TASKCAT_FIELDS } from "@/front/appworkflows";
 import { CollectionItem } from "@/common/model/collitem";

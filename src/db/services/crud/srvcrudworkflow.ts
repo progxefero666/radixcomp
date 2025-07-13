@@ -4,7 +4,7 @@
 
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { PrismaClient } from "@generated/prisma";
-import { DbOps, DpOperationUtil } from "@/db/dbkernel";
+import { DbOps, DpOperationUtil } from "@/common/database/dbkernel";
 import { Workflow } from "@/db/model/workflow";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";

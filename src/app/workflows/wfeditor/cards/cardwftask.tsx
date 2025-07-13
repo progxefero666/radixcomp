@@ -20,7 +20,7 @@ import { Tasktype } from "@/db/model/tasktype";
 import { getCodelangsAsOptions } from "@/db/services/util/codelangutil";
 import { getTaskcategoriessAsOptions, getTasktypeAsOptions } from "@/db/services/util/workflowutil";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
-import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/db/dbkernel";
+import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { OPERATIONS, OPERATIONS_TEXT } from "@/common/constants";
 import BarButtons from "@/radix/cbars/btbar";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";

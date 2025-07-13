@@ -1,15 +1,23 @@
-//src\db\services\generic\serviceread.ts
+//src\common\database\serviceread.ts
+
 "use server";
 
-import { Option } from "@/common/model/option";
+
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
 
 import { DB_COLL_CMD, DpOperationUtil } from "@/common/database/dbkernel";
-import {  DbTables } from "@/db/dbcatalog";
-import { Codelang } from "@/db/model/codelang";
 
 
+export enum DbTables {
+    codelang    = "codelang",
+    tasktype    = "tasktype",
+    workflow    = "workflow",
+    taskcategory= "taskcategory",
+    task        = "task",
+    apptype     = "apptype",
+    application = "application"
+};
 
 export async function executeReadQuery(commandSql: string, params: any[] = []): Promise<string> {
 

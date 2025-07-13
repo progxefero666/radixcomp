@@ -4,7 +4,7 @@
 import { PrismaClient }  from "@generated/prisma";
 
 import { JsonResponse }  from "@/common/model/jsonreponse";
-import { DbOps, DpOperationUtil } from "@/db/dbkernel";
+import { DbOps, DpOperationUtil } from "@/common/database/dbkernel";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 

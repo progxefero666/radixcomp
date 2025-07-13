@@ -2,7 +2,7 @@
 
 
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
-import { DB_ITEM_CMD_TEXT, DB_ITEM_CMD } from "@/db/dbkernel";
+import { DB_ITEM_CMD_TEXT, DB_ITEM_CMD } from "@/common/database/dbkernel";
 import { ThemeButtonsStyle } from "./radixtheme";
 import { RadixConf } from "./radixconf";
 import { OPERATIONS, OPERATIONS_TEXT } from "@/common/constants";

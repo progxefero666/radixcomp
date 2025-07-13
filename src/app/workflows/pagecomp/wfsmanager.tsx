@@ -8,7 +8,7 @@ import { BARCFG_ADD_IMPORT } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 
 import { parseResponseCollection } from "@/common/parser/javascriptparser";
-import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dbkernel";
+import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/common/database/dbkernel";
 import { Workflow } from "@/db/model/workflow";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
