@@ -9,6 +9,7 @@ import { ReactDiagram } from 'gojs-react';
 
 
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { DiagramCanvas } from "../xefero/diagramcanvas";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -17,8 +18,6 @@ const mainContentStyle = {
     borderLeft: '1px solid rgb(167, 176, 188)',
     borderRight: '1px solid rgb(125, 134, 145)',
 };
-
-
 
 
 interface CompProps {
@@ -37,7 +36,7 @@ export function MainContent({ value }: CompProps) {
 
     return (
         <Flex width="100%" direction="column" px="3" py="2" style={mainContentStyle} >
-
+            
         </Flex>
     );
 

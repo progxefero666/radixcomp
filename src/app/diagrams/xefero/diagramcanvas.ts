@@ -27,6 +27,26 @@ export class DiagramCanvas {
         this.ctx.clearRect(0, 0, this.dim.width, this.dim.height);
     };
 
+    public render_a(point: Point2d, color: string) {
 
+        /*
+          context.ellipse(
+            centerX,
+            centerY,
+            radiusX,
+            radiusY,
+            0, // rotation
+            startAngle,
+            endAngle,
+            anticlockwise
+        );
+        */
+        this.ctx.beginPath();
+        this.ctx.ellipse(point.x, point.y,100,30, 0, 0, Math.PI * 2);
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();    
+
+        //this.painter.fillPoint(point, color);
+    };
 
 }//end class
