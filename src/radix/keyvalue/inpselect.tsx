@@ -1,9 +1,10 @@
-import { Keyvalue } from "@/common/model/keyvalue";
+//src\radix\keyvalue\inpselect.tsx
 
 import { Box, Text, Flex, Select } from "@radix-ui/themes";
-
+import { Keyvalue } from "@/common/model/keyvalue";
 import { RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS } from "../radixconstants";
+import { ModelHelper } from "@/common/helper/modelhelper";
 
 
 /**
@@ -11,17 +12,22 @@ import { RADIX_COLORS } from "../radixconstants";
  */
 interface CompProps {
     onchange:   (value:string,name?:string) => void;
+    values?:    string[]; 
     collection: Keyvalue[]; 
     name?:      string;       
     label?:     string;
     disabled?:  boolean;
 }
-export function XSelect({name,collection,onchange,label,disabled}:CompProps) {
+export function XSelect({name,onchange,collection,values,label,disabled}:CompProps) {
 
     const size = RadixConf.SIZES.size_2;
     const variant = RadixConf.VARIANTS.surface;
     const color = RADIX_COLORS.gray;
     const handleOnChange = (value:string) => {onchange(value,(name??"select"));}
+
+    let inp_collection: Keyvalue[] = [];
+    if(collection)  {inp_collection=collection;}
+    else {if(values){inp_collection = ModelHelper.getAsKeyvalueArray(values);}}
 
     return (
         <Flex width="100%" direction={"row"} gap="2" >
@@ -46,3 +52,12 @@ export function XSelect({name,collection,onchange,label,disabled}:CompProps) {
     )
 
 }//end component
+
+
+/*static getAsKeyvalueArray(list:string[]): Keyvalue[]{
+    const result: Keyvalue[] = [];
+    for (let idx=0;idx<list.length;idx++) {
+        result.push(new Keyvalue(idx.toString(),list[idx]));
+    }
+    return result;
+}*/

@@ -212,7 +212,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     inline={true}
                     label="Operation: "
                     collection={operations}
-                    default={operationId}
+                    defaul={operationId}
                     onchange={onOpSelected}
                     disabled={false} />
                 <Button onClick={runOperation} color="green">
@@ -234,7 +234,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                             inline={true}
                             autocommit={true}
                             collection={modelsTableOptions.current}
-                            default={modelsTableOptions.current[0].id}
+                            defaul={modelsTableOptions.current[0].id}
                             onchange={onSelectTable} /> : null}
                     {showCheckList ?
                         <Box mr="2">
