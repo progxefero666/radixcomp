@@ -25,7 +25,7 @@ export function MainBar({onselection,section}: CompProps) {
     const sections:Option[] = MODULE_SECTIONS;
 
     return (
-        <Flex width="100%"  height="100vh" align="center" 
+        <Flex width="100%"  height="100vh" align="center" gapY="2"
               direction="column" py="3" style={primaryBarStyle} >         
             <MenuButtons options={sections}
                 onclick={onselection} 

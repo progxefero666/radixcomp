@@ -64,7 +64,7 @@ export function Header({ section, navback }: CompProps) {
 
 
     return (
-        <Grid width="100%" py="2" rows="auto" columns="14% 41% 45%" style={headerStyle} >
+        <Grid width="100%" py="2" rows="auto" columns="14% 82% 4%" style={headerStyle} >
 
             <Flex gridColumn="1" gridRow="1"
                 direction="row" gap="2" px="3" justify="between" style={headerLeftStyle} >
@@ -73,8 +73,11 @@ export function Header({ section, navback }: CompProps) {
             </Flex>
 
             <Flex gridColumn="2" gridRow="1"
-                direction="row" px="3" style={headerCenterStyle} >
+                  direction="row" px="3" style={headerCenterStyle} >
+            </Flex>
 
+            <Flex gridColumn="3" gridRow="1" >
+                rbd
             </Flex>
 
         </Grid>
