@@ -8,10 +8,7 @@ import { ServiceClientJsxForms } from "./module/client_jsxforms";
 import { ServClientTScriptServices } from "./module/client_tscriptservices";
 
 import { ServiceClientSqlScripts } from "./module/client_sqlscripts";
-import { JsonEntFilesOps } from "@/codegen/operations/jsonentfilesops";
-import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
-import { TsEntServiceFilesOps } from "@/codegen/operations/tsentservicefilesops";
-import { TsxEntFormsOps } from "@/codegen/operations/tsxentformsops";
+
 
 
 /**
@@ -49,7 +46,7 @@ public static readonly ACT_COPY:string = "copy";
         = new Option(ServiceClientSqlScripts.ID,
             ServiceClientSqlScripts.OPTION_VALUE, null, null, null);
 
-
+  /*
 
     public static readonly CLIENT_SERVICES: Option[] = [
         GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES,
@@ -58,6 +55,7 @@ public static readonly ACT_COPY:string = "copy";
         GenCodeModuleConfig.CLIENT_SQL_SCRIPTS
     ]
 
+  
     public static getServCliOperations(sectionName: string): Option[] {
 
         if (sectionName === ServClientTScriptEntities.ID) {
@@ -75,5 +73,6 @@ public static readonly ACT_COPY:string = "copy";
 
         return [];
     }
+    */
 }//export class AppConfig
 

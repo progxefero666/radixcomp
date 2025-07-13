@@ -33,7 +33,7 @@ import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { XSelect } from "@/radix/keyvalue/inpselect";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 import { CodeGenSquema } from "@/codegen/model/cgschema";
-
+import { CodeGenOperations } from "@/codegen/cgoperations";
 
 //import { SchemaService } from "@/client/metadata/schemaservice";
 
@@ -55,7 +55,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     //const fileInputRef = useRef<HTMLInputElement>(null);
     const [initialized, setInitialized] = useState<boolean>(false);
 
-    const [format,setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
+    const [format,setFormat] = useState<string>(CodeGenOperations.CODE_FORMATS[0].key);
 
     //db squema       
     const dbSquema = useRef<CodeGenSquema|null>(null);
@@ -88,9 +88,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         clientJsxForms.current = new ServiceClientJsxForms(dbSquema.current.squema);
 
         //load operations for the selected service
-        const listOperations: Option[] = GenCodeModuleConfig.getServCliOperations(section!);
-        setOperations(listOperations);
-        onOpSelected(listOperations[0].id);
+        //const listOperations: Option[] = GenCodeModuleConfig.getServCliOperations(section!);
+        //(listOperations);
+        //onOpSelected(listOperations[0].id);
         setInitialized(true);
     };//end
 
@@ -115,32 +115,32 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const onOpSelected = (operationId: string) => {
         if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
-            if (operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id) {
+            if (operationId == "get_all_def_class") {
                 setShowIncludeDefs(false);
                 setShowRadioList(false);
                 setShowCheckList(false);
             }
-            else if (operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id) {
+            else if (operationId == "get_all_entity_class") {
                 setShowIncludeDefs(true);
                 setShowRadioList(false);
                 setShowCheckList(false);
             }
-            else if (operationId == TsEntFilesOps.OP_GET_DEF_CLASS.id) {
+            else if (operationId == "get_def_class") {
                 setShowIncludeDefs(false);
                 setShowRadioList(true);
                 setShowCheckList(false);
             }
-            else if (operationId == TsEntFilesOps.OP_GET_ENT_CLASS.id) {
+            else if (operationId == "get_entity_class") {
                 setShowIncludeDefs(true);
                 setShowRadioList(true);
                 setShowCheckList(false);
             }
-            else if (operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id) {
+            else if (operationId == "get_list_def_class") {
                 setShowIncludeDefs(false);
                 setShowRadioList(false);
                 setShowCheckList(true);
             }
-            else if (operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id) {
+            else if (operationId == "get_list_entity_class") {
                 setShowIncludeDefs(true);
                 setShowRadioList(false);
                 setShowCheckList(true);
@@ -189,26 +189,24 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
         );
     };//end
     
-
     const renderMainContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
         
                 <Flex width="100%" direction="row" pb="2" >
-                    <XSelect label="Format:" collection={CodeGenConfig.CODE_FORMATS} 
+                    <XSelect label="Format:" collection={CodeGenOperations.CODE_FORMATS} 
                              onchange={onSelectTable}/>
                 </Flex>
                 
                 <SeparatorH />
 
                 <Flex width="100%" direction="row" pt="2"  >
-                    <Box mr="2">
-                        <Label>Tables: </Label>
-                    </Box>
+
+                    <Box mr="2"><Label>Tables:</Label></Box>
+
                     {showRadioList ?
                     <XSelect collection={dbSquema.current!.tcollection}
-                             onchange={onSelectCodeFormat}/>
-                    : null}
+                             onchange={onSelectCodeFormat}/>: null}
 
                     {showCheckList ?
                         <Box mr="2">

@@ -9,6 +9,7 @@ import { Option } from "@/common/model/option";
  */
 export class TsEntFilesOps {
 
+    /*
     public static readonly OP_GET_DEF_CLASS: Option
         = new Option("get_def_class", "Get Def. Class", null, null, null);
 
@@ -36,5 +37,5 @@ export class TsEntFilesOps {
         TsEntFilesOps.OP_GET_LIST_ENT_CLASS
     ]
     public static readonly ACTIVE_OPERATION: Option = TsEntFilesOps.OP_GET_DEF_CLASS
-
+*/
 }//end class

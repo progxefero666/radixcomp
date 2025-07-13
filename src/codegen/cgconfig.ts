@@ -28,13 +28,6 @@ export class CodeGenConfig {
 
     public static readonly NOT_DEF:string = "undefined";
     
-    public static readonly CODE_FORMATS: Keyvalue[] = [
-        new Keyvalue("typescript", "TypeScript"),        
-        new Keyvalue("json", "JSON"),
-        new Keyvalue("jsx", "JSX"),
-        new Keyvalue("sql", "SQL"),
-        new Keyvalue("javascript", "JavaScript")
-    ]; 
 
 
     public static readonly DEF_CLASS_NAMEADD: string = "Def"
@@ -60,8 +53,6 @@ export class CodeGenConfig {
         imports += `"` + CodeGenConfig.SQLTYPES_JSON_PATH + `";\n\n`;        
         return imports;
     }
-
-
 
 }//end class
 

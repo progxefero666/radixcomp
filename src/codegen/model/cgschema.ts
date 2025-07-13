@@ -2,8 +2,8 @@
 
 import { TOption } from "@/radix/radixtypes";
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
-import { CodeGenSql } from "../kernel/cgsqlmotor";
-import { SchemaService } from "../schemaservice";
+import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
+import { SchemaService } from "@/codegen/schemaservice";
 import { Keyvalue } from "@/common/model/keyvalue";
 
 
