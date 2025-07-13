@@ -3,7 +3,7 @@
 
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
-import { DbOps, DpOperationUtil } from "@/common/database/dbkernel";
+import {  DpOperationUtil } from "@/common/database/dbkernel";
 import { DB_TABLES } from "@/db/dbcatalog";
 
 
@@ -16,7 +16,7 @@ export async function get(id: number): Promise<string> {
     try {result = await prisma.task.findFirst({where:{id:id}});}
     catch (error) {return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));}
     finally {await prisma.$disconnect();}
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DbOps.GET_BY_ID), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task,"GET_BY_ID"), result);
 } //end function
 
 export async function getAll(): Promise<string> {
@@ -25,7 +25,7 @@ export async function getAll(): Promise<string> {
     try {result = await prisma.task.findMany();}
     catch (error) {return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));}
     finally {await prisma.$disconnect();}
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task,"GET_ALL"), result);
 } //end function
 
 export async function getByParent(commandSql:string,workflow_id:number,taskgroup_id:number): Promise<string> {
@@ -37,11 +37,11 @@ export async function getByParent(commandSql:string,workflow_id:number,taskgroup
     }
     catch (error) {return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));}
     finally {await prisma.$disconnect();}
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, "GET_ALL"), result);
 } //end function
 
 
-
+/*
 export async function getByParents(
             workflow_id:  number, taskgroup_id:  number,
             workflow_name:string, taskgroup_name:string ): Promise<string> {
@@ -83,6 +83,7 @@ export async function getByParents(
     } 
     catch (error) {return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));}    
     finally {await prisma.$disconnect();}
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DbOps.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, "GET_ALL"), result);
 
 }//end function
+*/
