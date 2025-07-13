@@ -12,7 +12,7 @@ import { RADIX_COLORS } from "../radixconstants";
 interface CompProps {
     onchange:   (value:string,name?:string) => void;
     collection: Keyvalue[]; 
-    name?:       string;       
+    name?:      string;       
     label?:     string;
     disabled?:  boolean;
 }
