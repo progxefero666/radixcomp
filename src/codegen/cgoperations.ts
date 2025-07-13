@@ -4,6 +4,9 @@ import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { SchemaService } from "@/codegen/schemaservice";
 import { Keyvalue } from "@/common/model/keyvalue";
 
+/**
+ * class CodeGenOperations.OPS_ENTITIES
+ */
 export class CodeGenOperations {
 
     public static FORMAT_TYPESCRIPT:Keyvalue = new Keyvalue("typescript", "TypeScript");

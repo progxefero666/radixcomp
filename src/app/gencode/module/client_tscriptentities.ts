@@ -30,16 +30,16 @@ export class ServClientTScriptEntities extends GenCodeModuleControl {
                                   tables:TOption[]|null): Promise<string|null> {  
         //console.log(JsonHelper.getTSelectionJsonString(tables!));                                             
         let code:string|null = null;
-        if( (operationId === TsEntFilesOps.OP_GET_DEF_CLASS.id) ||
-            (operationId === TsEntFilesOps.OP_GET_ENT_CLASS.id)){          
+        if( (operationId === "get_def_class") ||
+            (operationId === "get_entity_class")){          
             code = await getTypeScriptTableContent(this.sqlsquema,operationId,table!);            
         }
-        else if( (operationId == TsEntFilesOps.OP_GET_ALL_DEF_CLASS.id) ||
-                 (operationId == TsEntFilesOps.OP_GET_ALL_ENT_CLASS.id)){
+        else if( (operationId == "get_all_def_class") ||
+                 (operationId == "get_all_entity_class")){
             code = await getTypeScriptArrayTableContent(this.sqlsquema,operationId);  
         } 
-        else if( (operationId == TsEntFilesOps.OP_GET_LIST_DEF_CLASS.id) ||
-                 (operationId == TsEntFilesOps.OP_GET_LIST_ENT_CLASS.id) ){   
+        else if( (operationId == "get_list_def_class") ||
+                 (operationId == "get_list_entity_class") ){   
             const selectTables:string[] = CollectionHelper.getListFromTOptions(tables!);
             const namesjoined:string = CodeGenHelper.getStringsJoined(selectTables!);
             code = await getTypeScriptArrayTableContent(this.sqlsquema,operationId,namesjoined);  

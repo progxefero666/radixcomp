@@ -30,7 +30,7 @@ public static readonly ACT_COPY:string = "copy";
 
     public static readonly DBSQUEMA_FILE: string = "dbsquema.sql";
 
-    public static readonly CLIENT_TS_ENTITY_FILES: Option
+    public static readonly CLIENT_ENTITY_FILES: Option
         = new Option(ServClientTScriptEntities.ID,
             ServClientTScriptEntities.OPTION_VALUE, null, null, null);
 

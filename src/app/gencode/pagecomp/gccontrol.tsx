@@ -24,8 +24,7 @@ import { SchemaService } from "@/codegen/schemaservice";
 import { TsEntFilesOps } from "@/codegen/operations/tsentfilesops";
 import { ServClientTScriptEntities } from "../module/client_tscriptentities";
 
-import { ServiceClientJsxForms } from "../module/client_jsxforms";
-import { ServClientTScriptServices } from "../module/client_tscriptservices";
+
 import { Label } from "@radix-ui/react-context-menu";
 import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
@@ -63,13 +62,12 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const selGroupTableNames = useRef<TOption[] | null>(null);
     
     // operations list
-    const [operations, setOperations] = useState<Option[]>([]);
+    //const [operations, setOperations] = useState<Option[]>([]);
     const [operationId, setOperationId] = useState<string>("undefined");
 
     // service clients
     const clientTScriptEntities = useRef<ServClientTScriptEntities>(null);
-    const clientTScriptServices = useRef<ServClientTScriptServices>(null);
-    const clientJsxForms = useRef<ServiceClientJsxForms>(null);
+
 
     // UI
     const [showIncludeDefs, setShowIncludeDefs] = useState<boolean>(false);
@@ -84,8 +82,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
         //active service clients
         clientTScriptEntities.current = new ServClientTScriptEntities(dbSquema.current.squema);
-        clientTScriptServices.current = new ServClientTScriptServices(dbSquema.current.squema);
-        clientJsxForms.current = new ServiceClientJsxForms(dbSquema.current.squema);
+
 
         //load operations for the selected service
         //const listOperations: Option[] = GenCodeModuleConfig.getServCliOperations(section!);
@@ -114,7 +111,9 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     };//end
 
     const onOpSelected = (operationId: string) => {
-        if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
+
+        if (section == GenCodeModuleConfig.CLIENT_ENTITY_FILES.id) {
+
             if (operationId == "get_all_def_class") {
                 setShowIncludeDefs(false);
                 setShowRadioList(false);
@@ -151,7 +150,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const runOperation = async () => {
 
-        if (section == GenCodeModuleConfig.CLIENT_TS_ENTITY_FILES.id) {
+        if (section == GenCodeModuleConfig.CLIENT_ENTITY_FILES.id) {
             if(format === "typescript") {
                 const codecont: string | null = await clientTScriptEntities.current!.executeOperation(
                     operationId,
@@ -175,13 +174,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const renderHeader = () => {
         return (
             <Flex width="100%" direction="row" justify="between" mt="2" pb="2" align="center" >
-                <XInputSelect
-                    inline={true}
-                    label="Operation: "
-                    collection={operations}
-                    defaul={operationId}
-                    onchange={onOpSelected}
-                    disabled={false} />
+                <XSelect label="Format:" collection={CodeGenOperations.OPS_ENTITIES} 
+                         onchange={onOpSelected}/>                
                 <Button onClick={runOperation} color="green">
                     Run
                 </Button>
