@@ -2,7 +2,7 @@
 "use server";
 
 import { PrismaClient } from "@generated/prisma";
-import { DbOps, DpOperationUtil } from "@/db/dboperations";
+import { DbOps, DpOperationUtil } from "@/db/dbkernel";
 
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { DB_TABLES } from "@/db/dbcatalog";

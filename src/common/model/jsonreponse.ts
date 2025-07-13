@@ -1,6 +1,6 @@
 //src\common\json\models\jsonresponse.ts
 
-import { DB_CONSTANTS } from "@/db/dboperations";
+import { DB_CONSTANTS } from "@/db/dbkernel";
 
 
 

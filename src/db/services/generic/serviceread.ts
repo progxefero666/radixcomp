@@ -5,8 +5,8 @@ import { Option } from "@/common/model/option";
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
 
-import { DB_COLL_CMD, DpOperationUtil } from "@/db/dboperations";
-import { DB_TABLES, DbTables } from "@/db/dbcatalog";
+import { DB_COLL_CMD, DpOperationUtil } from "@/db/dbkernel";
+import {  DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 
 
@@ -24,7 +24,7 @@ export async function executeReadQuery(commandSql: string, params: any[] = []): 
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DB_COLL_CMD.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DB_COLL_CMD.GET_ALL), result);
 }//end function
 
 export async function getCountByParents(workflow_id: number, taskgroup_id: number): Promise<string> {
@@ -45,7 +45,7 @@ export async function getCountByParents(workflow_id: number, taskgroup_id: numbe
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DB_COLL_CMD.COUNT_ROWS), count);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DB_COLL_CMD.COUNT_ROWS), count);
 }
 
 /**

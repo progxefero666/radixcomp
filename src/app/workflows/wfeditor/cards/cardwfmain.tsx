@@ -18,7 +18,7 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { XInputText } from "@/radix/input/inptext";
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { RADIX_COLORS } from "@/radix/radixconstants";
-import { DB_ITEM_CMD_TEXT } from "@/db/dboperations";
+import { DB_ITEM_CMD_TEXT } from "@/db/dbkernel";
 
 
 const compStyle = {

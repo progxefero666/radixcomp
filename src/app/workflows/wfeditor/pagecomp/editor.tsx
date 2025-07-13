@@ -6,7 +6,7 @@ import { Box, Button, Flex, Text } from "@radix-ui/themes";
 
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection, parseResponseItem } from "@/common/parser/javascriptparser";
-import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dboperations";
+import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/db/dbkernel";
 import { Task } from "@/db/model/task";
 import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";

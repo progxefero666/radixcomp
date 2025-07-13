@@ -5,7 +5,7 @@ import { Flex, Box, Text, IconButton } from "@radix-ui/themes";
 import { useState } from "react";
 import { XInputText } from "../input/inptext";
 import { COMP_BORDER_STYLE } from "../radixtheme";
-import { DB_ITEM_CMD } from "@/db/dboperations";
+import { DB_ITEM_CMD } from "@/db/dbkernel";
 import { CollectionItem } from "@/common/model/collitem";
 
 
