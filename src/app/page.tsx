@@ -33,6 +33,8 @@ export default function PageGenCode() {
     const appRef = useRef<AppIndex>(null);
     const [code, setCode] = useState<string>("undefined");
     const [section, setSection] = useState<string|null>(null);
+    
+    const [filename, setFilename] = useState<string>("default.ts");
 
     useEffect(() => {
         //AppContext.saveCodelangs(appRef.current.codelangs);

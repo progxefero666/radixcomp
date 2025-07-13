@@ -6,8 +6,9 @@ import CardCode from "@/app/gencode/comp/cardcode";
 import { BARCFG_EXPORT_COPY } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
-import { FilesMimeTypes } from "@/codegen/kernel/cgconstants";
+
 import { GenCodeModuleConfig } from "../config";
+import { CodeGenConfig } from "@/codegen/cgconfig";
 
 
 interface CompProps {
@@ -22,7 +23,7 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
 
     const expFileName: string = fileName ?? GenCodeModuleConfig.NOT_DEF;
-    const codeFormat: string = format ?? FilesMimeTypes.TYPESCRIPT;
+    const codeFormat: string = format ?? CodeGenConfig.FORMAT_TYPESCRIPT.key;
 
     useEffect(() => {
         const init = (): void => {
@@ -33,37 +34,6 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
         init();
     }, []);
 
-
-
-    
-    const getExportFileMimetype = () => {
-        let mimetype: string = "";
-        if(codeFormat === FilesMimeTypes.TYPESCRIPT) {
-            mimetype = FilesMimeTypes.TYPESCRIPT;
-        }      
-        else if(codeFormat === FilesMimeTypes.JSON) {
-            mimetype = FilesMimeTypes.JSON; 
-        }          
-        else if(codeFormat === FilesMimeTypes.JAVASCRIPT) {
-            mimetype = FilesMimeTypes.JAVASCRIPT;
-        } 
-        else if(codeFormat === FilesMimeTypes.PYTHON) {
-            mimetype = FilesMimeTypes.PYTHON;
-        }
-        else if(codeFormat === FilesMimeTypes.SQL) {
-            mimetype = FilesMimeTypes.SQL;
-        }        
-        else if(codeFormat === FilesMimeTypes.HTML) {
-            mimetype = FilesMimeTypes.HTML;
-        }
-        else if(codeFormat === FilesMimeTypes.CSS) {
-            mimetype = FilesMimeTypes.CSS;
-        }
-        else {
-            mimetype = FilesMimeTypes.TXT; 
-        }
-        return mimetype;
-    }
 
     const onClick = (opId?: string) => {
 
@@ -81,7 +51,7 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
                 showAlert("not file name defined");
                 return;                 
             }   
-            exportFile(getExportFileMimetype(),code!,fileName);
+            //exportFile(getExportFileMimetype(),code!,fileName);
             return;      
         }                   
     }//end
@@ -109,9 +79,7 @@ export function GenCodeViewer({ section, format, code, fileName }: CompProps) {
 
 
 
-function exportFile(arg0: string, arg1: string, fileName: string) {
-    throw new Error("Function not implemented.");
-}
+
 //{(alertMessage !== AppConstants.NOT_DEF) ? renderAlert(alertMessage) : null}    
 
 

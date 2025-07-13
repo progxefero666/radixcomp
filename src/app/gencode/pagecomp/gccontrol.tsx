@@ -19,6 +19,7 @@ import { XSelect } from "@/radix/keyvalue/inpselect";
 import { CodeGenSquema } from "@/codegen/model/cgschema";
 import { CodeGenOperations } from "@/codegen/cgoperations";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
+import { CodeGenConfig } from "@/codegen/cgconfig";
 
 
 //---------------------------------------------------------------------------------------
@@ -34,7 +35,7 @@ interface CompProps {
 export function GenCodeControl({ section, ondataresult }: CompProps) {
 
     const [initialized, setInitialized] = useState<boolean>(false);
-    const [format, setFormat] = useState<string>(CodeGenOperations.CODE_FORMATS[0].key);
+    const [format, setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
 
     const dbSquemaControl = useRef<CodeGenSquema | null>(null);
     const clientTScriptEntities = useRef<ServClientEntities>(null);
@@ -126,7 +127,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                                 onchange={onOpSelected} />
                     </Box>
                     <Box>
-                        <XSelect label="Format:" collection={CodeGenOperations.CODE_FORMATS}
+                        <XSelect label="Format:" collection={CodeGenConfig.CODE_FORMATS}
                             onchange={onSelectCodeFormat} />                    
                     </Box>
                 </Flex>

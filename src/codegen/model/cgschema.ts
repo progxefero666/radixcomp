@@ -31,11 +31,9 @@ export class CodeGenSquema{
 
     public setActiveTable(tableName: string) {
         const index = this.getTableIndex(tableName);
-        //alert(index);
         if (index >= 0) {
             this.activeTableIndex = index;
             this.activeTableName = this.tables[this.activeTableIndex].name;
-            alert("Active table: " + this.activeTableName);
         }
     };//end
 

@@ -15,21 +15,7 @@ export enum CodeFormats {
     HTML = "html"
 }
 
-/**
- * CodeGen File Mimetypes
- *    - For Code Files
- */
-export enum FilesMimeTypes {
-   TYPESCRIPT = "text/typescript",
-   PYTHON = "text/x-python",		
-   JAVASCRIPT = "text/javascript",
-   JSON = "application/json",
-   SQL = "text/x-sql",
-   PDF = "application/pdf",
-   HTML = "text/html",
-   TXT = "text/plain",
-   CSS = "text/css"   
-}
+
 
 /**
  * CodeGen File Extensions
