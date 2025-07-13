@@ -1,6 +1,6 @@
 //src\app\workflows\config.ts
 
-import { InputItem, Option } from "@/common/models";
+import { InputItem, Option } from "@/common/option";
 import { NEW_ROW_ID, DB_CONSTANTS } from "@/db/dboperations";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";

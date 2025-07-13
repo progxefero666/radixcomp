@@ -1,12 +1,13 @@
 //src\db\dbmodelutil.ts
 
-import { EditableOption, EditableOptionId, Option } from "@/common/models";
+import {  Option } from "@/common/model/option";
 //import { DbTables } from "@/db/dbcatalog";
 
 import { Workflow } from "@/db/model/workflow";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 import { Task } from "@/db/model/task";
+import { EditableOptionId } from "@/common/model/editoption";
 
 
 export const getTasktypeAsOptions = (codelangs: Tasktype[]): Option[] => {

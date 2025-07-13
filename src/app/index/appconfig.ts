@@ -1,6 +1,6 @@
 //src\app_front\appconfig.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 
 
 /**

@@ -2,7 +2,7 @@
 
 //src\radix\cbars\btmenu.tsx
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 import { Flex, Button, Table, } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { ThemeButtonsStyle, ThemeDataStyle } from "../radixtheme";

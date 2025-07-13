@@ -3,7 +3,7 @@
 import React from "react";
 import { Label } from "radix-ui";
 import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
-import { InputItem } from "@/common/models";
+import { InputItem } from "@/common/option";
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
 import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { FilePlusIcon } from "@radix-ui/react-icons";

@@ -4,7 +4,7 @@ import { StorageService } from "@/common/storage";
 import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { getAllByTable } from "@/db/services/generic/serviceread";
-import { parseResponseCollection } from "@/common/javascriptparser";
+import { parseResponseCollection } from "@/common/parser/javascriptparser";
 import { Tasktype } from "@/db/model/tasktype";
 
 

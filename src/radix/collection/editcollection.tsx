@@ -1,7 +1,7 @@
 //src\radix\collection\editcollection.tsx
 
 import { Button,Box, Flex, Popover } from "@radix-ui/themes";
-import { EditableCollection, EditableOption, EditableOptionId } from "@/common/models";
+import { EditableCollection, EditableOption, EditableOptionId } from "@/common/option";
 import { EditOptionId } from "./editoption";
 
 

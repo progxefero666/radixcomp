@@ -5,17 +5,8 @@ import { usePathname } from "next/navigation";
 import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 
-import { Option } from "@/common/models";
-import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
-import { Codelang } from "@/db/model/codelang";
-import { parseResponseCollection } from "@/common/javascriptparser";
-import { DbTables } from "@/db/dbcatalog";
-import { getAllByTable } from "@/db/services/generic/serviceread";
-import { XInputSelect } from "@/radix/input/inpselect";
-import { CodelangUtil } from "@/db/modelutil/codelangutil";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { AppMemmory } from "@/front/appmemory";
 
+import { RadixConf,  } from "@/radix/radixconf";
 
 const headerStyle = {
     height: 'auto',

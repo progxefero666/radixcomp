@@ -1,12 +1,12 @@
 //src\radix\collection\editoption.tsx
 
-import { EditableOption, EditableOptionId } from "@/common/models";
 import { ArrowDownIcon, ArrowUpIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Flex, Box, Text, IconButton } from "@radix-ui/themes";
 import { useState } from "react";
 import { XInputText } from "../input/inptext";
 import { COMP_BORDER_STYLE } from "../radixtheme";
 import { DB_ITEM_CMD } from "@/db/dboperations";
+import { EditableOptionId } from "@/common/model/editoption";
 
 
 /**

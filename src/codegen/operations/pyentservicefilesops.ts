@@ -1,6 +1,6 @@
 //src\codegen\operations\pyentdervicefilesops.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 
 /**
  * class TsEntityFiles

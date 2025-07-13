@@ -1,6 +1,6 @@
 //src\codegen\kernel\cghelper.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 import { TOption } from "@/radix/radixtypes";
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";

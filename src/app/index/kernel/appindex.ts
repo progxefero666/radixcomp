@@ -8,7 +8,7 @@ import { getAllByTable } from "@/db/services/generic/serviceread";
 import { Tasktype } from "@/db/model/tasktype";
 import { Workflow } from "@/db/model/workflow";
 import { Apptype } from "@/db/model/apptype";
-import { parseCollection } from "@/common/javascriptparser";
+import { parseCollection } from "@/common/parser/javascriptparser";
 
 /**
  * App Main in Home Page

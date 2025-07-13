@@ -1,6 +1,6 @@
 //src\radix\radixutil.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 
 /*
 

@@ -5,7 +5,7 @@ import { Flex, Separator } from "@radix-ui/themes";
 
 import MenuButtons from "@/radix/cbars/btmenu";
 import { AppConfig } from "@/app/index/appconfig";
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 
 
 export const layoutStyle = {

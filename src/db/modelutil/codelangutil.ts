@@ -1,6 +1,6 @@
 //src\db\dbmodelutil.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 import { Codelang } from "@/db/model/codelang";
 import { DbTables } from "@/db/dbcatalog";
 

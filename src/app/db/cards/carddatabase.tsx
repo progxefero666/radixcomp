@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 import { Box,Text, Flex, Select, TextField, Button } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";

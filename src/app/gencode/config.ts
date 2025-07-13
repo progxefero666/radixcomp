@@ -1,6 +1,6 @@
 //src\app\gencode\config.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 
 import { OP_CATEGORIES } from "@/codegen/cgconfig";
 import { ServClientTScriptEntities } from "./module/client_tscriptentities";

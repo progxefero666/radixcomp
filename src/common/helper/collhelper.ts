@@ -1,6 +1,6 @@
 //src\common\util\modelhelper.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/model/option";
 import { TOption, TSelection } from "@/radix/radixtypes";
 
 /**

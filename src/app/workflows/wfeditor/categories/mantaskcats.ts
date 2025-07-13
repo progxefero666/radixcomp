@@ -1,6 +1,6 @@
 //src\app\workflows\wfeditor\categories\mantasscats.ts
 
-import { ManagerCollectionById } from "@/common/mancollection";
+import { ManagerCollectionById } from "@/common/manager/mancollection";
 import { DB_COLL_CMD, DB_ITEM_CMD } from "@/db/dboperations";
 import { Taskcategory, TypeTaskcategory } from "@/db/model/taskcategory";
 

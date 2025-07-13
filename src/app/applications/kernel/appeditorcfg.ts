@@ -1,6 +1,6 @@
 //src\app_front\manapplications\manappsacfg.ts
 
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 
 /**
  * class ManAppsCfg

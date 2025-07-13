@@ -2,21 +2,17 @@
 
 import React, { useState } from "react";
 import { Button, Box, Flex, IconButton, Text } from "@radix-ui/themes";
-import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon, FilePlusIcon } from "@radix-ui/react-icons";
-
+import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon,  } from "@radix-ui/react-icons";
 import { Taskcategory } from "@/db/model/taskcategory";
-import { Task } from "@/db/model/task";
-import { useRef } from "react";
 import { ManagerTaskcategories } from "../categories/mantaskcats";
 import { EditOptionId } from "@/radix/collection/editoption";
-import { EditableOption, EditableOptionId, InputItem } from "@/common/models";
 import { getTaskcatsAsEditableOptions } from "@/db/modelutil/workflowutil";
-import { InfoNotdata } from "@/radix/data/infonotdata";
-import { SeparatorH } from "@/radix/container/separatorh";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
-import { DB_COLL_CMD, DB_ITEM_CMD } from "@/db/dboperations";
+import {  DB_ITEM_CMD } from "@/db/dboperations";
 import { DialogForm} from "@/radix/dialog/dlginputoption";
 import { NEW_TASKCAT_FIELDS } from "@/front/appworkflows";
+import { EditableOptionId } from "@/common/model/editoption";
+import { InputItem } from "@/common/model/option";
 
 
 

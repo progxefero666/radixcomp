@@ -1,7 +1,7 @@
 //src\app\workflows\pagecomp\gcprimarybar.tsx
 
 import { useState, useEffect, useRef } from "react";
-import { Option } from "@/common/models";
+import { Option } from "@/common/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 
 import MenuButtons from "@/radix/cbars/btmenu";
