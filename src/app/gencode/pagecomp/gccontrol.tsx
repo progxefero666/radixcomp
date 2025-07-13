@@ -236,10 +236,12 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const renderMainContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
-                CodeGenConfig.CODE_FORMATS
-                <Flex width="100%" direction="row"  >
-                    <XSelect  collection={formats} onchange={onSelectCodeFormat}/>
+        
+                <Flex width="100%" direction="row" pb="2" >
+                    <XSelect label="Format" collection={formats} onchange={onSelectCodeFormat}/>
                 </Flex>
+                
+                <SeparatorH />
 
                 <Flex width="100%" direction="row"  >
                     <Box mr="2">

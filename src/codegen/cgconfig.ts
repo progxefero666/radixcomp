@@ -29,8 +29,8 @@ export class CodeGenConfig {
     public static readonly NOT_DEF:string = "undefined";
     
     public static readonly CODE_FORMATS: Keyvalue[] = [
+        new Keyvalue("ts", "TypeScript"),        
         new Keyvalue("json", "JSON"),
-        new Keyvalue("ts", "TypeScript"),
         new Keyvalue("jsx", "JSX"),
         new Keyvalue("sql", "SQL"),
         new Keyvalue("js", "JavaScript")

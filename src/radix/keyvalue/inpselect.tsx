@@ -32,16 +32,16 @@ export function XSelect({name,onchange,collection,values,label,disabled}:CompPro
     return (
         <Flex width="100%" direction={"row"} gap="2" >
 
-            {label?<Box pt={"1"}><Text size="2">{label}</Text></Box>:null}
+            {label?<Box pt={"1"}><Text size="3">{label}</Text></Box>:null}
 
             <Select.Root
-                defaultValue={collection[0].value}
+                defaultValue={inp_collection[0].key}
                 onValueChange={handleOnChange}
                 disabled={disabled}
                 size={size}  >
                 <Select.Trigger variant={variant} color={color} />
                 <Select.Content>
-                    {collection.map((item, index) => (
+                    {inp_collection.map((item, index) => (
                         <Select.Item key={index} value={item.key}>
                             {item.value}
                         </Select.Item>
