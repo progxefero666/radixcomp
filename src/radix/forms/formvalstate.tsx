@@ -36,7 +36,6 @@ import {
 
 import { _validityMatchers, DEFAULT_BUILT_IN_MESSAGES, DEFAULT_INVALID_MESSAGE, FORM_CONST_ELEMS, ValidityMatcher } from './formconst';
 import { FormControlProps, FormFieldProps,  FormLabelProps, FormMessage, FormProps, FormSubmitProps } from '@radix-ui/react-form';
-import { FormMessageImpl } from '@/radix/forms/formmsg';
 import { FormLabel } from '@/radix/forms/formlabel';
 import { useFormFieldContext, useValidationContext } from './form';
 
