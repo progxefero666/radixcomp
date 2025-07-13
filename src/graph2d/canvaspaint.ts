@@ -99,6 +99,8 @@ export class CanvasPainter {
         this.drawRect(rect2d.position,rect2d.dim,rect2d.color);
     }
 
+    // polygons
+    //.................................................................................
     public drawPolygon(points: Point2d[],color:string) {
         if (points.length < 3) return;
         this.ctx.strokeStyle = color;
@@ -140,5 +142,19 @@ export class CanvasPainter {
         this.ctx.stroke();
     }//end  
 
+    // curves
+    //.................................................................................
+
+    public drawCurve2D(point:Point2d,radius:number, 
+                       startAngle:number,endAngle:number, 
+                       color: string,
+                       counterclockwise: boolean) {
+        this.ctx.beginPath();
+        this.ctx.arc(point.x, point.y, radius, startAngle, endAngle, counterclockwise);
+        this.ctx.strokeStyle = color; 
+        this.ctx.lineWidth = 2; 
+        this.ctx.stroke();
+        this.ctx.closePath();
+    }//end  
 
 }//end class
