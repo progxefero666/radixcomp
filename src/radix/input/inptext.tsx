@@ -28,9 +28,12 @@ interface InputTextProps {
     maxlen?: number;
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
-    name, defaul, maxlen,autocommit,autofocus,type, inline, label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
+    name, defaul, maxlen,autocommit,autofocus,type, inline, 
+    label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
 
-    const [value, setValue] = useState<string|null>(defaul ?? null);
+    const [value, setValue] = useState<string|null>(null);
+
+    if( defaul && defaul == ""){setValue(defaul);}
 
     const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
@@ -51,7 +54,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                 else {onChange(event.target.value);}
             }
         }
-    }
+    };//end
 
     const handleOnSubmmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === RadixKeys.KEY_INTRO) {
@@ -63,6 +66,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     };
  
     const renderReadComp = () => {
+
         return (
             <TextField.Root type={input_type}
                 value={defaul}
@@ -74,24 +78,44 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                 {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
             </TextField.Root>
         )
-    }
+    };//end
 
     const renderEditComp = () => {
-        return (
-            <TextField.Root type={input_type}
-                defaultValue={defaul}
-                placeholder={placeholder}
-                onChange={handleOnChange}
-                variant={variant}
-                size={size} color={color}
-                radius={radius}
-                onKeyDown={handleOnSubmmit}
-                disabled={input_disabled} 
-                autoFocus={autofocus ?? false}>
-                {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
-            </TextField.Root>
-        )
-    }
+
+        // apply placeholder
+        if(value === null){
+            return (
+                <TextField.Root type={input_type}
+                    placeholder={placeholder}
+                    onChange={handleOnChange}
+                    variant={variant}
+                    size={size} color={color}
+                    radius={radius}
+                    onKeyDown={handleOnSubmmit}
+                    disabled={input_disabled} 
+                    autoFocus={autofocus ?? false}>
+                    {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
+                </TextField.Root>
+            )
+        }
+        // apply default value
+        else {
+            return (
+                <TextField.Root type={input_type}
+                    defaultValue={defaul}
+                    onChange={handleOnChange}
+                    variant={variant}
+                    size={size} color={color}
+                    radius={radius}
+                    onKeyDown={handleOnSubmmit}
+                    disabled={input_disabled} 
+                    autoFocus={autofocus ?? false}>
+                    {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
+                </TextField.Root>
+            )
+        }
+
+    };//end
 
     const renderRowSimpleContent = () => {
         return (
@@ -100,7 +124,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                     renderEditComp()}
             </Box>
         )
-    }
+    };//end
 
     const renderColSimpleContent = () => {
         return (
@@ -109,7 +133,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                     renderEditComp()}
             </Box>
         )
-    }
+    };//end
 
     const renderRowLabelContent = () => {
         return (
@@ -118,7 +142,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                 {renderRowSimpleContent()}
             </Flex>
         )
-    }
+    };//end
 
     const renderColLabelContent = () => {
         return (
@@ -127,7 +151,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                 {renderColSimpleContent()}
             </Flex>
         )
-    }
+    };//end
 
     return (
         <>

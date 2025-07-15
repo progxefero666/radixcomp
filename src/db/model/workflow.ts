@@ -1,28 +1,34 @@
 //src\db\model\workflow.ts
 
+import { DataConstants } from "@/common/constants";
+import { DbConstants } from "@/common/database/dbkernel";
+
+
 /**
  * Db Table Entity Class Workflow
  **/
 export class Workflow {
 
+    //DataConstants.EMPTY_VALUE;
     public id: number;
     public name: string;
-    public description: string = '';
+    public description: string;
     public context: string|null = null;        
     public application: string|null = null;   
-    public fpath: string|null;
+    public fpath: string|null = null;   
     public readonly updated?: Date|null;
 
-    constructor(id:number,name:string,
-                context:string|null,description:string,
+    constructor(id:number,name:string|null,
+                context:string|null,description:string|null,
                 application:string|null,fpath:string|null,updated?:Date ) {
 
-        this.id = id;
-        this.name = name;
-        this.context = context;        
-        this.description = description;
+        this.id          = id;
+        this.name        = name ?? "";
+        this.context     = context;        
+        this.description = description ?? "";
         this.application = application;
-        this.fpath = fpath;
+        this.fpath       = fpath;
+        
         if(updated !== null){this.updated = updated;}
     }
 

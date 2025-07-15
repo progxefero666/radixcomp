@@ -51,6 +51,16 @@ export enum DB_ERROR {
     UNKNOWN = "unknown_error"
 }   
 
+
+/**
+ * class DbConstants.EMPTY_VALUE
+ */
+export class DbConstants{
+    public static readonly EMPTY_VALUE: string = "";
+
+}
+
+
 /**
  * DbOps.NEW_ROW_ID
  */

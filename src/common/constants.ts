@@ -15,3 +15,11 @@ export enum OPERATIONS_TEXT {
     CANCEL= "Cancel",
 }
 
+
+/**
+ * class DbConstants.EMPTY_VALUE
+ */
+export class DataConstants{
+    public static readonly EMPTY_VALUE: string = "";
+
+}
