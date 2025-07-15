@@ -1,25 +1,26 @@
 //src/radix/dialog/dlginputoption.tsx
-import React, { useState, useEffect } from 'react';
-import { createRoot } from "react-dom/client";
 
+import React from "react";
 import { Label } from "radix-ui";
-import { Button, Box, Flex, IconButton, Text, Dialog, TextField } from "@radix-ui/themes";
+import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
 
-import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
-
-import { InputItem, Option } from "@/common/option";
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
-import { OPERATIONS } from '@/common/constants';
-import { BarSubmit } from '../cbars/barsubmit';
+import { BarSubmit } from "@/radix/cbars/barsubmit";
+import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
+import { InputField } from "@/common/model/inputfield";
+import { OPERATIONS } from "@/common/constants";
 
+
+/**
+ * DialogForm component
+ */
 interface CompProps {
     buttontext: string;
     title: string;
-    items: InputItem[];
-    onsave: (values: InputItem[]) => void;
+    items: InputField[];
+    onsave: (values: InputField[]) => void;
 }
-
-export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
+export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
 
     //const onCancel = () => { if (oncancel) { oncancel(); } }
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,48 +31,46 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
         onsave(items);
     };//end
 
-    const renderFormInputs = () => {
+    const renderInput = (input: InputField) => {
         return (
-            <Flex width="100%" direction="column" gapY="2" >
-                {items.map((item, index) => (
-                    <Box key={index.toString()}>
-                        <fieldset>
-                            <Label.Root>{items[index].label}</Label.Root>
-                            <TextField.Root name={items[index].id} 
-                                            placeholder={items[index].placeholder}
-                                radius="small" />
-                        </fieldset>                          
-                    </Box>                 
-                ))}
-            </Flex>
+            <fieldset>
+                <Label.Root>{input.label}</Label.Root>
+                <TextField.Root name={input.id}
+                    placeholder={input.placeholder}
+                    radius="small" />
+            </fieldset>
         )
     };//end
 
     return (
-        <Dialog.Root >
+        <Dialog.Root>
+
             <Dialog.Trigger>
                 <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
                     <FilePlusIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                  height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                        height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
                     <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
                         {buttontext}
-                    </Text>                                  
+                    </Text>
                 </Button>
             </Dialog.Trigger>
 
-            <Dialog.Content className="DialogContent">
+            {/*<Dialog.Description>description</Dialog.Description>*/}
+            <Dialog.Content>
 
-                <Dialog.Title className="DialogTitle">
+                <Dialog.Title>
                     <Text size={ThemeTextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
                 </Dialog.Title>
 
-                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => 
-                                {event.preventDefault();onSubmit(event);}}>
-
-                    {renderFormInputs()}
-  
-                    <Dialog.Close >
-                        <BarSubmit />
+                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { event.preventDefault(); onSubmit(event); }}>
+                    <Flex width="100%" direction="column" gapY="2" >
+                        {items.map((item, index) => (
+                            <Box key={index.toString()}>
+                                {renderInput(item)}
+                            </Box>
+                        ))}
+                    </Flex>
+                    <Dialog.Close>
                         <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
                             <Button type="submit"
                                 color={ThemeButtonsStyle.COLOR_SAVE}
@@ -90,13 +89,13 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
 
                     </Dialog.Close>
                 </form>
-
             </Dialog.Content>
 
         </Dialog.Root>
     )
 
 }//end component
+
 
 /*
 //oncancel?: () => void;

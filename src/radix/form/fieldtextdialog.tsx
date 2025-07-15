@@ -9,6 +9,7 @@ import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 import { InputField } from "@/common/model/inputfield";
 import { OPERATIONS } from "@/common/constants";
+import { RadixOpsText } from "../radixconstants";
 
 
 /**
@@ -17,18 +18,16 @@ import { OPERATIONS } from "@/common/constants";
 interface CompProps {
     buttontext: string;
     title: string;
-    items: InputField[];
-    onsave: (values: InputField[]) => void;
+    item: InputField;
+    onsave: (values: InputField) => void;
 }
-export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
+export const FieldTextDialog = ({ buttontext, title, item, onsave }: CompProps) => {
 
     //const onCancel = () => { if (oncancel) { oncancel(); } }
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);
-        for (let idx = 0; idx < items.length; idx++) {
-            items[idx].value = formData.get(items[idx].id)?.toString();
-        }
-        onsave(items);
+        item.value = formData.get(item.id)?.toString();
+        onsave(item);
     };//end
 
     const renderInput = (input: InputField) => {
@@ -64,24 +63,25 @@ export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
 
                 <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { event.preventDefault(); onSubmit(event); }}>
                     <Flex width="100%" direction="column" gapY="2" >
-                        {items.map((item, index) => (
-                            <Box key={index.toString()}>
-                                {renderInput(item)}
-                            </Box>
-                        ))}
+                        <fieldset>
+                            <Label.Root>{item.label}</Label.Root>
+                            <TextField.Root name={item.id}
+                                placeholder={item.placeholder}
+                                radius="small" />
+                        </fieldset>
                     </Flex>
                     <Dialog.Close>
                         <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
                             <Button type="submit"
                                 color={ThemeButtonsStyle.COLOR_SAVE}
                                 size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                                {OPERATIONS.SAVE}
+                                {RadixOpsText.OK}
                                 <CheckIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
                                     height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
                             </Button>
                             <Button color={ThemeButtonsStyle.COLOR_CLOSE}
                                 size={ThemeButtonsStyle.BTN_DEF_SIZE} >
-                                {OPERATIONS.CANCEL}
+                                {RadixOpsText.CANCEL}
                                 <Cross2Icon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
                                     height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
                             </Button>
@@ -95,3 +95,38 @@ export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
     )
 
 }//end component
+
+
+/*
+//oncancel?: () => void;
+<Dialog.Description className="DialogDescription">
+    Make changes
+</Dialog.Description>
+
+with defaultValue
+.......................................................
+<TextField.Root name="item_0" id="item_0"
+    defaultValue={items[0].value}
+    radius="small" placeholder="input ..." />
+
+with onCancelCaptureEvent
+.......................................................
+<Button  color="yellow" size="2" onClick={onCancel} >
+    Cancel
+    <Cross2Icon width="20px" height="20px" />
+</Button>    
+
+<Flex width="100%" direction="column" gapY="2" >
+    <fieldset>
+        <Label.Root>{items[0].label}</Label.Root>
+        <TextField.Root name={items[0].id} placeholder={items[0].placeholder}
+            radius="small" />
+    </fieldset>
+
+    <fieldset >
+        <Label.Root >{items[1].label}</Label.Root>
+        <TextField.Root name={items[1].id} placeholder={items[1].placeholder}
+            radius="small" />
+    </fieldset>
+</Flex>
+*/

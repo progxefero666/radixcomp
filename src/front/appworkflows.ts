@@ -57,15 +57,22 @@ export const NEW_WK: Workflow = new Workflow(
     DB_CONSTANTS.NOT_DEF, 
     null,"", null, null);
 
-export const NEW_TASKCAT_FIELDS:InputField[] = [
-    new InputField("text","item_0", "placeholder", "nacho", "Name", 50),
-    new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion", 100)
-];
+
+/**
+ * class AppWorkflows.NEW_TASKCAT_FIELDS
+ */
+export class AppWorkflows {
+
+    public static readonly NEW_TASKCAT_FIELDS:InputField[] = [
+        new InputField("text","item_0", "placeholder", "nacho", "Name"),
+        new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion")
+    ];
+}//end class
 
 
 /*
 ModelField
-export class AppWorkflows {}//end class
+
 
     -------------------------------------------------------
 	## Workflow Operations

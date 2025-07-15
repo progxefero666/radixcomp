@@ -98,6 +98,11 @@ export enum RADIX_COLORS {
     sky= "sky-7" , 
 };
 
+export class RadixOpsText{
+
+    public static readonly OK: string = "Ok";
+    public static readonly CANCEL: string = "Cancel";
+}
 
 /**
  * class RadixKeys.KEY_INTRO

@@ -10,7 +10,7 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
  */
 export class RadixButtons {
     //public static readonly VAL: any = "2";
-
+    
 }//end class
 
 export const renderHomeButton = (isPageIndex:boolean) => {

@@ -2,6 +2,7 @@
 
 import { TypeInput } from "@/common/types";
 import { Option } from "@/common/model/option";
+import { TRange } from "@/radix/radixtypes";
 
 
 export class InputField {
@@ -11,11 +12,11 @@ export class InputField {
     public placeholder: string;
     public value: any;
     public label: string | null = null;
-    public maxlength: number | null = null;
+    public length: TRange | null = null;
 
     constructor(itype: TypeInput, id: string,
         placeholder: string, value: string,
-        label: string | null, maxlength?: number) {
+        label: string | null, length?: TRange) {
 
         this.itype = itype;
         this.id = id;
@@ -23,7 +24,7 @@ export class InputField {
         this.placeholder = placeholder;
         this.value = value;
         this.label = label;
-        if (maxlength) { this.maxlength = maxlength }
+        if (length) { this.length = length }
     }
 
     public toJsonString(): string {

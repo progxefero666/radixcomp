@@ -43,3 +43,15 @@ export type radixTypeComp = {
     radius: any;
 }
 
+export type TRange = {
+    min: number;
+    max: number;
+}
+export type TInputText ={
+    id: string;
+    length: TRange;
+    placeholder?: string;
+    value?:string;
+    label?: string;    
+    //onsubmit: (value:string,id?:string) => void;
+}
