@@ -29,26 +29,19 @@ export class CvPaintConnections {
         this.ctx.lineWidth = arrow.width;
         this.ctx.stroke();
 
-        
         const vcalc:number = Math.PI/arrow.headFactor;
         this.ctx.beginPath();
 
         this.ctx.moveTo(arrow.target.x, arrow.target.y);
-
         this.ctx.lineTo(arrow.target.x- (arrow.headLen * Math.cos(arrow.angle-vcalc)),
-                        arrow.target.y- (arrow.headLen * Math.sin(arrow.angle-vcalc)));
-           
-                      
+                        arrow.target.y- (arrow.headLen * Math.sin(arrow.angle-vcalc)));                                 
         this.ctx.lineTo(arrow.target.x - (arrow.headLen * Math.cos(arrow.angle+vcalc)),
                         arrow.target.y - (arrow.headLen * Math.sin(arrow.angle+vcalc)));
-
                  
         this.ctx.lineTo(arrow.target.x, arrow.target.y);
         this.ctx.lineTo(arrow.target.x-(arrow.headLen*Math.cos(arrow.angle-vcalc)),
                         arrow.target.y-(arrow.headLen*Math.sin(arrow.angle-vcalc)));
 
-
-        
         this.ctx.stroke();
         this.ctx.restore();       
     };//end
