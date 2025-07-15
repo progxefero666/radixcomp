@@ -1,16 +1,10 @@
-//src/radix/dialog/dlginputoption.tsx
+//src\radix\dialog\dlgiconconfirm.tsx
 
 import React from "react";
-import { Label } from "radix-ui";
-import { Button, Box, Flex, Text, Dialog, TextField, IconButton } from "@radix-ui/themes";
-
+import { Button, Box, Flex, Text, Dialog, IconButton } from "@radix-ui/themes";
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
-import { BarSubmit } from "@/radix/cbars/barsubmit";
-import { ArrowUpIcon, CheckIcon, Cross2Icon, FilePlusIcon, TrashIcon } from "@radix-ui/react-icons";
-import { InputField } from "@/common/model/inputfield";
-import { OPERATIONS } from "@/common/constants";
+import { CheckIcon, Cross2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { RadixOpsText } from "../radixconstants";
-import { TInputText } from "../radixtypes";
 import { RadixConf } from "../radixconf";
 
 

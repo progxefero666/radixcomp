@@ -1,16 +1,11 @@
-//src/radix/dialog/dlginputoption.tsx
+//src\radix\dialog\dlgbuttonconfirm.tsx
 
 import React from "react";
-import { Label } from "radix-ui";
-import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
-
+import { Button, Box, Flex, Text, Dialog } from "@radix-ui/themes";
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
-import { BarSubmit } from "@/radix/cbars/barsubmit";
-import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
-import { InputField } from "@/common/model/inputfield";
-import { OPERATIONS } from "@/common/constants";
+import { CheckIcon, Cross2Icon, FilePlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { RadixOpsText } from "../radixconstants";
-import { TInputText } from "../radixtypes";
+import { RadixConf } from "../radixconf";
 
 
 /**
@@ -18,17 +13,26 @@ import { TInputText } from "../radixtypes";
  */
 interface CompProps {
     buttontext: string;
+    buttonicon: string;
     title: string;
-    item: InputField;
-    onsave: (values: TInputText) => void;
+    message: string;
+    onconfirm: () => void;
 }
-export const DialogButtonConfirm = ({ buttontext, title, item, onsave }: CompProps) => {
+export const DialogButtonConfirm = ({ buttontext,buttonicon, title, message, onconfirm }: CompProps) => {
 
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        const formData = new FormData(event.currentTarget);
-        onsave({id:item.id, value:formData.get(item.id)?.toString()});
-    };//end
-
+    const renderButton = () => {
+        if(buttonicon === RadixConf.ICON_DELETE) {
+            return (
+                <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
+                    <TrashIcon  width={ThemeIconsStyle.ICON_DEF_SIZE.width}
+                        height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                    <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
+                        {buttontext}
+                    </Text>
+                </Button>
+            )
+        }
+    }
     return (
         <Dialog.Root>
 
@@ -48,36 +52,31 @@ export const DialogButtonConfirm = ({ buttontext, title, item, onsave }: CompPro
                     <Text size={ThemeTextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
                 </Dialog.Title>
 
-                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { event.preventDefault(); onSubmit(event); }}>
-                    <Flex width="100%" direction="column" gapY="2" >
-                        <fieldset>
-                            <Label.Root>{item.label}</Label.Root>
-                            <TextField.Root name={item.id}
-                                placeholder={item.placeholder}
-                                radius="small" />
-                        </fieldset>
+                <Dialog.Description>
+                    <Text size={ThemeTextStyle.DEFAULT_SIZE}>{message}</Text>
+                </Dialog.Description>
+
+                <Dialog.Close>
+                    <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
+                        <Button type="submit"
+                            color={ThemeButtonsStyle.COLOR_SAVE}
+                            size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                            onClick={onconfirm} >
+                            {RadixOpsText.OK}
+                            <CheckIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
+                                height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                        </Button>
+                        <Button color={ThemeButtonsStyle.COLOR_CLOSE}
+                            size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                            {RadixOpsText.CANCEL}
+                            <Cross2Icon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
+                                height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                        </Button>
                     </Flex>
-                    <Dialog.Close>
-                        <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
-                            <Button type="submit"
-                                color={ThemeButtonsStyle.COLOR_SAVE}
-                                size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                                {RadixOpsText.OK}
-                                <CheckIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
-                            </Button>
-                            <Button color={ThemeButtonsStyle.COLOR_CLOSE}
-                                size={ThemeButtonsStyle.BTN_DEF_SIZE} >
-                                {RadixOpsText.CANCEL}
-                                <Cross2Icon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
-                            </Button>
-                        </Flex>
 
-                    </Dialog.Close>
-                </form>
+                </Dialog.Close>
+
             </Dialog.Content>
-
         </Dialog.Root>
     )
 

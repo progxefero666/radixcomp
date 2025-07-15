@@ -10,11 +10,10 @@ import { OPERATIONS } from "@/common/constants";
 
 
 interface CompProps {
-    state?: string;
     onsave: () => void;
 }
 
-export function WorkflowEditorHeader({ state }: CompProps) {
+export function WorkflowEditorHeader({ onsave }: CompProps) {
 
     const [barbuttons, setBarbuttonsCfg] = useState<BarButtonsCfg>(BARCFG_SAVE_CLOSE);
 

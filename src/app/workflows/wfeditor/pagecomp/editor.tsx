@@ -30,6 +30,8 @@ import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import { WorkflowEditorHeader } from "./editorheader";
+import { DialogButtonConfirm } from "@/radix/dialog/dlgbuttonconfirm";
+import { RadixConf } from "@/radix/radixconf";
 
 
 const mainContentStyle = {
@@ -45,8 +47,6 @@ interface WorkflowEditorProps {
 export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const [ready, setReady] = useState<boolean>(false);
-    const [barState, setBarState] = useState<string>("default");
-    const [barbuttons, setBarbuttonsCfg] = useState<BarButtonsCfg>(BARCFG_SAVE_CLOSE);
 
     const [codelangs, setCodelangs] = useState<Codelang[]>([]);
     const [tasktypes, setTasktypes] = useState<Tasktype[]>([]);
@@ -75,17 +75,15 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                 setTaskcats(parseResponseCollection<Taskcategory>(await getTaskcategories(workflowId))!);
                 setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id))!);
             }
+            else {
+                
+            }
             setReady(true);
             onCharge(workflow, taskcats);
         };
         init();
     }, []);
-
-    
-    const createNewGroup = () => {
-
-    };//end
-
+  
     const execMainCommand = (id: string) => {
         if (id == WorkflowActions.ADD_TASK) {
             let task_orden = tasks.length;
@@ -135,6 +133,11 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         alert("onSaveTaskEdition");
     };//end
 
+    const createNewGroup = (taskOrden:number) => {
+    
+        alert("current group"+ tasks[taskOrden].tkgroup);
+    };//end
+
     const renderMainCommands = () => {
         return (
             <Flex width="100%" direction="row" justify="center" align="center"
@@ -143,11 +146,12 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                     size="2" onClick={() => execMainCommand("add_task")} value="add task" >
                     add task
                 </Button>
-                
-                <Button variant="solid" color={RADIX_COLORS.green}
-                    size="2" onClick={() => execMainCommand("clear_tasks")} value="add task" >
-                    clear task
-                </Button>
+
+                <DialogButtonConfirm buttonicon={RadixConf.ICON_DELETE}
+                                     buttontext="clear tasks"
+                                     message="Are you sure you want to clear all tasks?"
+                                     title="Clear tasks" 
+                                     onconfirm={() => execMainCommand("clear_tasks")}  /> 
             </Flex>
         )
     };//end
@@ -169,7 +173,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
                 <Button variant="solid" color={RADIX_COLORS.blue}
                     size={ThemeButtonsStyle.BTN_DEF_SIZE}
-                    onClick={() => createNewGroup} >
+                    onClick={() => createNewGroup(index)} >
                     new group
                 </Button>
             </Flex>
@@ -198,7 +202,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
-            <WorkflowEditorHeader state={barState} onsave={onSaveWorkflow}/>
+            <WorkflowEditorHeader onsave={onSaveWorkflow}/>
             <CardWorkflowMain workflow={workflow} openinit={mainOpen} />
             {renderMainCommands()}
             {renderTasks()}
