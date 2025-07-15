@@ -4,7 +4,7 @@
 import { Dim2d, Point2d } from "@/graph2d/types2d";
 import { ShapeUtil } from "../util/shapeutil";
 import { Shape } from "@/graph2d/shapes/shape";
-import { XMath2d } from "@/common/math/xmath2d";
+import { XMath2d } from "@/common/math2d/xmath2d";
 
 /**
  * Shape: Cylinder
