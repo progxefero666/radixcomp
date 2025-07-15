@@ -24,6 +24,7 @@ import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { OPERATIONS, OPERATIONS_TEXT } from "@/common/constants";
 import BarButtons from "@/radix/cbars/btbar";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { DialogIconConfirm } from "@/radix/dialog/dlgiconconfirm";
 
 
 const compStyle = {
@@ -49,11 +50,12 @@ interface CardTaskProps {
     tasktypes: Tasktype[];
     taskcategories: Taskcategory[];
     task: Task;
-    onsave?: () => void;
-    oncancel?: () => void;
+    ondelete: (taskOrden:number) => void;
+    //onsave?: (taskOrden:number) => void;
+    
 }
 export default function CardTask({ taskscount,task, codelangs, tasktypes, taskcategories: taskgroups,
-                                   onsave, oncancel }: CardTaskProps) {
+                                    ondelete }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
     const proglanguageRef = useRef<HTMLSelectElement>(null);
@@ -70,15 +72,13 @@ export default function CardTask({ taskscount,task, codelangs, tasktypes, taskca
     const tasktypesColl: Option[] = getTasktypeAsOptions(tasktypes);
     const taskcategoriesColl: Option[] =getTaskcategoriessAsOptions(taskgroups);
 
+    const onDeleteConfirm = () => {        
+        ondelete(task.orden);
+    }; 
+
     const execTaskItemOperation = (operation:string) => {
 
-        if(operation === DB_ITEM_CMD.UPDATE) {
-       
-        }
-        else if(operation === DB_ITEM_CMD.DELETE) {
-       
-        }
-        else if (operation === DB_ITEM_CMD.MOVEUP ) {
+        if (operation === DB_ITEM_CMD.MOVEUP ) {
             if(task.orden > 0) { 
 
             }         
@@ -88,6 +88,10 @@ export default function CardTask({ taskscount,task, codelangs, tasktypes, taskca
 
             }                         
         }    
+        else if(operation === DB_ITEM_CMD.DELETE) {
+            alert("delete task");
+        }        
+        //else if(operation === DB_ITEM_CMD.UPDATE) {}
 
     };//end    
 
@@ -144,17 +148,17 @@ export default function CardTask({ taskscount,task, codelangs, tasktypes, taskca
                             placeholder="task name" />     
 
                         <Flex direction="row" gapX="2" ml="3" >
-                             <IconButton variant={RadixConf.VARIANTS.solid} 
+                            
+                            <IconButton variant={RadixConf.VARIANTS.solid} 
                                 onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.UPDATE)}>
                                 <ArchiveIcon />
                             </IconButton>                              
-
-                             <IconButton variant={RadixConf.VARIANTS.solid} 
-                                onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.DELETE)}>
-                                <TrashIcon />
-                            </IconButton>      
-                                                  
-                             <IconButton variant={RadixConf.VARIANTS.solid} 
+ 
+                            <DialogIconConfirm icon={RadixConf.ICON_DELETE}
+                                               message="confirm delete task?"
+                                               title="Confirm"
+                                               onconfirm={onDeleteConfirm}  />
+                            <IconButton variant={RadixConf.VARIANTS.solid} 
                                 onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.MOVEUP)}>
                                 <ArrowUpIcon />
                             </IconButton>

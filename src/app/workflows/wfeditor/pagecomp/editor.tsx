@@ -6,7 +6,7 @@ import { Box, Button, Flex, Text } from "@radix-ui/themes";
 
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection, parseResponseItem } from "@/common/parsers/javascriptparser";
-import { DB_CONSTANTS, DB_ITEM_CMD, DbOps } from "@/common/database/dbkernel";
+import { DB_ITEM_CMD, } from "@/common/database/dbkernel";
 import { Task } from "@/db/model/task";
 import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
@@ -26,9 +26,10 @@ import { Tasktype } from "@/db/model/tasktype";
 import CardTask from "../cards/cardwftask";
 
 import { RADIX_COLORS } from "@/radix/radixconstants";
-import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
+import { WorkflowEditorHeader } from "./editorheader";
 
 
 const mainContentStyle = {
@@ -81,6 +82,9 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     }, []);
 
     
+    const createNewGroup = () => {
+
+    };//end
 
     const execMainCommand = (id: string) => {
         if (id == WorkflowActions.ADD_TASK) {
@@ -127,7 +131,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         alert("onSaveWorkflow");
     };//end
 
-    const onSaveTask = () => {
+    const onDeleteTask = (taskOrden:number) => {
         alert("onSaveTaskEdition");
     };//end
 
@@ -139,6 +143,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                     size="2" onClick={() => execMainCommand("add_task")} value="add task" >
                     add task
                 </Button>
+                
                 <Button variant="solid" color={RADIX_COLORS.green}
                     size="2" onClick={() => execMainCommand("clear_tasks")} value="add task" >
                     clear task
@@ -147,42 +152,43 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         )
     };//end
 
+    const renderGroup = (groupId:number) => {
+
+    };//end
+
     const renderTasksCommands = (index:number) => {
         return (
             <Flex width="100%" direction="row" justify="center" align="center"
                 px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
 
                 <Button variant="solid" color={RADIX_COLORS.green}
-                    size="2" onClick={() => execTaskCommand(WorkflowActions.ADD_TASK,index)} >
+                    size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                    onClick={() => execTaskCommand(WorkflowActions.ADD_TASK,index)} >
                     add task
                 </Button>
+
                 <Button variant="solid" color={RADIX_COLORS.blue}
-                    size="2" onClick={() => execTaskCommand(WorkflowActions.COPY_TASK,index)} >
-                    clear task
+                    size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                    onClick={() => createNewGroup} >
+                    new group
                 </Button>
             </Flex>
         )
     };//end
 
     const renderTasks = () => {
-        if (tasks.length == 0) {
-            return (
-                <Box width="100%" px="2" py="1" >
-                    <Text size="2" color="gray">No tasks defined</Text>
-                </Box>
-            );
-        }
+
+        if (tasks.length == 0) {return (null);}
         return (
             <>
                 {tasks.map((task, index) => (
                     <Box key={index.toString()}>
-                        <CardTask 
-                            taskscount={tasks.length}
-                            codelangs={codelangs}
-                            tasktypes={tasktypes}
-                            taskcategories={taskcats}
-                            task={task}
-                            onsave={() => onSaveTask()}/>
+                        <CardTask taskscount={tasks.length}
+                                  codelangs={codelangs}
+                                  tasktypes={tasktypes}
+                                  taskcategories={taskcats}
+                                  task={task}
+                                  ondelete={() => onDeleteTask}/>
                         {renderTasksCommands(index)}    
                     </Box>
                 ))}
@@ -199,40 +205,4 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         </Flex>
     );
 
-}//end component
-
-interface CompProps {
-    state?: string;
-    onsave: () => void;
-}
-function WorkflowEditorHeader({ state }: CompProps) {
-
-    const [barbuttons, setBarbuttonsCfg] = useState<BarButtonsCfg>(BARCFG_SAVE_CLOSE);
-
-    const onBarbuttonsClick = (operation: string) => {
-        alert("Operation: " + operation);
-        if (operation == DB_ITEM_CMD.UPDATE) {
-
-        }
-        else if (operation == OPERATIONS.CLOSE) {
-
-        }
-    };
-
-    return (
-        <Flex direction="row" justify="end" px="3" py="1" style={mainContentStyle} >
-
-            <BarButtons barconfig={barbuttons}
-                onclick={onBarbuttonsClick} />
-
-        </Flex>
-    );
-
-}//end component
-
-/*
-        if (id == WF_EDITOR_TASK_ACTION.UPDATE_MAIN) {
-            alert("Update main");
-            return;
-        }
-*/
+};//end component
