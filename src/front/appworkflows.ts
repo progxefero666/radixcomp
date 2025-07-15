@@ -5,6 +5,7 @@ import { Option } from "@/common/model/option";
 import { DB_CONSTANTS, DbOps } from "@/common/database/dbkernel";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
+import { TKeyvalue } from "@/common/types";
 
 
 
@@ -32,43 +33,48 @@ export const MAN_WFS_SECTIONS = {
     MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
 } as const;
 
-
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
     EDITOR_VIEW_TASKGROUPS: new Option("manager_taskgroups", "Task Groups", null)
 } as const;
 
-export enum WF_EDITOR_TASK_ACTION {
-    UPDATE_MAIN = "update_main",
-    ADD_TASK = "add_task",
-    DELETE_TASK = "delete_task",
-    COPY_TASK = "copy_task",
-    MOVEUP_TASK = "moveup_task",
-    MOVEDOWN_TASK = "movedown_task", 
-    UPDATE_TASK = "update_task",   
-    CLEAR_TASKS = "clear_tasks"
-}
-
-export const TASKCATEGORY_DEFAULT: Taskcategory = new Taskcategory(
-    0, 0, "default", "taskgroup default");
-
-export const NEW_WK: Workflow = new Workflow(
-    Number(DbOps.NEW_ROW_ID),
-    DB_CONSTANTS.NOT_DEF, 
-    null,"", null, null);
-
 
 /**
- * class AppWorkflows.NEW_TASKCAT_FIELDS
+ * class AppWorkflows.TASKCATEGORY_DEF
  */
 export class AppWorkflows {
+
+    public static readonly NEW_WK: Workflow = new Workflow(
+        Number(DbOps.NEW_ROW_ID),
+        DB_CONSTANTS.NOT_DEF, 
+        null,"", null, null);        
 
     public static readonly NEW_TASKCAT_FIELDS:InputField[] = [
         new InputField("text","item_0", "placeholder", "nacho", "Name"),
         new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion")
     ];
+
+    public static readonly TASKCATEGORY_DEF: Taskcategory 
+        = new Taskcategory(0, 0, "default", "taskgroup default");
+
+ 
+
 }//end class
 
+/**
+ * class WorkflowActions
+ */
+export class WorkflowActions {
+
+    public static UPDATE_MAIN: string = "update_main";
+    public static ADD_TASK: string = "add_task";
+    public static DELETE_TASK: string = "delete_task";
+    public static COPY_TASK: string = "copy_task";
+    public static MOVEUP_TASK: string = "moveup_task";
+    public static MOVEDOWN_TASK: string = "movedown_task";
+    public static UPDATE_TASK: string = "update_task";
+    public static CLEAR_TASKS: string = "clear_tasks";    
+}//end class
 
 /*
 ModelField

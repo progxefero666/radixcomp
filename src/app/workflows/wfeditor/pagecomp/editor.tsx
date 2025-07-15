@@ -11,7 +11,7 @@ import { Task } from "@/db/model/task";
 import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
 
-import { NEW_WK, TASKCATEGORY_DEFAULT, WF_EDITOR_TASK_ACTION } from "@/front/appworkflows";
+import { AppWorkflows, WorkflowActions } from "@/front/appworkflows";
 import BarButtons from "@/radix/cbars/btbar";
 
 
@@ -53,8 +53,8 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     //if ((AppMemmory.readWorkflowId()!) !== Number(DbOps.NEW_ROW_ID)) { isNewWorkflow = false; }
 
     const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
-    const [workflow, setWorkflow] = useState<Workflow>(NEW_WK);
-    const [taskcats, setTaskcats] = useState<Taskcategory[]>([TASKCATEGORY_DEFAULT]);
+    const [workflow, setWorkflow] = useState<Workflow>(AppWorkflows.NEW_WK);
+    const [taskcats, setTaskcats] = useState<Taskcategory[]>([AppWorkflows.TASKCATEGORY_DEF]);
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
@@ -87,7 +87,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     };//end
     
     const execMainCommand = (id: string) => {
-        if (id == WF_EDITOR_TASK_ACTION.ADD_TASK) {
+        if (id == WorkflowActions.ADD_TASK) {
             let task_orden = 0;
             if( tasks.length > 0) {
                 task_orden = tasks.length;
@@ -96,7 +96,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             setTasks([...tasks, newTask]); 
             return;
         }        
-        else if (id == WF_EDITOR_TASK_ACTION.CLEAR_TASKS) {
+        else if (id == WorkflowActions.CLEAR_TASKS) {
             setTasks([]);
             return;
         }        
@@ -105,22 +105,22 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     const execTaskCommand = (id: string,index:number) => {
 
         // from row commands
-        if (id == WF_EDITOR_TASK_ACTION.ADD_TASK) {
+        if (id == WorkflowActions.ADD_TASK) {
             alert("Add task");
             return;
         }
-        else if (id == WF_EDITOR_TASK_ACTION.COPY_TASK) {
+        else if (id == WorkflowActions.COPY_TASK) {
             alert("Copy task");
         }
                 
         // from card commands
-        else if (id == WF_EDITOR_TASK_ACTION.DELETE_TASK) {
+        else if (id == WorkflowActions.DELETE_TASK) {
             alert("Delete task");
         }
-        else if (id == WF_EDITOR_TASK_ACTION.MOVEUP_TASK) {
+        else if (id == WorkflowActions.MOVEUP_TASK) {
             alert("Move up task");
         }
-        else if (id == WF_EDITOR_TASK_ACTION.MOVEDOWN_TASK) {
+        else if (id == WorkflowActions.MOVEDOWN_TASK) {
             alert("Move down task");
         }
 
@@ -161,11 +161,11 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                 px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
 
                 <Button variant="solid" color={RADIX_COLORS.green}
-                    size="2" onClick={() => execTaskCommand(WF_EDITOR_TASK_ACTION.ADD_TASK,index)} >
+                    size="2" onClick={() => execTaskCommand(WorkflowActions.ADD_TASK,index)} >
                     add task
                 </Button>
                 <Button variant="solid" color={RADIX_COLORS.blue}
-                    size="2" onClick={() => execTaskCommand(WF_EDITOR_TASK_ACTION.COPY_TASK,index)} >
+                    size="2" onClick={() => execTaskCommand(WorkflowActions.COPY_TASK,index)} >
                     clear task
                 </Button>
             </Flex>
