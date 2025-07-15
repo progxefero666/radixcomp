@@ -195,7 +195,13 @@ export class CanvasPainter {
 
     // shapes   
     //.................................................................................
-
+    /*            
+        this.drawHalfEllipse(shape.ellipsesCenter[0],
+                        shape.ellipsesDim.width,
+                        shape.ellipsesDim.height,
+                        false, 
+                        shape.color);
+    */
 
     public drawShapeCylinder(shape:ShapeCylinder){
     
@@ -203,16 +209,13 @@ export class CanvasPainter {
 
         this.ctx.moveTo(shape.rectPoints[0].x,shape.rectPoints[0].y);                
         this.ctx.lineTo(shape.rectPoints[1].x,shape.rectPoints[1].y);  
-        
-        this.drawHalfEllipse(shape.ellipsesCenter[0],
-                        shape.ellipsesDim.width,
-                        shape.ellipsesDim.height,
-                        false, 
-                        shape.color);
-
         this.ctx.lineTo(shape.rectPoints[2].x,shape.rectPoints[2].y);                             
-        //this.ctx.moveTo(shape.rectPoints[3].x,shape.rectPoints[3].y);                           
-        this.ctx.lineTo(shape.rectPoints[3].x,shape.rectPoints[3].y);
+    
+        this.ctx.bezierCurveTo(
+            shape.rectPoints[2].x,shape.rectPoints[2].y, 
+            180, 10,
+            shape.rectPoints[3].x,shape.rectPoints[3].y);
+        //this.ctx.lineTo(shape.rectPoints[3].x,shape.rectPoints[3].y);
         this.ctx.lineTo(shape.rectPoints[0].x,shape.rectPoints[0].y);
 
         this.ctx.lineWidth = 1; 

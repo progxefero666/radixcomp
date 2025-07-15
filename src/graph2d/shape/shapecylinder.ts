@@ -17,6 +17,9 @@ export class ShapeCylinder {
 
     public rectPoints: Point2d[] = [];
     public ellipsesCenter: Point2d[] = [];
+
+    public ellipsesRefPoint: Point2d[] = [];
+
     public ellipsesDim: Dim2d= {width: 0, height: 0};
 
     constructor(position:Point2d,dim:Dim2d,color:string) {
@@ -28,8 +31,24 @@ export class ShapeCylinder {
         this.ellipsesDim.width = this.dim.width;
         this.ellipsesDim.height = Math.floor(this.ellipsesDim.width / 5);
 
-        this.ellipsesCenter.push({x: position.x, y: position.y - this.dim.height / 2});
-        this.ellipsesCenter.push({x: position.x, y: position.y + this.dim.height / 2});
+        const ellipseUpCenter: Point2d ={x: position.x, y: position.y - this.dim.height / 2}
+        const ellipseDownCenter: Point2d ={x: position.x, y: position.y + this.dim.height / 2};
+
+        this.ellipsesCenter[0] = {x: position.x, y: position.y - this.dim.height / 2};
+        this.ellipsesCenter[1] = {x: position.x, y: position.y + this.dim.height / 2};
+
+        this.ellipsesRefPoint[0] = {
+            x: this.ellipsesCenter[0].x, 
+            y: this.ellipsesCenter[0].y - (this.ellipsesDim.height/2)
+        };
+        
+
+        this.ellipsesRefPoint[1] = {
+            x: this.ellipsesCenter[1].x, 
+            y: this.ellipsesCenter[1].y + (this.ellipsesDim.height/2)
+        };
+
+
     };//end
 
 

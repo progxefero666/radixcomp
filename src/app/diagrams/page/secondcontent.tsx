@@ -44,7 +44,7 @@ export function SecondContent({value}: CompProps) {
 
 
     const test = async () => {
-        const imageBitmap = await ImageLoader.getImageBitmapFromUrl(ball.src);   
+        const imageBitmap = await ImageLoader.getImageBitmap(ball.src);   
         ctrlCanvas.current?.render_a(imageBitmap);
     }
 
