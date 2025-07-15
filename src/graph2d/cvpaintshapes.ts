@@ -23,28 +23,38 @@ export class CanvasShapesPainter {
      * @param shape 
      */
     public drawCylinder(shape: ShapeCylinder) {
- 
+
         this.ctx.strokeStyle = shape.strokeColor;
 
         // step 1: draw main figure              
         //.................................................................................         
         this.ctx.beginPath();
         this.ctx.moveTo(shape.ellipseXCenter - shape.radiusX, shape.ellipseUpYCenter);
-        this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseUpYCenter,
-                         shape.radiusX,shape.radiusY,0,Math.PI,0,true);       
+        this.ctx.ellipse(shape.ellipseXCenter, shape.ellipseUpYCenter,
+            shape.radiusX, shape.radiusY, 0, Math.PI, 0, true);
         this.ctx.lineTo(shape.ellipseXCenter + shape.radiusX, shape.ellipseDownYCenter);
-        this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseDownYCenter,
-                         shape.radiusX,shape.radiusY,0,0,Math.PI,false );
+        this.ctx.ellipse(shape.ellipseXCenter, shape.ellipseDownYCenter,
+            shape.radiusX, shape.radiusY, 0, 0, Math.PI, false);
         this.ctx.lineTo(shape.ellipseXCenter - shape.radiusX, shape.ellipseUpYCenter);
         this.ctx.closePath();
         this.ctx.lineWidth = 1;
-        this.ctx.fillStyle = shape.fillColor;
-        this.ctx.fill();
-        this.ctx.stroke();  
 
- 
+        const gradient = this.ctx.createLinearGradient(
+            shape.rectPoints[0].x, shape.rectPoints[0].y,
+            shape.rectPoints[1].x, shape.rectPoints[1].y
+        )
+        gradient.addColorStop(0, "#000")
+        gradient.addColorStop(1, shape.fillColor)
+        
+
+        this.ctx.fillStyle = gradient
+        this.ctx.fill()
+        this.ctx.stroke();
+
+
         // step 2: draw ellipse up
         //.................................................................................  
+    
         this.ctx.beginPath();       
         this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseUpYCenter,
                          shape.radiusX,shape.radiusY,0,2*Math.PI,0,true);
@@ -53,7 +63,7 @@ export class CanvasShapesPainter {
         this.ctx.fillStyle = "#6b7887";
         this.ctx.fill();
         this.ctx.stroke(); 
-
+        
     };//end
 
 }//end class
