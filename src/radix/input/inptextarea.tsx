@@ -47,8 +47,7 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
     const size = RadixConf.SIZES.size_2;
     const radius = ThemeCompStyleOld.COMP_CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
-    const showInline: boolean = inline ?? false;
-    const auto: boolean = autocommit ?? false;  
+    const showInline: boolean = inline ?? false; 
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
@@ -62,7 +61,7 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
       
     const handleOnChange = (value:string) => {
         setValue(value);
-        if (auto) {
+        if (autocommit) {
             if (onchange) {
                 if (name !== null) {onchange(value, name);}
                 else {onchange(value);}

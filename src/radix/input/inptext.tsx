@@ -39,7 +39,6 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const variant = RadixConf.VARIANTS.surface;
 
     const showInline: boolean = inline ?? false;
-    const auto: boolean = autocommit ?? false;
     const input_type = type ?? INPUT_TEXT_TYPES.text;
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
@@ -50,7 +49,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
-        if (auto) {
+        if (autocommit) {
             if (onChange) {
                 if (name !== null) {onChange(event.target.value, name);}
                 else {onChange(event.target.value);}

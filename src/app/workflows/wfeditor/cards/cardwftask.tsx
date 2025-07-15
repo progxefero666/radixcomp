@@ -92,6 +92,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
         alert("import task description");
     };
 
+    /*
     const onCodelangSelected = (value: string|number,name?:string) => {
         task.codelang_id = Number(value);
     };    
@@ -103,12 +104,33 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
     const onTaskcategorySelected = (value: string|number,name?:string) => {
         task.taskcategory_id = Number(value);
     };  
+    */
+    const onFieldSelectChange = (value:string|number,name?:string) => {
+        if(name === "tasktype") {
+            task.tasktype_id = value as number;
+        }
+        else if(name === "codelang") {
+            task.codelang_id = value as number;
+        }
+        else if(name === "taskcategory") {
+            task.taskcategory_id = value as number;
+        }
+    }
 
     const onFieldTextChange = (value: string,name?:string) => {
-        task.taskcategory_id = Number(value);
-    };  
-
-    
+        if(name === "name") {
+            task.name = value;
+        }
+        else if(name === "description") {
+            task.description = value;
+        }
+        else if(name === "files") {
+            task.files = value;
+        }
+        else if(name === "folders") {
+            task.folders = value;
+        }           
+    };      
 
     return (
         <Flex direction="column" width="100%" px="2" pt="0" pb="2" style={compStyle}  >
@@ -158,34 +180,37 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
                         {/* tasktype_id */}
                         <Box gridColumn="1" gridRow="1" >                            
-                            <XInputSelect name="tasktype" 
+                            <XInputSelect 
+                                    name="tasktype" 
                                     label="Type" 
                                     inline={true}
                                     collection={tasktypesColl}
                                     defaul={task.tasktype_id.toString()}
-                                    onchange={onTasktypeSelected}
+                                    onchange={onFieldSelectChange}
                                     disabled={false} />                         
                         </Box>
                        
                        {/* codelang_id */}
                         <Box gridColumn="2" gridRow="1" >                            
-                            <XInputSelect name="codelang" 
+                            <XInputSelect 
+                                    name="codelang" 
                                     label="Code Lang"  
                                     inline={true}
                                     collection={codelangsColl}
                                     defaul={task.codelang_id.toString()}
-                                    onchange={onCodelangSelected}
+                                    onchange={onFieldSelectChange}
                                     disabled={false} />                         
                         </Box>
 
                         {/* taskgroup_id */}
                         <Box gridColumn="3" gridRow="1" >                           
-                            <XInputSelect  name="taskcategory" 
+                            <XInputSelect 
+                                    name="taskcategory" 
                                     label="Category"  
                                     inline={true}
                                     collection={taskcategoriesColl}
                                     defaul={task.taskcategory_id.toString()}
-                                    onchange={onTaskcategorySelected}
+                                    onchange={onFieldSelectChange}
                                     disabled={false} />                         
                         </Box>                                                
                     </Grid>
@@ -195,7 +220,8 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                         {/* description */}
                         <Flex width="100%" direction="row" justify="between"  >
                             <Box width="100%" >
-                                <XInputTextArea name="description" 
+                                <XInputTextArea 
+                                    name="description" 
                                     label="Description" 
                                     defaul={task.description!} 
                                     maxlen={Task.maxlen("description")!} 
@@ -213,7 +239,8 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                         </Flex>
                         
                         {/* files */}
-                        <XInputText name="files"
+                        <XInputText 
+                            name="files"
                             label="Files" 
                             defaul={task.files!} 
                             maxlen={Task.maxlen("files")!} 
@@ -221,7 +248,8 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                             onchange={onFieldTextChange} />   
 
                         {/* folders */}
-                        <XInputText name="folders"
+                        <XInputText 
+                            name="folders"
                             label="Folders" 
                             defaul={task.folders!} 
                             maxlen={Task.maxlen("folders")!} 
