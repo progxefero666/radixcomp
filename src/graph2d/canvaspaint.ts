@@ -7,11 +7,12 @@ import { ShapeCylinder }  from "@/graph2d/shape/shapecylinder"
 
 
 /**
- * CanvasPainter class
+ * CanvasPainter.ROTATION_NONE
  */
 export class CanvasPainter {
 
-    public static readonly POINT_RADIUS = 2;
+    public static readonly POINT_RADIUS:number = 2;
+    public static readonly ROTATION_NONE:number = 0;
 
     public ctx: CanvasRenderingContext2D;
     public dim: Dim2d;
@@ -156,14 +157,23 @@ export class CanvasPainter {
                        startAngle:number,endAngle:number, 
                        color: string) {
         this.ctx.beginPath();
-        this.ctx.ellipse(position.x, position.y,width,height, 0,startAngle, Math.PI*2);
+        this.ctx.ellipse(position.x, position.y,width,height,CanvasPainter.ROTATION_NONE,startAngle, Math.PI*2);
         this.ctx.strokeStyle = color; 
         this.ctx.stroke();    
     };//end
 
     public drawHalfEllipse(position:Point2d,width:number,height:number,ccw:boolean,color: string) {
         this.ctx.beginPath();
-        this.ctx.ellipse(position.x, position.y,width,height, 0, 0, Math.PI, ccw);
+        if(ccw) {
+            this.ctx.ellipse(position.x,position.y,
+                             width,height,CanvasPainter.ROTATION_NONE, 
+                             0,Math.PI,false);
+        }
+        else {
+            this.ctx.ellipse(position.x,position.y,width,
+                             height,CanvasPainter.ROTATION_NONE, 
+                             Math.PI,0,true);
+        }
         this.ctx.strokeStyle = color; 
         this.ctx.stroke();    
     };//end
@@ -186,26 +196,47 @@ export class CanvasPainter {
     // shapes   
     //.................................................................................
 
+
     public drawShapeCylinder(shape:ShapeCylinder){
     
         this.ctx.beginPath();
+
+        this.ctx.moveTo(shape.rectPoints[0].x,shape.rectPoints[0].y);                
+        this.ctx.lineTo(shape.rectPoints[1].x,shape.rectPoints[1].y);  
+        
         this.drawHalfEllipse(shape.ellipsesCenter[0],
-                             shape.ellipsesDim.width,
-                             shape.ellipsesDim.height,
-                             false, 
-                             shape.color);
-        this.ctx.lineTo(shape.rectPoints[2].x,shape.rectPoints[2].y);         
-        this.drawHalfEllipse(shape.ellipsesCenter[1],
-                             shape.ellipsesDim.width,
-                             shape.ellipsesDim.height,
-                             true, 
-                             shape.color);        
+                        shape.ellipsesDim.width,
+                        shape.ellipsesDim.height,
+                        false, 
+                        shape.color);
+
+        this.ctx.lineTo(shape.rectPoints[2].x,shape.rectPoints[2].y);                             
+        //this.ctx.moveTo(shape.rectPoints[3].x,shape.rectPoints[3].y);                           
+        this.ctx.lineTo(shape.rectPoints[3].x,shape.rectPoints[3].y);
         this.ctx.lineTo(shape.rectPoints[0].x,shape.rectPoints[0].y);
+
         this.ctx.lineWidth = 1; 
         this.ctx.strokeStyle = shape.color; 
         this.ctx.stroke();
         this.ctx.closePath();
 
     };//end 
+
+    public drawImageBitmap(img:ImageBitmap, pointxy: Point2d, dimension: Dim2d,alpha:number):void{
+        this.ctx.globalAlpha = alpha;
+        this.ctx.drawImage(img, pointxy.x, pointxy.y, dimension.width, dimension.height);
+        this.ctx.globalAlpha = 1;
+    }//end
+
+
+    public drawMemoryImagen(objectURL: string, pointxy: Point2d, dimension: Dim2d) {
+        const img = new Image();
+        if (objectURL) {
+            img.src = objectURL;
+            img.onload = () => {
+                this.ctx.drawImage(img, pointxy.x, pointxy.y, dimension.width, dimension.height);
+            };
+        }
+    }//end
 
 }//end class

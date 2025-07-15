@@ -23,12 +23,13 @@ export class ShapeCylinder {
         this.position = position;
         this.dim = dim;
         this.color = color;
-        this.rectPoints = ShapeUtil.getRectPoints(position, dim);
-        this.ellipsesDim.width = dim.width;
+
+        this.rectPoints = ShapeUtil.getRectPoints(this.position, this.dim);
+        this.ellipsesDim.width = this.dim.width;
         this.ellipsesDim.height = Math.floor(this.ellipsesDim.width / 5);
 
-        this.ellipsesCenter.push({x: position.x, y: position.y - dim.height / 2});
-        this.ellipsesCenter.push({x: position.x, y: position.y + dim.height / 2});
+        this.ellipsesCenter.push({x: position.x, y: position.y - this.dim.height / 2});
+        this.ellipsesCenter.push({x: position.x, y: position.y + this.dim.height / 2});
     };//end
 
 

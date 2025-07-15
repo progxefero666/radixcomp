@@ -28,16 +28,14 @@ export class DiagramCanvas {
         this.ctx.clearRect(0, 0, this.dim.width, this.dim.height);
     };
 
-    public render_c() {
-    
+    public render_a() {
         const position: Point2d = {x:200,y:200};
-        const color: string = "red";
-        
-        const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:100},color);
+        const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:100},"blue");
+        this.painter.drawShapeCylinder(cylinder);
     };
 
 
-    public render_a() {
+    public render_b() {
         const position: Point2d = {x:200,y:200};
         const color: string = "blue";
         this.painter.drawHalfEllipse(position, 50, 20,false, color);
