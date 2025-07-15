@@ -41,11 +41,9 @@ export class ShapeCylinder {
 
     public calculateElements() {
         this.rectPoints = ShapeUtil.getRectPoints(this.position, this.dim);
-
-        this.ellipseXCenter = this.position.x;
-        // Los centros de las elipses deben estar en la parte superior e inferior del "rectángulo"
-        this.ellipseUpYCenter = this.position.y - this.halfDimY;
+        this.ellipseXCenter     = this.position.x;
+        this.ellipseUpYCenter   = this.position.y - this.halfDimY;
         this.ellipseDownYCenter = this.position.y + this.halfDimY;
     };
 
-}
+}//end class
