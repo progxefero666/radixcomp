@@ -2,7 +2,7 @@
 
 import { CanvasPainter } from "@/graph2d/cvpaint";
 import { CanvasShapesPainter } from "@/graph2d/cvpaintshapes";
-import { ShapeCylinder } from "@/graph2d/shape/shapecylinder";
+import { ShapeCylinder } from "@/graph2d/shapes/shapecylinder";
 import { Dim2d, Point2d } from "@/graph2d/types2d";
 
 /**

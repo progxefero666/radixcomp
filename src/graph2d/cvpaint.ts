@@ -3,7 +3,7 @@
 import { Dim2d, Point2d } from "@/graph2d/types2d";
 import { Line2d } from "@/graph2d/model/line2d";
 import { Rectangle2d } from "@/graph2d/model/rectangle2d";
-import { ShapeCylinder } from "@/graph2d/shape/shapecylinder"
+import { ShapeCylinder } from "@/graph2d/shapes/shapecylinder"
 
 
 /**
