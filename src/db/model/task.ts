@@ -12,10 +12,11 @@ export class Task {
     public taskcategory_id: number;    
     public orden: number;
     public name: string;
-    public description: string;
+    
     public tkgroup: number;
-    public files: string;
-    public folders: string;
+    public description: string|null = null;
+    public files: string|null = null;
+    public folders: string|null = null;
 
     constructor(id: number,
                 tasktype_id: number,
@@ -23,11 +24,11 @@ export class Task {
                 workflow_id: number,
                 taskcategory_id: number,
                 orden: number,
-                name: string,
-                description: string,
+                name: string|null,
+                description: string|null,
                 tkgroup: number,
-                files: string,
-                folders: string) {
+                files: string|null,
+                folders: string|null) {
 
         this.id = id;
         this.tasktype_id = tasktype_id;
@@ -35,7 +36,7 @@ export class Task {
         this.workflow_id = workflow_id;
         this.taskcategory_id = taskcategory_id;
         this.orden = orden;
-        this.name = name;
+        this.name = name ?? "";
         this.description = description;
         this.tkgroup = tkgroup;
         this.files = files;

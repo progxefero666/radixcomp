@@ -32,12 +32,7 @@ const compStyle = {
     border: '2px solid var(--blue-7)',
     boxShadow: '0px 0px 1px rgba(69, 69, 69, 0.9)'
 };
-const headerStyle = {
-    with: '100%',
-    background: ' rgba(32, 32, 41, 0.9)',
-    borderRadius: '4px',
-    border: '1px solid rgba(144, 138, 137, 0.9)'
-};
+
 
 const barbuttonscfg: BarButtonsCfg  = new BarButtonsCfg(
     [DB_ITEM_CMD.DELETE,     DB_ITEM_CMD.MOVEUP,     DB_ITEM_CMD.MOVEDOWN],
@@ -60,15 +55,16 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                                    onsave, oncancel }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
-    
+    const proglanguageRef = useRef<HTMLSelectElement>(null);
+    const tasktypeRef     = useRef<HTMLSelectElement>(null);
+    const taskCategoryRef = useRef<HTMLSelectElement>(null);
+
     const nameRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const filesRef = useRef<HTMLInputElement>(null);
     const foldersRef = useRef<HTMLInputElement>(null);
 
-    const proglanguageRef = useRef<HTMLSelectElement>(null);
-    const tasktypeRef     = useRef<HTMLSelectElement>(null);
-    const taskCategoryRef = useRef<HTMLSelectElement>(null);
+
 
     //orden
     const codelangsColl: Option[] = getCodelangsAsOptions(codelangs);
@@ -77,7 +73,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
 
     const execTaskItemOperation = (operation:string) => {
-        
+
         if(operation === DB_ITEM_CMD.UPDATE) {
        
         }
@@ -85,7 +81,9 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
        
         }
         else if (operation === DB_ITEM_CMD.MOVEUP ) {
-                    
+            if(task.orden > 0) { 
+
+             }         
         }    
         else if (operation === DB_ITEM_CMD.MOVEDOWN) {
                       
@@ -93,17 +91,20 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
     };//end    
 
+    const importDescription = () => {
+        alert("import task description");
+    };
 
-    const onCodelangSelected = (value: string,name?:string) => {
-        //alert("onCodelangSelected: " + value + " name: " + name);
+    const onCodelangSelected = (value: string|number,name?:string) => {
+        task.codelang_id = Number(value);
     };    
 
-    const onTasktypeSelected = (value: string,name?:string) => {
-        //alert("onTasktypeSelected: " + value + " name: " + name);
+    const onTasktypeSelected = (value: string|number,name?:string) => {
+        task.tasktype_id = Number(value);
     };    
 
-    const onTaskcategorySelected = (value: string,name?:string) => {
-        //alert("onTaskcategorySelected: " + value + " name: " + name);
+    const onTaskcategorySelected = (value: string|number,name?:string) => {
+        task.taskcategory_id = Number(value);
     };  
 
     return (
@@ -119,13 +120,14 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                         </Box>
                     </Collapsible.Trigger>
 
-                    <Flex direction="row" width={"100%"} justify="between" align="center" style={headerStyle}>
+                    <Flex direction="row" width={"100%"} justify="between" align="center"
+                          py="1"  >
                         <XInputText name="tkname" inline={true}
                             defaul={task.name} 
                             maxlen={Task.maxlen("tkname")!} 
                             placeholder="task name" />     
 
-                        <Flex direction="row" gapX="2" >
+                        <Flex direction="row" gapX="2" ml="3" >
                              <IconButton variant={RadixConf.VARIANTS.solid} 
                                 onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.UPDATE)}>
                                 <ArchiveIcon />
@@ -153,7 +155,9 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
                         {/* tasktype_id */}
                         <Box gridColumn="1" gridRow="1" >                            
-                            <XInputSelect label="Type" inline={true}
+                            <XInputSelect name="tasktype" 
+                                    label="Type" 
+                                    inline={true}
                                     collection={tasktypesColl}
                                     defaul={task.tasktype_id.toString()}
                                     onchange={onTasktypeSelected}
@@ -162,7 +166,9 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                        
                        {/* codelang_id */}
                         <Box gridColumn="2" gridRow="1" >                            
-                            <XInputSelect label="Code Lang"  inline={true}
+                            <XInputSelect name="codelang" 
+                                    label="Code Lang"  
+                                    inline={true}
                                     collection={codelangsColl}
                                     defaul={task.codelang_id.toString()}
                                     onchange={onCodelangSelected}
@@ -171,7 +177,9 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
                         {/* taskgroup_id */}
                         <Box gridColumn="3" gridRow="1" >                           
-                            <XInputSelect label="Category"  inline={true}
+                            <XInputSelect  name="taskcategory" 
+                                    label="Category"  
+                                    inline={true}
                                     collection={taskcategoriesColl}
                                     defaul={task.taskcategory_id.toString()}
                                     onchange={onTaskcategorySelected}
@@ -181,23 +189,36 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
                     <Flex direction="column" gapY="2" px="2" py="1" >
 
-
                         {/* description */}
-                        <XInputTextArea label="Description" 
-                            defaul={task.description} 
-                            maxlen={Task.maxlen("description")!} 
-                            placeholder="input description" />   
-
-
+                        <Flex width="100%" direction="row" justify="between"  >
+                            <Box width="100%" >
+                                <XInputTextArea name="description" 
+                                    label="Description" 
+                                    defaul={task.description!} 
+                                    maxlen={Task.maxlen("description")!} 
+                                    placeholder="input description" />                                   
+                            </Box>
+                            <Flex pl="2" justify="end" mt="6">
+                                <Button variant="solid" 
+                                        color={ThemeButtonsStyle.COLOR_IMPORT}
+                                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                                        onClick={importDescription}  >
+                                    {DB_ITEM_CMD_TEXT.IMPORT}        
+                                </Button>        
+                            </Flex>
+                        </Flex>
+                        
                         {/* files */}
-                        <XInputText label="Files" 
-                            defaul={task.files} 
+                        <XInputText name="files"
+                            label="Files" 
+                            defaul={task.files!} 
                             maxlen={Task.maxlen("files")!} 
                             placeholder="input files" />   
 
                         {/* folders */}
-                        <XInputText label="Folders" 
-                            defaul={task.folders} 
+                        <XInputText name="folders"
+                            label="Folders" 
+                            defaul={task.folders!} 
                             maxlen={Task.maxlen("folders")!} 
                             placeholder="input folders" />   
                     

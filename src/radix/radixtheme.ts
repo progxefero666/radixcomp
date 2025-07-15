@@ -63,7 +63,7 @@ export class ThemeIconsStyle {
 }
 
 /**
- * class ThemeButtonsStyle.BTN_TEXT_SIZE
+ * class ThemeButtonsStyle.BTN_DEF_SIZE
  */
 export class ThemeButtonsStyle {
 

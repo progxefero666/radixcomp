@@ -24,7 +24,7 @@ interface CompProps {
     defaul?: string;
     maxlen?: number;
     autofocus?: boolean;
-    onchange?: (value: string,name?:string) => void;
+    onchange?: (value: string|number,name?:string) => void;
 }                  
 export const XInputSelect = forwardRef<HTMLSelectElement, CompProps>(({    
     autocommit,name, collection, label, defaul,

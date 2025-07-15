@@ -114,8 +114,9 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                             </Box>
                             <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
-                                        color={RADIX_COLORS.green}
-                                        size="2" onClick={importDescription}  >
+                                        color={ThemeButtonsStyle.COLOR_IMPORT}
+                                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                                        onClick={importDescription}  >
                                     {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        
                             </Flex>
@@ -132,7 +133,8 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                             <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
                                         color={RADIX_COLORS.green}
-                                        size="2" onClick={importContext}  >
+                                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                                        onClick={importContext}  >
                                     {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        
                             </Flex>

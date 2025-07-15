@@ -80,20 +80,15 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     }, []);
 
     
-    const getNewTask = (orden:number):Task => {               
-        return new Task(
-            DbOps.NEW_ROW_ID,tasktypes[0].id,codelangs[0].id, 
-            workflow.id, taskcats[0].id,
-            orden,"","",0,"","");    
-    };//end
-    
+
     const execMainCommand = (id: string) => {
         if (id == WorkflowActions.ADD_TASK) {
             let task_orden = 0;
             if( tasks.length > 0) {
                 task_orden = tasks.length;
             }          
-            const newTask = getNewTask(task_orden);
+            const newTask = AppWorkflows.getNewTask
+                (workflow.id,codelangs[0].id,tasktypes[0].id,task_orden);
             setTasks([...tasks, newTask]); 
             return;
         }        

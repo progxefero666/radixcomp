@@ -90,11 +90,9 @@ export class AppWorkflows {
                                  orden:number):Task => {               
         return new Task(
             DbOps.NEW_ROW_ID,
-            tasktypeId,
-            codelangId, 
-            workflowId, 
+            tasktypeId,codelangId,workflowId, 
             AppWorkflows.TASKCATEGORY_DEF.id,
-            orden,"","",0,"","");    
+            orden,null,null,0,null,null);    
     };//end
         
 }//end class
