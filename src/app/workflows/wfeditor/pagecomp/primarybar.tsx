@@ -3,16 +3,19 @@
 import React, { useState } from "react";
 import { Button, Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon,  } from "@radix-ui/react-icons";
-import { Taskcategory } from "@/db/model/taskcategory";
-import { ManagerTaskcategories } from "../categories/mantaskcats";
 import { EditOptionId } from "@/radix/collection/editoption";
-import { getTaskcatsAsEditableOptions } from "@/db/services/util/workflowutil";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
-import {  DB_ITEM_CMD } from "@/common/database/dbkernel";
+import {  DB_ITEM_CMD, DbOps } from "@/common/database/dbkernel";
 import { DialogForm} from "@/radix/dialog/dlginputoption";
-import { NEW_TASKCAT_FIELDS } from "@/front/appworkflows";
 import { CollectionItem } from "@/common/model/collitem";
 import { InputField } from "@/common/model/inputfield";
+
+import { NEW_TASKCAT_FIELDS } from "@/front/appworkflows";
+import { getTaskcatsAsEditableOptions } from "@/db/services/util/workflowutil";
+import { Taskcategory } from "@/db/model/taskcategory";
+import { ManagerTaskcategories } from "../categories/mantaskcats";
+import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
+import { parseResponseItem } from "@/common/parsers/javascriptparser";
 
 
 const primaryBarStyle = {
@@ -77,14 +80,21 @@ function PanelWfTaskcategories({ workflowid,initcollection }: PanelWfTaskcategor
 
 
     //const onCancelNewItem = () => {};
-    const onSaveNewItem = (fields: InputField[]) => {
-        //alert("onSaveNewItem");
-        const newItem = new Taskcategory(
-            0,
-            workflowid,
-            fields[0].value,fields[1].value
-        );
-        //manCategories.current.execOp(DB_ITEM_CMD.INSERT,);
+    const onSaveNewItem = async (fields: InputField[]) => {
+        alert("start");
+        const newItem = new Taskcategory(DbOps.NEW_ROW_ID,workflowid,fields[0].value,fields[1].value);
+        const newRecord = await insertTaskcategory(JSON.stringify(newItem));
+        if(newRecord==null){
+            alert("Error inserting new task category");
+            return;
+        }
+        const taskcategory: Taskcategory|null = parseResponseItem<Taskcategory>(newRecord);
+        if(taskcategory===null){
+            alert("Error parsing new task category");
+            return;
+        }
+        alert("end");
+        manCategories.current.execOp(DB_ITEM_CMD.INSERT,taskcategory);
     };//end
 
     

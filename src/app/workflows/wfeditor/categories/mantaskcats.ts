@@ -11,8 +11,10 @@ export class ManagerTaskcategories extends ManagerCollectionById<Taskcategory> {
     }
 
     public execOp = (id: string,item:Taskcategory): boolean => {
-        let result = false;
+        
+        alert(item.id);
 
+        let result = false;
         if (id == DB_ITEM_CMD.INSERT) {
             result = super.insert(item!);
         }
