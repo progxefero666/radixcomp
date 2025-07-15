@@ -6,7 +6,7 @@ import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon,  } from "@radix-ui/re
 import { EditOptionId } from "@/radix/collection/editoption";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import {  DB_ITEM_CMD, DbOps } from "@/common/database/dbkernel";
-import { DialogForm} from "@/radix/form/formdialog";
+import { DialogForm} from "@/radix/form/dgform";
 import { CollectionItem } from "@/common/model/collitem";
 import { InputField } from "@/common/model/inputfield";
 

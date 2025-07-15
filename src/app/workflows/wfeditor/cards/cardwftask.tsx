@@ -44,6 +44,7 @@ const barbuttonscfg: BarButtonsCfg  = new BarButtonsCfg(
 );
 
 interface CardTaskProps {
+    taskscount: number;
     codelangs: Codelang[];
     tasktypes: Tasktype[];
     taskcategories: Taskcategory[];
@@ -51,7 +52,7 @@ interface CardTaskProps {
     onsave?: () => void;
     oncancel?: () => void;
 }
-export default function CardTask({ task, codelangs, tasktypes, taskcategories: taskgroups,
+export default function CardTask({ taskscount,task, codelangs, tasktypes, taskcategories: taskgroups,
                                    onsave, oncancel }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
@@ -80,10 +81,12 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
         else if (operation === DB_ITEM_CMD.MOVEUP ) {
             if(task.orden > 0) { 
 
-             }         
+            }         
         }    
         else if (operation === DB_ITEM_CMD.MOVEDOWN) {
-                      
+           if(task.orden < taskscount - 1) { 
+
+            }                         
         }    
 
     };//end    
@@ -92,19 +95,7 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
         alert("import task description");
     };
 
-    /*
-    const onCodelangSelected = (value: string|number,name?:string) => {
-        task.codelang_id = Number(value);
-    };    
-
-    const onTasktypeSelected = (value: string|number,name?:string) => {
-        task.tasktype_id = Number(value);
-    };    
-
-    const onTaskcategorySelected = (value: string|number,name?:string) => {
-        task.taskcategory_id = Number(value);
-    };  
-    */
+ 
     const onFieldSelectChange = (value:string|number,name?:string) => {
         if(name === "tasktype") {
             task.tasktype_id = value as number;
@@ -157,10 +148,12 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                                 onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.UPDATE)}>
                                 <ArchiveIcon />
                             </IconButton>                              
+
                              <IconButton variant={RadixConf.VARIANTS.solid} 
                                 onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.DELETE)}>
                                 <TrashIcon />
-                            </IconButton>                            
+                            </IconButton>      
+                                                  
                              <IconButton variant={RadixConf.VARIANTS.solid} 
                                 onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.MOVEUP)}>
                                 <ArrowUpIcon />

@@ -44,11 +44,12 @@ export class ThemePagesStyles {
 }//end class
 
 /**
- * class ThemeTextStyle.DIALOG_TITLE_SIZE
+ * class ThemeTextStyle.DEFAULT_SIZE
  */
 export class ThemeTextStyle {
     
     public static readonly DIALOG_TITLE_SIZE: any = RadixConf.SIZES.size_2;
+    public static readonly DEFAULT_SIZE: any = RadixConf.SIZES.size_2;
 
 }
 

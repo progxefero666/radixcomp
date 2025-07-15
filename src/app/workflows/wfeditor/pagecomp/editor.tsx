@@ -176,7 +176,9 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             <>
                 {tasks.map((task, index) => (
                     <Box key={index.toString()}>
-                        <CardTask codelangs={codelangs}
+                        <CardTask 
+                            taskscount={tasks.length}
+                            codelangs={codelangs}
                             tasktypes={tasktypes}
                             taskcategories={taskcats}
                             task={task}

@@ -22,7 +22,7 @@ interface CompProps {
     item: InputField;
     onsave: (values: TInputText) => void;
 }
-export const FieldTextDialog = ({ buttontext, title, item, onsave }: CompProps) => {
+export const DialogButtonConfirm = ({ buttontext, title, item, onsave }: CompProps) => {
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);
