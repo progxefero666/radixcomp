@@ -46,6 +46,8 @@ interface PanelWfTaskcategoriesProps {
 }
 function PanelWfTaskcategories({ workflowid,initcollection }: PanelWfTaskcategoriesProps) {
 
+    console.log(initcollection);
+
     const manCategories = React.useRef<ManagerTaskcategories>(new ManagerTaskcategories(initcollection));
     const [coll, setColl] = useState<Taskcategory[]>(initcollection);
     const [open, setOpen] = useState<boolean>(true);

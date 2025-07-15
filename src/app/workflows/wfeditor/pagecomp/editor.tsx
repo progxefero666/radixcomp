@@ -49,7 +49,6 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     const [codelangs, setCodelangs] = useState<Codelang[]>([]);
     const [tasktypes, setTasktypes] = useState<Tasktype[]>([]);
 
-
     let isNewWorkflow: boolean = true;
     //if ((AppMemmory.readWorkflowId()!) !== Number(DbOps.NEW_ROW_ID)) { isNewWorkflow = false; }
 

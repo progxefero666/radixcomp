@@ -28,6 +28,7 @@ export const EditOptionId = ({ disabled, option, onclick }: CompProps) => {
     let isDisabled: boolean = true;
     if (disabled) { isDisabled = false; }
 
+
     const handlerOnclick = (action: string) => {
         if (onclick) { onclick(option.id, action); }
     }
@@ -41,8 +42,7 @@ export const EditOptionId = ({ disabled, option, onclick }: CompProps) => {
             </Box>
 
             <Flex width="146px" direction="row" gap="2" >
-                <XInputText inline={true} defaul={option.value}
-                    disabled={isDisabled} />
+                <XInputText inline={true} defaul={option.value}/>
             </Flex>
 
             {!isDisabled ?

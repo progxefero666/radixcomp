@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { forwardRef } from "react";
 import { Box, Flex, TextField } from "@radix-ui/themes";
 import { ThemeCompStyle, ThemeCompStyleOld } from "@/radix/radixtheme";
@@ -31,10 +31,8 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     name, defaul, maxlen,autocommit,autofocus,type, inline, 
     label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
 
-    const [value, setValue] = useState<string|null>(null);
-
-    if( defaul && defaul == ""){setValue(defaul);}
-
+    const [value, setValue] = useState<string|null>(defaul ?? null);
+  
     const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
     const radius  = ThemeCompStyle.CONT_RADIUS;
@@ -45,6 +43,10 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const input_type = type ?? INPUT_TEXT_TYPES.text;
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
+
+    useEffect(() => {
+        if( defaul && defaul == ""){setValue(null);}
+    }, []);
 
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);

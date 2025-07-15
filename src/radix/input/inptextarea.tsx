@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { forwardRef } from "react";
 import { Box, Flex,TextArea } from "@radix-ui/themes";
 import { ThemeCompStyleOld } from "@/radix/radixtheme";
@@ -37,7 +37,7 @@ const areaStyle = {
 };
 
 export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
-        (({ inline, label,maxlen,height, placeholder, defaul: value, onsubmmit, readonly, disabled }, ref) => {        
+        (({ inline, label,maxlen,height, placeholder, defaul, onsubmmit, readonly, disabled }, ref) => {        
 
     if(height) {areaStyle.height = height;}
 
@@ -51,26 +51,50 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
+    const [value, setValue] = useState<string|null>(null);
+    
+    if( defaul && defaul !== ""){setValue(defaul);}
+        
+    useEffect(() => {
+        if( defaul && defaul == ""){setValue(null);}
+    }, []);
+        
     const renderReadComp = () => {
         return (
-            <TextArea value={value} style={areaStyle}  size={size} 
+            <TextArea value={value!} style={areaStyle}  size={size} 
                       variant={variant} color={color} radius={radius}
                       disabled={true} />          
         )
     }
 
     const renderEditComp = () => {
-        return (
-             <TextArea value={value} 
-                style={areaStyle}  
-                size={size}            
-                placeholder={placeholder}
-                onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
-                variant={variant}  
-                color={color} 
-                radius={radius}
-                disabled={input_disabled} />            
-        )
+        if(value === null){
+            return (
+                <TextArea 
+                    placeholder={placeholder}
+                    style={areaStyle}  
+                    size={size}                            
+                    onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
+                    variant={variant}  
+                    color={color} 
+                    radius={radius}
+                    disabled={input_disabled} />      
+            )              
+        }
+        else {
+            return (
+                <TextArea
+                    value={value} 
+                    style={areaStyle}  
+                    size={size}            
+                    onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
+                    variant={variant}  
+                    color={color} 
+                    radius={radius}
+                    disabled={input_disabled} />    
+            )    
+        }
+
     }
 
     const renderRowSimpleContent = () => {
