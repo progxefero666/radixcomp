@@ -4,7 +4,6 @@ import { Flex, Tabs, Box, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
 import { Workflow } from "@/db/model/workflow";
-import { VIEWER_MODE } from "@/front/appworkflows";
 import CardWorkflowPreview from "../../cards/cardwfpreview";
 
 

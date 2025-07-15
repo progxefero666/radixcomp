@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { Box, Grid, Flex } from "@radix-ui/themes";
-import { MOD_SECTIONS, VIEWER_MODE } from "@/front/appworkflows";
+import { MOD_SECTIONS } from "@/front/appworkflows";
 import { Header } from "@/app/workflows/pagecomp/header";
 import { PrimaryBar } from "@/app/workflows/pagecomp/primarybar";
 import { WorkflowsManager } from "@/app/workflows/pagecomp/wfsmanager";

@@ -8,20 +8,11 @@ import { Workflow } from "@/db/model/workflow";
 import { TKeyvalue } from "@/common/types";
 
 
-
-
 export const MOD_SECTIONS = {
     MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
     MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
 } as const;
 
-export enum VIEWER_MODE {
-    DEFAULT = "default",
-    JSON = "json",
-    SQL = "sql",
-    PROMPT = "prompt",
-    GRAPH = "go_graph"
-}
 
 export const MAN_WFS_SECTIONS_ARRAY: Option[] = [
     MOD_SECTIONS.MANAGER_WORKFLOWS,
@@ -38,6 +29,19 @@ export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_TASKGROUPS: new Option("manager_taskgroups", "Task Groups", null)
 } as const;
 
+
+/**
+ * class AppWorkflowsConfig
+ */
+export class AppWorkflowsConfig {
+
+    public static readonly VIEW_DEFAULT: string = "default";
+    public static readonly VIEW_JSON: string = "json";
+    public static readonly VIEW_SQL: string = "sql";
+    public static readonly VIEW_PROMPT: string = "prompt";
+    public static readonly VIEW_GRAPH: string = "go_graph";
+
+}//end class
 
 /**
  * class AppWorkflows.TASKCATEGORY_DEF

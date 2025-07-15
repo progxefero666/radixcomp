@@ -2,7 +2,7 @@
 
 import { Flex } from "@radix-ui/themes";
 import { useState } from "react";
-import { VIEWER_MODE } from "@/front/appworkflows";
+import { AppWorkflowsConfig } from "@/front/appworkflows";
 import { Workflow } from "@/db/model/workflow";
 import CardWorkflowPreview from "@/app/workflows/cards/cardwfpreview";
 
@@ -12,7 +12,7 @@ interface CompProps {
     onedition?: () => void;
 }
 export const WorkflowViewer = ({ workflow, mode: actpanel }: CompProps) => {
-    const [mode, setMode] = useState<string>(VIEWER_MODE.DEFAULT);
+    const [mode, setMode] = useState<string>(AppWorkflowsConfig.VIEW_DEFAULT);
 
     if (!workflow) {
         return (
@@ -48,10 +48,10 @@ export const WorkflowViewer = ({ workflow, mode: actpanel }: CompProps) => {
     
     return (
         <Flex width="100%" direction="column" >
-            {mode == VIEWER_MODE.DEFAULT ? renderWorkflow() : null}
-            {mode == VIEWER_MODE.JSON ? renderJson() : null}
-            {mode == VIEWER_MODE.SQL ? renderSql() : null}
-            {mode == VIEWER_MODE.PROMPT ? renderPrompt() : null}
+            {mode == AppWorkflowsConfig.VIEW_DEFAULT ? renderWorkflow() : null}
+            {mode == AppWorkflowsConfig.VIEW_JSON ? renderJson() : null}
+            {mode == AppWorkflowsConfig.VIEW_SQL ? renderSql() : null}
+            {mode == AppWorkflowsConfig.VIEW_PROMPT ? renderPrompt() : null}
         </Flex>
     );
 
