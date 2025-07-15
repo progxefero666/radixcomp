@@ -1,6 +1,7 @@
 //src\app\diagrams\xefero\diagramcanvas.ts
 
-import { CanvasPainter } from "@/graph2d/canvaspaint";
+import { CanvasPainter } from "@/graph2d/cvpaint";
+import { CanvasShapesPainter } from "@/graph2d/cvpaintshapes";
 import { ShapeCylinder } from "@/graph2d/shape/shapecylinder";
 import { Dim2d, Point2d } from "@/graph2d/types2d";
 
@@ -14,6 +15,7 @@ export class DiagramCanvas {
     public backcolor: string;
     public center: Point2d = { x: 0, y: 0 };
     public painter:CanvasPainter;
+    public paintershapes:CanvasShapesPainter;
 
     constructor(ctx: CanvasRenderingContext2D, dimension: Dim2d, backcolor: string) {
         this.ctx = ctx;
@@ -22,30 +24,25 @@ export class DiagramCanvas {
         this.center.x = Math.floor(this.dim.width / 2);
         this.center.y = Math.floor(this.dim.height / 2);
         this.painter = new CanvasPainter(ctx, dimension, backcolor);
+        this.paintershapes = new CanvasShapesPainter(ctx);
     };//end
     
     public clear() {
         this.ctx.clearRect(0, 0, this.dim.width, this.dim.height);
     };
 
-    public render_a(imgbitmap:ImageBitmap) {
+    public render_a() {
         
         const position: Point2d = {x:200,y:200};        
         const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:70},"blue");
-        this.painter.drawShapeCylinder(cylinder);
+        this.paintershapes.drawCylinder(cylinder);
     };
 
-    public render_b() {
+    public render_b(imgbitmap:ImageBitmap) {
         const position: Point2d = {x:200,y:200};
-        //this.painter.drawImageBitmap(imgbitmap, position,1);
-        const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:100},"blue");
-        this.painter.drawShapeCylinder(cylinder);
-        const color: string = "blue";
-        this.painter.drawHalfEllipse(position, 50, 20,false, color);
+        this.painter.drawImageBitmap(imgbitmap, position,1);
     };
 
-    public render_c(imgbitmap:ImageBitmap) {
-        
-    };
+
 
 }//end class

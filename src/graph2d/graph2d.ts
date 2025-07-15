@@ -12,6 +12,8 @@ export class Graph2d {
 
     public static readonly DIM_DEF:Dim2d     = {width:0,height:0};
 
+    public static readonly ROTATION_NONE: number = 0;
+
     public static init() {
         // Initialization logic if needed
     }
