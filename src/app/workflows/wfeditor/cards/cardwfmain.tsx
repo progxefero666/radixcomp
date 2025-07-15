@@ -35,13 +35,14 @@ const headerStyle = {
 };
 
 interface CompProps {
+    openinit: boolean;
     workflow: Workflow;
     onsave?: () => void;
 }
-export default function CardWorkflowMain({workflow,onsave}:CompProps) {
+export default function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
 
     //const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(openinit);
     
     const nameRef = useRef<HTMLInputElement>(null);
     //const proglanguageRef = useRef<HTMLSelectElement>(null);

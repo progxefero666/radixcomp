@@ -20,6 +20,7 @@ interface CompProps {
     readonly?: boolean;
     disabled?: boolean
     defaul?: string;
+    onchange?: (value:string,name?: string) => void;
     onsubmmit?: (value:string) => void;
     type?: any;
     placeholder?: string;
@@ -37,7 +38,7 @@ const areaStyle = {
 };
 
 export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
-        (({ inline, label,maxlen,height, placeholder, defaul, onsubmmit, readonly, disabled }, ref) => {        
+        (({ inline,name, label,autocommit,maxlen,height, placeholder, defaul,onchange, onsubmmit, readonly, disabled }, ref) => {        
 
     if(height) {areaStyle.height = height;}
 
@@ -47,7 +48,7 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
     const radius = ThemeCompStyleOld.COMP_CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
     const showInline: boolean = inline ?? false;
-      
+    const auto: boolean = autocommit ?? false;  
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
@@ -58,7 +59,17 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
     useEffect(() => {
         if( defaul && defaul == ""){setValue(null);}
     }, []);
-        
+      
+    const handleOnChange = (value:string) => {
+        setValue(value);
+        if (auto) {
+            if (onchange) {
+                if (name !== null) {onchange(value, name);}
+                else {onchange(value);}
+            }
+        }
+    };//end
+
     const renderReadComp = () => {
         return (
             <TextArea value={value!} style={areaStyle}  size={size} 
@@ -74,7 +85,7 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
                     placeholder={placeholder}
                     style={areaStyle}  
                     size={size}                            
-                    onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
+                    onChange={(e) => {if(onsubmmit) {handleOnChange(e.target.value);}}}
                     variant={variant}  
                     color={color} 
                     radius={radius}
@@ -87,7 +98,7 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
                     value={value} 
                     style={areaStyle}  
                     size={size}            
-                    onChange={(e) => {if(onsubmmit) {onsubmmit(e.target.value);}}}
+                    onChange={(e) => {handleOnChange(e.target.value);}}
                     variant={variant}  
                     color={color} 
                     radius={radius}

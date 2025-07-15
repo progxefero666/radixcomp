@@ -64,13 +64,10 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
     const filesRef = useRef<HTMLInputElement>(null);
     const foldersRef = useRef<HTMLInputElement>(null);
 
-
-
     //orden
     const codelangsColl: Option[] = getCodelangsAsOptions(codelangs);
     const tasktypesColl: Option[] = getTasktypeAsOptions(tasktypes);
     const taskcategoriesColl: Option[] =getTaskcategoriessAsOptions(taskgroups);
-
 
     const execTaskItemOperation = (operation:string) => {
 
@@ -106,6 +103,12 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
     const onTaskcategorySelected = (value: string|number,name?:string) => {
         task.taskcategory_id = Number(value);
     };  
+
+    const onFieldTextChange = (value: string,name?:string) => {
+        task.taskcategory_id = Number(value);
+    };  
+
+    
 
     return (
         <Flex direction="column" width="100%" px="2" pt="0" pb="2" style={compStyle}  >
@@ -196,7 +199,8 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                                     label="Description" 
                                     defaul={task.description!} 
                                     maxlen={Task.maxlen("description")!} 
-                                    placeholder="input description" />                                   
+                                    placeholder="input description" 
+                                    onchange={onFieldTextChange} />                                   
                             </Box>
                             <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
@@ -213,14 +217,16 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                             label="Files" 
                             defaul={task.files!} 
                             maxlen={Task.maxlen("files")!} 
-                            placeholder="input files" />   
+                            placeholder="input files"
+                            onchange={onFieldTextChange} />   
 
                         {/* folders */}
                         <XInputText name="folders"
                             label="Folders" 
                             defaul={task.folders!} 
                             maxlen={Task.maxlen("folders")!} 
-                            placeholder="input folders" />   
+                            placeholder="input folders" 
+                            onchange={onFieldTextChange} />   
                     
                     </Flex>
 

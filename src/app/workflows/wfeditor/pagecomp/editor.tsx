@@ -53,6 +53,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     let isNewWorkflow: boolean = true;
     //if ((AppMemmory.readWorkflowId()!) !== Number(DbOps.NEW_ROW_ID)) { isNewWorkflow = false; }
 
+    const [mainOpen, setMainOpen] = useState<boolean>(true);
     const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
     const [workflow, setWorkflow] = useState<Workflow>(AppWorkflows.NEW_WK);
     const [taskcats, setTaskcats] = useState<Taskcategory[]>([AppWorkflows.TASKCATEGORY_DEF]);
@@ -83,16 +84,16 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const execMainCommand = (id: string) => {
         if (id == WorkflowActions.ADD_TASK) {
-            let task_orden = 0;
-            if( tasks.length > 0) {
-                task_orden = tasks.length;
-            }          
+            let task_orden = tasks.length;
+         
             const newTask = AppWorkflows.getNewTask
                 (workflow.id,codelangs[0].id,tasktypes[0].id,task_orden);
             setTasks([...tasks, newTask]); 
+            setMainOpen(false);
             return;
         }        
         else if (id == WorkflowActions.CLEAR_TASKS) {
+            alert("Clear tasks");
             setTasks([]);
             return;
         }        
@@ -122,17 +123,12 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     };//end
 
-
     const onSaveWorkflow = () => {
         alert("onSaveWorkflow");
     };//end
 
-    const onSaveTaskEdition = () => {
+    const onSaveTask = () => {
         alert("onSaveTaskEdition");
-    };//end
-
-    const onCancelTaskEdition = () => {
-        alert("onCancelTaskEdition");
     };//end
 
     const renderMainCommands = () => {
@@ -184,8 +180,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                             tasktypes={tasktypes}
                             taskcategories={taskcats}
                             task={task}
-                            onsave={() => onSaveTaskEdition()}
-                            oncancel={() => onCancelTaskEdition()} />
+                            onsave={() => onSaveTask()}/>
                         {renderTasksCommands(index)}    
                     </Box>
                 ))}
@@ -196,7 +191,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
             <WorkflowEditorHeader state={barState} onsave={onSaveWorkflow}/>
-            <CardWorkflowMain workflow={workflow} />
+            <CardWorkflowMain workflow={workflow} openinit={mainOpen} />
             {renderMainCommands()}
             {renderTasks()}
         </Flex>

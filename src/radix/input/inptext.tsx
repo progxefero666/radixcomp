@@ -18,7 +18,7 @@ interface InputTextProps {
     readonly?: boolean;
     disabled?: boolean
     defaul?: string;
-    onChange?: (value:string,name?: string) => void;
+    onchange?: (value:string,name?: string) => void;
     onsubmit?: (value:string|null,name?: string) => void;
     type?: any;
     placeholder?: string;
@@ -29,7 +29,7 @@ interface InputTextProps {
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     name, defaul, maxlen,autocommit,autofocus,type, inline, 
-    label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
+    label, placeholder, onchange: onChange,onsubmit, icon, readonly, disabled }, ref) => {
 
     const [value, setValue] = useState<string|null>(defaul ?? null);
   
