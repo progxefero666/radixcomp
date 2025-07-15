@@ -4,12 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
 
 
-import * as go from 'gojs';
-import { ReactDiagram } from 'gojs-react';
-
-
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { DiagramCanvas } from "../xefero/diagramcanvas";
+import ball from "@/public/images/ball.png";
+import { ImageLoader } from "@/graph2d/util/imageloader";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -25,19 +21,34 @@ interface CompProps {
 }
 export function MainContent({ value }: CompProps) {
 
+    const [ready, setReady] = useState<boolean>(false);
 
     const handleModelChange = (changes: any) => {
         alert('GoJS model changed!');
     }
-    
-    useEffect(() => {
 
+    const init = async () => {
+        const image = await ImageLoader.getImageBitmapFromUrl(ball.src);
+
+        setReady(true);
+    }
+    useEffect(() => {
+        if(ready){return;}
+        init();
     }, []);
 
     return (
         <Flex width="100%" direction="column" px="3" py="2" style={mainContentStyle} >
-            
+
         </Flex>
     );
 
 }//end PrimaryBar
+
+
+/*
+
+import * as go from 'gojs';
+import { ReactDiagram } from 'gojs-react';
+
+*/

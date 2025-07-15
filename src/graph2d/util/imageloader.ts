@@ -4,7 +4,7 @@ import { Dim2d } from "../types2d";
 
 
 /**
- * ImageLoader class
+ * ImageLoader.getImageBitmapFromUrl
  */
 export class ImageLoader {
 
@@ -25,7 +25,7 @@ export class ImageLoader {
         });
     }
 
-    public static async getCvImage(url: string): Promise<HTMLImageElement> {
+    public static async getImageBitmapFromUrl(url: string): Promise<HTMLImageElement> {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.src = url;
@@ -35,7 +35,7 @@ export class ImageLoader {
     }
 
     //public cvimages: ImageBitmap[] = [];
-    public static async getCvImages(imgbuffers:ArrayBuffer[]): Promise<ImageBitmap[]> {
+    public static async getImagesBitmaps(imgbuffers:ArrayBuffer[]): Promise<ImageBitmap[]> {
         let mimetype = "image/png"; 
         let cvimages: ImageBitmap[] = [];
         try {
@@ -65,7 +65,7 @@ export class ImageLoader {
 
     public static async getHtmlImages(objsUrls: string[]): Promise<HTMLImageElement[]> {
         try {
-            const images = await Promise.all(objsUrls.map(url => ImageLoader.getCvImage(url)));
+            const images = await Promise.all(objsUrls.map(url => ImageLoader.getImageBitmapFromUrl(url)));
             return images;
         } 
         catch (error) { console.error("Error loading images:", error);

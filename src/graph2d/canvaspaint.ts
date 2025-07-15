@@ -222,7 +222,14 @@ export class CanvasPainter {
 
     };//end 
 
-    public drawImageBitmap(img:ImageBitmap, pointxy: Point2d, dimension: Dim2d,alpha:number):void{
+    
+    public drawImageBitmap(img:ImageBitmap, pointxy: Point2d,alpha:number):void{
+        this.ctx.globalAlpha = alpha;
+        this.ctx.drawImage(img, pointxy.x, pointxy.y, img.width, img.height);
+        this.ctx.globalAlpha = alpha;
+    }//end
+
+    public drawImageBitmapDim(img:ImageBitmap, pointxy: Point2d, dimension: Dim2d,alpha:number):void{
         this.ctx.globalAlpha = alpha;
         this.ctx.drawImage(img, pointxy.x, pointxy.y, dimension.width, dimension.height);
         this.ctx.globalAlpha = 1;

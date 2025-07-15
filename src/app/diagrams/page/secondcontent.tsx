@@ -7,6 +7,10 @@ import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { DiagramCanvas } from "../xefero/diagramcanvas";
 
+import ball from "@/public/images/ball.png";
+import { ImageLoader } from "@/graph2d/util/imageloader";
+
+
 const secondContentStyle = {
     background: 'rgb(56, 56, 56)',
     border: '1px solid rgb(167, 176, 188)',
@@ -18,24 +22,34 @@ const canvasStyle = {
 };
 
 
-let ctrlCanvas:DiagramCanvas| null = null;
+
 interface CompProps {
     value?: string;
 }
 export function SecondContent({value}: CompProps) {
 
+    const [ready, setReady] = useState<boolean>(false);
+    const ctrlCanvas = useRef<DiagramCanvas | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+    const init = async () => {
+             
+        const ctx = canvasRef.current!.getContext('2d');
+        ctrlCanvas.current = new DiagramCanvas(ctx!,{width:400,height:400}, "#000000");    
+  
+        setReady(true);
+        test();
+    };
 
     useEffect(() => {
+        if(ready){return;}
         if(!canvasRef.current) return;
-        const ctx = canvasRef.current.getContext('2d');
-        ctrlCanvas = new DiagramCanvas(ctx!,{width:400,height:400}, "#000000");
-        test();
-    }, []);    
+        init();        
+    },);    
 
 
-    const test = () => {
+    const test = async () => {
+        const image = await ImageLoader.getImageBitmapFromUrl(ball.src);   
         ctrlCanvas?.render_a();
     }
 
