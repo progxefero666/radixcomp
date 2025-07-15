@@ -211,13 +211,15 @@ export class CanvasPainter {
         this.ctx.moveTo(shape.rectPoints[0].x,shape.rectPoints[0].y);             
            
         //this.ctx.lineTo(shape.rectPoints[1].x,shape.rectPoints[1].y);  
-        this.ctx.quadraticCurveTo(
-            shape.ellipseARefPoint[0].x,shape.ellipseARefPoint[0].y,
+        this.ctx.bezierCurveTo(
+            shape.ellipseUpRefPoints[0].x,shape.ellipseUpRefPoints[0].y,
+            shape.ellipseUpRefPoints[1].x,shape.ellipseUpRefPoints[1].y,
             shape.rectPoints[1].x,shape.rectPoints[1].y);
 
         this.ctx.lineTo(shape.rectPoints[2].x,shape.rectPoints[2].y);                             
-        this.ctx.quadraticCurveTo(
-            shape.ellipseDownRefPoint[0].x,shape.ellipseDownRefPoint[0].y,
+        this.ctx.bezierCurveTo(
+            shape.ellipseDownRefPoints[0].x,shape.ellipseDownRefPoints[0].y,
+            shape.ellipseDownRefPoints[1].x,shape.ellipseDownRefPoints[1].y,
             shape.rectPoints[3].x,shape.rectPoints[3].y);
         this.ctx.lineTo(shape.rectPoints[0].x,shape.rectPoints[0].y);
 

@@ -31,7 +31,7 @@ export class DiagramCanvas {
     public render_a(imgbitmap:ImageBitmap) {
         
         const position: Point2d = {x:200,y:200};        
-        const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:100},"blue");
+        const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:70},"blue");
         this.painter.drawShapeCylinder(cylinder);
     };
 
