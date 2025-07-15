@@ -208,17 +208,23 @@ export class CanvasPainter {
     
         this.ctx.beginPath();
 
-        this.ctx.moveTo(shape.rectPoints[0].x,shape.rectPoints[0].y);                
-        this.ctx.lineTo(shape.rectPoints[1].x,shape.rectPoints[1].y);  
-        this.ctx.lineTo(shape.rectPoints[2].x,shape.rectPoints[2].y);                             
-    
+        this.ctx.moveTo(shape.rectPoints[0].x,shape.rectPoints[0].y);             
+
+        //this.ctx.lineTo(shape.rectPoints[1].x,shape.rectPoints[1].y);  
+        this.ctx.bezierCurveTo(
+            shape.rectPoints[0].x,shape.rectPoints[0].y, 
+            shape.ellipsesRefPoint[0].x,shape.ellipsesRefPoint[0].y,
+            shape.rectPoints[1].x,shape.rectPoints[1].y);
+
+        this.ctx.lineTo(shape.rectPoints[2].x,shape.rectPoints[2].y);         
+
         this.ctx.bezierCurveTo(
             shape.rectPoints[2].x,shape.rectPoints[2].y, 
             shape.ellipsesRefPoint[1].x,shape.ellipsesRefPoint[1].y,
             shape.rectPoints[3].x,shape.rectPoints[3].y);
-        //this.ctx.lineTo(shape.rectPoints[3].x,shape.rectPoints[3].y);
-        this.ctx.lineTo(shape.rectPoints[0].x,shape.rectPoints[0].y);
 
+        this.ctx.lineTo(shape.rectPoints[0].x,shape.rectPoints[0].y);
+        
         this.ctx.lineWidth = 1; 
         this.ctx.strokeStyle = shape.color; 
         this.ctx.stroke();

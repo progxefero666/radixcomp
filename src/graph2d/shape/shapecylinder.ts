@@ -42,7 +42,7 @@ export class ShapeCylinder {
         
         this.ellipsesRefPoint[1] = {
             x: this.ellipsesCenter[1].x, 
-            y: this.ellipsesCenter[1].y + (this.ellipsesDim.height*2)
+            y: this.ellipsesCenter[1].y - (this.ellipsesDim.height*2)
         };
 
     };//end
