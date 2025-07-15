@@ -198,6 +198,7 @@ export class CanvasPainter {
         //.................................................................................  
         // step 1: draw main figure              
         //................................................................................. 
+        
         this.ctx.beginPath();
        
         this.ctx.moveTo(shape.ellipseXCenter - shape.radiusX, shape.ellipseUpYCenter);
@@ -212,6 +213,7 @@ export class CanvasPainter {
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = shape.color;
         this.ctx.stroke();
+        
         //.................................................................................    
 
         //.................................................................................  
@@ -219,12 +221,9 @@ export class CanvasPainter {
         //.................................................................................  
         this.ctx.beginPath();
        
-        this.ctx.moveTo(shape.ellipseXCenter - shape.radiusX, shape.ellipseUpYCenter);
         this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseUpYCenter,
-                         shape.radiusX,shape.radiusY,0,Math.PI,0,true);       
+                         shape.radiusX,shape.radiusY,0,2*Math.PI,0,true);
 
-        this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseUpYCenter,
-                         shape.radiusX,shape.radiusY,0,0,Math.PI,false);       
         this.ctx.closePath();
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = "red";
@@ -234,6 +233,8 @@ export class CanvasPainter {
     };//end
 
 
+        /*this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseUpYCenter,
+                         shape.radiusX,shape.radiusY,0,0,Math.PI,false);*/
     // shapes   
     //.................................................................................
     /*
