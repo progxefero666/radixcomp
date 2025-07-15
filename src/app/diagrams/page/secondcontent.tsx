@@ -4,25 +4,20 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { DiagramCanvas } from "../xefero/diagramcanvas";
-
-import ball from "@/public/images/ball.png";
 import { ImageLoader } from "@/graph2d/util/imageloader";
+
+import ball from "../../../../public/shapes/ball.png";
 
 
 const secondContentStyle = {
     background: 'rgb(56, 56, 56)',
     border: '1px solid rgb(167, 176, 188)',
 };
-
 const canvasStyle = {
     background: 'rgba(0, 0, 0, 1)',
     padding: '0',
 };
-
-
-
 interface CompProps {
     value?: string;
 }

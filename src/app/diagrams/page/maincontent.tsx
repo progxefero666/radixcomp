@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
 
 
-import ball from "@/public/images/ball.png";
 import { ImageLoader } from "@/graph2d/util/imageloader";
 
 const mainContentStyle = {
@@ -28,8 +27,7 @@ export function MainContent({ value }: CompProps) {
     }
 
     const init = async () => {
-        const image = await ImageLoader.getImageBitmapFromUrl(ball.src);
-
+     
         setReady(true);
     }
     useEffect(() => {
