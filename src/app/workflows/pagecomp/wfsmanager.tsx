@@ -64,7 +64,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             return;
         }
         else if (command == DB_ITEM_CMD.IMPORT) {
-            alert("import");
+            //alert("import");
             return;
         }
 

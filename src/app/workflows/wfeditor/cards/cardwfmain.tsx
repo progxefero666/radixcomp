@@ -79,13 +79,17 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                                         inline={true}
                                         defaul={workflow.name}                         
                                         maxlen={Workflow.maxlen("name")} 
-                                        placeholder="input name" /> 
+                                        placeholder="input name" 
+                                        autofocus={true} /> 
                         </Box>    
                         <Box width="20%" >
+                            {/*
                             <Button variant="solid" color={ThemeButtonsStyle.COLOR_IMPORT}
                                 size="2" onClick={importMain}  >
                                 {DB_ITEM_CMD_TEXT.IMPORT}   
-                            </Button>
+                            </Button>                            
+                            */}
+
                         </Box>    
                     </Flex>
                 </Flex>

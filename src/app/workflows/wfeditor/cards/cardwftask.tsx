@@ -68,20 +68,20 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
 
     const onBarButtonClick = (operation:string) => {
-        alert(operation);
+        //alert(operation);
     };    
 
 
     const onCodelangSelected = (value: string,name?:string) => {
-        alert("onCodelangSelected: " + value + " name: " + name);
+        //alert("onCodelangSelected: " + value + " name: " + name);
     };    
 
     const onTasktypeSelected = (value: string,name?:string) => {
-        alert("onTasktypeSelected: " + value + " name: " + name);
+        //alert("onTasktypeSelected: " + value + " name: " + name);
     };    
 
     const onTaskcategorySelected = (value: string,name?:string) => {
-        alert("onTaskcategorySelected: " + value + " name: " + name);
+        //alert("onTaskcategorySelected: " + value + " name: " + name);
     };  
 
     return (

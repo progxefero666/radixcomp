@@ -28,7 +28,7 @@ interface InputTextProps {
     maxlen?: number;
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
-    name, defaul, maxlen,autocommit, type, inline, label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
+    name, defaul, maxlen,autocommit,autofocus,type, inline, label, placeholder, onChange,onsubmit, icon, readonly, disabled }, ref) => {
 
     const [value, setValue] = useState<string|null>(defaul ?? null);
 
@@ -86,7 +86,8 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
                 size={size} color={color}
                 radius={radius}
                 onKeyDown={handleOnSubmmit}
-                disabled={input_disabled} >
+                disabled={input_disabled} 
+                autoFocus={autofocus ?? false}>
                 {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
             </TextField.Root>
         )
@@ -112,7 +113,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const renderRowLabelContent = () => {
         return (
-            <Flex gap="1">
+            <Flex gapX="2">
                 <Label.Root>{label}</Label.Root>
                 {renderRowSimpleContent()}
             </Flex>

@@ -55,9 +55,7 @@ export const TASKCATEGORY_DEFAULT: Taskcategory = new Taskcategory(
 export const NEW_WK: Workflow = new Workflow(
     Number(DbOps.NEW_ROW_ID),
     DB_CONSTANTS.NOT_DEF, 
-    DB_CONSTANTS.NOT_DEF,
-    DB_CONSTANTS.NOT_DEF, 
-    null, null);
+    null,"", null, null);
 
 export const NEW_TASKCAT_FIELDS:InputField[] = [
     new InputField("text","item_0", "placeholder", "nacho", "Name", 50),
