@@ -5,93 +5,47 @@ import { init } from "next/dist/compiled/webpack/webpack";
 import { ShapeUtil } from "../util/shapeutil";
 import { XMath } from "@/common/math/xmath";
 import { Graph2d } from "../graph2d";
+// src\graph2d\shape\shapecylinder.ts
 
+// src\graph2d\shape\shapecylinder.ts
+// src\graph2d\shape\shapecylinder.ts
 
-/**
- * ShapeCylinder class
- * Represents a cylinder shape in 2D space.
- * y end = ± (4*radius)/3;
- */
+// src\graph2d\shape\shapecylinder.ts
+
+// src\graph2d\shape\shapecylinder.ts
+
 export class ShapeCylinder {
-
-    public static readonly INCLIN_PERCENT: number = 60;
 
     public position: Point2d;
     public dim: Dim2d;
     public color: string;
     public halfDimY: number = 0;
-    public radius: number = 0;
+    public radiusX: number = 0;
+    public radiusY: number = 0;
+
     public rectPoints: Point2d[] = [];
 
-    public ellipsesCenter: Point2d[] = [];
-
-    public ellipseUpCenter: Point2d = Graph2d.POINT_DEF;
-    public ellipseUpRefPoints: Point2d[] = [];
-
-    public ellipseDownCenter: Point2d = Graph2d.POINT_DEF;
-    public ellipseDownRefPoints: Point2d[] = [];
+    public ellipseXCenter: number = 0;
+    public ellipseUpYCenter: number = 0;
+    public ellipseDownYCenter: number = 0;
 
     constructor(position: Point2d, dim: Dim2d, color: string) {
         this.position = position;
         this.dim = dim;
         this.color = color;
         this.halfDimY = Math.floor(this.dim.height / 2);
-        this.radius = Math.floor(this.dim.width / 2);
+        this.radiusX = Math.floor(this.dim.width / 2);
+        this.radiusY = Math.floor(this.dim.width * 0.2); 
         this.calculateElements();
-    };//end
+    };
 
     public calculateElements() {
-
         this.rectPoints = ShapeUtil.getRectPoints(this.position, this.dim);
 
-        this.ellipseUpCenter={x:this.position.x,y:this.position.y-this.halfDimY};
-        this.ellipseDownCenter={x:this.position.x,y:this.position.y+this.halfDimY};
+        this.ellipseXCenter = this.position.x;
+        // Los centros de las elipses deben estar en la parte superior e inferior del "rectángulo"
+        this.ellipseUpYCenter = this.position.y - this.halfDimY;
+        this.ellipseDownYCenter = this.position.y + this.halfDimY;
+    };
 
-        const sizeCalcX:number  = Math.floor(this.radius/4);
-        const sizeCalcY:number = XMath.getValueOfPercent(this.radius,ShapeCylinder.INCLIN_PERCENT);     
-   
-
-        this.ellipseUpRefPoints[0] = {
-            x: this.ellipseUpCenter.x - sizeCalcX,
-            y: this.ellipseUpCenter.y + sizeCalcY
-        };
-
-        this.ellipseUpRefPoints[1] = {
-            x: this.ellipseUpCenter.x + sizeCalcX,
-            y: this.ellipseUpCenter.y + sizeCalcY
-        };
-
-        this.ellipseUpRefPoints[2] = {
-            x: this.ellipseUpCenter.x + sizeCalcX,
-            y: this.ellipseUpCenter.y - sizeCalcY
-        };
-
-        this.ellipseUpRefPoints[3] = {
-            x: this.ellipseUpCenter.x - sizeCalcX,
-            y: this.ellipseUpCenter.y - sizeCalcY
-        };
-
-        
-        this.ellipseDownRefPoints[0] = {
-            x: this.ellipseDownCenter.x + sizeCalcX,
-            y: this.ellipseDownCenter.y + sizeCalcY
-        };
-
-        this.ellipseDownRefPoints[1] = {
-            x: this.ellipseDownCenter.x - sizeCalcX,
-            y: this.ellipseDownCenter.y + sizeCalcY
-        };   
-
-        this.ellipseDownRefPoints[0] = {
-            x: this.ellipseDownCenter.x - sizeCalcX,
-            y: this.ellipseDownCenter.y - sizeCalcY
-        };
-
-        this.ellipseDownRefPoints[1] = {
-            x: this.ellipseDownCenter.x + sizeCalcX,
-            y: this.ellipseDownCenter.y - sizeCalcY
-        };    
-
-    };//end
-
-}//end class
+}
