@@ -54,13 +54,12 @@ export class CanvasShapesPainter {
 
         // step 2: draw ellipse up
         //.................................................................................  
-    
         this.ctx.beginPath();       
         this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseUpYCenter,
                          shape.radiusX,shape.radiusY,0,2*Math.PI,0,true);
         this.ctx.closePath();
         this.ctx.lineWidth = 1;
-        this.ctx.fillStyle = "#6b7887";
+        this.ctx.fillStyle = shape.fillColor;
         this.ctx.fill();
         this.ctx.stroke(); 
         

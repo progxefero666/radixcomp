@@ -1,42 +1,27 @@
 //src\graph2d\shape\shapecylinder.ts
 
 import { Dim2d, Point2d } from "@/graph2d/types2d";
-import { init } from "next/dist/compiled/webpack/webpack";
 import { ShapeUtil } from "../util/shapeutil";
-import { XMath } from "@/common/math/xmath";
-import { Graph2d } from "../graph2d";
-// src\graph2d\shape\shapecylinder.ts
+import { Shape } from "@/graph2d/shape/shape";
 
-// src\graph2d\shape\shapecylinder.ts
-// src\graph2d\shape\shapecylinder.ts
+/**
+ * Shape: Cylinder
+ * class: ShapeCylinder
+ * public darkColor: string = "#1c1e20ff"; 
+ */
+export class ShapeCylinder extends Shape {
 
-// src\graph2d\shape\shapecylinder.ts
-
-// src\graph2d\shape\shapecylinder.ts
-
-export class ShapeCylinder {
-
-    public fillColor: string;
-    public strokeColor: string = "white";
-
-    public position: Point2d;
-    public dim: Dim2d;
-    
+    public rectPoints: Point2d[] = [];
     public halfDimY: number = 0;
     public radiusX: number = 0;
     public radiusY: number = 0;
-
-    public rectPoints: Point2d[] = [];
 
     public ellipseXCenter: number = 0;
     public ellipseUpYCenter: number = 0;
     public ellipseDownYCenter: number = 0;
 
     constructor(position:Point2d,dim:Dim2d,fillColor:string,strokeColor:string) {
-        this.position = position;
-        this.dim = dim;
-        this.fillColor = fillColor;
-        this.strokeColor = strokeColor;
+        super(position, dim, fillColor, strokeColor);
         this.halfDimY = Math.floor(this.dim.height / 2);
         this.radiusX = Math.floor(this.dim.width / 2);
         this.radiusY = Math.floor(this.dim.width * 0.2); 
