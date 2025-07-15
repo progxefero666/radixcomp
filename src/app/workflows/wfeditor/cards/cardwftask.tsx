@@ -1,9 +1,9 @@
 //src\app\workflows\wfeditor\cards\cardwftask.tsx
 
-import React from "react";
+import React, { useRef } from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { Button, Box, Text, Flex, Separator, IconButton, Container, Section, Heading } from "@radix-ui/themes";
-import { ArrowDownIcon, ArrowUpIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
+import { Button, Box, Text, Flex, Separator, IconButton, Container, Section, Heading, Grid } from "@radix-ui/themes";
+import { ArchiveIcon, ArrowDownIcon, ArrowUpIcon, ChevronDownIcon, ChevronUpIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Option } from "@/common/model/option";
 
 import { RadixConf } from "@/radix/radixconf";
@@ -60,6 +60,15 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                                    onsave, oncancel }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 
+    
+    const nameRef = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef<HTMLInputElement>(null);
+    const filesRef = useRef<HTMLInputElement>(null);
+    const foldersRef = useRef<HTMLInputElement>(null);
+
+    const proglanguageRef = useRef<HTMLSelectElement>(null);
+    const tasktypeRef     = useRef<HTMLSelectElement>(null);
+    const taskCategoryRef = useRef<HTMLSelectElement>(null);
 
     //orden
     const codelangsColl: Option[] = getCodelangsAsOptions(codelangs);
@@ -67,9 +76,22 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
     const taskcategoriesColl: Option[] =getTaskcategoriessAsOptions(taskgroups);
 
 
-    const onBarButtonClick = (operation:string) => {
-        //alert(operation);
-    };    
+    const execTaskItemOperation = (operation:string) => {
+        
+        if(operation === DB_ITEM_CMD.UPDATE) {
+       
+        }
+        else if(operation === DB_ITEM_CMD.DELETE) {
+       
+        }
+        else if (operation === DB_ITEM_CMD.MOVEUP ) {
+                    
+        }    
+        else if (operation === DB_ITEM_CMD.MOVEDOWN) {
+                      
+        }    
+
+    };//end    
 
 
     const onCodelangSelected = (value: string,name?:string) => {
@@ -102,12 +124,22 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
                             defaul={task.name} 
                             maxlen={Task.maxlen("tkname")!} 
                             placeholder="task name" />     
-                        <BarButtons  barconfig={barbuttonscfg} onclick={onBarButtonClick}/>
+
                         <Flex direction="row" gapX="2" >
-                             <IconButton variant={RadixConf.VARIANTS.solid} >
+                             <IconButton variant={RadixConf.VARIANTS.solid} 
+                                onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.UPDATE)}>
+                                <ArchiveIcon />
+                            </IconButton>                              
+                             <IconButton variant={RadixConf.VARIANTS.solid} 
+                                onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.DELETE)}>
+                                <TrashIcon />
+                            </IconButton>                            
+                             <IconButton variant={RadixConf.VARIANTS.solid} 
+                                onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.MOVEUP)}>
                                 <ArrowUpIcon />
                             </IconButton>
-                             <IconButton variant={RadixConf.VARIANTS.solid} >
+                             <IconButton variant={RadixConf.VARIANTS.solid}
+                                onClick={(e: React.MouseEvent) =>execTaskItemOperation(DB_ITEM_CMD.MOVEDOWN)}>
                                 <ArrowDownIcon />
                             </IconButton>                            
                         </Flex>
@@ -117,31 +149,38 @@ export default function CardTask({ task, codelangs, tasktypes, taskcategories: t
 
                 <Collapsible.Content>
 
-                    <Flex direction="column" gapY="2" px="2" py="1" >
+                    <Grid height="auto" rows="auto" columns="auto" gapX="4" px="2" >
 
                         {/* tasktype_id */}
-                        <XInputSelect
-                                label="Type: "
-                                collection={tasktypesColl}
-                                defaul={task.tasktype_id.toString()}
-                                onchange={onTasktypeSelected}
-                                disabled={false} />  
+                        <Box gridColumn="1" gridRow="1" >                            
+                            <XInputSelect label="Type" inline={true}
+                                    collection={tasktypesColl}
+                                    defaul={task.tasktype_id.toString()}
+                                    onchange={onTasktypeSelected}
+                                    disabled={false} />                         
+                        </Box>
+                       
+                       {/* codelang_id */}
+                        <Box gridColumn="2" gridRow="1" >                            
+                            <XInputSelect label="Code Lang"  inline={true}
+                                    collection={codelangsColl}
+                                    defaul={task.codelang_id.toString()}
+                                    onchange={onCodelangSelected}
+                                    disabled={false} />                         
+                        </Box>
 
-                        {/* codelang_id */}
-                        <XInputSelect
-                                label="Code Lang: "
-                                collection={codelangsColl}
-                                defaul={task.codelang_id.toString()}
-                                onchange={onCodelangSelected}
-                                disabled={false} />  
-                        
                         {/* taskgroup_id */}
-                        <XInputSelect
-                                label="Category: "
-                                collection={taskcategoriesColl}
-                                defaul={task.taskcategory_id.toString()}
-                                onchange={onTaskcategorySelected}
-                                disabled={false} />  
+                        <Box gridColumn="3" gridRow="1" >                           
+                            <XInputSelect label="Category"  inline={true}
+                                    collection={taskcategoriesColl}
+                                    defaul={task.taskcategory_id.toString()}
+                                    onchange={onTaskcategorySelected}
+                                    disabled={false} />                         
+                        </Box>                                                
+                    </Grid>
+
+                    <Flex direction="column" gapY="2" px="2" py="1" >
+
 
                         {/* description */}
                         <XInputTextArea label="Description" 

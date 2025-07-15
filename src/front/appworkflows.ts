@@ -7,6 +7,7 @@ import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
 import { TKeyvalue } from "@/common/types";
 import { TInputText } from "@/radix/radixtypes";
+import { Task } from "@/db/model/task";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -84,6 +85,18 @@ export class AppWorkflows {
         label:"Name",value:null,length:{min:3,max:50}
     };
 
+    public static  getNewTask = (workflowId:number,
+                                 codelangId:number,tasktypeId:number,
+                                 orden:number):Task => {               
+        return new Task(
+            DbOps.NEW_ROW_ID,
+            tasktypeId,
+            codelangId, 
+            workflowId, 
+            AppWorkflows.TASKCATEGORY_DEF.id,
+            orden,"","",0,"","");    
+    };//end
+        
 }//end class
 
 /**
