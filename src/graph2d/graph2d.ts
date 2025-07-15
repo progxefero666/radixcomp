@@ -4,7 +4,7 @@ import { Dim2d, Point2d } from "@/graph2d/types2d";
 
 
 /**
- * class Graph2d.DIM_DEF
+ * class Graph2d.POINT_DEF
  */
 export class Graph2d {
 
