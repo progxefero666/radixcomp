@@ -10,7 +10,7 @@ import { Task } from "@/db/model/task";
 import { WorkflowEditor } from "@/app/workflows/wfeditor/pagecomp/editor";
 import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
 import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
-import PanelWfTaskcategories from "./categories/paneltaskcats";
+
 import { WK_EDITOR_VIEWS } from "@/front/appworkflows";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";

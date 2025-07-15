@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { Box, Grid, Flex } from "@radix-ui/themes";
-import { MOD_SECTIONS } from "@/front/appworkflows";
+import { AppWorkflowsConfig } from "@/front/appworkflows";
 import { Header } from "@/app/workflows/pagecomp/header";
 import { PrimaryBar } from "@/app/workflows/pagecomp/primarybar";
 import { WorkflowsManager } from "@/app/workflows/pagecomp/wfsmanager";
@@ -27,7 +27,7 @@ const layoutStyle = {
  */
 export default function PageWorkflows() {
 
-    const [actsection, setActSection]   = useState<string>(MOD_SECTIONS.MANAGER_WORKFLOWS.id);
+    const [actsection, setActSection]   = useState<string>(AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS.id);
       const [wfCharged, setWfCharged]     = useState<boolean>(false);
     const [wfSelected, setWfSelected]   = useState<Workflow | null>(null);
 

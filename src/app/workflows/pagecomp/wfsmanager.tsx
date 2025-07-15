@@ -13,8 +13,9 @@ import { Workflow } from "@/db/model/workflow";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllByTable } from "@/db/services/generic/serviceread";
 import {CardWorkflowMin} from "../cards/cardwfmin";
-import { MOD_SECTIONS } from "@/front/appworkflows";
+
 import { AppMemmory } from "@/front/appmemory";
+import { AppWorkflowsConfig } from "@/front/appworkflows";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -150,8 +151,8 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             </Flex>
 
             {/*body */}
-            {section == MOD_SECTIONS.MANAGER_WORKFLOWS.id ? renderManWorkflows() : null}
-            {section == MOD_SECTIONS.MANAGER_TASKTYPES.id ? renderTasktypes() : null}
+            {section == AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS.id ? renderManWorkflows() : null}
+            {section == AppWorkflowsConfig.MOD_SECTIONS.MANAGER_TASKTYPES.id ? renderTasktypes() : null}
         </Flex>
     );
 

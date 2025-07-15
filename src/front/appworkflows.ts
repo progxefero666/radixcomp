@@ -8,16 +8,7 @@ import { Workflow } from "@/db/model/workflow";
 import { TKeyvalue } from "@/common/types";
 
 
-export const MOD_SECTIONS = {
-    MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
-    MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
-} as const;
 
-
-export const MAN_WFS_SECTIONS_ARRAY: Option[] = [
-    MOD_SECTIONS.MANAGER_WORKFLOWS,
-    MOD_SECTIONS.MANAGER_TASKTYPES
-];
 
 export const MAN_WFS_SECTIONS = {
     MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
@@ -40,6 +31,28 @@ export class AppWorkflowsConfig {
     public static readonly VIEW_SQL: string = "sql";
     public static readonly VIEW_PROMPT: string = "prompt";
     public static readonly VIEW_GRAPH: string = "go_graph";
+
+
+    public static readonly MOD_SECTIONS = {
+        MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
+        MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
+    } as const;
+
+
+    public static readonly readonlyMAN_WFS_SECTIONS_ARRAY: Option[] = [
+        AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS,
+        AppWorkflowsConfig.MOD_SECTIONS.MANAGER_TASKTYPES
+    ];
+
+    public static readonly MAN_WFS_SECTIONS = {
+        MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
+        MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
+    } as const;
+
+    public static readonly WK_EDITOR_VIEWS = {
+        EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
+        EDITOR_VIEW_TASKGROUPS: new Option("manager_taskgroups", "Task Groups", null)
+    } as const;
 
 }//end class
 
