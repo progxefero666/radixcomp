@@ -20,27 +20,30 @@ const primaryBarStyle = {
 };
 
 interface CompProps {
+    workflowid: number;
     collection: Taskcategory[] | null;
     onsave?: () => void;
 }
-export default function WorkflowPrimaryBar({ collection }: CompProps) {
+export default function WorkflowPrimaryBar({ workflowid,collection }: CompProps) {
 
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" style={primaryBarStyle} >
-            {collection ? <PanelWfTaskcategories initcollection={collection} /> : null}
+            {collection ? <PanelWfTaskcategories workflowid={workflowid}
+                                                 initcollection={collection} /> : null}
         </Flex>
     );
 
 }//end component
 
 interface PanelWfTaskcategoriesProps {
+    workflowid: number;
     initcollection: Taskcategory[];
     onsave?: () => void;
 }
-function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
+function PanelWfTaskcategories({ workflowid,initcollection }: PanelWfTaskcategoriesProps) {
 
-    const ref = React.useRef<ManagerTaskcategories>(new ManagerTaskcategories(initcollection));
+    const manCategories = React.useRef<ManagerTaskcategories>(new ManagerTaskcategories(initcollection));
     const [coll, setColl] = useState<Taskcategory[]>(initcollection);
     const [open, setOpen] = useState<boolean>(true);
 
@@ -74,8 +77,14 @@ function PanelWfTaskcategories({ initcollection }: PanelWfTaskcategoriesProps) {
 
 
     //const onCancelNewItem = () => {};
-    const onSaveNewItem = (values: InputField[]) => {
+    const onSaveNewItem = (fields: InputField[]) => {
         //alert("onSaveNewItem");
+        const newItem = new Taskcategory(
+            0,
+            workflowid,
+            fields[0].value,fields[1].value
+        );
+        //manCategories.current.execOp(DB_ITEM_CMD.INSERT,);
     };//end
 
     

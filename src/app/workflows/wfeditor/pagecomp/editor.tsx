@@ -6,7 +6,7 @@ import { Box, Button, Flex, Text } from "@radix-ui/themes";
 
 import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection, parseResponseItem } from "@/common/parsers/javascriptparser";
-import { DB_CONSTANTS, DB_ITEM_CMD, NEW_ROW_ID } from "@/common/database/dbkernel";
+import { DB_CONSTANTS, DB_ITEM_CMD, DbOps } from "@/common/database/dbkernel";
 import { Task } from "@/db/model/task";
 import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
@@ -51,7 +51,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
 
     let isNewWorkflow: boolean = true;
-    if ((AppMemmory.readWorkflowId()!) !== Number(NEW_ROW_ID)) { isNewWorkflow = false; }
+    if ((AppMemmory.readWorkflowId()!) !== Number(DbOps.NEW_ROW_ID)) { isNewWorkflow = false; }
 
     const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
     const [workflow, setWorkflow] = useState<Workflow>(NEW_WK);
@@ -82,7 +82,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     
     const getNewTask = (orden:number):Task => {               
         return new Task(
-            NEW_ROW_ID,tasktypes[0].id,codelangs[0].id, 
+            DbOps.NEW_ROW_ID,tasktypes[0].id,codelangs[0].id, 
             workflow.id, taskcats[0].id,
             orden,"","",0,"","");    
     };//end

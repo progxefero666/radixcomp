@@ -2,7 +2,7 @@
 
 import { InputField } from "@/common/model/inputfield";
 import { Option } from "@/common/model/option";
-import { NEW_ROW_ID, DB_CONSTANTS } from "@/common/database/dbkernel";
+import { DB_CONSTANTS, DbOps } from "@/common/database/dbkernel";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
 
@@ -53,7 +53,7 @@ export const TASKCATEGORY_DEFAULT: Taskcategory = new Taskcategory(
     0, 0, "default", "taskgroup default");
 
 export const NEW_WK: Workflow = new Workflow(
-    Number(NEW_ROW_ID),
+    Number(DbOps.NEW_ROW_ID),
     DB_CONSTANTS.NOT_DEF, 
     DB_CONSTANTS.NOT_DEF,
     DB_CONSTANTS.NOT_DEF, 

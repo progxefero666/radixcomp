@@ -47,7 +47,8 @@ export default function WorkflowEditorPage() {
             <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
 
             <Flex gridColumn="1" gridRow="2" >            
-                <WorkflowPrimaryBar collection={taskcats} />
+                {workflow ? <WorkflowPrimaryBar workflowid={workflow.id}
+                                                collection={taskcats} />:null}  
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" >

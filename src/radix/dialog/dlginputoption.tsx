@@ -6,8 +6,9 @@ import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
 
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
 import { BarSubmit } from "@/radix/cbars/barsubmit";
-import { FilePlusIcon } from "@radix-ui/react-icons";
+import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 import { InputField } from "@/common/model/inputfield";
+import { OPERATIONS } from "@/common/constants";
 
 
 /**
@@ -19,7 +20,7 @@ interface CompProps {
     items: InputField[];
     onsave: (values: InputField[]) => void;
 }
-export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
+export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
 
     //const onCancel = () => { if (oncancel) { oncancel(); } }
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,14 +31,14 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
         onsave(items);
     };//end
 
-    const renderInput = (input:InputField) => {
-        return(
+    const renderInput = (input: InputField) => {
+        return (
             <fieldset>
                 <Label.Root>{input.label}</Label.Root>
-                <TextField.Root name={input.id} 
-                                placeholder={input.placeholder}
-                                radius="small" />
-            </fieldset>                   
+                <TextField.Root name={input.id}
+                    placeholder={input.placeholder}
+                    radius="small" />
+            </fieldset>
         )
     };//end
 
@@ -47,10 +48,10 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
             <Dialog.Trigger>
                 <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
                     <FilePlusIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                  height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                        height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
                     <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
                         {buttontext}
-                    </Text>                                  
+                    </Text>
                 </Button>
             </Dialog.Trigger>
 
@@ -61,16 +62,32 @@ export const DialogForm = ({buttontext, title, items, onsave }: CompProps) => {
                     <Text size={ThemeTextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
                 </Dialog.Title>
 
-                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => 
-                                {event.preventDefault();onSubmit(event);}}>
+                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { event.preventDefault(); onSubmit(event); }}>
                     <Flex width="100%" direction="column" gapY="2" >
                         {items.map((item, index) => (
                             <Box key={index.toString()}>
-                                {renderInput(item)}                        
-                            </Box>                 
+                                {renderInput(item)}
+                            </Box>
                         ))}
                     </Flex>
-                    <Dialog.Close><BarSubmit /></Dialog.Close>
+                    <Dialog.Close>
+                        <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
+                            <Button type="submit"
+                                color={ThemeButtonsStyle.COLOR_SAVE}
+                                size={ThemeButtonsStyle.BTN_DEF_SIZE}>
+                                {OPERATIONS.SAVE}
+                                <CheckIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
+                                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                            </Button>
+                            <Button color={ThemeButtonsStyle.COLOR_CLOSE}
+                                size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                                {OPERATIONS.CANCEL}
+                                <Cross2Icon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
+                                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                            </Button>
+                        </Flex>
+
+                    </Dialog.Close>
                 </form>
             </Dialog.Content>
 

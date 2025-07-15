@@ -43,7 +43,7 @@ export enum DB_CONSTANTS {
     NOT_DEF   = "not_defined"
 }
 
-export const NEW_ROW_ID:number = 0;
+//export const NEW_ROW_ID:number = 0;
 
 export enum DB_ERROR {   
     NOT_FOUND = "not_found",
@@ -51,7 +51,12 @@ export enum DB_ERROR {
     UNKNOWN = "unknown_error"
 }   
 
+/**
+ * DbOps.NEW_ROW_ID
+ */
 export class DbOps{
+    public static readonly NEW_ROW_ID:number = 0;
+
     public static INSERT = "insert";
     public static UPDATE = "update";
     public static GET_BY_ID = "get_by_id";
