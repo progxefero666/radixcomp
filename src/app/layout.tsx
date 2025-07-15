@@ -7,7 +7,7 @@ import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import "@/style/smalls.css"
 import "@/style/diagrams.css"
-import "@/radix/forms/form.css";
+//import "@/radix/forms/form.css";
 
 
 // metadata for the application

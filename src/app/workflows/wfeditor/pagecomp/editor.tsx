@@ -45,6 +45,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const [ready, setReady] = useState<boolean>(false);
     const [barState, setBarState] = useState<string>("default");
+    const [barbuttons, setBarbuttonsCfg] = useState<BarButtonsCfg>(BARCFG_SAVE_CLOSE);
 
     const [codelangs, setCodelangs] = useState<Codelang[]>([]);
     const [tasktypes, setTasktypes] = useState<Tasktype[]>([]);
@@ -231,7 +232,6 @@ function WorkflowEditorHeader({ state }: CompProps) {
 
             <BarButtons barconfig={barbuttons}
                 onclick={onBarbuttonsClick} />
-
 
         </Flex>
     );

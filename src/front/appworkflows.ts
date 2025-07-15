@@ -55,8 +55,8 @@ export class AppWorkflowsConfig {
 export class AppWorkflows {
 
     public static readonly NEW_TASKTYPE_FIELDS:InputField[] = [
-        new InputField("text","name", "input name", null, "Name"),
-        new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion")
+        new InputField("text","name", "type name", null, "Name"),
+        new InputField("text","description", "type description", null, "Descripcion")
     ]
 
     public static readonly NEW_WK: Workflow = new Workflow(

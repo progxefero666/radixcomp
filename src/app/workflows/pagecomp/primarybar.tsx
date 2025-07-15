@@ -1,11 +1,9 @@
 //src\app\workflows\pagecomp\gcprimarybar.tsx
 
-import { useState, useEffect, useRef } from "react";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
-
 import MenuButtons from "@/radix/cbars/btmenu";
-import { MAN_WFS_SECTIONS_ARRAY } from "@/front/appworkflows";
+import { AppWorkflowsConfig } from "@/front/appworkflows";
 
 
 const primaryBarStyle = {
@@ -19,7 +17,7 @@ interface CompProps {
     onselection:(sectionId:string) => void;
 }
 export function PrimaryBar({onselection,section}: CompProps) {
-    const sections:Option[] = MAN_WFS_SECTIONS_ARRAY;
+    const sections:Option[] = AppWorkflowsConfig.MAN_WFS_SECTIONS_ARRAY;
 
     return (
         <Flex width="100%"  height="100vh" align="center" 
