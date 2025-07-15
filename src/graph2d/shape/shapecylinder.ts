@@ -16,9 +16,12 @@ import { Graph2d } from "../graph2d";
 
 export class ShapeCylinder {
 
+    public fillColor: string;
+    public strokeColor: string = "white";
+
     public position: Point2d;
     public dim: Dim2d;
-    public color: string;
+    
     public halfDimY: number = 0;
     public radiusX: number = 0;
     public radiusY: number = 0;
@@ -29,10 +32,11 @@ export class ShapeCylinder {
     public ellipseUpYCenter: number = 0;
     public ellipseDownYCenter: number = 0;
 
-    constructor(position: Point2d, dim: Dim2d, color: string) {
+    constructor(position:Point2d,dim:Dim2d,fillColor:string,strokeColor:string) {
         this.position = position;
         this.dim = dim;
-        this.color = color;
+        this.fillColor = fillColor;
+        this.strokeColor = strokeColor;
         this.halfDimY = Math.floor(this.dim.height / 2);
         this.radiusX = Math.floor(this.dim.width / 2);
         this.radiusY = Math.floor(this.dim.width * 0.2); 

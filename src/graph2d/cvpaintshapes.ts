@@ -24,6 +24,8 @@ export class CanvasShapesPainter {
      */
     public drawCylinder(shape: ShapeCylinder) {
  
+        this.ctx.strokeStyle = shape.strokeColor;
+
         // step 1: draw main figure              
         //.................................................................................         
         this.ctx.beginPath();
@@ -36,8 +38,7 @@ export class CanvasShapesPainter {
         this.ctx.lineTo(shape.ellipseXCenter - shape.radiusX, shape.ellipseUpYCenter);
         this.ctx.closePath();
         this.ctx.lineWidth = 1;
-        this.ctx.fillStyle = "blue";
-        this.ctx.strokeStyle = "white";
+        this.ctx.fillStyle = shape.fillColor;
         this.ctx.fill();
         this.ctx.stroke();  
 
@@ -47,10 +48,8 @@ export class CanvasShapesPainter {
         this.ctx.beginPath();       
         this.ctx.ellipse(shape.ellipseXCenter,shape.ellipseUpYCenter,
                          shape.radiusX,shape.radiusY,0,2*Math.PI,0,true);
-
         this.ctx.closePath();
         this.ctx.lineWidth = 1;
-        this.ctx.strokeStyle = "white";
         this.ctx.fillStyle = "#6b7887";
         this.ctx.fill();
         this.ctx.stroke(); 
