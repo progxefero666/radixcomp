@@ -22,7 +22,7 @@ export class ShapeArrow extends Shape {
     public headLen:number    = ShapeArrow.DEF_HEAD_LEN;
     public headFactor:number = ShapeArrow.DEF_HEAD_FACTOR;
 
-    constructor(position:Point2d,dim:Dim2d,fillColor:string,strokeColor:string,target:Point2d,width:number) {
+    constructor(position:Point2d,dim:Dim2d|null,fillColor:string,strokeColor:string,target:Point2d,width:number) {
         super(position,dim,fillColor,strokeColor);
         this.target = target;
         this.width = width;
