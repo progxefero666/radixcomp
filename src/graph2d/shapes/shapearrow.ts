@@ -7,9 +7,8 @@ import { Shape } from "@/graph2d/shapes/shape";
 import { XMath2d } from "@/common/math2d/xmath2d";
 
 /**
- * Shape: Cylinder
- * class: ShapeCylinder
- * public darkColor: string = "#1c1e20ff"; 
+ * Shape: Arrow
+ * class: ShapeArrow
  */
 export class ShapeArrow extends Shape {
 

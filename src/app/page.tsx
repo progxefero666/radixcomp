@@ -1,13 +1,19 @@
-//src\app\diagrams\page.tsx
+//src\app\workflows\page.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
 import { Box, Grid, Flex } from "@radix-ui/themes";
-import { SecondBar } from "./diagrams/page/secondbar";
-import { Header } from "./diagrams/page/header";
-import { MainBar } from "./diagrams/page/mainbar";
-import { MainContent } from "./diagrams/page/maincontent";
-import { SecondContent } from "./diagrams/page/secondcontent";
+import { MOD_SECTIONS, VIEWER_MODE } from "@/front/appworkflows";
+import { Header } from "@/app/workflows/pagecomp/header";
+import { PrimaryBar } from "@/app/workflows/pagecomp/primarybar";
+import { WorkflowsManager } from "@/app/workflows/pagecomp/wfsmanager";
+import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
+import { WorkflowViewer } from "./workflows/pagecomp/wfviewer";
+import { Workflow } from "@/db/model/workflow";
+
+import { Tasktype } from "@/db/model/tasktype";
+import { AppMemmory, saveMemmoryCodelangs, saveMemmoryTasktypes } from "@/front/appmemory";
 
 
 const layoutStyle = {
@@ -15,16 +21,30 @@ const layoutStyle = {
     padding: '0',
 };
 
-export default function PageDiagrams() {
+/**
+ * Page Workflows Manegement
+ *  const router = useRouter();
+ */
+export default function PageWorkflows() {
 
-    const [actsection, setActSection]  = useState<string>("section_1");
+    const [actsection, setActSection]   = useState<string>(MOD_SECTIONS.MANAGER_WORKFLOWS.id);
+      const [wfCharged, setWfCharged]     = useState<boolean>(false);
+    const [wfSelected, setWfSelected]   = useState<Workflow | null>(null);
+
+    const [tasktypes, setTasktypes] = useState<Tasktype[] | null>(null);
         
     useEffect(() => {
-
+        //saveMemmoryCodelangs();
+        //saveMemmoryTasktypes();
     }, []);
 
     const onSelection = (section: string) => {
         setActSection(section);
+    };
+
+    const showWfPreview = (workflow: Workflow) => {
+        setWfSelected(workflow);
+        setWfCharged(true);
     };
 
     return (
@@ -35,20 +55,24 @@ export default function PageDiagrams() {
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
-                <MainBar section={actsection}
+                <PrimaryBar section={actsection}
                     onselection={onSelection} />
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" >
-                <MainContent  />
+                <WorkflowsManager section={actsection}
+                    showwfpreview={showWfPreview} />
             </Flex>
 
             <Flex gridColumn="3" gridRow="2" >
-                <SecondContent  />
+                {wfCharged ?
+                    <WorkflowViewer workflow={wfSelected}/>
+                    : <Box width="100%">not data charged</Box>}
+
             </Flex>
 
             <Flex gridColumn="4" gridRow="2" >
-                rbd
+                <SecondBar section={actsection} />
             </Flex>
 
         </Grid>
