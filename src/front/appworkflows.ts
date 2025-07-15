@@ -87,12 +87,12 @@ export class AppWorkflows {
 
     public static  getNewTask = (workflowId:number,
                                  codelangId:number,tasktypeId:number,
-                                 orden:number):Task => {               
+                                 orden:number,groupIndex:number):Task => {               
         return new Task(
             DbOps.NEW_ROW_ID,
             tasktypeId,codelangId,workflowId, 
             AppWorkflows.TASKCATEGORY_DEF.id,
-            orden,null,null,0,null,null);    
+            orden,null,null,groupIndex,null,null);    
     };//end
         
 }//end class

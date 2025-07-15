@@ -32,6 +32,7 @@ import { getAllByTable } from "@/db/services/generic/serviceread";
 import { WorkflowEditorHeader } from "./editorheader";
 import { DialogButtonConfirm } from "@/radix/dialog/dlgbuttonconfirm";
 import { RadixConf } from "@/radix/radixconf";
+import { GroupTasks } from "@/db/modelextend/grouptasks";
 
 
 const mainContentStyle = {
@@ -60,6 +61,10 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     const [taskcats, setTaskcats] = useState<Taskcategory[]>([AppWorkflows.TASKCATEGORY_DEF]);
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    const groups = useRef<GroupTasks[]>([]);
+
+    
+    
     useEffect(() => {
         if (ready) { return; }
         const init = async () => {
@@ -76,7 +81,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                 setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id))!);
             }
             else {
-                
+                //GroupTasks
             }
             setReady(true);
             onCharge(workflow, taskcats);
@@ -88,10 +93,21 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         if (id == WorkflowActions.ADD_TASK) {
             let task_orden = tasks.length;
          
-            const newTask = AppWorkflows.getNewTask
-                (workflow.id,codelangs[0].id,tasktypes[0].id,task_orden);
-            setTasks([...tasks, newTask]); 
-            setMainOpen(false);
+            let newTask:Task|null = null;
+            if(groups.current.length == 0) { 
+                groups.current.push(new GroupTasks(0,[task_orden]));
+                newTask = AppWorkflows.getNewTask
+                    (workflow.id,codelangs[0].id,tasktypes[0].id,task_orden,0);                
+            }  
+            else {
+                const currentGroupIndex:number = groups.current.length - 1;
+                newTask = AppWorkflows.getNewTask
+                    (workflow.id,codelangs[0].id,tasktypes[0].id,task_orden,currentGroupIndex);                  
+            }
+            if(newTask!== null) {
+                setTasks([...tasks, newTask!]); 
+                setMainOpen(false);
+            }
             return;
         }        
         else if (id == WorkflowActions.CLEAR_TASKS) {
@@ -134,8 +150,8 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     };//end
 
     const createNewGroup = (taskOrden:number) => {
-    
         alert("current group"+ tasks[taskOrden].tkgroup);
+
     };//end
 
     const renderMainCommands = () => {
