@@ -1,7 +1,7 @@
 //src\app\workflows\wfeditor\cards\cardwfmain.tsx
 
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 import { Label } from "radix-ui";
@@ -42,7 +42,9 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
 
     //const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(true);
-
+    
+    const nameRef = useRef<HTMLInputElement>(null);
+    //const proglanguageRef = useRef<HTMLSelectElement>(null);
 
     const importMain = () => {
         console.log("import main");
@@ -71,10 +73,15 @@ export default function CardWorkflowMain({workflow,onsave}:CompProps) {
                         </Box>
                     </Collapsible.Trigger>
                     <Flex width="100%" justify="between" pt="2" mb="1" align="center" >
-                        <Box width="100%"  py="1" px="2" mr="2" style={headerStyle}>
-                            <Text size="3" >Main</Text>
+                        <Box width="80%"  py="1" px="2" mr="3" >
+                            <XInputText name="name"
+                                        label="Name"
+                                        inline={true}
+                                        defaul={workflow.name}                         
+                                        maxlen={Workflow.maxlen("name")} 
+                                        placeholder="input name" /> 
                         </Box>    
-                        <Box>
+                        <Box width="20%" >
                             <Button variant="solid" color={ThemeButtonsStyle.COLOR_IMPORT}
                                 size="2" onClick={importMain}  >
                                 {DB_ITEM_CMD_TEXT.IMPORT}   

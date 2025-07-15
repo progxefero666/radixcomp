@@ -55,8 +55,9 @@ function PanelWfTaskcategories({ workflowid,initcollection }: PanelWfTaskcategor
 
     const [formDefItems, setFormDefItems] = useState<InputField[]>([]);
 
-        
-
+    let isNewWorkflow:boolean = true;
+    if (workflowid != DbOps.NEW_ROW_ID) {isNewWorkflow = false;}
+    
     const execItemOperation = (id: number, action: string) => {
         alert(id);
 

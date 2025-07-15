@@ -57,7 +57,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     }
 
     const onBarButtonClick = (command: string) => {
-        alert(command);
+        
         if (command == DB_ITEM_CMD.INSERT) {
             AppMemmory.saveWorkflowId(Number(DbOps.NEW_ROW_ID));
             router.push("/workflows/wfeditor");

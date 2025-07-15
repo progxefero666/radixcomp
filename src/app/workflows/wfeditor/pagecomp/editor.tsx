@@ -51,7 +51,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
 
     let isNewWorkflow: boolean = true;
-    if ((AppMemmory.readWorkflowId()!) !== Number(DbOps.NEW_ROW_ID)) { isNewWorkflow = false; }
+    //if ((AppMemmory.readWorkflowId()!) !== Number(DbOps.NEW_ROW_ID)) { isNewWorkflow = false; }
 
     const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
     const [workflow, setWorkflow] = useState<Workflow>(NEW_WK);
@@ -127,6 +127,11 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     };//end
 
+
+    const onSaveWorkflow = () => {
+        alert("onSaveWorkflow");
+    };//end
+
     const onSaveTaskEdition = () => {
         alert("onSaveTaskEdition");
     };//end
@@ -195,7 +200,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
-            <WorkflowEditorHeader state={barState} />
+            <WorkflowEditorHeader state={barState} onsave={onSaveWorkflow}/>
             <CardWorkflowMain workflow={workflow} />
             {renderMainCommands()}
             {renderTasks()}
@@ -206,6 +211,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
 interface CompProps {
     state?: string;
+    onsave: () => void;
 }
 function WorkflowEditorHeader({ state }: CompProps) {
 
