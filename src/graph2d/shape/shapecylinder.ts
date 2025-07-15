@@ -28,26 +28,22 @@ export class ShapeCylinder {
         this.color = color;
 
         this.rectPoints = ShapeUtil.getRectPoints(this.position, this.dim);
+
         this.ellipsesDim.width = this.dim.width;
         this.ellipsesDim.height = Math.floor(this.ellipsesDim.width / 5);
-
-        const ellipseUpCenter: Point2d ={x: position.x, y: position.y - this.dim.height / 2}
-        const ellipseDownCenter: Point2d ={x: position.x, y: position.y + this.dim.height / 2};
-
         this.ellipsesCenter[0] = {x: position.x, y: position.y - this.dim.height / 2};
         this.ellipsesCenter[1] = {x: position.x, y: position.y + this.dim.height / 2};
 
+        //y end = ± (4*radius)/3;
         this.ellipsesRefPoint[0] = {
             x: this.ellipsesCenter[0].x, 
-            y: this.ellipsesCenter[0].y - (this.ellipsesDim.height/2)
+            y: this.ellipsesCenter[0].y - (this.ellipsesDim.height*2)
         };
         
-
         this.ellipsesRefPoint[1] = {
             x: this.ellipsesCenter[1].x, 
-            y: this.ellipsesCenter[1].y + (this.ellipsesDim.height/2)
+            y: this.ellipsesCenter[1].y + (this.ellipsesDim.height*2)
         };
-
 
     };//end
 

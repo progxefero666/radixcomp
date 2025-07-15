@@ -30,26 +30,22 @@ export class DiagramCanvas {
 
     public render_a(imgbitmap:ImageBitmap) {
         
-        const position: Point2d = {x:200,y:200};
-        this.painter.drawImageBitmap(imgbitmap, position,1);
-        
+        const position: Point2d = {x:200,y:200};        
         const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:100},"blue");
         this.painter.drawShapeCylinder(cylinder);
     };
 
     public render_b() {
-
         const position: Point2d = {x:200,y:200};
+        //this.painter.drawImageBitmap(imgbitmap, position,1);
         const cylinder: ShapeCylinder = new ShapeCylinder(position,{width:70,height:100},"blue");
         this.painter.drawShapeCylinder(cylinder);
-    };
-
-
-    public render_c() {
-        const position: Point2d = {x:200,y:200};
         const color: string = "blue";
         this.painter.drawHalfEllipse(position, 50, 20,false, color);
     };
 
+    public render_c(imgbitmap:ImageBitmap) {
+        
+    };
 
 }//end class

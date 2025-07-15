@@ -7,7 +7,8 @@ import { ShapeCylinder }  from "@/graph2d/shape/shapecylinder"
 
 
 /**
- * CanvasPainter.ROTATION_NONE
+ * class CanvasPainter
+ * constructor(ctx:CanvasRenderingContext2D,dimension:Dim2d,backcolor:string) 
  */
 export class CanvasPainter {
 
@@ -213,7 +214,7 @@ export class CanvasPainter {
     
         this.ctx.bezierCurveTo(
             shape.rectPoints[2].x,shape.rectPoints[2].y, 
-            180, 10,
+            shape.ellipsesRefPoint[1].x,shape.ellipsesRefPoint[1].y,
             shape.rectPoints[3].x,shape.rectPoints[3].y);
         //this.ctx.lineTo(shape.rectPoints[3].x,shape.rectPoints[3].y);
         this.ctx.lineTo(shape.rectPoints[0].x,shape.rectPoints[0].y);
