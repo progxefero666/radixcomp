@@ -6,14 +6,7 @@ import { DB_CONSTANTS, DbOps } from "@/common/database/dbkernel";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
 import { TKeyvalue } from "@/common/types";
-
-
-
-
-export const MAN_WFS_SECTIONS = {
-    MANAGER_WORKFLOWS: new Option("manager_workflows", "Workflows", null),
-    MANAGER_TASKTYPES: new Option("manager_tasktypes", "Task Types", null)
-} as const;
+import { TInputText } from "@/radix/radixtypes";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -39,7 +32,7 @@ export class AppWorkflowsConfig {
     } as const;
 
 
-    public static readonly readonlyMAN_WFS_SECTIONS_ARRAY: Option[] = [
+    public static readonly MAN_WFS_SECTIONS_ARRAY: Option[] = [
         AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS,
         AppWorkflowsConfig.MOD_SECTIONS.MANAGER_TASKTYPES
     ];
@@ -61,6 +54,11 @@ export class AppWorkflowsConfig {
  */
 export class AppWorkflows {
 
+    public static readonly NEW_TASKTYPE_FIELDS:InputField[] = [
+        new InputField("text","name", "input name", null, "Name"),
+        new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion")
+    ]
+
     public static readonly NEW_WK: Workflow = new Workflow(
         Number(DbOps.NEW_ROW_ID),
         DB_CONSTANTS.NOT_DEF, 
@@ -74,7 +72,17 @@ export class AppWorkflows {
     public static readonly TASKCATEGORY_DEF: Taskcategory 
         = new Taskcategory(0, 0, "default", "taskgroup default");
 
- 
+    public static DLG_WORKFLOW_NAME_INPUT: TInputText = {
+        id:"workflow_name",
+        placeholder:"Workflow Name",
+        label:"Name",value:null,length:{min:3,max:50}
+    };
+
+    public static DLG_TASK_NAME_INPUT: TInputText = {
+        id:"taskname_name",
+        placeholder:"task name",
+        label:"Name",value:null,length:{min:3,max:50}
+    };
 
 }//end class
 

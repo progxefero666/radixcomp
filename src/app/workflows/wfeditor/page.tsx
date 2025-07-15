@@ -11,7 +11,7 @@ import { WorkflowEditor } from "@/app/workflows/wfeditor/pagecomp/editor";
 import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
 import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
 
-import { WK_EDITOR_VIEWS } from "@/front/appworkflows";
+import { AppWorkflowsConfig } from "@/front/appworkflows";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 import WorkflowPrimaryBar from "./pagecomp/primarybar";
@@ -29,7 +29,7 @@ const layoutStyle = {
  */
 export default function WorkflowEditorPage() {
 
-    const [view,setView] = useState<string>(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
+    const [view,setView] = useState<string>(AppWorkflowsConfig.WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
 
     const [tasktypes,setTasktypes] = useState<Tasktype[]>([]);
     const [workflow,setWorkflow] = useState<Workflow|null>(null);

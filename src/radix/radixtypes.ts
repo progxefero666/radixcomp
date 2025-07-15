@@ -49,9 +49,9 @@ export type TRange = {
 }
 export type TInputText ={
     id: string;
-    length: TRange;
+    length?: TRange;
     placeholder?: string;
-    value?:string;
+    value?:string|null;
     label?: string;    
     //onsubmit: (value:string,id?:string) => void;
 }

@@ -10,6 +10,7 @@ import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 import { InputField } from "@/common/model/inputfield";
 import { OPERATIONS } from "@/common/constants";
 import { RadixOpsText } from "../radixconstants";
+import { TInputText } from "../radixtypes";
 
 
 /**
@@ -19,26 +20,13 @@ interface CompProps {
     buttontext: string;
     title: string;
     item: InputField;
-    onsave: (values: InputField) => void;
+    onsave: (values: TInputText) => void;
 }
 export const FieldTextDialog = ({ buttontext, title, item, onsave }: CompProps) => {
 
-    //const onCancel = () => { if (oncancel) { oncancel(); } }
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);
-        item.value = formData.get(item.id)?.toString();
-        onsave(item);
-    };//end
-
-    const renderInput = (input: InputField) => {
-        return (
-            <fieldset>
-                <Label.Root>{input.label}</Label.Root>
-                <TextField.Root name={input.id}
-                    placeholder={input.placeholder}
-                    radius="small" />
-            </fieldset>
-        )
+        onsave({id:item.id, value:formData.get(item.id)?.toString()});
     };//end
 
     return (
@@ -54,7 +42,6 @@ export const FieldTextDialog = ({ buttontext, title, item, onsave }: CompProps) 
                 </Button>
             </Dialog.Trigger>
 
-            {/*<Dialog.Description>description</Dialog.Description>*/}
             <Dialog.Content>
 
                 <Dialog.Title>
@@ -99,10 +86,6 @@ export const FieldTextDialog = ({ buttontext, title, item, onsave }: CompProps) 
 
 /*
 //oncancel?: () => void;
-<Dialog.Description className="DialogDescription">
-    Make changes
-</Dialog.Description>
-
 with defaultValue
 .......................................................
 <TextField.Root name="item_0" id="item_0"

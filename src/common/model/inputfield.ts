@@ -10,12 +10,12 @@ export class InputField {
     public id: string;
     public itype: TypeInput;
     public placeholder: string;
-    public value: any;
+    public value: any|null;
     public label: string | null = null;
     public length: TRange | null = null;
 
     constructor(itype: TypeInput, id: string,
-        placeholder: string, value: string,
+        placeholder: string, value: any|null,
         label: string | null, length?: TRange) {
 
         this.itype = itype;
