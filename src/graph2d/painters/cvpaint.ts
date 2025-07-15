@@ -7,10 +7,10 @@ import { ShapeCylinder } from "@/graph2d/shapes/shapecylinder"
 
 
 /**
- * class CanvasPainter
- * constructor(ctx:CanvasRenderingContext2D,dimension:Dim2d,backcolor:string) 
+ * Canvas Painter
+ * class CvPainter
  */
-export class CanvasPainter {
+export class CvPainter {
 
     public static readonly POINT_RADIUS: number = 2;
     public static readonly ROTATION_NONE: number = 0;
@@ -45,7 +45,7 @@ export class CanvasPainter {
 
     public fillPoint(point: Point2d, color: string) {
         this.ctx.beginPath();
-        this.ctx.arc(point.x, point.y, CanvasPainter.POINT_RADIUS, 0, Math.PI * 2);
+        this.ctx.arc(point.x, point.y, CvPainter.POINT_RADIUS, 0, Math.PI * 2);
         this.ctx.strokeStyle = color;
         this.ctx.stroke();
     }//end
@@ -190,7 +190,7 @@ export class CanvasPainter {
         startAngle: number, endAngle: number,
         color: string) {
         this.ctx.beginPath();
-        this.ctx.ellipse(position.x, position.y, width, height, CanvasPainter.ROTATION_NONE, startAngle, Math.PI * 2);
+        this.ctx.ellipse(position.x, position.y, width, height, CvPainter.ROTATION_NONE, startAngle, Math.PI * 2);
         this.ctx.strokeStyle = color;
         this.ctx.stroke();
     };//end

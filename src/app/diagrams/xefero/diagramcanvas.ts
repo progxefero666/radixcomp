@@ -1,21 +1,21 @@
 //src\app\diagrams\xefero\diagramcanvas.ts
 
-import { CanvasPainter } from "@/graph2d/cvpaint";
-import { CanvasShapesPainter } from "@/graph2d/cvpaintshapes";
+import { CvPainter } from "@/graph2d/painters/cvpaint";
+import { CvPaintShapes } from "@/graph2d/painters/cvpaintshapes";
 import { ShapeCylinder } from "@/graph2d/shapes/shapecylinder";
 import { Dim2d, Point2d } from "@/graph2d/types2d";
 
 /**
  * DiagramCanvas class
  */
-export class DiagramCanvas {
+export class CvPainterDiagrams {
 
     public ctx: CanvasRenderingContext2D;
     public dim: Dim2d;
     public backcolor: string;
     public center: Point2d = { x: 0, y: 0 };
-    public painter:CanvasPainter;
-    public paintershapes:CanvasShapesPainter;
+    public painter:CvPainter;
+    public paintershapes:CvPaintShapes;
 
     constructor(ctx: CanvasRenderingContext2D, dimension: Dim2d, backcolor: string) {
         this.ctx = ctx;
@@ -23,8 +23,8 @@ export class DiagramCanvas {
         this.backcolor = backcolor;
         this.center.x = Math.floor(this.dim.width / 2);
         this.center.y = Math.floor(this.dim.height / 2);
-        this.painter = new CanvasPainter(ctx, dimension, backcolor);
-        this.paintershapes = new CanvasShapesPainter(ctx);
+        this.painter = new CvPainter(ctx, dimension, backcolor);
+        this.paintershapes = new CvPaintShapes(ctx);
     };//end
     
     public clear() {

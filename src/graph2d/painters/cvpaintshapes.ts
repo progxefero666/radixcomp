@@ -7,10 +7,10 @@ import { ShapeCylinder } from "@/graph2d/shapes/shapecylinder"
 
 
 /**
- * class CanvasPainter
+ * class Canvas Painter Shapes
  * constructor(ctx:CanvasRenderingContext2D,dimension:Dim2d,backcolor:string) 
  */
-export class CanvasShapesPainter {
+export class CvPaintShapes {
 
     public ctx: CanvasRenderingContext2D;
 
