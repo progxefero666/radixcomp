@@ -25,11 +25,14 @@ export class ImageLoader {
         });
     }
 
-    public static async getImageBitmapFromUrl(url: string): Promise<HTMLImageElement> {
+    public static async getImageBitmapFromUrl(url: string): Promise<ImageBitmap> {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.src = url;
-            img.onload = () => resolve(img);
+            img.onload = async () => {
+                const imageBitmap = await createImageBitmap(img);
+                resolve(imageBitmap);
+            }    
             img.onerror = (err) => reject(err);
         });
     }
@@ -63,6 +66,7 @@ export class ImageLoader {
         return Promise.all(urls.map(url => this.loadImage(url)));
     };//end
 
+    /*
     public static async getHtmlImages(objsUrls: string[]): Promise<HTMLImageElement[]> {
         try {
             const images = await Promise.all(objsUrls.map(url => ImageLoader.getImageBitmapFromUrl(url)));
@@ -72,7 +76,7 @@ export class ImageLoader {
             return [];
         }
     }
-
+    */
 
 
     static async getImageDimension(file: File): Promise<Dim2d> {
