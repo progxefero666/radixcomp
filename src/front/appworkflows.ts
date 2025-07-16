@@ -12,7 +12,7 @@ import { getCountWorkflowsById } from "@/db/services/read/srvworkflow";
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { getCountAllRows } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
-import { insertWorkflow } from "@/db/services/crud/srvcrudworkflow";
+import { deleteWorkflow, insertWorkflow } from "@/db/services/crud/srvcrudworkflow";
 import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
 import { getAllTasktypes } from "@/db/services/read/srvmantasktypes";
 import { Tasktype } from "@/db/model/tasktype";
@@ -197,7 +197,7 @@ export class AppWorkflowsReader {
 
 
 /**
- * # class AppWorkflowsCrud
+ * # class AppWorkflowsCrud.delete_workflow
  *    - CRUD operations for workflows
  */
 export class AppWorkflowsCrud {
@@ -211,8 +211,8 @@ export class AppWorkflowsCrud {
         const response = await insertTaskcategory(JSON.stringify(taskCategory));      
         if(response === null) {return null;}
         const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;
-        if(responseObj.result==DB_CONSTANTS.ERROR) {return null;}
-        return Number(responseObj.data);
+        if(responseObj.result === DB_CONSTANTS.SUCCESS) {return Number(responseObj.data);}
+        return null;
     };//end
 
     public static insert_workflow = async (name:string,description:string): Promise<number|null> => {
@@ -220,9 +220,8 @@ export class AppWorkflowsCrud {
         const response = await insertWorkflow(JSON.stringify(workflow));
         if(response === null) {return null;}
         const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;        
-        if(responseObj.result==DB_CONSTANTS.ERROR) {return null;}
-
-        return Number(responseObj.data);
+        if(responseObj.result === DB_CONSTANTS.SUCCESS) {return Number(responseObj.data);}
+        return null;
     };//end
 
     public static insert_task = async (codelangId:number,tasktype_id:number,    
@@ -234,8 +233,21 @@ export class AppWorkflowsCrud {
                         orden,name,description,groupIndex,null,null);   
         const response = await insertTask(JSON.stringify(task));   
         const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;        
-        if(responseObj.result==DB_CONSTANTS.ERROR) {return null;}                     
-        return Number(responseObj.data); 
+        if(responseObj.result === DB_CONSTANTS.SUCCESS) {return Number(responseObj.data);}                     
+        return null; 
+    };//end
+
+    //const response = await getCountWorkflowsById(name);
+    //if (response === null) { return false; }
+    //const jsonParsed:JsonResponse = JSON.parse(response) as JsonResponse;
+    //const count = Number(jsonParsed.data);
+    //if(count <= 0) {return false;}    
+    public static delete_workflow = async (id:number): Promise<boolean> => {
+        const response = await deleteWorkflow(id);   
+        if(response === null) {return false;}
+        const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;
+        if(responseObj.result === DB_CONSTANTS.SUCCESS) {return true;}
+        return false;
     };//end
 
 };//end class

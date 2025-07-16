@@ -14,7 +14,7 @@ import { getAllRows } from "@/db/services/generic/serviceread";
 import {CardWorkflowMin} from "../cards/cardwfmin";
 
 import { AppMemmory } from "@/front/appmemory";
-import { AppWorkflows, AppWorkflowsConfig, AppWorkflowsCreator, AppWorkflowsReader } from "@/front/appworkflows";
+import { AppWorkflows, AppWorkflowsConfig, AppWorkflowsCreator, AppWorkflowsCrud, AppWorkflowsReader } from "@/front/appworkflows";
 import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
 import { DialogFieldText } from "@/radix/form/dlgfieldtext";
 import { TInputText } from "@/radix/radixtypes";
@@ -42,7 +42,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
 
     const [codelangs, setCodelangs] = useState<Codelang[]>([]);
     const [tasktypes, setTasktypes] = useState<Tasktype[]>([]);    
-    const [workflows, setWorkflows] = useState<Workflow[] | null>(null);
+    const [workflows, setWorkflows] = useState<Workflow[]>([]);
 
 
     const barButtonsCfg = BARCFG_ADD_IMPORT;
@@ -76,39 +76,46 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     };//end
 
     const execNew = async (inputName: TKeyvalue) => {
-        alert(inputName.value);
         const existName:boolean = await AppWorkflowsReader.existWorkflow(inputName.value!);
-        if(existName){
-            return alert("Workflow name in use.");
-        }
-        alert("Creating new workflow: " + inputName.value);
+        if(existName){return alert("Workflow name in use.");}
         const workflowId:number|null = await AppWorkflowsCreator
             .createCompleteWorkflow(inputName.value!,codelangs,tasktypes);
-        alert("Workflow created id: " + workflowId);
+        if(workflowId!== null) {
+            AppMemmory.saveWorkflowId(workflowId);
+            router.push("/workflows/wfeditor");
+        }   
     };//end
 
-
-    const execWfItemCardOperation = (itemIndex: number, action: string) => {
-        if (action == DB_ITEM_CMD.SELECT) {
-            showwfpreview(workflows![itemIndex]);
+    const execDelete = async (workflowIndex: number) => {
+        const result:boolean = await AppWorkflowsCrud.delete_workflow(workflows![workflowIndex].id!);
+        if(!result) {
+            alert("Error deleting workflow.");
             return;
         }
-        else if (action == DB_ITEM_CMD.DELETE) {
+        alert("Workflow deleted successfully.");
+        const act_workflows:Workflow[] = workflows;
+        act_workflows.splice(workflowIndex,1);
+        setWorkflows(act_workflows);        
+    };//end
 
-            return;
-        }
+    const execItemOperation = (index:number,action:string) => {
+        if (action == DB_ITEM_CMD.DELETE) {
+            execDelete(index);
+        }       
         else if (action == DB_ITEM_CMD.OPEN) {
-            AppMemmory.saveWorkflowId(workflows![itemIndex].id!);
+            AppMemmory.saveWorkflowId(workflows![index].id!);
             router.push("/workflows/wfeditor");
+            return;
+        }         
+        else if (action == DB_ITEM_CMD.SELECT) {
+            showwfpreview(workflows![index]);
             return;
         }
     };//end
 
     const renderManWorkflows = () => {
         if (workflows == null || workflows.length == 0) {
-            return (
-                <Text size="2" color="gray">not defined</Text>
-            );
+            return (<Text size="2" color="gray">not defined</Text>);
         }
         return (
             <>
@@ -117,7 +124,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
                         <CardWorkflowMin
                             index={index}
                             workflow={workflow}
-                            callback={execWfItemCardOperation} />
+                            callback={execItemOperation} />
                     </Box>
                 ))}
             </>
@@ -126,12 +133,8 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
 
     //AppMemmory.saveWorkflowId(workflows![itemIndex].id);
     const renderTasktypes = () => {
-
-        if (workflows == null || workflows.length == 0) {
-            return (
-                <Text size="2" color="gray">not defined</Text>
-            );
-        }
+        if (workflows == null || workflows.length == 0) 
+            {return (<Text size="2" color="gray">not defined</Text>);}
         return (
             <>
                 {workflows!.map((workflow, index) => (
@@ -139,7 +142,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
                         <CardWorkflowMin
                             index={index}
                             workflow={workflow}
-                            callback={execWfItemCardOperation} />
+                            callback={execItemOperation} />
                     </Box>
                 ))}
             </>
