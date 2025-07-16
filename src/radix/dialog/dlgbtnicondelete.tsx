@@ -11,23 +11,14 @@ import { RadixOpsText } from "../radixconstants";
  * DialogForm component
  */
 interface CompProps {
-    icon: string;
     title: string;
     message: string;
     onconfirm: () => void;
 }
-export const DialogIconConfirm = ({ icon, title, message, onconfirm }: CompProps) => {
+export const DialogBtnIconDeleteConfirm = ({title,message,onconfirm }: CompProps) => {
 
-    /*
-    const renderIcon = () => {
-        if (icon === RadixConf.ICON_DELETE) {
-            return (
-                <TrashIcon  width={ThemeIconsStyle.DEF_WIDTH}
-                            height={ThemeIconsStyle.DEF_HEIGHT}/>
-            )
-        }
-    }
-    */
+    //const renderIcon = () => {}
+
     return (
         <Dialog.Root >
 
