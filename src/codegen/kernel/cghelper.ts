@@ -7,7 +7,8 @@ import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CodeGenConfig } from "../cgconfig";
 
 /**
- * CodeGenHelper.getModelsTableOptions
+ * CodeGenHelper.uncapitalize
+ * CodeGenHelper.capitalize
  * class CodeGenHelper.getSelectModelTables(modelTables:ModelTable[],names:string[])
  */
 export class CodeGenHelper {

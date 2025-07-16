@@ -2,9 +2,19 @@
 
 import { FsConstants } from "./fsconfig";
 
+/**
+ * class FsFunctions:
+ * 
+ *      CodeGenHelper.uncapitalize
+ *      CodeGenHelper.capitalize
+ */
 export class FsFunctions {
 
+    
     /*
+    CodeGenHelper.uncapitalize
+ * CodeGenHelper.capitalize
+
            let content: string = includeImports ? TEMP_APICLIIMPORTS : "";
             content += TEMP_APICLISERVICE;
             content = content.replace(/_Table_/g, className);

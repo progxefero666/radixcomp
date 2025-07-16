@@ -6,6 +6,7 @@ import JSZip from 'jszip';
  * class FsConstants.PATH_PARENT
  */
 export class FsConstants {
+    public static readonly DEF_ENCODE_TEXT="utf-8";
 
     public static readonly TYPE_FOLDER: string = "folder";
     public static readonly TYPE_FILE: string = "file";
