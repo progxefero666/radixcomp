@@ -6,7 +6,8 @@ import { DB_ITEM_CMD} from "@/common/database/dbkernel";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
-import { OPERATIONS } from "@/common/constants";
+import { OpConstants } from "@/common/constants";
+
 
 
 interface CompProps {
@@ -22,7 +23,7 @@ export function WorkflowEditorHeader({ onsave }: CompProps) {
         if (operation == DB_ITEM_CMD.UPDATE) {
 
         }
-        else if (operation == OPERATIONS.CLOSE) {
+        else if (operation == OpConstants.OP_CLOSE) {
 
         }
     };

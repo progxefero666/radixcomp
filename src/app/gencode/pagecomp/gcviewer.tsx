@@ -22,7 +22,7 @@ export function GenCodeViewer({ format, code,exportdata }: CompProps) {
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
 
     useEffect(() => {
-         console.log(code);
+         //console.log(code);
     }, []);
 
 

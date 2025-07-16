@@ -5,13 +5,12 @@ import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { DB_ITEM_CMD_TEXT, DB_ITEM_CMD } from "@/common/database/dbkernel";
 import { ThemeButtonsStyle } from "./radixtheme";
 import { RadixConf } from "./radixconf";
-import { OPERATIONS, OPERATIONS_TEXT } from "@/common/constants";
-
+import { OpConstants } from "@/common/constants";
 
 //const MODE_EDITION:string = "edit";
 export const BARCFG_SAVE_CLOSE: BarButtonsCfg = new BarButtonsCfg(
-    [DB_ITEM_CMD.UPDATE,OPERATIONS.CLOSE],
-    [DB_ITEM_CMD_TEXT.UPDATE,OPERATIONS_TEXT.CLOSE],
+    [DB_ITEM_CMD.UPDATE,OpConstants.OP_CLOSE],
+    [DB_ITEM_CMD_TEXT.UPDATE,OpConstants.OP_TEXT_CLOSE],
     [ThemeButtonsStyle.COLOR_SAVE,ThemeButtonsStyle.COLOR_CLOSE],
     [RadixConf.ICON_SAVE,RadixConf.ICON_OPEN],
     [false,false],

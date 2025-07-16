@@ -68,16 +68,14 @@ export default function PageGenCode() {
         if(!dataCode){return;}
 
        
-        const file:File = CodeGeneration.generateFile(dataId,dataFormat,dataCode);
+        const file: File = CodeGeneration.generateFile(dataId, dataFormat, dataCode);
+        const url: string = URL.createObjectURL(file);
         
-         /*
-        const url = URL.createObjectURL(file);
-        const a = document.createElement("a");
+        const a: HTMLAnchorElement = document.createElement("a");
         a.href = url;
         a.download = file.name;
         a.click();
         URL.revokeObjectURL(url);
-        */
     };
 
     return (

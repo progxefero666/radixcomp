@@ -5,7 +5,7 @@ import { Button, Box, Flex, IconButton, Text, Dialog, TextField } from "@radix-u
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
-import { OPERATIONS } from '@/common/constants';
+import { OpConstants } from "@/common/constants";
 
 export const BarSubmit = () => {
 
@@ -14,13 +14,13 @@ export const BarSubmit = () => {
             <Button type="submit"
                 color={ThemeButtonsStyle.COLOR_SAVE}
                 size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                {OPERATIONS.SAVE}
+                {OpConstants.OP_TEXT_SAVE}
                 <CheckIcon width={ThemeIconsStyle.DEF_HEIGHT}
                     height={ThemeIconsStyle.DEF_WIDTH} />
             </Button>
             <Button color={ThemeButtonsStyle.COLOR_CLOSE}
                 size={ThemeButtonsStyle.BTN_DEF_SIZE} >
-                {OPERATIONS.CANCEL}
+                {OpConstants.OP_TEXT_CANCEL}
                 <Cross2Icon width={ThemeIconsStyle.DEF_HEIGHT}
                     height={ThemeIconsStyle.DEF_WIDTH} />
             </Button>
