@@ -6,9 +6,10 @@ import CardCode from "@/app/gencode/cards/cardcode";
 import { BARCFG_EXPORT_COPY } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
+import { OpConstants } from "@/common/constants";
 
-import { GenCodeModuleConfig } from "../config";
-import { CodeGenConfig } from "@/codegen/cgconfig";
+//import { GenCodeModuleConfig } from "../config";
+
 
 //
 
@@ -28,12 +29,12 @@ export function GenCodeViewer({ format, code,exportdata }: CompProps) {
 
     const onClick = (opId?: string) => {
 
-        if (opId==GenCodeModuleConfig.ACT_COPY) {
+        if (opId==OpConstants.OP_COPY) {
             navigator.clipboard.writeText(code!);
             alert("Code copied to clipboard");
             return; 
         }
-        else if (opId==GenCodeModuleConfig.ACT_EXPORT) {
+        else if (opId==OpConstants.OP_EXPORT) {
             exportdata();
         }                   
     };//end

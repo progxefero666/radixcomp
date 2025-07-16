@@ -3,6 +3,19 @@
 import { Option } from "@/common/model/option";
 import { Keyvalue } from "@/common/model/keyvalue";
 
+
+/**
+ * class CodeGenModules
+ */
+export class CodeGenModules {
+
+    public static readonly MODULES: Option[] = [
+        new Option("entity_files", "Entities files",null),
+        new Option("typescript_code", "Typescript Code",null)
+    ]
+
+}//end class
+
 /**
  * class CodeGenOperations.OPS_ENTITIES
  */
@@ -19,15 +32,4 @@ export class CodeGenOperations {
 
 }//end class
 
-/**
- * class CodeGenModules
- */
-export class CodeGenModules {
-
-    public static readonly MODULES: Option[] = [
-        new Option("entity_files", "Entities files",null),
-        new Option("service_files", "Service files",null)
-    ]
-
-}//end class
 

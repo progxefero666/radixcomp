@@ -6,7 +6,7 @@ import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes
 
 
 import MenuButtons from "@/radix/cbars/btmenu";
-import { GenCodeModuleConfig } from "@/app/gencode/config";
+
 import { CodeGenModules } from "@/codegen/cgoperations";
 
 
