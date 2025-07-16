@@ -14,8 +14,10 @@ import { getAllByTable } from "@/db/services/generic/serviceread";
 import {CardWorkflowMin} from "../cards/cardwfmin";
 
 import { AppMemmory } from "@/front/appmemory";
-import { AppWorkflowsConfig } from "@/front/appworkflows";
+import { AppWorkflows, AppWorkflowsConfig } from "@/front/appworkflows";
 import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
+import { DialogFieldText } from "@/radix/form/dlgfieldtext";
+import { TInputText } from "@/radix/radixtypes";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -60,25 +62,12 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     const execImport = () => {
     };//end
 
+    const execNew = (inputText: TInputText) => {
+        alert(inputText.value);
+    };//end
 
-    const onBarButtonClick = (command: string) => {
-        
-        if (command == DB_ITEM_CMD.INSERT) {
-            //alert("insert");
-            //DialogFieldText
-            AppMemmory.saveWorkflowId(Number(DbOps.NEW_ROW_ID));
-            router.push("/workflows/wfeditor");
-            return;
-        }
-        else if (command == DB_ITEM_CMD.IMPORT) {
-            //alert("import");
-            return;
-        }
-
-    }//end
 
     const execWfItemCardOperation = (itemIndex: number, action: string) => {
-
         if (action == DB_ITEM_CMD.SELECT) {
             showwfpreview(workflows![itemIndex]);
             return;
@@ -92,9 +81,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             router.push("/workflows/wfeditor");
             return;
         }
-
-    }
-
+    };//end
 
     const renderManWorkflows = () => {
         if (workflows == null || workflows.length == 0) {
@@ -102,7 +89,6 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
                 <Text size="2" color="gray">not defined</Text>
             );
         }
-
         return (
             <>
                 {workflows.map((workflow, index) => (
@@ -115,7 +101,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
                 ))}
             </>
         )
-    }
+    };//end
 
     //AppMemmory.saveWorkflowId(workflows![itemIndex].id);
     const renderTasktypes = () => {
@@ -137,7 +123,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
                 ))}
             </>
         )
-    }
+    };//end
 
     return (
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
@@ -152,11 +138,15 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
                     </TextField.Slot>
                 </TextField.Root>
                 <Flex direction="row" align="center" gapX="2" >
-
+                    
+                    <DialogFieldText buttontext="New" title="New workflow" 
+                                     item={AppWorkflows.DLG_WK_NAME_INPUT} onsave={execNew}/>
+                    
                     <Button variant="solid" color={ThemeButtonsStyle.COLOR_IMPORT}
                         size={ThemeButtonsStyle.BTN_DEF_SIZE} onClick={() => execImport()}  >
                         {DB_ITEM_CMD_TEXT.IMPORT}
                     </Button>
+
                 </Flex>
             </Flex>
 

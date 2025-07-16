@@ -73,12 +73,12 @@ export class AppWorkflows {
     public static readonly TASKCATEGORY_DEF: Taskcategory 
         = new Taskcategory(0, 0, "default", "taskgroup default");
 
-    public static DLG_WORKFLOW_NAME_INPUT: TInputText = {
-        id:"workflow_name",
-        placeholder:"Workflow Name",
-        label:"Name",value:null,length:{min:3,max:50}
-    };
-
+      
+    public static DLG_WK_NAME_INPUT: InputField 
+        = new InputField("text", "workflow_name",
+                        "workflow name", null, "Workflow Name", {min: 3, max: 50});
+    
+    
     public static DLG_TASK_NAME_INPUT: TInputText = {
         id:"taskname_name",
         placeholder:"task name",
