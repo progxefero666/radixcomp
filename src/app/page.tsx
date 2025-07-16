@@ -14,6 +14,7 @@ import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 import { CodeGeneration } from "@/codegen/cgconfig";
+import { FsFunctions } from "@/filesystem/fsfunctions";
 
 
 //const router = useRouter();
@@ -31,53 +32,54 @@ const boxStyle = {
 export default function PageGenCode() {
 
     let initialized: boolean = false;
-    const appRef = useRef<AppIndex>(null);
+
     
     const [section, setSection] = useState<string|null>(null);
+    
+    const [fileId,    setFileId]     = useState<string>("default");
+    const [fileFormat,setFileFormat] = useState<string>("typescript");
+    const [fileCode,  setFileCode]   = useState<string|null>(null);
 
-    const [dataCode,   setDataCode] = useState<string|null>(null);
-    const [dataId,     setDataId] = useState<string>("default");
-    const [dataFormat, setDataFormat] = useState<string>("typescript");
-
+    const [listFilesId,    setListFilesId]     = useState<string[]|null>(null);
+    const [listFilesFormat,setListFilesFormat] = useState<string[]|null>(null);
+    const [listFilesCode,  setListFilesCode]   = useState<string[]|null>(null);
     
     useEffect(() => {
-        //AppContext.saveCodelangs(appRef.current.codelangs);
         if(initialized) {return;} 
         
         const init = async () => {            
             const dbSquema = await readDbSqlScriptFile("dbsquema");
-            if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                        
-            appRef.current = new AppIndex();
-            const res: boolean = await appRef.current.loadInitCollections();
-            if(!res) {return;}            
+            if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                              
             initialized =true;
         };
         init();
     }, []);
 
-    const onCodeResult= (dataFormat:string,datacode:string,fileid?:string) => {
-
-        setDataFormat(dataFormat);
-        setDataCode(datacode);
-        setDataId(fileid ?? "default");
-    }
-    
     const loadSection = (sectionId: string) => {setSection(sectionId);}
 
-    const exportFile = () => {
-        if(!dataCode){return;}
 
-       
-        const file: File = CodeGeneration.generateFile(dataId, dataFormat, dataCode);
-        const url: string = URL.createObjectURL(file);
-        
-        const a: HTMLAnchorElement = document.createElement("a");
-        a.href = url;
-        a.download = file.name;
-        a.click();
-        URL.revokeObjectURL(url);
+    // for single files
+    //...............................................................................
+    const chargeFileCode= (dataFormat:string,datacode:string,fileid?:string) => {
+        setFileFormat(dataFormat);
+        setFileCode(datacode);
+        setFileId(fileid ?? "default");
+    };
+    
+    const exportFileCode = () => {
+        if(!fileCode){return;}
+        const file: File = CodeGeneration.generateFile(fileId, fileFormat, fileCode);
+        FsFunctions.chargeDownloadFile(file);
     };
 
+    // for multiple files
+    //...............................................................................    
+    const exportFolder = () => {
+    
+    };//end
+
+    // jsx
+    //...............................................................................    
     return (
         <Flex direction="column" height="100vh">
 
@@ -92,11 +94,11 @@ export default function PageGenCode() {
 
                 <Box  width="41%" style={boxStyle}> 
                     <GenCodeControl key={section}  section={section}  
-                                    ondataresult={onCodeResult}/>
+                                    ondataresult={chargeFileCode}/>
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
-                    {dataCode!==null ? <GenCodeViewer key={dataCode} code={dataCode} exportdata={exportFile} />:null}
+                    {fileCode!==null ? <GenCodeViewer key={fileCode} code={fileCode} exportdata={exportFileCode} />:null}
                     
                 </Box>
 
