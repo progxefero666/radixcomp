@@ -4,7 +4,7 @@
 import { PrismaClient }  from "@generated/prisma";
 
 import { JsonResponse }  from "@/common/model/jsonreponse";
-import { DpOperationUtil } from "@/common/database/dbkernel";
+import { DpOpsUtil } from "@/common/database/dbkernel";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
@@ -19,16 +19,16 @@ export async function get(id:number): Promise<string> {
         result = await prisma.apptype.findFirst({where:{id:id}});
         if (result === null) {
             return JsonResponse.ERROR
-                (DpOperationUtil.getErrNotFoundMessage("GET_BY_ID",DB_TABLES.apptype));
+                (DpOpsUtil.getErrNotFoundMessage("GET_BY_ID",DB_TABLES.apptype));
         }
     }
     catch (error) {        
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.apptype, "GET_BY_ID"), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.apptype, "GET_BY_ID"), result);
 
 } //end function
 
@@ -44,12 +44,12 @@ export async function getAll(): Promise<string> {
         result = await prisma.apptype.findMany();        
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.apptype,"GET_ALL"), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.apptype,"GET_ALL"), result);
 
 } //end function
 

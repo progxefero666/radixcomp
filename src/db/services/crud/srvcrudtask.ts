@@ -1,9 +1,9 @@
 //src\db\services\crud\srvcrudtask.ts
 
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { PrismaClient } from "@generated/prisma";
-import { DB_ERROR, DbOps, DpOperationUtil } from "@/common/database/dbkernel";
-import { Task } from "@/db/model/task";
+import { PrismaClient, Task } from "@generated/prisma";
+import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
+
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
@@ -11,27 +11,28 @@ import { DbTables } from "@/db/dbcatalog";
 /**
  * __table__ insert
  */
-export async function insert(item_serial:string): Promise<string> {
+export async function insertTask(item_serial:string): Promise<string> {
     
     const item: Task|null = parseItem<Task>(item_serial);
     if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
 
     const prisma = new PrismaClient();
-    let result: object|null = null;
+    let task: Task|null = null;
     try {
-        result = await prisma.task.create({data:item as any});
-        if (result === null) {
+        task = await prisma.task.create({data:item as any});
+        if (task === null) {
             return JsonResponse.ERROR
-                (DpOperationUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.task));
+                (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.task));
         }
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.task,DbOps.INSERT), null);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DbTables.task,DbOps.INSERT),
+                                task.id.toString());
 }//end
 
 /**
@@ -44,15 +45,15 @@ export async function update(item:Task): Promise<string> {
         result = await prisma.task.update({where:{id:item.id!},data:item!});        
         if (result === null) {
             return JsonResponse.ERROR
-                (DpOperationUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.task));
+                (DpOpsUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.task));
         }        
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DbOps.UPDATE), null);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("task", DbOps.UPDATE), null);
 }//end
 
 /**
@@ -64,15 +65,15 @@ export async function delette(id: number): Promise<string> {
     try {
         result = await prisma.task.delete({where:{id:id}});
         if (result === null) {
-            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.task));
+            return JsonResponse.ERROR(DpOpsUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.task));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DbOps.DELETE),null);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("task", DbOps.DELETE),null);
 }//end
 
 /**
@@ -84,14 +85,14 @@ export async function deleteAll(): Promise<string> {
     try {
         result = await prisma.task.deleteMany({});
         if (result === null) {
-            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.task));
+            return JsonResponse.ERROR(DpOpsUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.task));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DbOps.DELETE_ALL),null);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("task", DbOps.DELETE_ALL),null);
 }//end
 

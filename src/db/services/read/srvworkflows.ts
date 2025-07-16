@@ -3,7 +3,7 @@
 
 import { JsonResponse }  from "@/common/model/jsonreponse";
 import { PrismaClient }  from "@generated/prisma";
-import { DB_COLL_CMD, DpOperationUtil } from "@/common/database/dbkernel";
+import { DB_COLL_CMD, DpOpsUtil } from "@/common/database/dbkernel";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
@@ -18,13 +18,13 @@ export async function getAll(): Promise<string> {
         result = await prisma.workflow.findMany();
     }
     catch (error) {
-        DpOperationUtil.consoleErr(error, DpOperationUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_ALL));
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_ALL));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_ALL), result);
 } //end function
 
 

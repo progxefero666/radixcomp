@@ -5,7 +5,7 @@ import { Option } from "@/common/model/option";
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
 
-import { DB_COLL_CMD, DpOperationUtil } from "@/common/database/dbkernel";
+import { DB_COLL_CMD, DpOpsUtil } from "@/common/database/dbkernel";
 import {  DB_TABLES, DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 
@@ -33,13 +33,13 @@ export async function getCountByTable(table: string,rowName:string): Promise<str
         }                       
     }
     catch (error) {
-        console.error(DpOperationUtil.getErrMessage(error));
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        console.error(DpOpsUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.COUNT_ROWS),count.toString());
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.COUNT_ROWS),count.toString());
 
 };//end 
 
@@ -83,13 +83,13 @@ export async function getAllByTable(table: string): Promise<string> {
         }
     }
     catch (error) {
-        DpOperationUtil.consoleErr(error, DpOperationUtil.getOpName(table, DB_COLL_CMD.GET_ALL));
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName(table, DB_COLL_CMD.GET_ALL));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(table, DB_COLL_CMD.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(table, DB_COLL_CMD.GET_ALL), result);
 
 }//end server action
 
@@ -101,10 +101,10 @@ export async function executeReadQuery(commandSql: string, params: any[] = []): 
         result = await prisma.$queryRaw(Prisma.sql`${commandSql}`, ...params);
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DB_COLL_CMD.GET_ALL), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("task", DB_COLL_CMD.GET_ALL), result);
 }//end function

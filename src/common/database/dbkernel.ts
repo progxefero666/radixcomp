@@ -77,7 +77,7 @@ export class DbOps{
     public static COUNT_ROWS = "count_rows";
     public static DELETE = "delete";
 }
-export class DpOperationUtil {
+export class DpOpsUtil {
 
     public static getOpName(table:string,command:string): string {
         return table.concat("_", command);
@@ -91,7 +91,7 @@ export class DpOperationUtil {
     }    
 
     public static getErrMessage(error: unknown): string {        
-        return String(DpOperationUtil.getUnknowErrMessage(error));
+        return String(DpOpsUtil.getUnknowErrMessage(error));
     }    
     
     public static getOpErrMessage(table:string,command:string): string {

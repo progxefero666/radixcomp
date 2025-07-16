@@ -3,7 +3,7 @@
 
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
-import {  DpOperationUtil } from "@/common/database/dbkernel";
+import {  DpOpsUtil } from "@/common/database/dbkernel";
 import { DB_TABLES } from "@/db/dbcatalog";
 
 
@@ -14,18 +14,18 @@ export async function get(id: number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {result = await prisma.task.findFirst({where:{id:id}});}
-    catch (error) {return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));}
+    catch (error) {return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));}
     finally {await prisma.$disconnect();}
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task,"GET_BY_ID"), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.task,"GET_BY_ID"), result);
 } //end function
 
 export async function getAll(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {result = await prisma.task.findMany();}
-    catch (error) {return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));}
+    catch (error) {return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));}
     finally {await prisma.$disconnect();}
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task,"GET_ALL"), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.task,"GET_ALL"), result);
 } //end function
 
 export async function getByParent(commandSql:string,workflow_id:number,taskgroup_id:number): Promise<string> {
@@ -35,9 +35,9 @@ export async function getByParent(commandSql:string,workflow_id:number,taskgroup
         result = await prisma.$queryRawUnsafe(
             commandSql);
     }
-    catch (error) {return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));}
+    catch (error) {return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));}
     finally {await prisma.$disconnect();}
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, "GET_ALL"), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.task, "GET_ALL"), result);
 } //end function
 
 

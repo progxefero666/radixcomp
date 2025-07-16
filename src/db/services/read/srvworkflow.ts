@@ -3,7 +3,7 @@
 
 import { JsonResponse }  from "@/common/model/jsonreponse";
 import { PrismaClient }  from "@generated/prisma";
-import { DB_COLL_CMD, DpOperationUtil } from "@/common/database/dbkernel";
+import { DB_COLL_CMD, DpOpsUtil } from "@/common/database/dbkernel";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
@@ -17,13 +17,13 @@ export async function getCountWorkflowsById(name:string): Promise<string> {
         });
     }
     catch (error) {
-        console.error(DpOperationUtil.getErrMessage(error));
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        console.error(DpOpsUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_BY_ID),count.toString());
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_BY_ID),count.toString());
 
 };//end 
 
@@ -44,12 +44,12 @@ export async function getWorkflow(id:number): Promise<string> {
     }
     catch (error) {
         //OpUtil.consoleErr(error, OpUtil.getOpName(DB_TABLES.workflow, DbOps.GET_BY_ID));
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_BY_ID), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_BY_ID), result);
 
 } //end function
 
@@ -65,13 +65,13 @@ export async function get(id:number): Promise<string> {
         );
     }
     catch (error) {
-        DpOperationUtil.consoleErr(error, DpOperationUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_ID));
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_ID));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_ID), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_ID), result);
 
 } //end function
 
@@ -92,13 +92,13 @@ export async function getTaskcategories(workflow_id:number,includeTasks?:boolean
         });
     }
     catch (error) {
-        DpOperationUtil.consoleErr(error, DpOperationUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_FK));
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_FK));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_FK), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_FK), result);
 
 } //end function
 
@@ -113,12 +113,12 @@ export async function getTasks(workflow_id:number): Promise<string> {
         });
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DB_COLL_CMD.GET_BY_FK), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.task, DB_COLL_CMD.GET_BY_FK), result);
 
 } //end function
 
@@ -135,12 +135,12 @@ export async function getTasksByTaskcategory(workflow_id:number,taskcategory_id:
         });
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DB_COLL_CMD.GET_BY_FK), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.task, DB_COLL_CMD.GET_BY_FK), result);
 
 } //end function
 

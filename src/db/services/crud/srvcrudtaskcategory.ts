@@ -4,7 +4,7 @@
 
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { PrismaClient, Taskcategory } from "@generated/prisma";
-import { DB_ERROR, DbOps, DpOperationUtil } from "@/common/database/dbkernel";
+import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
 
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
@@ -24,16 +24,16 @@ export async function insertTaskcategory(item_serial:string): Promise<string> {
         result = await prisma.taskcategory.create({data:item as any});
         if (result === null) {
             return JsonResponse.ERROR
-                (DpOperationUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.taskcategory));
+                (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.taskcategory));
         }
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.taskcategory,DbOps.INSERT), 
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DbTables.taskcategory,DbOps.INSERT), 
                                 result.id.toString());
 }//end
 
@@ -47,15 +47,15 @@ export async function update(item:Taskcategory): Promise<string> {
         result = await prisma.taskcategory.update({where:{id:item.id!},data:item!});        
         if (result === null) {
             return JsonResponse.ERROR
-                (DpOperationUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.taskcategory));
+                (DpOpsUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.taskcategory));
         }        
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("taskcategory", DbOps.UPDATE), null);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("taskcategory", DbOps.UPDATE), null);
 }//end
 
 /**
@@ -67,15 +67,15 @@ export async function delette(id: number): Promise<string> {
     try {
         result = await prisma.taskcategory.delete({where:{id:id}});
         if (result === null) {
-            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.taskcategory));
+            return JsonResponse.ERROR(DpOpsUtil.getErrNotFoundMessage(DbOps.DELETE, DbTables.taskcategory));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("taskcategory", DbOps.DELETE),null);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("taskcategory", DbOps.DELETE),null);
 }//end
 
 /**
@@ -87,14 +87,14 @@ export async function deleteAll(): Promise<string> {
     try {
         result = await prisma.taskcategory.deleteMany({});
         if (result === null) {
-            return JsonResponse.ERROR(DpOperationUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.taskcategory));
+            return JsonResponse.ERROR(DpOpsUtil.getErrNotFoundMessage(DbOps.DELETE_ALL, DbTables.taskcategory));
         }          
     }
     catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {await prisma.$disconnect();}
 
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("taskcategory", DbOps.DELETE_ALL),null);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("taskcategory", DbOps.DELETE_ALL),null);
 }//end
 
