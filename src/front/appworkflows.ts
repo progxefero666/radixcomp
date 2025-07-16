@@ -28,7 +28,9 @@ export const WK_EDITOR_VIEWS = {
 
 
 /**
- * class AppWorkflowsConfig
+ * # class AppWorkflows Configuration:
+ *    - Module sections
+ *    - Workflow editor views
  */
 export class AppWorkflowsConfig {
 
@@ -63,19 +65,24 @@ export class AppWorkflowsConfig {
 }//end class
 
 /**
- * class AppWorkflows.TASKCAT_DEF_DESC
+ * class App Workflows
  */
 export class AppWorkflows {
 
-    
+    //......................................................................................................
+    // constants
+    //......................................................................................................    
     public static readonly FIRST_ITEM:number = 0;
     public static readonly FIRST_GROUP:number = 0;
 
-    public static readonly TASKCAT_DEF_NAME: string = "default";
-    
+    public static readonly TASKCAT_DEF_NAME: string = "default";    
     public static readonly TASKCAT_DEF_DESC: string = "default task category";
     public static readonly FIRST_TASK_NAME: string = "first task";
     public static readonly FIRST_TASK_DESC: string = "";
+
+    //......................................................................................................
+    // application forms definitions
+    //......................................................................................................    
 
     public static readonly NEW_TASKTYPE_FIELDS:InputField[] = [
         new InputField("text","name", "type name", null, "Name"),
@@ -96,7 +103,96 @@ export class AppWorkflows {
         = new InputField("text", "workflow_name",
                         "workflow name", null, "Workflow Name", {min: 3, max: 50});
     
-       
+    //......................................................................................................
+    // static methods
+    //......................................................................................................
+
+    public static getNewTask = async (codelangId:number,tasktype_id:number,    
+                                        workflowId:number,taskcategoryId:number,
+                                        name:string,description:string,
+                                        orden:number,groupIndex:number):Promise<Task> => {                                              
+        return new Task(DbOps.NEW_ROW_ID,
+                                   tasktype_id,codelangId,workflowId,taskcategoryId,
+                                   orden,name,description,groupIndex,null,null);   
+    };//end
+    
+
+    //......................................................................................................
+    // database client operations
+    //......................................................................................................
+
+
+    
+
+    public static createCompleteWorkflow = async(name:string,
+                                                 codelangs:Codelang[]|null,
+                                                 tasktypes:Tasktype[]|null): Promise<boolean> => {
+
+        if(codelangs === null){codelangs = await AppWorkflowsReader.read_codelangs(name);}
+        if(tasktypes === null){tasktypes = await AppWorkflowsReader.read_tasktypes(name);}
+        
+        // 1. insert workflow
+        const workflowId:number|null = await AppWorkflowsCrud.insert_workflow(name, AppWorkflows.FIRST_TASK_DESC); 
+        if(workflowId === null) {return false;}
+
+        // 2. insert default task category
+        const taskcategoryId:number|null = await AppWorkflowsCrud.insert_taskcategory(workflowId!,
+            AppWorkflows.TASKCAT_DEF_NAME, AppWorkflows.TASKCAT_DEF_DESC);
+        if(taskcategoryId === null) {return false;}
+
+        // 3. insert first task
+        const task:Task = new Task(
+            DbOps.NEW_ROW_ID,tasktypes![0].id,codelangs![0].id,
+            workflowId!,taskcategoryId!,
+            AppWorkflows.FIRST_ITEM,
+            AppWorkflows.FIRST_TASK_NAME,
+            AppWorkflows.FIRST_TASK_DESC,
+            AppWorkflows.FIRST_GROUP,
+            null,null);                       
+        const resposeItask = await insertTask(JSON.stringify(task));
+        if(resposeItask === null) {return false;}
+
+        return true;
+    };//end
+
+
+
+}//end class
+
+/**
+ * class WorkflowActions
+ */
+export class WorkflowActions {
+
+    public static UPDATE_MAIN: string = "update_main";
+    public static ADD_TASK: string = "add_task";
+    public static DELETE_TASK: string = "delete_task";
+    public static COPY_TASK: string = "copy_task";
+    public static MOVEUP_TASK: string = "moveup_task";
+    public static MOVEDOWN_TASK: string = "movedown_task";
+    public static UPDATE_TASK: string = "update_task";
+    public static CLEAR_TASKS: string = "clear_tasks";    
+
+}//end class
+
+/**
+ * # class AppWorkflowsReader
+ *    - Read operations for workflows
+ */
+export class AppWorkflowsReader {
+
+    public static read_codelangs = async (name: string): Promise<Codelang[]|null> => {
+        const response = await getAllCodelang();
+        if(response=== null){return null;}
+        return parseResponseCollection<Codelang>(response);
+    };//end
+    
+    public static read_tasktypes = async (name: string): Promise<Tasktype[]|null> => {
+        const response = await getAllTasktypes();
+        if(response=== null){return null;}
+        return parseResponseCollection<Tasktype>(response);
+    };//end
+
     public static existWorkflow = async (name: string): Promise<boolean> => {
         const response = await getCountAllRows(DbTables.workflow,name);
         if (response === null) { return false; }
@@ -105,20 +201,16 @@ export class AppWorkflows {
         alert(count);
         if(count > 0) {return true;}
         return false;
-    };//end
-    
-    public static get_codelangs = async (name: string): Promise<Codelang[]|null> => {
-        const response = await getAllCodelang();
-        if(response=== null){return null;}
-        return parseResponseCollection<Codelang>(response);
-    };//end
-    
-    public static get_tasktypes = async (name: string): Promise<Tasktype[]|null> => {
-        const response = await getAllTasktypes();
-        if(response=== null){return null;}
-        return parseResponseCollection<Tasktype>(response);
-    };//end
+    };//end    
 
+};//end class
+
+
+/**
+ * # class AppWorkflowsCrud
+ *    - CRUD operations for workflows
+ */
+export class AppWorkflowsCrud {
     public static insert_taskcategory = async (workflowId:number,
                                                name:string,
                                                description:string): Promise<number|null> => {
@@ -142,60 +234,4 @@ export class AppWorkflows {
         return Number(reponseIwObj.data);
     };//end
 
-    public static createNewWorkflow = async (name:string,codelangs:Codelang[]|null,tasktypes:Tasktype[]|null): Promise<boolean> => {
-
-        if(codelangs === null){codelangs = await AppWorkflows.get_codelangs(name);}
-        if(tasktypes === null){tasktypes = await AppWorkflows.get_tasktypes(name);}
-        
-        const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,"", null, null);
-        const response = await insertWorkflow(JSON.stringify(workflow));
-        const reponseIwObj:JsonResponse = JSON.parse(response) as JsonResponse;
-        if(reponseIwObj.isError()) {return false;}
-
-        const workflowId = Number(reponseIwObj.data);    
-        
-        const taskcategoryId:number|null = await AppWorkflows.insert_taskcategory(workflowId,
-            AppWorkflows.TASKCAT_DEF_NAME, AppWorkflows.TASKCAT_DEF_DESC);
-        if(taskcategoryId === null) {return false;}
-
-        const task:Task = new Task(
-            DbOps.NEW_ROW_ID,tasktypes![0].id,codelangs![0].id,
-            workflowId,taskcategoryId!,
-            AppWorkflows.FIRST_ITEM,
-            AppWorkflows.FIRST_TASK_NAME,
-            AppWorkflows.FIRST_TASK_DESC,
-            AppWorkflows.FIRST_GROUP,
-            null,null);       
-                
-        const resposeItask = await insertTask(JSON.stringify(task));
-        if(resposeItask === null) {return false;}
-
-        return true;
-    };//end
-
-    public static getNewTask = async (codelangId:number,tasktype_id:number,    
-                                        workflowId:number,taskcategoryId:number,
-                                        name:string,description:string,
-                                        orden:number,groupIndex:number):Promise<Task> => {                                              
-        return new Task(DbOps.NEW_ROW_ID,
-                                   tasktype_id,codelangId,workflowId,taskcategoryId,
-                                   orden,name,description,groupIndex,null,null);   
-    };//end
-
-}//end class
-
-/**
- * class WorkflowActions
- */
-export class WorkflowActions {
-
-    public static UPDATE_MAIN: string = "update_main";
-    public static ADD_TASK: string = "add_task";
-    public static DELETE_TASK: string = "delete_task";
-    public static COPY_TASK: string = "copy_task";
-    public static MOVEUP_TASK: string = "moveup_task";
-    public static MOVEDOWN_TASK: string = "movedown_task";
-    public static UPDATE_TASK: string = "update_task";
-    public static CLEAR_TASKS: string = "clear_tasks";    
-
-}//end class
+};//end class
