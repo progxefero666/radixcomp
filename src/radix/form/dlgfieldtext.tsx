@@ -11,6 +11,7 @@ import { InputField } from "@/common/model/inputfield";
 import { OPERATIONS } from "@/common/constants";
 import { RadixOpsText } from "../radixconstants";
 import { TInputText } from "../radixtypes";
+import { TKeyvalue } from "@/common/types";
 
 
 /**
@@ -20,13 +21,13 @@ interface CompProps {
     buttontext: string;
     title: string;
     item: InputField;
-    onsave: (values: TInputText) => void;
+    onsave: (values: TKeyvalue) => void;
 }
 export const DialogFieldText = ({ buttontext, title, item, onsave }: CompProps) => {
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);
-        onsave({id:item.id, value:formData.get(item.id)?.toString()});
+        onsave({key:item.id, value:formData.get(item.id)?.toString()});
     };//end
 
     return (

@@ -6,47 +6,45 @@ import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
 
 import { DB_COLL_CMD, DpOperationUtil } from "@/common/database/dbkernel";
-import {  DbTables } from "@/db/dbcatalog";
+import {  DB_TABLES, DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 
 
 
-export async function executeReadQuery(commandSql: string, params: any[] = []): Promise<string> {
-
-    const prisma = new PrismaClient();
-    let result = null;
-    try {
-        result = await prisma.$queryRaw(Prisma.sql`${commandSql}`, ...params);
-    }
-    catch (error) {
-        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
-    }
-    finally {
-        await prisma.$disconnect();
-    }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DB_COLL_CMD.GET_ALL), result);
-}//end function
-
-export async function getCountByParents(workflow_id: number, taskgroup_id: number): Promise<string> {
+export async function getCountByTable(table: string,rowName:string): Promise<string> {
 
     const prisma = new PrismaClient();
     let count = 0;
     try {
-        count = await prisma.task.count({
-            where: {
-                workflowId: workflow_id,
-                taskcategoryId: taskgroup_id,
-            },
-        });
+        if (table === DbTables.codelang) {
+            count = await prisma.codelang.count({where:{name:rowName}});
+        }        
+        else if (table === DbTables.tasktype) {
+            count = await prisma.tasktype.count({where:{name:rowName}});
+        }     
+        else if (table === DbTables.workflow) {
+            count = await prisma.workflow.count({where:{name:rowName}});
+        }  
+        else if (table === DbTables.apptype) {
+            count = await prisma.apptype.count({where:{name:rowName}});
+        }     
+        else if (table === DbTables.application) {
+            count = await prisma.application.count({where:{name:rowName}});
+        }                       
     }
     catch (error) {
+        console.error(DpOperationUtil.getErrMessage(error));
         return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DB_COLL_CMD.COUNT_ROWS), count);
-}
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.COUNT_ROWS),count.toString());
+
+};//end 
+
+
+
 
 /**
  * Server Action for Read Commom Tables
@@ -95,4 +93,18 @@ export async function getAllByTable(table: string): Promise<string> {
 
 }//end server action
 
+export async function executeReadQuery(commandSql: string, params: any[] = []): Promise<string> {
 
+    const prisma = new PrismaClient();
+    let result = null;
+    try {
+        result = await prisma.$queryRaw(Prisma.sql`${commandSql}`, ...params);
+    }
+    catch (error) {
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DB_COLL_CMD.GET_ALL), result);
+}//end function

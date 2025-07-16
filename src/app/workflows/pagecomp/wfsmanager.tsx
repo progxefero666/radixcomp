@@ -18,6 +18,7 @@ import { AppWorkflows, AppWorkflowsConfig } from "@/front/appworkflows";
 import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
 import { DialogFieldText } from "@/radix/form/dlgfieldtext";
 import { TInputText } from "@/radix/radixtypes";
+import { TKeyvalue } from "@/common/types";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -62,13 +63,14 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     const execImport = () => {
     };//end
 
-    const execNew = async (inputText: TInputText) => {
-        alert(inputText.value);
-        const existName:boolean = await AppWorkflows.existWorkflowName(inputText.value!);
+    const execNew = async (inputName: TKeyvalue) => {
+        alert(inputName.value);
+        const existName:boolean = await AppWorkflows.existWorkflow(inputName.value!);
         if(existName){
-            return alert("Workflow with this name already exists.");
+            return alert("Workflow name in use.");
         }
-        // Create new workflow 
+        AppWorkflows.createNewWorkflow(inputName.value!);
+
     };//end
 
 

@@ -10,6 +10,8 @@ import { TInputText } from "@/radix/radixtypes";
 import { Task } from "@/db/model/task";
 import { getCountWorkflowsById } from "@/db/services/read/srvworkflow";
 import { JsonResponse } from "@/common/model/jsonreponse";
+import { getCountByTable } from "@/db/services/generic/serviceread";
+import { DbTables } from "@/db/dbcatalog";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -90,8 +92,8 @@ export class AppWorkflows {
             orden,null,null,groupIndex,null,null);    
     };//end
        
-    public static existWorkflowName = async (name: string): Promise<boolean> => {
-        const response = await getCountWorkflowsById(name);
+    public static existWorkflow = async (name: string): Promise<boolean> => {
+        const response = await getCountByTable(DbTables.workflow,name);
         if (response === null) { return false; }
         const jsonParsed:JsonResponse = JSON.parse(response) as JsonResponse;
         const count = Number(jsonParsed.data);
@@ -100,6 +102,10 @@ export class AppWorkflows {
         return false;
     }//end
     
+    public static createNewWorkflow = async (name: string): Promise<boolean> => {
+
+        return true;
+    }//end
 
 }//end class
 

@@ -143,3 +143,27 @@ export async function getTasksByTaskcategory(workflow_id:number,taskcategory_id:
     return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.task, DB_COLL_CMD.GET_BY_FK), result);
 
 } //end function
+
+
+/*
+export async function getCountByParents(workflow_id: number, taskgroup_id: number): Promise<string> {
+
+    const prisma = new PrismaClient();
+    let count = 0;
+    try {
+        count = await prisma.task.count({
+            where: {
+                workflowId: workflow_id,
+                taskcategoryId: taskgroup_id,
+            },
+        });
+    }
+    catch (error) {
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName("task", DB_COLL_CMD.COUNT_ROWS), count);
+}
+*/
