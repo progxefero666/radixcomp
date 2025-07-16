@@ -5,17 +5,16 @@ import { Button, Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon,  } from "@radix-ui/react-icons";
 import { EditOptionId } from "@/radix/collection/editoption";
 import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
-import {  DB_ITEM_CMD, DbOps } from "@/common/database/dbkernel";
+import { DB_ITEM_CMD} from "@/common/database/dbkernel";
 import { DialogForm} from "@/radix/form/dgform";
 import { CollectionItem } from "@/common/model/collitem";
 import { InputField } from "@/common/model/inputfield";
 
-import { AppWorkflows, AppWorkflowsCrud, AppWorkflowsReader } from "@/front/appworkflows";
+import { AppWorkflows, AppWorkflowsCrud, AppWorkflowsReader, ManagerTaskcategories } from "@/front/appworkflows";
 import { getTaskcatsAsEditableOptions } from "@/db/services/util/workflowutil";
 import { Taskcategory } from "@/db/model/taskcategory";
-import { ManagerTaskcategories } from "../categories/mantaskcats";
-import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
-import { parseResponseItem } from "@/common/parsers/javascriptparser";
+
+
 
 interface PanelWfTaskcategoriesProps {
     workflowid: number;
