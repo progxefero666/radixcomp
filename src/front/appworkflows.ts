@@ -8,6 +8,8 @@ import { Workflow } from "@/db/model/workflow";
 import { TKeyvalue } from "@/common/types";
 import { TInputText } from "@/radix/radixtypes";
 import { Task } from "@/db/model/task";
+import { getCountWorkflowsById } from "@/db/services/read/srvworkflow";
+import { JsonResponse } from "@/common/model/jsonreponse";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -51,7 +53,7 @@ export class AppWorkflowsConfig {
 }//end class
 
 /**
- * class AppWorkflows.TASKCATEGORY_DEF
+ * class AppWorkflows.existWorkflowName
  */
 export class AppWorkflows {
 
@@ -87,7 +89,18 @@ export class AppWorkflows {
             AppWorkflows.TASKCATEGORY_DEF.id,
             orden,null,null,groupIndex,null,null);    
     };//end
-        
+       
+    public static existWorkflowName = async (name: string): Promise<boolean> => {
+        const response = await getCountWorkflowsById(name);
+        if (response === null) { return false; }
+        const jsonParsed:JsonResponse = JSON.parse(response) as JsonResponse;
+        const count = Number(jsonParsed.data);
+        alert(count);
+        if(count > 0) {return true;}
+        return false;
+    }//end
+    
+
 }//end class
 
 /**
@@ -103,5 +116,5 @@ export class WorkflowActions {
     public static MOVEDOWN_TASK: string = "movedown_task";
     public static UPDATE_TASK: string = "update_task";
     public static CLEAR_TASKS: string = "clear_tasks";    
-    
+
 }//end class

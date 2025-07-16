@@ -7,7 +7,25 @@ import { DB_COLL_CMD, DpOperationUtil } from "@/common/database/dbkernel";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
+export async function getCountWorkflowsById(name:string): Promise<string> {
 
+    const prisma = new PrismaClient();
+    let count = 0;
+    try {
+        count = await prisma.workflow.count({
+            where: {name:name},
+        });
+    }
+    catch (error) {
+        console.error(DpOperationUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOperationUtil.getErrMessage(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_BY_ID),count.toString());
+
+};//end 
 
 export async function getWorkflow(id:number): Promise<string> {
 

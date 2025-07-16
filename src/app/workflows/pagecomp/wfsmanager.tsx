@@ -62,8 +62,13 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     const execImport = () => {
     };//end
 
-    const execNew = (inputText: TInputText) => {
+    const execNew = async (inputText: TInputText) => {
         alert(inputText.value);
+        const existName:boolean = await AppWorkflows.existWorkflowName(inputText.value!);
+        if(existName){
+            return alert("Workflow with this name already exists.");
+        }
+        // Create new workflow 
     };//end
 
 
