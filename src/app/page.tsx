@@ -65,7 +65,19 @@ export default function PageGenCode() {
     const loadSection = (sectionId: string) => {setSection(sectionId);}
 
     const exportFile = () => {
-        const result:boolean = CodeGeneration.generateFile(dataId,dataFormat,dataCode!);
+        if(!dataCode){return;}
+
+       
+        const file:File = CodeGeneration.generateFile(dataId,dataFormat,dataCode);
+        
+         /*
+        const url = URL.createObjectURL(file);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = file.name;
+        a.click();
+        URL.revokeObjectURL(url);
+        */
     };
 
     return (

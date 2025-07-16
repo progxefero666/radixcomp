@@ -123,12 +123,13 @@ export class CodeGeneration {
         return mimetype;
     };
 
-    public static generateFile(id:string,format:string,content:string): boolean{        
-        let fname: string = CodeGeneration.getFilename(id,format);
-        let mimetype: string = CodeGeneration.getMimetype(format);
-        // Here you would implement the logic to generate the file
-        console.log(`Generating file: ${fname} with mimetype: ${mimetype}`);
-        return true;
+    public static generateFile(id:string,format:string,content:string): File{        
+        const fname: string = CodeGeneration.getFilename(id,format);
+        const mimetype: string = CodeGeneration.getMimetype(format);
+        const file:File =  new File([content], fname, { type: mimetype });
+        //alert(file.name);
+        console.log("File generated: ", file);
+        return file;
     }
 
 
