@@ -78,13 +78,6 @@ export class AppWorkflows {
         = new InputField("text", "workflow_name",
                         "workflow name", null, "Workflow Name", {min: 3, max: 50});
     
-    
-    public static DLG_TASK_NAME_INPUT: TInputText = {
-        id:"taskname_name",
-        placeholder:"task name",
-        label:"Name",value:null,length:{min:3,max:50}
-    };
-
     public static  getNewTask = (workflowId:number,
                                  codelangId:number,tasktypeId:number,
                                  orden:number,groupIndex:number):Task => {               
@@ -110,23 +103,5 @@ export class WorkflowActions {
     public static MOVEDOWN_TASK: string = "movedown_task";
     public static UPDATE_TASK: string = "update_task";
     public static CLEAR_TASKS: string = "clear_tasks";    
+    
 }//end class
-
-/*
-ModelField
-
-
-    -------------------------------------------------------
-	## Workflow Operations
-    - Create Workflow
-    -------------------------------------------------------
-	- Create Context
-	- Add Main Task
-	- Update Context	
-	- Update Main Task
-	- Delete Main Task
-	- Move Main Task
-	- Duplicate Main Task
-	- Clear Main Tasks
-     -------------------------------------------------------
-*/
