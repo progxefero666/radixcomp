@@ -7,9 +7,9 @@ import { Box, Flex, Grid, Text} from "@radix-ui/themes";
 import { AppMemmory } from "@/front/appmemory";
 import { InfoNotdata } from "@/radix/data/infonotdata";
 import { Workflow } from "@/db/model/workflow";
-import { WorkflowEditor } from "@/app/workflows/wfeditor/page/editor";
-import { WorkflowHeader } from "@/app/workflows/wfeditor/page/header";
-import { WorkflowViewer } from "@/app/workflows/wfeditor/page/viewer";
+import { WorkflowEditor } from "@/app/workflow/page/editor";
+import { WorkflowHeader } from "@/app/workflow/page/header";
+import { WorkflowViewer } from "@/app/workflow/page/viewer";
 import { AppWorkflowsReader } from "@/front/appworkflows";
 import { WorkflowPrimaryBar} from "./page/primarybar";
 

@@ -35,7 +35,7 @@ export default function PageWorkflows() {
 
     const openWorkflow = (id:number) => {
         AppMemmory.saveWorkflowId(id);
-        router.push("/workflows/wfeditor");
+        router.push("../workflow");
     };
 
     const viewWorkflow = (id:number) => {

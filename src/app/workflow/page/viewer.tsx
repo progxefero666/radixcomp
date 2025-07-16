@@ -4,7 +4,7 @@ import { Flex, Tabs, Box, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
 import { Workflow } from "@/db/model/workflow";
-import CardWorkflowPreview from "../../cards/cardwfpreview";
+import CardWorkflowPreview from "../../workflows/cards/cardwfpreview";
 
 
 interface CompProps {

@@ -20,8 +20,8 @@ import { Taskcategory } from "@/db/model/taskcategory";
 import { Codelang } from "@/db/model/codelang";
 import { Tasktype } from "@/db/model/tasktype";
 import { GroupTasks } from "@/db/modelextend/grouptasks";
-import {CardWorkflowMain} from "@/app/workflows/wfeditor/cards/cardwfmain";
-import {CardTask} from "@/app/workflows/wfeditor/cards/cardwftask";
+import {CardWorkflowMain} from "@/app/workflow/cards/cardwfmain";
+import {CardTask} from "@/app/workflow/cards/cardwftask";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
