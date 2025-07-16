@@ -20,6 +20,7 @@ export enum OPERATIONS_TEXT {
  * class DbConstants.EMPTY_VALUE
  */
 export class DataConstants{
+    
     public static readonly EMPTY_VALUE: string = "";
 
 }

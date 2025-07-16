@@ -34,8 +34,8 @@ export const DialogFieldText = ({ buttontext, title, item, onsave }: CompProps) 
 
             <Dialog.Trigger>
                 <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                    <FilePlusIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                        height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                    <FilePlusIcon width={ThemeIconsStyle.DEF_HEIGHT}
+                                            height={ThemeIconsStyle.DEF_WIDTH} />
                     <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
                         {buttontext}
                     </Text>
@@ -63,14 +63,14 @@ export const DialogFieldText = ({ buttontext, title, item, onsave }: CompProps) 
                                 color={ThemeButtonsStyle.COLOR_SAVE}
                                 size={ThemeButtonsStyle.BTN_DEF_SIZE}>
                                 {RadixOpsText.OK}
-                                <CheckIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                                <CheckIcon width={ThemeIconsStyle.DEF_HEIGHT}
+                                                        height={ThemeIconsStyle.DEF_WIDTH} />
                             </Button>
                             <Button color={ThemeButtonsStyle.COLOR_CLOSE}
                                 size={ThemeButtonsStyle.BTN_DEF_SIZE} >
                                 {RadixOpsText.CANCEL}
-                                <Cross2Icon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                    height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                                <Cross2Icon width={ThemeIconsStyle.DEF_HEIGHT}
+                                                        height={ThemeIconsStyle.DEF_WIDTH} />
                             </Button>
                         </Flex>
 

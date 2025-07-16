@@ -63,8 +63,6 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
     const groups = useRef<GroupTasks[]>([]);
 
-    
-    
     useEffect(() => {
         if (ready) { return; }
         const init = async () => {
@@ -82,6 +80,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             }
             else {
                 //GroupTasks
+                //[AppWorkflows.TASKCATEGORY_DEF]
             }
             setReady(true);
             onCharge(workflow, taskcats);

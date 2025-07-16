@@ -54,14 +54,17 @@ export class ThemeTextStyle {
 }
 
 /**
- * class ThemeIconsStyle.ICON_DEF_SIZE
+ * class ThemeIconsStyle.DEF_WIDTH
+ * class ThemeIconsStyle.DEF_HEIGHT
  */
 export class ThemeIconsStyle {
-    public static readonly ICON_DEF_SIZE = {
-        width: "20px",
-        height: "20px"
-    };
-}
+
+    public static readonly DEF_WIDTH = "20px";
+    public static readonly DEF_HEIGHT = "20px";    
+
+
+
+}//end class
 
 /**
  * class ThemeButtonsStyle.BTN_DEF_SIZE

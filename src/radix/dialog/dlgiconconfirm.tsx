@@ -20,7 +20,7 @@ interface CompProps {
 export const DialogIconConfirm = ({ icon, title, message, onconfirm }: CompProps) => {
 
     const renderIcon = () => {
-        if(icon === RadixConf.ICON_DELETE) {
+        if (icon === RadixConf.ICON_DELETE) {
             return (<TrashIcon />)
         }
     }
@@ -51,14 +51,14 @@ export const DialogIconConfirm = ({ icon, title, message, onconfirm }: CompProps
                             size={ThemeButtonsStyle.BTN_DEF_SIZE}
                             onClick={onconfirm} >
                             {RadixOpsText.OK}
-                            <CheckIcon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                            <CheckIcon width={ThemeIconsStyle.DEF_HEIGHT}
+                                        height={ThemeIconsStyle.DEF_WIDTH} />
                         </Button>
                         <Button color={ThemeButtonsStyle.COLOR_CLOSE}
                             size={ThemeButtonsStyle.BTN_DEF_SIZE} >
                             {RadixOpsText.CANCEL}
-                            <Cross2Icon width={ThemeIconsStyle.ICON_DEF_SIZE.width}
-                                height={ThemeIconsStyle.ICON_DEF_SIZE.height} />
+                            <Cross2Icon width={ThemeIconsStyle.DEF_HEIGHT}
+                                        height={ThemeIconsStyle.DEF_WIDTH} />
                         </Button>
                     </Flex>
 
