@@ -13,13 +13,13 @@ import { DbTables } from "@/db/dbcatalog";
 /**
  * __table__ insert
  */
-export async function insert(item_serial:string): Promise<string> {
+export async function insertWorkflow(item_serial:string): Promise<string> {
     
     const item: Workflow|null = parseItem<Workflow>(item_serial);
     if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
 
     const prisma = new PrismaClient();
-    let result: object|null = null;
+    let result: Workflow|null = null;
     try {
         result = await prisma.workflow.create({data:item});
         if (result === null) {
@@ -33,13 +33,13 @@ export async function insert(item_serial:string): Promise<string> {
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.workflow,DbOps.INSERT), null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.workflow,DbOps.INSERT),result.id.toString());
 }//end
 
 /**
  * __table__ update
  */
-export async function update(item:Workflow): Promise<string> { 
+export async function updateWorkflow(item:Workflow): Promise<string> { 
     const prisma = new PrismaClient();
     let result = null;
     try {
@@ -60,7 +60,7 @@ export async function update(item:Workflow): Promise<string> {
 /**
  * __table__ delete
  */
-export async function delette(id: number): Promise<string> {
+export async function deleteWorkflow(id: number): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {

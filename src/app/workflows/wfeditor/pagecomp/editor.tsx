@@ -58,7 +58,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     const [mainOpen, setMainOpen] = useState<boolean>(true);
     const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
     const [workflow, setWorkflow] = useState<Workflow>(AppWorkflows.NEW_WK);
-    const [taskcats, setTaskcats] = useState<Taskcategory[]>([AppWorkflows.TASKCATEGORY_DEF]);
+    const [taskcats, setTaskcats] = useState<Taskcategory[]>([]);
     const [tasks, setTasks] = useState<Task[]>([]);
 
     const groups = useRef<GroupTasks[]>([]);
@@ -91,7 +91,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
     const execMainCommand = (id: string) => {
         if (id == WorkflowActions.ADD_TASK) {
             let task_orden = tasks.length;
-         
+         /*
             let newTask:Task|null = null;
             if(groups.current.length == 0) { 
                 groups.current.push(new GroupTasks(0,[task_orden]));
@@ -107,6 +107,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
                 setTasks([...tasks, newTask!]); 
                 setMainOpen(false);
             }
+            */
             return;
         }        
         else if (id == WorkflowActions.CLEAR_TASKS) {

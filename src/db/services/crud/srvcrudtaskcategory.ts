@@ -19,7 +19,7 @@ export async function insertTaskcategory(item_serial:string): Promise<string> {
     if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
 
     const prisma = new PrismaClient();
-    let result: object|null = null;
+    let result: Taskcategory|null = null;
     try {
         result = await prisma.taskcategory.create({data:item as any});
         if (result === null) {
@@ -33,7 +33,8 @@ export async function insertTaskcategory(item_serial:string): Promise<string> {
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.taskcategory,DbOps.INSERT), null);
+    return JsonResponse.SUCCESS(DpOperationUtil.getOpName(DbTables.taskcategory,DbOps.INSERT), 
+                                result.id.toString());
 }//end
 
 /**

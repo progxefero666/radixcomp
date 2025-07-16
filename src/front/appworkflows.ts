@@ -12,6 +12,8 @@ import { getCountWorkflowsById } from "@/db/services/read/srvworkflow";
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { getCountByTable } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
+import { insertWorkflow } from "@/db/services/crud/srvcrudworkflow";
+import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -55,9 +57,11 @@ export class AppWorkflowsConfig {
 }//end class
 
 /**
- * class AppWorkflows.existWorkflowName
+ * class AppWorkflows.TASKCATEGORY_DEF_NAME
  */
 export class AppWorkflows {
+
+    public static readonly TASKCATEGORY_DEF_NAME: string = "default";
 
     public static readonly NEW_TASKTYPE_FIELDS:InputField[] = [
         new InputField("text","name", "type name", null, "Name"),
@@ -74,22 +78,46 @@ export class AppWorkflows {
         new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion")
     ];
 
-    public static readonly TASKCATEGORY_DEF: Taskcategory 
-        = new Taskcategory(0, 0, "default", "taskgroup default");
+
 
       
     public static DLG_WK_NAME_INPUT: InputField 
         = new InputField("text", "workflow_name",
                         "workflow name", null, "Workflow Name", {min: 3, max: 50});
     
-    public static  getNewTask = (workflowId:number,
-                                 codelangId:number,tasktypeId:number,
-                                 orden:number,groupIndex:number):Task => {               
-        return new Task(
-            DbOps.NEW_ROW_ID,
-            tasktypeId,codelangId,workflowId, 
-            AppWorkflows.TASKCATEGORY_DEF.id,
-            orden,null,null,groupIndex,null,null);    
+                        /*
+    constructor(id: number,
+                tasktype_id: number,
+                codelang_id: number,
+                workflow_id: number,
+                taskcategory_id: number,
+                orden: number,
+                name: string|null,
+                description: string|null,
+                tkgroup: number,
+                files: string|null,
+                folders: string|null) 
+            setTasktypes(parseResponseCollection<Tasktype>
+                    (await getAllByTable(DbTables.tasktype))!);                
+                */
+
+    public static  getNewTask = async ( tasktype_id: number,
+                                        codelangId:number,      
+                                        workflowId:number,                                 
+                                        taskcategoryId:number,
+                                        orden:number,
+                                        groupIndex:number):Promise<Task|null> => {       
+                                       
+        const tasktypeId:number = 0; 
+        /*
+            tasktypeId,
+            codelangId,
+            workflowId,
+            0 ,0,
+            AppWorkflows.TASKCATEGORY_DEF_NAME,
+            null,orden,null,null);    
+        */    
+        return null;    
     };//end
        
     public static existWorkflow = async (name: string): Promise<boolean> => {
@@ -104,9 +132,29 @@ export class AppWorkflows {
     
     public static createNewWorkflow = async (name: string): Promise<boolean> => {
 
-        return true;
+        const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,"", null, null);
+        const responseIw = await insertWorkflow(JSON.stringify(workflow));
+        const reponseIwObj:JsonResponse = JSON.parse(responseIw) as JsonResponse;
+        if(reponseIwObj.isError()) {
+            return false;
+        }
+        const workflowId = Number(reponseIwObj.data);
+        const taskCategory: Taskcategory = new Taskcategory
+            (DbOps.NEW_ROW_ID,workflowId,AppWorkflows.TASKCATEGORY_DEF_NAME,"default task category");
+
+        const resposeItc = await insertTaskcategory(JSON.stringify(taskCategory));    
+        const resposeItcObj:JsonResponse = JSON.parse(responseIw) as JsonResponse;
+        if(reponseIwObj.isError()) {
+            return false;
+        }        
+        const taskcategoryId = Number(resposeItcObj.data);
+        return false;
     }//end
 
+    /*
+        public static readonly TASKCATEGORY_DEF: Taskcategory 
+        = new Taskcategory(0, 0, "default", "taskgroup default");
+    */
 }//end class
 
 /**
