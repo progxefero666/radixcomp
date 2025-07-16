@@ -35,12 +35,36 @@ export class CgDataConstants {
     public static readonly PATTERN_2: Pattern = new Pattern(2,{start:"^<", end:">^"});
     public static readonly PATTERN_3: Pattern = new Pattern(3,{start:"^[", end:"]^"});
 
-    public static readonly STRPATTERN_A: string = "__[A]__";
+    public static STRPATTERN_A: string = "__[A]__";
+    public static STRPATTERN_B: string = "__[A]__";
+    public static STRPATTERN_C: string = "__[A]__";
+    public static STRPATTERN_D: string = "__[A]__";
 
-    //public static readonly PATTERN_B: Pattern = {start:"^[", end:"]^"};
-    //public static readonly PATTERN_C: Pattern = {start:"^¡", end:"¡^"};
-    //public static readonly PATTERN_D: Pattern = {start:"^<", end:">^"};
+};//end class
 
-   
+export class TypeScriptModule {
+    public static readonly OP_CLASS: string = "class";
+    public static readonly OP_FUNC: string = "func_def";
+    public static readonly OP_FUNC_STATIC: string = "func_static";
+    public static readonly OP_FUNC_PROMISE: string = "func_promise";
+    public static readonly OP_INTERFACE: string = "interface";
+    public static readonly OP_TYPE: string = "type";
+    public static readonly OP_STATES: string = "func_def";
+    public static readonly OP_USE_EFFECT: string = "func_def";
+
+};//end class
+export class TypeScriptJsxModule {
+
+    public static readonly OP_FUNC_JSX: string = "func_jsx";
+    public static readonly OP_COMP: string = "component";
+    public static readonly OP_COMP_REF: string = "component_ref";
+
+
+};//end class
+
+export class TypeScriptStyleModule {
+
+    public static readonly OP_OBJ: string = "func_def";
+    public static readonly OP_THEME: string = "func_def";
 
 };//end class
