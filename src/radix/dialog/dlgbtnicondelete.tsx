@@ -15,7 +15,7 @@ interface CompProps {
     message: string;
     onconfirm: () => void;
 }
-export const DialogBtnIconDeleteConfirm = ({title,message,onconfirm }: CompProps) => {
+export const DlgBtnIconDeleteConfirm = ({title,message,onconfirm }: CompProps) => {
 
     //const renderIcon = () => {}
 

@@ -8,8 +8,8 @@ import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
-import { DialogBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
-import { DialogBtnIconDeleteConfirm } from "@/radix/dialog/dlgbtnicondelete";
+import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
+import { DlgBtnIconDeleteConfirm } from "@/radix/dialog/dlgbtnicondelete";
 
 
 const compStyle = {
@@ -51,12 +51,12 @@ export function CardWorkflowMin({index,workflow,callback}: CompProps) {
                             </IconButton>
                         </Box>
                     </Collapsible.Trigger>
-                    <Flex width="100%" justify="between" align="start" >
-                        <Box width="100%" mt="1" py="1" px="2" mr="2" style={headerStyle}>
+                    <Flex width="100%" justify="between" py="1" align="start" >
+                        <Box width="100%" mt="1" px="2" mr="2" style={headerStyle}>
                             <Text size="3" >{workflow.name}</Text>
                         </Box>
-                        <Box pt="1">
-                            <DialogBtnIconDeleteConfirm 
+                        <Flex direction="row" gapX="2" >
+                            <DlgBtnIconDeleteConfirm 
                                                  message="confirm delete this workflow?"
                                                  title="Delete Workflow"
                                                  onconfirm={() => onHandlerClick(DB_ITEM_CMD.DELETE)}  />
@@ -64,7 +64,7 @@ export function CardWorkflowMin({index,workflow,callback}: CompProps) {
                                 <EyeOpenIcon onClick={() => onHandlerClick(DB_ITEM_CMD.OPEN)} />
                             </IconButton>                                 
                           
-                        </Box>
+                        </Flex>
                     </Flex>
                 </Flex>
 

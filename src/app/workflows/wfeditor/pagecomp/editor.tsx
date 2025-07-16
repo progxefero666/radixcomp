@@ -7,7 +7,7 @@ import { parseResponseCollection, parseResponseItem } from "@/common/parsers/jav
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { WorkflowEditorHeader } from "./editorheader";
-import { DialogBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
+import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
 import { RadixConf } from "@/radix/radixconf";
 import { AppMemmory } from "@/front/appmemory";
 import { DbTables } from "@/db/dbcatalog";
@@ -145,7 +145,7 @@ export function WorkflowEditor({ workflow }: WorkflowEditorProps) {
                     add task
                 </Button>
 
-                <DialogBtnDeleteConfirm buttonicon={RadixConf.ICON_DELETE}
+                <DlgBtnDeleteConfirm buttonicon={RadixConf.ICON_DELETE}
                                      buttontext="clear tasks"
                                      message="Are you sure you want to clear all tasks?"
                                      title="Clear tasks" 

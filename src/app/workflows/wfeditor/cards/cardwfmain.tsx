@@ -19,6 +19,7 @@ import { XInputText } from "@/radix/input/inptext";
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
+import { InfoNotdata } from "@/radix/data/infonotdata";
 
 
 const compStyle = {
@@ -41,11 +42,25 @@ interface CompProps {
 }
 export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
 
-    //const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
+    let initialized: boolean = false;
     const [open, setOpen] = React.useState(openinit);
     
-    const nameRef = useRef<HTMLInputElement>(null);
-    //const proglanguageRef = useRef<HTMLSelectElement>(null);
+    const nameRef        = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef<HTMLInputElement>(null);
+    const applicationRef        = useRef<HTMLInputElement>(null);
+    const contextRef = useRef<HTMLInputElement>(null);
+    const fpathRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {          
+        const init = async () => {
+            if(workflow.description === null) {workflow.description = "";}
+            if(workflow.application === null) {workflow.application = "";}
+            if(workflow.context     === null) {workflow.context = "";}
+            if(workflow.fpath === null)       {workflow.fpath = "";}                        
+            initialized = true;
+        };
+        init();
+    }, []);
 
     const importMain = () => {
         console.log("import main");
@@ -59,6 +74,11 @@ export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
         console.log("import description");
     };
 
+    if(!initialized) {
+        return (
+            <InfoNotdata message="loading Workflow main" />
+        );
+    }   
     return (
         <Flex direction="column" width="100%" px="2" pt="0" pb="2" style={compStyle}  >
             

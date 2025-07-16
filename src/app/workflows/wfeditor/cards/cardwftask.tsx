@@ -21,10 +21,10 @@ import { getCodelangsAsOptions } from "@/db/services/util/codelangutil";
 import { getTaskcategoriessAsOptions, getTasktypeAsOptions } from "@/db/services/util/workflowutil";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
-import { OPERATIONS, OPERATIONS_TEXT } from "@/common/constants";
-import BarButtons from "@/radix/cbars/btbar";
+
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { DialogIconConfirm } from "@/radix/dialog/dlgiconconfirm";
+import { DlgBtnIconDeleteConfirm } from "@/radix/dialog/dlgbtnicondelete";
+
 
 
 const compStyle = {
@@ -155,7 +155,7 @@ export function CardTask({ taskscount,task, codelangs, tasktypes, taskcategories
                                 <ArchiveIcon />
                             </IconButton>                              
  
-                            <DialogIconConfirm icon={RadixConf.ICON_DELETE}
+                            <DlgBtnIconDeleteConfirm 
                                                message="confirm delete task?"
                                                title="Confirm"
                                                onconfirm={onDeleteConfirm}  />
