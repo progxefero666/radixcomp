@@ -89,7 +89,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
             let fileId: string = "default";
 
             if (operationId === "get_def_class" || operationId === "get_entity_class") {
-                 alert(operationId);
+           
                 codecont = await clientTScriptEntities.current!
                     .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);
                 fileId = dbSquemaControl.current!.activeTableName;                    
@@ -99,7 +99,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
                 fileId = "list_tables";         
             }
-            //console.log(codecont);
+      
             if(codecont !== null) {ondataresult(CodeGenConfig.FORMAT_TYPESCRIPT,codecont,fileId);}
         }
 

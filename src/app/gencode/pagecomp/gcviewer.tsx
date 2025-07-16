@@ -13,48 +13,31 @@ import { CodeGenConfig } from "@/codegen/cgconfig";
 //
 
 interface CompProps {
-
     format?: string;
-    code?: string | null;
-    fileName?: string;
+    code: string;
     exportdata: () => void;
 }
 export function GenCodeViewer({ format, code,exportdata }: CompProps) {
 
-    const [codeCharged, setCodeCharged] = useState<boolean>(false);
     const [barButtons, setBarbuttons] = useState<BarButtonsCfg>(BARCFG_EXPORT_COPY);
 
     useEffect(() => {
-        const init = (): void => {
-            if (code && code !== null) {
-                setCodeCharged(true);
-            }
-        }
-        init();
+         console.log(code);
     }, []);
 
 
     const onClick = (opId?: string) => {
 
-        if (!codeCharged) { 
-            showAlert("not code charged");
-            return; 
-        }
-
         if (opId==GenCodeModuleConfig.ACT_COPY) {
             navigator.clipboard.writeText(code!);
-            showAlert("Code copied to clipboard");
+            alert("Code copied to clipboard");
             return; 
         }
         else if (opId==GenCodeModuleConfig.ACT_EXPORT) {
             exportdata();
         }                   
-    }//end
+    };//end
 
-
-    const showAlert = (message:string) => {
-        alert("Alert: " + message);
-    }
 
     return (
         <Flex className="h-full" direction="column"   >
@@ -64,8 +47,7 @@ export function GenCodeViewer({ format, code,exportdata }: CompProps) {
             </Flex>
 
             <Separator orientation="horizontal" size="4" mb="2" />
-            <CardCode title="Output Monitor"
-                code={code ?? "No code generated yet."} />
+            <CardCode title="Output Monitor" code={code} />
             
         </Flex>
     );
@@ -73,24 +55,3 @@ export function GenCodeViewer({ format, code,exportdata }: CompProps) {
 }//end component
 
 
-
-
-//{(alertMessage !== AppConstants.NOT_DEF) ? renderAlert(alertMessage) : null}    
-
-
-        /*
-        setAlertMessage("Code copied to clipboard");
-               //setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);    
-        let result = true; //CodeGenCfg.exportCode(code);
-        if (fileName && fileName !== AppConstants.NOT_DEF) {
-            //result = CodeGenCfg.exportCode(code, fileName);
-        }
-        
-        if (result) {
-            setAlertMessage(AppEditorMessages.MSG_EXPORT_SUCCESS);
-        }
-        else {
-            setAlertMessage(AppEditorMessages.MSG_EXPORT_ERROR);
-        }
-        setTimeout(() => setAlertMessage(AppConstants.NOT_DEF), 3000);
-        */

@@ -35,7 +35,7 @@ export default function PageGenCode() {
     
     const [section, setSection] = useState<string|null>(null);
 
-    const [dataCode,   setDataCode] = useState<string>("undefined");
+    const [dataCode,   setDataCode] = useState<string|null>(null);
     const [dataId,     setDataId] = useState<string>("default");
     const [dataFormat, setDataFormat] = useState<string>("typescript");
 
@@ -56,7 +56,7 @@ export default function PageGenCode() {
     }, []);
 
     const onCodeResult= (dataFormat:string,datacode:string,fileid?:string) => {
-        console.log(datacode);
+
         setDataFormat(dataFormat);
         setDataCode(datacode);
         setDataId(fileid ?? "default");
@@ -65,7 +65,7 @@ export default function PageGenCode() {
     const loadSection = (sectionId: string) => {setSection(sectionId);}
 
     const exportFile = () => {
-        const result:boolean = CodeGeneration.generateFile(dataId,dataFormat,dataCode);
+        const result:boolean = CodeGeneration.generateFile(dataId,dataFormat,dataCode!);
     };
 
     return (
@@ -86,7 +86,8 @@ export default function PageGenCode() {
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
-                    <GenCodeViewer code={dataCode} exportdata={exportFile} />
+                    {dataCode!==null ? <GenCodeViewer key={dataCode} code={dataCode} exportdata={exportFile} />:null}
+                    
                 </Box>
 
                 <Box width="4%" style={boxStyle}>
