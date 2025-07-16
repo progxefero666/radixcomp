@@ -2,7 +2,8 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Box, Grid, Flex } from "@radix-ui/themes";
 import { AppWorkflowsConfig } from "@/front/appworkflows";
 import { Header } from "@/app/workflows/pagecomp/header";
@@ -10,10 +11,7 @@ import { PrimaryBar } from "@/app/workflows/pagecomp/primarybar";
 import { WorkflowsManager } from "@/app/workflows/pagecomp/wfsmanager";
 import { SecondBar } from "@/app/workflows/pagecomp/secondbar";
 import { WorkflowViewer } from "./workflows/pagecomp/wfviewer";
-import { Workflow } from "@/db/model/workflow";
-
-import { Tasktype } from "@/db/model/tasktype";
-import { AppMemmory, saveMemmoryCodelangs, saveMemmoryTasktypes } from "@/front/appmemory";
+import { AppMemmory } from "@/front/appmemory";
 
 
 const layoutStyle = {
@@ -27,19 +25,20 @@ const layoutStyle = {
  */
 export default function PageWorkflows() {
 
-    const [actsection, setActSection]   = useState<string>(AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS.id);   
-    const [workflowId, setWorkflowId]   = useState<number | null>(null);
+    const router = useRouter();
+    const [actsection, setActSection] = useState<string>(AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS.id);   
+    const [workflowId, setWorkflowId] = useState<number | null>(null);
         
-    useEffect(() => {
-        //saveMemmoryCodelangs();
-        //saveMemmoryTasktypes();
-    }, []);
-
-    const onSelection = (section: string) => {
+    const onSectionSelected = (section: string) => {
         setActSection(section);
     };
 
-    const chargeWorkflow = (id:number) => {
+    const openWorkflow = (id:number) => {
+        AppMemmory.saveWorkflowId(id);
+        router.push("/workflows/wfeditor");
+    };
+
+    const viewWorkflow = (id:number) => {
         setWorkflowId(id);
     };
 
@@ -51,20 +50,19 @@ export default function PageWorkflows() {
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >
-                <PrimaryBar section={actsection}
-                    onselection={onSelection} />
+                <PrimaryBar section={actsection} onselection={onSectionSelected} />
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" >
                 <WorkflowsManager section={actsection}
-                    showwfpreview={chargeWorkflow} />
+                                  editworkflow={openWorkflow}
+                                  viewworkflow={viewWorkflow} />
             </Flex>
 
             <Flex gridColumn="3" gridRow="2" >
-                { (workflowId!==null) ?
+                {(workflowId!==null) ?
                     <WorkflowViewer workflowId={workflowId}/>
                     : <Box width="100%">not data charged</Box>}
-
             </Flex>
 
             <Flex gridColumn="4" gridRow="2" >

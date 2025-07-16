@@ -1,6 +1,6 @@
 //src\app\workflows\wfeditor\pagecomp\editorcategories.tsx
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon,  } from "@radix-ui/react-icons";
 import { EditOptionId } from "@/radix/collection/editoption";
@@ -10,7 +10,7 @@ import { DialogForm} from "@/radix/form/dgform";
 import { CollectionItem } from "@/common/model/collitem";
 import { InputField } from "@/common/model/inputfield";
 
-import { AppWorkflows } from "@/front/appworkflows";
+import { AppWorkflows, AppWorkflowsCrud, AppWorkflowsReader } from "@/front/appworkflows";
 import { getTaskcatsAsEditableOptions } from "@/db/services/util/workflowutil";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { ManagerTaskcategories } from "../categories/mantaskcats";
@@ -19,30 +19,39 @@ import { parseResponseItem } from "@/common/parsers/javascriptparser";
 
 interface PanelWfTaskcategoriesProps {
     workflowid: number;
-    initcollection: Taskcategory[];
+    
     onsave?: () => void;
 }
 
-export const PanelWfTaskcategories = ({ workflowid,initcollection }: PanelWfTaskcategoriesProps) =>{
+export const PanelWfTaskcategories = ({ workflowid }: PanelWfTaskcategoriesProps) =>{
 
-    console.log(initcollection);
-
-    const manCategories = React.useRef<ManagerTaskcategories>(new ManagerTaskcategories(initcollection));
-    const [coll, setColl] = useState<Taskcategory[]>(initcollection);
+    let initialized: boolean = false;
     const [open, setOpen] = useState<boolean>(true);
+    const [categories, setCategories] = useState<Taskcategory[]>([]);
+    const [collection, setCollection] = useState<CollectionItem[]>([]);
 
-    const [collOptions, setCollOptions]
-        = useState<CollectionItem[]>(getTaskcatsAsEditableOptions(initcollection));
+    const manager = React.useRef<ManagerTaskcategories>(null);
 
-    const [formDefItems, setFormDefItems] = useState<InputField[]>([]);
 
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-    let isNewWorkflow:boolean = true;
-    if (workflowid != null) {isNewWorkflow = false;}
-    
+    useEffect(() => {          
+        if(initialized) { return; }
+        const init = async () => {
+            const read_categories:Taskcategory[]|null = await AppWorkflowsReader.read_taskcategories(workflowid);
+            //if(read_categories === null) {alert("Error reading task categories");return;}
+            setCollection(getTaskcatsAsEditableOptions(read_categories!));
+            setCategories(read_categories!);
+            manager.current = new ManagerTaskcategories(read_categories!);
+            initialized = true;
+        };
+        init();
+    }, []);
+
+    const clearCategories = () => {
+        alert("clearCollection");
+    };//end
+
     const execItemOperation = (id: number, action: string) => {
-        alert(id);
-
+  
         if (action === DB_ITEM_CMD.EDIT) {
             alert("EDIT");
         }
@@ -57,27 +66,15 @@ export const PanelWfTaskcategories = ({ workflowid,initcollection }: PanelWfTask
         }
     };//end
 
-    const clearCollection = () => {
-        alert("clearCollection");
-    };//end
 
-
-    //const onCancelNewItem = () => {};
     const onSaveNewItem = async (fields: InputField[]) => {
-        alert("start");
-        const newItem = new Taskcategory(null,workflowid,fields[0].value,fields[1].value);
-        const newRecord = await insertTaskcategory(JSON.stringify(newItem));
-        if(newRecord==null){
-            alert("Error inserting new task category");
-            return;
-        }
-        const taskcategory: Taskcategory|null = parseResponseItem<Taskcategory>(newRecord);
-        if(taskcategory===null){
-            alert("Error parsing new task category");
-            return;
-        }
-        alert("end");
-        manCategories.current.execOp(DB_ITEM_CMD.INSERT,taskcategory);
+        alert("onSaveNewItem");        
+        const taskcategoryId:number|null = await AppWorkflowsCrud
+                .insert_taskcategory(workflowid,fields[0].value,fields[1].value);
+        const taskcategory:Taskcategory = new Taskcategory
+            (taskcategoryId,workflowid,fields[0].value,fields[1].value);
+        alert(taskcategoryId);
+        manager.current!.execOp(DB_ITEM_CMD.INSERT,taskcategory);
     };//end
 
     
@@ -85,13 +82,14 @@ export const PanelWfTaskcategories = ({ workflowid,initcollection }: PanelWfTask
         setOpen(!open);
     };//end
 
-    const renderList = () => {
+
+    const renderMainContent = () => {
         if (!open) {
             return (null)
         }
         return (
             <Flex width="100%" direction="column" gapY="2" >
-                {collOptions.map((item, index) => (
+                {collection.map((item, index) => (
                     <Box key={index.toString()}>
                         {index == 0 ?
                             <EditOptionId option={item} />
@@ -112,7 +110,8 @@ export const PanelWfTaskcategories = ({ workflowid,initcollection }: PanelWfTask
                 </IconButton>
                 <Text size="2">T. Categories</Text>
             </Flex>
-            {collOptions.length > 0 ? renderList() : null}
+
+            {initialized ? renderMainContent():null}
 
             <Flex width="100%" direction="row" px="2" py="1" gapX="2" justify="center"
                   style={COMP_BORDER_STYLE} >
@@ -121,11 +120,10 @@ export const PanelWfTaskcategories = ({ workflowid,initcollection }: PanelWfTask
                             items={AppWorkflows.NEW_TASKCAT_FIELDS} 
                             onsave={onSaveNewItem} />
 
-                <Button color="blue" size="2" onClick={() => clearCollection()}>
+                <Button color="blue" size="2" onClick={() => clearCategories()}>
                     <CrossCircledIcon />
                     clear
                 </Button>
-
             </Flex>
         </Flex>
     );

@@ -18,6 +18,7 @@ import { insertTask } from "@/db/services/crud/srvcrudtask";
 import { deleteWorkflow, insertWorkflow } from "@/db/services/crud/srvcrudworkflow";
 import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
 import { getWorkflow } from "@/db/services/read/srvworkflow";
+import { getAllTaskcategory } from "@/db/services/read/srvtaskcategories";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -210,6 +211,12 @@ export class AppWorkflowsReader {
         return false;
     };//end    
 
+    public static read_taskcategories = async (workflow_id:number,includeTasks?:boolean): Promise<Taskcategory[]|null> => {
+        const response = await getAllTaskcategory(workflow_id,includeTasks);
+        if(response=== null){return null;}
+        return parseResponseCollection<Taskcategory>(response);
+    };//end
+
 };//end class
 
 
@@ -230,6 +237,8 @@ export class AppWorkflowsCrud {
         const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;
         if(responseObj.result === DB_CONSTANTS.SUCCESS) {return Number(responseObj.data);}
         return null;
+        //if(taskcategoryId === null) {alert("Error inserting new task category");return;}
+
     };//end
 
     public static insert_workflow = async (name:string,description:string): Promise<number|null> => {

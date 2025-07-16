@@ -1,26 +1,31 @@
 //src\app\workflows\pagecomp\wfmain.tsx
 
-import { useRouter } from "next/navigation";
+
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Box, Button, Flex, Text, TextField } from "@radix-ui/themes";
 import { BARCFG_ADD_IMPORT } from "@/radix/appbars";
 
 import { parseResponseCollection } from "@/common/parsers/javascriptparser";
-import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT, DbOps } from "@/common/database/dbkernel";
+import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { Workflow } from "@/db/model/workflow";
 import { DbTables } from "@/db/dbcatalog";
 import { getAllRows } from "@/db/services/generic/serviceread";
-import {CardWorkflowMin} from "../cards/cardwfmin";
+import { CardWorkflowMin } from "../cards/cardwfmin";
 
 import { AppMemmory } from "@/front/appmemory";
-import { AppWorkflows, AppWorkflowsConfig, AppWorkflowsCreator, AppWorkflowsCrud, AppWorkflowsReader } from "@/front/appworkflows";
+
 import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
 import { DialogFieldText } from "@/radix/form/dlgfieldtext";
-import { TInputText } from "@/radix/radixtypes";
 import { TKeyvalue } from "@/common/types";
 import { Codelang } from "@/db/model/codelang";
 import { Tasktype } from "@/db/model/tasktype";
+import { AppWorkflows, 
+         AppWorkflowsConfig, 
+         AppWorkflowsCreator, 
+         AppWorkflowsCrud, 
+         AppWorkflowsReader } from "@/front/appworkflows";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -33,10 +38,10 @@ const mainContentStyle = {
 // const appRef = useRef<AppWorkflows>(null);
 interface CompProps {
     section: string;
-    //codelangs:Codelang[]|null;
-    showwfpreview: (id:number) => void;
+    editworkflow: (id:number) => void;
+    viewworkflow: (id:number) => void;
 }
-export function WorkflowsManager({ section, showwfpreview }: CompProps) {
+export function WorkflowsManager({ section,viewworkflow: chargeworkflow,editworkflow: openworkflow }: CompProps) {
     const router = useRouter();
     const [ready, setReady] = useState<boolean>(false);
 
@@ -104,12 +109,12 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             execDelete(id);
         }       
         else if (action == DB_ITEM_CMD.OPEN) {
-            AppMemmory.saveWorkflowId(id);
-            router.push("/workflows/wfeditor");
+            openworkflow(id);
+
             return;
         }         
         else if (action == DB_ITEM_CMD.SELECT) {
-            showwfpreview(id);
+            chargeworkflow(id);
             return;
         }
     };//end

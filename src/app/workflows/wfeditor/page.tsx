@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Box, Flex, Grid, Text} from "@radix-ui/themes";
 //db models
 import { Workflow } from "@/db/model/workflow";
@@ -11,10 +12,11 @@ import { WorkflowEditor } from "@/app/workflows/wfeditor/pagecomp/editor";
 import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
 import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
 
-import { AppWorkflowsConfig } from "@/front/appworkflows";
+import { AppWorkflowsConfig, AppWorkflowsReader } from "@/front/appworkflows";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Tasktype } from "@/db/model/tasktype";
 import WorkflowPrimaryBar from "./pagecomp/primarybar";
+import { AppMemmory } from "@/front/appmemory";
 
 
 
@@ -28,35 +30,46 @@ const layoutStyle = {
  *  const router = useRouter();
  */
 export default function WorkflowEditorPage() {
+    
 
-    const [view,setView] = useState<string>(AppWorkflowsConfig.WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
-
-    const [tasktypes,setTasktypes] = useState<Tasktype[]>([]);
+    const router = useRouter();
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
     const [taskcats,setTaskcats] = useState<Taskcategory[]|null>(null);
 
-    const onWorkflowCharged = (workflow:Workflow,taskcats:Taskcategory[]) => {
-        console.log(taskcats);
-        setWorkflow(workflow);
-        setTaskcats(taskcats);
-    }
 
+    useEffect(() => {          
+        const init = async () => {
+            const workflowId = AppMemmory.readWorkflowId();
+            alert("WorkflowId: " + workflowId);
+            setWorkflow(await AppWorkflowsReader.read_workflow(workflowId));
+        };
+        init();
+    }, []);
+
+    if(!workflow) {
+        return (
+            <Flex width="100%" align="center" justify="center" style={layoutStyle}>
+                <Text>Loading workflow...</Text>
+            </Flex>
+        );
+    }
     return (
         <Grid height="100vh" rows="auto 1fr" columns="20% 50% 30%" style={layoutStyle} >   
 
-            <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader /></Flex>
+            <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader />
+                <WorkflowEditor workflow={workflow} />
+            </Flex>
 
             <Flex gridColumn="1" gridRow="2" >            
-                {workflow ? <WorkflowPrimaryBar workflowid={workflow.id}
-                                                collection={taskcats} />:null}  
+                <WorkflowPrimaryBar workflowid={workflow.id!}  />
             </Flex>
 
             <Flex gridColumn="2" gridRow="2" >
-                <WorkflowEditor onCharge={onWorkflowCharged} />
+                <WorkflowEditor workflow={workflow} />            
             </Flex>
 
             <Flex gridColumn="3" gridRow="2" >
-                {workflow ? <WorkflowViewer workflow={workflow} />:null}                
+                <WorkflowViewer workflow={workflow} />      
             </Flex>   
 
         </Grid>
@@ -65,7 +78,12 @@ export default function WorkflowEditorPage() {
 }//end page
 
 /*
-	
+    const onWorkflowCharged = (workflow:Workflow,taskcats:Taskcategory[]) => {
+        console.log(taskcats);
+        setWorkflow(workflow);
+        setTaskcats(taskcats);
+    }
+	//const [view,setView] = useState<string>(AppWorkflowsConfig.WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
     const showManTaskgroups = () => {
         setView(WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id);
     }

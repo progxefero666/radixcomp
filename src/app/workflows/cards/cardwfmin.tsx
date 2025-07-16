@@ -1,15 +1,9 @@
 //src\app\workflows\cards\cardworkflow.tsx
 import React from "react";
 import * as Collapsible from '@radix-ui/react-collapsible';
-
-import { Label } from "radix-ui";
-import { Button, Box, Text, Flex, Separator, IconButton, Container, Section, Heading } from "@radix-ui/themes";
+import { Button, Box, Text, Flex, Separator, IconButton } from "@radix-ui/themes";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
-
-import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { RadixConf } from "@/radix/radixconf";
-import BarButtons from "@/radix/cbars/btbar";
-import { BARCFG_DELETE_OPEN, BARCFG_DOS } from "@/radix/appbars";
 import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
@@ -37,7 +31,6 @@ interface CompProps {
 }
 export function CardWorkflowMin({index,workflow,callback}: CompProps) {
 
-    const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);
 
     const onHandlerClick = (action: string) => {

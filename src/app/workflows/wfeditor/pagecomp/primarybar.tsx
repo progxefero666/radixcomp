@@ -12,16 +12,14 @@ const primaryBarStyle = {
 
 interface CompProps {
     workflowid: number;
-    collection: Taskcategory[] | null;
-    onsave?: () => void;
+    none?: () => void;
 }
-export default function WorkflowPrimaryBar({ workflowid,collection }: CompProps) {
+export default function WorkflowPrimaryBar({ workflowid }: CompProps) {
 
-
+    
     return (
         <Flex width="100%" direction="column" px="3" py="3" style={primaryBarStyle} >
-            {collection ? <PanelWfTaskcategories workflowid={workflowid}
-                                                 initcollection={collection} /> : null}
+            <PanelWfTaskcategories workflowid={workflowid} />
         </Flex>
     );
 

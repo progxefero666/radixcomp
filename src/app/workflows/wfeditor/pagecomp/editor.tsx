@@ -28,31 +28,24 @@ const mainContentStyle = {
     border: '1px solid rgb(167, 176, 188)'
 };
 
-// const appRef = useRef<AppWorkflows>(null);
+// onCharge: (workflow: Workflow, taskgroups: Taskcategory[]) => void;
 interface WorkflowEditorProps {
-    onCharge: (workflow: Workflow, taskgroups: Taskcategory[]) => void;
+    workflow: Workflow;    
 }
 
-export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
+export function WorkflowEditor({ workflow }: WorkflowEditorProps) {
 
-    const [ready, setReady] = useState<boolean>(false);
-
+    let initialized: boolean = false;
     const [codelangs, setCodelangs] = useState<Codelang[]>([]);
     const [tasktypes, setTasktypes] = useState<Tasktype[]>([]);
-
-    let isNewWorkflow: boolean = true;
-    //if ((AppMemmory.readWorkflowId()!) !== Number(DbOps.NEW_ROW_ID)) { isNewWorkflow = false; }
-
     const [mainOpen, setMainOpen] = useState<boolean>(true);
-    const [workflowId, setWorkflowId] = useState<number>(AppMemmory.readWorkflowId());
-    const [workflow, setWorkflow] = useState<Workflow>(AppWorkflows.NEW_WK);
     const [taskcats, setTaskcats] = useState<Taskcategory[]>([]);
     const [tasks, setTasks] = useState<Task[]>([]);
 
     const groups = useRef<GroupTasks[]>([]);
 
     useEffect(() => {
-        if (ready) { return; }
+        if (initialized) { return; }
         const init = async () => {
 
             setCodelangs(parseResponseCollection<Codelang>
@@ -60,11 +53,11 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
 
             setTasktypes(parseResponseCollection<Tasktype>
                     (await getAllRows(DbTables.tasktype))!);
-            
+            /*
             if (!isNewWorkflow) {
                 setWorkflow(parseResponseItem<Workflow>(await getWorkflow(workflowId))!);
                 setTaskcats(parseResponseCollection<Taskcategory>(await getTaskcategories(workflowId))!);
-                setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id))!);
+                setTasks(parseResponseCollection<Task>(await getTasks(workflow!.id!))!);
             }
             else {
                 //GroupTasks
@@ -72,6 +65,7 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
             }
             setReady(true);
             onCharge(workflow, taskcats);
+            */
         };
         init();
     }, []);
