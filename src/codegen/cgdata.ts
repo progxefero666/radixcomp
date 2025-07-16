@@ -1,4 +1,4 @@
-//src\codegen\data\cgdataconstants.ts
+//src\codegen\data\cgdata.ts
 
 //................................................................................
 // models
