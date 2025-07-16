@@ -39,7 +39,7 @@ interface CompProps {
     workflow: Workflow;
     onsave?: () => void;
 }
-export default function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
+export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
 
     //const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(openinit);

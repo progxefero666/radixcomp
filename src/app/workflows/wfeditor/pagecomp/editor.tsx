@@ -3,37 +3,25 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Flex, Text } from "@radix-ui/themes";
-
-import { Workflow } from "@/db/model/workflow";
 import { parseResponseCollection, parseResponseItem } from "@/common/parsers/javascriptparser";
-import { DB_ITEM_CMD, } from "@/common/database/dbkernel";
-import { Task } from "@/db/model/task";
-import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
-import { AppMemmory, readMemmoryTasktypes } from "@/front/appmemory";
-
-import { AppWorkflows, WorkflowActions } from "@/front/appworkflows";
-import BarButtons from "@/radix/cbars/btbar";
-
-
-import { Codelang } from "@/db/model/codelang";
-import { Taskcategory } from "@/db/model/taskcategory";
-import CardWorkflowMain from "../cards/cardwfmain";
-import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
-import { BARCFG_SAVE_CLOSE } from "@/radix/appbars";
-
-import { OPERATIONS } from "@/common/constants";
-import { Tasktype } from "@/db/model/tasktype";
-import CardTask from "../cards/cardwftask";
-
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
-import { DbTables } from "@/db/dbcatalog";
-import { getAllRows } from "@/db/services/generic/serviceread";
 import { WorkflowEditorHeader } from "./editorheader";
 import { DialogButtonConfirm } from "@/radix/dialog/dlgbuttonconfirm";
 import { RadixConf } from "@/radix/radixconf";
+import { AppMemmory } from "@/front/appmemory";
+import { DbTables } from "@/db/dbcatalog";
+import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
+import { getAllRows } from "@/db/services/generic/serviceread"
+import { AppWorkflows, WorkflowActions } from "@/front/appworkflows";
+import { Workflow } from "@/db/model/workflow";
+import { Task } from "@/db/model/task";
+import { Taskcategory } from "@/db/model/taskcategory";
+import { Codelang } from "@/db/model/codelang";
+import { Tasktype } from "@/db/model/tasktype";
 import { GroupTasks } from "@/db/modelextend/grouptasks";
-
+import {CardWorkflowMain} from "@/app/workflows/wfeditor/cards/cardwfmain";
+import {CardTask} from "@/app/workflows/wfeditor/cards/cardwftask";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',

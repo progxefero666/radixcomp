@@ -7,25 +7,6 @@ import { DB_COLL_CMD, DpOpsUtil } from "@/common/database/dbkernel";
 import { DB_TABLES }     from "@/db/dbcatalog";
 
 
-export async function getCountWorkflowsById(name:string): Promise<string> {
-
-    const prisma = new PrismaClient();
-    let count = 0;
-    try {
-        count = await prisma.workflow.count({
-            where: {name:name},
-        });
-    }
-    catch (error) {
-        console.error(DpOpsUtil.getErrMessage(error));
-        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
-    }
-    finally {
-        await prisma.$disconnect();
-    }
-    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_BY_ID),count.toString());
-
-};//end 
 
 export async function getWorkflow(id:number): Promise<string> {
 
@@ -74,6 +55,26 @@ export async function get(id:number): Promise<string> {
     return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.taskgroup, DB_COLL_CMD.GET_BY_ID), result);
 
 } //end function
+
+export async function getCountWorkflowsById(name:string): Promise<string> {
+
+    const prisma = new PrismaClient();
+    let count = 0;
+    try {
+        count = await prisma.workflow.count({
+            where: {name:name},
+        });
+    }
+    catch (error) {
+        console.error(DpOpsUtil.getErrMessage(error));
+        return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.workflow, DB_COLL_CMD.GET_BY_ID),count.toString());
+
+};//end 
 
 
 /**

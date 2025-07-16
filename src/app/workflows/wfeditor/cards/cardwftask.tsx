@@ -54,7 +54,7 @@ interface CardTaskProps {
     //onsave?: (taskOrden:number) => void;
     
 }
-export default function CardTask({ taskscount,task, codelangs, tasktypes, taskcategories: taskgroups,
+export function CardTask({ taskscount,task, codelangs, tasktypes, taskcategories: taskgroups,
                                     ondelete }: CardTaskProps) {
     const [open, setOpen] = React.useState(false);
 

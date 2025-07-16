@@ -14,7 +14,7 @@ import { getAllRows } from "@/db/services/generic/serviceread";
 import {CardWorkflowMin} from "../cards/cardwfmin";
 
 import { AppMemmory } from "@/front/appmemory";
-import { AppWorkflows, AppWorkflowsConfig, AppWorkflowsReader } from "@/front/appworkflows";
+import { AppWorkflows, AppWorkflowsConfig, AppWorkflowsCreator, AppWorkflowsReader } from "@/front/appworkflows";
 import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
 import { DialogFieldText } from "@/radix/form/dlgfieldtext";
 import { TInputText } from "@/radix/radixtypes";
@@ -82,7 +82,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             return alert("Workflow name in use.");
         }
         alert("Creating new workflow: " + inputName.value);
-        AppWorkflows.createCompleteWorkflow(inputName.value!,codelangs,tasktypes);
+        AppWorkflowsCreator.createCompleteWorkflow(inputName.value!,codelangs,tasktypes);
         alert("Workflow created.");
     };//end
 
