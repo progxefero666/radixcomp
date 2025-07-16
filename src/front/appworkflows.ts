@@ -148,22 +148,17 @@ export class AppWorkflowsCreator {
         if(workflowId === null) {return null;}
 
         // 2. insert default task category
-        const taskcategoryId:number|null = await AppWorkflowsCrud.insert_taskcategory(workflowId!,
-            AppWorkflows.TASKCAT_DEF_NAME, AppWorkflows.TASKCAT_DEF_DESC);
+        const taskcategoryId:number|null = await AppWorkflowsCrud.insert_taskcategory
+                (workflowId!,AppWorkflows.TASKCAT_DEF_NAME, AppWorkflows.TASKCAT_DEF_DESC);
         if(taskcategoryId === null) {return null;}
 
         // 3. insert first task
-        const task:Task = new Task(
-            DbOps.NEW_ROW_ID,tasktypes![0].id,codelangs![0].id,
-            workflowId!,taskcategoryId!,
-            AppWorkflows.FIRST_ITEM,
-            AppWorkflows.FIRST_TASK_NAME,
-            AppWorkflows.FIRST_TASK_DESC,
-            AppWorkflows.FIRST_GROUP,
-            null,null);                       
-        const resposeItask = await insertTask(JSON.stringify(task));
-        if(resposeItask === null) {return null;}
-
+        const taskId:number|null = await AppWorkflowsCrud.insert_task(
+            tasktypes![0].id,codelangs![0].id,
+            workflowId!,taskcategoryId!,AppWorkflows.FIRST_TASK_NAME,
+            AppWorkflows.FIRST_TASK_DESC,AppWorkflows.FIRST_ITEM,AppWorkflows.FIRST_GROUP);
+        if(taskId === null) {return null;}
+    
         return workflowId;
     };//end
 
@@ -206,6 +201,7 @@ export class AppWorkflowsReader {
  *    - CRUD operations for workflows
  */
 export class AppWorkflowsCrud {
+
     public static insert_taskcategory = async (workflowId:number,
                                                name:string,
                                                description:string): Promise<number|null> => {
@@ -215,7 +211,7 @@ export class AppWorkflowsCrud {
         const response = await insertTaskcategory(JSON.stringify(taskCategory));      
         if(response === null) {return null;}
         const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;
-        if(responseObj.isError()) {return null;}  
+        if(responseObj.result==DB_CONSTANTS.ERROR) {return null;}
         return Number(responseObj.data);
     };//end
 
@@ -223,10 +219,23 @@ export class AppWorkflowsCrud {
         const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,description, null, null);
         const response = await insertWorkflow(JSON.stringify(workflow));
         if(response === null) {return null;}
-        const reponseIwObj:JsonResponse = JSON.parse(response) as JsonResponse;        
-        if(reponseIwObj.isError()) {return null;}
+        const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;        
+        if(responseObj.result==DB_CONSTANTS.ERROR) {return null;}
 
-        return Number(reponseIwObj.data);
+        return Number(responseObj.data);
+    };//end
+
+    public static insert_task = async (codelangId:number,tasktype_id:number,    
+                                        workflowId:number,taskcategoryId:number,
+                                        name:string,description:string,
+                                        orden:number,groupIndex:number):Promise<number|null> => {                                              
+        const task:Task = new Task(DbOps.NEW_ROW_ID,tasktype_id,codelangId,
+                        workflowId,taskcategoryId,
+                        orden,name,description,groupIndex,null,null);   
+        const response = await insertTask(JSON.stringify(task));   
+        const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;        
+        if(responseObj.result==DB_CONSTANTS.ERROR) {return null;}                     
+        return Number(responseObj.data); 
     };//end
 
 };//end class

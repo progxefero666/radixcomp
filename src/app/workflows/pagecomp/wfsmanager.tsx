@@ -82,8 +82,9 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             return alert("Workflow name in use.");
         }
         alert("Creating new workflow: " + inputName.value);
-        AppWorkflowsCreator.createCompleteWorkflow(inputName.value!,codelangs,tasktypes);
-        alert("Workflow created.");
+        const workflowId:number|null = await AppWorkflowsCreator
+            .createCompleteWorkflow(inputName.value!,codelangs,tasktypes);
+        alert("Workflow created id: " + workflowId);
     };//end
 
 
