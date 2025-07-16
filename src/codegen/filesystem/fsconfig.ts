@@ -3,13 +3,14 @@
 import JSZip from 'jszip';
 
 /**
- * class FileSystemConstants
+ * class FsConstants.PATH_PARENT
  */
 export class FsConstants {
 
-    private static readonly TYPE_FOLDER: string = "folder";
-    private static readonly TYPE_FILE: string = "file";
-    private static readonly PATH_BAR: string = "/";
+    public static readonly TYPE_FOLDER: string = "folder";
+    public static readonly TYPE_FILE: string = "file";
+    public static readonly PATH_BAR: string = "/";
+    public static readonly PATH_PARENT: string = "..";
 
 }//end class
 
@@ -17,6 +18,6 @@ export class FsConstants {
  * class FileSystemConfig 
  */
 export class FsConfig {
-    private static readonly TYPE_FILE: string = "file";
+    public static readonly TYPE_FILE: string = "file";
 
 }//end class
