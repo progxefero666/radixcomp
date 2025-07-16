@@ -10,10 +10,16 @@ import { TInputText } from "@/radix/radixtypes";
 import { Task } from "@/db/model/task";
 import { getCountWorkflowsById } from "@/db/services/read/srvworkflow";
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { getCountByTable } from "@/db/services/generic/serviceread";
+import { getCountAllRows } from "@/db/services/generic/serviceread";
 import { DbTables } from "@/db/dbcatalog";
 import { insertWorkflow } from "@/db/services/crud/srvcrudworkflow";
 import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
+import { getAllTasktypes } from "@/db/services/read/srvmantasktypes";
+import { Tasktype } from "@/db/model/tasktype";
+import { parseResponseCollection } from "@/common/parsers/javascriptparser";
+import { Codelang } from "@/db/model/codelang";
+import { getAllCodelang } from "@/db/services/read/srvcodelang";
+import { insertTask } from "@/db/services/crud/srvcrudtask";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -121,7 +127,7 @@ export class AppWorkflows {
     };//end
        
     public static existWorkflow = async (name: string): Promise<boolean> => {
-        const response = await getCountByTable(DbTables.workflow,name);
+        const response = await getCountAllRows(DbTables.workflow,name);
         if (response === null) { return false; }
         const jsonParsed:JsonResponse = JSON.parse(response) as JsonResponse;
         const count = Number(jsonParsed.data);
@@ -132,6 +138,21 @@ export class AppWorkflows {
     
     public static createNewWorkflow = async (name: string): Promise<boolean> => {
 
+        const responsCl = await getAllCodelang();
+        if(responsCl=== null) {
+            alert("Error getting code langs.");
+            return false;
+        }
+        const codelangs:Codelang[] = parseResponseCollection<Codelang>(responsCl)!;
+
+        const responsTt = await getAllTasktypes();
+        if(responsTt=== null) {
+            alert("Error getting task types.");
+            return false;
+        }
+        const tasktypes: Tasktype[] = parseResponseCollection<Tasktype>(responsTt)!;
+        const tasktypeFirstId: number = tasktypes[0].id;
+        
         const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,"", null, null);
         const responseIw = await insertWorkflow(JSON.stringify(workflow));
         const reponseIwObj:JsonResponse = JSON.parse(responseIw) as JsonResponse;
@@ -148,7 +169,19 @@ export class AppWorkflows {
             return false;
         }        
         const taskcategoryId = Number(resposeItcObj.data);
-        return false;
+
+        const task:Task = new Task(
+            DbOps.NEW_ROW_ID,tasktypes[0].id,codelangs[0].id,
+            workflowId,taskcategoryId,0,"first task","",0,null,null);       
+        
+        
+        const resposeItask = await insertTask(JSON.stringify(task));
+        if(resposeItask === null) {
+            alert("Error inserting task.");
+            return false;
+        }
+        
+        return true;
     }//end
 
     /*

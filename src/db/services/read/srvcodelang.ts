@@ -18,7 +18,7 @@ import { DpOpsUtil } from "@/common/database/dbkernel";
     },
  *    
  */
-export async function get(id:number): Promise<string> {
+export async function getCodelang(id:number): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
@@ -44,7 +44,7 @@ export async function get(id:number): Promise<string> {
  * Server Action: Get All TaskTypesS
  *    desc: read all rows in table tasktypes
  */
-export async function getAll(): Promise<string> {
+export async function getAllCodelang(): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;

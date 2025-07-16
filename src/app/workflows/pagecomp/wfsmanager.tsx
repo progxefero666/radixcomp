@@ -10,7 +10,7 @@ import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT, DbOps } from "@/common/database/dbkernel";
 import { Workflow } from "@/db/model/workflow";
 import { DbTables } from "@/db/dbcatalog";
-import { getAllByTable } from "@/db/services/generic/serviceread";
+import { getAllRows } from "@/db/services/generic/serviceread";
 import {CardWorkflowMin} from "../cards/cardwfmin";
 
 import { AppMemmory } from "@/front/appmemory";
@@ -44,7 +44,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     useEffect(() => {
         if (ready) { return; }
         const init = async () => {
-            const response = await getAllByTable(DbTables.workflow);
+            const response = await getAllRows(DbTables.workflow);
             if (response === null) { return false; }
 
             const collection: Workflow[] | null = parseResponseCollection<Workflow>(response);

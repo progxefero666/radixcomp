@@ -3,7 +3,7 @@
 import { StorageService } from "@/common/storage";
 import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
-import { getAllByTable } from "@/db/services/generic/serviceread";
+import { getAllRows } from "@/db/services/generic/serviceread";
 import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { Tasktype } from "@/db/model/tasktype";
 
@@ -66,7 +66,7 @@ export class AppMemmory {
 } //end class
 
 export  async function saveMemmoryCodelangs(): Promise<void>  {
-    const response = await getAllByTable(DbTables.codelang);
+    const response = await getAllRows(DbTables.codelang);
     if (response === null) {return;}
     const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
     AppMemmory.saveCodelangs(JSON.stringify(collection, null, 4)); 
@@ -78,7 +78,7 @@ export function readMemmoryCodelangs(): Codelang[]  {
 }
 
 export  async function saveMemmoryTasktypes(): Promise<void>  {
-    const response = await getAllByTable(DbTables.tasktype);
+    const response = await getAllRows(DbTables.tasktype);
     if (response === null) {return;}
     const collection: Tasktype[] | null = parseResponseCollection<Tasktype>(response);
     console.log("saveMemmoryTasktypes", collection);

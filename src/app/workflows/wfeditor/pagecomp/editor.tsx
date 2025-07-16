@@ -28,7 +28,7 @@ import CardTask from "../cards/cardwftask";
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { DbTables } from "@/db/dbcatalog";
-import { getAllByTable } from "@/db/services/generic/serviceread";
+import { getAllRows } from "@/db/services/generic/serviceread";
 import { WorkflowEditorHeader } from "./editorheader";
 import { DialogButtonConfirm } from "@/radix/dialog/dlgbuttonconfirm";
 import { RadixConf } from "@/radix/radixconf";
@@ -68,10 +68,10 @@ export function WorkflowEditor({ onCharge }: WorkflowEditorProps) {
         const init = async () => {
 
             setCodelangs(parseResponseCollection<Codelang>
-                    (await getAllByTable(DbTables.codelang))!);
+                    (await getAllRows(DbTables.codelang))!);
 
             setTasktypes(parseResponseCollection<Tasktype>
-                    (await getAllByTable(DbTables.tasktype))!);
+                    (await getAllRows(DbTables.tasktype))!);
             
             if (!isNewWorkflow) {
                 setWorkflow(parseResponseItem<Workflow>(await getWorkflow(workflowId))!);

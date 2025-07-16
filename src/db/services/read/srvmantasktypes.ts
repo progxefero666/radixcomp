@@ -16,7 +16,7 @@ import { DB_TABLES }     from "@/db/dbcatalog";
     },
  *    
  */
-export async function get(id:number): Promise<string> {
+export async function getTasktype(id:number): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
@@ -42,7 +42,7 @@ export async function get(id:number): Promise<string> {
  * Server Action: Get All TaskTypesS
  *    desc: read all rows in table tasktypes
  */
-export async function getAll(): Promise<string> {
+export async function getAllTasktypes(): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;

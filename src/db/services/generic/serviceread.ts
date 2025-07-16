@@ -1,17 +1,13 @@
 //src\db\services\generic\serviceread.ts
 "use server";
 
-import { Option } from "@/common/model/option";
 import { JsonResponse } from "@/common/model/jsonreponse";
 import { Prisma, PrismaClient } from "@generated/prisma";
-
 import { DB_COLL_CMD, DpOpsUtil } from "@/common/database/dbkernel";
-import {  DB_TABLES, DbTables } from "@/db/dbcatalog";
-import { Codelang } from "@/db/model/codelang";
+import { DB_TABLES, DbTables } from "@/db/dbcatalog";
 
 
-
-export async function getCountByTable(table: string,rowName:string): Promise<string> {
+export async function getCountAllRows(table: string,rowName:string): Promise<string> {
 
     const prisma = new PrismaClient();
     let count = 0;
@@ -44,16 +40,12 @@ export async function getCountByTable(table: string,rowName:string): Promise<str
 };//end 
 
 
-
-
 /**
  * Server Action for Read Commom Tables
  *    desc: get all rows from table passed in parameter.
- * @param table
- * @returns JSON string with result
  */
-export async function getAllByTable(table: string): Promise<string> {
-    console.log("GetAll table:", table);
+export async function getAllRows(table: string): Promise<string> {
+    
     const prisma = new PrismaClient();
     let result = null;
     try {
