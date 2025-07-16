@@ -61,7 +61,7 @@ export class ThemeIconsStyle {
 
     public static readonly DEF_WIDTH = "20px";
     public static readonly DEF_HEIGHT = "20px";    
-
+    public static readonly DEF_SIZE = RadixConf.SIZES.size_2;
 
 
 }//end class

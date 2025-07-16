@@ -1,11 +1,10 @@
 //src\radix\dialog\dlgbuttonconfirm.tsx
 
 import React from "react";
-import { Button, Box, Flex, Text, Dialog } from "@radix-ui/themes";
+import { Button, Flex, Text, Dialog } from "@radix-ui/themes";
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
-import { CheckIcon, Cross2Icon, FilePlusIcon, TrashIcon } from "@radix-ui/react-icons";
+import { CheckIcon, Cross2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { RadixOpsText } from "../radixconstants";
-import { RadixConf } from "../radixconf";
 
 
 /**
@@ -20,24 +19,18 @@ interface CompProps {
 }
 export const DialogButtonConfirm = ({ buttontext, title, message, onconfirm }: CompProps) => {
 
-    const renderButton = () => {
-        return (
-            <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                <TrashIcon width={ThemeIconsStyle.DEF_HEIGHT}
-                    height={ThemeIconsStyle.DEF_WIDTH} />
-                <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
-                    {buttontext}
-                </Text>
-            </Button>
-        )
-    }
+  
     return (
         <Dialog.Root>
 
             <Dialog.Trigger>
-                <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                    <FilePlusIcon width={ThemeIconsStyle.DEF_HEIGHT}
-                        height={ThemeIconsStyle.DEF_WIDTH} />
+                <Button size   = {ThemeButtonsStyle.BTN_DEF_SIZE}
+                        color  = {ThemeButtonsStyle.COLOR_DELETE}
+                        radius = {ThemeButtonsStyle.BTN_DEF_RADIUS}>
+
+                    <TrashIcon width={ThemeIconsStyle.DEF_HEIGHT}
+                               height={ThemeIconsStyle.DEF_WIDTH} />
+
                     <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
                         {buttontext}
                     </Text>

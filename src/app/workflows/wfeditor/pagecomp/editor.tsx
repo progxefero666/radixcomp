@@ -7,7 +7,7 @@ import { parseResponseCollection, parseResponseItem } from "@/common/parsers/jav
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { WorkflowEditorHeader } from "./editorheader";
-import { DialogButtonConfirm } from "@/radix/dialog/dlgbuttonconfirm";
+import { DialogButtonConfirm } from "@/radix/dialog/dlgbtndelete";
 import { RadixConf } from "@/radix/radixconf";
 import { AppMemmory } from "@/front/appmemory";
 import { DbTables } from "@/db/dbcatalog";

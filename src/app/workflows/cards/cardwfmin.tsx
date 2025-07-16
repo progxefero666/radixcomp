@@ -8,7 +8,7 @@ import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { DialogButtonConfirm } from "@/radix/dialog/dlgbuttonconfirm";
+import { DialogButtonConfirm } from "@/radix/dialog/dlgbtndelete";
 
 
 const compStyle = {

@@ -1,11 +1,10 @@
 //src\radix\dialog\dlgiconconfirm.tsx
 
 import React from "react";
-import { Button, Box, Flex, Text, Dialog, IconButton } from "@radix-ui/themes";
+import { Button, Flex, Text, Dialog, IconButton } from "@radix-ui/themes";
 import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
 import { CheckIcon, Cross2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { RadixOpsText } from "../radixconstants";
-import { RadixConf } from "../radixconf";
 
 
 /**
@@ -19,18 +18,23 @@ interface CompProps {
 }
 export const DialogIconConfirm = ({ icon, title, message, onconfirm }: CompProps) => {
 
+    /*
     const renderIcon = () => {
         if (icon === RadixConf.ICON_DELETE) {
-            return (<TrashIcon />)
+            return (
+                <TrashIcon  width={ThemeIconsStyle.DEF_WIDTH}
+                            height={ThemeIconsStyle.DEF_HEIGHT}/>
+            )
         }
     }
-
+    */
     return (
         <Dialog.Root >
 
             <Dialog.Trigger>
-                <IconButton variant={RadixConf.VARIANTS.solid} >
-                    {renderIcon()}
+                <IconButton size={ThemeIconsStyle.DEF_SIZE}>
+                    <TrashIcon  width={ThemeIconsStyle.DEF_WIDTH}
+                                height={ThemeIconsStyle.DEF_HEIGHT}/>
                 </IconButton>
             </Dialog.Trigger>
 
