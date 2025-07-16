@@ -55,7 +55,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
 
             setTasktypes(parseResponseCollection<Tasktype>
                     (await getAllRows(DbTables.tasktype))!);
-                                
+
             const response = await getAllRows(DbTables.workflow);
             if (response === null) { return false; }
 
@@ -81,8 +81,9 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
         if(existName){
             return alert("Workflow name in use.");
         }
+        alert("Creating new workflow: " + inputName.value);
         AppWorkflows.createNewWorkflow(inputName.value!,codelangs,tasktypes);
-
+        alert("Workflow created.");
     };//end
 
 

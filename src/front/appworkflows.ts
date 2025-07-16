@@ -63,7 +63,7 @@ export class AppWorkflowsConfig {
 }//end class
 
 /**
- * class AppWorkflows.FIRST_TASK_DESC
+ * class AppWorkflows.TASKCAT_DEF_DESC
  */
 export class AppWorkflows {
 
@@ -71,7 +71,9 @@ export class AppWorkflows {
     public static readonly FIRST_ITEM:number = 0;
     public static readonly FIRST_GROUP:number = 0;
 
-    public static readonly TASKCATEGORY_DEF_NAME: string = "default";
+    public static readonly TASKCAT_DEF_NAME: string = "default";
+    
+    public static readonly TASKCAT_DEF_DESC: string = "default task category";
     public static readonly FIRST_TASK_NAME: string = "first task";
     public static readonly FIRST_TASK_DESC: string = "";
 
@@ -117,44 +119,56 @@ export class AppWorkflows {
         return parseResponseCollection<Tasktype>(response);
     };//end
 
+    public static insert_taskcategory = async (workflowId:number,
+                                               name:string,
+                                               description:string): Promise<number|null> => {
+        const taskCategory: Taskcategory 
+            = new Taskcategory(DbOps.NEW_ROW_ID,workflowId,name,description);
+
+        const response = await insertTaskcategory(JSON.stringify(taskCategory));      
+        if(response === null) {return null;}
+        const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;
+        if(responseObj.isError()) {return null;}  
+        return Number(responseObj.data);
+    };//end
+
+    public static insert_workflow = async (name:string,description:string): Promise<number|null> => {
+        const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,description, null, null);
+        const response = await insertWorkflow(JSON.stringify(workflow));
+        if(response === null) {return null;}
+        const reponseIwObj:JsonResponse = JSON.parse(response) as JsonResponse;        
+        if(reponseIwObj.isError()) {return null;}
+
+        return Number(reponseIwObj.data);
+    };//end
+
     public static createNewWorkflow = async (name:string,codelangs:Codelang[]|null,tasktypes:Tasktype[]|null): Promise<boolean> => {
 
         if(codelangs === null){codelangs = await AppWorkflows.get_codelangs(name);}
         if(tasktypes === null){tasktypes = await AppWorkflows.get_tasktypes(name);}
         
         const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,"", null, null);
-        const responseIw = await insertWorkflow(JSON.stringify(workflow));
-        const reponseIwObj:JsonResponse = JSON.parse(responseIw) as JsonResponse;
+        const response = await insertWorkflow(JSON.stringify(workflow));
+        const reponseIwObj:JsonResponse = JSON.parse(response) as JsonResponse;
         if(reponseIwObj.isError()) {return false;}
 
-        const workflowId = Number(reponseIwObj.data);
-        const taskCategory: Taskcategory = new Taskcategory
-            (DbOps.NEW_ROW_ID,workflowId,AppWorkflows.TASKCATEGORY_DEF_NAME,"default task category");
-
-        const resposeItc = await insertTaskcategory(JSON.stringify(taskCategory));    
-        const resposeItcObj:JsonResponse = JSON.parse(resposeItc) as JsonResponse;
-        if(reponseIwObj.isError()) {return false;}        
+        const workflowId = Number(reponseIwObj.data);    
         
-        const taskcategoryId = Number(resposeItcObj.data);
+        const taskcategoryId:number|null = await AppWorkflows.insert_taskcategory(workflowId,
+            AppWorkflows.TASKCAT_DEF_NAME, AppWorkflows.TASKCAT_DEF_DESC);
+        if(taskcategoryId === null) {return false;}
 
         const task:Task = new Task(
-            DbOps.NEW_ROW_ID,
-            tasktypes![0].id,
-            codelangs![0].id,
-            workflowId,
-            taskcategoryId,
+            DbOps.NEW_ROW_ID,tasktypes![0].id,codelangs![0].id,
+            workflowId,taskcategoryId!,
             AppWorkflows.FIRST_ITEM,
             AppWorkflows.FIRST_TASK_NAME,
             AppWorkflows.FIRST_TASK_DESC,
             AppWorkflows.FIRST_GROUP,
             null,null);       
-        
-        
+                
         const resposeItask = await insertTask(JSON.stringify(task));
-        if(resposeItask === null) {
-            alert("Error inserting task.");
-            return false;
-        }
+        if(resposeItask === null) {return false;}
 
         return true;
     };//end
