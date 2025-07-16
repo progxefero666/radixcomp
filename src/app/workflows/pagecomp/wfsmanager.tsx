@@ -34,7 +34,7 @@ const mainContentStyle = {
 interface CompProps {
     section: string;
     //codelangs:Codelang[]|null;
-    showwfpreview: (workflow: Workflow) => void;
+    showwfpreview: (id:number) => void;
 }
 export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     const router = useRouter();
@@ -86,29 +86,30 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
         }   
     };//end
 
-    const execDelete = async (workflowIndex: number) => {
-        const result:boolean = await AppWorkflowsCrud.delete_workflow(workflows![workflowIndex].id!);
+    const execDelete = async (id: number) => {
+        const result:boolean = await AppWorkflowsCrud.delete_workflow(id);
         if(!result) {
             alert("Error deleting workflow.");
             return;
         }
-        alert("Workflow deleted successfully.");
+        alert("Workflow deleted success.");
+        const workflowIndex:number =  AppWorkflows.getWorkflowIndex(workflows,id);
         const act_workflows:Workflow[] = workflows;
         act_workflows.splice(workflowIndex,1);
         setWorkflows(act_workflows);        
     };//end
 
-    const execItemOperation = (index:number,action:string) => {
+    const execItemOperation = (id:number,action:string) => {
         if (action == DB_ITEM_CMD.DELETE) {
-            execDelete(index);
+            execDelete(id);
         }       
         else if (action == DB_ITEM_CMD.OPEN) {
-            AppMemmory.saveWorkflowId(workflows![index].id!);
+            AppMemmory.saveWorkflowId(id);
             router.push("/workflows/wfeditor");
             return;
         }         
         else if (action == DB_ITEM_CMD.SELECT) {
-            showwfpreview(workflows![index]);
+            showwfpreview(id);
             return;
         }
     };//end

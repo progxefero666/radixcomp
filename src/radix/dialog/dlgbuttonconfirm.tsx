@@ -13,25 +13,23 @@ import { RadixConf } from "../radixconf";
  */
 interface CompProps {
     buttontext: string;
-    buttonicon: string;
+    buttonicon?: string;
     title: string;
     message: string;
     onconfirm: () => void;
 }
-export const DialogButtonConfirm = ({ buttontext, buttonicon, title, message, onconfirm }: CompProps) => {
+export const DialogButtonConfirm = ({ buttontext, title, message, onconfirm }: CompProps) => {
 
     const renderButton = () => {
-        if (buttonicon === RadixConf.ICON_DELETE) {
-            return (
-                <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                    <TrashIcon width={ThemeIconsStyle.DEF_HEIGHT}
-                        height={ThemeIconsStyle.DEF_WIDTH} />
-                    <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
-                        {buttontext}
-                    </Text>
-                </Button>
-            )
-        }
+        return (
+            <Button size={ThemeButtonsStyle.BTN_DEF_SIZE}>
+                <TrashIcon width={ThemeIconsStyle.DEF_HEIGHT}
+                    height={ThemeIconsStyle.DEF_WIDTH} />
+                <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
+                    {buttontext}
+                </Text>
+            </Button>
+        )
     }
     return (
         <Dialog.Root>

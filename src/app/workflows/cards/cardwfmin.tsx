@@ -12,6 +12,9 @@ import BarButtons from "@/radix/cbars/btbar";
 import { BARCFG_DELETE_OPEN, BARCFG_DOS } from "@/radix/appbars";
 import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
+import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
+import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { DialogButtonConfirm } from "@/radix/dialog/dlgbuttonconfirm";
 
 
 const compStyle = {
@@ -30,14 +33,14 @@ const headerStyle = {
 interface CompProps {
     index: number;
     workflow: Workflow;
-    callback: (index:number,action:string) => void;
+    callback: (id:number,action:string) => void;
 }
-export function CardWorkflowMin({ index,workflow , callback}: CompProps) {
+export function CardWorkflowMin({index,workflow,callback}: CompProps) {
 
     const barbuttonscfg: BarButtonsCfg = BARCFG_DOS
     const [open, setOpen] = React.useState(false);
 
-    const onClick = (action: string, compName?: string) => {
+    const onHandlerClick = (action: string) => {
         callback(index, action);
     };
 
@@ -59,7 +62,16 @@ export function CardWorkflowMin({ index,workflow , callback}: CompProps) {
                             <Text size="3" >{workflow.name}</Text>
                         </Box>
                         <Box pt="1">
-                            <BarButtons barconfig={barbuttonscfg} onclick={onClick} />
+                            <DialogButtonConfirm buttontext={DB_ITEM_CMD_TEXT.DELETE}
+                                                 message="confirm delete this workflow?"
+                                                 title="Delete Workflow"
+                                                 onconfirm={() => onHandlerClick(DB_ITEM_CMD.DELETE)}  />
+                                 
+                            <Button color={ThemeButtonsStyle.COLOR_OPEN}
+                                size={ThemeButtonsStyle.BTN_DEF_SIZE} 
+                                onClick={() => onHandlerClick(DB_ITEM_CMD.OPEN)}  >
+                                {DB_ITEM_CMD_TEXT.OPEN}
+                            </Button>                            
                         </Box>
                     </Flex>
                 </Flex>

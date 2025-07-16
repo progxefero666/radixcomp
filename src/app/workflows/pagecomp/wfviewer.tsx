@@ -1,48 +1,58 @@
 //src\app\workflows\pagecomp\wfviewer.tsx
 
-import { Flex } from "@radix-ui/themes";
-import { useState } from "react";
-import { AppWorkflowsConfig } from "@/front/appworkflows";
+import { Flex,Text,Box,Button } from "@radix-ui/themes";
+import { useEffect, useRef, useState } from "react";
+import { AppWorkflowsConfig, AppWorkflowsReader } from "@/front/appworkflows";
 import { Workflow } from "@/db/model/workflow";
 import CardWorkflowPreview from "@/app/workflows/cards/cardwfpreview";
 
 interface CompProps {
-    workflow?: Workflow | null;
+    workflowId: number;
     mode?: string;
     onedition?: () => void;
 }
-export const WorkflowViewer = ({ workflow, mode: actpanel }: CompProps) => {
+export const WorkflowViewer = ({ workflowId, mode: actpanel }: CompProps) => {
+    
+    let initialized: boolean = false;
     const [mode, setMode] = useState<string>(AppWorkflowsConfig.VIEW_DEFAULT);
 
-    if (!workflow) {
-        return (
-            <Flex width="100%" direction="column" px="2" pt="0" pb="2" >
-                <p>No workflow selected</p>
-            </Flex>
-        )
-    }
+    const workflow = useRef<Workflow>(null);
 
+    useEffect(() => {
+        if(initialized) {return;}         
+        const init = async () => {
+            workflow.current = await AppWorkflowsReader.read_workflow(workflowId);
+            initialized = true;
+        };
+        init();
+    }, []);
+        
+    if(!initialized){
+        return <Flex width="100%" height="100%" justify="center" align="center">
+            <Text>Loading...</Text>
+        </Flex>;
+    } 
     const renderWorkflow = () => {
         return (
-            <CardWorkflowPreview workflow={workflow} />
+            <CardWorkflowPreview workflow={workflow.current!} />
         )
     }
 
     const renderJson = () => {
         return (
-            <CardWorkflowPreview workflow={workflow} />
+            <CardWorkflowPreview workflow={workflow.current!} />
         )
     }    
 
     const renderPrompt = () => {
         return (
-            <CardWorkflowPreview workflow={workflow} />
+            <CardWorkflowPreview workflow={workflow.current!} />
         )
     }
 
     const renderSql = () => {
         return (
-            <CardWorkflowPreview workflow={workflow} />
+            <CardWorkflowPreview workflow={workflow.current!} />
         )
     }
     

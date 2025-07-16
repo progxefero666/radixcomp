@@ -21,7 +21,7 @@ export const BARCFG_SAVE_CLOSE: BarButtonsCfg = new BarButtonsCfg(
 export const BARCFG_ADD_IMPORT: BarButtonsCfg = new BarButtonsCfg(
     [DB_ITEM_CMD.INSERT,DB_ITEM_CMD.IMPORT],
     [DB_ITEM_CMD_TEXT.INSERT,DB_ITEM_CMD_TEXT.IMPORT],
-    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_ACT_OPEN],
+    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_OPEN],
     [RadixConf.ICON_DELETE,RadixConf.ICON_OPEN],
     [false,false],
     [true,true]
@@ -30,7 +30,7 @@ export const BARCFG_ADD_IMPORT: BarButtonsCfg = new BarButtonsCfg(
 export const BARCFG_DOS: BarButtonsCfg = new BarButtonsCfg(
     [DB_ITEM_CMD.DELETE,DB_ITEM_CMD.OPEN,DB_ITEM_CMD.SELECT],
     [DB_ITEM_CMD_TEXT.DELETE,DB_ITEM_CMD_TEXT.OPEN,DB_ITEM_CMD_TEXT.SELECT],
-    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_ACT_OPEN,ThemeButtonsStyle.COLOR_EXPORT],
+    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_OPEN,ThemeButtonsStyle.COLOR_EXPORT],
     [RadixConf.ICON_DELETE,RadixConf.ICON_OPEN,RadixConf.ICON_RUN],
     [false,false,false],
     [true,true,true]
@@ -39,7 +39,7 @@ export const BARCFG_DOS: BarButtonsCfg = new BarButtonsCfg(
 export const BARCFG_DELETE_OPEN: BarButtonsCfg = new BarButtonsCfg(
     [DB_ITEM_CMD.DELETE,DB_ITEM_CMD.OPEN],
     [DB_ITEM_CMD_TEXT.DELETE,DB_ITEM_CMD_TEXT.OPEN],
-    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_ACT_OPEN],
+    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_OPEN],
     [RadixConf.ICON_DELETE,RadixConf.ICON_OPEN],
     [false,false],
     [true,true]

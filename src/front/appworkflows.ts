@@ -1,25 +1,23 @@
-//src\app\workflows\config.ts
+//src\front\appworkflows.ts
 
 import { InputField } from "@/common/model/inputfield";
 import { Option } from "@/common/model/option";
-import { DB_CONSTANTS, DbOps } from "@/common/database/dbkernel";
+import { parseResponseCollection, parseResponseItem } from "@/common/parsers/javascriptparser";
+import { JsonResponse } from "@/common/model/jsonreponse";
+import { DB_CONSTANTS} from "@/common/database/dbkernel";
+import { DbTables } from "@/db/dbcatalog";
+import { Codelang } from "@/db/model/codelang";
+import { Tasktype } from "@/db/model/tasktype";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { Workflow } from "@/db/model/workflow";
-import { TKeyvalue } from "@/common/types";
-import { TInputText } from "@/radix/radixtypes";
 import { Task } from "@/db/model/task";
-import { getCountWorkflowsById } from "@/db/services/read/srvworkflow";
-import { JsonResponse } from "@/common/model/jsonreponse";
 import { getCountAllRows } from "@/db/services/generic/serviceread";
-import { DbTables } from "@/db/dbcatalog";
-import { deleteWorkflow, insertWorkflow } from "@/db/services/crud/srvcrudworkflow";
-import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
 import { getAllTasktypes } from "@/db/services/read/srvmantasktypes";
-import { Tasktype } from "@/db/model/tasktype";
-import { parseResponseCollection } from "@/common/parsers/javascriptparser";
-import { Codelang } from "@/db/model/codelang";
 import { getAllCodelang } from "@/db/services/read/srvcodelang";
 import { insertTask } from "@/db/services/crud/srvcrudtask";
+import { deleteWorkflow, insertWorkflow } from "@/db/services/crud/srvcrudworkflow";
+import { insertTaskcategory } from "@/db/services/crud/srvcrudtaskcategory";
+import { getWorkflow } from "@/db/services/read/srvworkflow";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -82,7 +80,7 @@ export class WorkflowActions {
 }//end class
 
 /**
- * class App Workflows
+ * class AppWorkflows.getWorkflowIndex
  */
 export class AppWorkflows {
 
@@ -118,6 +116,17 @@ export class AppWorkflows {
         = new InputField("text", "workflow_name",
                         "workflow name", null, "Workflow Name", {min: 3, max: 50});
     
+    public static getWorkflowIndex = (workflows:Workflow[],id:number):number => {
+        let index: number = -1;
+        for(let idx=0;idx<workflows.length;idx++) {
+            if(workflows[idx].id === id) {
+                index = idx;
+                break;
+            }
+        }
+        return index;
+    };//end
+
     public static getNewTask = async (codelangId:number,tasktype_id:number,    
                                         workflowId:number,taskcategoryId:number,
                                         name:string,description:string,
@@ -166,7 +175,7 @@ export class AppWorkflowsCreator {
 
 
 /**
- * # class AppWorkflowsReader
+ * # class AppWorkflowsReader.read_workflow
  *    - Read operations for workflows
  */
 export class AppWorkflowsReader {
@@ -181,6 +190,14 @@ export class AppWorkflowsReader {
         const response = await getAllTasktypes();
         if(response=== null){return null;}
         return parseResponseCollection<Tasktype>(response);
+    };//end
+
+    //getWorkflow
+    public static read_workflow = async (id: number): Promise<Workflow|null> => {
+        const response = await getWorkflow(id);
+        if(response=== null){return null;}
+        const workflow: Workflow|null = parseResponseItem<Workflow>(response);
+        return workflow;
     };//end
 
     public static existWorkflow = async (name: string): Promise<boolean> => {

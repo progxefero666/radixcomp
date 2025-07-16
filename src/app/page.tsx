@@ -27,11 +27,8 @@ const layoutStyle = {
  */
 export default function PageWorkflows() {
 
-    const [actsection, setActSection]   = useState<string>(AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS.id);
-      const [wfCharged, setWfCharged]     = useState<boolean>(false);
-    const [wfSelected, setWfSelected]   = useState<Workflow | null>(null);
-
-    const [tasktypes, setTasktypes] = useState<Tasktype[] | null>(null);
+    const [actsection, setActSection]   = useState<string>(AppWorkflowsConfig.MOD_SECTIONS.MANAGER_WORKFLOWS.id);   
+    const [workflowId, setWorkflowId]   = useState<number | null>(null);
         
     useEffect(() => {
         //saveMemmoryCodelangs();
@@ -42,9 +39,8 @@ export default function PageWorkflows() {
         setActSection(section);
     };
 
-    const showWfPreview = (workflow: Workflow) => {
-        setWfSelected(workflow);
-        setWfCharged(true);
+    const chargeWorkflow = (id:number) => {
+        setWorkflowId(id);
     };
 
     return (
@@ -61,12 +57,12 @@ export default function PageWorkflows() {
 
             <Flex gridColumn="2" gridRow="2" >
                 <WorkflowsManager section={actsection}
-                    showwfpreview={showWfPreview} />
+                    showwfpreview={chargeWorkflow} />
             </Flex>
 
             <Flex gridColumn="3" gridRow="2" >
-                {wfCharged ?
-                    <WorkflowViewer workflow={wfSelected}/>
+                { (workflowId!==null) ?
+                    <WorkflowViewer workflowId={workflowId}/>
                     : <Box width="100%">not data charged</Box>}
 
             </Flex>
