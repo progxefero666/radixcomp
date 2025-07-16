@@ -36,8 +36,9 @@ export const PanelWfTaskcategories = ({ workflowid,initcollection }: PanelWfTask
 
     const [formDefItems, setFormDefItems] = useState<InputField[]>([]);
 
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
     let isNewWorkflow:boolean = true;
-    if (workflowid != DbOps.NEW_ROW_ID) {isNewWorkflow = false;}
+    if (workflowid != null) {isNewWorkflow = false;}
     
     const execItemOperation = (id: number, action: string) => {
         alert(id);
@@ -64,7 +65,7 @@ export const PanelWfTaskcategories = ({ workflowid,initcollection }: PanelWfTask
     //const onCancelNewItem = () => {};
     const onSaveNewItem = async (fields: InputField[]) => {
         alert("start");
-        const newItem = new Taskcategory(DbOps.NEW_ROW_ID,workflowid,fields[0].value,fields[1].value);
+        const newItem = new Taskcategory(null,workflowid,fields[0].value,fields[1].value);
         const newRecord = await insertTaskcategory(JSON.stringify(newItem));
         if(newRecord==null){
             alert("Error inserting new task category");

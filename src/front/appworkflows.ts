@@ -105,7 +105,7 @@ export class AppWorkflows {
     ]
 
     public static readonly NEW_WK: Workflow = new Workflow(
-        Number(DbOps.NEW_ROW_ID),
+        null,
         DB_CONSTANTS.NOT_DEF, 
         null,"", null, null);        
 
@@ -122,7 +122,7 @@ export class AppWorkflows {
                                         workflowId:number,taskcategoryId:number,
                                         name:string,description:string,
                                         orden:number,groupIndex:number):Promise<Task> => {                                              
-        return new Task(DbOps.NEW_ROW_ID,tasktype_id,codelangId,
+        return new Task(null,tasktype_id,codelangId,
                         workflowId,taskcategoryId,
                         orden,name,description,groupIndex,null,null);   
     };//end
@@ -206,7 +206,7 @@ export class AppWorkflowsCrud {
                                                name:string,
                                                description:string): Promise<number|null> => {
         const taskCategory: Taskcategory 
-            = new Taskcategory(DbOps.NEW_ROW_ID,workflowId,name,description);
+            = new Taskcategory(null,workflowId,name,description);
 
         const response = await insertTaskcategory(JSON.stringify(taskCategory));      
         if(response === null) {return null;}
@@ -216,7 +216,7 @@ export class AppWorkflowsCrud {
     };//end
 
     public static insert_workflow = async (name:string,description:string): Promise<number|null> => {
-        const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,description, null, null);
+        const workflow: Workflow = new Workflow(null,name, null,description, null, null);
         const response = await insertWorkflow(JSON.stringify(workflow));
         if(response === null) {return null;}
         const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;        
@@ -229,7 +229,7 @@ export class AppWorkflowsCrud {
                                         workflowId:number,taskcategoryId:number,
                                         name:string,description:string,
                                         orden:number,groupIndex:number):Promise<number|null> => {                                              
-        const task:Task = new Task(DbOps.NEW_ROW_ID,tasktype_id,codelangId,
+        const task:Task = new Task(null,tasktype_id,codelangId,
                         workflowId,taskcategoryId,
                         orden,name,description,groupIndex,null,null);   
         const response = await insertTask(JSON.stringify(task));   

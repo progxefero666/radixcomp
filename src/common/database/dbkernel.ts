@@ -65,7 +65,7 @@ export class DbConstants{
  * DbOps.NEW_ROW_ID
  */
 export class DbOps{
-    public static readonly NEW_ROW_ID:number = 0;
+    //public static readonly NEW_ROW_ID:number = 0;
 
     public static INSERT = "insert";
     public static UPDATE = "update";
