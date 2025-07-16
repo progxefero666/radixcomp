@@ -14,9 +14,8 @@ interface CompProps {
     workflowid: number;
     none?: () => void;
 }
-export default function WorkflowPrimaryBar({ workflowid }: CompProps) {
-
-    
+export function WorkflowPrimaryBar({ workflowid }: CompProps) {
+   
     return (
         <Flex width="100%" direction="column" px="3" py="3" style={primaryBarStyle} >
             <PanelWfTaskcategories workflowid={workflowid} />

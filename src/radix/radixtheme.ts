@@ -67,7 +67,7 @@ export class ThemeIconsStyle {
 }//end class
 
 /**
- * class ThemeButtonsStyle.BTN_DEF_SIZE
+ * class ThemeButtonsStyle.COLOR_ADD
  */
 export class ThemeButtonsStyle {
 
@@ -83,7 +83,8 @@ export class ThemeButtonsStyle {
 
     public static readonly BTN_DEF_STYLE = {borderRadius: "var(--blue-9)"    };
 
-    public static readonly COLOR_OPEN   = RADIX_COLORS.blue;
+    public static readonly COLOR_ADD        = RADIX_COLORS.crimson;
+    public static readonly COLOR_OPEN       = RADIX_COLORS.blue;
     public static readonly COLOR_DELETE     = RADIX_COLORS.yellow;
     public static readonly COLOR_SAVE       = RADIX_COLORS.green;
     public static readonly COLOR_IMPORT     = RADIX_COLORS.ruby;

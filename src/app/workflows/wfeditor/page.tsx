@@ -4,25 +4,18 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Flex, Grid, Text} from "@radix-ui/themes";
-//db models
+import { AppMemmory } from "@/front/appmemory";
+import { InfoNotdata } from "@/radix/data/infonotdata";
 import { Workflow } from "@/db/model/workflow";
-
-import { Task } from "@/db/model/task";
 import { WorkflowEditor } from "@/app/workflows/wfeditor/pagecomp/editor";
 import { WorkflowHeader } from "@/app/workflows/wfeditor/pagecomp/header";
 import { WorkflowViewer } from "@/app/workflows/wfeditor/pagecomp/viewer";
-
-import { AppWorkflowsConfig, AppWorkflowsReader } from "@/front/appworkflows";
-import { Taskcategory } from "@/db/model/taskcategory";
-import { Tasktype } from "@/db/model/tasktype";
-import WorkflowPrimaryBar from "./pagecomp/primarybar";
-import { AppMemmory } from "@/front/appmemory";
-
+import { AppWorkflowsReader } from "@/front/appworkflows";
+import { WorkflowPrimaryBar} from "./pagecomp/primarybar";
 
 
 const layoutStyle = {
     background: 'rgb(153, 17, 62)',
-    
 };
 
 /**
@@ -31,26 +24,20 @@ const layoutStyle = {
  */
 export default function WorkflowEditorPage() {
     
-
     const router = useRouter();
     const [workflow,setWorkflow] = useState<Workflow|null>(null);
-    const [taskcats,setTaskcats] = useState<Taskcategory[]|null>(null);
-
 
     useEffect(() => {          
         const init = async () => {
-            const workflowId = AppMemmory.readWorkflowId();
-            alert("WorkflowId: " + workflowId);
-            setWorkflow(await AppWorkflowsReader.read_workflow(workflowId));
+            setWorkflow(await AppWorkflowsReader
+                .read_workflow(AppMemmory.readWorkflowId()));
         };
         init();
     }, []);
 
     if(!workflow) {
         return (
-            <Flex width="100%" align="center" justify="center" style={layoutStyle}>
-                <Text>Loading workflow...</Text>
-            </Flex>
+            <InfoNotdata message="loading Workflow" />
         );
     }
     return (
@@ -75,21 +62,4 @@ export default function WorkflowEditorPage() {
         </Grid>
     );
 
-}//end page
-
-/*
-    const onWorkflowCharged = (workflow:Workflow,taskcats:Taskcategory[]) => {
-        console.log(taskcats);
-        setWorkflow(workflow);
-        setTaskcats(taskcats);
-    }
-	//const [view,setView] = useState<string>(AppWorkflowsConfig.WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
-    const showManTaskgroups = () => {
-        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_TASKGROUPS.id);
-    }
-
-    const onCloseManTaskgroups = () => {
-        setView(WK_EDITOR_VIEWS.EDITOR_VIEW_DEFAULT.id);
-    }    
-
-*/
+};//end page

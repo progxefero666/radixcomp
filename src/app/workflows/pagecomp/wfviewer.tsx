@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { AppWorkflowsConfig, AppWorkflowsReader } from "@/front/appworkflows";
 import { Workflow } from "@/db/model/workflow";
 import CardWorkflowPreview from "@/app/workflows/cards/cardwfpreview";
+import { InfoNotdata } from "@/radix/data/infonotdata";
 
 interface CompProps {
     workflowId: number;
@@ -28,9 +29,7 @@ export const WorkflowViewer = ({ workflowId, mode: actpanel }: CompProps) => {
     }, []);
         
     if(!initialized){
-        return <Flex width="100%" height="100%" justify="center" align="center">
-            <Text>Loading...</Text>
-        </Flex>;
+        return(<InfoNotdata message="loading Workflow" />)
     } 
     const renderWorkflow = () => {
         return (

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import { ChevronUpIcon, ChevronDownIcon, CrossCircledIcon,  } from "@radix-ui/react-icons";
 import { EditOptionId } from "@/radix/collection/editoption";
-import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import {  DB_ITEM_CMD, DbOps } from "@/common/database/dbkernel";
 import { DialogForm} from "@/radix/form/dgform";
 import { CollectionItem } from "@/common/model/collitem";
@@ -84,16 +84,13 @@ export const PanelWfTaskcategories = ({ workflowid }: PanelWfTaskcategoriesProps
 
 
     const renderMainContent = () => {
-        if (!open) {
-            return (null)
-        }
+        if (!open) {return(null);}
         return (
             <Flex width="100%" direction="column" gapY="2" >
                 {collection.map((item, index) => (
                     <Box key={index.toString()}>
                         {index == 0 ?
-                            <EditOptionId option={item} />
-                            :
+                            <EditOptionId option={item} /> :
                             <EditOptionId option={item} onclick={execItemOperation} />
                         }
                     </Box>
@@ -120,7 +117,10 @@ export const PanelWfTaskcategories = ({ workflowid }: PanelWfTaskcategoriesProps
                             items={AppWorkflows.NEW_TASKCAT_FIELDS} 
                             onsave={onSaveNewItem} />
 
-                <Button color="blue" size="2" onClick={() => clearCategories()}>
+                <Button color={ThemeButtonsStyle.COLOR_ADD} 
+                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                         radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => clearCategories()}>
                     <CrossCircledIcon />
                     clear
                 </Button>
