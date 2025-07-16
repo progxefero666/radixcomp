@@ -154,7 +154,7 @@ export class AppWorkflowsCreator {
 
         // 3. insert first task
         const taskId:number|null = await AppWorkflowsCrud.insert_task(
-            tasktypes![0].id,codelangs![0].id,
+            tasktypes![0].id!,codelangs![0].id!,
             workflowId!,taskcategoryId!,AppWorkflows.FIRST_TASK_NAME,
             AppWorkflows.FIRST_TASK_DESC,AppWorkflows.FIRST_ITEM,AppWorkflows.FIRST_GROUP);
         if(taskId === null) {return null;}

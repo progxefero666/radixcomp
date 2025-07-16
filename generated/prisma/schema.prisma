@@ -21,9 +21,9 @@ model Codelang {
 }
 
 model Tasktype {
-  id          Int    @id @default(autoincrement())
-  name        String @unique @db.VarChar(100)
-  description String @db.VarChar(200)
+  id          Int     @id @default(autoincrement())
+  name        String  @unique @db.VarChar(100)
+  description String? @db.VarChar(200)
   tasks       Task[]
 
   @@map("tasktype")
@@ -33,7 +33,7 @@ model Workflow {
   id            Int            @id @default(autoincrement())
   name          String         @unique @db.VarChar(100)
   context       String?        @db.Text
-  description   String         @default("undefined") @db.Text
+  description   String?        @default("undefined") @db.Text
   application   String?        @db.VarChar(50)
   fpath         String?        @db.VarChar(500)
   updated       DateTime
@@ -77,7 +77,7 @@ model Task {
 model Apptype {
   id           Int           @id @default(autoincrement())
   name         String        @unique @db.VarChar(50)
-  description  String        @default("undefined") @db.VarChar(255)
+  description  String?       @default("undefined") @db.VarChar(255)
   applications Application[]
 
   @@map("apptype")
@@ -90,8 +90,8 @@ model Application {
   codelang     Codelang @relation(fields: [codelangId], references: [id], onDelete: Cascade)
   codelangId   Int
   name         String   @unique @db.VarChar(50)
-  description  String   @default("undefined") @db.VarChar(255)
-  repository   String   @default("undefined") @db.VarChar(250)
+  description  String?  @default("undefined") @db.VarChar(255)
+  repository   String?  @default("undefined") @db.VarChar(250)
   author       String?  @db.VarChar(100)
   osystem      String?  @db.VarChar(100)
   appurl       String?  @db.VarChar(500)

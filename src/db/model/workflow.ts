@@ -10,7 +10,7 @@ import { DbConstants } from "@/common/database/dbkernel";
 export class Workflow {
 
     //DataConstants.EMPTY_VALUE;
-    public id: number;
+    public id: number|null = null;  
     public name: string;
     public description: string;
     public context: string|null = null;        
@@ -18,7 +18,7 @@ export class Workflow {
     public fpath: string|null = null;   
     public readonly updated?: Date|null;
 
-    constructor(id:number,name:string|null,
+    constructor(id:number|null,name:string|null,
                 context:string|null,description:string|null,
                 application:string|null,fpath:string|null,updated?:Date ) {
 

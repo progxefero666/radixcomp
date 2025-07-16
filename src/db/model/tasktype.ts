@@ -5,11 +5,11 @@
  **/
 export class Tasktype {
 
-    public id: number;
+    public id: number|null;
     public name: string;
-    public description: string;
+    public description: string|null;
 
-    constructor(id:number,tename:string,description:string) {
+    constructor(id:number|null,tename:string,description:string|null) {
         this.id = id;
         this.name = tename;
         this.description = description;

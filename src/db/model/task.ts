@@ -5,7 +5,7 @@
  **/
 export class Task {
 
-    public id: number;
+    public id: number|null;
     public tasktype_id: number;
     public codelang_id: number;
     public workflow_id: number;
@@ -18,7 +18,7 @@ export class Task {
     public files: string|null = null;
     public folders: string|null = null;
 
-    constructor(id: number,
+    constructor(id: number|null,
                 tasktype_id: number,
                 codelang_id: number,
                 workflow_id: number,

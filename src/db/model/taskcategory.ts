@@ -7,14 +7,14 @@ import { Task } from "@generated/prisma";
  **/
 export class Taskcategory {
 
-    public id: number;
+    public id: number|null = null;
     public workflow_id: number;
     public name: string;
-    public description: string;
+    public description: string|null;
 
     public tasks?:Task[];
     
-    constructor(id:number,workflow_id:number,name:string,description:string,tasks?:Task[]) {
+    constructor(id:number|null,workflow_id:number,name:string,description:string|null,tasks?:Task[]) {
         this.id = id;
         this.workflow_id = workflow_id;
         this.name = name;

@@ -11,9 +11,9 @@ datasource db {
 // ----------------- MODELS -----------------
 
 model Codelang {
-    id          Int           @id @default(autoincrement())
-    name      String        @unique @db.VarChar(20)
-    description String        @db.VarChar(150)
+    id          Int     @id @default(autoincrement())
+    name        String  @unique @db.VarChar(20)
+    description String  @db.VarChar(150)
     tasks       Task[]
     applications Application[]
     @@map("codelang")
@@ -21,17 +21,17 @@ model Codelang {
 
 model Tasktype {
     id          Int    @id @default(autoincrement())
-    name      String @unique @db.VarChar(100)
-    description String @db.VarChar(200)
+    name        String @unique @db.VarChar(100)
+    description String? @db.VarChar(200)
     tasks       Task[]
     @@map("tasktype")
 }
 
 model Workflow {
     id          Int        @id @default(autoincrement())
-    name      String     @unique @db.VarChar(100)
+    name        String     @unique @db.VarChar(100)
     context     String?    @db.Text
-    description String     @default("undefined") @db.Text
+    description String?    @default("undefined") @db.Text
     application String?    @db.VarChar(50)
     fpath       String?    @db.VarChar(500)
     updated     DateTime
@@ -44,7 +44,7 @@ model Taskcategory {
     id          Int       @id @default(autoincrement())
     workflow    Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
     workflowId  Int       @map("workflow_id")
-    name      String    @db.VarChar(100)
+    name        String    @db.VarChar(100)
     description String?   @db.VarChar(100)
     tasks       Task[]
     @@map("taskcategory")
@@ -61,7 +61,7 @@ model Task {
     taskcategory    Taskcategory    @relation(fields: [taskcategoryId], references: [id], onDelete: Cascade)
     taskcategoryId  Int             @map("taskcategory_id")
     orden           Int
-    name          String          @unique @db.VarChar(255)
+    name            String          @unique @db.VarChar(255)
     tkgroup         Int
     description     String?         @db.Text
     files           String?         @db.Text
@@ -71,8 +71,8 @@ model Task {
 
 model Apptype {
     id            Int           @id @default(autoincrement())
-    name        String        @unique @db.VarChar(50)
-    description   String        @default("undefined") @db.VarChar(255)
+    name          String        @unique @db.VarChar(50)
+    description   String?       @default("undefined") @db.VarChar(255)
     applications  Application[]
     @@map("apptype")
 }
@@ -83,9 +83,9 @@ model Application {
     apptypeId     Int
     codelang      Codelang  @relation(fields: [codelangId], references: [id], onDelete: Cascade)
     codelangId    Int
-    name        String    @unique @db.VarChar(50)
-    description   String    @default("undefined") @db.VarChar(255)
-    repository    String    @default("undefined") @db.VarChar(250)
+    name          String    @unique @db.VarChar(50)
+    description   String?   @default("undefined") @db.VarChar(255)
+    repository    String?   @default("undefined") @db.VarChar(250)
     author        String?   @db.VarChar(100)
     osystem       String?   @db.VarChar(100)
     appurl        String?   @db.VarChar(500)

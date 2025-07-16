@@ -5,34 +5,42 @@
  **/
 export class Application {
 
-    public id: number;
-    public apptype_id: number = 0;
+    public id:          number|null = null;;
+    public apptype_id:  number;
     public codelang_id: number;
-    public name: string;
-    public description: string = 'undefined';
-    public repository: string = 'undefined';
-    public author: string;
-    public osystem: string;
-    public appurl: string;
-    public apppath: string;
-    public localdev: boolean = true;
-    public usedocker: boolean = false;
-    public controlusers: boolean = false;
-    public useui: boolean = false;
-    public useagents: boolean = false;
-    public consumedb: boolean = false;
-    public consumeapi: boolean = false;
-    public consumeai: boolean = false;
-    public exposedb: boolean = false;
-    public exposeapi: boolean = false;
-    public updated: Date;
+    public name:        string;
+    public description: string|null = null;
+    public repository:  string|null = null;
+    public author:      string|null = null;
+    public osystem:     string|null = null;
+    public appurl:      string|null = null;
+    public apppath:     string|null = null;
+    public localdev:    boolean = true;
+    public usedocker:   boolean = false;
+    public controlusers:boolean = false;
+    public useui:       boolean = false;
+    public useagents:   boolean = false;
+    public consumedb:   boolean = false;
+    public consumeapi:  boolean = false;
+    public consumeai:   boolean = false;
+    public exposedb:    boolean = false;
+    public exposeapi:   boolean = false;
+    public updated:     Date;
 
-    constructor(id:number,apptype_id:number,codelang_id:number,name:string,
-                description:string,repository:string,author:string,osystem:string,
-                appurl:string,apppath:string,localdev:boolean,usedocker:boolean,
-                controlusers:boolean,useui:boolean,useagents:boolean,consumedb:boolean,
-                consumeapi:boolean,consumeai:boolean,exposedb:boolean,exposeapi:boolean,
-                updated:Date ) {
+    constructor(id:number|null,
+                apptype_id:number,
+                codelang_id:number,
+                name:string,
+                description:string|null,
+                repository:string|null,
+                author:string|null,
+                osystem:string|null,
+                appurl:string|null,
+                apppath:string|null,
+                localdev:boolean,usedocker:boolean,controlusers:boolean,
+                useui:boolean,useagents:boolean,consumedb:boolean,
+                consumeapi:boolean,consumeai:boolean,exposedb:boolean,
+                exposeapi:boolean, updated:Date ) {
 
         this.id = id;
         this.apptype_id = apptype_id;

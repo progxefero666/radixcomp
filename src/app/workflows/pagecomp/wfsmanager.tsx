@@ -98,7 +98,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
             return;
         }
         else if (action == DB_ITEM_CMD.OPEN) {
-            AppMemmory.saveWorkflowId(workflows![itemIndex].id);
+            AppMemmory.saveWorkflowId(workflows![itemIndex].id!);
             router.push("/workflows/wfeditor");
             return;
         }
