@@ -63,11 +63,17 @@ export class AppWorkflowsConfig {
 }//end class
 
 /**
- * class AppWorkflows.TASKCATEGORY_DEF_NAME
+ * class AppWorkflows.FIRST_TASK_DESC
  */
 export class AppWorkflows {
 
+    
+    public static readonly FIRST_ITEM:number = 0;
+    public static readonly FIRST_GROUP:number = 0;
+
     public static readonly TASKCATEGORY_DEF_NAME: string = "default";
+    public static readonly FIRST_TASK_NAME: string = "first task";
+    public static readonly FIRST_TASK_DESC: string = "";
 
     public static readonly NEW_TASKTYPE_FIELDS:InputField[] = [
         new InputField("text","name", "type name", null, "Name"),
@@ -84,47 +90,10 @@ export class AppWorkflows {
         new InputField("text","item_1", "placeholder", "desadasdas", "Descripcion")
     ];
 
-
-
-      
     public static DLG_WK_NAME_INPUT: InputField 
         = new InputField("text", "workflow_name",
                         "workflow name", null, "Workflow Name", {min: 3, max: 50});
     
-                        /*
-    constructor(id: number,
-                tasktype_id: number,
-                codelang_id: number,
-                workflow_id: number,
-                taskcategory_id: number,
-                orden: number,
-                name: string|null,
-                description: string|null,
-                tkgroup: number,
-                files: string|null,
-                folders: string|null) 
-            setTasktypes(parseResponseCollection<Tasktype>
-                    (await getAllByTable(DbTables.tasktype))!);                
-                */
-
-    public static  getNewTask = async ( tasktype_id: number,
-                                        codelangId:number,      
-                                        workflowId:number,                                 
-                                        taskcategoryId:number,
-                                        orden:number,
-                                        groupIndex:number):Promise<Task|null> => {       
-                                       
-        const tasktypeId:number = 0; 
-        /*
-            tasktypeId,
-            codelangId,
-            workflowId,
-            0 ,0,
-            AppWorkflows.TASKCATEGORY_DEF_NAME,
-            null,orden,null,null);    
-        */    
-        return null;    
-    };//end
        
     public static existWorkflow = async (name: string): Promise<boolean> => {
         const response = await getCountAllRows(DbTables.workflow,name);
@@ -134,45 +103,51 @@ export class AppWorkflows {
         alert(count);
         if(count > 0) {return true;}
         return false;
-    }//end
+    };//end
     
-    public static createNewWorkflow = async (name: string): Promise<boolean> => {
+    public static get_codelangs = async (name: string): Promise<Codelang[]|null> => {
+        const response = await getAllCodelang();
+        if(response=== null){return null;}
+        return parseResponseCollection<Codelang>(response);
+    };//end
+    
+    public static get_tasktypes = async (name: string): Promise<Tasktype[]|null> => {
+        const response = await getAllTasktypes();
+        if(response=== null){return null;}
+        return parseResponseCollection<Tasktype>(response);
+    };//end
 
-        const responsCl = await getAllCodelang();
-        if(responsCl=== null) {
-            alert("Error getting code langs.");
-            return false;
-        }
-        const codelangs:Codelang[] = parseResponseCollection<Codelang>(responsCl)!;
+    public static createNewWorkflow = async (name:string,codelangs:Codelang[]|null,tasktypes:Tasktype[]|null): Promise<boolean> => {
 
-        const responsTt = await getAllTasktypes();
-        if(responsTt=== null) {
-            alert("Error getting task types.");
-            return false;
-        }
-        const tasktypes: Tasktype[] = parseResponseCollection<Tasktype>(responsTt)!;
-        const tasktypeFirstId: number = tasktypes[0].id;
+        if(codelangs === null){codelangs = await AppWorkflows.get_codelangs(name);}
+        if(tasktypes === null){tasktypes = await AppWorkflows.get_tasktypes(name);}
         
         const workflow: Workflow = new Workflow(DbOps.NEW_ROW_ID,name, null,"", null, null);
         const responseIw = await insertWorkflow(JSON.stringify(workflow));
         const reponseIwObj:JsonResponse = JSON.parse(responseIw) as JsonResponse;
-        if(reponseIwObj.isError()) {
-            return false;
-        }
+        if(reponseIwObj.isError()) {return false;}
+
         const workflowId = Number(reponseIwObj.data);
         const taskCategory: Taskcategory = new Taskcategory
             (DbOps.NEW_ROW_ID,workflowId,AppWorkflows.TASKCATEGORY_DEF_NAME,"default task category");
 
         const resposeItc = await insertTaskcategory(JSON.stringify(taskCategory));    
-        const resposeItcObj:JsonResponse = JSON.parse(responseIw) as JsonResponse;
-        if(reponseIwObj.isError()) {
-            return false;
-        }        
+        const resposeItcObj:JsonResponse = JSON.parse(resposeItc) as JsonResponse;
+        if(reponseIwObj.isError()) {return false;}        
+        
         const taskcategoryId = Number(resposeItcObj.data);
 
         const task:Task = new Task(
-            DbOps.NEW_ROW_ID,tasktypes[0].id,codelangs[0].id,
-            workflowId,taskcategoryId,0,"first task","",0,null,null);       
+            DbOps.NEW_ROW_ID,
+            tasktypes![0].id,
+            codelangs![0].id,
+            workflowId,
+            taskcategoryId,
+            AppWorkflows.FIRST_ITEM,
+            AppWorkflows.FIRST_TASK_NAME,
+            AppWorkflows.FIRST_TASK_DESC,
+            AppWorkflows.FIRST_GROUP,
+            null,null);       
         
         
         const resposeItask = await insertTask(JSON.stringify(task));
@@ -180,14 +155,19 @@ export class AppWorkflows {
             alert("Error inserting task.");
             return false;
         }
-        
-        return true;
-    }//end
 
-    /*
-        public static readonly TASKCATEGORY_DEF: Taskcategory 
-        = new Taskcategory(0, 0, "default", "taskgroup default");
-    */
+        return true;
+    };//end
+
+    public static getNewTask = async (codelangId:number,tasktype_id:number,    
+                                        workflowId:number,taskcategoryId:number,
+                                        name:string,description:string,
+                                        orden:number,groupIndex:number):Promise<Task> => {                                              
+        return new Task(DbOps.NEW_ROW_ID,
+                                   tasktype_id,codelangId,workflowId,taskcategoryId,
+                                   orden,name,description,groupIndex,null,null);   
+    };//end
+
 }//end class
 
 /**

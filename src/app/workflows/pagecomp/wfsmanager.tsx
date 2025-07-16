@@ -19,6 +19,8 @@ import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
 import { DialogFieldText } from "@/radix/form/dlgfieldtext";
 import { TInputText } from "@/radix/radixtypes";
 import { TKeyvalue } from "@/common/types";
+import { Codelang } from "@/db/model/codelang";
+import { Tasktype } from "@/db/model/tasktype";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',
@@ -37,6 +39,9 @@ interface CompProps {
 export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     const router = useRouter();
     const [ready, setReady] = useState<boolean>(false);
+
+    const [codelangs, setCodelangs] = useState<Codelang[]>([]);
+    const [tasktypes, setTasktypes] = useState<Tasktype[]>([]);    
     const [workflows, setWorkflows] = useState<Workflow[] | null>(null);
 
 
@@ -44,6 +49,13 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
     useEffect(() => {
         if (ready) { return; }
         const init = async () => {
+
+            setCodelangs(parseResponseCollection<Codelang>
+                    (await getAllRows(DbTables.codelang))!);
+
+            setTasktypes(parseResponseCollection<Tasktype>
+                    (await getAllRows(DbTables.tasktype))!);
+                                
             const response = await getAllRows(DbTables.workflow);
             if (response === null) { return false; }
 
@@ -69,7 +81,7 @@ export function WorkflowsManager({ section, showwfpreview }: CompProps) {
         if(existName){
             return alert("Workflow name in use.");
         }
-        AppWorkflows.createNewWorkflow(inputName.value!);
+        AppWorkflows.createNewWorkflow(inputName.value!,codelangs,tasktypes);
 
     };//end
 
