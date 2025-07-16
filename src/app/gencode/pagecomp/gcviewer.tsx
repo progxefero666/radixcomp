@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Box, Separator, Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
-import CardCode from "@/app/gencode/comp/cardcode";
+import CardCode from "@/app/gencode/cards/cardcode";
 import { BARCFG_EXPORT_COPY } from "@/radix/appbars";
 import BarButtons from "@/radix/cbars/btbar";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";

@@ -9,6 +9,13 @@ import { RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS, RADIX_SIZES } from "../radixconstants";
 import { radixTypeComp } from "../radixtypes";
 
+const areaStyle = {
+    width: '100%',   
+    height: '200px',     
+    border: '2px solid rgb(28, 28, 43)',
+    padding: '2px'
+};
+
 /**
  * InputTextComponent
  */
@@ -30,12 +37,7 @@ interface CompProps {
     height?: string;
 }
 
-const areaStyle = {
-    width: '100%',   
-    height: '200px',     
-    border: '2px solid rgb(28, 28, 43)',
-    padding: '2px'
-};
+
 
 export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
         (({ inline,name, label,autocommit,maxlen,height, placeholder, defaul,onchange, onsubmmit, readonly, disabled }, ref) => {        
@@ -53,10 +55,10 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
 
     const [value, setValue] = useState<string|null>(null);
     
-    if( defaul && defaul !== ""){setValue(defaul);}
+    
         
     useEffect(() => {
-        if( defaul && defaul == ""){setValue(null);}
+        if( defaul){setValue(defaul);}
     }, []);
       
     const handleOnChange = (value:string) => {

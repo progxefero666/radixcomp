@@ -16,10 +16,10 @@ export class AppConfig {
 
     // list modules
     public static readonly MOD_GENCODE: Option 
-        = new Option("./gencode","Gen. Code",null,null,null);
+        = new Option("./gencode","Code Generator",null,null,null);
 
     public static readonly MOD_WORKFLOWS: Option 
-        = new Option("./workflows","WorkFlows Man.",null,null,null);
+        = new Option("./workflows","WorkFlows",null,null,null);
 
     public static readonly MOD_APPLICATIONS: Option 
         = new Option("./applications","Applications",null,null,null);

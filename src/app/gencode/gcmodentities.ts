@@ -35,12 +35,13 @@ export class ServClientEntities extends GenCodeModuleControl {
     }//end
 
     public async execItemTsOperation(operationId:string,table:string):Promise<string|null> {
-                                         
+         alert("execItemTsOperation");                                
         let code: string | null = null;
         if ((operationId === "get_def_class") ||
             (operationId === "get_entity_class")) {
             code = await getTypeScriptTableContent(this.sqlsquema, operationId, table!);
         }
+        console.log(code);
         return code;
     };//end
 

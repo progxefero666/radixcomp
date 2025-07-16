@@ -29,9 +29,9 @@ CREATE TABLE public.application (
     id integer NOT NULL,
     apptype_id integer DEFAULT 0 NOT NULL,
     codelang_id integer NOT NULL,
-    anname character varying(50) NOT NULL,
-    description character varying(255) DEFAULT 'undefined'::character varying NOT NULL,
-    repository character varying(250) DEFAULT 'undefined'::character varying NOT NULL,
+    name character varying(50) NOT NULL,
+    description character varying(255),
+    repository character varying(250),
     author character varying(100),
     osystem character varying(100),
     appurl character varying(500),
@@ -80,8 +80,8 @@ ALTER SEQUENCE public.application_id_seq OWNED BY public.application.id;
 
 CREATE TABLE public.apptype (
     id integer NOT NULL,
-    aename character varying(50) NOT NULL,
-    description character varying(255) DEFAULT 'undefined'::character varying NOT NULL
+    name character varying(50) NOT NULL,
+    description character varying(255)
 );
 
 
@@ -115,8 +115,8 @@ ALTER SEQUENCE public.apptype_id_seq OWNED BY public.apptype.id;
 
 CREATE TABLE public.codelang (
     id integer NOT NULL,
-    cgname character varying(20) NOT NULL,
-    description character varying(150) NOT NULL
+    name character varying(20) NOT NULL,
+    description character varying(150)
 );
 
 
@@ -155,7 +155,7 @@ CREATE TABLE public.task (
     workflow_id integer NOT NULL,
     taskcategory_id integer NOT NULL,
     orden integer NOT NULL,
-    tkname character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
     description text,
     tkgroup integer NOT NULL,
     files text,
@@ -194,7 +194,7 @@ ALTER SEQUENCE public.task_id_seq OWNED BY public.task.id;
 CREATE TABLE public.taskcategory (
     id integer NOT NULL,
     workflow_id integer NOT NULL,
-    tyname character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
     description character varying(100)
 );
 
@@ -224,49 +224,13 @@ ALTER SEQUENCE public.taskcategory_id_seq OWNED BY public.taskcategory.id;
 
 
 --
--- Name: taskgroup; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.taskgroup (
-    id integer NOT NULL,
-    workflow_id integer NOT NULL,
-    tpname character varying(100) NOT NULL,
-    description character varying(100)
-);
-
-
-ALTER TABLE public.taskgroup OWNER TO postgres;
-
---
--- Name: taskgroup_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.taskgroup_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.taskgroup_id_seq OWNER TO postgres;
-
---
--- Name: taskgroup_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.taskgroup_id_seq OWNED BY public.taskgroup.id;
-
-
---
 -- Name: tasktype; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tasktype (
     id integer NOT NULL,
-    tename character varying(100) NOT NULL,
-    description character varying(200) NOT NULL
+    name character varying(100) NOT NULL,
+    description character varying(200)
 );
 
 
@@ -300,9 +264,9 @@ ALTER SEQUENCE public.tasktype_id_seq OWNED BY public.tasktype.id;
 
 CREATE TABLE public.workflow (
     id integer NOT NULL,
-    wwname character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
     context text,
-    description text DEFAULT 'undefined'::text NOT NULL,
+    description text,
     application character varying(50),
     fpath character varying(500),
     updated date NOT NULL
@@ -369,13 +333,6 @@ ALTER TABLE ONLY public.taskcategory ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
--- Name: taskgroup id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.taskgroup ALTER COLUMN id SET DEFAULT nextval('public.taskgroup_id_seq'::regclass);
-
-
---
 -- Name: tasktype id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -394,7 +351,7 @@ ALTER TABLE ONLY public.workflow ALTER COLUMN id SET DEFAULT nextval('public.wor
 --
 
 ALTER TABLE ONLY public.application
-    ADD CONSTRAINT aplication_name_key UNIQUE (anname);
+    ADD CONSTRAINT aplication_name_key UNIQUE (name);
 
 
 --
@@ -410,7 +367,7 @@ ALTER TABLE ONLY public.application
 --
 
 ALTER TABLE ONLY public.apptype
-    ADD CONSTRAINT apptypes_name_key UNIQUE (aename);
+    ADD CONSTRAINT apptypes_name_key UNIQUE (name);
 
 
 --
@@ -426,7 +383,7 @@ ALTER TABLE ONLY public.apptype
 --
 
 ALTER TABLE ONLY public.codelang
-    ADD CONSTRAINT codelang_name_key UNIQUE (cgname);
+    ADD CONSTRAINT codelang_name_key UNIQUE (name);
 
 
 --
@@ -442,7 +399,7 @@ ALTER TABLE ONLY public.codelang
 --
 
 ALTER TABLE ONLY public.task
-    ADD CONSTRAINT task_name_key UNIQUE (tkname);
+    ADD CONSTRAINT task_name_key UNIQUE (name);
 
 
 --
@@ -462,19 +419,11 @@ ALTER TABLE ONLY public.taskcategory
 
 
 --
--- Name: taskgroup taskgroup_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.taskgroup
-    ADD CONSTRAINT taskgroup_pkey PRIMARY KEY (id);
-
-
---
 -- Name: tasktype tasktype_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.tasktype
-    ADD CONSTRAINT tasktype_name_key UNIQUE (tename);
+    ADD CONSTRAINT tasktype_name_key UNIQUE (name);
 
 
 --
@@ -490,7 +439,7 @@ ALTER TABLE ONLY public.tasktype
 --
 
 ALTER TABLE ONLY public.workflow
-    ADD CONSTRAINT workflow_name_key UNIQUE (wwname);
+    ADD CONSTRAINT workflow_name_key UNIQUE (name);
 
 
 --
@@ -546,7 +495,7 @@ ALTER TABLE ONLY public.task
 --
 
 ALTER TABLE ONLY public.task
-    ADD CONSTRAINT taskcategory_id_fkey FOREIGN KEY (taskcategory_id) REFERENCES public.taskgroup(id) ON DELETE CASCADE;
+    ADD CONSTRAINT taskcategory_id_fkey FOREIGN KEY (taskcategory_id) REFERENCES public.taskcategory(id) ON DELETE CASCADE;
 
 
 --
@@ -555,14 +504,6 @@ ALTER TABLE ONLY public.task
 
 ALTER TABLE ONLY public.taskcategory
     ADD CONSTRAINT taskcategory_workflow_id_fkey FOREIGN KEY (workflow_id) REFERENCES public.workflow(id) ON DELETE CASCADE;
-
-
---
--- Name: taskgroup taskgroup_workflow_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.taskgroup
-    ADD CONSTRAINT taskgroup_workflow_id_fkey FOREIGN KEY (workflow_id) REFERENCES public.workflow(id) ON DELETE CASCADE;
 
 
 --

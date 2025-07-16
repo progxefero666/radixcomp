@@ -45,6 +45,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
 
   
     useEffect(() => {
+       
         if (section == null) { return; }
         if (initialized) { return; }
         dbSquemaControl.current = new CodeGenSquema(AppMemmory.readDbSquema());
@@ -82,11 +83,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
     const runOperation = async () => {
 
         let codecont: string | null = null;
-
+        
         if (format === "typescript") {
+           
             let fileId: string = "default";
 
             if (operationId === "get_def_class" || operationId === "get_entity_class") {
+                 alert(operationId);
                 codecont = await clientTScriptEntities.current!
                     .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);
                 fileId = dbSquemaControl.current!.activeTableName;                    
