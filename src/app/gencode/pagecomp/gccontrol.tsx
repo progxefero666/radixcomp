@@ -99,7 +99,8 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
                 fileId = "list_tables";         
             }
-            if(codecont !== null) {ondataresult(codecont,CodeGenConfig.FORMAT_TYPESCRIPT,fileId);}
+            //console.log(codecont);
+            if(codecont !== null) {ondataresult(CodeGenConfig.FORMAT_TYPESCRIPT,codecont,fileId);}
         }
 
         else if (format === "json") {
@@ -121,7 +122,7 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     .current!.execArrayJsonOperation(operationId,dbSquemaControl.current!.tables);    
                 fileId = "list_tables";    
             }
-            if(codecont !== null) {ondataresult(codecont,CodeGenConfig.FORMAT_JSON,fileId);}
+            if(codecont !== null) {ondataresult(CodeGenConfig.FORMAT_JSON,codecont,fileId);}
         }
 
         

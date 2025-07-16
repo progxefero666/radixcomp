@@ -44,22 +44,19 @@ export default function PageGenCode() {
         //AppContext.saveCodelangs(appRef.current.codelangs);
         if(initialized) {return;} 
         
-        const init = async () => {
-            
+        const init = async () => {            
             const dbSquema = await readDbSqlScriptFile("dbsquema");
-            console.log(dbSquema);
-            if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}            
-            
+            if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                        
             appRef.current = new AppIndex();
             const res: boolean = await appRef.current.loadInitCollections();
             if(!res) {return;}            
-
             initialized =true;
         };
         init();
     }, []);
 
     const onCodeResult= (dataFormat:string,datacode:string,fileid?:string) => {
+        console.log(datacode);
         setDataFormat(dataFormat);
         setDataCode(datacode);
         setDataId(fileid ?? "default");
