@@ -3,9 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-import { TOption } from "@/radix/radixtypes";
-
-import { Box, Grid, Separator, Flex, Text, Button, Link, Checkbox } from "@radix-ui/themes";
+import { Box, Grid, Flex, Text, Button, } from "@radix-ui/themes";
 import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { AppMemmory } from "@/front/appmemory";
@@ -18,8 +16,6 @@ import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { XSelect } from "@/radix/keyvalue/inpselect";
 import { CodeGenSquema } from "@/codegen/model/cgschema";
 import { CgEntityOperations } from "@/codegen/cgoperations";
-import { ModelTable } from "@/codegen/kernel/cgmodel";
-import { CgConfig } from "@/codegen/cgconfig";
 import { FileCode } from "@/filesystem/fsmodels";
 import { DocFormats } from "@/filesystem/fsconstants";
 import { CollectionHelper } from "@/common/helper/collhelper";

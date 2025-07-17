@@ -25,7 +25,7 @@ export class DataConstants{
 
 
 /**
- * class OpConstants
+ * class OpConstants.OP_TEXT_RUN
  */
 export class OpConstants{
     
@@ -47,6 +47,8 @@ export class OpConstants{
     public static readonly OP_MOVE_LAST: string ="move_last";
     public static readonly OP_MOVE_UP: string ="move_up";
     public static readonly OP_CLEAR: string ="clear";
+    public static readonly OP_RUN: string ="run";
+
 
     public static readonly OP_TEXT_OPEN: string ="Open";
     public static readonly OP_TEXT_CLOSE: string ="Close";
@@ -69,5 +71,6 @@ export class OpConstants{
     public static readonly OP_TEXT_MOVE_UP: string ="Move Up";
     public static readonly OP_TEXT_MOVE_DOWN: string ="Move Down";
     public static readonly OP_TEXT_CLEAR: string ="Clear";
+    public static readonly OP_TEXT_RUN: string ="run";
 
 };

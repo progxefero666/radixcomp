@@ -22,11 +22,9 @@ interface CompProps {
     onselect: (index:number,name?:string) => void;
     autofocus?: boolean;
 }
+export function XRadioGroup({collection, name, label, value, direction, autofocus, onselect }:CompProps) {
 
-
-export function XRadioGroup({autocommit,collection, name, label, value, direction, autofocus, onselect }:CompProps) {
-
-    const auto: boolean = autocommit ?? false;    
+   
     const def_value:string = value || collection[0].key;
     const compDirection: any = direction ?? "row";
 
@@ -35,16 +33,13 @@ export function XRadioGroup({autocommit,collection, name, label, value, directio
         size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
         radius: RADIX_RADIUS.medium
-    }
+    };//end
         
     const onSelect = (value:string) => {
         const itemIndex:number = CollectionHelper.getKeyvaluesIndex(collection,value);        
-        if(auto) {
-            if(name){onselect(itemIndex,name);}
-            else    {onselect(itemIndex);}           
-            return;
-        }     
-    }
+        if(name){onselect(itemIndex,name);}
+        else    {onselect(itemIndex);}           
+    };//end
 
     const renderItem = (key:string,value:string,text:string) => {
         return (
@@ -54,12 +49,11 @@ export function XRadioGroup({autocommit,collection, name, label, value, directio
                 </Text>                
             </RadioGroup.Item>
         )
-    }
+    };//end
 
     return (
         <RadioGroup.Root 
             color        = {compStyle.color}
-            variant      = {compStyle.variant}
             size         = {compStyle.size} 
             defaultValue = {def_value}  
             onValueChange= {onSelect}>            
