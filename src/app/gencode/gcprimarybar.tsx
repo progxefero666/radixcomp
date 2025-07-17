@@ -22,7 +22,7 @@ interface PrimaryBarProps {
     onselection:(sectionId:string) => void;
     oncollapse:() => void;
 }
-export function PrimaryBar({collapse,onselection,actsection}: PrimaryBarProps) {
+export function PrimaryBar({collapse,oncollapse,onselection,actsection}: PrimaryBarProps) {
     
     useEffect(() => {
         if(collapse) {
@@ -34,11 +34,12 @@ export function PrimaryBar({collapse,onselection,actsection}: PrimaryBarProps) {
     }, []);
 
     const onHandlerClick = () => {
+        oncollapse();
     };
 
     return (
-        <Flex direction="column" p="3" >            
-            <Flex direction="row" justify="between" px="2" align="center" gapX="2"  
+        <Flex direction="column" px="2" py="2" >            
+            <Flex direction="row" justify="between" px="2" py="1" align="center" gapX="2"  
                   style={COMP_BORDER_STYLE}  >
                 <Box>
                     <Text size="3" >

@@ -4,8 +4,9 @@ import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "@/radix/radixtypes";
 import { RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
 
+//background: 'rgb(56, 56, 56)',
 export const COMP_BORDER_STYLE = {
-    background: 'rgb(56, 56, 56)',
+    
     border: '1px solid rgb(167, 176, 188)'
 };
 
