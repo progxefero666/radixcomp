@@ -34,7 +34,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
         
     };//end 
 
-    const runOperation = async () => {
+    const runOperation = () => {
         alert(operation);
     };//end
 
@@ -90,20 +90,11 @@ export function TypeScriptManager({ onresult }: CompProps) {
                     </Box>
 
                 </Flex>
-                <Button color={ThemeButtonsStyle.COLOR_ADD}
-                    size={ThemeButtonsStyle.BTN_DEF_SIZE}
-                    radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
-                    onClick={() => runOperation()}>
-                    <CrossCircledIcon />
-                    <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
-                        {OpConstants.OP_TEXT_RUN}
-                    </Text>
-                </Button>
+
             </Flex>
         );
     };//end
-
-    //<TypeScriptViewer  code="" />     
+   
 
     return (
 
@@ -139,7 +130,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
             </Box>
 
             <Box  width="60%" >
-                <TypeScriptViewer code={code}  />           
+                <TypeScriptViewer code={code} runoperation={runOperation}  />           
             </Box>              
 
         </Flex>

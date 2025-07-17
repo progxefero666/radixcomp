@@ -7,7 +7,7 @@ import CardCode from "@/app/gencode/cards/cardcode";
 import { OpConstants } from "@/common/constants";
 import { FileCode } from "@/filesystem/fsmodels";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
-import { Link2Icon, Share2Icon } from "@radix-ui/react-icons";
+import { Link2Icon, PlayIcon, Share2Icon } from "@radix-ui/react-icons";
 
 
 /**
@@ -15,9 +15,9 @@ import { Link2Icon, Share2Icon } from "@radix-ui/react-icons";
  */
 interface CompProps {
     code: string;
-    esport?: () => void;
+    runoperation: () => void;
 }
-export function TypeScriptViewer({code,esport}: CompProps) {
+export function TypeScriptViewer({code,runoperation}: CompProps) {
 
     const onClick = (opId?: string) => {
 
@@ -26,7 +26,7 @@ export function TypeScriptViewer({code,esport}: CompProps) {
             alert("Code copied to clipboard");         
         }
         else if (opId==OpConstants.OP_EXPORT) {
-            if(esport){esport();};
+            
         }                   
     };//end
 
@@ -36,7 +36,15 @@ export function TypeScriptViewer({code,esport}: CompProps) {
 
             <Flex width={"100%"} justify="between" px="2" py="1" align="start" >
                 <Text size="3" align="left">{"Output Code"}</Text>
-                
+                <Button color={ThemeButtonsStyle.COLOR_ADD} 
+                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                        radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => runoperation}>
+                        <PlayIcon />
+                        <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
+                            "Run"
+                        </Text>
+                </Button>
 
                 <Flex direction="row" gapX="2" align="center" justify="center">
                     <Button color={ThemeButtonsStyle.COLOR_COPY} 
