@@ -3,39 +3,57 @@
 
 import path from "path";
 import * as fs from "fs/promises";
+import { promisify } from "util";
 
+import { exec } from 'child_process';
 
 /**
  * Server action to get the content of a text file.
  * @param fname 
  * @returns file content as a string
  */
-export async function readDbSqlScriptFile(id:string): Promise<string|null> {
-    
-    let fname:string|null = null;
-    if(id === "dbsquema") {fname = "dbsquema.sql";}
-    if(fname == null) {return null;}
+export async function readDbSqlScriptFile(id: string): Promise<string | null> {
 
-    const environment:string = process.env.NODE_ENV;
+    let fname: string | null = null;
+    if (id === "dbsquema") { fname = "dbsquema.sql"; }
+    if (fname == null) { return null; }
+
+    const environment: string = process.env.NODE_ENV;
     console.log(environment);
 
     const FOLDER_ROOT: string = "C:\\Development\\apps\\aigenerator\\public";
     const SUBFOLDER_DATA: string = "data";
-    const XEFERODB_PATH =  path.join(FOLDER_ROOT,SUBFOLDER_DATA);
+    const XEFERODB_PATH = path.join(FOLDER_ROOT, SUBFOLDER_DATA);
 
-    let content:string = "";
+    let content: string = "";
 
     const filePath: string = path.join(XEFERODB_PATH, fname);
     try {
         await fs.access(filePath, fs.constants.F_OK);
         content = await fs.readFile(filePath, { encoding: "utf-8" });
-    } 
+    }
     catch (error) {
         return null;
     }
     finally {
     }
-    return content;        
-   
+    return content;
+
 }//end action
 
+
+//process.env.DB_PASSWORD
+const execAsync = promisify(exec);
+
+export async function readDbSqlScript(): Promise<string> {
+    const command = `pg_dump -h localhost -U postgres -d xeferodb -s`;
+
+    try {
+        const { stdout } = await execAsync(command, {
+        env: { ...process.env, PGPASSWORD: 'admin' }
+        });
+        return stdout; // String SQL crudo
+    } catch (error) {
+        throw new Error(`Error: ${error}`);
+    }
+}//end action
