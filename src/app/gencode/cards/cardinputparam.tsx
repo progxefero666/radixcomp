@@ -29,7 +29,7 @@ export default function CardInputParam({patterns, input, maxlength }: CompProps)
     const renderPatterns = () => {
         return (
             <ScrollArea type="always" scrollbars="horizontal" style={{height:"auto"}}>
-                <Flex width="100%" direction="row" py="1" align="center" justify="center" >
+                <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="center" >
                     {patterns.map((pattern, index) => (
                         <Box key={index.toString()}>
                             {index===0 && <Image src="/icons/uno.png"    width={24} height={24} alt="icon-1" />} 
@@ -51,7 +51,13 @@ export default function CardInputParam({patterns, input, maxlength }: CompProps)
     return (
         <Flex width="100%" direction="column" px="2" py="1"  style={COMP_BORDER_STYLE} >
             <Box>
-                <Label>{input.label}</Label>
+                <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="between" >
+                    <Label>{input.label}</Label>
+                    <Flex direction="row" justify="end" align="center">
+                        {input.pattern.start + input.pattern.end }
+                    </Flex>
+                </Flex>
+                
                 <TextField.Root 
                     maxLength={maxlength ?? CgDataConstants.MAX_LENGTH_DEF}
                     name = {input.id}
