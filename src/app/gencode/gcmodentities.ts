@@ -50,7 +50,7 @@ export class ServClientEntities extends GenCodeModuleControl {
     };//end
 
     public async execListSelectionTsOperation(operationId:string,tables:TOption[]): Promise<string | null> {       
-        const selectTables: string[] = CollectionHelper.getListFromTOptions(tables!);
+        const selectTables: string[] = CollectionHelper.geTOptionsNames(tables!);
         const namesjoined: string = CodeGenHelper.getStringsJoined(selectTables!);
         let code: string | null = await getTypeScriptArrayTableContent(this.sqlsquema, operationId, namesjoined);
         return code;

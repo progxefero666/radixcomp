@@ -24,6 +24,7 @@ import { FileCode } from "@/filesystem/fsmodels";
 import { DocFormats } from "@/filesystem/fsconstants";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { XInputCheck } from "@/radix/input/inputcheck";
+import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 
 
 //---------------------------------------------------------------------------------------
@@ -132,14 +133,20 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                     operationId === CgEntityOperations.OP_LIST_ENTITY_CLASS) {
                     listCode = await clientTScriptEntities.current!
                         .execMultipleTsOperation(operationId, dbSquemaControl.current!.toptions);
+                    
+                    const tableIds:string[] = CollectionHelper
+                        .geTOptionsNames(dbSquemaControl.current!.toptions);
+
                     if (listCode != null) {
-                        filescode= dbSquemaControl.current!.getSelectedFilesCode(listCode);
+                        filescode= CgFileFunctions.getListFilesCode(tableIds,listCode);
                     }
                 }
                 else if(operationId === CgEntityOperations.OP_ALL_DEF_CLASS ||
-                        operationId === CgEntityOperations.OP_ALL_ENTITY_CLASS){   
+                        operationId === CgEntityOperations.OP_ALL_ENTITY_CLASS){  
+                    const tableIds:string[] = CollectionHelper
+                        .getKeyvaluesIds(dbSquemaControl.current!.tcollection);         
                     if (listCode != null) {
-                        filescode= dbSquemaControl.current!.getAllFilesCode(listCode);
+                        filescode= CgFileFunctions.getListFilesCode(tableIds,listCode);
                     }                                         
                 }
                 if (listCode != null) {onmultipleresult(filescode);}
@@ -150,7 +157,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                 let codecont = await clientTScriptEntities
                     .current!.execAllListTsOperation(operationId);
                 if (codecont !== null) { 
-                    onsingleresult(dbSquemaControl.current!.getFileCode("list_tables",codecont!)); 
+                    onsingleresult(CgFileFunctions.getFileCode("list_tables",codecont!)); 
                 }
             }
         }

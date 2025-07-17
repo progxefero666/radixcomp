@@ -2,12 +2,35 @@
 
 import { Option } from "@/common/model/option";
 import { TOption, TSelection } from "@/radix/radixtypes";
+import { Keyvalue } from "../model/keyvalue";
 
 /**
- *  class ModelHelper.getListFromTOptions
- *      provides utility methods to work with model data.
+ *  class CollectionHelper.geTOptionsNames
  */
 export class CollectionHelper {
+
+    //Keyvalue
+
+    public static getKeyvaluesIds(collection: Keyvalue[]): string[] {
+        const options: string[] = [];
+
+        for (const item of collection) {
+            const option = item.key; 
+            options.push(option);
+        }
+        return options;
+    };//end
+
+
+    public static geTOptionsNames(collection: TOption[]): string[] {
+        const options: string[] = [];
+
+        for (const item of collection) {
+            const option = item.name; 
+            options.push(option);
+        }
+        return options;
+    };//end     
 
     public static getOptionsFromList(collection: string[]): Option[] {
         const options: Option[] = [];
@@ -17,7 +40,7 @@ export class CollectionHelper {
             options.push(option);
         }
         return options;
-    }
+    };//end
 
     public static getListFromOptions(collection: Option[]): string[] {
         const options: string[] = [];
@@ -27,17 +50,8 @@ export class CollectionHelper {
             options.push(option);
         }
         return options;
-    }    
+    };//end    
 
-    public static getListFromTOptions(collection: TOption[]): string[] {
-        const options: string[] = [];
-
-        for (const item of collection) {
-            const option = item.name; 
-            options.push(option);
-        }
-        return options;
-    } 
 
     public static getElementIndex(collection: Option[],findValue:string): number {
         let index:number = -1;
@@ -51,7 +65,7 @@ export class CollectionHelper {
             }
         }
         return index;
-    }
+    };//end
 
     public static getTOptionIndex(collection: TOption[],findValue:string): number {
         let index:number = -1;
@@ -65,8 +79,7 @@ export class CollectionHelper {
             }
         }
         return index;
-    }    
-    //options:TOption[];
+    };//end    
     
 
     public static getListFromTSelection(tselection:TSelection): string[] {
@@ -75,7 +88,7 @@ export class CollectionHelper {
             list.push(item.id);
         }
         return list;
-    }   
+    };//end    
 
     
 }// end class

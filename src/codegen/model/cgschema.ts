@@ -10,6 +10,7 @@ import {FileCode} from "@/filesystem/fsmodels";
 
 import { DocFormats } from "@/filesystem/fsconstants";
 import { CollectionHelper } from "@/common/helper/collhelper";
+import { CgFileFunctions } from "../kernel/cgfilefunctions";
 /**
  * class CodeGenSchema tables[activeTableIndex]
  */
@@ -86,30 +87,7 @@ export class CodeGenSquema{
         return this.jsontables;
     };//end
 
-    public getFileCode(fileId:string,code:string): FileCode {
-        return new FileCode(
-                fileId,
-                DocFormats.FORMAT_TYPESCRIPT.value,
-                DocFormats.FORMAT_TYPESCRIPT.key,
-                code);
-    };//end
-    
-    public getAllFilesCode(code:string[]): FileCode[] {
-        const listFiles:FileCode[] = [];
-        for (let idx=0;idx<this.tables.length;idx++) {
-            listFiles.push(this.getFileCode(this.tables[idx].name,code[idx]));
-        }
-        return listFiles;
-    };//end
-
-
-    public getSelectedFilesCode(code:string[]): FileCode[] {
-        const listFiles:FileCode[] = [];
-        for (let idx=0;idx<code.length;idx++) {
-            listFiles.push(this.getFileCode(this.toptions[idx].name,code[idx]));
-        }
-        return listFiles;
-    };//end
+  
 
     public getActiveFileCode(code:string): FileCode {
         return new FileCode(
@@ -128,7 +106,7 @@ export class CodeGenSquema{
     };//end
 
     public getAllJsonFileCodes(): FileCode[] { 
-        let listfilesId: string[] = CollectionHelper.getListFromTOptions(this.toptions);
+        let listfilesId: string[] = CollectionHelper.geTOptionsNames(this.toptions);
                         
         const filecodes: FileCode[] = [];
         for (let idx=0;idx<this.jsontables.length;idx++) {
@@ -142,7 +120,7 @@ export class CodeGenSquema{
      };//end
 
     public getSelectedJsonFileCodes(): FileCode[] { 
-        let listfilesId: string[] = CollectionHelper.getListFromTOptions(this.toptions);
+        let listfilesId: string[] = CollectionHelper.geTOptionsNames(this.toptions);
                         
         const filecodes: FileCode[] = [];
         for (let idx=0;idx<this.jsontables.length;idx++) {
@@ -157,36 +135,3 @@ export class CodeGenSquema{
         return filecodes;
      };//end
 }//end class
-
-/*
-
-            
-    const runJsonOperation = async () => {
-        let codecont: string | null = null;
-        let fileId: string = "default";
-        if (operationId === "get_def_class" || operationId === "get_entity_class") {
-            const selTable: ModelTable = dbSquemaControl.current!.getActiveTable()!;
-            codecont = await clientTScriptEntities
-                .current!.execItemJsonOperation(operationId, selTable);
-            fileId = dbSquemaControl.current!.activeTableName;
-        }
-        else if (operationId === "get_list_def_class" || operationId === "get_list_entity_class") {
-            const select_tables: ModelTable[] = [];
-            codecont = await clientTScriptEntities
-                .current!.execArrayJsonOperation(operationId, select_tables);
-            fileId = "list_tables";
-        }
-        else if (operationId === "get_all_def_class" || operationId === "get_all_entity_class") {
-            codecont = await clientTScriptEntities
-                .current!.execArrayJsonOperation(operationId, dbSquemaControl.current!.tables);
-            fileId = "list_tables";
-        }
-        const filecode: FileCode = new FileCode(
-            fileId,
-            DocFormats.FORMAT_JSON.value,
-            DocFormats.FORMAT_JSON.key,
-            codecont!);
-
-        if (codecont !== null) { onsingleresult(filecode); }
-    };//end
-*/
