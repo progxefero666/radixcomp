@@ -10,24 +10,35 @@ import MenuButtons from "@/radix/cbars/btmenu";
 import { CodeGenModules } from "@/codegen/cgoperations";
 import { COMP_BORDER_STYLE, ThemeIconsStyle } from "@/radix/radixtheme";
 import { DB_ITEM_CMD } from "@/common/database/dbkernel";
-import { EyeOpenIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 
 /**
  * Page Primary Bar
  */
 interface PrimaryBarProps {    
+    collapse: boolean;
     actsection: string|null;
     onselection:(sectionId:string) => void;
+    oncollapse:() => void;
 }
-export function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
+export function PrimaryBar({collapse,onselection,actsection}: PrimaryBarProps) {
     
+    useEffect(() => {
+        if(collapse) {
+            
+        }
+        else {
+           
+        }
+    }, []);
+
     const onHandlerClick = () => {
     };
 
     return (
         <Flex direction="column" p="3" >            
-            <Flex direction="row" justify="between" align="center" gapX="2"  
+            <Flex direction="row" justify="between" px="2" align="center" gapX="2"  
                   style={COMP_BORDER_STYLE}  >
                 <Box>
                     <Text size="3" >
@@ -36,15 +47,18 @@ export function PrimaryBar({onselection,actsection}: PrimaryBarProps) {
                 </Box>    
                 <Box>
                     <IconButton size={ThemeIconsStyle.DEF_SIZE}>
-                        <EyeOpenIcon  width={ThemeIconsStyle.DEF_WIDTH}
+                        <ArrowLeftIcon  width={ThemeIconsStyle.DEF_WIDTH}
                                     height={ThemeIconsStyle.DEF_HEIGHT} onClick={() => onHandlerClick()} />
                     </IconButton>     
                 </Box>                  
             </Flex>
-            <MenuButtons options={CodeGenModules.MODULES}
-                onclick={onselection} 
-                actoption={actsection} />	
-            <Separator orientation="horizontal" size="4"  />
+            <Box width="100%" pt="2">     
+                <MenuButtons options={CodeGenModules.MODULES}
+                    onclick={onselection} 
+                    actoption={actsection} />	
+                <Separator orientation="horizontal" size="4"  />                           
+            </Box>              
+
         </Flex>
     );
 

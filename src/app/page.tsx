@@ -37,6 +37,9 @@ export default function PageGenCode() {
 
 
     const [ready, setReady] = useState<boolean>(false);
+    const [layoutColsWidth, setlayoutColsWidth] = useState<number[]>([14,82,4]); 
+    const [collapsePrimaryBar, setCollapsePrimaryBar] = useState<boolean>(false);
+
     const [section, setSection] = useState<string>(CodeGenModules.MODULES[1].id);
     const [fileCode,setFileCode]   = useState<FileCode|null>(null);
     const [listFileCode,setListFileCode] = useState<FileCode[]|null>(null);
@@ -59,9 +62,20 @@ export default function PageGenCode() {
         init();
     }, []);
 
+    const onPrimaryBarCollapse = () => {
+        const primBarCollapse:boolean = !collapsePrimaryBar;
+        if(primBarCollapse) {
+            setlayoutColsWidth([4,82,14]);
+        }
+        else {
+            setlayoutColsWidth([14,82,4]);
+        }
+        setCollapsePrimaryBar(!collapsePrimaryBar);
+    };//end
+
     const loadSection = (sectionId: string) => {
         setSection(sectionId);
-    }
+    };//end
 
 
     // for single files
@@ -117,25 +131,25 @@ export default function PageGenCode() {
     };//end
 
     const renderSectionEntityFiles = () => {
-        return (
-            <>
-            <Box  width="41%" style={boxStyle}> 
-                {ready ? 
-                <GenCodeControl key={section}  section={section}  
-                                onsingleresult={chargeFileCode}
-                                onmultipleresult={chargeMultipleFileCode}/>:null}
-            </Box>
-            <Box width="41%" style={boxStyle}>
-                { (fileCode!==null ) ? 
-                <GenCodeViewer singlecode={fileCode} 
-                                exportsinglecode={exportFileCode} 
-                                exportmultiplecode={exportFileCode}/>:null}                                
-                { (listFileCode!==null ) ? 
-                <GenCodeViewer multiplecode={listFileCode} 
-                                exportsinglecode={exportFileCode} 
-                                exportmultiplecode={exportFileCode}/>:null}                                                   
-            </Box>            
-            </>
+        return (            
+            <Box  width="82%" style={boxStyle}> 
+                <Box  width="50%" style={boxStyle}> 
+                    {ready ? 
+                    <GenCodeControl key={section}  section={section}  
+                                    onsingleresult={chargeFileCode}
+                                    onmultipleresult={chargeMultipleFileCode}/>:null}
+                </Box>
+                <Box width="50%" style={boxStyle}>
+                    { (fileCode!==null ) ? 
+                    <GenCodeViewer singlecode={fileCode} 
+                                    exportsinglecode={exportFileCode} 
+                                    exportmultiplecode={exportFileCode}/>:null}                                
+                    { (listFileCode!==null ) ? 
+                    <GenCodeViewer multiplecode={listFileCode} 
+                                    exportsinglecode={exportFileCode} 
+                                    exportmultiplecode={exportFileCode}/>:null}                                                   
+                </Box>    
+            </Box>  
         );
     };//end
 
@@ -151,7 +165,9 @@ export default function PageGenCode() {
 
                 <Box width="14%" style={boxStyle}>
                     <PrimaryBar actsection={section}
-                                onselection={loadSection} />
+                                collapse={collapsePrimaryBar}
+                                onselection={loadSection}
+                                oncollapse={onPrimaryBarCollapse} />
                 </Box>
 
                 {section === CodeGenModules.MODULES[0].id?renderSectionEntityFiles():null}
