@@ -155,32 +155,45 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
 
     const runJsonOperation = async () => {
-        let codecont: string | null = null;
-        let fileId: string = "default";
-        if (operationId === "get_def_class" || operationId === "get_entity_class") {
-            const selTable: ModelTable = dbSquemaControl.current!.getActiveTable()!;
-            codecont = await clientTScriptEntities
-                .current!.execItemJsonOperation(operationId, selTable);
-            fileId = dbSquemaControl.current!.activeTableName;
-        }
-        else if (operationId === "get_list_def_class" || operationId === "get_list_entity_class") {
-            const select_tables: ModelTable[] = [];
-            codecont = await clientTScriptEntities
-                .current!.execArrayJsonOperation(operationId, select_tables);
-            fileId = "list_tables";
-        }
-        else if (operationId === "get_all_def_class" || operationId === "get_all_entity_class") {
-            codecont = await clientTScriptEntities
-                .current!.execArrayJsonOperation(operationId, dbSquemaControl.current!.tables);
-            fileId = "list_tables";
-        }
-        const filecode: FileCode = new FileCode(
-            fileId,
-            DocFormats.FORMAT_JSON.value,
-            DocFormats.FORMAT_JSON.key,
-            codecont!);
+        
+        // for single file
+        //...............................................................................
+        if (operationId === "get_def_class") {           
+            onsingleresult(dbSquemaControl.current!.getActiveJsonFileCode());
+            return;
+        }//end if
 
-        if (codecont !== null) { onsingleresult(filecode); }
+        // for multiple file
+        //...............................................................................
+        if (optMultDisabled) {
+            let listCode: string[] = [];
+            if (operationId === "get_list_def_class") {
+                listCode = dbSquemaControl.current!.getSelectedJsonTables();
+            }
+            else {
+                listCode = dbSquemaControl.current!.getAllJsonTables();
+            }
+
+            let listfilesId: string[] = CollectionHelper
+                .getListFromTOptions(dbSquemaControl.current!.toptions);                
+            const filescode: FileCode[] = [];
+
+            for (let idx = 0; idx < listfilesId.length; idx++) {
+                filescode[idx] = new FileCode(
+                    listfilesId[idx],
+                    DocFormats.FORMAT_JSON.value,
+                    DocFormats.FORMAT_JSON.key,
+                    listCode![idx]);
+            }                
+            onmultipleresult(filescode);         
+            return       
+        }//end if
+
+        /*else {if(operationId==="get_list_def_class"||operationId==="get_list_entity_class"){}
+            else{}let fileId:string="list_tables";}*/
+   
+
+       
     };//end
 
     const renderHeader = () => {
