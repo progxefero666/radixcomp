@@ -5,6 +5,7 @@
  */
 export class FsHelper {
     
+    
     public static hasExtension(filePath: string): boolean {
         return filePath.split('/').pop()!.includes('.');
     };//end

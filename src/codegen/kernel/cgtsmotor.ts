@@ -1,7 +1,7 @@
 //src\app_front\codegen\util\modelutil.ts
 
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
-import { CodeGenConfig } from "@/codegen/cgconfig";
+import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 
@@ -26,29 +26,39 @@ export class CodeGenTsMotor {
 
         const className = CodeGenHelper.capitalize(tableModel.name);
         const fileName = `table_${tableModel.name.toLowerCase()}.ts`;        
-        content += `//${fileName}\n\n`;
+        content += `//${fileName}` + CgConfig.RETx2;
         
         // Class info
-        content += `/**\n`;
-        content += ` * Db Table Entity Class ${className}\n`;
-        content += ` **/\n`;
+        content += `/**`+CgConfig.RET;
+        content += ` * Db Table Entity Class ${className}`+CgConfig.RETx2;
+        content += ` **/`+CgConfig.RET;
         content += `export class ${className} {\n\n`;        
+
+        //CodeGenConfig.TAB_4
         // Generate properties
         for (const field of tableModel.fields) {
             const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);    
-            console.log(field.default);  
-            if(field.default!=null){
-                if (field.type === "text"){
-                    content += `    public ${field.name}: ${tsType} = '${field.default}';\n`;
+            if(!field.required ){
+                if(tsType === 'boolean'){
+                    content += CgConfig.TAB_4 +
+                               `public ${field.name}: ${tsType};`+ 
+                               CgConfig.RET;
                 }
                 else {
-                    content += `    public ${field.name}: ${tsType} = ${field.default};\n`;
+                    content += CgConfig.TAB_4 +
+                              `public ${field.name}: ${tsType} | null = null;`+ 
+                               CgConfig.RET;
                 }
-                
             }
-            else{
-                content += `    public ${field.name}: ${tsType};\n`;
-            }       
+            else {
+                if(field.default!=null){
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};`+CgConfig.RET;               
+                }
+                else{
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};`+CgConfig.RET;
+                }  
+            }
+    
         }        
         // Constructor
         content += `\n    constructor(`;
@@ -61,7 +71,7 @@ export class CodeGenTsMotor {
         content += `) {\n\n`;        
         // Constructor assignments
         for (const field of tableModel.fields) {
-            content += `        this.${field.name} = ${field.name};\n`;
+            content += `        this.${field.name} = ${field.name};`+CgConfig.RET;
         }        
         content += `    }\n\n`;
         
@@ -122,7 +132,7 @@ export class CodeGenTsMotor {
         
         let applyIncludeDef:boolean = includeDef ?? false;
         // 1. Imports una sola vez al principio
-        content += CodeGenConfig.getKernelImports();
+        content += CgConfig.getKernelImports();
         
         // 2. Para cada tabla, los 3 bloques
         for (let i = 0; i < tableModel.length; i++) {
@@ -229,14 +239,14 @@ export class CodeGenTsMotor {
       
     public static getEntityDefClass(table: ModelTable): string {
         let code: string = "";
-        code += CodeGenConfig.getKernelImports();
+        code += CgConfig.getKernelImports();
         code += CodeGenTsMotor.getEntityDefClassData(table);        
         return code;
     }//end
     
     public static getArrayEntityDefClass(tables: ModelTable[]): string {
         let code: string = "";
-        code += CodeGenConfig.getKernelImports();
+        code += CgConfig.getKernelImports();
         for (let i = 0; i < tables.length; i++) {
             const table = tables[i];
             code += CodeGenTsMotor.getEntityDefClassData(table);
@@ -246,7 +256,6 @@ export class CodeGenTsMotor {
         }        
         return code;
     }//end
-
 
 
 }//end class ModelUtil

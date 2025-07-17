@@ -8,8 +8,13 @@ import { DocFormats } from "./fsconstants";
  */
 export class FsFunctions {
 
-    //CodeGenHelper.uncapitalize
-    //CodeGenHelper.capitalize
+    public static capitalize(str: string): string {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }//end
+
+    public static uncapitalize(str: string): string {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+    }//end 
 
     public static getFilename(id:string,format:string): string {
         let fname: string = id + ".";

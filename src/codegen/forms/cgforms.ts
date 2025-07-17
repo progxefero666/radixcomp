@@ -1,7 +1,7 @@
 //src\codegen\forms\cgforms.ts
 
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
-import { CodeGenConfig } from "@/codegen/cgconfig";
+import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 

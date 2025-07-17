@@ -6,14 +6,15 @@
 
 
 /**
- * class CodeGenConfig.FORMAT_TYPESCRIPT
+ * class CodeGenConfig.RETURNx2
  */
-export class CodeGenConfig {
+export class CgConfig {
 
     public static readonly DEF_FILE_ID:string = "default";
     public static readonly DEF_CLASS_NAMEADD: string = "Def"
     public static readonly TAB_4:string = "    ";
-    public static readonly RETURN:string = "\n";
+    public static readonly RET:string = "\n";
+    public static readonly RETx2:string = "\n\n";
 
     public static readonly CODEGEN_LIB_PATH: string 
         = "@/codegen/kernel/cgmodel"
@@ -27,11 +28,11 @@ export class CodeGenConfig {
     public static getKernelImports(): string {
         let imports: string = "";
         imports += `import { ModelTable, ModelField, Relation } from `;
-        imports += `"` + CodeGenConfig.CODEGEN_LIB_PATH + `";\n`;
+        imports += `"` + CgConfig.CODEGEN_LIB_PATH + `";\n`;
         imports += `import types from `;
-        imports += `"` + CodeGenConfig.SQLTYPES_NUMBER_JSON_PATH + `";\n`;
+        imports += `"` + CgConfig.SQLTYPES_NUMBER_JSON_PATH + `";\n`;
         imports += `import sqlTypesData from `;
-        imports += `"` + CodeGenConfig.SQLTYPES_JSON_PATH + `";\n\n`;        
+        imports += `"` + CgConfig.SQLTYPES_JSON_PATH + `";\n\n`;        
         return imports;
     }
 

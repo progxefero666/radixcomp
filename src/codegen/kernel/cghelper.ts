@@ -4,7 +4,7 @@ import { Option } from "@/common/model/option";
 import { TOption } from "@/radix/radixtypes";
 import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSqlHelper } from "./cgsqlhelper";
-import { CodeGenConfig } from "../cgconfig";
+import { CgConfig } from "../cgconfig";
 
 /**
  * CodeGenHelper.uncapitalize
@@ -102,7 +102,7 @@ export class CodeGenHelper {
     }//end  
 
     public static getTabsSpace(countTabs:number): string {
-        return CodeGenConfig.TAB_4.repeat(countTabs);
+        return CgConfig.TAB_4.repeat(countTabs);
     }
 
     public static applyTabsToStringBlock(text:string,countTabs:number): string {
@@ -110,7 +110,7 @@ export class CodeGenHelper {
         //calculate total identation characters
         let spaceApply:string = "";
         for (let idx=0;idx<countTabs;idx++) {
-            spaceApply += CodeGenConfig.TAB_4;
+            spaceApply += CgConfig.TAB_4;
         }
 
         // apply indentation to each line

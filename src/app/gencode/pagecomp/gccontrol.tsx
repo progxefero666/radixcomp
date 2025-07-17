@@ -19,7 +19,7 @@ import { XSelect } from "@/radix/keyvalue/inpselect";
 import { CodeGenSquema } from "@/codegen/model/cgschema";
 import { CodeGenOperations } from "@/codegen/cgoperations";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
-import { CodeGenConfig } from "@/codegen/cgconfig";
+import { CgConfig } from "@/codegen/cgconfig";
 import { FileCode } from "@/filesystem/fsmodels";
 import { DocFormats } from "@/filesystem/fsconstants";
 import { CollectionHelper } from "@/common/helper/collhelper";
