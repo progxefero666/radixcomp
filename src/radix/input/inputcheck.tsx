@@ -7,6 +7,7 @@ import { ThemeCompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 import { RADIX_COLORS, RADIX_SIZES } from "../radixconstants";
+import { Label } from "@radix-ui/react-label";
 
 interface CompProps {
     autocommit?: boolean;
@@ -35,99 +36,44 @@ export const XInputCheck = forwardRef<HTMLInputElement, CompProps>(({
             onchange(value, name);
         }
     }
-    const renderReadComp = () => {
-        return (
-            <Box>
-                <Text as="label" size={size}>
-                    <Flex gap="2" align="center">
-                        <Checkbox
-                            defaultChecked={value}
-                            variant={variant}
-                            size={size}
-                            color={color}
-                            disabled={true} />
-                        {label}
-                    </Flex>
-                </Text>
-            </Box>
-        )
-    }
 
-    const renderEditComp = () => {
-        let cell_style: string = "";
-        if (isDisabled) { cell_style = ThemeCompStyleOld.C_CHECK_DISABLED_STYLE }
-        else { cell_style = ThemeCompStyleOld.C_CHECK_STYLE }
+    const renderContent = (direction:any) => {
+        if(direction === "row") {
+            return (
+                <Flex width="100" direction="row" gapX="2" align="center" justify="center">
+                    <Label>{label}</Label>
+                    <Checkbox                
+                        defaultChecked={value}
+                        variant={variant}
+                        size={size}
+                        color={color}
+                        onCheckedChange={handleOnChange}
+                        disabled={isDisabled} />
+                </Flex>       
+            )
+        }
+        else {
+             return (
+                <Flex width="100" direction="column" >
+                    <Label>{label}</Label>
+                    <Checkbox                
+                        defaultChecked={value}
+                        variant={variant}
+                        size={size}
+                        color={color}
+                        onCheckedChange={handleOnChange}
+                        disabled={isDisabled} />
+                </Flex>  
+             )
+        }
 
-        return (
-            <Box>
-                <Text as="label" size={size}>
-                    <Flex gap="2" align="center">
-                        <Checkbox
-                            defaultChecked={value}
-                            variant={variant}
-                            size={size}
-                            color={color}
-                            onCheckedChange={handleOnChange}
-                            disabled={disabled} />
-                        {label}
-                    </Flex>
-                </Text>
-            </Box>
-        )
-    }
-
-    const renderRowSimpleContent = () => {
-        return (
-            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
-                {isReadOnly ? renderReadComp() :
-                    renderEditComp()}
-            </div>
-        )
-    }
-
-    const renderRowLabelContent = () => {
-        return (
-            <Flex direction="row" mt="1"
-                width="100%"
-                gap="2" align="center">
-                <Checkbox
-                    defaultChecked={value}
-                    variant={variant}
-                    size={size}
-                    color={color}
-                    onCheckedChange={handleOnChange}
-                    disabled={disabled} />
-                {label}
-            </Flex>
-        )
-    }
-
-    const renderColSimpleContent = () => {
-        return (
-            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
-                {isReadOnly ? renderReadComp() :
-                    renderEditComp()}
-            </div>
-        )
-    }
-
-    const renderColLabelContent = () => {
-        return (
-            <div className={ThemeCompStyleOld.C_INCLABEL_COL_STYLE}>
-                {label}
-                {renderColSimpleContent()}
-            </div>
-        )
-    }
+    };//end
  
     return (
         <>
             {showInline ?
-                label ? renderRowLabelContent() :
-                    renderRowSimpleContent()
-                :
-                label ? renderColLabelContent() :
-                    renderColSimpleContent()
+                renderContent("row"):
+                renderContent("column")
             }
         </>
     )

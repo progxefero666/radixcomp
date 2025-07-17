@@ -199,7 +199,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     const renderHeader = () => {
         return (
             <Flex width="100%" direction="row" justify="between" mt="2" pb="2" align="center" >
-                <Flex width="100%" direction="row" gapX="2"  >
+                <Flex width="100%" direction="row" gapX="3"  >
                     <Box>
                         <XSelect label="Operations:"
                             collection={CgEntityOperations.OPS_ENTITIES}
@@ -211,10 +211,10 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                     </Box>
                     <Box>
                         <XInputCheck label="Multiple files"
-                            value={false}
-                            name="option_multiple"                           
-                            onchange={onOptMultipleChange}
-                            disabled={optMultDisabled} />
+                                    inline={true}
+                                        value={false}
+                                        name="option_multiple"                           
+                                        onchange={onOptMultipleChange} />
                     </Box>
                 </Flex>
                 <Button onClick={runOperation} color="green">

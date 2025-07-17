@@ -87,21 +87,4 @@ export class CodeGenSquema{
         return this.jsontables;
     };//end
 
-  
-
-    public getSelectedJsonFileCodes(): FileCode[] { 
-        let listfilesId: string[] = CollectionHelper.getTOptionsNames(this.toptions);
-                        
-        const filecodes: FileCode[] = [];
-        for (let idx=0;idx<this.jsontables.length;idx++) {
-            if(this.toptions[idx].selected) {
-                filecodes.push(new FileCode(
-                    listfilesId[idx],
-                    DocFormats.FORMAT_JSON.value,
-                    DocFormats.FORMAT_JSON.key,
-                    this.jsontables[idx]));                
-            }
-        }
-        return filecodes;
-     };//end
-}//end class
+};//end class
