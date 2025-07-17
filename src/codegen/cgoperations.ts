@@ -11,7 +11,8 @@ export class CodeGenModules {
 
     public static readonly MODULES: Option[] = [
         new Option("entity_files", "Entities files",null),
-        new Option("typescript_code", "Typescript Code",null)
+        new Option("typescript_code", "Typescript Code",null),
+        new Option("database_config", "Database Man.",null),   
     ]
 
 }//end class

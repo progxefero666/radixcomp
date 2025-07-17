@@ -49,12 +49,14 @@ export default function PageGenCode() {
             const jsontables: string[] =CodeGenJson.getAllJsonTables(dbSquema!);
 
             if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                              
-            //setReady(true);
+            setReady(true);
         };
         init();
     }, []);
 
-    const loadSection = (sectionId: string) => {setSection(sectionId);}
+    const loadSection = (sectionId: string) => {
+        setSection(sectionId);
+    }
 
 
     // for single files
@@ -91,6 +93,42 @@ export default function PageGenCode() {
     
     };//end
 
+    const renderSectionDatabase = () => {
+        return(
+            null
+        )
+    };//end
+
+    const renderSectionTsCode = () => {
+        return(
+            null
+        )
+    };//end
+
+    const renderSectionEntityFiles = () => {
+        return (
+            <>
+            <Box  width="41%" style={boxStyle}> 
+                {ready ? 
+                <GenCodeControl key={section}  section={section}  
+                                onsingleresult={chargeFileCode}
+                                onmultipleresult={chargeMultipleFileCode}/>:null}
+            </Box>
+            <Box width="41%" style={boxStyle}>
+                { (fileCode!==null ) ? 
+                <GenCodeViewer singlecode={fileCode} 
+                                exportsinglecode={exportFileCode} 
+                                exportmultiplecode={exportFileCode}/>:null}                                
+                { (listFileCode!==null ) ? 
+                <GenCodeViewer multiplecode={listFileCode} 
+                                exportsinglecode={exportFileCode} 
+                                exportmultiplecode={exportFileCode}/>:null}                                                   
+            </Box>            
+            </>
+        );
+    };//end
+
+
     // jsx
     //...............................................................................    
     return (
@@ -105,26 +143,9 @@ export default function PageGenCode() {
                                 onselection={loadSection} />
                 </Box>
 
-                <Box  width="41%" style={boxStyle}> 
-                    {ready ? 
-                    <GenCodeControl key={section}  section={section}  
-                                    onsingleresult={chargeFileCode}
-                                    onmultipleresult={chargeMultipleFileCode}/>:null}
-
-                </Box>
-
-                <Box width="41%" style={boxStyle}>
-                    { (fileCode!==null ) ? 
-                    <GenCodeViewer singlecode={fileCode} 
-                                   exportsinglecode={exportFileCode} 
-                                   exportmultiplecode={exportFileCode}/>:null}
-                                   
-                    { (listFileCode!==null ) ? 
-                    <GenCodeViewer multiplecode={listFileCode} 
-                                   exportsinglecode={exportFileCode} 
-                                   exportmultiplecode={exportFileCode}/>:null}                                   
-                    
-                </Box>
+                {section === CodeGenModules.MODULES[0].id?renderSectionEntityFiles():null}
+                {section === CodeGenModules.MODULES[1].id?renderSectionTsCode():null}
+                {section === CodeGenModules.MODULES[2].id?renderSectionDatabase():null}
 
                 <Box width="4%" style={boxStyle}>
                     <SecondBar actsection={section} />
