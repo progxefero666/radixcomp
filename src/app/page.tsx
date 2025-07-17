@@ -36,14 +36,8 @@ export default function PageGenCode() {
 
     
     const [section, setSection] = useState<string|null>(null);
-    
-    const [fileId,    setFileId]     = useState<string>("default");
-    const [fileFormat,setFileFormat] = useState<string>("typescript");
-    const [fileCode,  setFileCode]   = useState<string|null>(null);
-
-    const [listFilesId,    setListFilesId]     = useState<string[]|null>(null);
-    const [listFilesFormat,setListFilesFormat] = useState<string[]|null>(null);
-    const [listFilesCode,  setListFilesCode]   = useState<string[]|null>(null);
+    const [fileCode,setFileCode]   = useState<FileCode|null>(null);
+    const [listFileCode,setListFileCode] = useState<FileCode[]|null>(null);
     
     useEffect(() => {
         if(initialized) {return;} 
@@ -62,19 +56,30 @@ export default function PageGenCode() {
     // for single files
     //...............................................................................
     const chargeFileCode= (filecode:FileCode) => {
-        setFileFormat(filecode.format);
-        setFileCode(filecode.code);
-        setFileId(filecode.id);
+        setFileCode(filecode);
     };
     
     const exportFileCode = () => {
         if(!fileCode){return;}
-        const file: File = CodeGeneration.generateFile(fileId, fileFormat, fileCode);
+        const file: File = CodeGeneration
+            .generateFile(fileCode.id,fileCode.format,fileCode.code);
         FsFunctions.chargeDownloadFile(file);
     };
 
     // for multiple files
     //...............................................................................    
+    const chargeMultipleFileCode= (filescode:FileCode[]) => {
+        setListFileCode(filescode);
+
+        const files: File[] = [];
+        for(let idx=0;idx<filescode.length;idx++){
+            const file: File = CodeGeneration.generateFile
+                (filescode[idx].id,filescode[idx].format,filescode[idx].code);
+            files.push(file);    
+        }
+        FsFunctions.chargeDownloadListFile(files);
+
+    };
     const exportFolder = () => {
     
     };//end
@@ -95,11 +100,15 @@ export default function PageGenCode() {
 
                 <Box  width="41%" style={boxStyle}> 
                     <GenCodeControl key={section}  section={section}  
-                                    onsingleresult={chargeFileCode}/>
+                                    onsingleresult={chargeFileCode}
+                                    onmultipleresult={chargeMultipleFileCode}/>
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
-                    {fileCode!==null ? <GenCodeViewer key={fileCode} code={fileCode} exportdata={exportFileCode} />:null}
+                    {fileCode!==null ? 
+                    <GenCodeViewer key={fileCode.code} 
+                                   code={fileCode.code} 
+                                   exportdata={exportFileCode} />:null}
                     
                 </Box>
 

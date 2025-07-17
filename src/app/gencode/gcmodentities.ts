@@ -105,4 +105,6 @@ export class ServClientEntities extends GenCodeModuleControl {
         return listCode;
     };//end
 
+    
+
 };//end class

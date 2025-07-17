@@ -18,6 +18,12 @@ export class FsFunctions {
         a.download = file.name;
         a.click();
         URL.revokeObjectURL(url);
-    }
+    };//end
+
+    public static chargeDownloadListFile(listFiles:File[]){
+        for (let idx=0;idx<listFiles.length;idx++) {
+            FsFunctions.chargeDownloadFile(listFiles[idx]);
+        }
+    }    
 
 }//end class

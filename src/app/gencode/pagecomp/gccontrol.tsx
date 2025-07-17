@@ -22,6 +22,7 @@ import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { CodeGenConfig } from "@/codegen/cgconfig";
 import { FileCode } from "@/filesystem/fsmodels";
 import { DocFormats } from "@/filesystem/fsconstants";
+import { CollectionHelper } from "@/common/helper/collhelper";
 
 
 //---------------------------------------------------------------------------------------
@@ -33,8 +34,9 @@ import { DocFormats } from "@/filesystem/fsconstants";
 interface CompProps {
     section?: string | null;
     onsingleresult: (filecode:FileCode) => void;
+    onmultipleresult: (filescode:FileCode[]) => void;
 }
-export function GenCodeControl({ section, onsingleresult: ondataresult }: CompProps) {
+export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompProps) {
 
     const [initialized, setInitialized] = useState<boolean>(false);
     const [format, setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
@@ -85,36 +87,60 @@ export function GenCodeControl({ section, onsingleresult: ondataresult }: CompPr
 
     const runOperation = async () => {
 
-        let codecont: string | null = null;
         
+        
+        // for TypeScript format
+        //...............................................................................
         if (format === "typescript") {
            
-            let fileId: string = "default";
-
             if (operationId === "get_def_class" || operationId === "get_entity_class") {
-           
+                let codecont: string | null = null;
                 codecont = await clientTScriptEntities.current!
                     .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);
-                fileId = dbSquemaControl.current!.activeTableName;            
-                if(codecont !== null) {ondataresult(CodeGenConfig.FORMAT_TYPESCRIPT,codecont,fileId);}        
+                const filecode:FileCode = new FileCode(
+                    dbSquemaControl.current!.activeTableName,
+                    DocFormats.FORMAT_TYPESCRIPT.value, 
+                    DocFormats.FORMAT_TYPESCRIPT.key,
+                    codecont!);
+                if(codecont !== null) {onsingleresult(filecode);}        
             }
             else {
                 if(multiple){
-                    codecont = await clientTScriptEntities.current!
-                        .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
-                    fileId = "list_tables";  
+                    let listfilesId: string[] = CollectionHelper
+                        .getListFromTOptions(dbSquemaControl.current!.toptions);
+                    let listCode: string[] | null = await clientTScriptEntities.current!
+                        .execMultipleTsOperation(operationId,dbSquemaControl.current!.toptions); 
+
+                    if(listCode!=null){    
+                        const filescode:FileCode[] = [];
+                        for(let idx=0;idx<listfilesId.length;idx++){
+                            filescode[idx] = new FileCode(
+                                listfilesId[idx],
+                                DocFormats.FORMAT_TYPESCRIPT.value, 
+                                DocFormats.FORMAT_TYPESCRIPT.key,   
+                                listCode![idx]);
+                        }                        
+                        onmultipleresult(filescode);
+                    }
                 }
                 else{
-                    codecont = await clientTScriptEntities.current!
+                    let codecont = await clientTScriptEntities.current!
                         .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
-                    fileId = "list_tables";  
+                    const filecode:FileCode = new FileCode(
+                        "list_tables",
+                        DocFormats.FORMAT_TYPESCRIPT.value, 
+                        DocFormats.FORMAT_TYPESCRIPT.key,
+                        codecont!);     
+                    if(codecont !== null) {onsingleresult(filecode);}                   
                 }
             }
-      
             
         }
-
+        
+        // for JSON format
+        //...............................................................................
         else if (format === "json") {
+            let codecont: string | null = null;
             let fileId: string = "default";
             if (operationId === "get_def_class" || operationId === "get_entity_class") {
                 const selTable:ModelTable=dbSquemaControl.current!.getActiveTable()!;
@@ -139,7 +165,7 @@ export function GenCodeControl({ section, onsingleresult: ondataresult }: CompPr
                 DocFormats.FORMAT_JSON.key,
                 codecont!);
 
-            if(codecont !== null) {ondataresult(filecode);}
+            if(codecont !== null) {onsingleresult(filecode);}
         }
 
         
