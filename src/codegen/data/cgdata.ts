@@ -33,19 +33,18 @@ export class Pattern {
 //................................................................................
 export class CgDataConstants {
 
-    public static readonly PATTERN_0: Pattern = new Pattern(0,{start:"__[", end:"]__"});
+    public static readonly PATTERN_0: Pattern = new Pattern(0,{start:"__^", end:"^__"});
     public static readonly PATTERN_1: Pattern = new Pattern(1,{start:"^¡", end:"¡^"});
     public static readonly PATTERN_2: Pattern = new Pattern(2,{start:"^<", end:">^"});
     public static readonly PATTERN_3: Pattern = new Pattern(3,{start:"^[", end:"]^"});
 
-    public static STRPATTERN_A: string = "__[A]__";
-    public static STRPATTERN_B: string = "__[A]__";
-    public static STRPATTERN_C: string = "__[A]__";
-    public static STRPATTERN_D: string = "__[A]__";
+    public static STRPATTERN_A: string = "__^A^__";
+
 
 };//end class
 
 
+//class TsOps.OP_CLASS
 export class TsOps {
     public static readonly MOD_ID: string = "typescript";
 

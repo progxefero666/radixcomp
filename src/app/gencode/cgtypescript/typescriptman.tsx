@@ -3,14 +3,16 @@
 import { useState, useEffect, useRef } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
-import { Box, Grid, Flex, Text, Button, Tabs, } from "@radix-ui/themes";
+import { Box, Grid, Flex, Text, Button, Tabs, TextField, } from "@radix-ui/themes";
 import { ThemeButtonsStyle } from "@/radix/radixtheme";
 
-import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { CrossCircledIcon, PlayIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
 import { Keyvalue } from "@/common/model/keyvalue";
 import { JsxOps, TsOps } from "@/codegen/data/cgdata";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
+import { Label } from "@radix-ui/react-label";
+import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
 
 
 
@@ -26,25 +28,42 @@ export function TypeScriptManager({ onresult }: CompProps) {
     //useEffect(() => {}, []);
     const [code, setCode] = useState<string>("");
 
+    const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
     const [operation, setOperation] = useState<string>(TsOps.BASIC[0].key);
 
-    const listBasicOps: Keyvalue[] = TsOps.BASIC;
+    useEffect(() => {
+        onOpSelected(0,TsOps.MOD_ID);
+    }, []);
 
-    const onOpSelected = (index: number, name?: string) => {
-        
+    const onOpSelected = (index: number, name?: string) => {         
+        if(name==TsOps.MOD_ID)       {execTsOperation(index, name);}
+        else if(name==JsxOps.MOD_ID) {execJsxOperation(index, name);}    
+    };//end 
+
+    const execTsOperation = (index: number, name?: string) => {  
+           
+            setOpGroup(TsOps.MOD_ID);
+            setOperation(TsOps.BASIC[index].key);  
+
+            alert("execTsOperation");
+            alert(TsOps.BASIC[index].key);
+            alert(TsOps.OP_CLASS);
+            if(TsOps.BASIC[index].key===TsOps.OP_CLASS){
+                const template:string = TsTemplates.t_class;
+                setCode(template);
+            }      
+    };//end 
+
+    const execJsxOperation = (index: number, name?: string) => {  
+            alert("exec op: jsx");
+            setOpGroup(JsxOps.MOD_ID);
+            setOperation(JsxOps.BASIC[index].key);        
     };//end 
 
     const runOperation = () => {
         alert(operation);
     };//end
 
-    const renderTestContent = () => {
-        return (
-            <Flex width="100%" direction="column" py="2" >
-                <Text size="2">Make changes to your account.</Text>
-            </Flex>
-        );
-    };//end    
 
     const renderAdvancedContent = () => {
         return (
@@ -88,9 +107,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                     <Box>
                         "header 2"
                     </Box>
-
                 </Flex>
-
             </Flex>
         );
     };//end
@@ -99,11 +116,11 @@ export function TypeScriptManager({ onresult }: CompProps) {
     return (
 
         <Flex width="100%" direction="row" gridColumn="1" gridRow="1" >
- 
 
-            <Box width="40%" >
+            <Box width="32%" >
 
                 <Tabs.Root defaultValue="basic">
+
                     <Tabs.List>
                         <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
                         <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
@@ -111,9 +128,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
                     </Tabs.List>
 
                     <Box pt="3">
+
                         <Tabs.Content value="basic">
                             {renderBasicContent()}
-
                         </Tabs.Content>
 
                         <Tabs.Content value="advanced">
@@ -121,16 +138,43 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         </Tabs.Content>
 
                         <Tabs.Content value="test">
-                            {renderTestContent()}
+                            test
                         </Tabs.Content>
                     </Box>
 
                 </Tabs.Root>
-        
-            </Box>
 
-            <Box  width="60%" >
-                <TypeScriptViewer code={code} runoperation={runOperation}  />           
+            </Box>
+            <Box  width="18%" >
+                <Flex width="100%" direction="row" gapY="2" >
+                    <Button color={ThemeButtonsStyle.COLOR_ADD} 
+                            size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                            radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
+                            onClick={() => runOperation()}>
+                            <PlayIcon />
+                            <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
+                                "Run"
+                            </Text>
+                    </Button>
+                </Flex>
+
+                {/* input parameters */}              
+                <Flex width="100%" direction="column" gapY="2" >
+                    <Label>Parameter 0</Label>
+                    <TextField.Root 
+                        name="parameter_0"
+                        placeholder="param 0"
+                        radius="medium" />
+                    <Label>Parameter 1</Label>
+                    <TextField.Root 
+                        name="parameter_1"
+                        placeholder="param 1"
+                        radius="medium" />                        
+                </Flex>                      
+            </Box>    
+
+            <Box  width="50%" >
+                <TypeScriptViewer key={code}  code={code}  />           
             </Box>              
 
         </Flex>

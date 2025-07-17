@@ -15,9 +15,8 @@ import { Link2Icon, PlayIcon, Share2Icon } from "@radix-ui/react-icons";
  */
 interface CompProps {
     code: string;
-    runoperation: () => void;
 }
-export function TypeScriptViewer({code,runoperation}: CompProps) {
+export function TypeScriptViewer({code}: CompProps) {
 
     const onClick = (opId?: string) => {
 
@@ -30,22 +29,14 @@ export function TypeScriptViewer({code,runoperation}: CompProps) {
         }                   
     };//end
 
+
     return (
         <Flex className="h-full" direction="column" >
 
 
             <Flex width={"100%"} justify="between" px="2" py="1" align="start" >
+                
                 <Text size="3" align="left">{"Output Code"}</Text>
-                <Button color={ThemeButtonsStyle.COLOR_ADD} 
-                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
-                        radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
-                        onClick={() => runoperation}>
-                        <PlayIcon />
-                        <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
-                            "Run"
-                        </Text>
-                </Button>
-
                 <Flex direction="row" gapX="2" align="center" justify="center">
                     <Button color={ThemeButtonsStyle.COLOR_COPY} 
                             size={ThemeButtonsStyle.BTN_DEF_SIZE}

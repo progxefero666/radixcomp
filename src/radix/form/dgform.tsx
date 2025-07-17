@@ -8,7 +8,7 @@ import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radi
 import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 import { InputField } from "@/common/model/inputfield";
-import { OPERATIONS } from "@/common/constants";
+
 
 
 /**
@@ -75,13 +75,13 @@ export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
                             <Button type="submit"
                                 color={ThemeButtonsStyle.COLOR_SAVE}
                                 size={ThemeButtonsStyle.BTN_DEF_SIZE}>
-                                {OPERATIONS.SAVE}
+                                "save"
                                 <CheckIcon width={ThemeIconsStyle.DEF_HEIGHT}
                                     height={ThemeIconsStyle.DEF_WIDTH} />
                             </Button>
                             <Button color={ThemeButtonsStyle.COLOR_CLOSE}
                                 size={ThemeButtonsStyle.BTN_DEF_SIZE} >
-                                {OPERATIONS.CANCEL}
+                                "Cancel"
                                 <Cross2Icon width={ThemeIconsStyle.DEF_HEIGHT}
                                     height={ThemeIconsStyle.DEF_WIDTH} />
                             </Button>

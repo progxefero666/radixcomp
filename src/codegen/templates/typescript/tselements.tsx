@@ -1,15 +1,12 @@
-//src\codegen\templates\typescript\tstemplates.ts
 
-import { CgDataConstants } from "@/codegen/data/cgdata";
-import { DocFormats } from "@/filesystem/fsconstants";
+import { useEffect, useRef, useState } from "react";
+import { Box,Flex,Text,Grid,Button,IconButton,Tabs} from "@radix-ui/themes";
+import { Keyvalue } from "@/common/model/keyvalue";
 
 
+// template class
+//............................................................................
 /**
- * class TmpTypeScript
- */
-export class TsTemplates {
-public static t_class: string = 
-   `/**
  * class __$Template$__
  */
 export class __$Template$__ {
@@ -30,7 +27,4 @@ export class __$Template$__ {
         return JSON.stringify(this, null, 4);
     }
     
-}//end class`;
-
-};//end class
-
+}//end class
