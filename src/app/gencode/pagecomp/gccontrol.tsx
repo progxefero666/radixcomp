@@ -20,6 +20,8 @@ import { CodeGenSquema } from "@/codegen/model/cgschema";
 import { CodeGenOperations } from "@/codegen/cgoperations";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { CodeGenConfig } from "@/codegen/cgconfig";
+import { FileCode } from "@/filesystem/fsmodels";
+import { DocFormats } from "@/filesystem/fsconstants";
 
 
 //---------------------------------------------------------------------------------------
@@ -30,12 +32,13 @@ import { CodeGenConfig } from "@/codegen/cgconfig";
 //---------------------------------------------------------------------------------------
 interface CompProps {
     section?: string | null;
-    ondataresult: (dataFormat:string,datacode:string,fileid?:string) => void;
+    onsingleresult: (filecode:FileCode) => void;
 }
-export function GenCodeControl({ section, ondataresult }: CompProps) {
+export function GenCodeControl({ section, onsingleresult: ondataresult }: CompProps) {
 
     const [initialized, setInitialized] = useState<boolean>(false);
     const [format, setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
+    const [multiple, setMultiple] = useState<boolean>(true);
 
     const dbSquemaControl = useRef<CodeGenSquema | null>(null);
     const clientTScriptEntities = useRef<ServClientEntities>(null);
@@ -92,15 +95,23 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
            
                 codecont = await clientTScriptEntities.current!
                     .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);
-                fileId = dbSquemaControl.current!.activeTableName;                    
+                fileId = dbSquemaControl.current!.activeTableName;            
+                if(codecont !== null) {ondataresult(CodeGenConfig.FORMAT_TYPESCRIPT,codecont,fileId);}        
             }
             else {
-                codecont = await clientTScriptEntities.current!
-                    .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
-                fileId = "list_tables";         
+                if(multiple){
+                    codecont = await clientTScriptEntities.current!
+                        .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
+                    fileId = "list_tables";  
+                }
+                else{
+                    codecont = await clientTScriptEntities.current!
+                        .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
+                    fileId = "list_tables";  
+                }
             }
       
-            if(codecont !== null) {ondataresult(CodeGenConfig.FORMAT_TYPESCRIPT,codecont,fileId);}
+            
         }
 
         else if (format === "json") {
@@ -122,7 +133,13 @@ export function GenCodeControl({ section, ondataresult }: CompProps) {
                     .current!.execArrayJsonOperation(operationId,dbSquemaControl.current!.tables);    
                 fileId = "list_tables";    
             }
-            if(codecont !== null) {ondataresult(CodeGenConfig.FORMAT_JSON,codecont,fileId);}
+            const filecode:FileCode = new FileCode(
+                fileId,
+                DocFormats.FORMAT_JSON.value, 
+                DocFormats.FORMAT_JSON.key,
+                codecont!);
+
+            if(codecont !== null) {ondataresult(filecode);}
         }
 
         

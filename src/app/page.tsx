@@ -15,6 +15,7 @@ import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 import { CodeGeneration } from "@/codegen/cgconfig";
 import { FsFunctions } from "@/filesystem/fsfunctions";
+import { FileCode } from "@/filesystem/fsmodels";
 
 
 //const router = useRouter();
@@ -60,10 +61,10 @@ export default function PageGenCode() {
 
     // for single files
     //...............................................................................
-    const chargeFileCode= (dataFormat:string,datacode:string,fileid?:string) => {
-        setFileFormat(dataFormat);
-        setFileCode(datacode);
-        setFileId(fileid ?? "default");
+    const chargeFileCode= (filecode:FileCode) => {
+        setFileFormat(filecode.format);
+        setFileCode(filecode.code);
+        setFileId(filecode.id);
     };
     
     const exportFileCode = () => {
@@ -94,7 +95,7 @@ export default function PageGenCode() {
 
                 <Box  width="41%" style={boxStyle}> 
                     <GenCodeControl key={section}  section={section}  
-                                    ondataresult={chargeFileCode}/>
+                                    onsingleresult={chargeFileCode}/>
                 </Box>
 
                 <Box width="41%" style={boxStyle}>

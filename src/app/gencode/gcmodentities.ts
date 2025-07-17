@@ -43,8 +43,7 @@ export class ServClientEntities extends GenCodeModuleControl {
         return code;
     };//end
 
-    public async execArrayTsOperation(operationId:string,tables:TOption[]): Promise<string | null> {
-                                                 
+    public async execArrayTsOperation(operationId:string,tables:TOption[]): Promise<string | null> {                                                 
         let code: string | null = null;
         if ((operationId == "get_all_def_class") ||
             (operationId == "get_all_entity_class")) {
@@ -81,5 +80,29 @@ export class ServClientEntities extends GenCodeModuleControl {
         return code;
     };//end
     
+    public async execMultipleTsOperation(operationId:string,tables:TOption[]): Promise<string[] | null> {
+                                                 
+        let listCode: string[] = [];
+
+        if (operationId == "get_all_def_class" || operationId == "get_list_def_class" ) {
+            for (let idx=0;idx<tables.length;idx++) {
+                const itemCode: string | null = 
+                    await this.execItemTsOperation("get_def_class",tables[idx].name);
+                if(itemCode !== null) {
+                    listCode.push(itemCode);
+                }   
+            }
+        }
+        else if(operationId == "get_all_entity_class" || operationId == "get_list_entity_class") {
+            for (let idx=0;idx<tables.length;idx++) {
+                const itemCode: string | null 
+                    = await this.execItemTsOperation("get_entity_class",tables[idx].name);
+                if(itemCode !== null) {
+                    listCode.push(itemCode);
+                }                       
+            }
+        }        
+        return listCode;
+    };//end
 
 };//end class
