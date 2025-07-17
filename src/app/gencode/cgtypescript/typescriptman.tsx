@@ -1,10 +1,10 @@
 //src\app\gencode\cgtypescript\typescriptman.tsx
 
 import Image from 'next/image'
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
-import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, } from "@radix-ui/themes";
+import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, } from "@radix-ui/themes";
 import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 
 import { CrossCircledIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
@@ -37,6 +37,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const countParamsRef = useRef<HTMLInputElement>(null);
 
+    const [countParams, setCountParams] = useState<number>(1);
     const [template, setTemplate] = useState<string>("");
     const [data, setData] = useState<string>("");
     const [code, setCode] = useState<string>("");
@@ -48,10 +49,6 @@ export function TypeScriptManager({ onresult }: CompProps) {
         onTsOpSelected(0,TsOps.MOD_ID);
     }, []);
     //onchange?: (value: string, name?: string) => void;
-
-    const onChangeCountParams = (value:number, name?: string) => {   
-        alert("onChangeCountParams: " + value);
-    };//end 
 
     const onTsOpSelected = (index: number, name?: string) => {    
         setOpGroup(name!);     
@@ -95,6 +92,12 @@ export function TypeScriptManager({ onresult }: CompProps) {
         //console.log("indexOf found String :" + index );   
     };//end
 
+
+    const onChangeCountParams = (value: number[]) => {
+        alert("onChangeCountParams: " + value[0]);
+        const count:number = Math.floor(value[0] / 12);
+    };
+
     const renderAdvancedContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
@@ -133,11 +136,15 @@ export function TypeScriptManager({ onresult }: CompProps) {
             <Box px="2" py="2">
                 <Flex  direction="row" justify="between" px="2" py="1" align="center" 
                         style={COMP_BORDER_STYLE} >
-                    <Label>Cnt. Parameters</Label>  
-                    <XInputNumber autocommit={true}
-                                  inline={true}
-                                  value="1"
-                                  onchange={onChangeCountParams} /> 
+                    <Box width={"50%"}>
+                        <Text  size="2">Cnt. Params</Text>                          
+                    </Box>        
+                    <Box width={"50%"}>
+                        <Slider defaultValue={[50]} step={12}
+                                onValueChange={onChangeCountParams}   />
+                        
+                    </Box>
+
                 </Flex>
                 <Flex width="100%" direction="column" mt="2" gapY="2"  >
                     <CardInputParam pattindex={0}
@@ -163,7 +170,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
         <Flex width="100%" direction="row" gridColumn="1" gridRow="1" >
 
-            <Box width="32%" >
+            <Box width="33%" >
 
                 <Tabs.Root defaultValue="basic">
 
@@ -191,7 +198,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 </Tabs.Root>
 
             </Box>
-            <Box  width="18%" >
+            <Box  width="23%" >
 
                 <Flex width="100%" direction="row" px="2" gapX="2" py="1" justify="center" >
                     <Button color={ThemeButtonsStyle.COLOR_SAVE} style={buttonRunStyle}
@@ -203,17 +210,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                                 execute
                             </Text>
                     </Button>
-                    {/*
-                    <Button color={ThemeButtonsStyle.COLOR_SAVE} 
-                            size={ThemeButtonsStyle.BTN_DEF_SIZE}
-                            radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
-                            onClick={() => applyParameters()}>
-                            <ReloadIcon />
-                            <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
-                                "Update"
-                            </Text>
-                    </Button>                     
-                    */}
+
                    
                 </Flex>
                 <Separator size="4"  />
@@ -224,7 +221,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
             </Box>    
 
-            <Box  width="50%" >
+            <Box  width="44%" >
                 <TypeScriptViewer key={code}  code={code}  />           
             </Box>              
 
@@ -232,3 +229,15 @@ export function TypeScriptManager({ onresult }: CompProps) {
     )
 
 }//end comp
+
+/*
+<Button color={ThemeButtonsStyle.COLOR_SAVE} 
+        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+        radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
+        onClick={() => applyParameters()}>
+        <ReloadIcon />
+        <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
+            "Update"
+        </Text>
+</Button>                     
+*/
