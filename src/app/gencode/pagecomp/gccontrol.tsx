@@ -17,7 +17,7 @@ import { CardDatabase } from "@/app/db/cards/carddatabase";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import { XSelect } from "@/radix/keyvalue/inpselect";
 import { CodeGenSquema } from "@/codegen/model/cgschema";
-import { CodeGenOperations } from "@/codegen/cgoperations";
+import { CgEntityOperations } from "@/codegen/cgoperations";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { CgConfig } from "@/codegen/cgconfig";
 import { FileCode } from "@/filesystem/fsmodels";
@@ -110,34 +110,35 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     const runTypeScriptOperation = async () => {
 
-        if (operationId === "get_def_class" || operationId === "get_entity_class") {
+        if (operationId ===CgEntityOperations.OP_DEF_CLASS || 
+            operationId === CgEntityOperations.OP_ENTITY_CLASS) {
             let codecont: string | null = null;
             codecont = await clientTScriptEntities.current!
                 .execItemTsOperation(operationId, dbSquemaControl.current!.activeTableName);
-            const filecode: FileCode = new FileCode(
-                dbSquemaControl.current!.activeTableName,
-                DocFormats.FORMAT_TYPESCRIPT.value,
-                DocFormats.FORMAT_TYPESCRIPT.key,
-                codecont!);
+            const filecode: FileCode = dbSquemaControl.current!.getActiveFileCode(codecont!);
             if (codecont !== null) { onsingleresult(filecode); }
         }
         else {
             if (!optMultDisabled) {
-                let listfilesId: string[] = CollectionHelper
-                    .getListFromTOptions(dbSquemaControl.current!.toptions);
-                let listCode: string[] | null = await clientTScriptEntities.current!
-                    .execMultipleTsOperation(operationId, dbSquemaControl.current!.toptions);
+                let listCode: string[] | null = null;
+                let filescode: FileCode[] = [];
 
-                if (listCode != null) {
-                    const filescode: FileCode[] = [];
-                    for (let idx = 0; idx < listfilesId.length; idx++) {
-                        filescode[idx] = new FileCode(
-                            listfilesId[idx],
-                            DocFormats.FORMAT_TYPESCRIPT.value,
-                            DocFormats.FORMAT_TYPESCRIPT.key,
-                            listCode![idx]);
+                if( operationId === CgEntityOperations.OP_LIST_DEF_CLASS ||
+                    operationId === CgEntityOperations.OP_LIST_ENTITY_CLASS) {
+                    listCode = await clientTScriptEntities.current!
+                        .execMultipleTsOperation(operationId, dbSquemaControl.current!.toptions);
+                    if (listCode != null) {
+                        filescode= dbSquemaControl.current!.getSelectedFilesCode(listCode);
                     }
-                    onmultipleresult(filescode);
+                }
+                else if(operationId === CgEntityOperations.OP_ALL_DEF_CLASS ||
+                        operationId === CgEntityOperations.OP_ALL_ENTITY_CLASS){   
+                    if (listCode != null) {
+                        filescode= dbSquemaControl.current!.getSelectedFilesCode(listCode);
+                    }                                         
+                }
+                if (listCode != null) {
+                     onmultipleresult(filescode);
                 }
             }
             else {
@@ -158,7 +159,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         
         // for single file
         //...............................................................................
-        if (operationId === "get_def_class") {           
+        if (operationId === CgEntityOperations.OP_DEF_CLASS) {           
             onsingleresult(dbSquemaControl.current!.getActiveJsonFileCode());
             return;
         }//end if
@@ -166,34 +167,19 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         // for multiple file
         //...............................................................................
         if (optMultDisabled) {
-            let listCode: string[] = [];
-            if (operationId === "get_list_def_class") {
-                listCode = dbSquemaControl.current!.getSelectedJsonTables();
+
+            if (operationId === CgEntityOperations.OP_LIST_DEF_CLASS) {
+                onmultipleresult(dbSquemaControl
+                    .current!.getSelectedJsonFileCodes());  
             }
             else {
-                listCode = dbSquemaControl.current!.getAllJsonTables();
-            }
-
-            let listfilesId: string[] = CollectionHelper
-                .getListFromTOptions(dbSquemaControl.current!.toptions);                
-            const filescode: FileCode[] = [];
-
-            for (let idx = 0; idx < listfilesId.length; idx++) {
-                filescode[idx] = new FileCode(
-                    listfilesId[idx],
-                    DocFormats.FORMAT_JSON.value,
-                    DocFormats.FORMAT_JSON.key,
-                    listCode![idx]);
-            }                
-            onmultipleresult(filescode);         
+                onmultipleresult(dbSquemaControl
+                    .current!.getAllJsonFileCodes());  
+            }           
             return       
         }//end if
 
-        /*else {if(operationId==="get_list_def_class"||operationId==="get_list_entity_class"){}
-            else{}let fileId:string="list_tables";}*/
-   
 
-       
     };//end
 
     const renderHeader = () => {
@@ -202,7 +188,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                 <Flex width="100%" direction="row" gapX="2"  >
                     <Box>
                         <XSelect label="Operations:"
-                            collection={CodeGenOperations.OPS_ENTITIES}
+                            collection={CgEntityOperations.OPS_ENTITIES}
                             onchange={onOpSelected} />
                     </Box>
                     <Box>

@@ -86,6 +86,39 @@ export class CodeGenSquema{
         return this.jsontables;
     };//end
 
+    public getFileCode(fileId:string,code:string): FileCode {
+        return new FileCode(
+                fileId,
+                DocFormats.FORMAT_TYPESCRIPT.value,
+                DocFormats.FORMAT_TYPESCRIPT.key,
+                code);
+    };//end
+    
+    public getAllFilesCode(code:string[]): FileCode[] {
+        const listFiles:FileCode[] = [];
+        for (let idx=0;idx<this.tables.length;idx++) {
+            listFiles.push(this.getFileCode(this.tables[idx].name,code[idx]));
+        }
+        return listFiles;
+    };//end
+
+
+    public getSelectedFilesCode(code:string[]): FileCode[] {
+        const listFiles:FileCode[] = [];
+        for (let idx=0;idx<code.length;idx++) {
+            listFiles.push(this.getFileCode(this.toptions[idx].name,code[idx]));
+        }
+        return listFiles;
+    };//end
+
+    public getActiveFileCode(code:string): FileCode {
+        return new FileCode(
+                this.activeTableName,
+                DocFormats.FORMAT_JSON.value,
+                DocFormats.FORMAT_JSON.key,
+                code);
+    };//end
+
     public getActiveJsonFileCode(): FileCode {
         return new FileCode(
                 this.activeTableName,

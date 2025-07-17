@@ -17,17 +17,24 @@ export class CodeGenModules {
 }//end class
 
 /**
- * class CodeGenOperations.OPS_ENTITIES
+ * CgEntityOperations
  */
-export class CodeGenOperations {
+export class CgEntityOperations {
+
+    public static readonly OP_DEF_CLASS:string          = "get_def_class";
+    public static readonly OP_ENTITY_CLASS:string       = "get_entity_class";
+    public static readonly OP_ALL_DEF_CLASS:string      = "get_all_def_class";
+    public static readonly OP_ALL_ENTITY_CLASS:string   = "get_all_entity_class";
+    public static readonly OP_LIST_DEF_CLASS:string     = "get_list_def_class";
+    public static readonly OP_LIST_ENTITY_CLASS:string  = "get_list_entity_class"; 
 
     public static OPS_ENTITIES: Keyvalue[] = [
-        new Keyvalue("get_def_class", "Get Def. Class"),
-        new Keyvalue("get_entity_class", "Get Entity Class"),
-        new Keyvalue("get_all_def_class", "Get All Def. Class"),
-        new Keyvalue("get_all_entity_class", "Get All Entity Class"),
-        new Keyvalue("get_list_def_class", "Get List Def. Class"),
-        new Keyvalue("get_list_entity_class", "Get List Entity Class")
+        new Keyvalue(CgEntityOperations.OP_DEF_CLASS,        "Get Def. Class"),
+        new Keyvalue(CgEntityOperations.OP_ENTITY_CLASS,     "Get Entity Class"),
+        new Keyvalue(CgEntityOperations.OP_ALL_DEF_CLASS,    "Get All Def. Class"),
+        new Keyvalue(CgEntityOperations.OP_ALL_ENTITY_CLASS, "Get All Entity Class"),
+        new Keyvalue(CgEntityOperations.OP_LIST_DEF_CLASS,   "Get List Def. Class"),
+        new Keyvalue(CgEntityOperations.OP_LIST_ENTITY_CLASS,"Get List Entity Class")
     ];
 
 }//end class
