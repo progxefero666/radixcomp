@@ -5,11 +5,11 @@ import { FileCode } from "@/filesystem/fsmodels";
 
 
 /**
- * class CgFileFunctions.getListFilesCode
+ * class CgFileFunctions.getJsonArrayFilesCode
  */
 export class CgFileFunctions {
 
-    public static getFileCode(fileId:string,code:string): FileCode {
+    public static getTypeScriptFileCode(fileId:string,code:string): FileCode {
         return new FileCode(
                 fileId,
                 DocFormats.FORMAT_TYPESCRIPT.value,
@@ -17,12 +17,29 @@ export class CgFileFunctions {
                 code);
     };//end
 
-    public static getListFilesCode(filesIds:string[],code:string[]): FileCode[] {
+    public static getTypeScriptArrayFilesCode(filesIds:string[],code:string[]): FileCode[] {
         const listFiles:FileCode[] = [];
         for (let idx=0;idx<filesIds.length;idx++) {
-            listFiles.push(CgFileFunctions.getFileCode(filesIds[idx],code[idx]));
+            listFiles.push(CgFileFunctions.getTypeScriptFileCode(filesIds[idx],code[idx]));
         }
         return listFiles;
     };//end
+
+    public static getJsonFileCode(fileId:string,code:string): FileCode {
+        return new FileCode(
+                fileId,
+                DocFormats.FORMAT_JSON.value,
+                DocFormats.FORMAT_JSON.key,
+                code);
+    };//end    
+
+    public static getJsonArrayFilesCode(filesIds:string[],code:string[]): FileCode[] {
+        const listFiles:FileCode[] = [];
+        for (let idx=0;idx<filesIds.length;idx++) {
+            listFiles.push(CgFileFunctions.getJsonFileCode(filesIds[idx],code[idx]));
+        }
+        return listFiles;
+    };//end    
+
 
 }//end class

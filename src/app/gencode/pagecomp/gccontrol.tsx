@@ -119,7 +119,9 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
             let codecont: string | null = null;
             codecont = await clientTScriptEntities.current!
                 .execItemTsOperation(operationId, dbSquemaControl.current!.activeTableName);
-            const filecode: FileCode = dbSquemaControl.current!.getActiveFileCode(codecont!);
+            const filecode: FileCode = CgFileFunctions
+                .getTypeScriptFileCode(dbSquemaControl.current!.activeTableName,codecont!);
+            
             if (codecont !== null) { onsingleresult(filecode); }
         }
         else {
@@ -135,10 +137,10 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                         .execMultipleTsOperation(operationId, dbSquemaControl.current!.toptions);
                     
                     const tableIds:string[] = CollectionHelper
-                        .geTOptionsNames(dbSquemaControl.current!.toptions);
+                        .getTOptionsNames(dbSquemaControl.current!.toptions);
 
                     if (listCode != null) {
-                        filescode= CgFileFunctions.getListFilesCode(tableIds,listCode);
+                        filescode= CgFileFunctions.getTypeScriptArrayFilesCode(tableIds,listCode);
                     }
                 }
                 else if(operationId === CgEntityOperations.OP_ALL_DEF_CLASS ||
@@ -146,7 +148,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                     const tableIds:string[] = CollectionHelper
                         .getKeyvaluesIds(dbSquemaControl.current!.tcollection);         
                     if (listCode != null) {
-                        filescode= CgFileFunctions.getListFilesCode(tableIds,listCode);
+                        filescode= CgFileFunctions.getTypeScriptArrayFilesCode(tableIds,listCode);
                     }                                         
                 }
                 if (listCode != null) {onmultipleresult(filescode);}
@@ -157,7 +159,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                 let codecont = await clientTScriptEntities
                     .current!.execAllListTsOperation(operationId);
                 if (codecont !== null) { 
-                    onsingleresult(CgFileFunctions.getFileCode("list_tables",codecont!)); 
+                    onsingleresult(CgFileFunctions.getTypeScriptFileCode("list_tables",codecont!)); 
                 }
             }
         }
@@ -169,22 +171,27 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         // for single file
         //...............................................................................
         if (operationId === CgEntityOperations.OP_DEF_CLASS) {           
-            onsingleresult(dbSquemaControl.current!.getActiveJsonFileCode());
+            onsingleresult(CgFileFunctions.getJsonFileCode(
+                dbSquemaControl.current!.activeTableName,
+                dbSquemaControl.current!.getActiveJson()));
             return;
         }//end if
 
         // for multiple file
         //...............................................................................
-        if (optMultDisabled) {
+        if (!optMultDisabled) {
+            let filesCode: FileCode[] = [];
             if (operationId === CgEntityOperations.OP_LIST_DEF_CLASS) {
-                onmultipleresult(dbSquemaControl
-                    .current!.getSelectedJsonFileCodes());  
+                filesCode = CgFileFunctions.getJsonArrayFilesCode(
+                    CollectionHelper.getTOptionsNames(dbSquemaControl.current!.toptions),
+                    dbSquemaControl.current!.getSelectedJsonTables() );                                             
             }
-            else {
-                onmultipleresult(dbSquemaControl
-                    .current!.getAllJsonFileCodes());  
+            else {                  
+                filesCode = CgFileFunctions.getJsonArrayFilesCode(
+                    CollectionHelper.getKeyvaluesIds(dbSquemaControl.current!.tcollection),
+                    dbSquemaControl.current!.jsontables );                
             }           
-            return       
+           onmultipleresult(filesCode);    
         }//end if
 
     };//end

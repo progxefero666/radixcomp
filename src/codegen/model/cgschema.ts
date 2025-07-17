@@ -89,38 +89,8 @@ export class CodeGenSquema{
 
   
 
-    public getActiveFileCode(code:string): FileCode {
-        return new FileCode(
-                this.activeTableName,
-                DocFormats.FORMAT_JSON.value,
-                DocFormats.FORMAT_JSON.key,
-                code);
-    };//end
-
-    public getActiveJsonFileCode(): FileCode {
-        return new FileCode(
-                this.activeTableName,
-                DocFormats.FORMAT_JSON.value,
-                DocFormats.FORMAT_JSON.key,
-                this.getActiveJson());
-    };//end
-
-    public getAllJsonFileCodes(): FileCode[] { 
-        let listfilesId: string[] = CollectionHelper.geTOptionsNames(this.toptions);
-                        
-        const filecodes: FileCode[] = [];
-        for (let idx=0;idx<this.jsontables.length;idx++) {
-            filecodes.push(new FileCode(
-                listfilesId[idx],
-                DocFormats.FORMAT_JSON.value,
-                DocFormats.FORMAT_JSON.key,
-                this.jsontables[idx]));
-        }
-        return filecodes;
-     };//end
-
     public getSelectedJsonFileCodes(): FileCode[] { 
-        let listfilesId: string[] = CollectionHelper.geTOptionsNames(this.toptions);
+        let listfilesId: string[] = CollectionHelper.getTOptionsNames(this.toptions);
                         
         const filecodes: FileCode[] = [];
         for (let idx=0;idx<this.jsontables.length;idx++) {

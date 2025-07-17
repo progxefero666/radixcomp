@@ -22,7 +22,7 @@ export class CollectionHelper {
     };//end
 
 
-    public static geTOptionsNames(collection: TOption[]): string[] {
+    public static getTOptionsNames(collection: TOption[]): string[] {
         const options: string[] = [];
 
         for (const item of collection) {
