@@ -39,13 +39,12 @@ interface CompProps {
 export function GenCodeControl({ section, onsingleresult, onmultipleresult }: CompProps) {
 
     const [initialized, setInitialized] = useState<boolean>(false);
+    
     const dbSquemaControl       = useRef<CodeGenSquema | null>(null);
     const clientTScriptEntities = useRef<ServClientEntities>(null);
 
     const [format, setFormat] = useState<string>(DocFormats.FORMAT_TYPESCRIPT.key);
     const [optMultDisabled, setOptMultDisabled] = useState<boolean>(true);
-
-
     const [operationId, setOperationId] = useState<string>("undefined");
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
@@ -97,13 +96,16 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
 
     const runOperation = async () => {
-        if (format === "typescript") {
+        if (format === DocFormats.FORMAT_TYPESCRIPT.key) {
             runTypeScriptOperation();
         }
-        else if (format === "json") {
+        else if (format === DocFormats.FORMAT_JSON.key ) {
             runJsonOperation();
         }
-
+        else if (format === DocFormats.FORMAT_SQL.key ) {}
+        else if (format === DocFormats.FORMAT_JSX.key ) {}        
+        else if (format === DocFormats.FORMAT_PYTHON.key ) {}       
+        else if (format === DocFormats.FORMAT_MARKDOWN.key ) {}           
     };//end
 
     const runTypeScriptOperation = async () => {

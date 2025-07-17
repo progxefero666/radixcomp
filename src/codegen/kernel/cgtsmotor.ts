@@ -29,8 +29,8 @@ export class CodeGenTsMotor {
         content += `//${fileName}` + CgConfig.RETx2;
         
         // Class info
-        content += `/**`+CgConfig.RET;
-        content += ` * Db Table Entity Class ${className}`+CgConfig.RETx2;
+        content += `/**\n`;
+        content += ` * Db Table Entity Class ${className}\n\n`;
         content += ` **/`+CgConfig.RET;
         content += `export class ${className} {\n\n`;        
 
@@ -41,21 +41,19 @@ export class CodeGenTsMotor {
             if(!field.required ){
                 if(tsType === 'boolean'){
                     content += CgConfig.TAB_4 +
-                               `public ${field.name}: ${tsType};`+ 
-                               CgConfig.RET;
+                               `public ${field.name}: ${tsType};\n`;
                 }
                 else {
                     content += CgConfig.TAB_4 +
-                              `public ${field.name}: ${tsType} | null = null;`+ 
-                               CgConfig.RET;
+                              `public ${field.name}: ${tsType} | null = null;\n`;
                 }
             }
             else {
                 if(field.default!=null){
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};`+CgConfig.RET;               
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
                 }
                 else{
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};`+CgConfig.RET;
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
                 }  
             }
     
@@ -65,7 +63,17 @@ export class CodeGenTsMotor {
         const constructorParams: string[] = [];
         for (const field of tableModel.fields) {
             const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
-            constructorParams.push(`${field.name}: ${tsType}`);
+            if(!field.required ){
+                if(tsType === 'boolean'){
+                    constructorParams.push(`${field.name}: ${tsType}`);
+                }
+                else {
+                    constructorParams.push(`${field.name}: ${tsType} | null`);
+                }                 
+            }
+            else {
+                constructorParams.push(`${field.name}: ${tsType}`);
+            }           
         }        
         content += constructorParams.join(',\n                ');
         content += `) {\n\n`;        

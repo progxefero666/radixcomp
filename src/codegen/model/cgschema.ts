@@ -5,6 +5,7 @@ import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { SchemaService } from "@/codegen/schemaservice";
 import { Keyvalue } from "@/common/model/keyvalue";
+import { CodeGenJson } from "../kernel/cgjsonmotor";
 
 
 /**
@@ -20,6 +21,10 @@ export class CodeGenSquema{
     public activeTableIndex: number = -1;
     public activeTableName: string = "";
 
+    public jsontables: string[] = [];
+
+    //CodeGenJson
+
     constructor(squema: string) {
         this.squema = squema;
         this.tables = CodeGenSql.getEsquemaTables(this.squema);        
@@ -27,7 +32,14 @@ export class CodeGenSquema{
         this.toptions = SchemaService.getListTablesAsTOptions(this.tables);
         this.activeTableIndex = 0;
         this.activeTableName = this.tables[this.activeTableIndex].name;
-    };
+        this.postConstructor();
+    };//end
+
+    private postConstructor() {
+        this.tables.forEach((table) => {
+            this.jsontables.push(CodeGenJson.getJsonEntDef(table));
+        });
+    };//end
 
     public setActiveTable(tableName: string) {
         const index = this.getTableIndex(tableName);

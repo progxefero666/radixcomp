@@ -85,21 +85,3 @@ export class CodeGenJson {
     }
 
 } //end class
-
-   /*    
-    public static getCompEntityJson(tableModel: ModelTable): string {
-        const compEntity = {
-            classdef: tableModel,
-            class: tableModel
-        };
-        return JSON.stringify(compEntity, null, 4);
-    }
-    
-    public static getArrayCompEntityJson(tableModels: ModelTable[]): string {
-        const compEntities = tableModels.map(tableModel => ({
-            classdef: tableModel,
-            class: tableModel
-        }));
-        return JSON.stringify(compEntities, null, 4);
-    }
-    */

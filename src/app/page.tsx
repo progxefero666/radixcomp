@@ -55,6 +55,7 @@ export default function PageGenCode() {
     // for single files
     //...............................................................................
     const chargeFileCode= (filecode:FileCode) => {
+        console.log("chargeFileCode",filecode);
         setFileCode(filecode);
         setListFileCode(null);
     };
