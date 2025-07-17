@@ -1,0 +1,168 @@
+{
+    "name": "task",
+    "fields": [
+        {
+            "relations": null,
+            "name": "id",
+            "type": "numeric",
+            "pk": true,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": "5:0",
+            "minlen": null,
+            "maxlen": null,
+            "fk": false
+        },
+        {
+            "relations": [
+                {
+                    "table": "tasktype",
+                    "field": "id"
+                }
+            ],
+            "name": "tasktype_id",
+            "type": "numeric",
+            "pk": false,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": "5:0",
+            "minlen": null,
+            "maxlen": null,
+            "fk": true
+        },
+        {
+            "relations": [
+                {
+                    "table": "codelang",
+                    "field": "id"
+                }
+            ],
+            "name": "codelang_id",
+            "type": "numeric",
+            "pk": false,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": "5:0",
+            "minlen": null,
+            "maxlen": null,
+            "fk": true
+        },
+        {
+            "relations": [
+                {
+                    "table": "workflow",
+                    "field": "id"
+                }
+            ],
+            "name": "workflow_id",
+            "type": "numeric",
+            "pk": false,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": "5:0",
+            "minlen": null,
+            "maxlen": null,
+            "fk": true
+        },
+        {
+            "relations": [
+                {
+                    "table": "taskcategory",
+                    "field": "id"
+                }
+            ],
+            "name": "taskcategory_id",
+            "type": "numeric",
+            "pk": false,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": "5:0",
+            "minlen": null,
+            "maxlen": null,
+            "fk": true
+        },
+        {
+            "relations": null,
+            "name": "orden",
+            "type": "numeric",
+            "pk": false,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": "5:0",
+            "minlen": null,
+            "maxlen": null,
+            "fk": false
+        },
+        {
+            "relations": null,
+            "name": "name",
+            "type": "text",
+            "pk": false,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": null,
+            "minlen": null,
+            "maxlen": 255,
+            "fk": false
+        },
+        {
+            "relations": null,
+            "name": "description",
+            "type": "text",
+            "pk": false,
+            "generated": false,
+            "required": false,
+            "default": null,
+            "format": null,
+            "minlen": null,
+            "maxlen": null,
+            "fk": false
+        },
+        {
+            "relations": null,
+            "name": "tkgroup",
+            "type": "numeric",
+            "pk": false,
+            "generated": false,
+            "required": true,
+            "default": null,
+            "format": "5:0",
+            "minlen": null,
+            "maxlen": null,
+            "fk": false
+        },
+        {
+            "relations": null,
+            "name": "files",
+            "type": "text",
+            "pk": false,
+            "generated": false,
+            "required": false,
+            "default": null,
+            "format": null,
+            "minlen": null,
+            "maxlen": null,
+            "fk": false
+        },
+        {
+            "relations": null,
+            "name": "folders",
+            "type": "text",
+            "pk": false,
+            "generated": false,
+            "required": false,
+            "default": null,
+            "format": null,
+            "minlen": null,
+            "maxlen": null,
+            "fk": false
+        }
+    ]
+}

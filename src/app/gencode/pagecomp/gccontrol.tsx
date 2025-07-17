@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { TOption } from "@/radix/radixtypes";
 
-import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
+import { Box, Grid, Separator, Flex, Text, Button, Link, Checkbox } from "@radix-ui/themes";
 import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { AppMemmory } from "@/front/appmemory";
@@ -40,7 +40,9 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
 
     const [initialized, setInitialized] = useState<boolean>(false);
     const [format, setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
-    const [multiple, setMultiple] = useState<boolean>(true);
+    //const [multiple, setMultiple] = useState<boolean>(true);
+
+    const [optMultDisabled, setOptMultDisabled] = useState<boolean>(true);
 
     const dbSquemaControl = useRef<CodeGenSquema | null>(null);
     const clientTScriptEntities = useRef<ServClientEntities>(null);
@@ -67,27 +69,34 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
         dbSquemaControl.current?.setActiveTable(tableName);
     };//end
 
+
+    const onOptMultipleChange = (value:boolean, compName?: string) => {
+        setOptMultDisabled(value);
+    };//end
+
+
     const onOpSelected = (operationId: string) => {
         if (operationId == "get_def_class" ||
             operationId == "get_entity_class") {
             setShowRadioList(true);
             setShowCheckList(false);    
+            setOptMultDisabled(true);
         }
         else if (operationId == "get_list_def_class" ||
                  operationId == "get_list_entity_class") {
             setShowRadioList(false);
-            setShowCheckList(true);            
+            setShowCheckList(true);         
+            setOptMultDisabled(false);   
         }
         else {
             setShowRadioList(false);
             setShowCheckList(false);
+            setOptMultDisabled(false);
         }
         setOperationId(operationId);
     };//end
 
     const runOperation = async () => {
-
-        
         
         // for TypeScript format
         //...............................................................................
@@ -168,8 +177,6 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
             if(codecont !== null) {onsingleresult(filecode);}
         }
 
-        
-
     };//end
 
 
@@ -186,6 +193,12 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
                         <XSelect label="Format:" collection={CodeGenConfig.CODE_FORMATS}
                             onchange={onSelectCodeFormat} />                    
                     </Box>
+                    <Box>
+                        <Checkbox
+                            defaultChecked={false} 
+                            onCheckedChange={onOptMultipleChange}
+                            disabled={optMultDisabled} />                   
+                    </Box>                    
                 </Flex>
                 <Button onClick={runOperation} color="green">
                     Run

@@ -16,6 +16,7 @@ import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 import { CodeGeneration } from "@/codegen/cgconfig";
 import { FsFunctions } from "@/filesystem/fsfunctions";
 import { FileCode } from "@/filesystem/fsmodels";
+import { CodeGenModules } from "@/codegen/cgoperations";
 
 
 //const router = useRouter();
@@ -32,20 +33,18 @@ const boxStyle = {
 
 export default function PageGenCode() {
 
-    let initialized: boolean = false;
 
-    
-    const [section, setSection] = useState<string|null>(null);
+    const [ready, setReady] = useState<boolean>(false);
+    const [section, setSection] = useState<string>(CodeGenModules.MODULES[0].id);
     const [fileCode,setFileCode]   = useState<FileCode|null>(null);
     const [listFileCode,setListFileCode] = useState<FileCode[]|null>(null);
     
     useEffect(() => {
-        if(initialized) {return;} 
-        
+        if(ready) {return;} 
         const init = async () => {            
             const dbSquema = await readDbSqlScriptFile("dbsquema");
             if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                              
-            initialized =true;
+            setReady(true);
         };
         init();
     }, []);
@@ -57,6 +56,7 @@ export default function PageGenCode() {
     //...............................................................................
     const chargeFileCode= (filecode:FileCode) => {
         setFileCode(filecode);
+        setListFileCode(null);
     };
     
     const exportFileCode = () => {
@@ -70,7 +70,7 @@ export default function PageGenCode() {
     //...............................................................................    
     const chargeMultipleFileCode= (filescode:FileCode[]) => {
         setListFileCode(filescode);
-
+        setFileCode(null);
         const files: File[] = [];
         for(let idx=0;idx<filescode.length;idx++){
             const file: File = CodeGeneration.generateFile
@@ -80,7 +80,7 @@ export default function PageGenCode() {
         FsFunctions.chargeDownloadListFile(files);
 
     };
-    
+
     const exportFolder = () => {
     
     };//end
@@ -100,17 +100,23 @@ export default function PageGenCode() {
                 </Box>
 
                 <Box  width="41%" style={boxStyle}> 
+                    {ready ? 
                     <GenCodeControl key={section}  section={section}  
                                     onsingleresult={chargeFileCode}
-                                    onmultipleresult={chargeMultipleFileCode}/>
+                                    onmultipleresult={chargeMultipleFileCode}/>:null}
+
                 </Box>
 
                 <Box width="41%" style={boxStyle}>
-                    {fileCode!==null ? 
-                    <GenCodeViewer key={fileCode.code} 
-                                   singlecode={fileCode} 
+                    { (fileCode!==null ) ? 
+                    <GenCodeViewer singlecode={fileCode} 
                                    exportsinglecode={exportFileCode} 
                                    exportmultiplecode={exportFileCode}/>:null}
+                                   
+                    { (listFileCode!==null ) ? 
+                    <GenCodeViewer multiplecode={listFileCode} 
+                                   exportsinglecode={exportFileCode} 
+                                   exportmultiplecode={exportFileCode}/>:null}                                   
                     
                 </Box>
 
