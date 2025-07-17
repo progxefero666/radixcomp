@@ -23,6 +23,7 @@ import { CgConfig } from "@/codegen/cgconfig";
 import { FileCode } from "@/filesystem/fsmodels";
 import { DocFormats } from "@/filesystem/fsconstants";
 import { CollectionHelper } from "@/common/helper/collhelper";
+import { XInputCheck } from "@/radix/input/inputcheck";
 
 
 //---------------------------------------------------------------------------------------
@@ -44,7 +45,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     const clientTScriptEntities = useRef<ServClientEntities>(null);
 
     const [format, setFormat] = useState<string>(DocFormats.FORMAT_TYPESCRIPT.key);
-    const [optMultDisabled, setOptMultDisabled] = useState<boolean>(true);
+    const [optMultDisabled, setOptMultDisabled] = useState<boolean>(false);
     const [operationId, setOperationId] = useState<string>("undefined");
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
@@ -168,7 +169,6 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         // for multiple file
         //...............................................................................
         if (optMultDisabled) {
-
             if (operationId === CgEntityOperations.OP_LIST_DEF_CLASS) {
                 onmultipleresult(dbSquemaControl
                     .current!.getSelectedJsonFileCodes());  
@@ -179,7 +179,6 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
             }           
             return       
         }//end if
-
 
     };//end
 
@@ -197,9 +196,10 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                             onchange={onSelectCodeFormat} />
                     </Box>
                     <Box>
-                        <Checkbox
-                            defaultChecked={false}
-                            onCheckedChange={onOptMultipleChange}
+                        <XInputCheck label="Multiple files"
+                            value={false}
+                            name="option_multiple"                           
+                            onchange={onOptMultipleChange}
                             disabled={optMultDisabled} />
                     </Box>
                 </Flex>
