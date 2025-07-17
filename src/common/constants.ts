@@ -1,8 +1,17 @@
 //src\common\constants.ts
 
-import { Keyvalue } from "./model/keyvalue";
-import { TKeyvalue } from "./types";
 
+/**
+ * class HttpConst
+ */
+export class HttpConst {
+
+    public static readonly HTTP_GET = "GET";
+    public static readonly HTTP_POST = "POST";
+    public static readonly HTTP_PUT = "PUT";
+    public static readonly HTTP_DELETE = "DELETE";
+
+};//end class
 
 /**
  * class DbConstants.EMPTY_VALUE
@@ -13,7 +22,6 @@ export class DataConstants{
     public static readonly UNDEFINED: string = "undefined";
 
 };//end class
-
 
 
 /**
@@ -62,24 +70,4 @@ export class OpConstants{
     public static readonly OP_TEXT_MOVE_DOWN: string ="Move Down";
     public static readonly OP_TEXT_CLEAR: string ="Clear";
 
-};//end class
-
-
-    /*
-    public static getFilename(id:string,format:string): string {
-        let fname: string = id + ".";
-        if(format === CodeGenConfig.FORMAT_TYPESCRIPT) {
-            fname += "ts";
-        }
-        else if(format === CodeGenConfig.FORMAT_JSON) {
-            fname += "json";
-        }
-        else if(format === CodeGenConfig.FORMAT_SQL) {
-            fname += "sql";
-        }
-        else if(format === CodeGenConfig.FORMAT_JAVASCRIPT) {
-            fname += "js";
-        }
-        return fname;
-    };    
-    */
+};

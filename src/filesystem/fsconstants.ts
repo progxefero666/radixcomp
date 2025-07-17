@@ -4,7 +4,10 @@ import { Keyvalue } from "@/common/model/keyvalue";
 import { TKeyvalue } from "@/common/types";
 
 export class DocFormats{
-
+    
+    public static readonly FORM_URLENCODED: string = "application/x-www-form-urlencoded";
+    public static readonly MULTIPART_FORM_DATA: string = "multipart/form-data";
+    
     public static FORMAT_ZIP:TKeyvalue          = {key: "application/zip", value: "zip"};
     public static FORMAT_TEXTPLAIN:TKeyvalue    = {key: "text/plain", value: "txt"};
     public static FORMAT_TYPESCRIPT:TKeyvalue   = {key: "text/typescript", value: "ts"};
