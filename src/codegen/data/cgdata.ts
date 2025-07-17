@@ -45,15 +45,15 @@ export class CgDataConstants {
 
     public static LIST_PARAMETERS: TInputPattern[] = [
 
-        new TInputPattern("0",{start:"^%",end:"%^"},"Parameter 0",null),
-        new TInputPattern("1",{start:"^¡",end:"¡^"},"Parameter 1",null),
-        new TInputPattern("2",{start:"^<",end:">^"},"Parameter 2",null),
-        new TInputPattern("3",{start:"^[",end:"]^"},"Parameter 3",null),   
-        new TInputPattern("4",{start:"^+",end:"+^"},"Parameter 4",null),
-        new TInputPattern("5",{start:"^*",end:"*^"},"Parameter 5",null),   
-        new TInputPattern("6",{start:"^-",end:"-^"},"Parameter 6",null), 
-        new TInputPattern("7",{start:"^:",end:":^"},"Parameter 7",null),     
-        new TInputPattern("8",{start:"^/",end:"\^"},"Parameter 8",null),     
+        new TInputPattern("0",{start:"^%",end:"%^"},null,"Parameter 0",null),
+        new TInputPattern("1",{start:"^¡",end:"¡^"},null,"Parameter 1",null),
+        new TInputPattern("2",{start:"^<",end:">^"},null,"Parameter 2",null),
+        new TInputPattern("3",{start:"^[",end:"]^"},null,"Parameter 3",null),   
+        new TInputPattern("4",{start:"^+",end:"+^"},null,"Parameter 4",null),
+        new TInputPattern("5",{start:"^*",end:"*^"},null,"Parameter 5",null),   
+        new TInputPattern("6",{start:"^-",end:"-^"},null,"Parameter 6",null), 
+        new TInputPattern("7",{start:"^:",end:":^"},null,"Parameter 7",null),     
+        new TInputPattern("8",{start:"^/",end:"\^"},null,"Parameter 8",null),     
     ]
 
 };//end class

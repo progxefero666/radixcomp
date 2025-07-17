@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from 'next/image'
-import { Box,Text,Flex,IconButton,TextField,Link, ScrollArea, Table} from "@radix-ui/themes";
+import { Box,Text,Flex,IconButton,TextField,Link, ScrollArea, Table, Checkbox} from "@radix-ui/themes";
 
 import { Pattern, TInputPattern } from "@/codegen/data/cgdatamodels";
 import { Label } from "@radix-ui/react-label";
@@ -105,8 +105,8 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
             </Box>
             {!collapse ? 
             <>
-                <Table.Root>   
-                    <Table.Body>
+                <Table.Root >    
+                    <Table.Body >
 
                         <Table.Row>
                             <Table.Cell>value:</Table.Cell>
@@ -116,20 +116,26 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                                     name = {input.id}
                                     placeholder = {input.id}
                                     radius = "medium" />
+                            </Table.Cell>
+                            <Table.Cell>
+                                cl
                             </Table.Cell>
                         </Table.Row>
 
-                        <Table.Row>
-                            <Table.Cell>value:</Table.Cell>
+                        <Table.Row >
+                            <Table.Cell>var:</Table.Cell>
                             <Table.Cell>
                                 <TextField.Root 
                                     maxLength={maxlength ?? CgDataConstants.MAX_LENGTH_DEF}
                                     name = {input.id}
-                                    placeholder = {input.id}
+                                    placeholder = {input.variable ?? ""}
                                     radius = "medium" />
                             </Table.Cell>
+                            <Table.Cell>
+                                <Box pt="2"><Checkbox defaultChecked /></Box>                                
+                            </Table.Cell>                            
                         </Table.Row> 
-                                               
+
                     </Table.Body>  
 
                 </Table.Root>

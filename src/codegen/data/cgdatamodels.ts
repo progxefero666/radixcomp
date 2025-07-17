@@ -24,14 +24,16 @@ export class Pattern {
  * class TInputPattern
  */
 export class TInputPattern  {
-    public id:     string;
+    public id:      string;
     public pattern: TPattern;
-    public value:  string;
-    public label:  string|null;
+    public value:   string;
+    public variable:string|null = null;
+    public label:   string|null;
 
-    constructor(id: string,pattern:TPattern, label: string|null, value:string|null) {
+    constructor(id: string,pattern:TPattern,variable:string|null,label: string|null,value:string|null) {
         this.id = id;
         this.pattern = pattern;
+        this.variable = variable ?? null;
         this.label = label ?? null;
         this.value = value ?? "";        
     };//end
