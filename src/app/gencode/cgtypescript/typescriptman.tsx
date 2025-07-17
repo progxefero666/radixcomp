@@ -1,5 +1,6 @@
 //src\app\gencode\cgtypescript\typescriptman.tsx
 
+import Image from 'next/image'
 import { useState, useEffect, useRef } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
@@ -130,7 +131,11 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 <TextField.Root 
                     name="parameter_1"
                     placeholder="param 1"
-                    radius="medium" />                        
+                    radius="medium" />    
+                <Image src="/icons/uno.png"    width={36} height={36} alt="icon-1" />
+                <Image src="/icons/dos.png"    width={36} height={36} alt="icon-1" />
+                <Image src="/icons/tres.png"   width={36} height={36} alt="icon-1" />
+                <Image src="/icons/cuatro.png" width={36} height={36} alt="icon-1" />                                
             </Flex> 
         );
     };//end  
