@@ -14,7 +14,6 @@ import { Link2Icon, Share2Icon } from "@radix-ui/react-icons";
  * Component TypeScript Viewer 
  */
 interface CompProps {
-
     code: string;
     esport?: () => void;
 }

@@ -1,25 +1,11 @@
 //src\app\gencode\cgtypescript\typescriptman.tsx
 
 import { useState, useEffect, useRef } from "react";
+import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
 import { Box, Grid, Flex, Text, Button, Tabs, } from "@radix-ui/themes";
-import { ThemeButtonsStyle, ThemePagesStyles } from "@/radix/radixtheme";
-import { SeparatorH } from "@/radix/container/separatorh";
-import { AppMemmory } from "@/front/appmemory";
-import { XCheckGroup } from "@/radix/input/inpgrpcheck";
-import { ServClientEntities } from "../../../codegen/client/gcmodentities";
+import { ThemeButtonsStyle } from "@/radix/radixtheme";
 
-import { AppConfig } from "@/app/index/appconfig";
-import { CardDatabase } from "@/app/db/cards/carddatabase";
-import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
-import { XSelect } from "@/radix/keyvalue/inpselect";
-import { CodeGenSquema } from "@/codegen/model/cgschema";
-import { CgEntityOperations } from "@/codegen/cgoperations";
-import { FileCode } from "@/filesystem/fsmodels";
-import { DocFormats } from "@/filesystem/fsconstants";
-import { CollectionHelper } from "@/common/helper/collhelper";
-import { XInputCheck } from "@/radix/input/inputcheck";
-import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
 import { Keyvalue } from "@/common/model/keyvalue";
@@ -33,21 +19,23 @@ const LAYOUT_STYLE = {
 };
 
 interface CompProps {
-    onresult: (code: String) => void;
+    onresult?: (code: String) => void;
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
     //useEffect(() => {}, []);
     const [code, setCode] = useState<string>("");
 
+    const [operation, setOperation] = useState<string>(TsOps.BASIC[0].key);
+
     const listBasicOps: Keyvalue[] = TsOps.BASIC;
 
     const onOpSelected = (index: number, name?: string) => {
-        alert("Op selected: " + index + " " + name);
+        
     };//end 
 
     const runOperation = async () => {
-        alert("Run operation not implemented yet");
+        alert(operation);
     };//end
 
     const renderTestContent = () => {
@@ -118,10 +106,12 @@ export function TypeScriptManager({ onresult }: CompProps) {
     //<TypeScriptViewer  code="" />     
 
     return (
-        <Box height="100vh" width="100%" pt="2" style={LAYOUT_STYLE} >
-            <Grid height="100vh" rows="1fr" columns="50% 50%"  >  
-                <Flex gridColumn="1" gridRow="1" >
-                      
+
+        <Flex width="100%" direction="row" gridColumn="1" gridRow="1" >
+ 
+
+            <Box width="40%" >
+
                 <Tabs.Root defaultValue="basic">
                     <Tabs.List>
                         <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
@@ -145,14 +135,14 @@ export function TypeScriptManager({ onresult }: CompProps) {
                     </Box>
 
                 </Tabs.Root>
-         
-                </Flex>
+        
+            </Box>
 
-                <Flex gridColumn="2" gridRow="1" >
-                            
-                </Flex>                
-            </Grid>
+            <Box  width="60%" >
+                <TypeScriptViewer code={code}  />           
+            </Box>              
 
-        </Box>
+        </Flex>
     )
+
 }//end comp

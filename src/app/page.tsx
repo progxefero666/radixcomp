@@ -12,16 +12,13 @@ import { GenCodeViewer } from "@/app/gencode/cgentityfiles/entityfilesviewer";
 
 import { PrimaryBar } from "@/app/gencode/gcprimarybar";
 import { PageHeader } from "@/app/gencode/gcheader";
-import { readDbSqlScript, readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
+import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 
 import { FsFunctions } from "@/filesystem/fsfunctions";
 import { FileCode } from "@/filesystem/fsmodels";
 import { CodeGenModules } from "@/codegen/cgoperations";
-import { ModelTable } from "@/codegen/kernel/cgmodel";
-import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
-import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
+
 import { TypeScriptManager } from "./gencode/cgtypescript/typescriptman";
-import { TypeScriptViewer } from "./gencode/cgtypescript/typescriptviewer";
 
 
 //const router = useRouter();
