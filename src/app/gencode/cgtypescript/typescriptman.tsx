@@ -124,10 +124,18 @@ export function TypeScriptManager({ onresult }: CompProps) {
         
         return (
             <Flex width="100%" direction="column" mt="2" gapY="2" pr="2" >
-                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[0]} />
-                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[1]} />
-                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[2]} />
-                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[3]} />
+                <CardInputParam pattindex={0}
+                                patterns={CgDataConstants.LIST_PATTERNS} 
+                                input={CgDataConstants.LIST_PARAMETERS[0]} />
+                <CardInputParam pattindex={1}
+                                patterns={CgDataConstants.LIST_PATTERNS} 
+                                input={CgDataConstants.LIST_PARAMETERS[1]} />
+                <CardInputParam pattindex={2}
+                                patterns={CgDataConstants.LIST_PATTERNS} 
+                                input={CgDataConstants.LIST_PARAMETERS[2]} />
+                <CardInputParam pattindex={3}
+                                patterns={CgDataConstants.LIST_PATTERNS} 
+                                input={CgDataConstants.LIST_PARAMETERS[3]} />                                                                
                           
             </Flex> 
         );

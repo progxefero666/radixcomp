@@ -22,28 +22,52 @@ const compStyle = {
 interface CompProps {
     patterns: Pattern[];
     input: TInputPattern;
+    pattindex: number;
     maxlength?: number;  
 }
-export default function CardInputParam({patterns, input, maxlength }: CompProps) {
+export default function CardInputParam({patterns, input,pattindex, maxlength }: CompProps) {
+
+    const handlerOnClick = (index:number) => {
+    };
 
     const renderPatterns = () => {
         return (
             <ScrollArea type="always" scrollbars="horizontal" style={{height:"auto"}}>
-                <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="center" >
-                    {patterns.map((pattern, index) => (
-                        <Box key={index.toString()}>
-                            {index===0 && <Image src="/icons/uno.png"    width={24} height={24} alt="icon-1" />} 
-                            {index===1 && <Image src="/icons/dos.png"    width={24} height={24} alt="icon-2" />}
-                            {index===2 && <Image src="/icons/tres.png"   width={24} height={24} alt="icon-3" />} 
-                            {index===3 && <Image src="/icons/cuatro.png" width={24} height={24} alt="icon-4" />}
-                            {index===4 && <Image src="/icons/cinco.png"  width={24} height={24} alt="icon-5" />} 
-                            {index===5 && <Image src="/icons/seis.png"   width={24} height={24} alt="icon-6" />}
-                            {index===6 && <Image src="/icons/siete.png"  width={24} height={24} alt="icon-7" />} 
-                            {index===7 && <Image src="/icons/ocho.png"   width={24} height={24} alt="icon-8" />}
-                            {index===9 && <Image src="/icons/nueve.png"  width={24} height={24} alt="icon-9" />}                            
-                        </Box>                 
-                    ))}
-                </Flex>                    
+            <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="center" >
+                {patterns.map((pattern, index) => (
+                <Box key={index.toString()}>
+                    {index===pattindex ? 
+                        <>
+                            {index===0 && <Image src="/icons/uno_red.png"    width={24} height={24} alt="icon-1" onClick={() => handlerOnClick(0)} />} 
+                            {index===1 && <Image src="/icons/dos_red.png"    width={24} height={24} alt="icon-2" onClick={() => handlerOnClick(1)} />}
+                            {index===2 && <Image src="/icons/tres_red.png"   width={24} height={24} alt="icon-3" onClick={() => handlerOnClick(2)} />} 
+                            {index===3 && <Image src="/icons/cuatro_red.png" width={24} height={24} alt="icon-4" onClick={() => handlerOnClick(3)} />}
+                            {index===4 && <Image src="/icons/cinco_red.png"  width={24} height={24} alt="icon-5" onClick={() => handlerOnClick(4)} />} 
+                            {index===5 && <Image src="/icons/seis_red.png"   width={24} height={24} alt="icon-6" onClick={() => handlerOnClick(5)} />}
+                            {index===6 && <Image src="/icons/siete_red.png"  width={24} height={24} alt="icon-7" onClick={() => handlerOnClick(6)} />} 
+                            {index===7 && <Image src="/icons/ocho_red.png"   width={24} height={24} alt="icon-8" onClick={() => handlerOnClick(7)} />}
+                            {index===8 && <Image src="/icons/nueve_red.png"  width={24} height={24} alt="icon-9" onClick={() => handlerOnClick(8)} />}                         
+                        </>                    
+                    : 
+                        <>
+                            {index===0 && <Image src="/icons/uno.png"    width={24} height={24} alt="icon-1" onClick={() => handlerOnClick(0)} />} 
+                            {index===1 && <Image src="/icons/dos.png"    width={24} height={24} alt="icon-2" onClick={() => handlerOnClick(1)} />}
+                            {index===2 && <Image src="/icons/tres.png"   width={24} height={24} alt="icon-3" onClick={() => handlerOnClick(2)} />} 
+                            {index===3 && <Image src="/icons/cuatro.png" width={24} height={24} alt="icon-4" onClick={() => handlerOnClick(3)} />}
+                            {index===4 && <Image src="/icons/cinco.png"  width={24} height={24} alt="icon-5" onClick={() => handlerOnClick(4)} />} 
+                            {index===5 && <Image src="/icons/seis.png"   width={24} height={24} alt="icon-6" onClick={() => handlerOnClick(5)} />}
+                            {index===6 && <Image src="/icons/siete.png"  width={24} height={24} alt="icon-7" onClick={() => handlerOnClick(6)} />} 
+                            {index===7 && <Image src="/icons/ocho.png"   width={24} height={24} alt="icon-8" onClick={() => handlerOnClick(7)} />}
+                            {index===8 && <Image src="/icons/nueve.png"  width={24} height={24} alt="icon-9" onClick={() => handlerOnClick(8)} />}                         
+                        </>                    
+                    }
+                    
+            
+
+                           
+                </Box>                 
+                ))}
+            </Flex>                    
             </ScrollArea>   
         );
     };//end  
