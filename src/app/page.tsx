@@ -6,12 +6,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
 import { AppIndex } from "@/app/index/kernel/appindex";
 import { AppMemmory } from "@/front/appmemory";
-import { GenCodeControl } from "@/app/gencode/pagecomp/entityfilesmanager";
+import { GenCodeControl } from "@/app/gencode/cgentityfiles/entityfilesmanager";
 import { GenCodeViewer } from "@/app/gencode/cgentityfiles/entityfilesviewer";
 
 
-import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
-import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
+import { PrimaryBar } from "@/app/gencode/gcprimarybar";
+import { PageHeader } from "@/app/gencode/gcheader";
 import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 
 import { FsFunctions } from "@/filesystem/fsfunctions";

@@ -10,7 +10,7 @@ import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { AppMemmory } from "@/front/appmemory";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
-import { ServClientEntities } from "../gcmodentities";
+import { ServClientEntities } from "../../../codegen/client/gcmodentities";
 import { Label } from "@radix-ui/react-context-menu";
 import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";

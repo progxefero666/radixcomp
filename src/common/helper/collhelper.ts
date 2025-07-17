@@ -5,12 +5,24 @@ import { TOption, TSelection } from "@/radix/radixtypes";
 import { Keyvalue } from "../model/keyvalue";
 
 /**
- *  class CollectionHelper.geTOptionsNames
+ *  class CollectionHelper.getKeyvaluesIndex
  */
 export class CollectionHelper {
 
     //Keyvalue
-
+    public static getKeyvaluesIndex(collection: Keyvalue[],findValue:string): number {
+        let index:number = -1;
+        if (collection == null || collection.length === 0) {
+            return index;
+        }
+        for (let itemIdx=0;itemIdx<collection.length;itemIdx++) {
+            if (collection[itemIdx].key == findValue) {
+                index = itemIdx;
+                break;
+            }
+        }
+        return index;
+    };//end
     public static getKeyvaluesIds(collection: Keyvalue[]): string[] {
         const options: string[] = [];
 

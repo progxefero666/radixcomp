@@ -1,46 +1,34 @@
 //src\radix\group\grpradio.tsx
 
-import { forwardRef } from "react";
+
 import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { Option } from "@/common/model/option";
-import { radixTypeComp, radixTypeDirection } from "@/radix/radixtypes";
+
+import { radixTypeComp } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
-import { RADIX_COLORS, RADIX_RADIUS } from "../radixconstants";
+import { RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
+import { Keyvalue } from "@/common/model/keyvalue";
+import { ThemeTextStyle } from "@/radix/radixtheme";
 
 
-/*
-<CheckboxGroup.Root defaultValue={["1"]} name="example">
-	<CheckboxGroup.Item value="1">Fun</CheckboxGroup.Item>
-	<CheckboxGroup.Item value="2">Serious</CheckboxGroup.Item>
-	<CheckboxGroup.Item value="3">Smart</CheckboxGroup.Item>
-</CheckboxGroup.Root>
 
-
-<XRadioGroup name="selectTable"
-                        autocommit={true}
-                        onselect={onSelectTable}
-                        options={menuListTables}
-                        value={modelTables[0].name}
-                        direction="column" />    
- * XRadioGroup
- */
 interface CompProps {
     autocommit?: boolean;
     name?: string;
-    options: Option[];
+    collection: Keyvalue[]; 
     label?: string;
-    direction?: radixTypeDirection;
+    direction?: any;
     value?: any;
     onselect: (index:number,name?:string) => void;
     autofocus?: boolean;
 }
-export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
-    autocommit,options, name, label, value, direction, autofocus, onselect }, ref) => {
+
+
+export function XRadioGroup({autocommit,collection, name, label, value, direction, autofocus, onselect }:CompProps) {
 
     const auto: boolean = autocommit ?? false;    
-    const def_value:string = value || options[0].id;
-    const compDirection: radixTypeDirection = direction ?? "row";
+    const def_value:string = value || collection[0].key;
+    const compDirection: any = direction ?? "row";
 
     const compStyle: radixTypeComp = {
         color: RADIX_COLORS.gray,
@@ -50,7 +38,7 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
     }
         
     const onSelect = (value:string) => {
-        const itemIndex:number = CollectionHelper.getElementIndex(options,value);        
+        const itemIndex:number = CollectionHelper.getKeyvaluesIndex(collection,value);        
         if(auto) {
             if(name){onselect(itemIndex,name);}
             else    {onselect(itemIndex);}           
@@ -61,10 +49,9 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
     const renderItem = (key:string,value:string,text:string) => {
         return (
             <RadioGroup.Item key={key} value={value}  >
-                <Text size="2" >  
+                <Text size={ThemeTextStyle.DEFAULT_SIZE} >  
                     {text}  
-                </Text>
-                
+                </Text>                
             </RadioGroup.Item>
         )
     }
@@ -77,11 +64,11 @@ export const XRadioGroup = forwardRef<HTMLInputElement, CompProps>(({
             defaultValue = {def_value}  
             onValueChange= {onSelect}>            
                 <Flex direction = {compDirection} gap="2">
-                    {options.map((opt, index) => (
-                        renderItem(index.toString(),opt.id, opt.text)         
+                    {collection.map((opt, index) => (
+                        renderItem(index.toString(),opt.key, opt.value)         
                     ))}                    
                 </Flex>
         </RadioGroup.Root>
     )
 
-})//end component
+}//end component
