@@ -8,7 +8,7 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import { AppMemmory } from "@/front/appmemory";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
 import { ServClientEntities } from "../../../codegen/client/gcmodentities";
-import { Label } from "@radix-ui/react-context-menu";
+
 import { AppConfig } from "@/app/index/appconfig";
 import { CardDatabase } from "@/app/db/cards/carddatabase";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
@@ -23,7 +23,7 @@ import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
 import { Keyvalue } from "@/common/model/keyvalue";
-import { TsOperations } from "@/codegen/data/cgdata";
+import { JsxOps, TsOps } from "@/codegen/data/cgdata";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
 
 
@@ -37,14 +37,15 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
-     //useEffect(() => {}, []);
+    //useEffect(() => {}, []);
     const [code, setCode] = useState<string>("");
 
-    const listBasicOps: Keyvalue[] = TsOperations.BASIC;
-    
-    const onOpSelected = (index:number,name?:string) => {
+    const listBasicOps: Keyvalue[] = TsOps.BASIC;
+
+    const onOpSelected = (index: number, name?: string) => {
+        alert("Op selected: " + index + " " + name);
     };//end 
-        
+
     const runOperation = async () => {
         alert("Run operation not implemented yet");
     };//end
@@ -69,15 +70,22 @@ export function TypeScriptManager({ onresult }: CompProps) {
         return (
             <Flex width="100%" direction="row" px="4" >
                 <Box width="50%" px="2">
-                    <XRadioGroup collection={TsOperations.BASIC} 
-                                 label="Operations"
-                                 value={TsOperations.BASIC[0].key}
-                                 autofocus={true}                                 
-                                 onselect={onOpSelected} />
+                    <XRadioGroup
+                        name={TsOps.MOD_ID}
+                        collection={TsOps.BASIC}
+                        label="Operations"
+                        value={TsOps.BASIC[0].key}
+                        autofocus={true}
+                        onselect={onOpSelected} />
                 </Box>
                 <Box width="50%">
-                    Parameter List
-                </Box>                
+                    <XRadioGroup
+                        name={JsxOps.MOD_ID}
+                        collection={JsxOps.BASIC}
+                        label="Jsx Operations"
+                        value={JsxOps.BASIC[0].key}
+                        onselect={onOpSelected} />
+                </Box>
             </Flex>
         );
     };//end
@@ -107,30 +115,43 @@ export function TypeScriptManager({ onresult }: CompProps) {
         );
     };//end
 
+    //<TypeScriptViewer  code="" />     
+
     return (
         <Box height="100vh" width="100%" pt="2" style={LAYOUT_STYLE} >
-            <Tabs.Root defaultValue="basic">
-                <Tabs.List>
-                    <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
-                    <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
-                    <Tabs.Trigger value="test">Test</Tabs.Trigger>
-                </Tabs.List>
+            <Grid height="100vh" rows="1fr" columns="50% 50%"  >  
+                <Flex gridColumn="1" gridRow="1" >
+                      
+                <Tabs.Root defaultValue="basic">
+                    <Tabs.List>
+                        <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
+                        <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
+                        <Tabs.Trigger value="test">Test</Tabs.Trigger>
+                    </Tabs.List>
 
-                <Box pt="3">
-                    <Tabs.Content value="basic">
-                        {renderBasicContent()}
+                    <Box pt="3">
+                        <Tabs.Content value="basic">
+                            {renderBasicContent()}
 
-                    </Tabs.Content>
+                        </Tabs.Content>
 
-                    <Tabs.Content value="advanced">
-                        {renderAdvancedContent()}
-                    </Tabs.Content>
+                        <Tabs.Content value="advanced">
+                            {renderAdvancedContent()}
+                        </Tabs.Content>
 
-                    <Tabs.Content value="test">
-                        {renderTestContent()}
-                    </Tabs.Content>
-                </Box>
-            </Tabs.Root>
+                        <Tabs.Content value="test">
+                            {renderTestContent()}
+                        </Tabs.Content>
+                    </Box>
+
+                </Tabs.Root>
+         
+                </Flex>
+
+                <Flex gridColumn="2" gridRow="1" >
+                            
+                </Flex>                
+            </Grid>
 
         </Box>
     )

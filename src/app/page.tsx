@@ -40,15 +40,15 @@ export default function PageGenCode() {
 
 
     const [ready, setReady] = useState<boolean>(false);
-    const [section, setSection] = useState<string>(CodeGenModules.MODULES[0].id);
+    const [section, setSection] = useState<string>(CodeGenModules.MODULES[1].id);
     const [fileCode,setFileCode]   = useState<FileCode|null>(null);
     const [listFileCode,setListFileCode] = useState<FileCode[]|null>(null);
     
     useEffect(() => {
         if(ready) {return;} 
         const init = async () => {            
-            //const dbSquema = await readDbSqlScriptFile("dbsquema");
-            const dbSquema = await readDbSqlScript();
+            const dbSquema = await readDbSqlScriptFile("dbsquema");
+            //const dbSquema = await readDbSqlScript();
             if(dbSquema === null) {
                 alert("Error reading database schema");
                 return;
@@ -113,15 +113,9 @@ export default function PageGenCode() {
 
     const renderSectionTsCode = () => {
         return(
-            <>
-            <Box  width="30%" style={boxStyle}> 
+            <Box  width="82%" style={boxStyle}> 
                 <TypeScriptManager onresult={onTsCodeResult} />
-            </Box>
-            <Box width="52%" style={boxStyle}>
-       
-                <TypeScriptViewer  code="" />                                       
-            </Box>            
-            </>
+            </Box>         
         )
     };//end
 

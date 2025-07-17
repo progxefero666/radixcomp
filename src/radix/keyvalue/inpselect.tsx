@@ -5,6 +5,7 @@ import { Keyvalue } from "@/common/model/keyvalue";
 import { RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS } from "../radixconstants";
 import { ModelHelper } from "@/common/helper/modelhelper";
+import { Label } from "@radix-ui/react-label";
 
 
 /**
@@ -36,7 +37,7 @@ export function XSelect({name,onchange,collection,values,label,disabled}:CompPro
         <Flex width="100%" direction={"row"} gap="2" >
 
             {label?<Box pt={"1"}><Text size="3">{label}</Text></Box>:null}
-
+            <Label>ss</Label>
             <Select.Root
                 defaultValue={inp_collection[0].key}
                 onValueChange={handleOnChange}

@@ -1,19 +1,16 @@
 //src\app\workflows\wfeditor\pagecomp\maincontent.tsx
 
-import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Flex, Text } from "@radix-ui/themes";
-import { parseResponseCollection, parseResponseItem } from "@/common/parsers/javascriptparser";
+import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { WorkflowEditorHeader } from "./editorheader";
 import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
 import { RadixConf } from "@/radix/radixconf";
-import { AppMemmory } from "@/front/appmemory";
 import { DbTables } from "@/db/dbcatalog";
-import { getTaskcategories, getTasks, getWorkflow } from "@/db/services/read/srvworkflow";
 import { getAllRows } from "@/db/services/generic/serviceread"
-import { AppWorkflows, WorkflowActions } from "@/front/appworkflows";
+import { WorkflowActions } from "@/front/appworkflows";
 import { Workflow } from "@/db/model/workflow";
 import { Task } from "@/db/model/task";
 import { Taskcategory } from "@/db/model/taskcategory";

@@ -46,7 +46,8 @@ export class CgDataConstants {
 };//end class
 
 
-export class TsOperations {
+export class TsOps {
+    public static readonly MOD_ID: string = "typescript";
 
     public static readonly OP_CLASS: string = "class";
     public static readonly OP_FUNCT: string = "function";
@@ -57,29 +58,53 @@ export class TsOperations {
     public static readonly OP_TYPE: string = "type";
     public static readonly OP_USE_STATE: string = "use_state";
     public static readonly OP_USE_EFFECT: string = "use_effect";
-    public static readonly OP_FUNC_JSX: string = "func_jsx";
-    public static readonly OP_COMPONENT: string = "component";
-    public static readonly OP_COMPONENT_REF: string = "component_ref";
+
 
     public static BASIC: Keyvalue[] = [
-        new Keyvalue(TsOperations.OP_CLASS,         "class"),
-        new Keyvalue(TsOperations.OP_FUNCT,         "const function"),
-        new Keyvalue(TsOperations.OP_FUNCT_STATIC,  "static function"),
-        new Keyvalue(TsOperations.OP_FUNCT_ASYNC,   "async function"),
-        new Keyvalue(TsOperations.OP_FUNCT_PROMISE, "Promise function"),
-        new Keyvalue(TsOperations.OP_INTERFACE,     "Interface"),
-        new Keyvalue(TsOperations.OP_TYPE,          "Type"),
-        new Keyvalue(TsOperations.OP_USE_STATE,     "Use State"),
-        new Keyvalue(TsOperations.OP_USE_EFFECT,    "Use Effect"),
+        new Keyvalue(TsOps.OP_CLASS,         "class"),
+        new Keyvalue(TsOps.OP_FUNCT,         "const function"),
+        new Keyvalue(TsOps.OP_FUNCT_STATIC,  "static function"),
+        new Keyvalue(TsOps.OP_FUNCT_ASYNC,   "async function"),
+        new Keyvalue(TsOps.OP_FUNCT_PROMISE, "Promise function"),
+        new Keyvalue(TsOps.OP_USE_EFFECT,    "foreachs"),
+        new Keyvalue(TsOps.OP_INTERFACE,     "Interface"),
+        new Keyvalue(TsOps.OP_TYPE,          "Type"),
+        new Keyvalue(TsOps.OP_USE_STATE,     "Use State"),
+        new Keyvalue(TsOps.OP_USE_EFFECT,    "Use Effect"),
     ];
 
 };//end class
-export class TypeScriptJsxModule {
+export class JsxOps {
 
-    public static readonly OP_FUNC_JSX: string = "func_jsx";
-    public static readonly OP_COMP: string = "component";
-    public static readonly OP_COMP_REF: string = "component_ref";
+    public static readonly MOD_ID: string = "typescript_jsx";
 
+    public static readonly OP_FUNC_JSX: string          = "func_jsx";
+    public static readonly OP_COMPONENT: string         = "component";
+    public static readonly OP_COMPONENT_REF: string     = "component_ref";
+
+    public static readonly OP_BUTTONS: string           = "buttons";
+    public static readonly OP_ICON_BUTTONS: string      = "iconbuttons";
+    public static readonly OP_GRID: string              = "iconbuttons";
+
+    public static readonly OP_PAGE: string              = "page_geader";
+    public static readonly OP_PAGE_HEADER: string       = "page_geader";
+    public static readonly OP_PAGE_PRIMARY_BAR: string  = "page_primary_bar";
+    public static readonly OP_PAGE_SECOND_BAR: string   = "page_main_content";
+    public static readonly OP_PAGE_MAINCONTENT: string  = "page_main_content";
+
+    public static BASIC: Keyvalue[] = [
+        new Keyvalue(JsxOps.OP_FUNC_JSX,         "func_jsx"),
+        new Keyvalue(JsxOps.OP_COMPONENT,        "component"),
+        new Keyvalue(JsxOps.OP_COMPONENT_REF,    "component ref"),
+        new Keyvalue(JsxOps.OP_BUTTONS,          "buttons"),
+        new Keyvalue(JsxOps.OP_ICON_BUTTONS,     "icon buttons"),
+        new Keyvalue(JsxOps.OP_GRID,             "grids"),
+        new Keyvalue(JsxOps.OP_PAGE,             "page"),
+        new Keyvalue(JsxOps.OP_PAGE_HEADER,      "page header"),
+        new Keyvalue(JsxOps.OP_PAGE_PRIMARY_BAR, "page primary bar"),
+        new Keyvalue(JsxOps.OP_PAGE_SECOND_BAR,  "page second bar"),
+        new Keyvalue(JsxOps.OP_PAGE_MAINCONTENT, "page main content"),
+    ];
 
 };//end class
 

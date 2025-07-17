@@ -99,7 +99,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="author"
                 ref={authorRef} 
                 label="Auhor"
-                defaul={item.author}
+                defaul={item.author!}
                 maxlen={AppDef.AUTHOR_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -108,7 +108,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="repository"
                 ref={repositoryRef}
                 label="repository"
-                defaul={item.repository}
+                defaul={item.repository!}
                 maxlen={AppDef.REFERENCE_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -117,7 +117,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="description"
                 ref={descriptionRef}
                 label="Description"
-                defaul={item.description}
+                defaul={item.description!}
                 maxlen={AppDef.DESCRIPTION_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -126,7 +126,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="url" 
                 ref={urlRef} 
                 label="url"
-                defaul={item.appurl} 
+                defaul={item.appurl!} 
                 maxlen={AppDef.URL_MAXLEN}
                 readonly={readonly} 
                 disabled={disabled} />
@@ -135,7 +135,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="path"
                 ref={pathRef}
                 label="path"
-                defaul={item.apppath}
+                defaul={item.apppath!}
                 maxlen={AppDef.PATH_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -174,7 +174,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="opsystem"
                 ref={osystemRef}
                 label="system"
-                defaul={item.osystem}
+                defaul={item.osystem!}
                 maxlen={AppDef.OSSYSTEM_MAXLEN}
                 readonly={readonly}
                 disabled={disabled} />
@@ -183,7 +183,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="opsystem"
                 ref={osystemRef}
                 label="system"
-                value={item.osystem}
+                value={item.osystem!}
                 step={1}
                 readonly={readonly}
                 disabled={disabled} />

@@ -1,8 +1,8 @@
 //src\radix\radixcolors.ts
 
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "./radixtypes";
-import { RADIX_COLORS, RADIX_RADIUS } from "./radixconstants";
+import { radixTypeComp } from "@/radix/radixtypes";
+import { RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
 
 export const COMP_BORDER_STYLE = {
     background: 'rgb(56, 56, 56)',
