@@ -6,7 +6,8 @@ import * as fs from "fs/promises";
 import { promisify } from "util";
 
 import { exec } from 'child_process';
-
+import dotenv from 'dotenv';
+dotenv.config();
 /**
  * Server action to get the content of a text file.
  * @param fname 
@@ -45,15 +46,21 @@ export async function readDbSqlScriptFile(id: string): Promise<string | null> {
 //process.env.DB_PASSWORD
 const execAsync = promisify(exec);
 
-export async function readDbSqlScript(): Promise<string> {
-    const command = `pg_dump -h localhost -U postgres -d xeferodb -s`;
+export async function readDbSqlScript(): Promise<string|null> {
 
+    //const command = `pg_dump -h localhost -U postgres -d xeferodb -s`;
+    const command = "pg_dump -h "+ 
+                     process.env.DB_HOST + " -U " + 
+                     process.env.DB_USER + " -d " + 
+                     process.env.DB_NAME + " -s";
+    let content: string = "";
     try {
-        const { stdout } = await execAsync(command, {
-        env: { ...process.env, PGPASSWORD: 'admin' }
-        });
-        return stdout; // String SQL crudo
-    } catch (error) {
-        throw new Error(`Error: ${error}`);
+        const { stdout } = await execAsync(command, 
+            {  env: { ...process.env, PGPASSWORD: process.env.DB_PASSWORD } });
+        content = stdout; // String SQL crudo
+    } 
+    catch (error) {
+        return null;
     }
+    return content;
 }//end action

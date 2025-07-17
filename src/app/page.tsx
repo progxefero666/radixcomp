@@ -40,7 +40,7 @@ export default function PageGenCode() {
 
 
     const [ready, setReady] = useState<boolean>(false);
-    const [section, setSection] = useState<string>(CodeGenModules.MODULES[1].id);
+    const [section, setSection] = useState<string>(CodeGenModules.MODULES[0].id);
     const [fileCode,setFileCode]   = useState<FileCode|null>(null);
     const [listFileCode,setListFileCode] = useState<FileCode[]|null>(null);
     
