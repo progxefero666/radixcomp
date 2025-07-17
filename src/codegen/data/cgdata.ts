@@ -2,7 +2,7 @@
 
 import { Keyvalue } from "@/common/model/keyvalue";
 import { CgEntityOperations } from "../cgoperations";
-import { Pattern, TPattern } from "./cgdatamodels";
+import { Pattern, TInputPattern, TPattern } from "./cgdatamodels";
 
 
 //................................................................................
@@ -10,23 +10,24 @@ import { Pattern, TPattern } from "./cgdatamodels";
 //................................................................................
 
 /**
- * class CgDataConstants.MAX_LENGTH_DEF
+ * class CgDataConstants.LIST_PARAMETERS
  */
 export class CgDataConstants {
 
     public static readonly MAX_LENGTH_DEF: number = 50;
 
     //public static PATTERN_VAR_A: string = "__^A^__";
-    //1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣✅
-    public static readonly PATTERN_0: Pattern = new Pattern({start:"__^", end:"^__"},null, null);
-    public static readonly PATTERN_1: Pattern = new Pattern({start:"^¡",  end:"¡^"}, null, null);
-    public static readonly PATTERN_2: Pattern = new Pattern({start:"^<",  end:">^"}, null, null);
-    public static readonly PATTERN_3: Pattern = new Pattern({start:"^[",  end:"]^"}, null, null);
-    public static readonly PATTERN_4: Pattern = new Pattern({start:"__^", end:"^__"},null, null);
-    public static readonly PATTERN_5: Pattern = new Pattern({start:"^¡",  end:"¡^"}, null, null);
-    public static readonly PATTERN_6: Pattern = new Pattern({start:"^<",  end:">^"}, null, null);
-    public static readonly PATTERN_7: Pattern = new Pattern({start:"^[",  end:"]^"}, null, null);
-    
+
+    public static readonly PATTERN_0: Pattern = new Pattern({start:"^%", end:"%^"}, null, null);
+    public static readonly PATTERN_1: Pattern = new Pattern({start:"^¡", end:"¡^"}, null, null);
+    public static readonly PATTERN_2: Pattern = new Pattern({start:"^<", end:">^"}, null, null);
+    public static readonly PATTERN_3: Pattern = new Pattern({start:"^[", end:"]^"}, null, null);
+    public static readonly PATTERN_4: Pattern = new Pattern({start:"^+", end:"+^"}, null, null);
+    public static readonly PATTERN_5: Pattern = new Pattern({start:"*^", end:"*^"}, null, null);
+    public static readonly PATTERN_6: Pattern = new Pattern({start:"^-", end:"-^"}, null, null);
+    public static readonly PATTERN_7: Pattern = new Pattern({start:"^:", end:":^"}, null, null);
+    public static readonly PATTERN_8: Pattern = new Pattern({start:"^/", end:"\^"}, null, null);
+
     public static readonly LIST_PATTERNS: Pattern[] = [
         CgDataConstants.PATTERN_0,  
         CgDataConstants.PATTERN_1,
@@ -37,6 +38,19 @@ export class CgDataConstants {
         CgDataConstants.PATTERN_6,
         CgDataConstants.PATTERN_7
     ];
+
+    public static LIST_PARAMETERS: TInputPattern[] = [
+
+        new TInputPattern("0",{start:"^%",end:"%^"},"Parameter 0",null),
+        new TInputPattern("1",{start:"^¡",end:"¡^"},"Parameter 0",null),
+        new TInputPattern("2",{start:"^<",end:">^"},"Parameter 0",null),
+        new TInputPattern("3",{start:"^[",end:"]^"},"Parameter 0",null),   
+        new TInputPattern("4",{start:"^+",end:"+^"},"Parameter 0",null),
+        new TInputPattern("5",{start:"^*",end:"*^"},"Parameter 0",null),   
+        new TInputPattern("6",{start:"^-",end:"-^"},"Parameter 0",null), 
+        new TInputPattern("7",{start:"^:",end:":^"},"Parameter 0",null),     
+        new TInputPattern("8",{start:"^/",end:"\^"},"Parameter 0",null),     
+    ]
 
 };//end class
 

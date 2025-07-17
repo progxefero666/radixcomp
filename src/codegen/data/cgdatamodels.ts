@@ -25,11 +25,11 @@ export class Pattern {
  */
 export class TInputPattern  {
     public id:     string;
-    public pattern: string;
+    public pattern: TPattern;
     public value:  string;
     public label:  string|null;
 
-    constructor(id: string,pattern:string, label: string|null, value:string|null) {
+    constructor(id: string,pattern:TPattern, label: string|null, value:string|null) {
         this.id = id;
         this.pattern = pattern;
         this.label = label ?? null;

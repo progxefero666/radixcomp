@@ -10,12 +10,13 @@ import { ThemeButtonsStyle } from "@/radix/radixtheme";
 import { CrossCircledIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
 import { Keyvalue } from "@/common/model/keyvalue";
-import { JsxOps, TsOps } from "@/codegen/data/cgdata";
+import { CgDataConstants, JsxOps, TsOps } from "@/codegen/data/cgdata";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
 import { Label } from "@radix-ui/react-label";
 import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { min } from "date-fns";
+import CardInputParam from '../cards/cardinputparam';
 
 
 
@@ -120,22 +121,14 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end
 
     const renderParameters = () => {
+        
         return (
             <Flex width="100%" direction="column" mt="2" gapY="2" pr="2" >
-                <Label>Parameter 0</Label>
-                <TextField.Root 
-                    name="parameter_0"
-                    placeholder="param 0"
-                    radius="medium" />
-                <Label>Parameter 1</Label>
-                <TextField.Root 
-                    name="parameter_1"
-                    placeholder="param 1"
-                    radius="medium" />    
-                <Image src="/icons/uno.png"    width={36} height={36} alt="icon-1" />
-                <Image src="/icons/dos.png"    width={36} height={36} alt="icon-1" />
-                <Image src="/icons/tres.png"   width={36} height={36} alt="icon-1" />
-                <Image src="/icons/cuatro.png" width={36} height={36} alt="icon-1" />                                
+                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[0]} />
+                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[1]} />
+                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[2]} />
+                <CardInputParam patterns={CgDataConstants.LIST_PATTERNS} input={CgDataConstants.LIST_PARAMETERS[3]} />
+                          
             </Flex> 
         );
     };//end  
