@@ -1,0 +1,62 @@
+{
+    "name": "taskcategory",
+    "fields":[
+        {
+            "name": "id",
+            "type": "numeric",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": "5:0",
+            "pk": true,
+            "fk": false,
+            "minlen": null,
+            "maxlen": null,
+            "relations": null
+        }, 
+        {
+            "name": "workflow_id",
+            "type": "numeric",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": "5:0",
+            "pk": false,
+            "fk": true,
+            "minlen": null,
+            "maxlen": null,
+                        "relations": [
+                {
+                    "table": "workflow",
+                    "field": "id"
+                }
+            ]
+                    }, 
+        {
+            "name": "name",
+            "type": "text",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 100,
+            "relations": null
+        }, 
+        {
+            "name": "description",
+            "type": "text",
+            "required": false,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 100,
+            "relations": null
+        }
+    ]
+}

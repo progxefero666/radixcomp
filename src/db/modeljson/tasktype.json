@@ -1,0 +1,44 @@
+{
+    "name": "tasktype",
+    "fields":[
+        {
+            "name": "id",
+            "type": "numeric",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": "5:0",
+            "pk": true,
+            "fk": false,
+            "minlen": null,
+            "maxlen": null,
+            "relations": null
+        }, 
+        {
+            "name": "name",
+            "type": "text",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 100,
+            "relations": null
+        }, 
+        {
+            "name": "description",
+            "type": "text",
+            "required": false,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 200,
+            "relations": null
+        }
+    ]
+}

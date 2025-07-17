@@ -57,7 +57,7 @@ export async function readDbSqlScript(): Promise<string|null> {
     try {
         const { stdout } = await execAsync(command, 
             {  env: { ...process.env, PGPASSWORD: process.env.DB_PASSWORD } });
-        content = stdout; // String SQL crudo
+        content = stdout; 
     } 
     catch (error) {
         return null;

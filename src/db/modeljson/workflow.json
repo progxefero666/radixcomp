@@ -1,0 +1,96 @@
+{
+    "name": "workflow",
+    "fields":[
+        {
+            "name": "id",
+            "type": "numeric",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": "5:0",
+            "pk": true,
+            "fk": false,
+            "minlen": null,
+            "maxlen": null,
+            "relations": null
+        }, 
+        {
+            "name": "name",
+            "type": "text",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 100,
+            "relations": null
+        }, 
+        {
+            "name": "context",
+            "type": "text",
+            "required": false,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": null,
+            "relations": null
+        }, 
+        {
+            "name": "description",
+            "type": "text",
+            "required": false,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": null,
+            "relations": null
+        }, 
+        {
+            "name": "application",
+            "type": "text",
+            "required": false,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 50,
+            "relations": null
+        }, 
+        {
+            "name": "fpath",
+            "type": "text",
+            "required": false,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 500,
+            "relations": null
+        }, 
+        {
+            "name": "updated",
+            "type": "date",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": null,
+            "relations": null
+        }
+    ]
+}
