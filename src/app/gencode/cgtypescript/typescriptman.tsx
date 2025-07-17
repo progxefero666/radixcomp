@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
 import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, } from "@radix-ui/themes";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 
 import { CrossCircledIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
@@ -17,6 +17,7 @@ import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { min } from "date-fns";
 import CardInputParam from '../cards/cardinputparam';
+import { XInputNumber } from '@/radix/input/inpnumber';
 
 
 
@@ -34,7 +35,8 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
-    //useEffect(() => {}, []);
+    const countParamsRef = useRef<HTMLInputElement>(null);
+
     const [template, setTemplate] = useState<string>("");
     const [data, setData] = useState<string>("");
     const [code, setCode] = useState<string>("");
@@ -45,6 +47,11 @@ export function TypeScriptManager({ onresult }: CompProps) {
     useEffect(() => {
         onTsOpSelected(0,TsOps.MOD_ID);
     }, []);
+    //onchange?: (value: string, name?: string) => void;
+
+    const onChangeCountParams = (value:number, name?: string) => {   
+        alert("onChangeCountParams: " + value);
+    };//end 
 
     const onTsOpSelected = (index: number, name?: string) => {    
         setOpGroup(name!);     
@@ -123,21 +130,32 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const renderParameters = () => {
         
         return (
-            <Flex width="100%" direction="column" mt="2" gapY="2" pr="2" >
-                <CardInputParam pattindex={0}
-                                patterns={CgDataConstants.LIST_PATTERNS} 
-                                input={CgDataConstants.LIST_PARAMETERS[0]} />
-                <CardInputParam pattindex={1}
-                                patterns={CgDataConstants.LIST_PATTERNS} 
-                                input={CgDataConstants.LIST_PARAMETERS[1]} />
-                <CardInputParam pattindex={2}
-                                patterns={CgDataConstants.LIST_PATTERNS} 
-                                input={CgDataConstants.LIST_PARAMETERS[2]} />
-                <CardInputParam pattindex={3}
-                                patterns={CgDataConstants.LIST_PATTERNS} 
-                                input={CgDataConstants.LIST_PARAMETERS[3]} />                                                                
-                          
-            </Flex> 
+            <Box px="2" py="2">
+                <Flex  direction="row" justify="between" px="2" py="1" align="center" 
+                        style={COMP_BORDER_STYLE} >
+                    <Label>Cnt. Parameters</Label>  
+                    <XInputNumber autocommit={true}
+                                  inline={true}
+                                  value="1"
+                                  onchange={onChangeCountParams} /> 
+                </Flex>
+                <Flex width="100%" direction="column" mt="2" gapY="2"  >
+                    <CardInputParam pattindex={0}
+                                    patterns={CgDataConstants.LIST_PATTERNS} 
+                                    input={CgDataConstants.LIST_PARAMETERS[0]} />
+                    <CardInputParam pattindex={1}
+                                    patterns={CgDataConstants.LIST_PATTERNS} 
+                                    input={CgDataConstants.LIST_PARAMETERS[1]} />
+                    <CardInputParam pattindex={2}
+                                    patterns={CgDataConstants.LIST_PATTERNS} 
+                                    input={CgDataConstants.LIST_PARAMETERS[2]} />
+                    <CardInputParam pattindex={3}
+                                    patterns={CgDataConstants.LIST_PATTERNS} 
+                                    input={CgDataConstants.LIST_PARAMETERS[3]} />                                                                
+                            
+                </Flex>                               
+            </Box>
+
         );
     };//end  
 

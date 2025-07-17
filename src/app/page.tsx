@@ -37,7 +37,7 @@ export default function PageGenCode() {
 
 
     const [ready, setReady] = useState<boolean>(false);
-    const [layoutColsWidth, setlayoutColsWidth] = useState<number[]>([14,82,4]); 
+    const [layoutColsWidth, setlayoutColsWidth] = useState<string[]>(["14%","82%","4%"]); 
     const [collapsePrimaryBar, setCollapsePrimaryBar] = useState<boolean>(false);
 
     const [section, setSection] = useState<string>(CodeGenModules.MODULES[1].id);
@@ -63,12 +63,13 @@ export default function PageGenCode() {
     }, []);
 
     const onPrimaryBarCollapse = () => {
+       
         const primBarCollapse:boolean = !collapsePrimaryBar;
         if(primBarCollapse) {
-            setlayoutColsWidth([4,82,14]);
+            setlayoutColsWidth(["4%","92%","4%"]);
         }
         else {
-            setlayoutColsWidth([14,82,4]);
+            setlayoutColsWidth(["14%","82%","4%"]);
         }
         setCollapsePrimaryBar(!collapsePrimaryBar);
     };//end
@@ -124,7 +125,7 @@ export default function PageGenCode() {
 
     const renderSectionTsCode = () => {
         return(
-            <Box  width="82%" style={boxStyle}> 
+            <Box  width={layoutColsWidth[1]} style={boxStyle}> 
                 <TypeScriptManager onresult={onTsCodeResult} />
             </Box>         
         )
@@ -132,7 +133,7 @@ export default function PageGenCode() {
 
     const renderSectionEntityFiles = () => {
         return (            
-            <Box  width="82%" style={boxStyle}> 
+            <Box  width={layoutColsWidth[1]} style={boxStyle}> 
                 <Box  width="50%" style={boxStyle}> 
                     {ready ? 
                     <GenCodeControl key={section}  section={section}  
@@ -163,7 +164,7 @@ export default function PageGenCode() {
             
             <Flex height="100%">
 
-                <Box width="14%" style={boxStyle}>
+                <Box width={layoutColsWidth[0]} style={boxStyle}>
                     <PrimaryBar actsection={section}
                                 collapse={collapsePrimaryBar}
                                 onselection={loadSection}
@@ -174,7 +175,7 @@ export default function PageGenCode() {
                 {section === CodeGenModules.MODULES[1].id?renderSectionTsCode():null}
                 {section === CodeGenModules.MODULES[2].id?renderSectionDatabase():null}
 
-                <Box width="4%" style={boxStyle}>
+                <Box width={layoutColsWidth[2]} style={boxStyle}>
                     <SecondBar actsection={section} />
                 </Box>
             </Flex>

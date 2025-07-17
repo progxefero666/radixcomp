@@ -10,7 +10,7 @@ import MenuButtons from "@/radix/cbars/btmenu";
 import { CodeGenModules } from "@/codegen/cgoperations";
 import { COMP_BORDER_STYLE, ThemeIconsStyle } from "@/radix/radixtheme";
 import { DB_ITEM_CMD } from "@/common/database/dbkernel";
-import { ArrowLeftIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 
 /**
@@ -39,27 +39,31 @@ export function PrimaryBar({collapse,oncollapse,onselection,actsection}: Primary
 
     return (
         <Flex direction="column" px="2" py="2" >            
-            <Flex direction="row" justify="between" px="2" py="1" align="center" gapX="2"  
+            <Flex direction="row" justify="between" px="1" py="1" align="center" gapX="2"  
                   style={COMP_BORDER_STYLE}  >
-                <Box>
-                    <Text size="3" >
-                        Sections
-                    </Text>                    
-                </Box>    
+
+                {!collapse ? <Box><Text size="3" >Sections</Text></Box>:null}    
+
                 <Box>
                     <IconButton size={ThemeIconsStyle.DEF_SIZE}>
+                        {collapse ? 
+                        <ArrowRightIcon  width={ThemeIconsStyle.DEF_WIDTH}
+                                    height={ThemeIconsStyle.DEF_HEIGHT} onClick={() => onHandlerClick()} />
+                        :
                         <ArrowLeftIcon  width={ThemeIconsStyle.DEF_WIDTH}
                                     height={ThemeIconsStyle.DEF_HEIGHT} onClick={() => onHandlerClick()} />
+                        }
                     </IconButton>     
                 </Box>                  
             </Flex>
+            {!collapse ?
             <Box width="100%" pt="2">     
                 <MenuButtons options={CodeGenModules.MODULES}
                     onclick={onselection} 
                     actoption={actsection} />	
                 <Separator orientation="horizontal" size="4"  />                           
-            </Box>              
-
+            </Box>:null}    
+           
         </Flex>
     );
 

@@ -9,6 +9,8 @@ import { Label } from "@radix-ui/react-label";
 import { CgDataConstants } from "@/codegen/data/cgdata";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import { RADIX_COLORS } from "@/radix/radixconstants";
+import { RadixConf } from "@/radix/radixconf";
+import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 
 const compStyle = {
     background: 'rgb(35, 35, 39)',
@@ -27,6 +29,8 @@ interface CompProps {
     maxlength?: number;  
 }
 export default function CardInputParam({patterns, input,pattindex, maxlength }: CompProps) {
+
+   const [collapse, setCollapse] = useState<boolean>(false);
 
     const onHandlerOnClick = (index:number) => {
     };
@@ -61,11 +65,7 @@ export default function CardInputParam({patterns, input,pattindex, maxlength }: 
                             {index===7 && <Image src="/icons/ocho.png"   width={24} height={24} alt="icon-8" onClick={() => onHandlerOnClick(7)} />}
                             {index===8 && <Image src="/icons/nueve.png"  width={24} height={24} alt="icon-9" onClick={() => onHandlerOnClick(8)} />}                         
                         </>                    
-                    }
-                    
-            
-
-                           
+                    }                           
                 </Box>                 
                 ))}
             </Flex>                    
@@ -77,23 +77,38 @@ export default function CardInputParam({patterns, input,pattindex, maxlength }: 
         <Flex width="100%" direction="column" px="2" py="1"  style={COMP_BORDER_STYLE} >
             <Box>
                 <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="between" >
-                    <Label>{input.label}</Label>
+                    <Box>
+                       <IconButton variant={RadixConf.VARIANTS.ghost} 
+                             onClick={() => setCollapse(!collapse)} >
+                             {!collapse ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                        </IconButton>
+                    </Box>
+                    <Box>
+                        <Label>{input.label}</Label>                        
+                    </Box>                    
+
                     <Flex direction="row" justify="end" align="center">
                         <Text size="3" color={RADIX_COLORS.amber} >
                             {input.pattern.start + input.pattern.end}
                         </Text>                        
                     </Flex>
                 </Flex>
-                
-                <TextField.Root 
-                    maxLength={maxlength ?? CgDataConstants.MAX_LENGTH_DEF}
-                    name = {input.id}
-                    placeholder = {input.id}
-                    radius = "medium" />
             </Box>
-            <Box>
-                {renderPatterns()}
-            </Box>
+            {!collapse ? 
+            <>
+                <Box>      
+                    <TextField.Root 
+                        maxLength={maxlength ?? CgDataConstants.MAX_LENGTH_DEF}
+                        name = {input.id}
+                        placeholder = {input.id}
+                        radius = "medium" />
+                </Box>
+                <Box>
+                    {renderPatterns()}
+                </Box>            
+            </>            
+            :null}
+
 
         </Flex>
     );

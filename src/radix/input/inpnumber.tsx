@@ -24,8 +24,8 @@ interface CompProps {
     readonly?: boolean;
     disabled?: boolean
     value?: string;
-    onchange?: (value: string, name?: string) => void;
-    onsubmit?: (value: string, name?: string) => void;
+    onchange?: (value: number, name?: string) => void;
+    onsubmit?: (value: number, name?: string) => void;
     step?: number;
     autofocus?: boolean;
 }
@@ -63,13 +63,13 @@ export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
 
     const triggerOnChange = (newValue: string) => {
         if (onchange) {
-            onchange(newValue, name);
+            onchange(Number(newValue), name);
         }
     };
 
     const triggerOnSubmit = (newValue: string) => {
         if (onsubmit) {
-            onsubmit(newValue, name);
+            onsubmit(Number(newValue), name);
         }
     };
 
