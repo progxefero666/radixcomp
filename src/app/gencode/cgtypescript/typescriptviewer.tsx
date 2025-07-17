@@ -34,7 +34,7 @@ export function TypeScriptViewer({code}: CompProps) {
         <Flex className="h-full" direction="column" >
 
 
-            <Flex width={"100%"} justify="between" px="2" py="1" align="start" >
+            <Flex width={"100%"} justify="between" pl="4" pr="2" py="1" align="start" >
                 
                 <Text size="3" align="left">{"Output Code"}</Text>
                 <Flex direction="row" gapX="2" align="center" justify="center">

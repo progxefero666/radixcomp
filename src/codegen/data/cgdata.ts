@@ -77,11 +77,12 @@ export class JsxOps {
 
     public static readonly MOD_ID: string = "typescript_jsx";
 
+    public static readonly OP_BUTTONS: string           = "buttons";
     public static readonly OP_FUNC_JSX: string          = "func_jsx";
     public static readonly OP_COMPONENT: string         = "component";
     public static readonly OP_COMPONENT_REF: string     = "component_ref";
 
-    public static readonly OP_BUTTONS: string           = "buttons";
+    
     public static readonly OP_ICON_BUTTONS: string      = "iconbuttons";
     public static readonly OP_GRID: string              = "iconbuttons";
 
