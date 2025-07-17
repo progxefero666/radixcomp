@@ -80,6 +80,7 @@ export default function PageGenCode() {
         FsFunctions.chargeDownloadListFile(files);
 
     };
+    
     const exportFolder = () => {
     
     };//end
@@ -107,8 +108,9 @@ export default function PageGenCode() {
                 <Box width="41%" style={boxStyle}>
                     {fileCode!==null ? 
                     <GenCodeViewer key={fileCode.code} 
-                                   code={fileCode.code} 
-                                   exportdata={exportFileCode} />:null}
+                                   singlecode={fileCode} 
+                                   exportsinglecode={exportFileCode} 
+                                   exportmultiplecode={exportFileCode}/>:null}
                     
                 </Box>
 
