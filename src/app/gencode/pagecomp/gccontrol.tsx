@@ -33,10 +33,10 @@ import { CollectionHelper } from "@/common/helper/collhelper";
 //---------------------------------------------------------------------------------------
 interface CompProps {
     section?: string | null;
-    onsingleresult: (filecode:FileCode) => void;
-    onmultipleresult: (filescode:FileCode[]) => void;
+    onsingleresult: (filecode: FileCode) => void;
+    onmultipleresult: (filescode: FileCode[]) => void;
 }
-export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompProps) {
+export function GenCodeControl({ section, onsingleresult, onmultipleresult }: CompProps) {
 
     const [initialized, setInitialized] = useState<boolean>(false);
     const [format, setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
@@ -50,9 +50,9 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
 
-  
+
     useEffect(() => {
-       
+
         if (section == null) { return; }
         if (initialized) { return; }
         dbSquemaControl.current = new CodeGenSquema(AppMemmory.readDbSquema());
@@ -70,7 +70,7 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
     };//end
 
 
-    const onOptMultipleChange = (value:boolean, compName?: string) => {
+    const onOptMultipleChange = (value: boolean, compName?: string) => {
         setOptMultDisabled(value);
     };//end
 
@@ -79,14 +79,14 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
         if (operationId == "get_def_class" ||
             operationId == "get_entity_class") {
             setShowRadioList(true);
-            setShowCheckList(false);    
+            setShowCheckList(false);
             setOptMultDisabled(true);
         }
         else if (operationId == "get_list_def_class" ||
-                 operationId == "get_list_entity_class") {
+            operationId == "get_list_entity_class") {
             setShowRadioList(false);
-            setShowCheckList(true);         
-            setOptMultDisabled(false);   
+            setShowCheckList(true);
+            setOptMultDisabled(false);
         }
         else {
             setShowRadioList(false);
@@ -97,108 +97,109 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
     };//end
 
     const runOperation = async () => {
-        
-        // for TypeScript format
-        //...............................................................................
         if (format === "typescript") {
-           
-            if (operationId === "get_def_class" || operationId === "get_entity_class") {
-                let codecont: string | null = null;
-                codecont = await clientTScriptEntities.current!
-                    .execItemTsOperation(operationId,dbSquemaControl.current!.activeTableName);
-                const filecode:FileCode = new FileCode(
-                    dbSquemaControl.current!.activeTableName,
-                    DocFormats.FORMAT_TYPESCRIPT.value, 
-                    DocFormats.FORMAT_TYPESCRIPT.key,
-                    codecont!);
-                if(codecont !== null) {onsingleresult(filecode);}        
-            }
-            else {
-                if(multiple){
-                    let listfilesId: string[] = CollectionHelper
-                        .getListFromTOptions(dbSquemaControl.current!.toptions);
-                    let listCode: string[] | null = await clientTScriptEntities.current!
-                        .execMultipleTsOperation(operationId,dbSquemaControl.current!.toptions); 
-
-                    if(listCode!=null){    
-                        const filescode:FileCode[] = [];
-                        for(let idx=0;idx<listfilesId.length;idx++){
-                            filescode[idx] = new FileCode(
-                                listfilesId[idx],
-                                DocFormats.FORMAT_TYPESCRIPT.value, 
-                                DocFormats.FORMAT_TYPESCRIPT.key,   
-                                listCode![idx]);
-                        }                        
-                        onmultipleresult(filescode);
-                    }
-                }
-                else{
-                    let codecont = await clientTScriptEntities.current!
-                        .execArrayTsOperation(operationId,dbSquemaControl.current!.toptions);             
-                    const filecode:FileCode = new FileCode(
-                        "list_tables",
-                        DocFormats.FORMAT_TYPESCRIPT.value, 
-                        DocFormats.FORMAT_TYPESCRIPT.key,
-                        codecont!);     
-                    if(codecont !== null) {onsingleresult(filecode);}                   
-                }
-            }
-            
+            runTypeScriptOperation();
         }
-        
-        // for JSON format
-        //...............................................................................
         else if (format === "json") {
-            let codecont: string | null = null;
-            let fileId: string = "default";
-            if (operationId === "get_def_class" || operationId === "get_entity_class") {
-                const selTable:ModelTable=dbSquemaControl.current!.getActiveTable()!;
-                codecont = await clientTScriptEntities
-                    .current!.execItemJsonOperation(operationId,selTable);    
-                fileId = dbSquemaControl.current!.activeTableName;       
-            }
-            else if (operationId === "get_list_def_class" || operationId === "get_list_entity_class"){
-                const select_tables:  ModelTable[] = [];
-                codecont = await clientTScriptEntities
-                    .current!.execArrayJsonOperation(operationId,select_tables);    
-                fileId = "list_tables";    
-            }
-            else if (operationId === "get_all_def_class" || operationId === "get_all_entity_class"){
-                codecont = await clientTScriptEntities
-                    .current!.execArrayJsonOperation(operationId,dbSquemaControl.current!.tables);    
-                fileId = "list_tables";    
-            }
-            const filecode:FileCode = new FileCode(
-                fileId,
-                DocFormats.FORMAT_JSON.value, 
-                DocFormats.FORMAT_JSON.key,
-                codecont!);
-
-            if(codecont !== null) {onsingleresult(filecode);}
+            runJsonOperation();
         }
 
     };//end
 
+    const runTypeScriptOperation = async () => {
+
+        if (operationId === "get_def_class" || operationId === "get_entity_class") {
+            let codecont: string | null = null;
+            codecont = await clientTScriptEntities.current!
+                .execItemTsOperation(operationId, dbSquemaControl.current!.activeTableName);
+            const filecode: FileCode = new FileCode(
+                dbSquemaControl.current!.activeTableName,
+                DocFormats.FORMAT_TYPESCRIPT.value,
+                DocFormats.FORMAT_TYPESCRIPT.key,
+                codecont!);
+            if (codecont !== null) { onsingleresult(filecode); }
+        }
+        else {
+            if (!optMultDisabled) {
+                let listfilesId: string[] = CollectionHelper
+                    .getListFromTOptions(dbSquemaControl.current!.toptions);
+                let listCode: string[] | null = await clientTScriptEntities.current!
+                    .execMultipleTsOperation(operationId, dbSquemaControl.current!.toptions);
+
+                if (listCode != null) {
+                    const filescode: FileCode[] = [];
+                    for (let idx = 0; idx < listfilesId.length; idx++) {
+                        filescode[idx] = new FileCode(
+                            listfilesId[idx],
+                            DocFormats.FORMAT_TYPESCRIPT.value,
+                            DocFormats.FORMAT_TYPESCRIPT.key,
+                            listCode![idx]);
+                    }
+                    onmultipleresult(filescode);
+                }
+            }
+            else {
+                let codecont = await clientTScriptEntities.current!
+                    .execArrayTsOperation(operationId, dbSquemaControl.current!.toptions);
+                const filecode: FileCode = new FileCode(
+                    "list_tables",
+                    DocFormats.FORMAT_TYPESCRIPT.value,
+                    DocFormats.FORMAT_TYPESCRIPT.key,
+                    codecont!);
+                if (codecont !== null) { onsingleresult(filecode); }
+            }
+        }
+
+    };//end
+
+    const runJsonOperation = async () => {
+        let codecont: string | null = null;
+        let fileId: string = "default";
+        if (operationId === "get_def_class" || operationId === "get_entity_class") {
+            const selTable: ModelTable = dbSquemaControl.current!.getActiveTable()!;
+            codecont = await clientTScriptEntities
+                .current!.execItemJsonOperation(operationId, selTable);
+            fileId = dbSquemaControl.current!.activeTableName;
+        }
+        else if (operationId === "get_list_def_class" || operationId === "get_list_entity_class") {
+            const select_tables: ModelTable[] = [];
+            codecont = await clientTScriptEntities
+                .current!.execArrayJsonOperation(operationId, select_tables);
+            fileId = "list_tables";
+        }
+        else if (operationId === "get_all_def_class" || operationId === "get_all_entity_class") {
+            codecont = await clientTScriptEntities
+                .current!.execArrayJsonOperation(operationId, dbSquemaControl.current!.tables);
+            fileId = "list_tables";
+        }
+        const filecode: FileCode = new FileCode(
+            fileId,
+            DocFormats.FORMAT_JSON.value,
+            DocFormats.FORMAT_JSON.key,
+            codecont!);
+
+        if (codecont !== null) { onsingleresult(filecode); }
+    };//end
 
     const renderHeader = () => {
         return (
             <Flex width="100%" direction="row" justify="between" mt="2" pb="2" align="center" >
                 <Flex width="100%" direction="row" gapX="2"  >
                     <Box>
-                        <XSelect label="Operations:" 
-                                collection={CodeGenOperations.OPS_ENTITIES}
-                                onchange={onOpSelected} />
+                        <XSelect label="Operations:"
+                            collection={CodeGenOperations.OPS_ENTITIES}
+                            onchange={onOpSelected} />
                     </Box>
                     <Box>
                         <XSelect label="Format:" collection={CodeGenConfig.CODE_FORMATS}
-                            onchange={onSelectCodeFormat} />                    
+                            onchange={onSelectCodeFormat} />
                     </Box>
                     <Box>
                         <Checkbox
-                            defaultChecked={false} 
+                            defaultChecked={false}
                             onCheckedChange={onOptMultipleChange}
-                            disabled={optMultDisabled} />                   
-                    </Box>                    
+                            disabled={optMultDisabled} />
+                    </Box>
                 </Flex>
                 <Button onClick={runOperation} color="green">
                     Run
@@ -215,12 +216,12 @@ export function GenCodeControl({section,onsingleresult,onmultipleresult}: CompPr
                     {showRadioList ?
                         <XSelect collection={dbSquemaControl.current!.tcollection}
                             onchange={onSelectTable} /> : null}
-                    {showCheckList ?                                              
+                    {showCheckList ?
                         <XCheckGroup name="selectTables"
-                                    autocommit={true}
-                                    inline={true}
-                                    collection={dbSquemaControl.current!.toptions}
-                                    onselect={dbSquemaControl.current!.selectTables} /> : null}
+                            autocommit={true}
+                            inline={true}
+                            collection={dbSquemaControl.current!.toptions}
+                            onselect={dbSquemaControl.current!.selectTables} /> : null}
                 </Flex>
             </Flex>
         );

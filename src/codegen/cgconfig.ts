@@ -1,6 +1,7 @@
 //src\codegen\kernel\cgconfig.ts
 
 import { Keyvalue } from "@/common/model/keyvalue";
+import { DocFormats } from "@/filesystem/fsconstants";
 
 
 
@@ -43,17 +44,7 @@ export class CodeGenConfig {
         new Keyvalue(CodeGenConfig.FORMAT_JAVASCRIPT, "JavaScript")
     ]; 
 
-    public static readonly TYPESCRIPT_MIMETYPE: string = "text/typescript";
-    public static readonly JSON_MIMETYPE: string = "application/json";
-    public static readonly PYTHON_MIMETYPE: string = "application/pdf";
-    public static readonly MARKDOWN_MIMETYPE: string = "text/plain";
-    public static readonly JSX_MIMETYPE: string = "text/typescript";        
-    public static readonly SQL_MIMETYPE: string = "text/x-sql";
-    public static readonly JAVASCRIPT_MIMETYPE: string = "text/javascript";
-    public static readonly CSS_MIMETYPE: string = "text/css";
-    public static readonly HTML_MIMETYPE: string = "text/html";
-    public static readonly PDF_MIMETYPE: string = "application/pdf";
-    public static readonly TXT_MIMETYPE: string = "text/plain";
+    
 
  
     public static readonly DEF_FILE_ID:string = "default";
@@ -82,73 +73,18 @@ export class CodeGenConfig {
         return imports;
     }
 
+    /*
+      public static readonly TYPESCRIPT_MIMETYPE: string = "text/typescript";
+    public static readonly JSON_MIMETYPE: string = "application/json";
+    public static readonly PYTHON_MIMETYPE: string = "application/pdf";
+    public static readonly MARKDOWN_MIMETYPE: string = "text/plain";
+    public static readonly JSX_MIMETYPE: string = "text/typescript";        
+    public static readonly SQL_MIMETYPE: string = "text/x-sql";
+    public static readonly JAVASCRIPT_MIMETYPE: string = "text/javascript";
+    public static readonly CSS_MIMETYPE: string = "text/css";
+    public static readonly HTML_MIMETYPE: string = "text/html";
+    public static readonly PDF_MIMETYPE: string = "application/pdf";
+    public static readonly TXT_MIMETYPE: string = "text/plain";
+    */
 };//end class
 
-/**
- * class CodeGeneration.generateFile
- */
-export class CodeGeneration {
-
-    public static getFilename(id:string,format:string): string {
-        let fname: string = id + ".";
-        if(format === CodeGenConfig.FORMAT_TYPESCRIPT) {
-            fname += "ts";
-        }
-        else if(format === CodeGenConfig.FORMAT_JSON) {
-            fname += "json";
-        }
-        else if(format === CodeGenConfig.FORMAT_SQL) {
-            fname += "sql";
-        }
-        else if(format === CodeGenConfig.FORMAT_JAVASCRIPT) {
-            fname += "js";
-        }
-        return fname;
-    };
-
-    public static getMimetype(format:string): string {
-        let mimetype: string = CodeGenConfig.TXT_MIMETYPE;
-        if(format === CodeGenConfig.FORMAT_TYPESCRIPT) {
-            mimetype = CodeGenConfig.TYPESCRIPT_MIMETYPE;
-        }
-        else if(format === CodeGenConfig.FORMAT_JSON) {
-            mimetype = CodeGenConfig.JSON_MIMETYPE;
-        }
-        else if(format === CodeGenConfig.FORMAT_SQL) {
-            mimetype = CodeGenConfig.SQL_MIMETYPE;
-        }
-        else if(format === CodeGenConfig.FORMAT_JAVASCRIPT) {
-            mimetype = CodeGenConfig.JAVASCRIPT_MIMETYPE;
-        }
-        return mimetype;
-    };
-
-    public static generateFile(id:string,format:string,content:string): File{        
-        const fname: string = CodeGeneration.getFilename(id,format);
-        const mimetype: string = CodeGeneration.getMimetype(format);
-        const file:File =  new File([content], fname, { type: mimetype });
-        //alert(file.name);
-        console.log("File generated: ", file);
-        return file;
-    }
-
-
-    /*
-   const exportFile = () => {
-        if (dataCode === "undefined" || dataCode === null) {
-            alert("No code to export");
-            return;
-        }
-        const blob = new Blob([dataCode], { type: dataFormat });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = dataId + '.' + dataFormat;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }    
-    */
-       
-}//end class

@@ -13,7 +13,7 @@ import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
 import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
 import { PageHeader } from "@/app/gencode/pagecomp/gcheader";
 import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
-import { CodeGeneration } from "@/codegen/cgconfig";
+
 import { FsFunctions } from "@/filesystem/fsfunctions";
 import { FileCode } from "@/filesystem/fsmodels";
 import { CodeGenModules } from "@/codegen/cgoperations";
@@ -61,7 +61,7 @@ export default function PageGenCode() {
     
     const exportFileCode = () => {
         if(!fileCode){return;}
-        const file: File = CodeGeneration
+        const file: File = FsFunctions
             .generateFile(fileCode.id,fileCode.format,fileCode.code);
         FsFunctions.chargeDownloadFile(file);
     };
@@ -73,7 +73,7 @@ export default function PageGenCode() {
         setFileCode(null);
         const files: File[] = [];
         for(let idx=0;idx<filescode.length;idx++){
-            const file: File = CodeGeneration.generateFile
+            const file: File = FsFunctions.generateFile
                 (filescode[idx].id,filescode[idx].format,filescode[idx].code);
             files.push(file);    
         }
