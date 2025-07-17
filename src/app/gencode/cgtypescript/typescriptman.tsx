@@ -18,6 +18,7 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import { min } from "date-fns";
 import CardInputParam from '../cards/cardinputparam';
 import { XInputNumber } from '@/radix/input/inpnumber';
+import { TInputPattern } from '@/codegen/data/cgdatamodels';
 
 
 
@@ -35,9 +36,23 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
-    const countParamsRef = useRef<HTMLInputElement>(null);
 
     const [countParams, setCountParams] = useState<number>(1);
+    const [params, setParams] 
+        = useState<TInputPattern[]>(CgDataConstants.LIST_PARAMETERS.slice(0,1));
+    
+    const sliderParamsValueInit = CgDataConstants.COUNT_PARAMETERS_DEF * 
+                                  CgDataConstants.FACTOR_INC_PARAMETERS;
+
+    const [sliderParamsValue, setSliderParamsValue] = useState<number>(sliderParamsValueInit);
+
+    const onChangeCountParams = (value: number[]) => {
+        const count:number = Math.floor(value[0] / CgDataConstants.FACTOR_INC_PARAMETERS);
+        setCountParams(count);
+        setParams(CgDataConstants.LIST_PARAMETERS.slice(0,count+1));
+        setSliderParamsValue(count * CgDataConstants.FACTOR_INC_PARAMETERS);
+    };
+
     const [template, setTemplate] = useState<string>("");
     const [data, setData] = useState<string>("");
     const [code, setCode] = useState<string>("");
@@ -93,10 +108,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end
 
 
-    const onChangeCountParams = (value: number[]) => {
-        alert("onChangeCountParams: " + value[0]);
-        const count:number = Math.floor(value[0] / 12);
-    };
+
 
     const renderAdvancedContent = () => {
         return (
@@ -134,35 +146,30 @@ export function TypeScriptManager({ onresult }: CompProps) {
         
         return (
             <Box px="2" py="2">
+
                 <Flex  direction="row" justify="between" px="2" py="1" align="center" 
                         style={COMP_BORDER_STYLE} >
-                    <Box width={"50%"}>
-                        <Text  size="2">Cnt. Params</Text>                          
-                    </Box>        
-                    <Box width={"50%"}>
-                        <Slider defaultValue={[50]} step={12}
-                                onValueChange={onChangeCountParams}   />
-                        
-                    </Box>
 
+                    <Text  size="2">
+                        <Box width="40%">Cnt. Params:</Box> 
+                        <Box width="10%" >{countParams}</Box>
+                        <Box width="50%">
+                            <Slider defaultValue={[sliderParamsValue]} step={CgDataConstants.FACTOR_INC_PARAMETERS}
+                                    onValueChange={onChangeCountParams}   />                        
+                        </Box>                        
+                    </Text> 
                 </Flex>
+
                 <Flex width="100%" direction="column" mt="2" gapY="2"  >
-                    <CardInputParam pattindex={0}
-                                    patterns={CgDataConstants.LIST_PATTERNS} 
-                                    input={CgDataConstants.LIST_PARAMETERS[0]} />
-                    <CardInputParam pattindex={1}
-                                    patterns={CgDataConstants.LIST_PATTERNS} 
-                                    input={CgDataConstants.LIST_PARAMETERS[1]} />
-                    <CardInputParam pattindex={2}
-                                    patterns={CgDataConstants.LIST_PATTERNS} 
-                                    input={CgDataConstants.LIST_PARAMETERS[2]} />
-                    <CardInputParam pattindex={3}
-                                    patterns={CgDataConstants.LIST_PATTERNS} 
-                                    input={CgDataConstants.LIST_PARAMETERS[3]} />                                                                
-                            
+                    {params.map((param, index) => (
+                        <Box key={index.toString()}>
+                            <CardInputParam pattindex={index}
+                                            patterns={CgDataConstants.LIST_PATTERNS} 
+                                            input={CgDataConstants.LIST_PARAMETERS[index]} />                            
+                        </Box>                 
+                    ))}
                 </Flex>                               
             </Box>
-
         );
     };//end  
 

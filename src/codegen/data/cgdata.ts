@@ -10,11 +10,15 @@ import { Pattern, TInputPattern, TPattern } from "./cgdatamodels";
 //................................................................................
 
 /**
- * class CgDataConstants.LIST_PARAMETERS
+ * class CgDataConstants.COUNT_PARAMETERS_DEF
  */
 export class CgDataConstants {
 
     public static readonly MAX_LENGTH_DEF: number = 50;
+    public static readonly MAX_COUNT_PARAMETERS: number = 8;
+    public static readonly FACTOR_INC_PARAMETERS: number = 12; // 12, 24, 36, 48, 60, 72, 84, 96
+
+    public static readonly COUNT_PARAMETERS_DEF: number = 1;
 
     //public static PATTERN_VAR_A: string = "__^A^__";
 
@@ -26,7 +30,7 @@ export class CgDataConstants {
     public static readonly PATTERN_5: Pattern = new Pattern({start:"*^", end:"*^"}, null, null);
     public static readonly PATTERN_6: Pattern = new Pattern({start:"^-", end:"-^"}, null, null);
     public static readonly PATTERN_7: Pattern = new Pattern({start:"^:", end:":^"}, null, null);
-    public static readonly PATTERN_8: Pattern = new Pattern({start:"^/", end:"\^"}, null, null);
+
 
     public static readonly LIST_PATTERNS: Pattern[] = [
         CgDataConstants.PATTERN_0,  
