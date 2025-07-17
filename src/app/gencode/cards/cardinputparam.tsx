@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from 'next/image'
-import { Box,Text,Flex,IconButton,TextField, ScrollArea} from "@radix-ui/themes";
+import { Box,Text,Flex,IconButton,TextField,Link, ScrollArea} from "@radix-ui/themes";
 
 import { Pattern, TInputPattern } from "@/codegen/data/cgdatamodels";
 import { Label } from "@radix-ui/react-label";
@@ -19,52 +19,61 @@ const compStyle = {
     padding: "0px 0px 0px 0px",
  };//style={boxStyle}
 
+const iconStyle = {
+    cursor: 'pointer',
+};
+ 
+
 /**
  * CardCode Component
  */
 interface CompProps {
     patterns: Pattern[];
     input: TInputPattern;
-    pattindex: number;
+    pattindexInit: number;
     maxlength?: number;  
 }
-export default function CardInputParam({patterns, input,pattindex, maxlength }: CompProps) {
+export default function CardInputParam({patterns, input,pattindexInit, maxlength }: CompProps) {
 
-   const [collapse, setCollapse] = useState<boolean>(false);
+    const [collapse, setCollapse] = useState<boolean>(false);
+    const [pattindex, setPattindex] = useState<number>(pattindexInit);
 
     const onHandlerOnClick = (index:number) => {
+        setPattindex(index);
+        input.pattern.start = patterns[index].patt.start;
+        input.pattern.end = patterns[index].patt.end;
     };
 
     const renderPatterns = () => {
         return (
             <ScrollArea type="always" scrollbars="horizontal" style={{height:"auto"}}>
-            <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="center" >
+            <Flex width="100%" direction="row" py="2" gapX="2" align="center" justify="center" >
                 {patterns.map((pattern, index) => (
-                <Box key={index.toString()}>
+                <Box key={index.toString()}  >
                     {index===pattindex ? 
-                        <>
-                            {index===0 && <Image src="/icons/uno_red.png"    width={24} height={24} alt="icon-1" onClick={() => onHandlerOnClick(0)} />} 
-                            {index===1 && <Image src="/icons/dos_red.png"    width={24} height={24} alt="icon-2" onClick={() => onHandlerOnClick(1)} />}
-                            {index===2 && <Image src="/icons/tres_red.png"   width={24} height={24} alt="icon-3" onClick={() => onHandlerOnClick(2)} />} 
-                            {index===3 && <Image src="/icons/cuatro_red.png" width={24} height={24} alt="icon-4" onClick={() => onHandlerOnClick(3)} />}
-                            {index===4 && <Image src="/icons/cinco_red.png"  width={24} height={24} alt="icon-5" onClick={() => onHandlerOnClick(4)} />} 
-                            {index===5 && <Image src="/icons/seis_red.png"   width={24} height={24} alt="icon-6" onClick={() => onHandlerOnClick(5)} />}
-                            {index===6 && <Image src="/icons/siete_red.png"  width={24} height={24} alt="icon-7" onClick={() => onHandlerOnClick(6)} />} 
-                            {index===7 && <Image src="/icons/ocho_red.png"   width={24} height={24} alt="icon-8" onClick={() => onHandlerOnClick(7)} />}
-                            {index===8 && <Image src="/icons/nueve_red.png"  width={24} height={24} alt="icon-9" onClick={() => onHandlerOnClick(8)} />}                         
-                        </>                    
-                    : 
-                        <>
-                            {index===0 && <Image src="/icons/uno.png"    width={24} height={24} alt="icon-1" onClick={() => onHandlerOnClick(0)} />} 
-                            {index===1 && <Image src="/icons/dos.png"    width={24} height={24} alt="icon-2" onClick={() => onHandlerOnClick(1)} />}
-                            {index===2 && <Image src="/icons/tres.png"   width={24} height={24} alt="icon-3" onClick={() => onHandlerOnClick(2)} />} 
-                            {index===3 && <Image src="/icons/cuatro.png" width={24} height={24} alt="icon-4" onClick={() => onHandlerOnClick(3)} />}
-                            {index===4 && <Image src="/icons/cinco.png"  width={24} height={24} alt="icon-5" onClick={() => onHandlerOnClick(4)} />} 
-                            {index===5 && <Image src="/icons/seis.png"   width={24} height={24} alt="icon-6" onClick={() => onHandlerOnClick(5)} />}
-                            {index===6 && <Image src="/icons/siete.png"  width={24} height={24} alt="icon-7" onClick={() => onHandlerOnClick(6)} />} 
-                            {index===7 && <Image src="/icons/ocho.png"   width={24} height={24} alt="icon-8" onClick={() => onHandlerOnClick(7)} />}
-                            {index===8 && <Image src="/icons/nueve.png"  width={24} height={24} alt="icon-9" onClick={() => onHandlerOnClick(8)} />}                         
-                        </>                    
+    <>
+        {index===0 && <Link href="#"><Image src="/icons/uno_red.png"  width={24} height={24} alt="1" onClick={() => onHandlerOnClick(0)}/></Link>} 
+        {index===1 && <Link href="#"><Image src="/icons/dos_red.png"    width={24} height={24} alt="2" onClick={() => onHandlerOnClick(1)} /></Link>}
+        {index===2 && <Link href="#"><Image src="/icons/tres_red.png"   width={24} height={24} alt="3" onClick={() => onHandlerOnClick(2)} /></Link>} 
+        {index===3 && <Link href="#"><Image src="/icons/cuatro_red.png" width={24} height={24} alt="4" onClick={() => onHandlerOnClick(3)} /></Link>}
+        {index===4 && <Link href="#"><Image src="/icons/cinco_red.png"  width={24} height={24} alt="5" onClick={() => onHandlerOnClick(4)} /></Link>} 
+        {index===5 && <Link href="#"><Image src="/icons/seis_red.png"   width={24} height={24} alt="6" onClick={() => onHandlerOnClick(5)} /></Link>}
+        {index===6 && <Link href="#"><Image src="/icons/siete_red.png"  width={24} height={24} alt="7" onClick={() => onHandlerOnClick(6)} /></Link>} 
+        {index===7 && <Link href="#"><Image src="/icons/ocho_red.png"   width={24} height={24} alt="8" onClick={() => onHandlerOnClick(7)} /></Link>}
+        {index===8 && <Link href="#"><Image src="/icons/nueve_red.png"  width={24} height={24} alt="9" onClick={() => onHandlerOnClick(8)} /></Link>}
+    </>                    
+: 
+    <>
+        {index===0 && <Link href="#"><Image src="/icons/uno.png"    width={24} height={24} alt="1" onClick={() => onHandlerOnClick(0)} /></Link>} 
+        {index===1 && <Link href="#"><Image src="/icons/dos.png"    width={24} height={24} alt="2" onClick={() => onHandlerOnClick(1)} /></Link>}
+        {index===2 && <Link href="#"><Image src="/icons/tres.png"   width={24} height={24} alt="3" onClick={() => onHandlerOnClick(2)} /></Link>} 
+        {index===3 && <Link href="#"><Image src="/icons/cuatro.png" width={24} height={24} alt="4" onClick={() => onHandlerOnClick(3)} /></Link>}
+        {index===4 && <Link href="#"><Image src="/icons/cinco.png"  width={24} height={24} alt="5" onClick={() => onHandlerOnClick(4)} /></Link>} 
+        {index===5 && <Link href="#"><Image src="/icons/seis.png"   width={24} height={24} alt="6" onClick={() => onHandlerOnClick(5)} /></Link>}
+        {index===6 && <Link href="#"><Image src="/icons/siete.png"  width={24} height={24} alt="" onClick={() => onHandlerOnClick(6)} /></Link>} 
+        {index===7 && <Link href="#"><Image src="/icons/ocho.png"   width={24} height={24} alt="" onClick={() => onHandlerOnClick(7)} /></Link>}
+        {index===8 && <Link href="#"><Image src="/icons/nueve.png"  width={24} height={24} alt="" onClick={() => onHandlerOnClick(8)} /></Link>}                         
+    </>                    
                     }                           
                 </Box>                 
                 ))}
@@ -76,17 +85,18 @@ export default function CardInputParam({patterns, input,pattindex, maxlength }: 
     return (
         <Flex width="100%" direction="column" px="2" py="1"  style={COMP_BORDER_STYLE} >
             <Box>
-                <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="between" >
-                    <Box width="auto">
+                <Flex width="100%" direction="row" py="1" align="center" justify="start" >
+                    <Box >
                         <IconButton variant={RadixConf.VARIANTS.ghost} 
                             onClick={() => setCollapse(!collapse)} >
                             {!collapse ? <ChevronUpIcon /> : <ChevronDownIcon />}
                         </IconButton>
                     </Box>
-                    <Flex direction="row" justify="start" align="center" >
-                        <Label>{input.label}</Label>                        
-                    </Flex>
-                    <Flex direction="row" justify="end" align="center">
+                    <Flex width="100%"  direction="row" justify="between" align="center" pl="2" pr="2">
+                        <Text>
+                            {input.label}
+                        </Text>                    
+                    
                         <Text size="3" color={RADIX_COLORS.amber} >
                             {input.pattern.start + input.pattern.end}
                         </Text>                        

@@ -167,7 +167,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 <Flex width="100%" direction="column" mt="2" gapY="2"  >
                     {params.map((param, index) => (
                         <Box key={index.toString()}>
-                            <CardInputParam pattindex={index}
+                            <CardInputParam pattindexInit={index}
                                             patterns={CgDataConstants.LIST_PATTERNS} 
                                             input={CgDataConstants.LIST_PARAMETERS[index]} />                            
                         </Box>                 
