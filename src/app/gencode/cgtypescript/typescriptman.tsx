@@ -120,10 +120,21 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const renderParameters = () => {
         return (
-            <p>sdasd</p>
+            <Flex width="100%" direction="column" mt="2" gapY="2" pr="2" >
+                <Label>Parameter 0</Label>
+                <TextField.Root 
+                    name="parameter_0"
+                    placeholder="param 0"
+                    radius="medium" />
+                <Label>Parameter 1</Label>
+                <TextField.Root 
+                    name="parameter_1"
+                    placeholder="param 1"
+                    radius="medium" />                        
+            </Flex> 
         );
     };//end  
-              
+
     return (
 
         <Flex width="100%" direction="row" gridColumn="1" gridRow="1" >
@@ -184,18 +195,8 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 <Separator size="4"  />
 
                 {/* input parameters */}              
-                <Flex width="100%" direction="column" mt="2" gapY="2" pr="2" >
-                    <Label>Parameter 0</Label>
-                    <TextField.Root 
-                        name="parameter_0"
-                        placeholder="param 0"
-                        radius="medium" />
-                    <Label>Parameter 1</Label>
-                    <TextField.Root 
-                        name="parameter_1"
-                        placeholder="param 1"
-                        radius="medium" />                        
-                </Flex>   
+                {renderParameters()}
+  
 
             </Box>    
 

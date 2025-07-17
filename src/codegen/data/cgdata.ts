@@ -2,31 +2,8 @@
 
 import { Keyvalue } from "@/common/model/keyvalue";
 import { CgEntityOperations } from "../cgoperations";
+import { Pattern, TPattern } from "./cgdatamodels";
 
-//................................................................................
-// models
-//................................................................................
-export type TPattern = {
-    start: string;
-    end: string;
-};
-
-export class Pattern {
-
-    public id: number;
-    public patt: TPattern;
-    public varname?: string;
-    public value?: string;
-
-    constructor(id:number,patt:TPattern,varname?:string) {
-        this.id = id;
-        this.patt = patt;
-        if(varname) {
-            this.value = patt.start + varname + patt.end;
-        }
-    };//end
-
-};//end class
 
 //................................................................................
 // constants
@@ -39,7 +16,6 @@ export class CgDataConstants {
     public static readonly PATTERN_3: Pattern = new Pattern(3,{start:"^[", end:"]^"});
 
     public static STRPATTERN_A: string = "__^A^__";
-
 
 };//end class
 
