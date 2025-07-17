@@ -19,6 +19,7 @@ import { min } from "date-fns";
 import CardInputParam from '../cards/cardinputparam';
 import { XInputNumber } from '@/radix/input/inpnumber';
 import { TInputPattern } from '@/codegen/data/cgdatamodels';
+import { RADIX_COLORS } from '@/radix/radixconstants';
 
 
 
@@ -150,14 +151,17 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 <Flex  direction="row" justify="between" px="2" py="1" align="center" 
                         style={COMP_BORDER_STYLE} >
 
-                    <Text  size="2">
-                        <Box width="40%">Cnt. Params:</Box> 
-                        <Box width="10%" >{countParams}</Box>
-                        <Box width="50%">
-                            <Slider defaultValue={[sliderParamsValue]} step={CgDataConstants.FACTOR_INC_PARAMETERS}
-                                    onValueChange={onChangeCountParams}   />                        
-                        </Box>                        
-                    </Text> 
+                            
+                    <Box width="40%" >
+                        <Text  size="2">Count Params:</Text>                          
+                    </Box> 
+                    <Box width="10%" >
+                        <Text  size="3" color={RADIX_COLORS.orange}>{countParams}</Text>                          
+                    </Box>                           
+                    <Box width="50%">
+                        <Slider defaultValue={[sliderParamsValue]} step={CgDataConstants.FACTOR_INC_PARAMETERS}
+                                onValueChange={onChangeCountParams}   />                        
+                    </Box>
                 </Flex>
 
                 <Flex width="100%" direction="column" mt="2" gapY="2"  >

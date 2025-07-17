@@ -77,16 +77,15 @@ export default function CardInputParam({patterns, input,pattindex, maxlength }: 
         <Flex width="100%" direction="column" px="2" py="1"  style={COMP_BORDER_STYLE} >
             <Box>
                 <Flex width="100%" direction="row" py="2" gapX="1" align="center" justify="between" >
-                    <Box>
-                       <IconButton variant={RadixConf.VARIANTS.ghost} 
-                             onClick={() => setCollapse(!collapse)} >
-                             {!collapse ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                    <Box width="auto">
+                        <IconButton variant={RadixConf.VARIANTS.ghost} 
+                            onClick={() => setCollapse(!collapse)} >
+                            {!collapse ? <ChevronUpIcon /> : <ChevronDownIcon />}
                         </IconButton>
                     </Box>
-                    <Box>
+                    <Flex direction="row" justify="start" align="center" >
                         <Label>{input.label}</Label>                        
-                    </Box>                    
-
+                    </Flex>
                     <Flex direction="row" justify="end" align="center">
                         <Text size="3" color={RADIX_COLORS.amber} >
                             {input.pattern.start + input.pattern.end}
