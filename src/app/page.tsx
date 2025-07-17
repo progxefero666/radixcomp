@@ -20,6 +20,8 @@ import { CodeGenModules } from "@/codegen/cgoperations";
 import { ModelTable } from "@/codegen/kernel/cgmodel";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
+import { TypeScriptManager } from "./gencode/cgtypescript/typescriptman";
+import { TypeScriptViewer } from "./gencode/cgtypescript/typescriptviewer";
 
 
 //const router = useRouter();
@@ -99,21 +101,19 @@ export default function PageGenCode() {
         )
     };//end
 
+    const onTsCodeResult = () => {
+    
+    };//end
+
     const renderSectionTsCode = () => {
         return(
             <>
             <Box  width="41%" style={boxStyle}> 
-                {ready ? null:null}
+                <TypeScriptManager onresult={onTsCodeResult} />
             </Box>
             <Box width="41%" style={boxStyle}>
-                { (fileCode!==null ) ? 
-                <GenCodeViewer singlecode={fileCode} 
-                                exportsinglecode={exportFileCode} 
-                                exportmultiplecode={exportFileCode}/>:null}                                
-                { (listFileCode!==null ) ? 
-                <GenCodeViewer multiplecode={listFileCode} 
-                                exportsinglecode={exportFileCode} 
-                                exportmultiplecode={exportFileCode}/>:null}                                                   
+       
+            <TypeScriptViewer  code="" />                                       
             </Box>            
             </>
         )

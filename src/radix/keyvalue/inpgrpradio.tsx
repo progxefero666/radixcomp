@@ -13,20 +13,19 @@ import { ThemeTextStyle } from "@/radix/radixtheme";
 
 
 interface CompProps {
-    autocommit?: boolean;
+    
     name?: string;
     collection: Keyvalue[]; 
     label?: string;
-    direction?: any;
     value?: any;
     onselect: (index:number,name?:string) => void;
     autofocus?: boolean;
 }
-export function XRadioGroup({collection, name, label, value, direction, autofocus, onselect }:CompProps) {
+export function XRadioGroup({collection, name, label, value, autofocus, onselect }:CompProps) {
 
    
     const def_value:string = value || collection[0].key;
-    const compDirection: any = direction ?? "row";
+
 
     const compStyle: radixTypeComp = {
         color: RADIX_COLORS.gray,
@@ -52,12 +51,12 @@ export function XRadioGroup({collection, name, label, value, direction, autofocu
     };//end
 
     return (
-        <RadioGroup.Root 
+        <RadioGroup.Root autoFocus={true}
             color        = {compStyle.color}
             size         = {compStyle.size} 
             defaultValue = {def_value}  
             onValueChange= {onSelect}>            
-                <Flex direction = {compDirection} gap="2">
+                <Flex direction = "row" gap="2">
                     {collection.map((opt, index) => (
                         renderItem(index.toString(),opt.key, opt.value)         
                     ))}                    

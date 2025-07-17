@@ -22,6 +22,9 @@ import { XInputCheck } from "@/radix/input/inputcheck";
 import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
+import { Keyvalue } from "@/common/model/keyvalue";
+import { TsOperations } from "@/codegen/data/cgdata";
+import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
 
 
 
@@ -30,16 +33,18 @@ const LAYOUT_STYLE = {
 };
 
 interface CompProps {
-    section?: string | null;
-    onsingleresult: (filecode: FileCode) => void;
-    onmultipleresult: (filescode: FileCode[]) => void;
+    onresult: (code: String) => void;
 }
-export function TypeScriptManager({ section, onsingleresult, onmultipleresult }: CompProps) {
+export function TypeScriptManager({ onresult }: CompProps) {
 
+     //useEffect(() => {}, []);
+    const [code, setCode] = useState<string>("");
 
-    const onOpSelected = (operationId: string) => {
+    const listBasicOps: Keyvalue[] = TsOperations.BASIC;
+    
+    const onOpSelected = (index:number,name?:string) => {
     };//end 
-
+        
     const runOperation = async () => {
         alert("Run operation not implemented yet");
     };//end
@@ -62,8 +67,18 @@ export function TypeScriptManager({ section, onsingleresult, onmultipleresult }:
 
     const renderBasicContent = () => {
         return (
-            <Flex width="100%" direction="column" py="2" >
-                <Text size="2">Make changes to your account.</Text>
+            <Flex width="100%" direction="row"  py="2" >
+                <Box width="50%">
+                    <XRadioGroup collection={TsOperations.BASIC} 
+                                 label="Operations"
+                                 value={TsOperations.BASIC[0].key}
+                                 autofocus={true}
+                                 
+                                 onselect={onOpSelected} />
+                </Box>
+                <Box width="50%">
+                    Parameter List
+                </Box>                
             </Flex>
         );
     };//end
@@ -73,12 +88,10 @@ export function TypeScriptManager({ section, onsingleresult, onmultipleresult }:
             <Flex width="100%" direction="row" justify="between" mt="2" pb="2" align="center" >
                 <Flex width="100%" direction="row" gapX="3"  >
                     <Box>
-                        <XSelect label="Operations:"
-                            collection={CgEntityOperations.OPS_ENTITIES}
-                            onchange={onOpSelected} />
+                        "header 1"
                     </Box>
                     <Box>
-                        "2"
+                        "header 2"
                     </Box>
 
                 </Flex>

@@ -61,7 +61,7 @@ export class TsOperations {
     public static readonly OP_COMPONENT: string = "component";
     public static readonly OP_COMPONENT_REF: string = "component_ref";
 
-    public static OPERATIONS: Keyvalue[] = [
+    public static BASIC: Keyvalue[] = [
         new Keyvalue(TsOperations.OP_CLASS,         "class"),
         new Keyvalue(TsOperations.OP_FUNCT,         "const function"),
         new Keyvalue(TsOperations.OP_FUNCT_STATIC,  "static function"),

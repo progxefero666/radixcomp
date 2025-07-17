@@ -14,11 +14,11 @@ import { Link2Icon, Share2Icon } from "@radix-ui/react-icons";
  * Component TypeScript Viewer 
  */
 interface CompProps {
-    format?: string;
+
     code: string;
-    esport: () => void;
+    esport?: () => void;
 }
-export function TypeScriptViewer({code,format,esport}: CompProps) {
+export function TypeScriptViewer({code,esport}: CompProps) {
 
     const onClick = (opId?: string) => {
 
@@ -27,7 +27,7 @@ export function TypeScriptViewer({code,format,esport}: CompProps) {
             alert("Code copied to clipboard");         
         }
         else if (opId==OpConstants.OP_EXPORT) {
-             esport();
+            if(esport){esport();};
         }                   
     };//end
 
@@ -36,7 +36,7 @@ export function TypeScriptViewer({code,format,esport}: CompProps) {
 
 
             <Flex width={"100%"} justify="between" px="2" py="1" align="start" >
-                <Text size="3" align="left">{"Output Monitor"}</Text>
+                <Text size="3" align="left">{"Output Code"}</Text>
                 
 
                 <Flex direction="row" gapX="2" align="center" justify="center">
