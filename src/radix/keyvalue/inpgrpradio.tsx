@@ -56,7 +56,7 @@ export function XRadioGroup({collection, name, label, value, autofocus, onselect
             size         = {compStyle.size} 
             defaultValue = {def_value}  
             onValueChange= {onSelect}>            
-                <Flex direction = "row" gap="2">
+                <Flex direction = "column" gap="2">
                     {collection.map((opt, index) => (
                         renderItem(index.toString(),opt.key, opt.value)         
                     ))}                    

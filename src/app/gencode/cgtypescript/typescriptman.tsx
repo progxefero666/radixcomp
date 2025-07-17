@@ -67,13 +67,12 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const renderBasicContent = () => {
         return (
-            <Flex width="100%" direction="row"  py="2" >
-                <Box width="50%">
+            <Flex width="100%" direction="row" px="4" >
+                <Box width="50%" px="2">
                     <XRadioGroup collection={TsOperations.BASIC} 
                                  label="Operations"
                                  value={TsOperations.BASIC[0].key}
-                                 autofocus={true}
-                                 
+                                 autofocus={true}                                 
                                  onselect={onOpSelected} />
                 </Box>
                 <Box width="50%">
@@ -110,7 +109,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     return (
         <Box height="100vh" width="100%" pt="2" style={LAYOUT_STYLE} >
-            <Tabs.Root defaultValue="account">
+            <Tabs.Root defaultValue="basic">
                 <Tabs.List>
                     <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
                     <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>

@@ -108,12 +108,12 @@ export default function PageGenCode() {
     const renderSectionTsCode = () => {
         return(
             <>
-            <Box  width="41%" style={boxStyle}> 
+            <Box  width="30%" style={boxStyle}> 
                 <TypeScriptManager onresult={onTsCodeResult} />
             </Box>
-            <Box width="41%" style={boxStyle}>
+            <Box width="52%" style={boxStyle}>
        
-            <TypeScriptViewer  code="" />                                       
+                <TypeScriptViewer  code="" />                                       
             </Box>            
             </>
         )
