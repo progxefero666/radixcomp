@@ -8,14 +8,35 @@ import { Pattern, TPattern } from "./cgdatamodels";
 //................................................................................
 // constants
 //................................................................................
+
+/**
+ * class CgDataConstants.MAX_LENGTH_DEF
+ */
 export class CgDataConstants {
 
-    public static readonly PATTERN_0: Pattern = new Pattern(0,{start:"__^", end:"^__"});
-    public static readonly PATTERN_1: Pattern = new Pattern(1,{start:"^¡", end:"¡^"});
-    public static readonly PATTERN_2: Pattern = new Pattern(2,{start:"^<", end:">^"});
-    public static readonly PATTERN_3: Pattern = new Pattern(3,{start:"^[", end:"]^"});
+    public static readonly MAX_LENGTH_DEF: number = 50;
 
-    public static STRPATTERN_A: string = "__^A^__";
+    //public static PATTERN_VAR_A: string = "__^A^__";
+    //1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣✅
+    public static readonly PATTERN_0: Pattern = new Pattern({start:"__^", end:"^__"},null, null);
+    public static readonly PATTERN_1: Pattern = new Pattern({start:"^¡",  end:"¡^"}, null, null);
+    public static readonly PATTERN_2: Pattern = new Pattern({start:"^<",  end:">^"}, null, null);
+    public static readonly PATTERN_3: Pattern = new Pattern({start:"^[",  end:"]^"}, null, null);
+    public static readonly PATTERN_4: Pattern = new Pattern({start:"__^", end:"^__"},null, null);
+    public static readonly PATTERN_5: Pattern = new Pattern({start:"^¡",  end:"¡^"}, null, null);
+    public static readonly PATTERN_6: Pattern = new Pattern({start:"^<",  end:">^"}, null, null);
+    public static readonly PATTERN_7: Pattern = new Pattern({start:"^[",  end:"]^"}, null, null);
+    
+    public static readonly LIST_PATTERNS: Pattern[] = [
+        CgDataConstants.PATTERN_0,  
+        CgDataConstants.PATTERN_1,
+        CgDataConstants.PATTERN_2,
+        CgDataConstants.PATTERN_3,
+        CgDataConstants.PATTERN_4,
+        CgDataConstants.PATTERN_5,        
+        CgDataConstants.PATTERN_6,
+        CgDataConstants.PATTERN_7
+    ];
 
 };//end class
 
