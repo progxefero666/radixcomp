@@ -30,25 +30,9 @@ export class CodeGenConfig {
 
     public static readonly NOT_DEF:string = "undefined";
     
-    public static FORMAT_TYPESCRIPT:string = "typescript";
-    public static FORMAT_JSON:string = "json";
-    public static FORMAT_JSX:string = "jsx";
-    public static FORMAT_SQL:string = "sql";
-    public static FORMAT_JAVASCRIPT:string = "javascript";
-
-    public static readonly CODE_FORMATS: Keyvalue[] = [
-        new Keyvalue(CodeGenConfig.FORMAT_TYPESCRIPT, "TypeScript"),        
-        new Keyvalue(CodeGenConfig.FORMAT_JSON, "JSON"),
-        new Keyvalue(CodeGenConfig.FORMAT_JSX, "JSX"),  
-        new Keyvalue(CodeGenConfig.FORMAT_SQL, "SQL"),
-        new Keyvalue(CodeGenConfig.FORMAT_JAVASCRIPT, "JavaScript")
-    ]; 
-
-    
 
  
     public static readonly DEF_FILE_ID:string = "default";
-
     public static readonly DEF_CLASS_NAMEADD: string = "Def"
     public static readonly TAB_4:string = "    ";
     public static readonly RETURN:string = "\n";
@@ -73,18 +57,20 @@ export class CodeGenConfig {
         return imports;
     }
 
-    /*
-      public static readonly TYPESCRIPT_MIMETYPE: string = "text/typescript";
-    public static readonly JSON_MIMETYPE: string = "application/json";
-    public static readonly PYTHON_MIMETYPE: string = "application/pdf";
-    public static readonly MARKDOWN_MIMETYPE: string = "text/plain";
-    public static readonly JSX_MIMETYPE: string = "text/typescript";        
-    public static readonly SQL_MIMETYPE: string = "text/x-sql";
-    public static readonly JAVASCRIPT_MIMETYPE: string = "text/javascript";
-    public static readonly CSS_MIMETYPE: string = "text/css";
-    public static readonly HTML_MIMETYPE: string = "text/html";
-    public static readonly PDF_MIMETYPE: string = "application/pdf";
-    public static readonly TXT_MIMETYPE: string = "text/plain";
-    */
 };//end class
 
+/*
+    public static FORMAT_TYPESCRIPT:string = "typescript";
+    public static FORMAT_JSON:string = "json";
+    public static FORMAT_JSX:string = "jsx";
+    public static FORMAT_SQL:string = "sql";
+    public static FORMAT_JAVASCRIPT:string = "javascript";
+
+    public static readonly CODE_FORMATS: Keyvalue[] = [
+        new Keyvalue(CodeGenConfig.FORMAT_TYPESCRIPT, "TypeScript"),        
+        new Keyvalue(CodeGenConfig.FORMAT_JSON, "JSON"),
+        new Keyvalue(CodeGenConfig.FORMAT_JSX, "JSX"),  
+        new Keyvalue(CodeGenConfig.FORMAT_SQL, "SQL"),
+        new Keyvalue(CodeGenConfig.FORMAT_JAVASCRIPT, "JavaScript")
+    ]; 
+*/

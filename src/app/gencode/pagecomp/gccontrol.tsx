@@ -39,13 +39,13 @@ interface CompProps {
 export function GenCodeControl({ section, onsingleresult, onmultipleresult }: CompProps) {
 
     const [initialized, setInitialized] = useState<boolean>(false);
-    const [format, setFormat] = useState<string>(CodeGenConfig.CODE_FORMATS[0].key);
-    //const [multiple, setMultiple] = useState<boolean>(true);
+    const dbSquemaControl       = useRef<CodeGenSquema | null>(null);
+    const clientTScriptEntities = useRef<ServClientEntities>(null);
 
+    const [format, setFormat] = useState<string>(DocFormats.FORMAT_TYPESCRIPT.key);
     const [optMultDisabled, setOptMultDisabled] = useState<boolean>(true);
 
-    const dbSquemaControl = useRef<CodeGenSquema | null>(null);
-    const clientTScriptEntities = useRef<ServClientEntities>(null);
+
     const [operationId, setOperationId] = useState<string>("undefined");
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
@@ -191,7 +191,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                             onchange={onOpSelected} />
                     </Box>
                     <Box>
-                        <XSelect label="Format:" collection={CodeGenConfig.CODE_FORMATS}
+                        <XSelect label="Format:" collection={DocFormats.LIST_FORMATS}
                             onchange={onSelectCodeFormat} />
                     </Box>
                     <Box>

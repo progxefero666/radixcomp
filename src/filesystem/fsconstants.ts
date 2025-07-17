@@ -1,5 +1,6 @@
 //src\codegen\filesystem\fsconstants.ts
 
+import { Keyvalue } from "@/common/model/keyvalue";
 import { TKeyvalue } from "@/common/types";
 
 export class DocFormats{
@@ -50,4 +51,11 @@ export class DocFormats{
         return mimetype;
     };    
 
+    public static readonly LIST_FORMATS: Keyvalue[] = [
+        new Keyvalue(DocFormats.FORMAT_TYPESCRIPT.key, "TypeScript"),        
+        new Keyvalue(DocFormats.FORMAT_JSON.key, "JSON"),
+        new Keyvalue(DocFormats.FORMAT_JSX.key, "JSX"),  
+        new Keyvalue(DocFormats.FORMAT_SQL.key, "SQL"),
+        new Keyvalue(DocFormats.FORMAT_JAVASCRIPT.key, "JavaScript")
+    ]; 
 };//end class
