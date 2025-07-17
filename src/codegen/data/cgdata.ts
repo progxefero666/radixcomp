@@ -1,5 +1,8 @@
 //src\codegen\data\cgdata.ts
 
+import { Keyvalue } from "@/common/model/keyvalue";
+import { CgEntityOperations } from "../cgoperations";
+
 //................................................................................
 // models
 //................................................................................
@@ -42,15 +45,33 @@ export class CgDataConstants {
 
 };//end class
 
-export class TypeScriptModule {
+
+export class TsOperations {
+
     public static readonly OP_CLASS: string = "class";
-    public static readonly OP_FUNC: string = "func_def";
-    public static readonly OP_FUNC_STATIC: string = "func_static";
-    public static readonly OP_FUNC_PROMISE: string = "func_promise";
+    public static readonly OP_FUNCT: string = "function";
+    public static readonly OP_FUNCT_STATIC: string = "function_static";
+    public static readonly OP_FUNCT_PROMISE: string = "function_promise";
+    public static readonly OP_FUNCT_ASYNC: string = "function_promise";
     public static readonly OP_INTERFACE: string = "interface";
     public static readonly OP_TYPE: string = "type";
-    public static readonly OP_STATES: string = "func_def";
-    public static readonly OP_USE_EFFECT: string = "func_def";
+    public static readonly OP_USE_STATE: string = "use_state";
+    public static readonly OP_USE_EFFECT: string = "use_effect";
+    public static readonly OP_FUNC_JSX: string = "func_jsx";
+    public static readonly OP_COMPONENT: string = "component";
+    public static readonly OP_COMPONENT_REF: string = "component_ref";
+
+    public static OPERATIONS: Keyvalue[] = [
+        new Keyvalue(TsOperations.OP_CLASS,         "class"),
+        new Keyvalue(TsOperations.OP_FUNCT,         "const function"),
+        new Keyvalue(TsOperations.OP_FUNCT_STATIC,  "static function"),
+        new Keyvalue(TsOperations.OP_FUNCT_ASYNC,   "async function"),
+        new Keyvalue(TsOperations.OP_FUNCT_PROMISE, "Promise function"),
+        new Keyvalue(TsOperations.OP_INTERFACE,     "Interface"),
+        new Keyvalue(TsOperations.OP_TYPE,          "Type"),
+        new Keyvalue(TsOperations.OP_USE_STATE,     "Use State"),
+        new Keyvalue(TsOperations.OP_USE_EFFECT,    "Use Effect"),
+    ];
 
 };//end class
 export class TypeScriptJsxModule {

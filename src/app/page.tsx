@@ -6,8 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
 import { AppIndex } from "@/app/index/kernel/appindex";
 import { AppMemmory } from "@/front/appmemory";
-import { GenCodeControl } from "@/app/gencode/pagecomp/gccontrol";
-import { GenCodeViewer } from "@/app/gencode/pagecomp/gcviewer";
+import { GenCodeControl } from "@/app/gencode/pagecomp/entityfilesmanager";
+import { GenCodeViewer } from "@/app/gencode/cgentityfiles/entityfilesviewer";
 
 
 import { PrimaryBar } from "@/app/gencode/pagecomp/gcprimarybar";
@@ -38,7 +38,7 @@ export default function PageGenCode() {
 
 
     const [ready, setReady] = useState<boolean>(false);
-    const [section, setSection] = useState<string>(CodeGenModules.MODULES[0].id);
+    const [section, setSection] = useState<string>(CodeGenModules.MODULES[1].id);
     const [fileCode,setFileCode]   = useState<FileCode|null>(null);
     const [listFileCode,setListFileCode] = useState<FileCode[]|null>(null);
     
@@ -101,7 +101,21 @@ export default function PageGenCode() {
 
     const renderSectionTsCode = () => {
         return(
-            null
+            <>
+            <Box  width="41%" style={boxStyle}> 
+                {ready ? null:null}
+            </Box>
+            <Box width="41%" style={boxStyle}>
+                { (fileCode!==null ) ? 
+                <GenCodeViewer singlecode={fileCode} 
+                                exportsinglecode={exportFileCode} 
+                                exportmultiplecode={exportFileCode}/>:null}                                
+                { (listFileCode!==null ) ? 
+                <GenCodeViewer multiplecode={listFileCode} 
+                                exportsinglecode={exportFileCode} 
+                                exportmultiplecode={exportFileCode}/>:null}                                                   
+            </Box>            
+            </>
         )
     };//end
 
