@@ -110,6 +110,8 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     const runTypeScriptOperation = async () => {
 
+        // for single entity file
+        //...............................................................................
         if (operationId ===CgEntityOperations.OP_DEF_CLASS || 
             operationId === CgEntityOperations.OP_ENTITY_CLASS) {
             let codecont: string | null = null;
@@ -119,6 +121,8 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
             if (codecont !== null) { onsingleresult(filecode); }
         }
         else {
+            // for multiple entities files
+            //...............................................................................
             if (!optMultDisabled) {
                 let listCode: string[] | null = null;
                 let filescode: FileCode[] = [];
@@ -134,22 +138,19 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                 else if(operationId === CgEntityOperations.OP_ALL_DEF_CLASS ||
                         operationId === CgEntityOperations.OP_ALL_ENTITY_CLASS){   
                     if (listCode != null) {
-                        filescode= dbSquemaControl.current!.getSelectedFilesCode(listCode);
+                        filescode= dbSquemaControl.current!.getAllFilesCode(listCode);
                     }                                         
                 }
-                if (listCode != null) {
-                     onmultipleresult(filescode);
-                }
+                if (listCode != null) {onmultipleresult(filescode);}
             }
+            // for multiple single file
+            //...............................................................................            
             else {
-                let codecont = await clientTScriptEntities.current!
-                    .execArrayTsOperation(operationId, dbSquemaControl.current!.toptions);
-                const filecode: FileCode = new FileCode(
-                    "list_tables",
-                    DocFormats.FORMAT_TYPESCRIPT.value,
-                    DocFormats.FORMAT_TYPESCRIPT.key,
-                    codecont!);
-                if (codecont !== null) { onsingleresult(filecode); }
+                let codecont = await clientTScriptEntities
+                    .current!.execAllListTsOperation(operationId);
+                if (codecont !== null) { 
+                    onsingleresult(dbSquemaControl.current!.getFileCode("list_tables",codecont!)); 
+                }
             }
         }
 

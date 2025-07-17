@@ -7,7 +7,7 @@ import { TOption } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/server/xeferodb/tsclasses";
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
-
+import {Keyvalue} from "@/common/model/keyvalue";
 
 export class GenCodeModuleControl {
 
@@ -43,18 +43,16 @@ export class ServClientEntities extends GenCodeModuleControl {
         return code;
     };//end
 
-    public async execArrayTsOperation(operationId:string,tables:TOption[]): Promise<string | null> {                                                 
-        let code: string | null = null;
-        if ((operationId == "get_all_def_class") ||
-            (operationId == "get_all_entity_class")) {
-            code = await getTypeScriptArrayTableContent(this.sqlsquema, operationId);
-        }
-        else if ((operationId == "get_list_def_class") ||
-            (operationId == "get_list_entity_class")) {
-            const selectTables: string[] = CollectionHelper.getListFromTOptions(tables!);
-            const namesjoined: string = CodeGenHelper.getStringsJoined(selectTables!);
-            code = await getTypeScriptArrayTableContent(this.sqlsquema, operationId, namesjoined);
-        }
+    
+
+    public async execAllListTsOperation(operationId:string): Promise<string | null> {                                                 
+        return await getTypeScriptArrayTableContent(this.sqlsquema, operationId);
+    };//end
+
+    public async execListSelectionTsOperation(operationId:string,tables:TOption[]): Promise<string | null> {       
+        const selectTables: string[] = CollectionHelper.getListFromTOptions(tables!);
+        const namesjoined: string = CodeGenHelper.getStringsJoined(selectTables!);
+        let code: string | null = await getTypeScriptArrayTableContent(this.sqlsquema, operationId, namesjoined);
         return code;
     };//end
 
