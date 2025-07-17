@@ -17,6 +17,9 @@ import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 import { FsFunctions } from "@/filesystem/fsfunctions";
 import { FileCode } from "@/filesystem/fsmodels";
 import { CodeGenModules } from "@/codegen/cgoperations";
+import { ModelTable } from "@/codegen/kernel/cgmodel";
+import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
+import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 
 
 //const router = useRouter();
@@ -43,8 +46,10 @@ export default function PageGenCode() {
         if(ready) {return;} 
         const init = async () => {            
             const dbSquema = await readDbSqlScriptFile("dbsquema");
+            const jsontables: string[] =CodeGenJson.getAllJsonTables(dbSquema!);
+
             if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                              
-            setReady(true);
+            //setReady(true);
         };
         init();
     }, []);

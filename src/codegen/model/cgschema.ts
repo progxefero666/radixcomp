@@ -21,24 +21,24 @@ export class CodeGenSquema{
     public tcollection: Keyvalue[] = [];
     public toptions:    TOption[] = [];
 
-    public activeTableIndex: number = -1;
+    public activeTableIndex: number = 0;
     public activeTableName: string = "";
 
+    //can be charged previously
     public jsontables: string[] = [];
 
-    //CodeGenJson
-
-    constructor(squema: string) {
+    constructor(squema: string,jsontables?:string[]) {
         this.squema = squema;
-        this.tables = CodeGenSql.getEsquemaTables(this.squema);        
-        this.tcollection = SchemaService.getCollectionTables(this.tables);
-        this.toptions = SchemaService.getListTablesAsTOptions(this.tables);
-        this.activeTableIndex = 0;
-        this.activeTableName = this.tables[this.activeTableIndex].name;
-        this.postConstructor();
+        this.tables           = CodeGenSql.getEsquemaTables(this.squema);        
+        this.tcollection      = SchemaService.getCollectionTables(this.tables);
+        this.toptions         = SchemaService.getListTablesAsTOptions(this.tables);
+        this.activeTableName  = this.tables[this.activeTableIndex].name;
+
+        if(jsontables){this.jsontables=jsontables;}  
+        else          {this.loadJsonTables();}      
     };//end
 
-    private postConstructor() {
+    private loadJsonTables() {
         this.tables.forEach((table) => {
             this.jsontables.push(CodeGenJson.getJsonEntDef(table));
         });

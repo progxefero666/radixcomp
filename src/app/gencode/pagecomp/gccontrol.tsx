@@ -44,6 +44,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     
     const dbSquemaControl       = useRef<CodeGenSquema | null>(null);
     const clientTScriptEntities = useRef<ServClientEntities>(null);
+    const [jsonTables, setJsonTables] = useState<string[]>([]);
 
     const [format, setFormat] = useState<string>(DocFormats.FORMAT_TYPESCRIPT.key);
     const [optMultDisabled, setOptMultDisabled] = useState<boolean>(false);
@@ -53,10 +54,12 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
 
     useEffect(() => {
-
-        if (section == null) { return; }
         if (initialized) { return; }
-        dbSquemaControl.current = new CodeGenSquema(AppMemmory.readDbSquema());
+        
+        const dbSquema = AppMemmory.readDbSquema();
+        setJsonTables(CodeGenJson.getAllJsonTables(dbSquema));
+
+        dbSquemaControl.current = new CodeGenSquema(dbSquema);
         clientTScriptEntities.current = new ServClientEntities(dbSquemaControl.current.squema);
         onOpSelected("get_def_class");
         setInitialized(true);
@@ -69,7 +72,6 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     const onSelectTable = (tableName: string, compName?: string) => {
         dbSquemaControl.current?.setActiveTable(tableName);
     };//end
-
 
     const onOptMultipleChange = (value: boolean, compName?: string) => {
         setOptMultDisabled(value);
@@ -209,7 +211,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                         <XSelect label="Format:" collection={DocFormats.LIST_FORMATS}
                             onchange={onSelectCodeFormat} />
                     </Box>
-                    <Box>
+                    <Box pt="1">
                         <XInputCheck label="Multiple files"
                                     inline={true}
                                         value={false}

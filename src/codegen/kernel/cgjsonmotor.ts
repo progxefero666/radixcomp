@@ -5,9 +5,10 @@ import types from "@/codegen/kernel/sqltypesnumber.json";
 import { CgConfig } from "../cgconfig";
 import { CodeGenTsMotor } from "./cgtsmotor";
 import { CodeGenHelper } from "./cghelper";
+import { CodeGenSql } from "./cgsqlmotor";
 
 /**
- * Class CodeGenJson.getJsonEntDef
+ * Class CodeGenJson.getAllJsonTables
  */
 export class CodeGenJson {
 
@@ -82,6 +83,17 @@ export class CodeGenJson {
         }
         code += CgConfig.RET + "]" + CgConfig.RET;
         return code;
-    }
+    };//
+
+
+    public static getAllJsonTables(dbSquema:string):string[]{
+        const tables: ModelTable[]  = CodeGenSql.getEsquemaTables(dbSquema!);
+        const jsontables: string[] = [];
+        tables.forEach((table) => {
+            jsontables.push(CodeGenJson.getJsonEntDef(table));
+        });
+        return jsontables;
+    };//end
+
 
 } //end class
