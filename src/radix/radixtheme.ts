@@ -51,6 +51,7 @@ export class TextStyle {
     
     public static readonly DIALOG_TITLE_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly DEFAULT_SIZE: any = RadixConf.SIZES.size_2;
+    public static readonly MEDIUM_SIZE: any = RadixConf.SIZES.size_3;
     public static readonly DEF_COLOR: any = "#EEEEEE";
 
     public static readonly COLOR_SPECIAL: any = "#d9ff00ff";
