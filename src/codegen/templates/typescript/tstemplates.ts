@@ -8,7 +8,7 @@
 export class TsTemplates {
 public static t_class: string = 
    `/**
- * class ^%classname"%^
+ * class ^%classname%^
  */
 export class ^%Template"%^ {
     

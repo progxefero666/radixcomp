@@ -12,7 +12,7 @@ import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
 import CardInputParam from '../cards/cardinputparam';
 import { InputPattern } from '@/codegen/data/model/inputpattern';
 import { RADIX_COLORS } from '@/radix/radixconstants';
-import { PlayIcon } from '@radix-ui/react-icons';
+import { PlayIcon, ReloadIcon, TextAlignTopIcon, TrashIcon } from '@radix-ui/react-icons';
 import { OpConstants } from '@/common/constants';
 import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';
 import { RadixConf } from '@/radix/radixconf';
@@ -28,8 +28,8 @@ const LAYOUT_STYLE = {
     background: 'rgba(33, 33, 33, 1)',
 };
 
-const buttonRunStyle = {
-    minWidth: '160px',
+const buttonBarStyle = {
+    minWidth: '100px',
 };
 
 
@@ -150,26 +150,29 @@ export function TypeScriptManager({ onresult }: CompProps) {
         );
     };//end
 
+    const renderJsxContent = () => {
+        return (
+            <Flex width="100%" direction="row" px="4" >
+                <XRadioGroup
+                    name={JsxOps.MOD_ID}
+                    collection={JsxOps.BASIC}
+                    label="Jsx Operations"
+                    value={JsxOps.BASIC[0].key}
+                    onselect={onJsxOpSelected} />
+            </Flex>
+        );
+    };//end
+
     const renderBasicContent = () => {
         return (
             <Flex width="100%" direction="row" px="4" >
-                <Box width="50%" px="2">
-                    <XRadioGroup
-                        name={TsOps.MOD_ID}
-                        collection={TsOps.BASIC}
-                        label="Operations"
-                        value={TsOps.BASIC[0].key}
-                        autofocus={true}
-                        onselect={onTsOpSelected} />
-                </Box>
-                <Box width="50%">
-                    <XRadioGroup
-                        name={JsxOps.MOD_ID}
-                        collection={JsxOps.BASIC}
-                        label="Jsx Operations"
-                        value={JsxOps.BASIC[0].key}
-                        onselect={onJsxOpSelected} />
-                </Box>
+                <XRadioGroup
+                    name={TsOps.MOD_ID}
+                    collection={TsOps.BASIC}
+                    label="Operations"
+                    value={TsOps.BASIC[0].key}
+                    autofocus={true}
+                    onselect={onTsOpSelected} />
             </Flex>
         );
     };//end
@@ -226,36 +229,58 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
         <Flex height="auto" width="100%" direction="row" gridColumn="1" gridRow="1" >
 
-            <Box width="27%" >
+            <Box width="20%" >
                 <Tabs.Root defaultValue="basic">
                     <Tabs.List>
                         <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
+                        <Tabs.Trigger value="jsx">Jsx</Tabs.Trigger>
                         <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
-                        <Tabs.Trigger value="test">Test</Tabs.Trigger>
                     </Tabs.List>
                     <Box pt="3">
                         <Tabs.Content value="basic">
                             {renderBasicContent()}
                         </Tabs.Content>
+                        <Tabs.Content value="jsx">
+                            {renderJsxContent()}
+                            
+                        </Tabs.Content>
                         <Tabs.Content value="advanced">
                             {renderAdvancedContent()}
-                        </Tabs.Content>
-                        <Tabs.Content value="test">
-                            test
                         </Tabs.Content>
                     </Box>
                 </Tabs.Root>
             </Box>
 
-            <Box width="32%" pr="3" >
-                <Flex width="100%" direction="row" py="1" justify="center" >
-                    <Button color={RADIX_COLORS.green} style={buttonRunStyle}
+            <Box width="36%" pr="3" >
+                <Flex width="100%" direction="row" py="1" justify="center" gapX="2" >
+                    <Button color={RADIX_COLORS.green} 
                         size={ButtonsStyle.BTN_DEF_SIZE}
                         radius={ButtonsStyle.BTN_DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <PlayIcon />
                         <Text size="3">execute</Text>
                     </Button>
+                    <Button color={RADIX_COLORS.yellow} 
+                        size={ButtonsStyle.BTN_DEF_SIZE}
+                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => runOperation()}>
+                        <TrashIcon />
+                        <Text size="3">clear</Text>
+                    </Button>                
+                    <Button color={RADIX_COLORS.indigo} 
+                        size={ButtonsStyle.BTN_DEF_SIZE}
+                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => runOperation()}>
+                        <TextAlignTopIcon />
+                        <Text size="3">close all</Text>
+                    </Button>   
+                    <Button color={RADIX_COLORS.tomato} 
+                        size={ButtonsStyle.BTN_DEF_SIZE}
+                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => runOperation()}>
+                        <ReloadIcon />
+                        <Text size="3">init</Text>
+                    </Button>                                           
                 </Flex>
                 <Separator size="4" />
 
@@ -283,7 +308,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 </Flex>
             </Box>
 
-            <Box width="41%" >
+            <Box width="44%" >
                 <TypeScriptViewer key={template}
                     template={template}
                     code={code} />

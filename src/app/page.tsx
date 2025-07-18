@@ -37,8 +37,8 @@ export default function PageGenCode() {
 
 
     const [ready, setReady] = useState<boolean>(false);
-    const [layoutColsWidth, setlayoutColsWidth] = useState<string[]>(["4%","92%","4%"]); 
-    const [collapsePrimaryBar, setCollapsePrimaryBar] = useState<boolean>(true);
+    const [layoutColsWidth, setlayoutColsWidth] = useState<string[]>(["14%","82%","4%"]); 
+    const [collapsePrimaryBar, setCollapsePrimaryBar] = useState<boolean>(false);
 
     const [section, setSection] = useState<string>(CodeGenModules.MODULES[1].id);
     const [fileCode,setFileCode]   = useState<FileCode|null>(null);

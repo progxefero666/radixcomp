@@ -33,7 +33,7 @@ export function TypeScriptViewer({template,code}: CompProps) {
 
     const renderBarButtons = () => {
         return (
-            <Flex width="auto" direction="row" gapX="2" align="center" justify="end">
+            <Flex width="100%" direction="row" gapX="2" align="center" justify="end" pr="4" >
                 <Button color={ButtonsStyle.COLOR_COPY} 
                         size={ButtonsStyle.BTN_DEF_SIZE}
                         radius={ButtonsStyle.BTN_DEF_RADIUS}
@@ -58,25 +58,24 @@ export function TypeScriptViewer({template,code}: CompProps) {
 
     return (
         <Flex className="h-full" direction="column" >
-          
-            <Separator orientation="horizontal" size="4" mb="2" />
-                  
-                <Tabs.Root defaultValue={CgDataConst.WTEMPLATE}>
-                    <Tabs.List>
-                        <Tabs.Trigger value={CgDataConst.WTEMPLATE}>Template</Tabs.Trigger>
-                        <Tabs.Trigger value={CgDataConst.WCODE}>Code</Tabs.Trigger>
-                        {renderBarButtons()}
-                    </Tabs.List>
-                    <Box pt="3">
-                        <Tabs.Content value={CgDataConst.WTEMPLATE}>                           
-                           <CardCode code={template} />  
-                        </Tabs.Content>
 
-                        <Tabs.Content value={CgDataConst.WCODE}>
-                            <CardCode code={code} /> 
-                        </Tabs.Content>
-                    </Box>
-                </Tabs.Root>            
+                  
+            <Tabs.Root defaultValue={CgDataConst.WTEMPLATE}>
+                <Tabs.List>
+                    <Tabs.Trigger value={CgDataConst.WTEMPLATE}>Template</Tabs.Trigger>
+                    <Tabs.Trigger value={CgDataConst.WCODE}>Code</Tabs.Trigger>
+                    {renderBarButtons()}
+                </Tabs.List>
+                <Box pt="3">
+                    <Tabs.Content value={CgDataConst.WTEMPLATE}>                           
+                        <CardCode code={template} />  
+                    </Tabs.Content>
+
+                    <Tabs.Content value={CgDataConst.WCODE}>
+                        <CardCode code={code} /> 
+                    </Tabs.Content>
+                </Box>
+            </Tabs.Root>            
         </Flex>
     );
 

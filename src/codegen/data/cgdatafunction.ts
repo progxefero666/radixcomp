@@ -9,11 +9,26 @@ import { TsOps } from "./cgdataoperations";
  */
 export class CgDataTsFunctions {
     
+    public static replaceAll(content: string, searchValue: string, replaceValue: string): string {
+        let found: boolean = true;
+        while (found) {
+            const position: number = content.indexOf(searchValue);
+            if(position>= 0) {
+                content = content.replace(searchValue, replaceValue);
+            }
+            else{found = false;}
+        }
+        return content;
+    };//end
+
+
     public static executeOperation(template:string,params:Keyvalue[]): string {
+        console.log(params);
         let code: string = template;
         params.forEach((item) => {
             code = code.replace(item.key,item.value);
         });
+        console.log(code);
         return code;
     }//end 
 
