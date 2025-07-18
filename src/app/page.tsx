@@ -158,13 +158,13 @@ export default function PageGenCode() {
     // jsx
     //...............................................................................    
     return (
-        <Flex direction="column" height="100vh">
+        <Flex direction="column" height="auto">
 
             <PageHeader />
             
             <Flex height="100%">
 
-                <Box width={layoutColsWidth[0]} style={boxStyle}>
+                <Box height="100vh" width={layoutColsWidth[0]} style={boxStyle}>
                     <PrimaryBar actsection={section}
                                 collapse={collapsePrimaryBar}
                                 onselection={loadSection}
@@ -175,7 +175,7 @@ export default function PageGenCode() {
                 {section === CodeGenModules.MODULES[1].id?renderSectionTsCode():null}
                 {section === CodeGenModules.MODULES[2].id?renderSectionDatabase():null}
 
-                <Box width={layoutColsWidth[2]} style={boxStyle}>
+                <Box height="100vh" width={layoutColsWidth[2]} style={boxStyle}>
                     <SecondBar actsection={section} />
                 </Box>
             </Flex>

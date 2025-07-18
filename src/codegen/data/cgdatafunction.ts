@@ -19,7 +19,18 @@ export class CgDataTsFunctions {
 
 }//end class
 
-/*  //content = content.replace(/_Table_/g, className);
+/*  
+
+        for (let idx = 0; idx < params.length; idx++) {
+            console.log(idx.toString + ":" +
+                paramsValues[idx].key + ":" +
+                paramsValues[idx].value);
+        }
+
+        if (operation === TsOps.OP_CLASS) {
+
+        }
+//content = content.replace(/_Table_/g, className);
     //CodeGenHelper.uncapitalize
     //CodeGenHelper.capitalize
     public static executeOperation(opId:string,template:string,params:Keyvalue[]): string {

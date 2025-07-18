@@ -31,46 +31,41 @@ export function TypeScriptViewer({template,code}: CompProps) {
         }                   
     };//end
 
-    const renderHeader = () => {
+    const renderBarButtons = () => {
         return (
-            <Flex width={"100%"} justify="between" pl="4" pr="2" py="1" align="start" >
-                
-                <Text size="3" align="left">{"Output Code"}</Text>
-                <Flex direction="row" gapX="2" align="center" justify="center">
-                    <Button color={ButtonsStyle.COLOR_COPY} 
-                            size={ButtonsStyle.BTN_DEF_SIZE}
-                            radius={ButtonsStyle.BTN_DEF_RADIUS}
-                            onClick={() => onClick(OpConstants.OP_COPY)}>
-                        <Link2Icon  />
-                        <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
-                            {OpConstants.OP_TEXT_COPY}
-                        </Text>
-                    </Button>      
-                    <Button color={ButtonsStyle.COLOR_EXPORT} 
-                            size={ButtonsStyle.BTN_DEF_SIZE}
-                            radius={ButtonsStyle.BTN_DEF_RADIUS}
-                            onClick={() => onClick(OpConstants.OP_EXPORT)}>
-                        <Share2Icon  />
-                        <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
-                            {OpConstants.OP_TEXT_EXPORT}
-                        </Text>
-                    </Button>                                   
-                </Flex>    
-            </Flex>
+            <Flex width="auto" direction="row" gapX="2" align="center" justify="end">
+                <Button color={ButtonsStyle.COLOR_COPY} 
+                        size={ButtonsStyle.BTN_DEF_SIZE}
+                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => onClick(OpConstants.OP_COPY)}>
+                    <Link2Icon  />
+                    <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
+                        {OpConstants.OP_TEXT_COPY}
+                    </Text>
+                </Button>      
+                <Button color={ButtonsStyle.COLOR_EXPORT} 
+                        size={ButtonsStyle.BTN_DEF_SIZE}
+                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => onClick(OpConstants.OP_EXPORT)}>
+                    <Share2Icon  />
+                    <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
+                        {OpConstants.OP_TEXT_EXPORT}
+                    </Text>
+                </Button>                                   
+            </Flex>    
         );
     };//end
 
     return (
         <Flex className="h-full" direction="column" >
-            {renderHeader()}
+          
             <Separator orientation="horizontal" size="4" mb="2" />
                   
-
                 <Tabs.Root defaultValue={CgDataConst.WTEMPLATE}>
                     <Tabs.List>
                         <Tabs.Trigger value={CgDataConst.WTEMPLATE}>Template</Tabs.Trigger>
                         <Tabs.Trigger value={CgDataConst.WCODE}>Code</Tabs.Trigger>
-
+                        {renderBarButtons()}
                     </Tabs.List>
                     <Box pt="3">
                         <Tabs.Content value={CgDataConst.WTEMPLATE}>                           
