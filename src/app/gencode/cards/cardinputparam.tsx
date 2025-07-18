@@ -59,10 +59,10 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
         setUseVariable(useOstias);
     };
 
-    const onchangeVarValue = (value:string) => {
-        const result:string = input.pattern.start + value + input.pattern.end;
+    const onchangeVarValue = (value:string) => {        
         if(onchange){
-            onchange(input.id, result);
+            const result:string = input.pattern.start + value + input.pattern.end;
+            onchange(input.id,result);
         }
         setVariable(value);
     };//end
@@ -111,7 +111,9 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
                     <Table.Body >
 
                         <Table.Row >
-                            <Table.Cell>var:</Table.Cell>
+                            <Table.Cell p="0" maxWidth="20%">
+                                var:
+                            </Table.Cell>
                             <Table.Cell>
                                 <XInputText key={variableInit}
                                             autofocus={true}
@@ -133,7 +135,9 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
                         </Table.Row> 
 
                         <Table.Row>
-                            <Table.Cell>value:</Table.Cell>
+                            <Table.Cell p="0" maxWidth="20%">
+                                value:
+                            </Table.Cell>
                             <Table.Cell>
                                 <TextField.Root 
                                     maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}

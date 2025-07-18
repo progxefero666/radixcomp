@@ -181,58 +181,43 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
         <Flex width="100%" direction="row" gridColumn="1" gridRow="1" >
 
-            <Box width="33%" >
-
+            <Box width="27%" >
                 <Tabs.Root defaultValue="basic">
-
                     <Tabs.List>
                         <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
                         <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
                         <Tabs.Trigger value="test">Test</Tabs.Trigger>
                     </Tabs.List>
-
                     <Box pt="3">
-
                         <Tabs.Content value="basic">
                             {renderBasicContent()}
                         </Tabs.Content>
-
                         <Tabs.Content value="advanced">
                             {renderAdvancedContent()}
                         </Tabs.Content>
-
                         <Tabs.Content value="test">
                             test
                         </Tabs.Content>
                     </Box>
-
                 </Tabs.Root>
-
             </Box>
-            <Box  width="23%" >
 
-                <Flex width="100%" direction="row" px="2" gapX="2" py="1" justify="center" >
+            <Box  width="32%" >
+                <Flex width="100%" direction="row" py="1" justify="center" >
                     <Button color={ThemeButtonsStyle.COLOR_SAVE} style={buttonRunStyle}
                             size={ThemeButtonsStyle.BTN_DEF_SIZE}
                             radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
                             onClick={() => runOperation()}>
                             <PlayIcon />
-                            <Text size="3">
-                                execute
-                            </Text>
+                            <Text size="3">execute</Text>
                     </Button>
-
-                   
                 </Flex>
-                <Separator size="4"  />
-
+                <Separator size="4"/>
                 {/* input parameters */}              
                 {renderParameters()}
-  
-
             </Box>    
 
-            <Box  width="44%" >
+            <Box  width="41%" >
                 <TypeScriptViewer key={code}  code={code}  />           
             </Box>              
 

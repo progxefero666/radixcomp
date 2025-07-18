@@ -46,17 +46,13 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
-    //useEffect(() => { }, []);
-
-
-
-    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         
         setValue(event.target.value);
         if (autocommit) {
             if (onchange) {
-                //if (name !== null) {onChange(event.target.value, name);}
-                //else {onChange(event.target.value);}
+                if (name !== null) {onchange(event.target.value, name);}
+                else {onchange(event.target.value);}
             }
         }
     };//end
