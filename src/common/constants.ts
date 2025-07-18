@@ -14,7 +14,7 @@ export class HttpConst {
 };//end class
 
 /**
- * class DbConstants.EMPTY_VALUE
+ * class DataConstants
  */
 export class DataConstants{
     
@@ -25,10 +25,11 @@ export class DataConstants{
 
 
 /**
- * class OpConstants.OP_TEXT_RUN
+ * class OpConstants.OP_TEXT_DELETE
  */
 export class OpConstants{
     
+    public static readonly OP_ADD: string ="add";
     public static readonly OP_OPEN: string ="open";
     public static readonly OP_CLOSE: string ="close";
     public static readonly OP_SAVE: string ="save";
@@ -50,6 +51,7 @@ export class OpConstants{
     public static readonly OP_RUN: string ="run";
 
 
+    public static readonly OP_TEXT_ADD: string ="Add";
     public static readonly OP_TEXT_OPEN: string ="Open";
     public static readonly OP_TEXT_CLOSE: string ="Close";
     public static readonly OP_TEXT_SAVE: string ="Save";

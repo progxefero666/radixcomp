@@ -8,7 +8,7 @@ import { OpConstants } from "@/common/constants";
 import { FileCode } from "@/filesystem/fsmodels";
 import { ButtonsStyle } from "@/radix/radixtheme";
 import { Link2Icon, PlayIcon, Share2Icon } from "@radix-ui/react-icons";
-import { CgDataConst } from "@/codegen/data/cgdata";
+import { CgDataConst } from "@/codegen/data/cgdataconfig";
 
 
 /**

@@ -6,13 +6,17 @@ import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
 import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, } from "@radix-ui/themes";
 import { COMP_BORDER_STYLE, ButtonsStyle } from "@/radix/radixtheme";
-import { CgDataConst, JsxOps, TsOps } from "@/codegen/data/cgdata";
+import { JsxOps, TsOps } from "@/codegen/data/cgdataoperations";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
 import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
 import CardInputParam from '../cards/cardinputparam';
 import { InputPattern } from '@/codegen/data/model/inputpattern';
 import { RADIX_COLORS } from '@/radix/radixconstants';
 import { PlayIcon } from '@radix-ui/react-icons';
+import { OpConstants } from '@/common/constants';
+import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';
+import { RadixConf } from '@/radix/radixconf';
+import { CgDataConst } from '@/codegen/data/cgdataconfig';
 
 
 const LAYOUT_STYLE = {
@@ -41,12 +45,16 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const [sliderParamsValue, setSliderParamsValue] = useState<number>(sliderParamsValueInit);
 
+    const execListParamsCommand = (id: string) => {
+
+    };//end
+    
     const onChangeCountParams = (value: number[]) => {
         const count:number = Math.floor(value[0] / CgDataConst.FACTOR_INC_PARAMETERS);
         setCountParams(count);
         setParams(CgDataConst.LIST_PARAMS.slice(0,count+1));
         setSliderParamsValue(count * CgDataConst.FACTOR_INC_PARAMETERS);
-    };
+    };//end
 
     //................................................................................
     // viewer content
@@ -83,8 +91,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     
     const onchange = (id:string,value:string) => {
         console.log(id.concat(":").concat(value));
-    }
-
+    };//end
 
     const runOperation = () => {
         if(opGroup==TsOps.MOD_ID) {
@@ -107,7 +114,6 @@ export function TypeScriptManager({ onresult }: CompProps) {
         }       
     };//end 
     
-
     const renderAdvancedContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
@@ -143,7 +149,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const renderParameters = () => {
         
         return (
-            <Box px="2" py="2">
+            <Box  py="2">
 
                 <Flex  direction="row" justify="between" px="2" py="1" align="center" 
                         style={COMP_BORDER_STYLE} >                            
@@ -152,9 +158,11 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         <Text size="3" color={RADIX_COLORS.orange}>{countParams}</Text>                          
                     </Box>                           
                     <Box width="50%">
+                        {/*
                         <Slider defaultValue={[sliderParamsValue]} 
                                 step={CgDataConst.FACTOR_INC_PARAMETERS}
-                                onValueChange={onChangeCountParams}   />                        
+                                onValueChange={onChangeCountParams}   />                         
+                        */}                       
                     </Box>
                 </Flex>
 
@@ -197,7 +205,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 </Tabs.Root>
             </Box>
 
-            <Box  width="32%" >
+            <Box  width="32%" pr="3" >
                 <Flex width="100%" direction="row" py="1" justify="center" >
                     <Button color={RADIX_COLORS.green} style={buttonRunStyle}
                             size={ButtonsStyle.BTN_DEF_SIZE}
@@ -208,8 +216,26 @@ export function TypeScriptManager({ onresult }: CompProps) {
                     </Button>
                 </Flex>
                 <Separator size="4"/>
+                
                 {/* input parameters */}              
                 {renderParameters()}
+
+                {/* bar add and delete buttons */}
+                <Flex direction="row" justify="center" align="center"
+                      px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
+                    <Button variant="solid" 
+                            color={RADIX_COLORS.green}
+                            size="2" 
+                            onClick={() => execListParamsCommand(OpConstants.OP_ADD)} >
+                        {OpConstants.OP_TEXT_ADD}
+                    </Button>
+
+                    <DlgBtnDeleteConfirm buttonicon={RadixConf.ICON_DELETE}
+                                        buttontext={OpConstants.OP_TEXT_DELETE}
+                                        message="confirm delete?"
+                                        title="delete parameter" 
+                                        onconfirm={() => execListParamsCommand(OpConstants.OP_DELETE)}  /> 
+                </Flex>                
             </Box>    
 
             <Box  width="41%" >
@@ -223,14 +249,3 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
 }//end comp
 
-/*
-<Button color={ThemeButtonsStyle.COLOR_SAVE} 
-        size={ThemeButtonsStyle.BTN_DEF_SIZE}
-        radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
-        onClick={() => applyParameters()}>
-        <ReloadIcon />
-        <Text size={ThemeButtonsStyle.BTN_TEXT_SIZE}>
-            "Update"
-        </Text>
-</Button>                     
-*/

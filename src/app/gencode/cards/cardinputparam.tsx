@@ -5,8 +5,6 @@ import Image from 'next/image'
 import { Box, Text, Flex, IconButton, TextField, Link, ScrollArea, Table, Checkbox } from "@radix-ui/themes";
 
 import { InputPattern } from "@/codegen/data/model/inputpattern";
-import { Label } from "@radix-ui/react-label";
-import { CgDataConst } from "@/codegen/data/cgdata";
 import { COMP_BORDER_STYLE, TextStyle } from "@/radix/radixtheme";
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { RadixConf } from "@/radix/radixconf";
@@ -14,6 +12,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { XInputCheck } from "@/radix/input/inputcheck";
 import { XInputText } from "@/radix/input/inptext";
 import { Pattern } from "@/codegen/data/model/pattern";
+import { CgDataConst } from "@/codegen/data/cgdataconfig";
 
 const compStyle = {
     background: 'rgb(35, 35, 39)',
