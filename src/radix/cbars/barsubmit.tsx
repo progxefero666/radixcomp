@@ -4,7 +4,7 @@ import { Button, Box, Flex, IconButton, Text, Dialog, TextField } from "@radix-u
 
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 
-import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
+import { ThemeButtonsStyle, ThemeIconsStyle, TextStyle } from '@/radix/radixtheme';
 import { OpConstants } from "@/common/constants";
 
 export const BarSubmit = () => {

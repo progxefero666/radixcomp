@@ -7,7 +7,7 @@ import { Box,Text,Flex,IconButton,TextField,Link, ScrollArea, Table, Checkbox} f
 import { InputPattern } from "@/codegen/data/model/inputpattern";
 import { Label } from "@radix-ui/react-label";
 import { CgDataConst } from "@/codegen/data/cgdata";
-import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { COMP_BORDER_STYLE, TextStyle } from "@/radix/radixtheme";
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { RadixConf } from "@/radix/radixconf";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
@@ -111,8 +111,11 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
                     <Table.Body >
 
                         <Table.Row >
-                            <Table.Cell p="0" maxWidth="20%">
-                                var:
+                            <Table.Cell px="0" maxWidth="20%">
+                                <Text size={TextStyle.DEFAULT_SIZE} 
+                                      color={TextStyle.DEF_COLOR} >
+                                    var:
+                                </Text>
                             </Table.Cell>
                             <Table.Cell>
                                 <XInputText key={variableInit}
@@ -135,7 +138,7 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
                         </Table.Row> 
 
                         <Table.Row>
-                            <Table.Cell p="0" maxWidth="20%">
+                            <Table.Cell px="0" maxWidth="20%">
                                 value:
                             </Table.Cell>
                             <Table.Cell>

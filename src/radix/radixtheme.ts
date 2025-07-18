@@ -47,11 +47,11 @@ export class ThemePagesStyles {
 /**
  * class ThemeTextStyle.DEFAULT_SIZE
  */
-export class ThemeTextStyle {
+export class TextStyle {
     
     public static readonly DIALOG_TITLE_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly DEFAULT_SIZE: any = RadixConf.SIZES.size_2;
-
+    public static readonly DEF_COLOR: any = "#EEEEEE";
 }
 
 /**

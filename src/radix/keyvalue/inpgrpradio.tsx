@@ -8,7 +8,7 @@ import { radixTypeComp } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
 import { Keyvalue } from "@/common/model/keyvalue";
-import { ThemeTextStyle } from "@/radix/radixtheme";
+import { TextStyle } from "@/radix/radixtheme";
 
 
 
@@ -43,7 +43,7 @@ export function XRadioGroup({collection, name, label, value, autofocus, onselect
     const renderItem = (key:string,value:string,text:string) => {
         return (
             <RadioGroup.Item key={key} value={value}  >
-                <Text size={ThemeTextStyle.DEFAULT_SIZE} >  
+                <Text size={TextStyle.DEFAULT_SIZE} >  
                     {text}  
                 </Text>                
             </RadioGroup.Item>

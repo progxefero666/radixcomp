@@ -4,7 +4,7 @@ import React from "react";
 import { Label } from "radix-ui";
 import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
 
-import { ThemeButtonsStyle, ThemeIconsStyle, ThemeTextStyle } from '@/radix/radixtheme';
+import { ThemeButtonsStyle, ThemeIconsStyle, TextStyle } from '@/radix/radixtheme';
 
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 import { InputField } from "@/common/model/inputfield";
@@ -46,7 +46,7 @@ export const DialogFieldText = ({ buttontext, title, item, onsave }: CompProps) 
             <Dialog.Content>
 
                 <Dialog.Title>
-                    <Text size={ThemeTextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
+                    <Text size={TextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
                 </Dialog.Title>
 
                 <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { event.preventDefault(); onSubmit(event); }}>
