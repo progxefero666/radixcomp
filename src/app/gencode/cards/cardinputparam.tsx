@@ -34,12 +34,14 @@ interface CompProps {
     patterns: Pattern[];
     input: InputPattern;
     pattindexInit: number;
+    onchange?: (id:string,value:string) => void;
     maxlength?: number;  
 }
-export default function CardInputParam({patterns, input,pattindexInit, maxlength }: CompProps) {
+export default function CardInputParam({patterns,input,pattindexInit,onchange,maxlength}: CompProps) {
 
     const [collapse, setCollapse] = useState<boolean>(false);
     const [useVariable, setUseVariable] = useState<boolean>(true);
+    const [variableInit, setVariableInit] = useState<string>("");
     const [variable, setVariable] = useState<string>("");
     const [pattindex, setPattindex] = useState<number>(pattindexInit);
 
@@ -51,12 +53,19 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
 
     const onChangeUseVariable = () => {  
         const useOstias:boolean = !useVariable;
-        if(useOstias== false) {    
-                
-            setVariable(" ");
+        if(!useOstias) {                    
+            setVariableInit(" ");
         }        
         setUseVariable(useOstias);
     };
+
+    const onchangeVarValue = (value:string) => {
+        const result:string = input.pattern.start + value + input.pattern.end;
+        if(onchange){
+
+        }
+        setVariable(value);
+    };//end
 
     const renderPatterns = () => {
         return (
@@ -89,10 +98,7 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                         </IconButton>
                     </Box>
                     <Flex width="100%"  direction="row" justify="between" align="center" pl="2" pr="2">
-                        <Text>
-                            {input.label}
-                        </Text>                    
-                    
+                        <Text>{input.label}</Text>                                        
                         <Text size="3" color={RADIX_COLORS.amber} >
                             {input.pattern.start + input.pattern.end}
                         </Text>                        
@@ -104,25 +110,12 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                 <Table.Root >    
                     <Table.Body >
 
-                        <Table.Row>
-                            <Table.Cell>value:</Table.Cell>
-                            <Table.Cell>
-                                <TextField.Root 
-                                    maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
-                                    name = {input.id}
-                                    placeholder = {input.id}
-                                    radius = "medium" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                cl
-                            </Table.Cell>
-                        </Table.Row>
-
                         <Table.Row >
                             <Table.Cell>var:</Table.Cell>
                             <Table.Cell>
-                                <XInputText key={variable}
-                                            defaul={variable}
+                                <XInputText key={variableInit}
+                                            autofocus={true}
+                                            defaul={variableInit}
                                             inline={true}
                                             autocommit={true}
                                             disabled={!useVariable} />
@@ -137,6 +130,20 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                                 </Box>                                
                             </Table.Cell>                            
                         </Table.Row> 
+
+                        <Table.Row>
+                            <Table.Cell>value:</Table.Cell>
+                            <Table.Cell>
+                                <TextField.Root 
+                                    maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
+                                    name = {input.id}
+                                    placeholder = {input.id}
+                                    radius = "medium" />
+                            </Table.Cell>
+                            <Table.Cell>
+                                cl
+                            </Table.Cell>
+                        </Table.Row>
 
                     </Table.Body>  
 
