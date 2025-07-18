@@ -11,6 +11,8 @@ import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { RadixConf } from "@/radix/radixconf";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
+import { XInputCheck } from "@/radix/input/inputcheck";
+import { XInputText } from "@/radix/input/inptext";
 
 const compStyle = {
     background: 'rgb(35, 35, 39)',
@@ -36,12 +38,23 @@ interface CompProps {
 export default function CardInputParam({patterns, input,pattindexInit, maxlength }: CompProps) {
 
     const [collapse, setCollapse] = useState<boolean>(false);
+    const [useVariable, setUseVariable] = useState<boolean>(true);
+    const [variable, setVariable] = useState<string>("");
     const [pattindex, setPattindex] = useState<number>(pattindexInit);
 
     const onHandlerOnClick = (index:number) => {
         setPattindex(index);
         input.pattern.start = patterns[index].patt.start;
         input.pattern.end = patterns[index].patt.end;
+    };
+
+    const onChangeUseVariable = () => {  
+        const useOstias:boolean = !useVariable;
+        if(useOstias== false) {    
+                
+            setVariable(" ");
+        }        
+        setUseVariable(useOstias);
     };
 
     const renderPatterns = () => {
@@ -125,14 +138,19 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                         <Table.Row >
                             <Table.Cell>var:</Table.Cell>
                             <Table.Cell>
-                                <TextField.Root 
-                                    maxLength={maxlength ?? CgDataConstants.MAX_LENGTH_DEF}
-                                    name = {input.id}
-                                    placeholder = {input.variable ?? ""}
-                                    radius = "medium" />
+                                <XInputText defaul={variable}  key={variable}
+                                            inline={true}
+                                            autocommit={true}
+                                             />
                             </Table.Cell>
                             <Table.Cell>
-                                <Box pt="2"><Checkbox defaultChecked /></Box>                                
+                                <Box pt="2">
+                                    <XInputCheck name="useVariable"
+                                                 autocommit={true} 
+                                                 inline={true} 
+                                                 value={useVariable}
+                                                 onchange={() => onChangeUseVariable()} />
+                                </Box>                                
                             </Table.Cell>                            
                         </Table.Row> 
 

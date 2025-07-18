@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
 import { forwardRef } from "react";
 import { Box, Flex, TextField } from "@radix-ui/themes";
@@ -31,8 +33,9 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     name, defaul, maxlen,autocommit,autofocus,type, inline, 
     label, placeholder, onchange: onChange,onsubmit, icon, readonly, disabled }, ref) => {
 
-    const [value, setValue] = useState<string|null>(defaul ?? null);
-  
+    if(disabled) {defaul=" ";}
+
+    const [value, setValue] = useState<string|null>(defaul ?? "");
     const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
     const radius  = ThemeCompStyle.CONT_RADIUS;
@@ -43,16 +46,15 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const input_readonly = readonly ?? false;
     const input_disabled = disabled ?? false;
 
-    useEffect(() => {
-        if( defaul && defaul == ""){setValue(null);}
-    }, []);
+    //useEffect(() => { }, []);
 
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        
         setValue(event.target.value);
         if (autocommit) {
             if (onChange) {
-                if (name !== null) {onChange(event.target.value, name);}
-                else {onChange(event.target.value);}
+                //if (name !== null) {onChange(event.target.value, name);}
+                //else {onChange(event.target.value);}
             }
         }
     };//end
@@ -82,7 +84,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     };//end
 
     const renderEditComp = () => {
-
+        
         // apply placeholder
         if(value === null){
             return (
@@ -119,6 +121,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     };//end
 
     const renderRowSimpleContent = () => {
+
         return (
             <Box className={ThemeCompStyleOld.C_CELL_STYLE}>
                 {input_readonly ? renderReadComp() :
@@ -137,6 +140,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     };//end
 
     const renderRowLabelContent = () => {
+   
         return (
             <Flex gapX="2">
                 <Label.Root>{label}</Label.Root>
