@@ -68,33 +68,37 @@ export class IconsStyle {
 }//end class
 
 /**
- * class ThemeButtonsStyle.COLOR_ADD
+ * class ButtonsStyle.COLOR_CLEAR
  */
 export class ButtonsStyle {
 
-    public static readonly  BTN_DEF_SIZE: any = RadixConf.SIZES.size_2;
-    public static readonly  BTN_DEF_VAR: any = RadixConf.VARIANTS.soft;
-    public static readonly  BTN_DEF_RADIUS: any = RADIX_RADIUS.medium;
-    public static readonly  BTN_DEF_COLOR: any = "gray";
+    public static readonly BTN_DEF_SIZE: any = RadixConf.SIZES.size_2;
+    public static readonly BTN_DEF_VAR: any = RadixConf.VARIANTS.soft;
+    public static readonly BTN_DEF_RADIUS: any = RADIX_RADIUS.medium;
+    public static readonly BTN_DEF_COLOR: any = "gray";
 
-    public static readonly  BTN_TEXT_SIZE: any = RadixConf.SIZES.size_2;
+    public static readonly BTN_TEXT_SIZE: any = RadixConf.SIZES.size_2;
 
-    public static readonly  BTN_HOME_COLOR: any = "gray";
-    public static readonly  BTN_HOME_STYLE: any = "w-full justify-start";
+    public static readonly BTN_HOME_COLOR: any = "gray";
+    public static readonly BTN_HOME_STYLE: any = "w-full justify-start";
 
-    public static readonly  BTN_DEF_STYLE = {borderRadius: "var(--blue-9)"    };
+    public static readonly BTN_DEF_STYLE = {borderRadius: "var(--blue-9)"    };
 
+    
     public static readonly COLOR_ADD        = RADIX_COLORS.crimson;
-    public static readonly  COLOR_OPEN       = RADIX_COLORS.blue;
-    public static readonly  COLOR_DELETE     = RADIX_COLORS.yellow;
-    public static readonly  COLOR_SAVE       = RADIX_COLORS.green;
-    public static readonly  COLOR_IMPORT     = RADIX_COLORS.ruby;
-    public static readonly  COLOR_EXPORT     = RADIX_COLORS.iris;
-    public static readonly  COLOR_RUN        = RADIX_COLORS.red;
-    public static readonly  COLOR_COPY       = RADIX_COLORS.jade;
-    public static readonly  COLOR_CLOSE      = RADIX_COLORS.jade;
-    public static readonly  COLOR_MOVEUP     = RADIX_COLORS.mauve;
-    public static readonly  COLOR_MOVEDOWN   = RADIX_COLORS.indigo;
+    public static readonly COLOR_OPEN       = RADIX_COLORS.blue;
+    
+    public static readonly COLOR_DELETE     = RADIX_COLORS.yellow;
+    public static readonly COLOR_CLEAR      = RADIX_COLORS.yellow;
+    public static readonly COLOR_SAVE       = RADIX_COLORS.green;
+    public static readonly COLOR_IMPORT     = RADIX_COLORS.ruby;
+    public static readonly COLOR_EXPORT     = RADIX_COLORS.iris;
+    public static readonly COLOR_RUN        = RADIX_COLORS.green;
+    public static readonly COLOR_COPY       = RADIX_COLORS.jade;
+    public static readonly COLOR_CLOSE      = RADIX_COLORS.jade;
+    public static readonly COLOR_MOVEUP     = RADIX_COLORS.mauve;
+    public static readonly COLOR_MOVEDOWN   = RADIX_COLORS.indigo;
+    public static readonly COLOR_RESET   = RADIX_COLORS.plum;
 }
 
 /**

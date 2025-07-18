@@ -10,7 +10,7 @@ public static t_class: string =
    `/**
  * class ^%classname%^
  */
-export class ^%Template"%^ {
+export class ^%classname%^ {
     
     public static readonly DEF: string = "n";
 

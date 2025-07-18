@@ -253,28 +253,28 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
             <Box width="36%" pr="3" >
                 <Flex width="100%" direction="row" py="1" justify="center" gapX="2" >
-                    <Button color={RADIX_COLORS.green} 
+                    <Button color={ButtonsStyle.COLOR_RUN} 
                         size={ButtonsStyle.BTN_DEF_SIZE}
                         radius={ButtonsStyle.BTN_DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <PlayIcon />
                         <Text size="3">execute</Text>
                     </Button>
-                    <Button color={RADIX_COLORS.yellow} 
+                    <Button color={ButtonsStyle.COLOR_CLEAR} 
                         size={ButtonsStyle.BTN_DEF_SIZE}
                         radius={ButtonsStyle.BTN_DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <TrashIcon />
                         <Text size="3">clear</Text>
                     </Button>                
-                    <Button color={RADIX_COLORS.indigo} 
+                    <Button color={ButtonsStyle.COLOR_CLOSE} 
                         size={ButtonsStyle.BTN_DEF_SIZE}
                         radius={ButtonsStyle.BTN_DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <TextAlignTopIcon />
                         <Text size="3">close all</Text>
                     </Button>   
-                    <Button color={RADIX_COLORS.tomato} 
+                    <Button color={ButtonsStyle.COLOR_RESET} 
                         size={ButtonsStyle.BTN_DEF_SIZE}
                         radius={ButtonsStyle.BTN_DEF_RADIUS}
                         onClick={() => runOperation()}>

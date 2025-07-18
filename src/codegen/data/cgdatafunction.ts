@@ -5,7 +5,7 @@ import { TsOps } from "./cgdataoperations";
 
 
 /**
- * class CgDataTsFunctions
+ * class CgDataTsFunctions.replaceAll
  */
 export class CgDataTsFunctions {
     
@@ -26,7 +26,7 @@ export class CgDataTsFunctions {
         console.log(params);
         let code: string = template;
         params.forEach((item) => {
-            code = code.replace(item.key,item.value);
+            code =CgDataTsFunctions.replaceAll(code, item.key, item.value);
         });
         console.log(code);
         return code;
