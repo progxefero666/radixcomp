@@ -17,6 +17,7 @@ import { OpConstants } from '@/common/constants';
 import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';
 import { RadixConf } from '@/radix/radixconf';
 import { CgDataConst } from '@/codegen/data/cgdataconfig';
+import { Keyvalue } from '@/common/model/keyvalue';
 
 
 const LAYOUT_STYLE = {
@@ -33,87 +34,123 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
+    const [paramIndexSel, setParamIndexSel] = useState<number>(0);
+    const [paramsValues, setParamsValues] = useState<Keyvalue[]>([]);
+
     //................................................................................
     // array parameters
     //................................................................................  
-    const [countParams, setCountParams] = useState<number>(1);
-    const [params, setParams] 
-        = useState<InputPattern[]>(CgDataConst.LIST_PARAMS.slice(0,1));
-    
-    const sliderParamsValueInit = CgDataConst.COUNT_PARAMETERS_DEF * 
-                                  CgDataConst.FACTOR_INC_PARAMETERS;
+    const [countParams, setCountParams] = useState<number>(4);
+    const [params, setParams]
+        = useState<InputPattern[]>(CgDataConst.LIST_PARAMS.slice(0, 4));
+
+    const sliderParamsValueInit = CgDataConst.COUNT_PARAMETERS_DEF *
+        CgDataConst.FACTOR_INC_PARAMETERS;
 
     const [sliderParamsValue, setSliderParamsValue] = useState<number>(sliderParamsValueInit);
 
     const execListParamsCommand = (id: string) => {
 
     };//end
-    
+
     const onChangeCountParams = (value: number[]) => {
-        const count:number = Math.floor(value[0] / CgDataConst.FACTOR_INC_PARAMETERS);
+        const count: number = Math.floor(value[0] / CgDataConst.FACTOR_INC_PARAMETERS);
         setCountParams(count);
-        setParams(CgDataConst.LIST_PARAMS.slice(0,count+1));
+        setParams(CgDataConst.LIST_PARAMS.slice(0, count + 1));
         setSliderParamsValue(count * CgDataConst.FACTOR_INC_PARAMETERS);
+        updateListParams(count);
     };//end
 
+    const updateListParams = (newCount: number) => {
+        if (newCount == countParams) { return; }
+
+        const params_values: Keyvalue[] = [];
+        if (newCount > countParams) {
+        }
+        else {
+        }
+        setParamsValues(params_values);
+    };//end
     //................................................................................
     // viewer content
     //................................................................................     
-    const [template, setTemplate] = useState<string>("");    
+    const [template, setTemplate] = useState<string>("");
     const [code, setCode] = useState<string>("");
 
     useEffect(() => {
-        onTsOpSelected(0,TsOps.MOD_ID);
+        onTsOpSelected(0, TsOps.MOD_ID);
+        const params_values: Keyvalue[] = [];
+        for (let idx = 0; idx < params.length; idx++) {
+            params_values.push(new Keyvalue
+                (params[idx].getValue(), params[idx].getValue()));
+        }
+        setParamsValues(params_values);
     }, []);
-    
+
+    const onCardInpSelected = (index: number) => {
+        setParamIndexSel(index);
+    };//end
+
+
+    const onchange = (index: number, pattern: string, value: string) => {
+        console.log(index.toString() + ":" + pattern + ":" + value);
+        const params_values: Keyvalue[] = paramsValues;
+        params_values[index] = new Keyvalue(pattern, value);
+        setParamsValues(params_values);
+    };//end
+
     //................................................................................
     // operation selected 
     //................................................................................    
     const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
     const [operation, setOperation] = useState<string>(TsOps.BASIC[0].key);
-    const onTsOpSelected = (index: number, name?: string) => {    
-        setOpGroup(name!);     
-        setOperation(TsOps.BASIC[index].key); 
-        if(TsOps.BASIC[index].key===TsOps.OP_CLASS){
-            setTemplate(TsTemplates.t_class);                   
-        }     
+    const onTsOpSelected = (index: number, name?: string) => {
+        setOpGroup(name!);
+        setOperation(TsOps.BASIC[index].key);
+        if (TsOps.BASIC[index].key === TsOps.OP_CLASS) {
+            setTemplate(TsTemplates.t_class);
+        }
     };//end 
 
-    const onJsxOpSelected = (index: number, name?: string) => {    
-        setOpGroup(name!);     
-        setOperation(JsxOps.BASIC[index].key);    
+    const onJsxOpSelected = (index: number, name?: string) => {
+        setOpGroup(name!);
+        setOperation(JsxOps.BASIC[index].key);
     };//end 
 
 
     //................................................................................
     // run operation 
     //................................................................................
-    
-    const onchange = (id:number,value:string) => {
-        console.log(id.toString().concat(":").concat(value));
-    };//end
 
     const runOperation = () => {
-        if(opGroup==TsOps.MOD_ID) {
-            execTsOperation(0,TsOps.BASIC[0].key);
+        if (opGroup == TsOps.MOD_ID) {
+            execTsOperation(0, TsOps.BASIC[0].key);
         }
-        else if(opGroup==JsxOps.MOD_ID) {
-            execJsxOperation(0,JsxOps.BASIC[0].key);
+        else if (opGroup == JsxOps.MOD_ID) {
+            execJsxOperation(0, JsxOps.BASIC[0].key);
         }
     };//end
 
-    const execTsOperation = (index: number, name?: string) => {             
-        if(TsOps.BASIC[index].key===TsOps.OP_CLASS){
-            alert("run class operation");
-        }      
+    const execTsOperation = (index: number, name?: string) => {
+        alert("run TsOperation");
+
+        for (let idx = 0; idx < params.length; idx++) {
+            console.log(idx.toString + ":" +
+                paramsValues[idx].key + ":" +
+                paramsValues[idx].value);
+        }
+
+        if (TsOps.BASIC[index].key === TsOps.OP_CLASS) {
+
+        }
     };//end 
 
-    const execJsxOperation = (index: number, name?: string) => {  
-        if(JsxOps.BASIC[index].key===JsxOps.OP_BUTTONS){
+    const execJsxOperation = (index: number, name?: string) => {
+        if (JsxOps.BASIC[index].key === JsxOps.OP_BUTTONS) {
             alert("run buttons operation");
-        }       
+        }
     };//end 
-    
+
     const renderAdvancedContent = () => {
         return (
             <Flex width="100%" direction="column" py="2" >
@@ -147,35 +184,47 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end
 
     const renderParameters = () => {
-        
-        return (
-            <Box  py="2">
 
-                <Flex  direction="row" justify="between" px="2" py="1" align="center" 
-                        style={COMP_BORDER_STYLE} >                            
-                    <Box width="40%"><Text size="2">Count Params:</Text></Box> 
+        return (
+            <Box py="2">
+
+                <Flex direction="row" justify="between" px="2" py="1" align="center"
+                    style={COMP_BORDER_STYLE} >
+                    <Box width="40%"><Text size="2">Count Params:</Text></Box>
                     <Box width="10%" >
-                        <Text size="3" color={RADIX_COLORS.orange}>{countParams}</Text>                          
-                    </Box>                           
+                        <Text size="3" color={RADIX_COLORS.orange}>{countParams}</Text>
+                    </Box>
                     <Box width="50%">
                         {/*
                         <Slider defaultValue={[sliderParamsValue]} 
                                 step={CgDataConst.FACTOR_INC_PARAMETERS}
                                 onValueChange={onChangeCountParams}   />                         
-                        */}                       
+                        */}
                     </Box>
                 </Flex>
 
                 <Flex width="100%" direction="column" mt="2" gapY="2"  >
                     {params.map((param, index) => (
                         <Box key={index.toString()}>
-                            <CardInputParam pattindexInit={index}
-                                            patterns={CgDataConst.LIST_PATTERNS} 
-                                            input={CgDataConst.LIST_PARAMS[index]} 
-                                            onchange={onchange}/>                            
-                        </Box>                 
+                            {index === paramIndexSel ?
+                                <CardInputParam pattindexInit={index}
+                                    patterns={CgDataConst.LIST_PATTERNS}
+                                    input={CgDataConst.LIST_PARAMS[index]}
+                                    onchange={onchange}
+                                    onselected={onCardInpSelected}
+                                    initCollapse={false} />
+                                :
+                                <CardInputParam pattindexInit={index}
+                                    patterns={CgDataConst.LIST_PATTERNS}
+                                    input={CgDataConst.LIST_PARAMS[index]}
+                                    onchange={onchange}
+                                    onselected={onCardInpSelected}
+                                    initCollapse={true} />
+                            }
+
+                        </Box>
                     ))}
-                </Flex>                               
+                </Flex>
             </Box>
         );
     };//end  
@@ -205,44 +254,44 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 </Tabs.Root>
             </Box>
 
-            <Box  width="32%" pr="3" >
+            <Box width="32%" pr="3" >
                 <Flex width="100%" direction="row" py="1" justify="center" >
                     <Button color={RADIX_COLORS.green} style={buttonRunStyle}
-                            size={ButtonsStyle.BTN_DEF_SIZE}
-                            radius={ButtonsStyle.BTN_DEF_RADIUS}
-                            onClick={() => runOperation()}>
-                            <PlayIcon />
-                            <Text size="3">execute</Text>
+                        size={ButtonsStyle.BTN_DEF_SIZE}
+                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        onClick={() => runOperation()}>
+                        <PlayIcon />
+                        <Text size="3">execute</Text>
                     </Button>
                 </Flex>
-                <Separator size="4"/>
-                
-                {/* input parameters */}              
+                <Separator size="4" />
+
+                {/* input parameters */}
                 {renderParameters()}
 
                 {/* bar add and delete buttons */}
                 <Flex direction="row" justify="center" align="center"
-                      px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
-                    <Button variant="solid" 
-                            color={RADIX_COLORS.green}
-                            size="2" 
-                            onClick={() => execListParamsCommand(OpConstants.OP_ADD)} >
+                    px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
+                    <Button variant="solid"
+                        color={RADIX_COLORS.green}
+                        size="2"
+                        onClick={() => execListParamsCommand(OpConstants.OP_ADD)} >
                         {OpConstants.OP_TEXT_ADD}
                     </Button>
 
                     <DlgBtnDeleteConfirm buttonicon={RadixConf.ICON_DELETE}
-                                        buttontext={OpConstants.OP_TEXT_DELETE}
-                                        message="confirm delete?"
-                                        title="delete parameter" 
-                                        onconfirm={() => execListParamsCommand(OpConstants.OP_DELETE)}  /> 
-                </Flex>                
-            </Box>    
+                        buttontext={OpConstants.OP_TEXT_DELETE}
+                        message="confirm delete?"
+                        title="delete parameter"
+                        onconfirm={() => execListParamsCommand(OpConstants.OP_DELETE)} />
+                </Flex>
+            </Box>
 
-            <Box  width="41%" >
+            <Box width="41%" >
                 <TypeScriptViewer key={template}
-                                  template={template}
-                                  code={code}  />           
-            </Box>              
+                    template={template}
+                    code={code} />
+            </Box>
 
         </Flex>
     )

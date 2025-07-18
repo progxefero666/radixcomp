@@ -30,27 +30,37 @@ const iconStyle = {
  * CardCode Component
  */
 interface CompProps {
+    initCollapse?: boolean;
     patterns: Pattern[];
     input: InputPattern;
     pattindexInit: number;
-    onchange?: (id: number, value: string) => void;
+    onchange?: (id:number,pattern:string,value:string) => void;
+    onselected: (index:number) => void;
     maxlength?: number;
 }
-export default function CardInputParam({ patterns, input, pattindexInit, onchange, maxlength }: CompProps) {
+export default function CardInputParam({ 
+    input,initCollapse, onselected: onCardInpParamCollapse,
+    patterns,pattindexInit, onchange, maxlength }: CompProps) {
 
-    const [collapse, setCollapse] = useState<boolean>(false);
+    const [collapse, setCollapse] = useState<boolean>(initCollapse ?? true);
     const [useVariable, setUseVariable] = useState<boolean>(true);
     const [variableInit, setVariableInit] = useState<string>("");
     const [variable, setVariable] = useState<string>("");
     const [pattindex, setPattindex] = useState<number>(pattindexInit);
     const [pattern, setPattern] = useState<string>(input.getValue());
+    const [value, setValue] = useState<string>("");
+
+    const onCollapse = () => {
+        onCardInpParamCollapse(input.id);
+        setCollapse(!collapse);
+    };//end
 
     const onHandlerOnClick = (index: number) => {
         input.pattern.start = patterns[index].patt.start;
         input.pattern.end = patterns[index].patt.end; 
-        const result: string = input.pattern.start + variable + input.pattern.end;       
+        const new_pattern: string = input.pattern.start + variable + input.pattern.end;       
         setPattindex(index);
-        setPattern(result);
+        setPattern(new_pattern);
     };
 
     const onChangeUseVariable = () => {
@@ -61,14 +71,21 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
         setUseVariable(useOstias);
     };
 
-    const onchangeVarValue = (value: string) => {
+    const onchangeVarValue = (varvalue: string) => {
+        const new_pattern: string = input.pattern.start + varvalue + input.pattern.end;
+        setVariable(varvalue);
+        setPattern(new_pattern);        
         if (onchange) {
-            const result: string = input.pattern.start + value + input.pattern.end;
-            setPattern(result);
-            onchange(input.id, result);
+            onchange(input.id, new_pattern,value);
         }
-        setVariable(value);
     };//end
+
+    const onChangeValue = (value: string) => {
+        setValue(value);
+        if (onchange) {
+            onchange(input.id, pattern, value);
+        }
+    };
 
     const renderPatterns = () => {
         return (
@@ -96,14 +113,13 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
                 <Flex width="100%" direction="row" py="1" align="center" justify="start" >
                     <Box >
                         <IconButton variant={RadixConf.VARIANTS.ghost}
-                            onClick={() => setCollapse(!collapse)} >
+                            onClick={() => onCollapse()} >
                             {!collapse ? <ChevronUpIcon /> : <ChevronDownIcon />}
                         </IconButton>
                     </Box>
                     <Flex width="100%" direction="row" justify="between" align="center" pl="2" pr="2">
                         <Text>{input.label}</Text>
                         <Text size="3" color={RADIX_COLORS.amber} >
-
                         </Text>
                     </Flex>
                 </Flex>
@@ -147,6 +163,7 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
                                         maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
                                         name={input.id.toString()}
                                         defaultValue={pattern}
+                                        key={pattern}
                                         radius="medium" />
                                 </Table.Cell>
                                 <Table.Cell>
@@ -163,6 +180,7 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
                                 </Table.Cell>
                                 <Table.Cell>
                                     <TextField.Root
+                                        onChange={(e) => onChangeValue(e.target.value)}
                                         maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
                                         name={input.id.toString()}
                                         placeholder={input.id.toString()}
