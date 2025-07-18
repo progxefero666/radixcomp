@@ -47,9 +47,11 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
     const [pattern, setPattern] = useState<string>(input.getValue());
 
     const onHandlerOnClick = (index: number) => {
-        setPattindex(index);
         input.pattern.start = patterns[index].patt.start;
-        input.pattern.end = patterns[index].patt.end;
+        input.pattern.end = patterns[index].patt.end; 
+        const result: string = input.pattern.start + variable + input.pattern.end;       
+        setPattindex(index);
+        setPattern(result);
     };
 
     const onChangeUseVariable = () => {

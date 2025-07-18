@@ -68,17 +68,17 @@ export function TypeScriptViewer({template,code}: CompProps) {
 
                 <Tabs.Root defaultValue={CgDataConst.WTEMPLATE}>
                     <Tabs.List>
-                        <Tabs.Trigger value={CgDataConst.WTEMPLATE}>Basic</Tabs.Trigger>
-                        <Tabs.Trigger value={CgDataConst.WCODE}>Advanced</Tabs.Trigger>
+                        <Tabs.Trigger value={CgDataConst.WTEMPLATE}>Template</Tabs.Trigger>
+                        <Tabs.Trigger value={CgDataConst.WCODE}>Code</Tabs.Trigger>
 
                     </Tabs.List>
                     <Box pt="3">
                         <Tabs.Content value={CgDataConst.WTEMPLATE}>                           
-                           <CardCode title="Template" code={template} />  
+                           <CardCode code={template} />  
                         </Tabs.Content>
 
-                        <Tabs.Content title="Code" value={CgDataConst.WCODE}>
-                            <CardCode title="Template" code={code} /> 
+                        <Tabs.Content value={CgDataConst.WCODE}>
+                            <CardCode code={code} /> 
                         </Tabs.Content>
                     </Box>
                 </Tabs.Root>            

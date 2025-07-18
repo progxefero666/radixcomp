@@ -8,7 +8,7 @@ import { XInputTextArea } from "@/radix/input/inptextarea";
  * CardCode Component
  */
 interface CompProps {
-    title: string;
+    title?: string;
     code?: string;    
 }
 export default function CardCode({ title, code }: CompProps) {
