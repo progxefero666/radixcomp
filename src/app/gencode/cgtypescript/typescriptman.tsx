@@ -40,7 +40,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const [countParams, setCountParams] = useState<number>(1);
     const [params, setParams] 
-        = useState<InputPattern[]>(CgDataConst.LIST_PARAMETERS.slice(0,1));
+        = useState<InputPattern[]>(CgDataConst.LIST_PARAMS.slice(0,1));
     
     const sliderParamsValueInit = CgDataConst.COUNT_PARAMETERS_DEF * 
                                   CgDataConst.FACTOR_INC_PARAMETERS;
@@ -50,7 +50,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const onChangeCountParams = (value: number[]) => {
         const count:number = Math.floor(value[0] / CgDataConst.FACTOR_INC_PARAMETERS);
         setCountParams(count);
-        setParams(CgDataConst.LIST_PARAMETERS.slice(0,count+1));
+        setParams(CgDataConst.LIST_PARAMS.slice(0,count+1));
         setSliderParamsValue(count * CgDataConst.FACTOR_INC_PARAMETERS);
     };
 
@@ -169,7 +169,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         <Box key={index.toString()}>
                             <CardInputParam pattindexInit={index}
                                             patterns={CgDataConst.LIST_PATTERNS} 
-                                            input={CgDataConst.LIST_PARAMETERS[index]} />                            
+                                            input={CgDataConst.LIST_PARAMS[index]} />                            
                         </Box>                 
                     ))}
                 </Flex>                               

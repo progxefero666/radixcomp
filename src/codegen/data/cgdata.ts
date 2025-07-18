@@ -44,17 +44,17 @@ export class CgDataConst {
         CgDataConst.PATT_7
     ];
 
-    public static LIST_PARAMETERS: InputPattern[] = [
+    public static LIST_PARAMS: InputPattern[] = [
 
-        new InputPattern("0",{start:"^%",end:"%^"},null,"Parameter 0",null),
-        new InputPattern("1",{start:"^¡",end:"¡^"},null,"Parameter 1",null),
-        new InputPattern("2",{start:"^<",end:">^"},null,"Parameter 2",null),
-        new InputPattern("3",{start:"^[",end:"]^"},null,"Parameter 3",null),   
-        new InputPattern("4",{start:"^+",end:"+^"},null,"Parameter 4",null),
-        new InputPattern("5",{start:"^*",end:"*^"},null,"Parameter 5",null),   
-        new InputPattern("6",{start:"^-",end:"-^"},null,"Parameter 6",null), 
-        new InputPattern("7",{start:"^:",end:":^"},null,"Parameter 7",null),     
-        new InputPattern("8",{start:"^/",end:"\^"},null,"Parameter 8",null),     
+        new InputPattern("0",{start:"^%",end:"%^"}),
+        new InputPattern("1",{start:"^¡",end:"¡^"}),
+        new InputPattern("2",{start:"^<",end:">^"}),
+        new InputPattern("3",{start:"^[",end:"]^"}),   
+        new InputPattern("4",{start:"^+",end:"+^"}),
+        new InputPattern("5",{start:"^*",end:"*^"}),   
+        new InputPattern("6",{start:"^-",end:"-^"}), 
+        new InputPattern("7",{start:"^:",end:":^"}),     
+        new InputPattern("8",{start:"^/",end:"\^"}),     
     ]
 
 };//end class

@@ -4,20 +4,18 @@ import { TPattern } from "src/codegen/data/model/pattern";
 
 /**
  * class TInputPattern
+ * public value:   string;
  */
 export class InputPattern  {
     public id:      string;
     public pattern: TPattern;
-    public value:   string;
-    public variable:string|null = null;
     public label:   string|null;
+    public variable:string|null = null;
 
-    constructor(id: string,pattern:TPattern,variable:string|null,label: string|null,value:string|null) {
+    constructor(id: string,pattern:TPattern) {
         this.id = id;
         this.pattern = pattern;
-        this.variable = variable ?? null;
-        this.label = label ?? null;
-        this.value = value ?? "";        
+        this.label = "Parameter " + id;
     };//end
 
 }//end class
