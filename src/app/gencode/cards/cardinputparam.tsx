@@ -114,8 +114,8 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
 
                             <Table.Row >
                                 <Table.Cell px="2" maxWidth="20%">
-                                    <Text size={TextStyle.DEFAULT_SIZE}
-                                        color={TextStyle.DEF_COLOR} >
+                                    <Text size={TextStyle.SIZE_DEF}
+                                        color={TextStyle.COLOR_DEF} >
                                         Variable
                                     </Text>
                                 </Table.Cell>
@@ -136,17 +136,16 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
 
                             <Table.Row>
                                 <Table.Cell px="2" maxWidth="20%">
-                                    <Text size={TextStyle.DEFAULT_SIZE}
-                                        color={TextStyle.DEF_COLOR} >
+                                    <Text size={TextStyle.SIZE_DEF}
+                                        color={TextStyle.COLOR_DEF} >
                                         Pattern
                                     </Text>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <TextField.Root
+                                    <TextField.Root style={TextStyle.COLOR_SPECIAL}
                                         maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
                                         name={input.id}
-                                        defaultValue={" "}
-                                        value={pattern}
+                                        defaultValue={pattern}
                                         radius="medium" />
                                 </Table.Cell>
                                 <Table.Cell>
@@ -156,8 +155,8 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
 
                             <Table.Row>
                                 <Table.Cell px="2" maxWidth="20%">
-                                    <Text size={TextStyle.DEFAULT_SIZE}
-                                        color={TextStyle.DEF_COLOR} >
+                                    <Text size={TextStyle.SIZE_DEF}
+                                        color={TextStyle.COLOR_DEF} >
                                         Value
                                     </Text>
                                 </Table.Cell>

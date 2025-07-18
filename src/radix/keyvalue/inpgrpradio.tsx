@@ -43,7 +43,7 @@ export function XRadioGroup({collection, name, label, value, autofocus, onselect
     const renderItem = (key:string,value:string,text:string) => {
         return (
             <RadioGroup.Item key={key} value={value}  >
-                <Text size={TextStyle.DEFAULT_SIZE} >  
+                <Text size={TextStyle.SIZE_DEF} >  
                     {text}  
                 </Text>                
             </RadioGroup.Item>

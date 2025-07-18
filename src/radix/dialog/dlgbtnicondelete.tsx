@@ -32,11 +32,11 @@ export const DlgBtnIconDeleteConfirm = ({title,message,onconfirm }: CompProps) =
             <Dialog.Content>
 
                 <Dialog.Title>
-                    <Text size={TextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
+                    <Text size={TextStyle.SIZE_TITLE_DIALOG}>{title}</Text>
                 </Dialog.Title>
 
                 <Dialog.Description>
-                    <Text size={TextStyle.DEFAULT_SIZE}>{message}</Text>
+                    <Text size={TextStyle.SIZE_DEF}>{message}</Text>
                 </Dialog.Description>
 
                 <Dialog.Close>

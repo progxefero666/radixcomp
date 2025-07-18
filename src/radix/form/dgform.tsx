@@ -59,7 +59,7 @@ export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
             <Dialog.Content>
 
                 <Dialog.Title>
-                    <Text size={TextStyle.DIALOG_TITLE_SIZE}>{title}</Text>
+                    <Text size={TextStyle.SIZE_TITLE_DIALOG}>{title}</Text>
                 </Dialog.Title>
 
                 <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => { event.preventDefault(); onSubmit(event); }}>

@@ -37,7 +37,9 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
-
+    //................................................................................
+    // array parameters
+    //................................................................................  
     const [countParams, setCountParams] = useState<number>(1);
     const [params, setParams] 
         = useState<InputPattern[]>(CgDataConst.LIST_PARAMS.slice(0,1));
@@ -54,18 +56,22 @@ export function TypeScriptManager({ onresult }: CompProps) {
         setSliderParamsValue(count * CgDataConst.FACTOR_INC_PARAMETERS);
     };
 
+    //................................................................................
+    // array parameters
+    //................................................................................     
     const [template, setTemplate] = useState<string>("");
     const [data, setData] = useState<string>("");
     const [code, setCode] = useState<string>("");
 
-    const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
-    const [operation, setOperation] = useState<string>(TsOps.BASIC[0].key);
-
     useEffect(() => {
         onTsOpSelected(0,TsOps.MOD_ID);
     }, []);
-    //onchange?: (value: string, name?: string) => void;
-
+    
+    //................................................................................
+    // operation selected 
+    //................................................................................    
+    const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
+    const [operation, setOperation] = useState<string>(TsOps.BASIC[0].key);
     const onTsOpSelected = (index: number, name?: string) => {    
         setOpGroup(name!);     
         setOperation(TsOps.BASIC[index].key); 
@@ -79,6 +85,16 @@ export function TypeScriptManager({ onresult }: CompProps) {
         setOpGroup(name!);     
         setOperation(JsxOps.BASIC[index].key);    
     };//end 
+
+
+    //................................................................................
+    // run operation 
+    //................................................................................
+    
+    const onchange = (id:string,value:string) => {
+        console.log(id.concat(":").concat(value));
+    }
+
 
     const runOperation = () => {
         if(opGroup==TsOps.MOD_ID) {
@@ -102,16 +118,6 @@ export function TypeScriptManager({ onresult }: CompProps) {
         }       
     };//end 
     
-    const applyParameters = () => {
-        alert("applyParametersd");
-        //let index = str1.indexOf( "string" ); 
-        //console.log("indexOf found String :" + index );   
-    };//end
-
-
-    const onchange = (id:string,value:string) => {
-        console.log(id.concat(":").concat(value));
-    }
 
     const renderAdvancedContent = () => {
         return (
@@ -204,7 +210,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
             <Box  width="32%" >
                 <Flex width="100%" direction="row" py="1" justify="center" >
-                    <Button color={ButtonsStyle.COLOR_SAVE} style={buttonRunStyle}
+                    <Button color={RADIX_COLORS.green} style={buttonRunStyle}
                             size={ButtonsStyle.BTN_DEF_SIZE}
                             radius={ButtonsStyle.BTN_DEF_RADIUS}
                             onClick={() => runOperation()}>
