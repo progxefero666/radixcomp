@@ -109,7 +109,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end
 
 
-
+    const onchange = (id:string,value:string) => {
+        console.log(id.concat(":").concat(value));
+    }
 
     const renderAdvancedContent = () => {
         return (
@@ -149,17 +151,14 @@ export function TypeScriptManager({ onresult }: CompProps) {
             <Box px="2" py="2">
 
                 <Flex  direction="row" justify="between" px="2" py="1" align="center" 
-                        style={COMP_BORDER_STYLE} >
-
-                            
-                    <Box width="40%" >
-                        <Text  size="2">Count Params:</Text>                          
-                    </Box> 
+                        style={COMP_BORDER_STYLE} >                            
+                    <Box width="40%"><Text size="2">Count Params:</Text></Box> 
                     <Box width="10%" >
-                        <Text  size="3" color={RADIX_COLORS.orange}>{countParams}</Text>                          
+                        <Text size="3" color={RADIX_COLORS.orange}>{countParams}</Text>                          
                     </Box>                           
                     <Box width="50%">
-                        <Slider defaultValue={[sliderParamsValue]} step={CgDataConst.FACTOR_INC_PARAMETERS}
+                        <Slider defaultValue={[sliderParamsValue]} 
+                                step={CgDataConst.FACTOR_INC_PARAMETERS}
                                 onValueChange={onChangeCountParams}   />                        
                     </Box>
                 </Flex>
@@ -169,7 +168,8 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         <Box key={index.toString()}>
                             <CardInputParam pattindexInit={index}
                                             patterns={CgDataConst.LIST_PATTERNS} 
-                                            input={CgDataConst.LIST_PARAMS[index]} />                            
+                                            input={CgDataConst.LIST_PARAMS[index]} 
+                                            onchange={onchange}/>                            
                         </Box>                 
                     ))}
                 </Flex>                               

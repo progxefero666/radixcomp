@@ -62,7 +62,7 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
     const onchangeVarValue = (value:string) => {
         const result:string = input.pattern.start + value + input.pattern.end;
         if(onchange){
-
+            onchange(input.id, result);
         }
         setVariable(value);
     };//end
@@ -116,6 +116,7 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
                                 <XInputText key={variableInit}
                                             autofocus={true}
                                             defaul={variableInit}
+                                            onchange={onchangeVarValue}
                                             inline={true}
                                             autocommit={true}
                                             disabled={!useVariable} />
