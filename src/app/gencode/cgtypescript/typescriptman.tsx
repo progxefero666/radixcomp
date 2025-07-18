@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState, useEffect, useRef } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
-
+import { Accordion } from "radix-ui";
 import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, } from "@radix-ui/themes";
 import { COMP_BORDER_STYLE, ButtonsStyle } from "@/radix/radixtheme";
 import { JsxOps, TsOps } from "@/codegen/data/cgdataoperations";
@@ -18,6 +18,7 @@ import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';
 import { RadixConf } from '@/radix/radixconf';
 import { CgDataConst } from '@/codegen/data/cgdataconfig';
 import { Keyvalue } from '@/common/model/keyvalue';
+import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion';
 
 
 const LAYOUT_STYLE = {
@@ -34,7 +35,7 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
-    const [paramIndexSel, setParamIndexSel] = useState<number>(0);
+
     const [paramsValues, setParamsValues] = useState<Keyvalue[]>([]);
 
     //................................................................................
@@ -87,13 +88,10 @@ export function TypeScriptManager({ onresult }: CompProps) {
         setParamsValues(params_values);
     }, []);
 
-    const onCardInpSelected = (index: number) => {
-        setParamIndexSel(index);
-    };//end
 
 
     const onchange = (index: number, pattern: string, value: string) => {
-        console.log(index.toString() + ":" + pattern + ":" + value);
+        //console.log(index.toString() + ":" + pattern + ":" + value);
         const params_values: Keyvalue[] = paramsValues;
         params_values[index] = new Keyvalue(pattern, value);
         setParamsValues(params_values);
@@ -186,7 +184,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const renderParameters = () => {
 
         return (
-            <Box py="2">
+            <>
 
                 <Flex direction="row" justify="between" px="2" py="1" align="center"
                     style={COMP_BORDER_STYLE} >
@@ -202,30 +200,35 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         */}
                     </Box>
                 </Flex>
-
+                <Flex width="100%" direction="column" mt="2" >
+                    <Accordion.Root type="single" defaultValue={params[0].id.toString()} collapsible>
+                        {params.map((param, index) => (
+                            <Box key={index.toString()}>
+                                <Accordion.Item value={param.id.toString()}>
+                                    <AccordionTrigger>{param.label}</AccordionTrigger>
+                                    <AccordionContent>
+                                        <CardInputParam pattindexInit={index}
+                                            patterns={CgDataConst.LIST_PATTERNS}
+                                            input={CgDataConst.LIST_PARAMS[index]}
+                                            onchange={onchange} />
+                                    </AccordionContent>
+                                </Accordion.Item>
+                            </Box>
+                        ))}
+                    </Accordion.Root>
+                </Flex>
                 <Flex width="100%" direction="column" mt="2" gapY="2"  >
                     {params.map((param, index) => (
                         <Box key={index.toString()}>
-                            {index === paramIndexSel ?
-                                <CardInputParam pattindexInit={index}
-                                    patterns={CgDataConst.LIST_PATTERNS}
-                                    input={CgDataConst.LIST_PARAMS[index]}
-                                    onchange={onchange}
-                                    onselected={onCardInpSelected}
-                                    initCollapse={false} />
-                                :
-                                <CardInputParam pattindexInit={index}
-                                    patterns={CgDataConst.LIST_PATTERNS}
-                                    input={CgDataConst.LIST_PARAMS[index]}
-                                    onchange={onchange}
-                                    onselected={onCardInpSelected}
-                                    initCollapse={true} />
-                            }
+                            <CardInputParam pattindexInit={index}
+                                patterns={CgDataConst.LIST_PATTERNS}
+                                input={CgDataConst.LIST_PARAMS[index]}
+                                onchange={onchange} />
 
                         </Box>
                     ))}
                 </Flex>
-            </Box>
+            </>
         );
     };//end  
 
@@ -267,7 +270,10 @@ export function TypeScriptManager({ onresult }: CompProps) {
                 <Separator size="4" />
 
                 {/* input parameters */}
-                {renderParameters()}
+                <Box py="2" key="paramIndexSel" >
+                    {renderParameters()}
+                </Box>
+
 
                 {/* bar add and delete buttons */}
                 <Flex direction="row" justify="center" align="center"
