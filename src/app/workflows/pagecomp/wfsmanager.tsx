@@ -16,7 +16,7 @@ import { CardWorkflowMin } from "../cards/cardwfmin";
 
 import { AppMemmory } from "@/front/appmemory";
 
-import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle, IconsStyle } from "@/radix/radixtheme";
 import { DialogFieldText } from "@/radix/form/dlgfieldtext";
 import { TKeyvalue } from "@/common/types";
 import { Codelang } from "@/db/model/codelang";
@@ -163,8 +163,8 @@ export function WorkflowsManager({ section,viewworkflow: chargeworkflow,editwork
                 <TextField.Root placeholder="Search workflows…" size="2"
                     onChange={(e) => { onFilterchange(e.target.value); }} >
                     <TextField.Slot>
-                        <MagnifyingGlassIcon width={ThemeIconsStyle.DEF_HEIGHT}
-                                             height={ThemeIconsStyle.DEF_WIDTH} />
+                        <MagnifyingGlassIcon width={IconsStyle.DEF_HEIGHT}
+                                             height={IconsStyle.DEF_WIDTH} />
                     </TextField.Slot>
                 </TextField.Root>
                 <Flex direction="row" align="center" gapX="2" >
@@ -172,8 +172,8 @@ export function WorkflowsManager({ section,viewworkflow: chargeworkflow,editwork
                     <DialogFieldText buttontext="New" title="New workflow" 
                                      item={AppWorkflows.DLG_WK_NAME_INPUT} onsave={execNew}/>
                     
-                    <Button variant="solid" color={ThemeButtonsStyle.COLOR_IMPORT}
-                        size={ThemeButtonsStyle.BTN_DEF_SIZE} onClick={() => execImport()}  >
+                    <Button variant="solid" color={ButtonsStyle.COLOR_IMPORT}
+                        size={ButtonsStyle.BTN_DEF_SIZE} onClick={() => execImport()}  >
                         {DB_ITEM_CMD_TEXT.IMPORT}
                     </Button>
 

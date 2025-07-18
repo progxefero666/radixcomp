@@ -58,7 +58,7 @@ export class TextStyle {
  * class ThemeIconsStyle.DEF_WIDTH
  * class ThemeIconsStyle.DEF_HEIGHT
  */
-export class ThemeIconsStyle {
+export class IconsStyle {
 
     public static readonly DEF_WIDTH = "20px";
     public static readonly DEF_HEIGHT = "20px";    
@@ -70,7 +70,7 @@ export class ThemeIconsStyle {
 /**
  * class ThemeButtonsStyle.COLOR_ADD
  */
-export class ThemeButtonsStyle {
+export class ButtonsStyle {
 
     public static readonly BTN_DEF_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly BTN_DEF_VAR: any = RadixConf.VARIANTS.soft;
@@ -100,7 +100,7 @@ export class ThemeButtonsStyle {
 /**
  * class ThemeCompStyle.CONT_CSS_STYLE
  */
-export class ThemeCompStyle {
+export class CompStyle {
 
     public static readonly CONT_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly CONT_RADIUS: any = RADIX_RADIUS.medium;
@@ -108,10 +108,10 @@ export class ThemeCompStyle {
     public static readonly CONT_COLOR: any = RADIX_COLORS.gray;
 
     public static readonly CONT_STYLE: radixTypeComp = {
-        size: ThemeCompStyle.CONT_SIZE,
-        radius: ThemeCompStyle.CONT_RADIUS,
-        variant: ThemeCompStyle.CONT_VARIANT,
-        color: ThemeCompStyle.CONT_COLOR
+        size: CompStyle.CONT_SIZE,
+        radius: CompStyle.CONT_RADIUS,
+        variant: CompStyle.CONT_VARIANT,
+        color: CompStyle.CONT_COLOR
     };
 
     /*
@@ -130,7 +130,7 @@ export class ThemeCompStyle {
 /**
  * class ThemeCompStyleOld
  */
-export class ThemeCompStyleOld {
+export class CompStyleOld {
 
     public static readonly COMP_CONT_RADIUS: any = "medium";
     public static readonly COMP_CONT_VARIANT: any = "soft";
@@ -158,7 +158,7 @@ export class ThemeCompStyleOld {
 /**
  * class ThemeDataStyle.TABLE_DEF_SIZE
  */
-export class ThemeDataStyle {
+export class DataStyle {
 
     public static readonly TABLE_DEF_SIZE: any = RadixConf.SIZES.size_2;
 
@@ -167,7 +167,7 @@ export class ThemeDataStyle {
 /**
  * class ThemeMenusStyle.OPT_SIZE
  */
-export class ThemeMenusStyle {
+export class MenusStyle {
 
     public static readonly OPT_ACT_COLOR: any = RADIX_COLORS.indigo;
     public static readonly OPT_COLOR: any = RADIX_COLORS.blue;

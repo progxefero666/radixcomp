@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { forwardRef } from "react";
 import { Box, Flex,TextField } from "@radix-ui/themes";
-import { ThemeCompStyleOld } from "@/radix/radixtheme";
+import { CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
@@ -36,7 +36,7 @@ export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
 
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
-    const radius = ThemeCompStyleOld.COMP_CONT_RADIUS;
+    const radius = CompStyleOld.COMP_CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
     const showInline: boolean = inline ?? false;
     
@@ -129,7 +129,7 @@ export const XInputNumber = forwardRef<HTMLInputElement,CompProps>
 
     const renderRowSimpleContent = () => {
         return (
-            <Box className={ThemeCompStyleOld.C_CELL_STYLE}>
+            <Box className={CompStyleOld.C_CELL_STYLE}>
                 {input_readonly ? renderReadComp() :
                     renderEditComp()}
             </Box>

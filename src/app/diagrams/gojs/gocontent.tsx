@@ -8,7 +8,7 @@ import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
 
 
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle } from "@/radix/radixtheme";
 
 const mainContentStyle = {
     background: 'rgb(56, 56, 56)',

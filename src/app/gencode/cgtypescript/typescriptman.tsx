@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, FormEvent } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
 import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, } from "@radix-ui/themes";
-import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
+import { COMP_BORDER_STYLE, ButtonsStyle } from "@/radix/radixtheme";
 
 import { CrossCircledIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
@@ -204,9 +204,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
             <Box  width="32%" >
                 <Flex width="100%" direction="row" py="1" justify="center" >
-                    <Button color={ThemeButtonsStyle.COLOR_SAVE} style={buttonRunStyle}
-                            size={ThemeButtonsStyle.BTN_DEF_SIZE}
-                            radius={ThemeButtonsStyle.BTN_DEF_RADIUS}
+                    <Button color={ButtonsStyle.COLOR_SAVE} style={buttonRunStyle}
+                            size={ButtonsStyle.BTN_DEF_SIZE}
+                            radius={ButtonsStyle.BTN_DEF_RADIUS}
                             onClick={() => runOperation()}>
                             <PlayIcon />
                             <Text size="3">execute</Text>

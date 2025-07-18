@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { usePathname, useRouter } from 'next/navigation';
 import { Box, Grid, Flex, Text, Button, Link, TextField } from "@radix-ui/themes";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle } from "@/radix/radixtheme";
 
 import { RadixConf } from "@/radix/radixconf";
 
@@ -53,9 +53,9 @@ export function WorkflowHeader({ navback }: CompProps) {
                 <Button
                     variant={pathname === "/" ? RadixConf.VARIANTS.solid :
                         RadixConf.VARIANTS.soft}
-                    color={ThemeButtonsStyle.BTN_HOME_COLOR}
-                    className={ThemeButtonsStyle.BTN_HOME_STYLE}
-                    size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                    color={ButtonsStyle.BTN_HOME_COLOR}
+                    className={ButtonsStyle.BTN_HOME_STYLE}
+                    size={ButtonsStyle.BTN_DEF_SIZE} >
                     Home
                 </Button>
             </Link>

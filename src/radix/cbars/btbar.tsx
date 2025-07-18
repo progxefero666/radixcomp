@@ -4,7 +4,7 @@ import { radixTypeComp } from "../radixtypes";
 import { Option } from "@/common/model/option";
 import { Flex, Button, } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { ThemeButtonsStyle } from "../radixtheme";
+import { ButtonsStyle } from "../radixtheme";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 
 /**
@@ -16,14 +16,14 @@ export interface BarButtonsProp {
 }
 export default function BarButtons({barconfig, onclick}: BarButtonsProp) {
 
-    const size: any = ThemeButtonsStyle.BTN_DEF_SIZE;
+    const size: any = ButtonsStyle.BTN_DEF_SIZE;
 
     const renderMainContent = () => {
         return (
             <>
                 {barconfig.operations.map((operation, index) => (
                     <Button key={operation}
-                        variant={ThemeButtonsStyle.BTN_DEF_VAR}
+                        variant={ButtonsStyle.BTN_DEF_VAR}
                         color={barconfig.color[index]!}
                         size={size}
                         onClick={() => onclick(operation)}>

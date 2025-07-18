@@ -4,7 +4,7 @@ import { Option } from "@/common/model/option";
 import { Flex, Box } from "@radix-ui/themes";
 
 import { renderOptionButton } from "@/radix/radixbuttons";
-import { ThemeCompStyle, ThemeMenusStyle} from "@/radix/radixtheme";
+import { CompStyle, MenusStyle} from "@/radix/radixtheme";
 import { StringsHelper } from "@/common/markdown/mkdstrings";
 
 
@@ -22,15 +22,15 @@ export interface MenuProp {
 export default function MenuButtons({options,actoption,onclick: onselection}: MenuProp) {
 
     return (
-        <Flex width="100%" direction="column" align="center" gapY="3" style={ThemeCompStyle.CONT_CSS_STYLE} >
+        <Flex width="100%" direction="column" align="center" gapY="3" style={CompStyle.CONT_CSS_STYLE} >
             {options.map((section, index) => (
             <Box width="100%" key={index.toString()}   >
                 {StringsHelper.equals(section.id, actoption) ?
                     renderOptionButton(section.id,onselection,section.text,
-                        ThemeMenusStyle.OPT_ACT_CSS)
+                        MenusStyle.OPT_ACT_CSS)
                     :
                     renderOptionButton(section.id,onselection,section.text,
-                        ThemeMenusStyle.OPT_ACT_CSS)
+                        MenusStyle.OPT_ACT_CSS)
                 }
             </Box>
             ))}

@@ -7,7 +7,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
-import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle, IconsStyle } from "@/radix/radixtheme";
 import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
 import { DlgBtnIconDeleteConfirm } from "@/radix/dialog/dlgbtnicondelete";
 
@@ -60,7 +60,7 @@ export function CardWorkflowMin({index,workflow,callback}: CompProps) {
                                                  message="confirm delete this workflow?"
                                                  title="Delete Workflow"
                                                  onconfirm={() => onHandlerClick(DB_ITEM_CMD.DELETE)}  />
-                            <IconButton size={ThemeIconsStyle.DEF_SIZE}>
+                            <IconButton size={IconsStyle.DEF_SIZE}>
                                 <EyeOpenIcon onClick={() => onHandlerClick(DB_ITEM_CMD.OPEN)} />
                             </IconButton>                                 
                           

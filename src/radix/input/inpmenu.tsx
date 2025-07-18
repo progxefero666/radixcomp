@@ -7,7 +7,7 @@ import { radixTypeComp } from "../radixtypes";
 import React from "react";
 import { Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
-import { ThemeCompStyleOld } from "@/radix/radixtheme";
+import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
 
@@ -99,8 +99,8 @@ export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
 
     const renderEditComp = () => {
         let cell_style: string = "";
-        if (isDisabled) { cell_style = ThemeCompStyleOld.C_SELECT_DISABLED_STYLE; }
-        else { cell_style = ThemeCompStyleOld.C_SELECT_EDIT_STYLE; }
+        if (isDisabled) { cell_style = CompStyleOld.C_SELECT_DISABLED_STYLE; }
+        else { cell_style = CompStyleOld.C_SELECT_EDIT_STYLE; }
 
         return (
             <>
@@ -124,7 +124,7 @@ export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
 
     const renderRowSimpleContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
+            <div className={CompStyleOld.C_CELL_STYLE}>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
             </div>
@@ -133,8 +133,8 @@ export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
 
     const renderRowLabelContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_INCLABEL_ROW_STYLE}>
-                <div className={ThemeCompStyleOld.C_CELL_STYLE}>
+            <div className={CompStyleOld.C_INCLABEL_ROW_STYLE}>
+                <div className={CompStyleOld.C_CELL_STYLE}>
                     {label}
                 </div>
                 {renderRowSimpleContent()}
@@ -144,7 +144,7 @@ export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
 
     const renderColSimpleContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
+            <div className={CompStyleOld.C_CELL_STYLE}>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
             </div>
@@ -153,7 +153,7 @@ export const InputMenu = forwardRef<HTMLSelectElement, InputMenuProps>(({
 
     const renderColLabelContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_INCLABEL_COL_STYLE}>
+            <div className={CompStyleOld.C_INCLABEL_COL_STYLE}>
                 {label}
                 {renderColSimpleContent()}
             </div>

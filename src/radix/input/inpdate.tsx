@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "radix-themes-datepicker-styles";
 
 import { Flex, Text, Box } from "@radix-ui/themes";
-import { ThemeCompStyleOld } from "@/radix/radixtheme";
+import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
 import { radixTypeComp } from "../radixtypes";
@@ -94,8 +94,8 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
 
     const renderEditComp = () => {
         let cell_style: string = "";
-        if (isDisabled) { cell_style = ThemeCompStyleOld.C_CHECK_DISABLED_STYLE }
-        else { cell_style = ThemeCompStyleOld.C_CHECK_STYLE }
+        if (isDisabled) { cell_style = CompStyleOld.C_CHECK_DISABLED_STYLE }
+        else { cell_style = CompStyleOld.C_CHECK_STYLE }
 
         return (
             <Box>
@@ -121,7 +121,7 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
 
     const renderRowSimpleContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
+            <div className={CompStyleOld.C_CELL_STYLE}>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
             </div>
@@ -130,8 +130,8 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
 
     const renderRowLabelContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_INCLABEL_ROW_STYLE}>
-                <div className={ThemeCompStyleOld.C_CELL_STYLE}>
+            <div className={CompStyleOld.C_INCLABEL_ROW_STYLE}>
+                <div className={CompStyleOld.C_CELL_STYLE}>
                     {label}
                 </div>
                 {renderRowSimpleContent()}
@@ -141,7 +141,7 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
 
     const renderColSimpleContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_CELL_STYLE}>
+            <div className={CompStyleOld.C_CELL_STYLE}>
                 {isReadOnly ? renderReadComp() :
                     renderEditComp()}
             </div>
@@ -150,7 +150,7 @@ export const XInputDate = forwardRef<HTMLInputElement, CompProps>(({
 
     const renderColLabelContent = () => {
         return (
-            <div className={ThemeCompStyleOld.C_INCLABEL_COL_STYLE}>
+            <div className={CompStyleOld.C_INCLABEL_COL_STYLE}>
                 {label}
                 {renderColSimpleContent()}
             </div>

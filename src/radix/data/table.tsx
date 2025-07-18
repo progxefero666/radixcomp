@@ -3,7 +3,7 @@
 //src\radix\cbars\btmenu.tsx
 
 import { Flex, Button, Table, } from "@radix-ui/themes";
-import { ThemeDataStyle } from "../radixtheme";
+import { DataStyle } from "../radixtheme";
 
 
 /**
@@ -15,7 +15,7 @@ export interface TableProp {
 }
 export default function XTable({ headers }: TableProp) {
 
-    const size: any = ThemeDataStyle.TABLE_DEF_SIZE;
+    const size: any = DataStyle.TABLE_DEF_SIZE;
 
     const renderMainContent = () => {
         return (

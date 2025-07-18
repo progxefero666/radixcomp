@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link } from "@radix-ui/themes";
 import { RadixConf, RadixConfTexts } from "@/radix/radixconf";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle } from "@/radix/radixtheme";
 import { renderHomeButton } from "@/radix/radixbuttons";
 
 

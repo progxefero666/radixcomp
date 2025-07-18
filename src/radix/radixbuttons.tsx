@@ -2,7 +2,7 @@
 
 import { Link,Button,IconButton } from "@radix-ui/themes";
 import { RadixConf } from "@/radix//radixconf";
-import {ThemeButtonsStyle, ThemeMenusStyle} from "@/radix/radixtheme";
+import {ButtonsStyle, MenusStyle} from "@/radix/radixtheme";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 /**
@@ -19,9 +19,9 @@ export const renderHomeButton = (isPageIndex:boolean) => {
             <Button
                 variant={isPageIndex ? RadixConf.VARIANTS.solid :
                                         RadixConf.VARIANTS.soft}
-                color={ThemeButtonsStyle.BTN_HOME_COLOR}
-                className={ThemeButtonsStyle.BTN_HOME_STYLE}
-                size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                color={ButtonsStyle.BTN_HOME_COLOR}
+                className={ButtonsStyle.BTN_HOME_STYLE}
+                size={ButtonsStyle.BTN_DEF_SIZE} >
                 Home
             </Button>
         </Link>
@@ -35,7 +35,7 @@ export const renderOptionButton = (id: string, onclick: (name: string) => void,
         <Button key={id} 
             onClick={() => onclick(id)}
             style={style}
-            size={ThemeMenusStyle.OPT_SIZE} >
+            size={MenusStyle.OPT_SIZE} >
             {text}
         </Button>
     )

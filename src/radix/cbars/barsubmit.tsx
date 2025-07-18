@@ -4,7 +4,7 @@ import { Button, Box, Flex, IconButton, Text, Dialog, TextField } from "@radix-u
 
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 
-import { ThemeButtonsStyle, ThemeIconsStyle, TextStyle } from '@/radix/radixtheme';
+import { ButtonsStyle, IconsStyle, TextStyle } from '@/radix/radixtheme';
 import { OpConstants } from "@/common/constants";
 
 export const BarSubmit = () => {
@@ -12,17 +12,17 @@ export const BarSubmit = () => {
     return (
         <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
             <Button type="submit"
-                color={ThemeButtonsStyle.COLOR_SAVE}
-                size={ThemeButtonsStyle.BTN_DEF_SIZE}>
+                color={ButtonsStyle.COLOR_SAVE}
+                size={ButtonsStyle.BTN_DEF_SIZE}>
                 {OpConstants.OP_TEXT_SAVE}
-                <CheckIcon width={ThemeIconsStyle.DEF_HEIGHT}
-                    height={ThemeIconsStyle.DEF_WIDTH} />
+                <CheckIcon width={IconsStyle.DEF_HEIGHT}
+                    height={IconsStyle.DEF_WIDTH} />
             </Button>
-            <Button color={ThemeButtonsStyle.COLOR_CLOSE}
-                size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+            <Button color={ButtonsStyle.COLOR_CLOSE}
+                size={ButtonsStyle.BTN_DEF_SIZE} >
                 {OpConstants.OP_TEXT_CANCEL}
-                <Cross2Icon width={ThemeIconsStyle.DEF_HEIGHT}
-                    height={ThemeIconsStyle.DEF_WIDTH} />
+                <Cross2Icon width={IconsStyle.DEF_HEIGHT}
+                    height={IconsStyle.DEF_WIDTH} />
             </Button>
         </Flex>
     );

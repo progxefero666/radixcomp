@@ -8,7 +8,7 @@ import { Box, Grid, Separator, Flex, Text, Button, Link, IconButton } from "@rad
 import MenuButtons from "@/radix/cbars/btmenu";
 
 import { CodeGenModules } from "@/codegen/cgoperations";
-import { COMP_BORDER_STYLE, ThemeIconsStyle } from "@/radix/radixtheme";
+import { COMP_BORDER_STYLE, IconsStyle } from "@/radix/radixtheme";
 import { DB_ITEM_CMD } from "@/common/database/dbkernel";
 import { ArrowLeftIcon, ArrowRightIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
@@ -45,13 +45,13 @@ export function PrimaryBar({collapse,oncollapse,onselection,actsection}: Primary
                 {!collapse ? <Box><Text size="3" >Sections</Text></Box>:null}    
 
                 <Box>
-                    <IconButton size={ThemeIconsStyle.DEF_SIZE}>
+                    <IconButton size={IconsStyle.DEF_SIZE}>
                         {collapse ? 
-                        <ArrowRightIcon  width={ThemeIconsStyle.DEF_WIDTH}
-                                    height={ThemeIconsStyle.DEF_HEIGHT} onClick={() => onHandlerClick()} />
+                        <ArrowRightIcon  width={IconsStyle.DEF_WIDTH}
+                                    height={IconsStyle.DEF_HEIGHT} onClick={() => onHandlerClick()} />
                         :
-                        <ArrowLeftIcon  width={ThemeIconsStyle.DEF_WIDTH}
-                                    height={ThemeIconsStyle.DEF_HEIGHT} onClick={() => onHandlerClick()} />
+                        <ArrowLeftIcon  width={IconsStyle.DEF_WIDTH}
+                                    height={IconsStyle.DEF_HEIGHT} onClick={() => onHandlerClick()} />
                         }
                     </IconButton>     
                 </Box>                  

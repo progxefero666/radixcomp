@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button, Flex, Text, Dialog, IconButton } from "@radix-ui/themes";
-import { ThemeButtonsStyle, ThemeIconsStyle, TextStyle } from '@/radix/radixtheme';
+import { ButtonsStyle, IconsStyle, TextStyle } from '@/radix/radixtheme';
 import { CheckIcon, Cross2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { RadixOpsText } from "../radixconstants";
 
@@ -23,9 +23,9 @@ export const DlgBtnIconDeleteConfirm = ({title,message,onconfirm }: CompProps) =
         <Dialog.Root >
 
             <Dialog.Trigger>
-                <IconButton size={ThemeIconsStyle.DEF_SIZE}>
-                    <TrashIcon  width={ThemeIconsStyle.DEF_WIDTH}
-                                height={ThemeIconsStyle.DEF_HEIGHT}/>
+                <IconButton size={IconsStyle.DEF_SIZE}>
+                    <TrashIcon  width={IconsStyle.DEF_WIDTH}
+                                height={IconsStyle.DEF_HEIGHT}/>
                 </IconButton>
             </Dialog.Trigger>
 
@@ -42,18 +42,18 @@ export const DlgBtnIconDeleteConfirm = ({title,message,onconfirm }: CompProps) =
                 <Dialog.Close>
                     <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
                         <Button type="submit"
-                            color={ThemeButtonsStyle.COLOR_SAVE}
-                            size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                            color={ButtonsStyle.COLOR_SAVE}
+                            size={ButtonsStyle.BTN_DEF_SIZE}
                             onClick={onconfirm} >
                             {RadixOpsText.OK}
-                            <CheckIcon width={ThemeIconsStyle.DEF_HEIGHT}
-                                        height={ThemeIconsStyle.DEF_WIDTH} />
+                            <CheckIcon width={IconsStyle.DEF_HEIGHT}
+                                        height={IconsStyle.DEF_WIDTH} />
                         </Button>
-                        <Button color={ThemeButtonsStyle.COLOR_CLOSE}
-                            size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                        <Button color={ButtonsStyle.COLOR_CLOSE}
+                            size={ButtonsStyle.BTN_DEF_SIZE} >
                             {RadixOpsText.CANCEL}
-                            <Cross2Icon width={ThemeIconsStyle.DEF_HEIGHT}
-                                        height={ThemeIconsStyle.DEF_WIDTH} />
+                            <Cross2Icon width={IconsStyle.DEF_HEIGHT}
+                                        height={IconsStyle.DEF_WIDTH} />
                         </Button>
                     </Flex>
 

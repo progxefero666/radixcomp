@@ -7,7 +7,7 @@ import { Option } from "@/common/model/option";
 import React from "react";
 import { Box,Text, Flex, Select } from "@radix-ui/themes";
 import { TextField } from "@radix-ui/themes";
-import { ThemeCompStyleOld } from "@/radix/radixtheme";
+import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
@@ -70,8 +70,8 @@ export const XInputSelect = forwardRef<HTMLSelectElement, CompProps>(({
     const renderEditComp = () => {
         //placeholder={placeholder}
         let cell_style: string = "";
-        if (isDisabled) { cell_style = ThemeCompStyleOld.C_SELECT_DISABLED_STYLE; }
-        else { cell_style = ThemeCompStyleOld.C_SELECT_EDIT_STYLE; }
+        if (isDisabled) { cell_style = CompStyleOld.C_SELECT_DISABLED_STYLE; }
+        else { cell_style = CompStyleOld.C_SELECT_EDIT_STYLE; }
 
         return (            
             <Select.Root

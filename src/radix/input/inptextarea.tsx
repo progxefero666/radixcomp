@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { forwardRef } from "react";
 import { Box, Flex,TextArea } from "@radix-ui/themes";
-import { ThemeCompStyleOld } from "@/radix/radixtheme";
+import { CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS, RADIX_SIZES } from "../radixconstants";
@@ -47,7 +47,7 @@ export const XInputTextArea = forwardRef<HTMLInputElement, CompProps>
 
     const color = "gray";
     const size = RadixConf.SIZES.size_2;
-    const radius = ThemeCompStyleOld.COMP_CONT_RADIUS;
+    const radius = CompStyleOld.COMP_CONT_RADIUS;
     const variant = RadixConf.VARIANTS.surface;
     const showInline: boolean = inline ?? false; 
     const input_readonly = readonly ?? false;

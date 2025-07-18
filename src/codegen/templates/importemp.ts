@@ -17,7 +17,7 @@ import { InfoNotdata } from "@/radix/data/infonotdata";
 
 import { RadixConf } from "@/radix/radixconf";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
-import { ThemeButtonsStyle, ThemeIconsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle, IconsStyle } from "@/radix/radixtheme";
 import { parseResponseCollection, parseResponseItem } from "@/common/parsers/javascriptparser";
 
 //   const typeRef = useRef<HTMLSelectElement>(null);

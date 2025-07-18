@@ -22,7 +22,7 @@ import { getTaskcategoriessAsOptions, getTasktypeAsOptions } from "@/db/services
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { DB_ITEM_CMD, DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle } from "@/radix/radixtheme";
 import { DlgBtnIconDeleteConfirm } from "@/radix/dialog/dlgbtnicondelete";
 
 
@@ -38,7 +38,7 @@ const compStyle = {
 const barbuttonscfg: BarButtonsCfg  = new BarButtonsCfg(
     [DB_ITEM_CMD.DELETE,     DB_ITEM_CMD.MOVEUP,     DB_ITEM_CMD.MOVEDOWN],
     [DB_ITEM_CMD_TEXT.DELETE,DB_ITEM_CMD_TEXT.MOVEUP,DB_ITEM_CMD_TEXT.MOVEDOWN],
-    [ThemeButtonsStyle.COLOR_DELETE,ThemeButtonsStyle.COLOR_MOVEUP,ThemeButtonsStyle.COLOR_MOVEDOWN],
+    [ButtonsStyle.COLOR_DELETE,ButtonsStyle.COLOR_MOVEUP,ButtonsStyle.COLOR_MOVEDOWN],
     [RadixConf.ICON_SAVE,RadixConf.ICON_OPEN],
     [false,false],
     [true,true]
@@ -228,8 +228,8 @@ export function CardTask({ taskscount,task, codelangs, tasktypes, taskcategories
                             </Box>
                             <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
-                                        color={ThemeButtonsStyle.COLOR_IMPORT}
-                                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                                        color={ButtonsStyle.COLOR_IMPORT}
+                                        size={ButtonsStyle.BTN_DEF_SIZE}
                                         onClick={importDescription}  >
                                     {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        

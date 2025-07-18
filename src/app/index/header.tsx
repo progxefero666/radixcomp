@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Flex, Text, Button, Box } from "@radix-ui/themes";
 import { usePathname } from "next/navigation";
 
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { AppConfig } from "@/app/index/appconfig";
 
@@ -22,9 +22,9 @@ export default function Header({ module: section }: IndexHeaderProps) {
                 <Button
                     variant={pathname === "/" ? RadixConf.VARIANTS.solid :
                                                 RadixConf.VARIANTS.soft}
-                    color={ThemeButtonsStyle.BTN_HOME_COLOR}
-                    className={ThemeButtonsStyle.BTN_HOME_STYLE}
-                    size={ThemeButtonsStyle.BTN_DEF_SIZE} >
+                    color={ButtonsStyle.BTN_HOME_COLOR}
+                    className={ButtonsStyle.BTN_HOME_STYLE}
+                    size={ButtonsStyle.BTN_DEF_SIZE} >
                     Home
                 </Button>
             </Link>

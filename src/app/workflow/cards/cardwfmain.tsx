@@ -14,7 +14,7 @@ import BarButtons from "@/radix/cbars/btbar";
 import { BARCFG_DOS } from "@/radix/appbars";
 import { Workflow } from "@/db/model/workflow";
 import { OutputText } from "@/radix/data/outputtext";
-import { ThemeButtonsStyle } from "@/radix/radixtheme";
+import { ButtonsStyle } from "@/radix/radixtheme";
 import { XInputText } from "@/radix/input/inptext";
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { RADIX_COLORS } from "@/radix/radixconstants";
@@ -135,8 +135,8 @@ export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
                             </Box>
                             <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
-                                        color={ThemeButtonsStyle.COLOR_IMPORT}
-                                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                                        color={ButtonsStyle.COLOR_IMPORT}
+                                        size={ButtonsStyle.BTN_DEF_SIZE}
                                         onClick={importDescription}  >
                                     {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        
@@ -154,7 +154,7 @@ export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
                             <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
                                         color={RADIX_COLORS.green}
-                                        size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                                        size={ButtonsStyle.BTN_DEF_SIZE}
                                         onClick={importContext}  >
                                     {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { RADIX_COLORS } from "@/radix/radixconstants";
-import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
+import { COMP_BORDER_STYLE, ButtonsStyle } from "@/radix/radixtheme";
 import { WorkflowEditorHeader } from "./editorheader";
 import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
 import { RadixConf } from "@/radix/radixconf";
@@ -161,13 +161,13 @@ export function WorkflowEditor({ workflow }: WorkflowEditorProps) {
                 px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
 
                 <Button variant="solid" color={RADIX_COLORS.green}
-                    size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                    size={ButtonsStyle.BTN_DEF_SIZE}
                     onClick={() => execTaskCommand(WorkflowActions.ADD_TASK,index)} >
                     add task
                 </Button>
 
                 <Button variant="solid" color={RADIX_COLORS.blue}
-                    size={ThemeButtonsStyle.BTN_DEF_SIZE}
+                    size={ButtonsStyle.BTN_DEF_SIZE}
                     onClick={() => createNewGroup(index)} >
                     new group
                 </Button>

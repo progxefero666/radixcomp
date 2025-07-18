@@ -3,7 +3,7 @@
 
 import { forwardRef } from "react";
 import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
-import { ThemeCompStyleOld } from "@/radix/radixtheme";
+import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 import { RADIX_COLORS, RADIX_SIZES } from "../radixconstants";
