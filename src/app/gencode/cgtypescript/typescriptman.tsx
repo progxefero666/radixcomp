@@ -89,8 +89,8 @@ export function TypeScriptManager({ onresult }: CompProps) {
     // run operation 
     //................................................................................
     
-    const onchange = (id:string,value:string) => {
-        console.log(id.concat(":").concat(value));
+    const onchange = (id:number,value:string) => {
+        console.log(id.toString().concat(":").concat(value));
     };//end
 
     const runOperation = () => {

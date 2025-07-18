@@ -43,16 +43,15 @@ export class CgDataConst {
     ];
 
     public static LIST_PARAMS: InputPattern[] = [
-
-        new InputPattern("0",{start:"^%",end:"%^"}),
-        new InputPattern("1",{start:"^¡",end:"¡^"}),
-        new InputPattern("2",{start:"^<",end:">^"}),
-        new InputPattern("3",{start:"^[",end:"]^"}),   
-        new InputPattern("4",{start:"^+",end:"+^"}),
-        new InputPattern("5",{start:"^*",end:"*^"}),   
-        new InputPattern("6",{start:"^-",end:"-^"}), 
-        new InputPattern("7",{start:"^:",end:":^"}),     
-        new InputPattern("8",{start:"^/",end:"\^"}),     
+        new InputPattern(0,{start:"^%",end:"%^"}),
+        new InputPattern(1,{start:"^¡",end:"¡^"}),
+        new InputPattern(2,{start:"^<",end:">^"}),
+        new InputPattern(3,{start:"^[",end:"]^"}),   
+        new InputPattern(4,{start:"^+",end:"+^"}),
+        new InputPattern(5,{start:"^*",end:"*^"}),   
+        new InputPattern(6,{start:"^-",end:"-^"}), 
+        new InputPattern(7,{start:"^:",end:":^"}),     
+        new InputPattern(8,{start:"^/",end:"\^"}),     
     ]
 
 };//end class

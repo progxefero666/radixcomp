@@ -33,7 +33,7 @@ interface CompProps {
     patterns: Pattern[];
     input: InputPattern;
     pattindexInit: number;
-    onchange?: (id: string, value: string) => void;
+    onchange?: (id: number, value: string) => void;
     maxlength?: number;
 }
 export default function CardInputParam({ patterns, input, pattindexInit, onchange, maxlength }: CompProps) {
@@ -145,7 +145,7 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
                                 <Table.Cell>
                                     <TextField.Root style={TextStyle.COLOR_SPECIAL}
                                         maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
-                                        name={input.id}
+                                        name={input.id.toString()}
                                         defaultValue={pattern}
                                         radius="medium" />
                                 </Table.Cell>
@@ -164,8 +164,8 @@ export default function CardInputParam({ patterns, input, pattindexInit, onchang
                                 <Table.Cell>
                                     <TextField.Root
                                         maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
-                                        name={input.id}
-                                        placeholder={input.id}
+                                        name={input.id.toString()}
+                                        placeholder={input.id.toString()}
                                         radius="medium" />
                                 </Table.Cell>
                                 <Table.Cell>

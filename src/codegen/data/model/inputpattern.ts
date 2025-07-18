@@ -7,12 +7,12 @@ import { TPattern } from "src/codegen/data/model/pattern";
  * public value:   string;
  */
 export class InputPattern  {
-    public id:      string;
+    public id:      number;
     public pattern: TPattern;
     public label:   string|null;
     public variable:string|null = null;
 
-    constructor(id: string,pattern:TPattern) {
+    constructor(id: number,pattern:TPattern) {
         this.id = id;
         this.pattern = pattern;
         this.label = "Parameter " + id;
