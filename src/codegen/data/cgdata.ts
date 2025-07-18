@@ -1,8 +1,9 @@
 //src\codegen\data\cgdata.ts
 
 import { Keyvalue } from "@/common/model/keyvalue";
-import { CgEntityOperations } from "../cgoperations";
-import { Pattern, TInputPattern, TPattern } from "./cgdatamodels";
+
+import { InputPattern } from "@/codegen/data/inputpattern";
+import { Pattern } from "@/codegen/data/model/pattern";
 
 
 //................................................................................
@@ -22,14 +23,14 @@ export class CgDataConstants {
 
     //public static PATTERN_VAR_A: string = "__^A^__";
 
-    public static readonly PATTERN_0: Pattern = new Pattern({start:"^%", end:"%^"}, null, null);
-    public static readonly PATTERN_1: Pattern = new Pattern({start:"^¡", end:"¡^"}, null, null);
-    public static readonly PATTERN_2: Pattern = new Pattern({start:"^<", end:">^"}, null, null);
-    public static readonly PATTERN_3: Pattern = new Pattern({start:"^[", end:"]^"}, null, null);
-    public static readonly PATTERN_4: Pattern = new Pattern({start:"^+", end:"+^"}, null, null);
-    public static readonly PATTERN_5: Pattern = new Pattern({start:"*^", end:"*^"}, null, null);
-    public static readonly PATTERN_6: Pattern = new Pattern({start:"^-", end:"-^"}, null, null);
-    public static readonly PATTERN_7: Pattern = new Pattern({start:"^:", end:":^"}, null, null);
+    public static readonly PATTERN_0: Pattern = new Pattern({start:"^%", end:"%^"},"/icons/uno.png","/icons/uno_red.png");
+    public static readonly PATTERN_1: Pattern = new Pattern({start:"^¡", end:"¡^"}, null, "/icons/dos_red.png");
+    public static readonly PATTERN_2: Pattern = new Pattern({start:"^<", end:">^"}, null, "/icons/tres_red.png");
+    public static readonly PATTERN_3: Pattern = new Pattern({start:"^[", end:"]^"}, null, "/icons/cuatro_red.png");
+    public static readonly PATTERN_4: Pattern = new Pattern({start:"^+", end:"+^"}, null, "/icons/cinco_red.png");
+    public static readonly PATTERN_5: Pattern = new Pattern({start:"*^", end:"*^"}, null, "/icons/seis_red.png");
+    public static readonly PATTERN_6: Pattern = new Pattern({start:"^-", end:"-^"}, null, "/icons/siete_red.png");
+    public static readonly PATTERN_7: Pattern = new Pattern({start:"^:", end:":^"}, null, "/icons/ocho_red.png");
 
 
     public static readonly LIST_PATTERNS: Pattern[] = [
@@ -43,17 +44,17 @@ export class CgDataConstants {
         CgDataConstants.PATTERN_7
     ];
 
-    public static LIST_PARAMETERS: TInputPattern[] = [
+    public static LIST_PARAMETERS: InputPattern[] = [
 
-        new TInputPattern("0",{start:"^%",end:"%^"},null,"Parameter 0",null),
-        new TInputPattern("1",{start:"^¡",end:"¡^"},null,"Parameter 1",null),
-        new TInputPattern("2",{start:"^<",end:">^"},null,"Parameter 2",null),
-        new TInputPattern("3",{start:"^[",end:"]^"},null,"Parameter 3",null),   
-        new TInputPattern("4",{start:"^+",end:"+^"},null,"Parameter 4",null),
-        new TInputPattern("5",{start:"^*",end:"*^"},null,"Parameter 5",null),   
-        new TInputPattern("6",{start:"^-",end:"-^"},null,"Parameter 6",null), 
-        new TInputPattern("7",{start:"^:",end:":^"},null,"Parameter 7",null),     
-        new TInputPattern("8",{start:"^/",end:"\^"},null,"Parameter 8",null),     
+        new InputPattern("0",{start:"^%",end:"%^"},null,"Parameter 0",null),
+        new InputPattern("1",{start:"^¡",end:"¡^"},null,"Parameter 1",null),
+        new InputPattern("2",{start:"^<",end:">^"},null,"Parameter 2",null),
+        new InputPattern("3",{start:"^[",end:"]^"},null,"Parameter 3",null),   
+        new InputPattern("4",{start:"^+",end:"+^"},null,"Parameter 4",null),
+        new InputPattern("5",{start:"^*",end:"*^"},null,"Parameter 5",null),   
+        new InputPattern("6",{start:"^-",end:"-^"},null,"Parameter 6",null), 
+        new InputPattern("7",{start:"^:",end:":^"},null,"Parameter 7",null),     
+        new InputPattern("8",{start:"^/",end:"\^"},null,"Parameter 8",null),     
     ]
 
 };//end class

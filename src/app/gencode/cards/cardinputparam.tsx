@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from 'next/image'
 import { Box,Text,Flex,IconButton,TextField,Link, ScrollArea, Table, Checkbox} from "@radix-ui/themes";
 
-import { Pattern, TInputPattern } from "@/codegen/data/cgdatamodels";
+import { InputPattern } from "@/codegen/data/inputpattern";
 import { Label } from "@radix-ui/react-label";
 import { CgDataConstants } from "@/codegen/data/cgdata";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
@@ -13,6 +13,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { XInputCheck } from "@/radix/input/inputcheck";
 import { XInputText } from "@/radix/input/inptext";
+import { Pattern } from "@/codegen/data/model/pattern";
 
 const compStyle = {
     background: 'rgb(35, 35, 39)',
@@ -31,7 +32,7 @@ const iconStyle = {
  */
 interface CompProps {
     patterns: Pattern[];
-    input: TInputPattern;
+    input: InputPattern;
     pattindexInit: number;
     maxlength?: number;  
 }
@@ -65,27 +66,27 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                 <Box key={index.toString()}  >
                     {index===pattindex ? 
     <>
-        {index===0 && <Link href="#"><Image src="/icons/uno_red.png"  width={24} height={24} alt="1" onClick={() => onHandlerOnClick(0)}/></Link>} 
-        {index===1 && <Link href="#"><Image src="/icons/dos_red.png"    width={24} height={24} alt="2" onClick={() => onHandlerOnClick(1)} /></Link>}
-        {index===2 && <Link href="#"><Image src="/icons/tres_red.png"   width={24} height={24} alt="3" onClick={() => onHandlerOnClick(2)} /></Link>} 
-        {index===3 && <Link href="#"><Image src="/icons/cuatro_red.png" width={24} height={24} alt="4" onClick={() => onHandlerOnClick(3)} /></Link>}
-        {index===4 && <Link href="#"><Image src="/icons/cinco_red.png"  width={24} height={24} alt="5" onClick={() => onHandlerOnClick(4)} /></Link>} 
-        {index===5 && <Link href="#"><Image src="/icons/seis_red.png"   width={24} height={24} alt="6" onClick={() => onHandlerOnClick(5)} /></Link>}
-        {index===6 && <Link href="#"><Image src="/icons/siete_red.png"  width={24} height={24} alt="7" onClick={() => onHandlerOnClick(6)} /></Link>} 
-        {index===7 && <Link href="#"><Image src="/icons/ocho_red.png"   width={24} height={24} alt="8" onClick={() => onHandlerOnClick(7)} /></Link>}
-        {index===8 && <Link href="#"><Image src="/icons/nueve_red.png"  width={24} height={24} alt="9" onClick={() => onHandlerOnClick(8)} /></Link>}
+        {index===0 && <Link href="#"><Image src="/icons/uno_red.png"   
+                            width={24} height={24} alt="1" onClick={()=>onHandlerOnClick(0)}/></Link>} 
+        {index===1 && <Link href="#"><Image src="/icons/dos_red.png"    
+                            width={24} height={24} alt="2" onClick={()=>onHandlerOnClick(1)} /></Link>}
+        {index===2 && <Link href="#"><Image src="/icons/tres_red.png"   width={24} height={24} alt="3" onClick={()=>onHandlerOnClick(2)}/></Link>} 
+        {index===3 && <Link href="#"><Image src="/icons/cuatro_red.png" width={24} height={24} alt="4" onClick={()=>onHandlerOnClick(3)}/></Link>}
+        {index===4 && <Link href="#"><Image src="/icons/cinco_red.png"  width={24} height={24} alt="5" onClick={()=>onHandlerOnClick(4)}/></Link>} 
+        {index===5 && <Link href="#"><Image src="/icons/seis_red.png"   width={24} height={24} alt="6" onClick={()=>onHandlerOnClick(5)}/></Link>}
+        {index===6 && <Link href="#"><Image src="/icons/siete_red.png"  width={24} height={24} alt="7" onClick={()=>onHandlerOnClick(6)}/></Link>} 
+        {index===7 && <Link href="#"><Image src="/icons/ocho_red.png"   width={24} height={24} alt="8" onClick={()=>onHandlerOnClick(7)}/></Link>}
     </>                    
 : 
     <>
-        {index===0 && <Link href="#"><Image src="/icons/uno.png"    width={24} height={24} alt="1" onClick={() => onHandlerOnClick(0)} /></Link>} 
-        {index===1 && <Link href="#"><Image src="/icons/dos.png"    width={24} height={24} alt="2" onClick={() => onHandlerOnClick(1)} /></Link>}
-        {index===2 && <Link href="#"><Image src="/icons/tres.png"   width={24} height={24} alt="3" onClick={() => onHandlerOnClick(2)} /></Link>} 
-        {index===3 && <Link href="#"><Image src="/icons/cuatro.png" width={24} height={24} alt="4" onClick={() => onHandlerOnClick(3)} /></Link>}
-        {index===4 && <Link href="#"><Image src="/icons/cinco.png"  width={24} height={24} alt="5" onClick={() => onHandlerOnClick(4)} /></Link>} 
-        {index===5 && <Link href="#"><Image src="/icons/seis.png"   width={24} height={24} alt="6" onClick={() => onHandlerOnClick(5)} /></Link>}
-        {index===6 && <Link href="#"><Image src="/icons/siete.png"  width={24} height={24} alt="" onClick={() => onHandlerOnClick(6)} /></Link>} 
-        {index===7 && <Link href="#"><Image src="/icons/ocho.png"   width={24} height={24} alt="" onClick={() => onHandlerOnClick(7)} /></Link>}
-        {index===8 && <Link href="#"><Image src="/icons/nueve.png"  width={24} height={24} alt="" onClick={() => onHandlerOnClick(8)} /></Link>}                         
+        {index===0 && <Link href="#"><Image src="/icons/uno.png"    width={24} height={24} alt="1" onClick={() => onHandlerOnClick(0)}/></Link>} 
+        {index===1 && <Link href="#"><Image src="/icons/dos.png"    width={24} height={24} alt="2" onClick={() => onHandlerOnClick(1)}/></Link>}
+        {index===2 && <Link href="#"><Image src="/icons/tres.png"   width={24} height={24} alt="3" onClick={() => onHandlerOnClick(2)}/></Link>} 
+        {index===3 && <Link href="#"><Image src="/icons/cuatro.png" width={24} height={24} alt="4" onClick={() => onHandlerOnClick(3)}/></Link>}
+        {index===4 && <Link href="#"><Image src="/icons/cinco.png"  width={24} height={24} alt="5" onClick={() => onHandlerOnClick(4)}/></Link>} 
+        {index===5 && <Link href="#"><Image src="/icons/seis.png"   width={24} height={24} alt="6" onClick={() => onHandlerOnClick(5)}/></Link>}
+        {index===6 && <Link href="#"><Image src="/icons/siete.png"  width={24} height={24} alt="" onClick={() => onHandlerOnClick(6)}/></Link>} 
+        {index===7 && <Link href="#"><Image src="/icons/ocho.png"   width={24} height={24} alt="" onClick={() => onHandlerOnClick(7)}/></Link>}
     </>                    
                     }                           
                 </Box>                 

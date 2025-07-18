@@ -18,7 +18,7 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import { min } from "date-fns";
 import CardInputParam from '../cards/cardinputparam';
 import { XInputNumber } from '@/radix/input/inpnumber';
-import { TInputPattern } from '@/codegen/data/cgdatamodels';
+import { InputPattern } from '@/codegen/data/inputpattern';
 import { RADIX_COLORS } from '@/radix/radixconstants';
 
 
@@ -40,7 +40,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const [countParams, setCountParams] = useState<number>(1);
     const [params, setParams] 
-        = useState<TInputPattern[]>(CgDataConstants.LIST_PARAMETERS.slice(0,1));
+        = useState<InputPattern[]>(CgDataConstants.LIST_PARAMETERS.slice(0,1));
     
     const sliderParamsValueInit = CgDataConstants.COUNT_PARAMETERS_DEF * 
                                   CgDataConstants.FACTOR_INC_PARAMETERS;
