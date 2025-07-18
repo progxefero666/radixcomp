@@ -1,26 +1,34 @@
 
 import { useEffect, useRef, useState } from "react";
-import { Box,Flex,Text,Grid,Button,IconButton,Tabs} from "@radix-ui/themes";
-import { Keyvalue } from "@/common/model/keyvalue";
+import { Box, Flex, Text, Grid, Button, IconButton, Tabs } from "@radix-ui/themes";
+import { TOption } from "@/radix/radixtypes";
+import { Accordion } from "radix-ui";
+import { ChevronDownIcon, } from "@radix-ui/themes";
+import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { CgDataConst } from '@/codegen/data/cgdataconfig';
+
+import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion';
+import React from 'react';
+import { SeparatorH } from "@/radix/container/separatorh";
 
 
 // template component
 //............................................................................
 export interface CompProps {
-    name:       string;    
-    inline?:    boolean;
-    callback:   (value:string) => void;
+    name: string;
+    inline?: boolean;
+    callback: (value: string) => void;
 }
 export default function TemplateComp({ callback }: CompProps) {
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [ready, setReady] = useState<boolean>(false);
-             
+
     useEffect(() => {
 
     }, []);
 
-    return(
+    return (
         <Flex width="100%" direction="column" px="2" py="1" align="center" justify="center">
             <p>template</p>
         </Flex>
@@ -28,3 +36,50 @@ export default function TemplateComp({ callback }: CompProps) {
 
 };
 
+/**
+ * Accordion template
+ */
+interface AccordionProps {
+    text?: string;
+    options: TOption[];
+};
+export const XAccordion = ({ options }: AccordionProps) => {
+
+    return (
+        <Box width="100%">
+            <Accordion.Root type="single" defaultValue={options[0].name} collapsible>
+                {options.map((option, index) => (
+                    <Flex key={index.toString()}
+                          width="100%" direction="column" 
+                          style={COMP_BORDER_STYLE} >
+
+                        <Accordion.Item value={option.name}>
+
+                            <Accordion.Header >
+                                <Accordion.Trigger style={{ width: '100%' }} >
+                                    <Flex width="100%" direction="row" justify="start" align="center" px="2" py="1">
+                                        <Flex width="70%" justify="start">
+                                            {option.text}
+                                        </Flex>
+                                        <Flex width="30%" justify="end" >
+                                            <ChevronDownIcon className="AccordionChevron" aria-hidden />
+                                        </Flex>
+                                    </Flex>
+                                    <SeparatorH />
+                                </Accordion.Trigger>
+                            </Accordion.Header>
+
+                            <AccordionContent>
+                                {option.text}
+                            </AccordionContent>
+
+                        </Accordion.Item>
+
+                    </Flex>
+                ))}
+            </Accordion.Root>
+        </Box>
+
+
+    )
+};//end

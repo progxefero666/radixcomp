@@ -1,10 +1,10 @@
 //src\app\gencode\cgtypescript\typescriptman.tsx
-
+import classNames from "classnames";
 import Image from 'next/image'
 import { useState, useEffect, useRef } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 import { Accordion } from "radix-ui";
-import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, } from "@radix-ui/themes";
+import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, ChevronDownIcon, } from "@radix-ui/themes";
 import { COMP_BORDER_STYLE, ButtonsStyle } from "@/radix/radixtheme";
 import { JsxOps, TsOps } from "@/codegen/data/cgdataoperations";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
@@ -19,6 +19,8 @@ import { RadixConf } from '@/radix/radixconf';
 import { CgDataConst } from '@/codegen/data/cgdataconfig';
 import { Keyvalue } from '@/common/model/keyvalue';
 import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion';
+import React from 'react';
+import { SeparatorH } from "@/radix/container/separatorh";
 
 
 const LAYOUT_STYLE = {
@@ -186,7 +188,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
         return (
             <>
 
-                <Flex direction="row" justify="between" px="2" py="1" align="center"
+                <Flex direction="row" justify="between" px="2" py="1" align="center" mb="2" 
                     style={COMP_BORDER_STYLE} >
                     <Box width="40%"><Text size="2">Count Params:</Text></Box>
                     <Box width="10%" >
@@ -200,34 +202,43 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         */}
                     </Box>
                 </Flex>
-                <Flex width="100%" direction="column" mt="2" >
+
+                <Box width="100%">
                     <Accordion.Root type="single" defaultValue={params[0].id.toString()} collapsible>
                         {params.map((param, index) => (
-                            <Box key={index.toString()}>
+                            <Flex key={index.toString()} width="100%"
+                                direction="column" style={COMP_BORDER_STYLE} >
+
                                 <Accordion.Item value={param.id.toString()}>
-                                    <AccordionTrigger>{param.label}</AccordionTrigger>
+
+                                    <Accordion.Header >
+                                        <Accordion.Trigger style={{ width: '100%' }} >
+                                            <Flex width="100%" direction="row" justify="start" align="center" px="2" py="1">
+                                                <Flex width="70%" justify="start">
+                                                    {param.label}
+                                                </Flex>    
+                                                <Flex width="30%" justify="end" >
+                                                    <ChevronDownIcon className="AccordionChevron" aria-hidden />
+                                                </Flex>                                              
+                                            </Flex>                                            
+                                            <SeparatorH />
+                                        </Accordion.Trigger>
+                                    </Accordion.Header>
+
                                     <AccordionContent>
                                         <CardInputParam pattindexInit={index}
                                             patterns={CgDataConst.LIST_PATTERNS}
                                             input={CgDataConst.LIST_PARAMS[index]}
                                             onchange={onchange} />
                                     </AccordionContent>
+
                                 </Accordion.Item>
-                            </Box>
+
+                            </Flex>
                         ))}
                     </Accordion.Root>
-                </Flex>
-                <Flex width="100%" direction="column" mt="2" gapY="2"  >
-                    {params.map((param, index) => (
-                        <Box key={index.toString()}>
-                            <CardInputParam pattindexInit={index}
-                                patterns={CgDataConst.LIST_PATTERNS}
-                                input={CgDataConst.LIST_PARAMS[index]}
-                                onchange={onchange} />
+                </Box>
 
-                        </Box>
-                    ))}
-                </Flex>
             </>
         );
     };//end  

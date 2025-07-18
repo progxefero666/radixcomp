@@ -99,7 +99,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
     };//end  
 
     return (
-        <Flex width="100%" direction="column" px="2" py="1" style={COMP_BORDER_STYLE} >
+        <Box width="100%"  px="2" py="1" >
 
             <Table.Root  >
                 <Table.Body >
@@ -174,7 +174,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
                 {renderPatterns()}
             </Box>
 
-        </Flex>
+        </Box>
     );
 
 }//end component
