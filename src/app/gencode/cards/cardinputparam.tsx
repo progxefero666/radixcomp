@@ -64,31 +64,13 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
             <Flex width="100%" direction="row" py="2" gapX="2" align="center" justify="center" >
                 {patterns.map((pattern, index) => (
                 <Box key={index.toString()}  >
-                    {index===pattindex ? 
-    <>
-        {index===0 && <Link href="#"><Image src="/icons/uno_red.png"   
-                            width={24} height={24} alt="1" onClick={()=>onHandlerOnClick(0)}/></Link>} 
-        {index===1 && <Link href="#"><Image src="/icons/dos_red.png"    
-                            width={24} height={24} alt="2" onClick={()=>onHandlerOnClick(1)} /></Link>}
-        {index===2 && <Link href="#"><Image src="/icons/tres_red.png"   width={24} height={24} alt="3" onClick={()=>onHandlerOnClick(2)}/></Link>} 
-        {index===3 && <Link href="#"><Image src="/icons/cuatro_red.png" width={24} height={24} alt="4" onClick={()=>onHandlerOnClick(3)}/></Link>}
-        {index===4 && <Link href="#"><Image src="/icons/cinco_red.png"  width={24} height={24} alt="5" onClick={()=>onHandlerOnClick(4)}/></Link>} 
-        {index===5 && <Link href="#"><Image src="/icons/seis_red.png"   width={24} height={24} alt="6" onClick={()=>onHandlerOnClick(5)}/></Link>}
-        {index===6 && <Link href="#"><Image src="/icons/siete_red.png"  width={24} height={24} alt="7" onClick={()=>onHandlerOnClick(6)}/></Link>} 
-        {index===7 && <Link href="#"><Image src="/icons/ocho_red.png"   width={24} height={24} alt="8" onClick={()=>onHandlerOnClick(7)}/></Link>}
-    </>                    
-: 
-    <>
-        {index===0 && <Link href="#"><Image src="/icons/uno.png"    width={24} height={24} alt="1" onClick={() => onHandlerOnClick(0)}/></Link>} 
-        {index===1 && <Link href="#"><Image src="/icons/dos.png"    width={24} height={24} alt="2" onClick={() => onHandlerOnClick(1)}/></Link>}
-        {index===2 && <Link href="#"><Image src="/icons/tres.png"   width={24} height={24} alt="3" onClick={() => onHandlerOnClick(2)}/></Link>} 
-        {index===3 && <Link href="#"><Image src="/icons/cuatro.png" width={24} height={24} alt="4" onClick={() => onHandlerOnClick(3)}/></Link>}
-        {index===4 && <Link href="#"><Image src="/icons/cinco.png"  width={24} height={24} alt="5" onClick={() => onHandlerOnClick(4)}/></Link>} 
-        {index===5 && <Link href="#"><Image src="/icons/seis.png"   width={24} height={24} alt="6" onClick={() => onHandlerOnClick(5)}/></Link>}
-        {index===6 && <Link href="#"><Image src="/icons/siete.png"  width={24} height={24} alt="" onClick={() => onHandlerOnClick(6)}/></Link>} 
-        {index===7 && <Link href="#"><Image src="/icons/ocho.png"   width={24} height={24} alt="" onClick={() => onHandlerOnClick(7)}/></Link>}
-    </>                    
-                    }                           
+					<Link href="#">
+                        {index==pattindex ? 
+                        <Image  src={pattern.actIcon} width={24} height={24} alt="alt" 
+                                onClick={()=>onHandlerOnClick(index)}/>: 
+                        <Image  src={pattern.defIcon} width={24} height={24} alt="alt" 
+                                onClick={() => onHandlerOnClick(index)}/>} 
+                    </Link>                             
                 </Box>                 
                 ))}
             </Flex>                    
