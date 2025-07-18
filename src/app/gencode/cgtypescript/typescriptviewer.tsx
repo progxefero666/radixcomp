@@ -1,22 +1,24 @@
 //src\app\gencode\cgtypescript\typescriptviewer.tsx
 
 import { useEffect, useState } from "react";
-import { Box, Separator, Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
+import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, } from "@radix-ui/themes";
 import CardCode from "@/app/gencode/cards/cardcode";
 
 import { OpConstants } from "@/common/constants";
 import { FileCode } from "@/filesystem/fsmodels";
 import { ButtonsStyle } from "@/radix/radixtheme";
 import { Link2Icon, PlayIcon, Share2Icon } from "@radix-ui/react-icons";
+import { CgDataConst } from "@/codegen/data/cgdata";
 
 
 /**
  * Component TypeScript Viewer 
  */
 interface CompProps {
+    template: string;
     code: string;
 }
-export function TypeScriptViewer({code}: CompProps) {
+export function TypeScriptViewer({template,code}: CompProps) {
 
     const onClick = (opId?: string) => {
 
@@ -29,11 +31,8 @@ export function TypeScriptViewer({code}: CompProps) {
         }                   
     };//end
 
-
-    return (
-        <Flex className="h-full" direction="column" >
-
-
+    const renderHeader = () => {
+        return (
             <Flex width={"100%"} justify="between" pl="4" pr="2" py="1" align="start" >
                 
                 <Text size="3" align="left">{"Output Code"}</Text>
@@ -58,9 +57,31 @@ export function TypeScriptViewer({code}: CompProps) {
                     </Button>                                   
                 </Flex>    
             </Flex>
+        );
+    };//end
 
+    return (
+        <Flex className="h-full" direction="column" >
+            {renderHeader()}
             <Separator orientation="horizontal" size="4" mb="2" />
-            <CardCode title="TypeScript Code" code={code} />        
+                  
+
+                <Tabs.Root defaultValue={CgDataConst.WTEMPLATE}>
+                    <Tabs.List>
+                        <Tabs.Trigger value={CgDataConst.WTEMPLATE}>Basic</Tabs.Trigger>
+                        <Tabs.Trigger value={CgDataConst.WCODE}>Advanced</Tabs.Trigger>
+
+                    </Tabs.List>
+                    <Box pt="3">
+                        <Tabs.Content value={CgDataConst.WTEMPLATE}>                           
+                           <CardCode title="Template" code={template} />  
+                        </Tabs.Content>
+
+                        <Tabs.Content title="Code" value={CgDataConst.WCODE}>
+                            <CardCode title="Template" code={code} /> 
+                        </Tabs.Content>
+                    </Box>
+                </Tabs.Root>            
         </Flex>
     );
 

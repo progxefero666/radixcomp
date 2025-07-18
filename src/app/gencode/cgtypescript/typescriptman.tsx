@@ -1,26 +1,18 @@
 //src\app\gencode\cgtypescript\typescriptman.tsx
 
 import Image from 'next/image'
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
 
 import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, } from "@radix-ui/themes";
 import { COMP_BORDER_STYLE, ButtonsStyle } from "@/radix/radixtheme";
-
-import { CrossCircledIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
-import { OpConstants } from "@/common/constants";
-import { Keyvalue } from "@/common/model/keyvalue";
 import { CgDataConst, JsxOps, TsOps } from "@/codegen/data/cgdata";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
-import { Label } from "@radix-ui/react-label";
 import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
-import { SeparatorH } from "@/radix/container/separatorh";
-import { min } from "date-fns";
 import CardInputParam from '../cards/cardinputparam';
-import { XInputNumber } from '@/radix/input/inpnumber';
 import { InputPattern } from '@/codegen/data/model/inputpattern';
 import { RADIX_COLORS } from '@/radix/radixconstants';
-
+import { PlayIcon } from '@radix-ui/react-icons';
 
 
 const LAYOUT_STYLE = {
@@ -57,10 +49,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };
 
     //................................................................................
-    // array parameters
+    // viewer content
     //................................................................................     
-    const [template, setTemplate] = useState<string>("");
-    const [data, setData] = useState<string>("");
+    const [template, setTemplate] = useState<string>("");    
     const [code, setCode] = useState<string>("");
 
     useEffect(() => {
@@ -76,8 +67,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
         setOpGroup(name!);     
         setOperation(TsOps.BASIC[index].key); 
         if(TsOps.BASIC[index].key===TsOps.OP_CLASS){
-            setTemplate(TsTemplates.t_class);  
-            setCode(TsTemplates.t_class);              
+            setTemplate(TsTemplates.t_class);                   
         }     
     };//end 
 
@@ -108,13 +98,12 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const execTsOperation = (index: number, name?: string) => {             
         if(TsOps.BASIC[index].key===TsOps.OP_CLASS){
             alert("run class operation");
-            //setCode(template);
         }      
     };//end 
 
     const execJsxOperation = (index: number, name?: string) => {  
         if(JsxOps.BASIC[index].key===JsxOps.OP_BUTTONS){
-            //setCode(template);
+            alert("run buttons operation");
         }       
     };//end 
     
@@ -224,7 +213,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
             </Box>    
 
             <Box  width="41%" >
-                <TypeScriptViewer key={code}  code={code}  />           
+                <TypeScriptViewer key={template}
+                                  template={template}
+                                  code={code}  />           
             </Box>              
 
         </Flex>

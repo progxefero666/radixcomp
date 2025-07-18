@@ -11,9 +11,12 @@ import { Pattern } from "@/codegen/data/model/pattern";
 //................................................................................
 
 /**
- * class CgDataConstants.COUNT_PARAMETERS_DEF
+ * class {CgDataConst.WCODE}
  */
 export class CgDataConst {
+
+    public static readonly WTEMPLATE: string = "template";
+    public static readonly WCODE: string = "code";
 
     public static readonly MAX_LENGTH_DEF: number = 50;
     public static readonly MAX_COUNT_PARAMETERS: number = 8;
