@@ -138,10 +138,11 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                         <Table.Row >
                             <Table.Cell>var:</Table.Cell>
                             <Table.Cell>
-                                <XInputText defaul={variable}  key={variable}
+                                <XInputText key={variable}
+                                            defaul={variable}
                                             inline={true}
                                             autocommit={true}
-                                             />
+                                            disabled={!useVariable} />
                             </Table.Cell>
                             <Table.Cell>
                                 <Box pt="2">

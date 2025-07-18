@@ -31,7 +31,7 @@ interface InputTextProps {
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     name, defaul, maxlen,autocommit,autofocus,type, inline, 
-    label, placeholder, onchange: onChange,onsubmit, icon, readonly, disabled }, ref) => {
+    label, placeholder, onchange,onsubmit, icon, readonly, disabled }, ref) => {
 
     if(disabled) {defaul=" ";}
 
@@ -48,11 +48,13 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     //useEffect(() => { }, []);
 
+
+
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         
         setValue(event.target.value);
         if (autocommit) {
-            if (onChange) {
+            if (onchange) {
                 //if (name !== null) {onChange(event.target.value, name);}
                 //else {onChange(event.target.value);}
             }
@@ -103,6 +105,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
         }
         // apply default value
         else {
+            
             return (
                 <TextField.Root type={input_type}
                     defaultValue={defaul}
