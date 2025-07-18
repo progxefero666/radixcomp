@@ -18,4 +18,8 @@ export class InputPattern  {
         this.label = "Parameter " + id;
     };//end
 
+    public getValue(): string {
+        return this.pattern.start + this.pattern.end;
+    };//end
+    
 }//end class

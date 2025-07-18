@@ -44,6 +44,7 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
     const [variableInit, setVariableInit] = useState<string>("");
     const [variable, setVariable] = useState<string>("");
     const [pattindex, setPattindex] = useState<number>(pattindexInit);
+    const [pattern, setPattern] = useState<string>(input.getValue());
 
     const onHandlerOnClick = (index:number) => {
         setPattindex(index);
@@ -100,7 +101,7 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
                     <Flex width="100%"  direction="row" justify="between" align="center" pl="2" pr="2">
                         <Text>{input.label}</Text>                                        
                         <Text size="3" color={RADIX_COLORS.amber} >
-                            {input.pattern.start + input.pattern.end}
+                            
                         </Text>                        
                     </Flex>
                 </Flex>
@@ -111,35 +112,50 @@ export default function CardInputParam({patterns,input,pattindexInit,onchange,ma
                     <Table.Body >
 
                         <Table.Row >
-                            <Table.Cell px="0" maxWidth="20%">
+                            <Table.Cell px="2" maxWidth="20%">
                                 <Text size={TextStyle.DEFAULT_SIZE} 
                                       color={TextStyle.DEF_COLOR} >
-                                    var:
+                                    Variable
                                 </Text>
                             </Table.Cell>
                             <Table.Cell>
-                                <XInputText key={variableInit}
-                                            autofocus={true}
+                                <XInputText inline={true} autocommit={true} autofocus={true}                                            
                                             defaul={variableInit}
-                                            onchange={onchangeVarValue}
-                                            inline={true}
-                                            autocommit={true}
+                                            onchange={onchangeVarValue}                                                                                        
                                             disabled={!useVariable} />
                             </Table.Cell>
                             <Table.Cell>
                                 <Box pt="2">
-                                    <XInputCheck name="useVariable"
-                                                 autocommit={true} 
-                                                 inline={true} 
-                                                 value={useVariable}
+                                    <XInputCheck inline={true} autocommit={true}                                                  
+                                                 name="useVariable" value={useVariable}
                                                  onchange={() => onChangeUseVariable()} />
                                 </Box>                                
                             </Table.Cell>                            
                         </Table.Row> 
 
                         <Table.Row>
-                            <Table.Cell px="0" maxWidth="20%">
-                                value:
+                            <Table.Cell px="2" maxWidth="20%">
+                                <Text size={TextStyle.DEFAULT_SIZE} 
+                                      color={TextStyle.DEF_COLOR} >
+                                    Pattern
+                                </Text>
+                            </Table.Cell>
+                            <Table.Cell>
+                                <Text size={TextStyle.DEFAULT_SIZE} 
+                                      color={TextStyle.COLOR_SPECIAL} >
+                                    {pattern}
+                                </Text>                                
+                               
+                            </Table.Cell>
+
+                        </Table.Row>
+
+                        <Table.Row>
+                            <Table.Cell px="2" maxWidth="20%">
+                                <Text size={TextStyle.DEFAULT_SIZE} 
+                                      color={TextStyle.DEF_COLOR} >
+                                    Value
+                                </Text>
                             </Table.Cell>
                             <Table.Cell>
                                 <TextField.Root 

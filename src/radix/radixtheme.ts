@@ -45,13 +45,15 @@ export class ThemePagesStyles {
 }//end class
 
 /**
- * class ThemeTextStyle.DEFAULT_SIZE
+ * class TextStyle.COLOR_SPECIAL
  */
 export class TextStyle {
     
     public static readonly DIALOG_TITLE_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly DEFAULT_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly DEF_COLOR: any = "#EEEEEE";
+
+    public static readonly COLOR_SPECIAL: any = "#d9ff00ff";
 }
 
 /**
