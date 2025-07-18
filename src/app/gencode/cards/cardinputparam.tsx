@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Image from 'next/image'
 import { Box,Text,Flex,IconButton,TextField,Link, ScrollArea, Table, Checkbox} from "@radix-ui/themes";
 
-import { InputPattern } from "@/codegen/data/inputpattern";
+import { InputPattern } from "@/codegen/data/model/inputpattern";
 import { Label } from "@radix-ui/react-label";
-import { CgDataConstants } from "@/codegen/data/cgdata";
+import { CgDataConst } from "@/codegen/data/cgdata";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import { RADIX_COLORS } from "@/radix/radixconstants";
 import { RadixConf } from "@/radix/radixconf";
@@ -126,7 +126,7 @@ export default function CardInputParam({patterns, input,pattindexInit, maxlength
                             <Table.Cell>value:</Table.Cell>
                             <Table.Cell>
                                 <TextField.Root 
-                                    maxLength={maxlength ?? CgDataConstants.MAX_LENGTH_DEF}
+                                    maxLength={maxlength ?? CgDataConst.MAX_LENGTH_DEF}
                                     name = {input.id}
                                     placeholder = {input.id}
                                     radius = "medium" />

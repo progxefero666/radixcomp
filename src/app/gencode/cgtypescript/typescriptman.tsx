@@ -10,7 +10,7 @@ import { COMP_BORDER_STYLE, ThemeButtonsStyle } from "@/radix/radixtheme";
 import { CrossCircledIcon, PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import { OpConstants } from "@/common/constants";
 import { Keyvalue } from "@/common/model/keyvalue";
-import { CgDataConstants, JsxOps, TsOps } from "@/codegen/data/cgdata";
+import { CgDataConst, JsxOps, TsOps } from "@/codegen/data/cgdata";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
 import { Label } from "@radix-ui/react-label";
 import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
@@ -18,7 +18,7 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import { min } from "date-fns";
 import CardInputParam from '../cards/cardinputparam';
 import { XInputNumber } from '@/radix/input/inpnumber';
-import { InputPattern } from '@/codegen/data/inputpattern';
+import { InputPattern } from '@/codegen/data/model/inputpattern';
 import { RADIX_COLORS } from '@/radix/radixconstants';
 
 
@@ -40,18 +40,18 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const [countParams, setCountParams] = useState<number>(1);
     const [params, setParams] 
-        = useState<InputPattern[]>(CgDataConstants.LIST_PARAMETERS.slice(0,1));
+        = useState<InputPattern[]>(CgDataConst.LIST_PARAMETERS.slice(0,1));
     
-    const sliderParamsValueInit = CgDataConstants.COUNT_PARAMETERS_DEF * 
-                                  CgDataConstants.FACTOR_INC_PARAMETERS;
+    const sliderParamsValueInit = CgDataConst.COUNT_PARAMETERS_DEF * 
+                                  CgDataConst.FACTOR_INC_PARAMETERS;
 
     const [sliderParamsValue, setSliderParamsValue] = useState<number>(sliderParamsValueInit);
 
     const onChangeCountParams = (value: number[]) => {
-        const count:number = Math.floor(value[0] / CgDataConstants.FACTOR_INC_PARAMETERS);
+        const count:number = Math.floor(value[0] / CgDataConst.FACTOR_INC_PARAMETERS);
         setCountParams(count);
-        setParams(CgDataConstants.LIST_PARAMETERS.slice(0,count+1));
-        setSliderParamsValue(count * CgDataConstants.FACTOR_INC_PARAMETERS);
+        setParams(CgDataConst.LIST_PARAMETERS.slice(0,count+1));
+        setSliderParamsValue(count * CgDataConst.FACTOR_INC_PARAMETERS);
     };
 
     const [template, setTemplate] = useState<string>("");
@@ -159,7 +159,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         <Text  size="3" color={RADIX_COLORS.orange}>{countParams}</Text>                          
                     </Box>                           
                     <Box width="50%">
-                        <Slider defaultValue={[sliderParamsValue]} step={CgDataConstants.FACTOR_INC_PARAMETERS}
+                        <Slider defaultValue={[sliderParamsValue]} step={CgDataConst.FACTOR_INC_PARAMETERS}
                                 onValueChange={onChangeCountParams}   />                        
                     </Box>
                 </Flex>
@@ -168,8 +168,8 @@ export function TypeScriptManager({ onresult }: CompProps) {
                     {params.map((param, index) => (
                         <Box key={index.toString()}>
                             <CardInputParam pattindexInit={index}
-                                            patterns={CgDataConstants.LIST_PATTERNS} 
-                                            input={CgDataConstants.LIST_PARAMETERS[index]} />                            
+                                            patterns={CgDataConst.LIST_PATTERNS} 
+                                            input={CgDataConst.LIST_PARAMETERS[index]} />                            
                         </Box>                 
                     ))}
                 </Flex>                               
