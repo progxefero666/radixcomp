@@ -106,10 +106,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
         setCode(" ");
     };//end 
 
-    const onGroupSelected = (group: string) => {
-        if(group === TsOps.MOD_ID)       {onTsOpSelected(0,TsOps.MOD_ID); }
-        else if(group === JsxOps.MOD_ID) {onJsxOpSelected(0,JsxOps.MOD_ID);}
-  
+    const onTabSelected = (tabValue: string) => {
+        if(tabValue === TsOps.MOD_ID)       {onTsOpSelected(0,TsOps.MOD_ID); }
+        else if(tabValue === JsxOps.MOD_ID) {onJsxOpSelected(0,JsxOps.MOD_ID);}
     };//end
 
 
@@ -158,8 +157,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
         );
     };//end
 
-    const renderParameters = () => {
-    
+    const renderParameters = () => {    
         return (
             <>
                 <Flex direction="row" justify="between" px="2" py="1" align="center" mb="2" 
@@ -169,9 +167,6 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         <Text size="3" color={RADIX_COLORS.orange}>{countParams}</Text>
                     </Box>
                     <Box width="50%">
-                        {/*
-      
-                        */}
                     </Box>
                 </Flex>
 
@@ -206,17 +201,14 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end  
 
     return (
-        //onClick={(e) => onGroupSelected(e.currentTarget.tabIndex)}
 
         <Flex height="auto" width="100%" direction="row" gridColumn="1" gridRow="1" >
 
             <Box width="20%" >
                 <Tabs.Root defaultValue={TsOps.MOD_ID} 
-                            onValueChange={(value) => onGroupSelected(value)} >
+                            onValueChange={(value) => onTabSelected(value)} >
                     <Tabs.List >
-                        <Tabs.Trigger value={TsOps.MOD_ID} >
-                            {TsOps.MOD_ID}
-                        </Tabs.Trigger>
+                        <Tabs.Trigger value={TsOps.MOD_ID}>{TsOps.MOD_ID}</Tabs.Trigger>
                         <Tabs.Trigger value={JsxOps.MOD_ID}>{JsxOps.MOD_ID}</Tabs.Trigger>
                         <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
                     </Tabs.List>
@@ -225,8 +217,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                             {renderBasicContent()}
                         </Tabs.Content>
                         <Tabs.Content value={JsxOps.MOD_ID}>
-                            {renderJsxContent()}
-                            
+                            {renderJsxContent()}                            
                         </Tabs.Content>
                         <Tabs.Content value="advanced">
                             {renderAdvancedContent()}
@@ -237,36 +228,15 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
             <Box width="36%" pr="3" >
                 <Flex width="100%" direction="row" py="1" justify="center" gapX="2" >
-                    <Button color={ButtonsStyle.COLOR_RUN} 
-                        size={ButtonsStyle.DEF_SIZE}
-                        radius={ButtonsStyle.DEF_RADIUS}
-                        onClick={() => runOperation()}>
-                        <PlayIcon />
-                        <Text size="3">execute</Text>
-                    </Button>
-                    <Button color={ButtonsStyle.COLOR_CLEAR} 
-                        size={ButtonsStyle.DEF_SIZE}
-                        radius={ButtonsStyle.DEF_RADIUS}
-                        onClick={() => runOperation()}>
-                        <TrashIcon />
-                        <Text size="3">clear</Text>
-                    </Button>                
-                    <Button color={ButtonsStyle.COLOR_CLOSE} 
-                        size={ButtonsStyle.DEF_SIZE}
-                        radius={ButtonsStyle.DEF_RADIUS}
-                        onClick={() => runOperation()}>
-                        <TextAlignTopIcon />
-                        <Text size="3">close all</Text>
-                    </Button>   
-                    {/*
-                    <Button color={ButtonsStyle.COLOR_RESET} 
-                        size={ButtonsStyle.DEF_SIZE}
-                        radius={ButtonsStyle.DEF_RADIUS}
-                        onClick={() => runOperation()}>
-                        <ReloadIcon />
-                        <Text size="3">init</Text>
-                    </Button>                    
-                    */}
+
+                    {renderButton("Execute",ButtonsStyle.COLOR_RUN,
+                                 <PlayIcon />,"execute",runOperation)}  
+
+                    {renderButton("Clear",ButtonsStyle.COLOR_CLEAR,
+                                 <TrashIcon />,"clear",runOperation)}  
+
+                    {renderButton("Close All",ButtonsStyle.COLOR_CLOSE,
+                                 <TextAlignTopIcon />,"init",runOperation)}       
    
                     {renderButton("Init",ButtonsStyle.COLOR_RESET,
                                  <TrashIcon />,"init",runOperation)}

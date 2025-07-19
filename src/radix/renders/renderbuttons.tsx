@@ -20,11 +20,6 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import { CgDataPatterns } from '@/codegen/data/cgdatapatterns';
 
 
-const renderIcon = (icon:string) => {
-    return (
-        {icon}  
-    );
-};
 
 export const renderButton = (text:string, 
                              color:any,
@@ -42,3 +37,10 @@ export const renderButton = (text:string,
         </Button>    
     );
 };//end
+
+
+export const renderIconButton = (icon:string) => {
+    return (
+        {icon}  
+    );
+};
