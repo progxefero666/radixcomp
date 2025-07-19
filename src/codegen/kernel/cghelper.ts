@@ -136,11 +136,12 @@ export class CodeGenHelper {
 
         // apply indentation to each line
         const lines = text.split('\n');
+        let  result: string = "";
         for (let idx=0;idx<lines.length;idx++) {
-            lines[idx] = spaceApply + lines[idx];
+            result += spaceApply + lines[idx] + "\n";
         }
   
-        return lines.join('\n');
+        return result;
     }
     
     //CodeGenHelper.getStringsJoined

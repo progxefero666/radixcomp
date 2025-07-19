@@ -87,21 +87,20 @@ export class XFormsGen {
     public static genInputValues(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
 
-        let result: string = XForms.t_form_inputs + CgConfig.RET;
-        result += XForms.t_useEffect_start + CgConfig.RET;
-
-        let array_result = "setFormInputs(["+ CgConfig.RET;
+        let array_result =  "setFormInputs(["+ CgConfig.RET;
         for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
-            array_result +=  CgConfig.TAB_4 +`new InputValue("` + jsonCollection.fields[idx].name + `", null)`;
+            array_result +=   CgConfig.TAB_4 +`new InputValue("` + jsonCollection.fields[idx].name + `", null)`;
             array_result += CgConfig.RET;
         }
-        array_result += "]);" + CgConfig.RET;
-        array_result = CodeGenHelper.applyTabsToStringBlock(array_result, 1);
-        
-        result+= array_result;
-        result+= XForms.t_useEffect_end + CgConfig.RETx2;
-        result+= CodeGenHelper.applyTabsToStringBlock(result, 1);
-        return array_result;
+        array_result +=  "]);";
+
+        array_result = CodeGenHelper.applyTabsToStringBlock(array_result, 2);
+             
+        let result: string = XForms.t_form_inputs + CgConfig.RET;
+        result +=  XForms.t_useEffect_start + CgConfig.RET;
+        result += array_result;
+        result += XForms.t_useEffect_end + CgConfig.RET;        
+        return result;
     };//
 
     public static genRefs(jsonTable: string): string {
@@ -170,12 +169,11 @@ export class XFormsGen {
 
         //............................................................................
         let resultImports: string = XFormsGen.genImports();
-        let resultInputs: string = XFormsGen.genInputValues(jsonTable);
+        let resultInputs: string  = XFormsGen.genInputValues(jsonTable);
         //............................................................................
 
         //............................................................................
         let resultRefs: string = "";
-        resultRefs += CodeGenHelper.applyTabsToStringBlock(XFormsGen.genRefs(jsonTable),1);
         resultRefs += CgConfig.RETx2;
         //............................................................................
 
@@ -261,11 +259,11 @@ export class XFormsGen {
             }//end if pk
 
         }//end for
-        resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2);
+        resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2)+ CgConfig.RET;;
         //............................................................................        
 
         let result:string = resultImports + resultInputs + resultRefs + resultFields;
-        return resultInputs;
+        return result;
     }//end
 
     //ouputFormatRef.current!.value
