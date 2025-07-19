@@ -25,7 +25,7 @@ import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
 import jsonApp from "@/db/modeljson/application.json";
 import { InputField } from "@/common/model/inputfield";
-import { jsonTemplate, XFormsGenerator } from "@/codegen/xforms/xforms";
+import { jsonTemplate, XFormsGen } from "@/codegen/xforms/xforms";
 
 
 //---------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     const runTest = () => {
 
-          XFormsGenerator.generateForm(jsonTemplate);
+          XFormsGen.generateForm(jsonTemplate);
     };//end
 
     const runOperation = async () => {

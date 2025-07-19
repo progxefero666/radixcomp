@@ -6,12 +6,13 @@
 
 
 /**
- * class CodeGenConfig.RETURNx2
+ * class CgConfig.CHAR_SPACE
  */
 export class CgConfig {
 
     public static readonly DEF_FILE_ID:string = "default";
     public static readonly DEF_CLASS_NAMEADD: string = "Def"
+    public static readonly CHAR_SPACE:string = " ";
     public static readonly TAB_4:string = "    ";
     public static readonly RET:string = "\n";
     public static readonly RETx2:string = "\n\n";
