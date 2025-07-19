@@ -15,24 +15,6 @@
             "relations": null
         }, 
         {
-            "name": "apptype_id",
-            "type": "number",
-            "required": true,
-            "generated": false,
-            "default": "0",
-            "format": "5:0",
-            "pk": false,
-            "fk": true,
-            "minlen": null,
-            "maxlen": null,
-                        "relations": [
-                {
-                    "table": "apptype",
-                    "field": "id"
-                }
-            ]
-                    }, 
-        {
             "name": "codelang_id",
             "type": "number",
             "required": true,
@@ -78,7 +60,7 @@
         }, 
         {
             "name": "repository",
-            "type": "text",
+            "type": "url",
             "required": false,
             "generated": false,
             "default": null,
@@ -91,7 +73,7 @@
         }, 
         {
             "name": "author",
-            "type": "text",
+            "type": "password",
             "required": false,
             "generated": false,
             "default": null,
@@ -103,12 +85,12 @@
             "relations": null
         }, 
         {
-            "name": "osystem",
-            "type": "text",
+            "name": "version",
+            "type": "decimal",
             "required": false,
             "generated": false,
-            "default": null,
-            "format": null,
+            "default": 0.0,
+            "format": "6:3",
             "pk": false,
             "fk": false,
             "minlen": null,
@@ -116,8 +98,8 @@
             "relations": null
         }, 
         {
-            "name": "appurl",
-            "type": "text",
+            "name": "telephone",
+            "type": "tel",
             "required": false,
             "generated": false,
             "default": null,
@@ -129,8 +111,8 @@
             "relations": null
         }, 
         {
-            "name": "apppath",
-            "type": "text",
+            "name": "email",
+            "type": "email",
             "required": false,
             "generated": false,
             "default": null,
@@ -139,19 +121,6 @@
             "fk": false,
             "minlen": null,
             "maxlen": 500,
-            "relations": null
-        }, 
-        {
-            "name": "localdev",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "true",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
             "relations": null
         }, 
         {
@@ -181,32 +150,6 @@
             "relations": null
         }, 
         {
-            "name": "useui",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null
-        }, 
-        {
-            "name": "useagents",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null
-        }, 
-        {
             "name": "consumedb",
             "type": "boolean",
             "required": true,
@@ -221,45 +164,6 @@
         }, 
         {
             "name": "consumeapi",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null
-        }, 
-        {
-            "name": "consumeai",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null
-        }, 
-        {
-            "name": "exposedb",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null
-        }, 
-        {
-            "name": "exposeapi",
             "type": "boolean",
             "required": true,
             "generated": false,

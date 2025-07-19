@@ -24,6 +24,7 @@ import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
 import jsonApp from "@/db/modeljson/application.json";
+import { InputField } from "@/common/model/inputfield";
 
 
 //---------------------------------------------------------------------------------------
@@ -100,9 +101,12 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     const runTest = () => {
 
+        const formFields:InputField[] = [];
+
         for(let idx=0; idx < jsonApp.fields.length; idx++) {
 
             console.log("...........................................");
+            console.log("type:", jsonApp.fields[idx].type);
             if(jsonApp.fields[idx].pk){
                 console.log("pk :", jsonApp.fields[idx].name);
             } 
@@ -110,9 +114,21 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                 console.log("fKey:", jsonApp.fields[idx].name);
             }
             else {
-                console.log("type:", jsonApp.fields[idx].type);
+                if(jsonApp.fields[idx].type === "text"){
+
+                }
+                else if(jsonApp.fields[idx].type === "number"){
+                    
+                }   
+                else if(jsonApp.fields[idx].type === "boolean"){
+                    
+                }
+                else if(jsonApp.fields[idx].type === "date"){
+                    
+                }                                              
+                console.log("default:", jsonApp.fields[idx].name);
             }     
-        }
+        }//end for
           
     };//end
 

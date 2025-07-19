@@ -1,20 +1,21 @@
 //src\common\model\inputfield.ts
 
-import { TypeInput } from "@/common/types";
+
 import { Option } from "@/common/model/option";
 import { TRange } from "@/radix/radixtypes";
+import { FieldType } from "@/radix/xforms/xformstypes";
 
 
 export class InputField {
 
     public id: string;
-    public itype: TypeInput;
+    public itype: FieldType;
     public placeholder: string;
     public value: any|null;
     public label: string | null = null;
     public length: TRange | null = null;
 
-    constructor(itype: TypeInput, id: string,
+    constructor(itype: FieldType, id: string,
         placeholder: string, value: any|null,
         label: string | null, length?: TRange) {
 
