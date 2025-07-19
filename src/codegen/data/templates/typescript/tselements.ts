@@ -3,6 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { Box,Flex,Text,Grid,Button,IconButton,Tabs} from "@radix-ui/themes";
 import { Keyvalue } from "@/common/model/keyvalue";
 
+// template function
+//............................................................................
+
+
+const _f0_ = async (field_0:string, field_1:boolean) => {   
+    
+};//end 
+
 
 // template class
 //............................................................................
@@ -27,4 +35,25 @@ export class __$Template$__ {
         return JSON.stringify(this, null, 4);
     }
     
+  
+}//end class
+
+/*
+     new Pattern("^%","%^","/icons/uno"),  
+        new Pattern("^¡","¡^","/icons/dos"),
+        new Pattern("^<",">^","/icons/tres"),
+        new Pattern("^[","]^","/icons/cuatro"),
+        new Pattern("^+","+^","/icons/cinco"),
+        new Pattern("*^","*^","/icons/seis"),        
+        new Pattern("^-","^-","/icons/siete"),
+        new Pattern("^:",":^","/icons/ocho")
+*/
+
+export class templates {
+
+public static funct_void: string =
+`const function_void = (f0:string,f1:boolean) => {
+
+};//end`;
+
 }//end class

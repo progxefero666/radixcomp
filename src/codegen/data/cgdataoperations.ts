@@ -13,15 +13,16 @@ export class TsOps {
     public static readonly MOD_ID: string = "typescript";
 
     public static BASIC: Keyvalue[] = [
-        new Keyvalue("class",           TsTemplates.class),
-        new Keyvalue("type",            "TsTemplates.type"),
-        new Keyvalue("function",        "TsTemplates.function"),
-        new Keyvalue("function_static", "TsTemplates.function_static"),
-        new Keyvalue("function_promise","TsTemplates.function_promise"),
-        new Keyvalue("function_async",  "TsTemplates.function_async"),       
-        new Keyvalue("interface",       "TsTemplates.interface"),        
-        new Keyvalue("use_state",       "TsTemplates.use_state"),
-        new Keyvalue("use_effect",      "TsTemplates.use_effect"),        
+
+        new Keyvalue("class",       TsTemplates.clas),
+        new Keyvalue("class_static",TsTemplates.class_static),
+        new Keyvalue("funct_void",          TsTemplates.funct_void),
+        new Keyvalue("funct_return",        TsTemplates.funct_return),
+        new Keyvalue("funct_static",        TsTemplates.funct_static),
+        new Keyvalue("funct_promise",       TsTemplates.funct_promise),
+        new Keyvalue("funct_async",         TsTemplates.funct_async),   
+        new Keyvalue("funct_static_promise",TsTemplates.funct_static_promise),    
+        //new Keyvalue("interface",       "TsTemplates.interface"),       
     ];
 
     public static getColl_BASIC(): Keyvalue[] {
