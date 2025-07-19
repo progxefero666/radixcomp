@@ -125,7 +125,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                 }
                 else if(jsonApp.fields[idx].type === "date"){
                     
-                }                                              
+                }                                              jsonAppjsonAppjsonAppjsonAppjsonApp
                 console.log("default:", jsonApp.fields[idx].name);
             }     
         }//end for

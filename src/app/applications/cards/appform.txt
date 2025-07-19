@@ -57,9 +57,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
 
     //const item_date: string = format(new Date(), "yyyy/MM/dd");
     const item_date: Date = new Date();
-    const dateRef = useRef<HTMLInputElement>(null);
 
-    const typeRef = useRef<HTMLSelectElement>(null);
     const proglanguageRef = useRef<HTMLSelectElement>(null);
 
     const nameRef = useRef<HTMLInputElement>(null);
