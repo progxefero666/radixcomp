@@ -12,7 +12,8 @@ import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { XInputCheck } from "@/radix/input/inputcheck";
 import { XInputText } from "@/radix/input/inptext";
 import { Pattern } from "@/codegen/data/model/pattern";
-import { CgDataConst } from "@/codegen/data/cgdatakernel";
+import { CgDataProcessor } from "@/codegen/data/cgdataproc";
+
 
 const compStyle = {
     background: 'rgb(35, 35, 39)',
@@ -135,7 +136,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
                         </Table.Cell>
                         <Table.Cell>
                             <TextField.Root style={TextStyle.COLOR_SPECIAL}
-                                maxLength={CgDataConst.MAX_LENGTH_DEF}
+                                maxLength={CgDataProcessor.MAX_LENGTH_DEF}
                                 name={input.id.toString()}
                                 defaultValue={pattern}
                                 key={pattern}
@@ -156,7 +157,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
                         <Table.Cell>
                             <TextField.Root
                                 onChange={(e) => onChangeValue(e.target.value)}
-                                maxLength={CgDataConst.MAX_LENGTH_DEF}
+                                maxLength={CgDataProcessor.MAX_LENGTH_DEF}
                                 name={input.id.toString()}
                                 placeholder={input.id.toString()}
                                 radius="medium" />

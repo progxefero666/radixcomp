@@ -1,28 +1,17 @@
 //src\codegen\data\cgdataconfig.ts
 
 import { Keyvalue } from "@/common/model/keyvalue";
-import { InputPattern } from "@/codegen/data/model/inputpattern";
-import { Pattern } from "@/codegen/data/model/pattern";
 import { TextHelper } from "@/common/helper/texthelper";
-
-
-/**
- * class CgDataConst.WTEMPLATE
- */
-export class CgDataConst {
-
-    public static readonly WTEMPLATE: string = "template";
-    public static readonly WCODE: string = "code";
-
-    public static readonly MAX_LENGTH_DEF: number = 50;
- 
-};//end class
 
 
 /**
  * class CgDataProcessor
  */
 export class CgDataProcessor {
+
+    public static readonly WTEMPLATE: string = "template";
+    public static readonly WCODE: string = "code";
+    public static readonly MAX_LENGTH_DEF: number = 50;
 
     public static executeOperation(template:string,params:Keyvalue[]): string {
         console.log(params);

@@ -5,8 +5,6 @@ import { TOption } from "@/radix/radixtypes";
 import { Accordion } from "radix-ui";
 import { ChevronDownIcon, } from "@radix-ui/themes";
 import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
-import { CgDataConst } from '@/codegen/data/cgdatakernel';
-
 import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion';
 import React from 'react';
 import { SeparatorH } from "@/radix/container/separatorh";

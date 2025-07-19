@@ -14,7 +14,7 @@ import { PlayIcon, ReloadIcon, TextAlignTopIcon, TrashIcon } from '@radix-ui/rea
 import { OpConstants } from '@/common/constants';
 import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';
 import { RadixConf } from '@/radix/radixconf';
-import { CgDataConst, CgDataProcessor } from '@/codegen/data/cgdatakernel';
+import { CgDataProcessor } from '@/codegen/data/cgdataproc';
 import { Keyvalue } from '@/common/model/keyvalue';
 import React from 'react';
 import { SeparatorH } from "@/radix/container/separatorh";
@@ -35,7 +35,7 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
-    const [viewerActTab, setViewerActTab] = useState<string>(CgDataConst.WTEMPLATE);
+    const [viewerActTab, setViewerActTab] = useState<string>(CgDataProcessor.WTEMPLATE);
     const [paramsValues, setParamsValues] = useState<Keyvalue[]>([]);
 
     //................................................................................
@@ -117,7 +117,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const runOperation = () => {
         if (opGroup == TsOps.MOD_ID) {
             const result:string =  CgDataProcessor.executeOperation(template, paramsValues);
-            setViewerActTab(CgDataConst.WCODE);
+            setViewerActTab(CgDataProcessor.WCODE);
             setCode(result);
         }
         else if (opGroup == JsxOps.MOD_ID) {
@@ -293,7 +293,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
             <Box width="44%" >
                 <TypeScriptViewer key={template}
-                                  activetab={CgDataConst.WTEMPLATE}
+                                  activetab={CgDataProcessor.WTEMPLATE}
                                   template={template}
                                   code={code} />
             </Box>

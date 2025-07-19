@@ -8,7 +8,8 @@ import { OpConstants } from "@/common/constants";
 import { FileCode } from "@/filesystem/fsmodels";
 import { ButtonsStyle } from "@/radix/radixtheme";
 import { Link2Icon, PlayIcon, Share2Icon } from "@radix-ui/react-icons";
-import { CgDataConst } from "@/codegen/data/cgdatakernel";
+import { CgDataProcessor } from "@/codegen/data/cgdataproc";
+
 
 
 /**
@@ -61,18 +62,18 @@ export function TypeScriptViewer({activetab,template,code}: CompProps) {
         <Flex className="h-full" direction="column" >
 
                   
-            <Tabs.Root defaultValue={CgDataConst.WTEMPLATE}>
+            <Tabs.Root defaultValue={CgDataProcessor.WTEMPLATE}>
                 <Tabs.List>
-                    <Tabs.Trigger value={CgDataConst.WTEMPLATE}>Template</Tabs.Trigger>
-                    <Tabs.Trigger value={CgDataConst.WCODE}>Code</Tabs.Trigger>
+                    <Tabs.Trigger value={CgDataProcessor.WTEMPLATE}>Template</Tabs.Trigger>
+                    <Tabs.Trigger value={CgDataProcessor.WCODE}>Code</Tabs.Trigger>
                     {renderBarButtons()}
                 </Tabs.List>
                 <Box pt="3">
-                    <Tabs.Content value={CgDataConst.WTEMPLATE}>                           
+                    <Tabs.Content value={CgDataProcessor.WTEMPLATE}>                           
                         <CardCode code={template} />  
                     </Tabs.Content>
 
-                    <Tabs.Content value={CgDataConst.WCODE}>
+                    <Tabs.Content value={CgDataProcessor.WCODE}>
                         <CardCode code={code} /> 
                     </Tabs.Content>
                 </Box>
