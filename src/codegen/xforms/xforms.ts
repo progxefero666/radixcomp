@@ -28,47 +28,45 @@ export class XForms {
     public static readonly TT_TEL: string = "telephone";
     public static readonly TT_HIDDEN: string = "hidden";
 
-    public static tempRefInput: string = `const ^%v%^Ref = useRef<HTMLInputElement>(null);`;
-    public static tempRefSelect: string = `const dateRef = useRef<HTMLSelectElement>(null);`;
+    public static t_refInput: string = `const ^%v%^Ref = useRef<HTMLInputElement>(null);`;
+    public static t_refSelect: string = `const dateRef = useRef<HTMLSelectElement>(null);`;
 
-    public static tempAttr_name: string = `name={^%v%^}`;
-    public static tempAttr_label: string = `label={^%v%^}`;
+    public static t_attr_name: string = `name={^%v%^}`;
+    public static t_attr_label: string = `label={^%v%^}`;
     
-    public static tempAttr_maxlen: string = `maxlen={^%v%^}`;
-    public static tempAttr_readonly: string = `readonly={^%v%^}`;
-    public static tempAttr_disabled: string = `disabled={^%v%^}`;
-    public static tempAttr_ref: string = `ref={^%v%^}`;
-    public static tempAttr_inline: string = `inline={^%v%^}`;
-    public static tempAttr_collection: string = `collection={^%v%^}`;
-    public static tempAttr_autocommit: string = `default={^%v%^}`;
+    public static t_attr_maxlen: string = `maxlen={^%v%^}`;
+    public static t_attr_readonly: string = `readonly={^%v%^}`;
+    public static t_attr_disabled: string = `disabled={^%v%^}`;
+    public static t_attr_ref: string = `ref={^%v%^}`;
+    public static t_attr_inline: string = `inline={^%v%^}`;
+    public static t_attr_collection: string = `collection={^%v%^}`;
+    public static t_attr_autocommit: string = `default={^%v%^}`;
 
-    public static tempAttr_default_text: string = `default={'^%v%^'}`;
-    public static tempAttr_default_other: string = `default={^%v%^}`;
+    public static t_attr_default_text: string = `default={'^%v%^'}`;
+    public static t_attr_default_other: string = `default={^%v%^}`;
 
-    public static tempTag_open: string = `<`;
-    public static tempTag_close: string = ` />\n`;
+    public static t_tag_open: string = `<`;
+    public static t_tag_close: string = ` />\n`;
 
-    public static tempComp_text: string = `XInputText`;
-    public static tempComp_check: string = `XInputCheck`;
-    public static tempComp_number: string = `XInputNumber`;
-    public static tempComp_decimal: string = `XInputDecimal`;
-    public static tempComp_collection: string = `XInputSelect`;
-    public static tempComp_date: string = `XInputDate`;
-    public static tempComp_textarea: string = `XInputTextArea`;
-    public static tempComp_file: string = `XInputFile`;
-    public static tempComp_datetime: string = `XInputDateTime`;
+    public static tc_text: string = `XInputText`;
+    public static tc_check: string = `XInputCheck`;
+    public static tc_number: string = `XInputNumber`;
+    public static tc_decimal: string = `XInputDecimal`;
+    public static tc_collection: string = `XInputSelect`;
+    public static tc_date: string = `XInputDate`;
+    public static tc_textarea: string = `XInputTextArea`;
+    public static tc_file: string = `XInputFile`;
+    public static tc_datetime: string = `XInputDateTime`;
 
-    /*XInputNumber
-     
-               <XInputText
-                name="opsystem"jsonApp
-                ref={osystemRef}
-                label="system"
-                default={item.osystem}
-                maxlen={AppDef.OSSYSTEM_MAXLEN}
-                readonly={readonly}
-                disabled={disabled} /> 
-    */
+    /*    
+        <XInputText
+        name="opsystem"jsonApp
+        ref={osystemRef}
+        label="system"
+        default={item.osystem}
+        maxlen={AppDef.OSSYSTEM_MAXLEN}
+        readonly={readonly}
+        disabled={disabled} />  */
 };//end class
 
 export class XFormsGen {
@@ -85,12 +83,12 @@ export class XFormsGen {
         for (let idx = 0; idx < jsonCollection.fields.length; idx++) {
             if (!jsonCollection.fields[idx].pk) {
                 if (jsonCollection.fields[idx].fk) {
-                    result += XForms.tempRefSelect
+                    result += XForms.t_refSelect
                         .replace(XForms.PATTERN, jsonCollection.fields[idx].name) + CgConfig.RET;
                 }
                 else {
                     result += XForms
-                        .tempRefInput.replace(XForms.PATTERN, jsonCollection.fields[idx].name) + CgConfig.RET;
+                        .t_refInput.replace(XForms.PATTERN, jsonCollection.fields[idx].name) + CgConfig.RET;
                 }
             }
         }//end for
@@ -106,35 +104,35 @@ export class XFormsGen {
         for (let idx = 0; idx < jsonApp.fields.length; idx++) {
 
             if (!jsonApp.fields[idx].pk) {
-                result += XForms.tempTag_open;
+                result += XForms.t_tag_open;
 
                 if (jsonApp.fields[idx].fk) {
-                    result += XForms.tempComp_collection;
+                    result += XForms.tc_collection;
                 }
                 else {
                     if (jsonApp.fields[idx].type === XForms.FT_TEXT) {
 
                     }
                     else if (jsonApp.fields[idx].type === XForms.FT_TEXTAREA) {
-                        result += XForms.tempComp_textarea;
+                        result += XForms.tc_textarea;
                     }                    
                     else if (jsonApp.fields[idx].type === XForms.FT_NUMBER) {
                         if (jsonApp.fields[idx].format.split(":")[1] == "0") {
-                            result += XForms.tempComp_number;
+                            result += XForms.tc_number;
                         }
-                        else {result += XForms.tempComp_decimal;}
+                        else {result += XForms.tc_decimal;}
                     }
                     else if (jsonApp.fields[idx].type === XForms.FT_CHECK) {
-                        result += XForms.tempComp_check;
+                        result += XForms.tc_check;
                     }
                     else if (jsonApp.fields[idx].type === XForms.FT_DATE) {
-                        result += XForms.tempComp_date;
+                        result += XForms.tc_date;
                     }
                     else if (jsonApp.fields[idx].type === XForms.FT_DATETIME) {
-                        result += XForms.tempComp_datetime;
+                        result += XForms.tc_datetime;
                     }                    
                     else if (jsonApp.fields[idx].type === XForms.FT_FILE) {
-                        result += XForms.tempComp_file;
+                        result += XForms.tc_file;
                     }
                 }
             }
@@ -156,60 +154,56 @@ export class XFormsGen {
         result += XFormsGen.genInitTags(jsonTable) + CgConfig.RETx2;
         //............................................................................
         const jsonApp = JSON.parse(jsonTable);
-        //XForms.tempAttr_readonly 
-        //XForms.tempAttr_disabled        
-        //XForms.tempAttr_inline        
-        //XForms.tempAttr_autocommit  
-
-        //XForms.tempAttr_collection
+        
         for (let idx = 0; idx < jsonApp.fields.length; idx++) {
 
             if (!jsonApp.fields[idx].pk) {
 
                 //tempAttr_ref
-                result += XForms.tempAttr_ref
+                result += XForms.t_attr_ref
                     .replace(XForms.PATTERN, jsonApp.fields[idx].name)+ CgConfig.RET;
 
                 //tempAttr_name
-                result += XForms.tempAttr_name
+                result += XForms.t_attr_name
                     .replace(XForms.PATTERN, jsonApp.fields[idx].name)+ CgConfig.RET;
     
                 //tempAttr_label
-                result += XForms.tempAttr_name
+                result += XForms.t_attr_name
                     .replace(XForms.PATTERN, jsonApp.fields[idx].label)+ CgConfig.RET;
 
                 //tempAttr_maxlen         
                 if (jsonApp.fields[idx].type === XForms.FT_TEXT && 
                     jsonApp.fields[idx].maxlen !== null) { 
-                    result += XForms.tempAttr_maxlen
+                    result += XForms.t_attr_maxlen
                         .replace(XForms.PATTERN, jsonApp.fields[idx].maxlen)+ CgConfig.RET;                     
                 }
                 
                 //collection for fks
                 if (jsonApp.fields[idx].fk) {    
-                    result +=  XForms.tempAttr_collection
+                    result +=  XForms.t_attr_collection
                         .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
-                    result += XForms.tempAttr_default_other
+                    result += XForms.t_attr_default_other
                         .replace(XForms.PATTERN, "collection[0]")+ CgConfig.RET;                     
                 }
                 else {
                     if(XForms.PATTERN, jsonApp.fields[idx].default!== null) {
                         if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
                             jsonApp.fields[idx].type === XForms.FT_DECIMAL) {
-                            result += XForms.tempAttr_default_other.replace
+                            result += XForms.t_attr_default_other.replace
                                 (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET;                                  
                         }
+                        else if(jsonApp.fields[idx].type === XForms.FT_CHECK){
+                            result += XForms.t_attr_default_other.replace
+                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET; 
+                        }                          
                         else if(jsonApp.fields[idx].type === XForms.FT_TEXT||
                             jsonApp.fields[idx].type === XForms.FT_TEXTAREA ||
                             jsonApp.fields[idx].type === XForms.FT_DATE ||
                             jsonApp.fields[idx].type === XForms.FT_DATETIME) {
-
-                        }
-                        else if(jsonApp.fields[idx].type === XForms.FT_CHECK){
-
-                        }                                                  
-                    }
-                    
+                            result += XForms.t_attr_default_text.replace
+                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET; 
+                        }                                                
+                    }                    
                 }
             }
         }//end for
@@ -220,56 +214,11 @@ export class XFormsGen {
 
 };//end class
 
+       //XForms.tempAttr_readonly 
+        //XForms.tempAttr_disabled        
+        //XForms.tempAttr_inline        
+        //XForms.tempAttr_autocommit  
 
-/*
-ç
-    public static generateForm(): string {
-
-        let result: string = "";
-
-        for(let idx=0; idx < jsonApp.fields.length; idx++) {
-
-            //pk
-            if(jsonApp.fields[idx].pk){
-                console.log("pk :", jsonApp.fields[idx].name);
-            } 
-            //fkey
-            else if(jsonApp.fields[idx].fk) {
-                console.log("fKey:", jsonApp.fields[idx].name);
-                const data:string = XForms.tempRefSelect
-                    .replace("^%v%^",jsonApp.fields[idx].name)+ CgConfig.RET;
-          
-            }
-            //default
-            else {
-                if(jsonApp.fields[idx].type === "text"){
-                    const data:string = XForms
-                        .tempRefInput.replace("^%v%^",jsonApp.fields[idx].name)+ CgConfig.RET;
-                }
-                else if(jsonApp.fields[idx].type === "number"){
-                    const format: string = jsonApp.fields[idx].format || "5:0";
-                    const chars = jsonApp.fields[idx].format.split(":");
-                    if(chars[1] == "0") {
-
-                    }
-                    else {
-
-                    }
-                }   
-                else if(jsonApp.fields[idx].type === "boolean"){
-                    
-                }
-                else if(jsonApp.fields[idx].type === "date"){
-                    
-                } 
-            }
-
-        }//end for
-        return result;
-    }//end
-
-
-*/
 
 export const jsonTemplate: string =
     `{
