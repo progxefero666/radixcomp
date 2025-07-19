@@ -12,7 +12,7 @@ import { GenCodeViewer } from "@/app/gencode/cgentityfiles/entityfilesviewer";
 
 import { PrimaryBar } from "@/app/gencode/gcprimarybar";
 import { PageHeader } from "@/app/gencode/gcheader";
-import { readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
+import { readDbSqlScript, readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
 
 import { FsFunctions } from "@/filesystem/fsfunctions";
 import { FileCode } from "@/filesystem/fsmodels";
@@ -47,8 +47,8 @@ export default function PageGenCode() {
     useEffect(() => {
         if(ready) {return;} 
         const init = async () => {            
-            const dbSquema = await readDbSqlScriptFile("dbsquema");
-            //const dbSquema = await readDbSqlScript();
+            //const dbSquema = await readDbSqlScriptFile("dbsquema");
+            const dbSquema = await readDbSqlScript();
             if(dbSquema === null) {
                 alert("Error reading database schema");
                 return;

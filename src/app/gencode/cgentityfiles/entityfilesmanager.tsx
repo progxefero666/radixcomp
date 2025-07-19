@@ -21,6 +21,7 @@ import { DocFormats } from "@/filesystem/fsconstants";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { XInputCheck } from "@/radix/input/inputcheck";
 import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
+import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
 
 //---------------------------------------------------------------------------------------
@@ -54,7 +55,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         
         const dbSquema = AppMemmory.readDbSquema();
         setJsonTables(CodeGenJson.getAllJsonTables(dbSquema));
-
+        //const tables = CodeGenSql.getEsquemaTables(dbSquema);     
         dbSquemaControl.current = new CodeGenSquema(dbSquema);
         clientTScriptEntities.current = new ServClientEntities(dbSquemaControl.current.squema);
         onOpSelected("get_def_class");

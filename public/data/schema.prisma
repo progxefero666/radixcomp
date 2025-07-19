@@ -1,0 +1,27 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// ----------------- MODELS -----------------
+
+model Proglanguage {
+    id      String  @id @db.Char(16)
+    name    String  @unique @db.VarChar(16)
+    tastemplates    Template[]
+    @@map("proglanguage")
+}
+
+model Template {
+    id              String        @id @db.Char(16)
+    name            String        @unique @db.VarChar(16)
+    proglanguage    proglanguage  @relation(fields: [proglanguageId], references: [id], onDelete: Cascade)
+    proglanguageId  String        @db.Char(16)   
+    datacode        String        @db.Text 
+    @@map("template")
+}
