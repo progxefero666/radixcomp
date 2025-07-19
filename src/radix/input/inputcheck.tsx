@@ -41,7 +41,7 @@ export const XInputCheck = forwardRef<HTMLInputElement, CompProps>(({
         if(direction === "row") {
             return (
                 <Flex width="100" direction="row" gapX="2" align="center" justify="center">
-                    <Label>{label}</Label>
+                    <Box pt={"1"}><Text size="2">{label}</Text></Box>
                     <Checkbox                
                         defaultChecked={value}
                         variant={variant}
@@ -55,7 +55,7 @@ export const XInputCheck = forwardRef<HTMLInputElement, CompProps>(({
         else {
              return (
                 <Flex width="100" direction="column" >
-                    <Label>{label}</Label>
+                    <Box pt={"1"}><Text size="2">{label}</Text></Box>
                     <Checkbox                
                         defaultChecked={value}
                         variant={variant}

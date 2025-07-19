@@ -36,8 +36,8 @@ export function XSelect({name,onchange,collection,values,label,disabled}:CompPro
     return (
         <Flex width="100%" direction={"row"} gap="2" >
 
-            {label?<Box pt={"1"}><Text size="3">{label}</Text></Box>:null}
-            <Label>ss</Label>
+            {label?<Box pt={"1"}><Text size="2">{label}</Text></Box>:null}
+   
             <Select.Root
                 defaultValue={inp_collection[0].key}
                 onValueChange={handleOnChange}

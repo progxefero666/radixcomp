@@ -209,10 +209,10 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                     </Box>
                     <Box pt="1">
                         <XInputCheck label="Multiple files"
-                                    inline={true}
-                                        value={false}
-                                        name="option_multiple"                           
-                                        onchange={onOptMultipleChange} />
+                                     inline={true}
+                                     value={false}
+                                     name="option_multiple"                           
+                                     onchange={onOptMultipleChange} />
                     </Box>
                 </Flex>
                 <Button onClick={runOperation} color="green">

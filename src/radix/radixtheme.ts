@@ -45,7 +45,7 @@ export class RadixTheme {
 
 
 /**
- * class TextStyle.COLOR_SPECIAL
+ * class TextStyle.SIZE_DEF
  */
 export class TextStyle {
     
