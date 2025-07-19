@@ -960,11 +960,11 @@ export namespace Prisma {
    */
 
   export type ProglanguageCountOutputType = {
-    template: number
+    templates: number
   }
 
   export type ProglanguageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    template?: boolean | ProglanguageCountOutputTypeCountTemplateArgs
+    templates?: boolean | ProglanguageCountOutputTypeCountTemplatesArgs
   }
 
   // Custom InputTypes
@@ -981,7 +981,7 @@ export namespace Prisma {
   /**
    * ProglanguageCountOutputType without action
    */
-  export type ProglanguageCountOutputTypeCountTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProglanguageCountOutputTypeCountTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: templateWhereInput
   }
 
@@ -1130,7 +1130,7 @@ export namespace Prisma {
   export type proglanguageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    template?: boolean | proglanguage$templateArgs<ExtArgs>
+    templates?: boolean | proglanguage$templatesArgs<ExtArgs>
     _count?: boolean | ProglanguageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["proglanguage"]>
 
@@ -1151,7 +1151,7 @@ export namespace Prisma {
 
   export type proglanguageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["proglanguage"]>
   export type proglanguageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    template?: boolean | proglanguage$templateArgs<ExtArgs>
+    templates?: boolean | proglanguage$templatesArgs<ExtArgs>
     _count?: boolean | ProglanguageCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type proglanguageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1160,7 +1160,7 @@ export namespace Prisma {
   export type $proglanguagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "proglanguage"
     objects: {
-      template: Prisma.$templatePayload<ExtArgs>[]
+      templates: Prisma.$templatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1559,7 +1559,7 @@ export namespace Prisma {
    */
   export interface Prisma__proglanguageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    template<T extends proglanguage$templateArgs<ExtArgs> = {}>(args?: Subset<T, proglanguage$templateArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$templatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    templates<T extends proglanguage$templatesArgs<ExtArgs> = {}>(args?: Subset<T, proglanguage$templatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$templatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1979,9 +1979,9 @@ export namespace Prisma {
   }
 
   /**
-   * proglanguage.template
+   * proglanguage.templates
    */
-  export type proglanguage$templateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type proglanguage$templatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the template
      */
@@ -3156,13 +3156,13 @@ export namespace Prisma {
     NOT?: proglanguageWhereInput | proglanguageWhereInput[]
     id?: StringFilter<"proglanguage"> | string
     name?: StringFilter<"proglanguage"> | string
-    template?: TemplateListRelationFilter
+    templates?: TemplateListRelationFilter
   }
 
   export type proglanguageOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    template?: templateOrderByRelationAggregateInput
+    templates?: templateOrderByRelationAggregateInput
   }
 
   export type proglanguageWhereUniqueInput = Prisma.AtLeast<{
@@ -3171,7 +3171,7 @@ export namespace Prisma {
     OR?: proglanguageWhereInput[]
     NOT?: proglanguageWhereInput | proglanguageWhereInput[]
     name?: StringFilter<"proglanguage"> | string
-    template?: TemplateListRelationFilter
+    templates?: TemplateListRelationFilter
   }, "id">
 
   export type proglanguageOrderByWithAggregationInput = {
@@ -3243,25 +3243,25 @@ export namespace Prisma {
   export type proglanguageCreateInput = {
     id: string
     name: string
-    template?: templateCreateNestedManyWithoutProglanguageInput
+    templates?: templateCreateNestedManyWithoutProglanguageInput
   }
 
   export type proglanguageUncheckedCreateInput = {
     id: string
     name: string
-    template?: templateUncheckedCreateNestedManyWithoutProglanguageInput
+    templates?: templateUncheckedCreateNestedManyWithoutProglanguageInput
   }
 
   export type proglanguageUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    template?: templateUpdateManyWithoutProglanguageNestedInput
+    templates?: templateUpdateManyWithoutProglanguageNestedInput
   }
 
   export type proglanguageUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    template?: templateUncheckedUpdateManyWithoutProglanguageNestedInput
+    templates?: templateUncheckedUpdateManyWithoutProglanguageNestedInput
   }
 
   export type proglanguageCreateManyInput = {
@@ -3283,7 +3283,7 @@ export namespace Prisma {
     id: string
     name: string
     datacode: string
-    proglanguage: proglanguageCreateNestedOneWithoutTemplateInput
+    proglanguage: proglanguageCreateNestedOneWithoutTemplatesInput
   }
 
   export type templateUncheckedCreateInput = {
@@ -3297,7 +3297,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     datacode?: StringFieldUpdateOperationsInput | string
-    proglanguage?: proglanguageUpdateOneRequiredWithoutTemplateNestedInput
+    proglanguage?: proglanguageUpdateOneRequiredWithoutTemplatesNestedInput
   }
 
   export type templateUncheckedUpdateInput = {
@@ -3457,18 +3457,18 @@ export namespace Prisma {
     deleteMany?: templateScalarWhereInput | templateScalarWhereInput[]
   }
 
-  export type proglanguageCreateNestedOneWithoutTemplateInput = {
-    create?: XOR<proglanguageCreateWithoutTemplateInput, proglanguageUncheckedCreateWithoutTemplateInput>
-    connectOrCreate?: proglanguageCreateOrConnectWithoutTemplateInput
+  export type proglanguageCreateNestedOneWithoutTemplatesInput = {
+    create?: XOR<proglanguageCreateWithoutTemplatesInput, proglanguageUncheckedCreateWithoutTemplatesInput>
+    connectOrCreate?: proglanguageCreateOrConnectWithoutTemplatesInput
     connect?: proglanguageWhereUniqueInput
   }
 
-  export type proglanguageUpdateOneRequiredWithoutTemplateNestedInput = {
-    create?: XOR<proglanguageCreateWithoutTemplateInput, proglanguageUncheckedCreateWithoutTemplateInput>
-    connectOrCreate?: proglanguageCreateOrConnectWithoutTemplateInput
-    upsert?: proglanguageUpsertWithoutTemplateInput
+  export type proglanguageUpdateOneRequiredWithoutTemplatesNestedInput = {
+    create?: XOR<proglanguageCreateWithoutTemplatesInput, proglanguageUncheckedCreateWithoutTemplatesInput>
+    connectOrCreate?: proglanguageCreateOrConnectWithoutTemplatesInput
+    upsert?: proglanguageUpsertWithoutTemplatesInput
     connect?: proglanguageWhereUniqueInput
-    update?: XOR<XOR<proglanguageUpdateToOneWithWhereWithoutTemplateInput, proglanguageUpdateWithoutTemplateInput>, proglanguageUncheckedUpdateWithoutTemplateInput>
+    update?: XOR<XOR<proglanguageUpdateToOneWithWhereWithoutTemplatesInput, proglanguageUpdateWithoutTemplatesInput>, proglanguageUncheckedUpdateWithoutTemplatesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3561,38 +3561,38 @@ export namespace Prisma {
     datacode?: StringFilter<"template"> | string
   }
 
-  export type proglanguageCreateWithoutTemplateInput = {
+  export type proglanguageCreateWithoutTemplatesInput = {
     id: string
     name: string
   }
 
-  export type proglanguageUncheckedCreateWithoutTemplateInput = {
+  export type proglanguageUncheckedCreateWithoutTemplatesInput = {
     id: string
     name: string
   }
 
-  export type proglanguageCreateOrConnectWithoutTemplateInput = {
+  export type proglanguageCreateOrConnectWithoutTemplatesInput = {
     where: proglanguageWhereUniqueInput
-    create: XOR<proglanguageCreateWithoutTemplateInput, proglanguageUncheckedCreateWithoutTemplateInput>
+    create: XOR<proglanguageCreateWithoutTemplatesInput, proglanguageUncheckedCreateWithoutTemplatesInput>
   }
 
-  export type proglanguageUpsertWithoutTemplateInput = {
-    update: XOR<proglanguageUpdateWithoutTemplateInput, proglanguageUncheckedUpdateWithoutTemplateInput>
-    create: XOR<proglanguageCreateWithoutTemplateInput, proglanguageUncheckedCreateWithoutTemplateInput>
+  export type proglanguageUpsertWithoutTemplatesInput = {
+    update: XOR<proglanguageUpdateWithoutTemplatesInput, proglanguageUncheckedUpdateWithoutTemplatesInput>
+    create: XOR<proglanguageCreateWithoutTemplatesInput, proglanguageUncheckedCreateWithoutTemplatesInput>
     where?: proglanguageWhereInput
   }
 
-  export type proglanguageUpdateToOneWithWhereWithoutTemplateInput = {
+  export type proglanguageUpdateToOneWithWhereWithoutTemplatesInput = {
     where?: proglanguageWhereInput
-    data: XOR<proglanguageUpdateWithoutTemplateInput, proglanguageUncheckedUpdateWithoutTemplateInput>
+    data: XOR<proglanguageUpdateWithoutTemplatesInput, proglanguageUncheckedUpdateWithoutTemplatesInput>
   }
 
-  export type proglanguageUpdateWithoutTemplateInput = {
+  export type proglanguageUpdateWithoutTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type proglanguageUncheckedUpdateWithoutTemplateInput = {
+  export type proglanguageUncheckedUpdateWithoutTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
   }

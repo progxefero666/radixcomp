@@ -9,9 +9,9 @@ datasource db {
 }
 
 model proglanguage {
-  id       String     @id @db.Char(16)
-  name     String     @db.VarChar(16)
-  template template[]
+  id        String     @id @db.Char(16)
+  name      String     @db.VarChar(16)
+  templates template[]
 
   @@map("proglanguage")
 }
