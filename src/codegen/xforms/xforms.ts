@@ -9,54 +9,52 @@ import { CgConfig } from "@/codegen/cgconfig";
  */
 export class XForms {
 
-    public static readonly PATTERN:string = "^%v%^";
+    public static PATTERN:string      = "^%v%^";
+    public static t_tag_open: string  = `<`;
+    public static t_tag_close: string = ` />\n`;
 
-    public static readonly FT_TEXT: string = "text";
-    public static readonly FT_TEXTAREA: string = "textarea";
-    public static readonly FT_CHECK: string = "check";
-    public static readonly FT_NUMBER: string = "number";
-    public static readonly FT_DECIMAL: string = "decimal";
-    public static readonly FT_COLLECTION: string = "collection";
-    public static readonly FT_DATE: string = "date";
-    public static readonly FT_DATETIME: string = "datetime";
-    public static readonly FT_FILE: string = "file";
+    public static FT_TEXT: string       = "text";
+    public static FT_TEXTAREA: string   = "textarea";
+    public static FT_CHECK: string      = "check";
+    public static FT_NUMBER: string     = "number";
+    public static FT_DECIMAL: string    = "decimal";
+    public static FT_COLLECTION: string = "collection";
+    public static FT_DATE: string       = "date";
+    public static FT_DATETIME: string   = "datetime";
+    public static FT_FILE: string       = "file";
 
-    public static readonly TT_DEFAULT: string = "text";
-    public static readonly TT_URL: string = "url";
-    public static readonly TT_EMAIL: string = "email";
-    public static readonly TT_PASSWORD: string = "password";
-    public static readonly TT_TEL: string = "telephone";
-    public static readonly TT_HIDDEN: string = "hidden";
+    public static tc_text: string       = `XInputText`;
+    public static tc_check: string      = `XInputCheck`;
+    public static tc_number: string     = `XInputNumber`;
+    public static tc_decimal: string    = `XInputDecimal`;
+    public static tc_collection: string = `XInputSelect`;
+    public static tc_date: string       = `XInputDate`;
+    public static tc_textarea: string   = `XInputTextArea`;
+    public static tc_file: string       = `XInputFile`;
+    public static tc_datetime: string   = `XInputDateTime`;
+
+    public static TT_DEFAULT: string = "text";
+    public static TT_URL: string = "url";
+    public static TT_EMAIL: string = "email";
+    public static TT_PASSWORD: string = "password";
+    public static TT_TEL: string = "telephone";
+    public static TT_HIDDEN: string = "hidden";
 
     public static t_refInput: string = `const ^%v%^Ref = useRef<HTMLInputElement>(null);`;
     public static t_refSelect: string = `const dateRef = useRef<HTMLSelectElement>(null);`;
 
-    public static t_attr_name: string = `name={^%v%^}`;
-    public static t_attr_label: string = `label={^%v%^}`;
-    
-    public static t_attr_maxlen: string = `maxlen={^%v%^}`;
-    public static t_attr_readonly: string = `readonly={^%v%^}`;
-    public static t_attr_disabled: string = `disabled={^%v%^}`;
-    public static t_attr_ref: string = `ref={^%v%^}`;
-    public static t_attr_inline: string = `inline={^%v%^}`;
+    public static t_attr_ref: string        = `ref={^%v%^}`;
+    public static t_attr_name: string       = `name="^%v%^"`;
+    public static t_attr_label: string      = `label="^%v%^"`;
     public static t_attr_collection: string = `collection={^%v%^}`;
+    public static t_attr_default: string    = `default={^%v%^}`;
+    public static t_attr_maxlen: string     = `maxlen={^%v%^}`;
+    public static t_attr_readonly: string   = `readonly={^%v%^}`;
+    public static t_attr_disabled: string   = `disabled={^%v%^}`;
+    public static t_attr_inline: string     = `inline={^%v%^}`;
     public static t_attr_autocommit: string = `default={^%v%^}`;
 
-    public static t_attr_default_text: string = `default={'^%v%^'}`;
-    public static t_attr_default_other: string = `default={^%v%^}`;
 
-    public static t_tag_open: string = `<`;
-    public static t_tag_close: string = ` />\n`;
-
-    public static tc_text: string = `XInputText`;
-    public static tc_check: string = `XInputCheck`;
-    public static tc_number: string = `XInputNumber`;
-    public static tc_decimal: string = `XInputDecimal`;
-    public static tc_collection: string = `XInputSelect`;
-    public static tc_date: string = `XInputDate`;
-    public static tc_textarea: string = `XInputTextArea`;
-    public static tc_file: string = `XInputFile`;
-    public static tc_datetime: string = `XInputDateTime`;
 
     /*    
         <XInputText
@@ -182,27 +180,26 @@ export class XFormsGen {
                 if (jsonApp.fields[idx].fk) {    
                     result +=  XForms.t_attr_collection
                         .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
-                    result += XForms.t_attr_default_other
+                    result += XForms.t_attr_default
                         .replace(XForms.PATTERN, "collection[0]")+ CgConfig.RET;                     
                 }
                 else {
-                    if(XForms.PATTERN, jsonApp.fields[idx].default!== null) {
-                        if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
-                            jsonApp.fields[idx].type === XForms.FT_DECIMAL) {
-                            result += XForms.t_attr_default_other.replace
-                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET;                                  
-                        }
-                        else if(jsonApp.fields[idx].type === XForms.FT_CHECK){
-                            result += XForms.t_attr_default_other.replace
-                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET; 
-                        }                          
-                        else if(jsonApp.fields[idx].type === XForms.FT_TEXT||
+                    if(XForms.PATTERN, jsonApp.fields[idx].default!== null) {                     
+                        if(jsonApp.fields[idx].type === XForms.FT_TEXT||
                             jsonApp.fields[idx].type === XForms.FT_TEXTAREA ||
                             jsonApp.fields[idx].type === XForms.FT_DATE ||
                             jsonApp.fields[idx].type === XForms.FT_DATETIME) {
-                            result += XForms.t_attr_default_text.replace
-                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET; 
-                        }                                                
+                            result += '"'+ XForms.t_attr_default.replace
+                                (XForms.PATTERN,jsonApp.fields[idx].default)+'"'+ CgConfig.RET; 
+                        }    
+                        if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
+                                jsonApp.fields[idx].type === XForms.FT_DECIMAL ||
+                                jsonApp.fields[idx].type === XForms.FT_CHECK) {
+                            result += XForms.t_attr_default.replace
+                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET;       
+                            result += XForms.t_attr_default.replace
+                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET;                                                              
+                        }                                         
                     }                    
                 }
             }
