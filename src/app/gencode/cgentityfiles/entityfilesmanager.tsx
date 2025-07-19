@@ -115,10 +115,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     */
 
     const runTest = () => {
-        const formInputs: InputValue[] = [
-            new InputValue("name", "Test Name"),
-            new InputValue("email", "email")
-        ];
+
         const codecont: string = XFormsGen.generateForm(jsonTemplate);
         onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform", codecont!));
     };//end

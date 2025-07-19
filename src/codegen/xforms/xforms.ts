@@ -88,7 +88,6 @@ export class XFormsGen {
         const jsonCollection = JSON.parse(jsonTable);
 
         let result: string = XForms.t_form_inputs + CgConfig.RET;
-
         result += XForms.t_useEffect_start + CgConfig.RET;
 
         let array_result = "setFormInputs(["+ CgConfig.RET;
@@ -97,12 +96,12 @@ export class XFormsGen {
             array_result += CgConfig.RET;
         }
         array_result += "]);" + CgConfig.RET;
-        array_result += CodeGenHelper.applyTabsToStringBlock(array_result, 1);
+        array_result = CodeGenHelper.applyTabsToStringBlock(array_result, 1);
         
         result+= array_result;
         result+= XForms.t_useEffect_end + CgConfig.RETx2;
         result+= CodeGenHelper.applyTabsToStringBlock(result, 1);
-        return result;
+        return array_result;
     };//
 
     public static genRefs(jsonTable: string): string {
@@ -266,7 +265,7 @@ export class XFormsGen {
         //............................................................................        
 
         let result:string = resultImports + resultInputs + resultRefs + resultFields;
-        return result;
+        return resultInputs;
     }//end
 
     //ouputFormatRef.current!.value
