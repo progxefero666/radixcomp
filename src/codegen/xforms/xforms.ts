@@ -10,29 +10,29 @@ import { CodeGenHelper } from "../kernel/cghelper";
  */
 export class XForms {
 
-    public static PATTERN:string      = "^%v%^";
-    public static t_tag_open: string  = `<`;
+    public static PATTERN: string = "^%v%^";
+    public static t_tag_open: string = `<`;
     public static t_tag_close: string = ` />\n`;
 
-    public static FT_TEXT: string       = "text";
-    public static FT_TEXTAREA: string   = "textarea";
-    public static FT_CHECK: string      = "boolean";
-    public static FT_NUMBER: string     = "number";
-    public static FT_DECIMAL: string    = "decimal";
+    public static FT_TEXT: string = "text";
+    public static FT_TEXTAREA: string = "textarea";
+    public static FT_CHECK: string = "boolean";
+    public static FT_NUMBER: string = "number";
+    public static FT_DECIMAL: string = "decimal";
     public static FT_COLLECTION: string = "collection";
-    public static FT_DATE: string       = "date";
-    public static FT_DATETIME: string   = "datetime";
-    public static FT_FILE: string       = "file";
+    public static FT_DATE: string = "date";
+    public static FT_DATETIME: string = "datetime";
+    public static FT_FILE: string = "file";
 
-    public static tc_text: string       = `XInputText`;
-    public static tc_check: string      = `XInputCheck`;
-    public static tc_number: string     = `XInputNumber`;
-    public static tc_decimal: string    = `XInputDecimal`;
+    public static tc_text: string = `XInputText`;
+    public static tc_check: string = `XInputCheck`;
+    public static tc_number: string = `XInputNumber`;
+    public static tc_decimal: string = `XInputDecimal`;
     public static tc_collection: string = `XInputSelect`;
-    public static tc_date: string       = `XInputDate`;
-    public static tc_textarea: string   = `XInputTextArea`;
-    public static tc_file: string       = `XInputFile`;
-    public static tc_datetime: string   = `XInputDateTime`;
+    public static tc_date: string = `XInputDate`;
+    public static tc_textarea: string = `XInputTextArea`;
+    public static tc_file: string = `XInputFile`;
+    public static tc_datetime: string = `XInputDateTime`;
 
     public static TT_DEFAULT: string = "text";
     public static TT_URL: string = "url";
@@ -41,20 +41,20 @@ export class XForms {
     public static TT_TEL: string = "telephone";
     public static TT_HIDDEN: string = "hidden";
 
-    public static t_refInput: string = `const ^%v%^Ref = useRef<HTMLInputElement>(null);`;
-    public static t_refSelect: string = `const dateRef = useRef<HTMLSelectElement>(null);`;
+    public static t_refInput: string  = `const ^%v%^Ref = useRef<HTMLInputElement>(null);`;
+    public static t_refSelect: string = `const ^%v%^Ref = useRef<HTMLSelectElement>(null);`;
 
-    public static t_attr_ref: string        = `ref={^%v%^}`;
-    public static t_attr_name: string       = `name="^%v%^"`;
-    public static t_attr_label: string      = `label="^%v%^"`;
+    public static t_attr_ref: string = `ref={^%v%^Ref}`;
+    public static t_attr_name: string = `name="^%v%^"`;
+    public static t_attr_label: string = `label="^%v%^"`;
     public static t_attr_collection: string = `collection={^%v%^}`;
-    public static t_attr_default: string    = `default={^%v%^}`;
-    public static t_attr_maxlen: string     = `maxlen={^%v%^}`;
-    public static t_attr_disabled: string   = `disabled={^%v%^}`;
-    
+    public static t_attr_default: string = `default={^%v%^}`;
+    public static t_attr_maxlen: string = `maxlen={^%v%^}`;
+    public static t_attr_disabled: string = `disabled={^%v%^}`;
+
     public static t_attr_autocommit: string = `default={^%v%^}`;
 
-    public static attr_inline: string     = `inline={true}`;
+    public static attr_inline: string = `inline={true}`;
 
     /*    
         <XInputText
@@ -94,51 +94,42 @@ export class XFormsGen {
         return result;
     };//end 
 
-    public static genInitTags(jsonTable: string): string {
-        const jsonApp = JSON.parse(jsonTable);
-        
-        let result: string = "";
+    public static genInitTag(field: any): string {
 
-        for (let idx = 0; idx < jsonApp.fields.length; idx++) {
+        let result: string =  XForms.t_tag_open;
 
-            if (!jsonApp.fields[idx].pk) {
-                result += XForms.t_tag_open;
-
-                if (jsonApp.fields[idx].fk) {
-                    result += XForms.tc_collection;
-                }
-                else {
-                    console.log(jsonApp.fields[idx].type);
-                    if (jsonApp.fields[idx].type === XForms.FT_TEXT) {
-                        result += XForms.tc_text;
-                    }
-                    else if (jsonApp.fields[idx].type === XForms.FT_TEXTAREA) {
-                        result += XForms.tc_textarea;
-                    }                    
-                    else if (jsonApp.fields[idx].type === XForms.FT_NUMBER) {
-                        if (jsonApp.fields[idx].format.split(":")[1] == "0") {
-                            result += XForms.tc_number;
-                        }
-                        else {result += XForms.tc_decimal;}
-                    }
-                    else if (jsonApp.fields[idx].type === XForms.FT_CHECK) {
-                        result += XForms.tc_check;
-                    }
-                    else if (jsonApp.fields[idx].type === XForms.FT_DATE) {
-                        result += XForms.tc_date;
-                    }
-                    else if (jsonApp.fields[idx].type === XForms.FT_DATETIME) {
-                        result += XForms.tc_datetime;
-                    }                    
-                    else if (jsonApp.fields[idx].type === XForms.FT_FILE) {
-                        result += XForms.tc_file;
-                    }
-                }
-                result += CgConfig.CHAR_SPACE +XForms.t_tag_close+ CgConfig.RET; 
+        if (field.fk) {
+            result += XForms.tc_collection;
+        }
+        else {
+            console.log(field.type);
+            if (field.type === XForms.FT_TEXT) {
+                result += XForms.tc_text;
             }
-        }//end for
-        
-        return result;// + CgConfig.CHAR_SPACE;
+            else if (field.type === XForms.FT_TEXTAREA) {
+                result += XForms.tc_textarea;
+            }
+            else if (field.type === XForms.FT_NUMBER) {
+                if (field.format.split(":")[1] == "0") {
+                    result += XForms.tc_number;
+                }
+                else { result += XForms.tc_decimal; }
+            }
+            else if (field.type === XForms.FT_CHECK) {
+                result += XForms.tc_check;
+            }
+            else if (field.type === XForms.FT_DATE) {
+                result += XForms.tc_date;
+            }
+            else if (field.type === XForms.FT_DATETIME) {
+                result += XForms.tc_datetime;
+            }
+            else if (field.type === XForms.FT_FILE) {
+                result += XForms.tc_file;
+            }
+        }
+
+        return result + CgConfig.CHAR_SPACE;
     };//end 
 
     public static genDefault(fieldType: any): string {
@@ -151,19 +142,21 @@ export class XFormsGen {
 
         let result: string = "";
         result += XFormsGen.genRefs(jsonTable) + CgConfig.RETx2;
-        result += XFormsGen.genInitTags(jsonTable) + CgConfig.RETx2;
+       
 
         //............................................................................
-        
-        const jsonApp = JSON.parse(jsonTable);
-        
-        for (let idx = 0; idx < jsonApp.fields.length; idx++) {
 
-            if (!jsonApp.fields[idx].pk) {
+        const jsonObj = JSON.parse(jsonTable);
+
+        for (let idx = 0; idx < jsonObj.fields.length; idx++) {
+
+            if (!jsonObj.fields[idx].pk) {
+
+                result += XFormsGen.genInitTag(jsonObj.fields[idx]) ;
 
                 //tempAttr_ref
                 result += XForms.t_attr_ref
-                    .replace(XForms.PATTERN, jsonApp.fields[idx].name)+ CgConfig.RET;
+                    .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
 
                 /*    
                 //tempAttr_name
@@ -221,14 +214,14 @@ export class XFormsGen {
                     result += XForms.attr_inline + CgConfig.RET;       
                 }
                  */
-                    
-                result += XForms.t_tag_close+ CgConfig.RET; 
+
+                result += XForms.t_tag_close + CgConfig.RET;
 
             }//end if pk
 
         }//end for
-        
-       
+
+
         //............................................................................
 
         return result;
@@ -238,7 +231,7 @@ export class XFormsGen {
 };//end class
 
 
-         
+
 
 
 export const jsonTemplate: string =
