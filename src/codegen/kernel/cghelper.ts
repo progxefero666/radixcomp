@@ -7,7 +7,7 @@ import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CgConfig } from "../cgconfig";
 
 /**
- * CodeGenHelper.isGeneratedDate
+ * CodeGenHelper.applyTabsToStringBlock
  */
 export class CodeGenHelper {
 

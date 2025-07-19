@@ -140,35 +140,38 @@ export class XFormsGen {
 
     public static generateForm(jsonTable: string): string {
 
-        let result: string = "";
-        result += XFormsGen.genRefs(jsonTable) + CgConfig.RETx2;
+        //............................................................................
+        let resultRefs: string = "";
+        resultRefs += CodeGenHelper.applyTabsToStringBlock(XFormsGen.genRefs(jsonTable),1);
+        resultRefs += CgConfig.RETx2;
         //............................................................................
 
+        //............................................................................
         const jsonObj = JSON.parse(jsonTable);
-
+        let resultFields: string = "";
         for (let idx = 0; idx < jsonObj.fields.length; idx++) {
 
             if (!jsonObj.fields[idx].pk) {
 
-                result += XFormsGen.genInitTag(jsonObj.fields[idx]) ;
+                resultFields += XFormsGen.genInitTag(jsonObj.fields[idx]) + CgConfig.RET;
 
                 //tempAttr_ref
-                result += CgConfig.TAB_4 + XForms.t_attr_ref
+                resultFields += CgConfig.TAB_4 + XForms.t_attr_ref
                     .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
 
                 //tempAttr_name
-                result += CgConfig.TAB_4 + XForms.t_attr_name
+                resultFields += CgConfig.TAB_4 + XForms.t_attr_name
                     .replace(XForms.PATTERN,jsonObj.fields[idx].name) + CgConfig.RET;
     
                 //tempAttr_label
                 const label = TextHelper.capitalize(jsonObj.fields[idx].name);
-                result += CgConfig.TAB_4 +  XForms.t_attr_label.replace(XForms.PATTERN,label);
+                resultFields += CgConfig.TAB_4 +  XForms.t_attr_label.replace(XForms.PATTERN,label);
 
                 //tempAttr_maxlen         
                 if (jsonObj.fields[idx].type === XForms.FT_TEXT && 
                     jsonObj.fields[idx].maxlen !== null) { 
-                    result += CgConfig.RET;
-                    result +=  CgConfig.TAB_4 + XForms.t_attr_maxlen
+                    resultFields += CgConfig.RET;
+                    resultFields +=  CgConfig.TAB_4 + XForms.t_attr_maxlen
                         .replace(XForms.PATTERN, jsonObj.fields[idx].maxlen);                     
                 }
                 
@@ -177,15 +180,15 @@ export class XFormsGen {
                    jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
                    jsonObj.fields[idx].type === XForms.FT_CHECK||
                    jsonObj.fields[idx].type === XForms.FT_FILE) {
-                    result += CgConfig.RET;
-                    result +=  CgConfig.TAB_4 + XForms.attr_inline;       
+                    resultFields += CgConfig.RET;
+                    resultFields +=  CgConfig.TAB_4 + XForms.attr_inline;       
                 }     
 
                 // default value
                 if (jsonObj.fields[idx].fk) {    
-                    result += XForms.t_attr_collection
+                    resultFields += XForms.t_attr_collection
                         .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
-                    result += CgConfig.TAB_4 + XForms.t_attr_default
+                    resultFields += CgConfig.TAB_4 + XForms.t_attr_default
                         .replace(XForms.PATTERN, "collection[0]");                     
                 }
                 else {
@@ -194,17 +197,17 @@ export class XFormsGen {
                             jsonObj.fields[idx].type === XForms.FT_TEXTAREA)  {
                             const defaultValue = CodeGenHelper
                                 .getIntoSingleQuotes(jsonObj.fields[idx].default);    
-                            result += CgConfig.RET;    
-                            result +=  CgConfig.TAB_4 + XForms.t_attr_default.replace
+                            resultFields += CgConfig.RET;    
+                            resultFields +=  CgConfig.TAB_4 + XForms.t_attr_default.replace
                                 (XForms.PATTERN,defaultValue); 
                         }    
                         else if(jsonObj.fields[idx].type === XForms.FT_DATE ||
                             jsonObj.fields[idx].type === XForms.FT_DATETIME) {
                             const defaultValue = CodeGenHelper
                                 .getIntoSingleQuotes(jsonObj.fields[idx].default);                                   
-                            result += CgConfig.RET;    
+                            resultFields += CgConfig.RET;    
                             if(CodeGenHelper.isGeneratedDate(jsonObj.fields[idx].default)) {   
-                                result += XForms.t_attr_default
+                                resultFields += XForms.t_attr_default
                                     .replace(XForms.PATTERN,defaultValue);                                 
                             }                            
                         } 
@@ -213,30 +216,41 @@ export class XFormsGen {
                                 jsonObj.fields[idx].type === XForms.FT_CHECK) {  
                             const defaultValue = CodeGenHelper
                                 .getIntoKeys(jsonObj.fields[idx].default);                                     
-                            result += CgConfig.RET;        
-                            result += XForms.t_attr_default
+                            resultFields += CgConfig.RET;        
+                            resultFields += CgConfig.TAB_4 + XForms.t_attr_default
                                 .replace(XForms.PATTERN,defaultValue);                                                              
                         }                                         
                     }                    
                 }
                 
-                result += XForms.t_tag_close + CgConfig.RET;
+                resultFields += XForms.t_tag_close + CgConfig.RET;
 
             }//end if pk
 
         }//end for
+        resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2);
+        //............................................................................        
 
-
-        //............................................................................
-
+        let result:string = resultRefs + resultFields;
         return result;
     }//end
 
+    //ouputFormatRef.current!.value
+    //applyTransRef.current!.checked
 
 };//end class
 
 
+/*
 
+    const validate = (): boolean => {
+        return true;
+    };//end
+
+    const onSubmit = () => {
+
+    };//end
+*/
 
 
 export const jsonTemplate: string =

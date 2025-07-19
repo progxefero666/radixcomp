@@ -100,6 +100,18 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         setOperationId(operationId);
     };//end
 
+    const validate = (): boolean => {
+        return true;
+    };//end
+
+    const onSubmit = () => {
+        const validation:boolean = validate();
+        if (!validation) {
+            alert("Validation error");
+            return;
+        }        
+    };//end
+
     const runTest = () => {
 
           const codecont:string = XFormsGen.generateForm(jsonTemplate);
