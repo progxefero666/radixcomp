@@ -2,12 +2,12 @@
 "use server";
 
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { PrismaClient } from "@generated/prisma";
+import { Codelang, PrismaClient } from "@generated/prisma";
 import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
 
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
-import { Codelang } from "@/db/model/codelang";
+
 
 
 /**

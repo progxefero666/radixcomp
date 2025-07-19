@@ -2,9 +2,9 @@
 "use server";
 
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { PrismaClient } from "@generated/prisma";
+import { Apptype, PrismaClient } from "@generated/prisma";
 import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
-import { Apptype } from "@/db/model/apptype";
+
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 

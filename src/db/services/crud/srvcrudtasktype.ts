@@ -4,9 +4,9 @@
 "use server";
 
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { PrismaClient } from "@generated/prisma";
+import { PrismaClient, Tasktype } from "@generated/prisma";
 import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
-import { Tasktype } from "@/db/model/tasktype";
+
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
@@ -16,13 +16,10 @@ import { DbTables } from "@/db/dbcatalog";
  */
 export async function insert(item_serial:string): Promise<string> {
     
-    const item: Tasktype|null = parseItem<Tasktype>(item_serial);
-    if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
-
     const prisma = new PrismaClient();
     let result: object|null = null;
     try {
-        result = await prisma.tasktype.create({data:item});
+        result = await prisma.tasktype.create({data:item_serial as any});
         if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.tasktype));

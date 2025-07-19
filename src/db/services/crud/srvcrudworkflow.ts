@@ -15,13 +15,12 @@ import { DbTables } from "@/db/dbcatalog";
  */
 export async function insertWorkflow(item_serial:string): Promise<string> {
     
-    const item: Workflow|null = parseItem<Workflow>(item_serial);
-    if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
+
 
     const prisma = new PrismaClient();
     let result: Workflow|null = null;
     try {
-        result = await prisma.workflow.create({data:item});
+        result = await prisma.workflow.create({data:item_serial as any});
         /*if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.workflow));
