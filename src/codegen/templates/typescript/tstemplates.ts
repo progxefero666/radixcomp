@@ -6,7 +6,7 @@
  * class TmpTypeScript
  */
 export class TsTemplates {
-public static t_class: string = 
+public static class: string = 
    `/**
  * class ^%classname%^
  */

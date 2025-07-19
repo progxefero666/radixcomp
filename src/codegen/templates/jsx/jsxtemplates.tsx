@@ -11,7 +11,7 @@ import { Keyvalue } from "@/common/model/keyvalue";
 export class JsxTemplates {
 //..................................................................................
 
-public static t_component: string = 
+public static component: string = 
    `import { useEffect, useRef, useState } from "react";
     import { Box,Flex,Text,Grid,Button,IconButton,Tabs} from "@radix-ui/themes";
 

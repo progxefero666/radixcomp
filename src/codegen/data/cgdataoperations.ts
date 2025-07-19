@@ -9,30 +9,20 @@ import { JsxTemplates } from "../templates/jsx/jsxtemplates";
  * 
  */
 export class TsOps {
+
     public static readonly MOD_ID: string = "typescript";
 
-    public static readonly OP_CLASS: string = "class";
-    public static readonly OP_FUNCT: string = "function";
-    public static readonly OP_FUNCT_STATIC: string = "function_static";
-    public static readonly OP_FUNCT_PROMISE: string = "function_promise";
-    public static readonly OP_FUNCT_ASYNC: string = "function_promise";
-    public static readonly OP_INTERFACE: string = "interface";
-    public static readonly OP_TYPE: string = "type";
-    public static readonly OP_USE_STATE: string = "use_state";
-    public static readonly OP_USE_EFFECT: string = "use_effect";
-
-
     public static BASIC: Keyvalue[] = [
-        new Keyvalue(TsOps.OP_CLASS,         TsTemplates.t_class),
-        new Keyvalue(TsOps.OP_FUNCT,         "const function"),
-        new Keyvalue(TsOps.OP_FUNCT_STATIC,  "static function"),
-        new Keyvalue(TsOps.OP_FUNCT_ASYNC,   "async function"),
-        new Keyvalue(TsOps.OP_FUNCT_PROMISE, "Promise function"),
-        new Keyvalue(TsOps.OP_USE_EFFECT,    "foreachs"),
-        new Keyvalue(TsOps.OP_INTERFACE,     "Interface"),
-        new Keyvalue(TsOps.OP_TYPE,          "Type"),
-        new Keyvalue(TsOps.OP_USE_STATE,     "Use State"),
-        new Keyvalue(TsOps.OP_USE_EFFECT,    "Use Effect"),
+        new Keyvalue("class",           TsTemplates.class),
+        new Keyvalue("type",            "TsTemplates.type"),
+        new Keyvalue("function",        "TsTemplates.function"),
+        new Keyvalue("function_static", "TsTemplates.function_static"),
+        new Keyvalue("function_promise","TsTemplates.function_promise"),
+        new Keyvalue("function_async",  "TsTemplates.function_async"),       
+        new Keyvalue("interface",       "TsTemplates.interface"),        
+        new Keyvalue("use_state",       "TsTemplates.use_state"),
+        new Keyvalue("use_effect",      "TsTemplates.use_effect"),
+        
     ];
 
     public static getOperationIndex(opId: string): number {
@@ -61,18 +51,18 @@ export class JsxOps {
 
     public static readonly MOD_ID: string = "typescript_jsx";
 
-    public static OPS_BASIC: Keyvalue[] = [
-        new Keyvalue("function",         "t_function"),
-        new Keyvalue("component",        "t_component"),
-        new Keyvalue("component_ref",    "t_component ref"),
-        new Keyvalue("button",           "t_button"),
-        new Keyvalue("iconbutton",       "t_icon_button"),
-        new Keyvalue("grid",             "t_grid"),
-        new Keyvalue("page",             "t_page"),
-        new Keyvalue("page_header",      "t_page_header"),
-        new Keyvalue("page_primary bar", "t_page_primary bar"),
-        new Keyvalue("page_second bar",  "t_page_second bar"),
-        new Keyvalue("page_main content","t_page_main content"),
+    public static OPS_BASIC: Keyvalue[] = [        
+        new Keyvalue("component",        JsxTemplates.component),
+        new Keyvalue("function",         "JsxTemplates.function"),
+        new Keyvalue("component_ref",    "JsxTemplates.component ref"),
+        new Keyvalue("button",           "JsxTemplates.button"),
+        new Keyvalue("iconbutton",       "JsxTemplates.icon_button"),
+        new Keyvalue("grid",             "JsxTemplates.grid"),
+        new Keyvalue("page",             "JsxTemplates.page"),
+        new Keyvalue("page_header",      "JsxTemplates.page_header"),
+        new Keyvalue("page_primary_bar", "JsxTemplates.page_primary_bar"),
+        new Keyvalue("page_second_bar",  "JsxTemplates.page_second_bar"),
+        new Keyvalue("page_main_content","JsxTemplates.page_main_content"),
     ];
 
     public static getTemplate(opId: string): string {

@@ -18,6 +18,7 @@ import { CgDataConst, CgDataProcessor } from '@/codegen/data/cgdatakernel';
 import { Keyvalue } from '@/common/model/keyvalue';
 import React from 'react';
 import { SeparatorH } from "@/radix/container/separatorh";
+import { CgDataPatterns } from '@/codegen/data/cgdatapatterns';
 
 
 const LAYOUT_STYLE = {
@@ -42,10 +43,10 @@ export function TypeScriptManager({ onresult }: CompProps) {
     //................................................................................  
     const [countParams, setCountParams] = useState<number>(4);
     const [params, setParams]
-        = useState<InputPattern[]>(CgDataConst.LIST_PARAMS.slice(0, 4));
+        = useState<InputPattern[]>(CgDataPatterns.LIST_PARAMS.slice(0, 4));
 
-    const sliderParamsValueInit = CgDataConst.COUNT_PARAMETERS_DEF *
-        CgDataConst.FACTOR_INC_PARAMETERS;
+    const sliderParamsValueInit = CgDataPatterns.COUNT_PARAMETERS_DEF *
+        CgDataPatterns.FACTOR_INC_PARAMETERS;
 
     const [sliderParamsValue, setSliderParamsValue] = useState<number>(sliderParamsValueInit);
 
@@ -54,10 +55,10 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end
 
     const onChangeCountParams = (value: number[]) => {
-        const count: number = Math.floor(value[0] / CgDataConst.FACTOR_INC_PARAMETERS);
+        const count: number = Math.floor(value[0] / CgDataPatterns.FACTOR_INC_PARAMETERS);
         setCountParams(count);
-        setParams(CgDataConst.LIST_PARAMS.slice(0, count + 1));
-        setSliderParamsValue(count * CgDataConst.FACTOR_INC_PARAMETERS);
+        setParams(CgDataPatterns.LIST_PARAMS.slice(0, count + 1));
+        setSliderParamsValue(count * CgDataPatterns.FACTOR_INC_PARAMETERS);
         updateListParams(count);
     };//end
 
@@ -193,8 +194,8 @@ export function TypeScriptManager({ onresult }: CompProps) {
                             <SeparatorH />                      
                             <Box key={index.toString()}>
                                 <CardInputParam pattindexInit={index}
-                                        patterns={CgDataConst.LIST_PATTERNS}
-                                        input={CgDataConst.LIST_PARAMS[index]}
+                                        patterns={CgDataPatterns.LIST_PATTERNS}
+                                        input={CgDataPatterns.LIST_PARAMS[index]}
                                         onchange={onchange} />
 
                             </Box>
