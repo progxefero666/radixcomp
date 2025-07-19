@@ -5,7 +5,7 @@ import { CgConfig } from "@/codegen/cgconfig";
 
 
 /**
- * XForms.tempAttr_name
+ * XForms.FT_TEXT
  */
 export class XForms {
 
@@ -28,19 +28,22 @@ export class XForms {
     public static readonly TT_TEL: string = "telephone";
     public static readonly TT_HIDDEN: string = "hidden";
 
-    public static tempRefInput: string = `const ^%v%^Ref = useRef<HTMLInputElement>(null);\n`;
-    public static tempRefSelect: string = `const dateRef = useRef<HTMLSelectElement>(null);\n`;
+    public static tempRefInput: string = `const ^%v%^Ref = useRef<HTMLInputElement>(null);`;
+    public static tempRefSelect: string = `const dateRef = useRef<HTMLSelectElement>(null);`;
 
-    public static tempAttr_name: string = `name={^%v%^}\n`;
-    public static tempAttr_label: string = `label={^%v%^}\n`;
-    public static tempAttr_default: string = `default={^%v%^}\n`;
-    public static tempAttr_maxlen: string = `maxlen={^%v%^}\n`;
-    public static tempAttr_readonly: string = `readonly={^%v%^}\n`;
-    public static tempAttr_disabled: string = `disabled={^%v%^}\n`;
-    public static tempAttr_ref: string = `ref={^%v%^}\n`;
-    public static tempAttr_inline: string = `inline={^%v%^}\n`;
-    public static tempAttr_collection: string = `collection={^%v%^}\n`;
-    public static tempAttr_autocommit: string = `default={^%v%^}\n`;
+    public static tempAttr_name: string = `name={^%v%^}`;
+    public static tempAttr_label: string = `label={^%v%^}`;
+    
+    public static tempAttr_maxlen: string = `maxlen={^%v%^}`;
+    public static tempAttr_readonly: string = `readonly={^%v%^}`;
+    public static tempAttr_disabled: string = `disabled={^%v%^}`;
+    public static tempAttr_ref: string = `ref={^%v%^}`;
+    public static tempAttr_inline: string = `inline={^%v%^}`;
+    public static tempAttr_collection: string = `collection={^%v%^}`;
+    public static tempAttr_autocommit: string = `default={^%v%^}`;
+
+    public static tempAttr_default_text: string = `default={'^%v%^'}`;
+    public static tempAttr_default_other: string = `default={^%v%^}`;
 
     public static tempTag_open: string = `<`;
     public static tempTag_close: string = ` />\n`;
@@ -153,14 +156,12 @@ export class XFormsGen {
         result += XFormsGen.genInitTags(jsonTable) + CgConfig.RETx2;
         //............................................................................
         const jsonApp = JSON.parse(jsonTable);
-
-        //XForms.tempAttr_default
-        //XForms.tempAttr_maxlen 
         //XForms.tempAttr_readonly 
         //XForms.tempAttr_disabled        
-        //XForms.tempAttr_inline
+        //XForms.tempAttr_inline        
+        //XForms.tempAttr_autocommit  
+
         //XForms.tempAttr_collection
-        //XForms.tempAttr_autocommit        
         for (let idx = 0; idx < jsonApp.fields.length; idx++) {
 
             if (!jsonApp.fields[idx].pk) {
@@ -177,15 +178,38 @@ export class XFormsGen {
                 result += XForms.tempAttr_name
                     .replace(XForms.PATTERN, jsonApp.fields[idx].label)+ CgConfig.RET;
 
-                //tempAttr_default
-                result += XForms.tempAttr_default
-                    .replace(XForms.PATTERN, jsonApp.fields[idx].default)+ CgConfig.RET;      
+                //tempAttr_maxlen         
+                if (jsonApp.fields[idx].type === XForms.FT_TEXT && 
+                    jsonApp.fields[idx].maxlen !== null) { 
+                    result += XForms.tempAttr_maxlen
+                        .replace(XForms.PATTERN, jsonApp.fields[idx].maxlen)+ CgConfig.RET;                     
+                }
                 
+                //collection for fks
                 if (jsonApp.fields[idx].fk) {    
-                     result += "{collection[0]}" + CgConfig.RET;
+                    result +=  XForms.tempAttr_collection
+                        .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
+                    result += XForms.tempAttr_default_other
+                        .replace(XForms.PATTERN, "collection[0]")+ CgConfig.RET;                     
                 }
                 else {
-                    result += XFormsGen.genDefault(jsonApp.fields[idx].type) + CgConfig.RET;
+                    if(XForms.PATTERN, jsonApp.fields[idx].default!== null) {
+                        if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
+                            jsonApp.fields[idx].type === XForms.FT_DECIMAL) {
+                            result += XForms.tempAttr_default_other.replace
+                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET;                                  
+                        }
+                        else if(jsonApp.fields[idx].type === XForms.FT_TEXT||
+                            jsonApp.fields[idx].type === XForms.FT_TEXTAREA ||
+                            jsonApp.fields[idx].type === XForms.FT_DATE ||
+                            jsonApp.fields[idx].type === XForms.FT_DATETIME) {
+
+                        }
+                        else if(jsonApp.fields[idx].type === XForms.FT_CHECK){
+
+                        }                                                  
+                    }
+                    
                 }
             }
         }//end for
