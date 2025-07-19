@@ -100,7 +100,7 @@ export class XFormsGen {
         result +=  XForms.t_useEffect_start + CgConfig.RET;
         result += array_result;
         result += XForms.t_useEffect_end + CgConfig.RET;        
-        return result;
+        return CodeGenHelper.applyTabsToStringBlock(result,1);
     };//
 
     public static genRefs(jsonTable: string): string {
@@ -119,7 +119,7 @@ export class XFormsGen {
             }
         }//end for
 
-        return result;
+        return CodeGenHelper.applyTabsToStringBlock(result,1);
     };//end 
 
     public static genInitTag(field: any): string {
@@ -170,11 +170,7 @@ export class XFormsGen {
         //............................................................................
         let resultImports: string = XFormsGen.genImports();
         let resultInputs: string  = XFormsGen.genInputValues(jsonTable);
-        //............................................................................
-
-        //............................................................................
-        let resultRefs: string = "";
-        resultRefs += CgConfig.RETx2;
+        let resultRefs: string = XFormsGen.genRefs(jsonTable);
         //............................................................................
 
         //............................................................................

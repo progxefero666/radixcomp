@@ -100,19 +100,24 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         setOperationId(operationId);
     };//end
 
-    /* 
+    
     const [formInputs,setFormInputs] = useState<InputValue[]>([]);
     const validate = (): boolean => {
         return true;
     };//end
     const onSubmit = () => {
+        const formData:InputValue[] = [];
+        for(let idx = 0; idx < formInputs.length; idx++) {
+            const formDataItem: InputValue = new InputValue(
+                "","");
+        }
         const validation: boolean = validate();
         if (!validation) {
             alert("Validation error");
             return;
         }
     };//end
-    */
+    
 
     const runTest = () => {
 
