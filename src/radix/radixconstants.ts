@@ -1,4 +1,6 @@
 // File: src\radix\radixconstants.ts
+import { Keyvalue } from "@/common/model/keyvalue";
+
 
 export enum CONTROL_TYPES {
     TEXT     = "text",
@@ -95,7 +97,7 @@ export enum RADIX_COLORS {
     amber= "amber" ,
     orange= "orange" ,
     brown= "brown" ,
-    sky= "sky-7" , 
+    sky= "sky" , 
 };
 
 export class RadixOpsText{

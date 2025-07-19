@@ -2,7 +2,44 @@
 
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "@/radix/radixtypes";
-import { RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
+import { RADIX_SIZES,RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
+import { Keyvalue } from "@/common/model/keyvalue";
+
+/**
+ * class RadixTheme
+ */
+export class RadixTheme {
+
+    public static readonly COLORS: Keyvalue[] = [
+        new Keyvalue(RADIX_COLORS.gray, "Gray"),
+        new Keyvalue(RADIX_COLORS.red, "Red"),
+        new Keyvalue(RADIX_COLORS.blue, "Blue"),
+        new Keyvalue(RADIX_COLORS.green, "Green"),
+        new Keyvalue(RADIX_COLORS.yellow, "Yellow"),    
+        new Keyvalue(RADIX_COLORS.pink, "Pink"),
+        new Keyvalue(RADIX_COLORS.purple, "Purple"),
+        new Keyvalue(RADIX_COLORS.orange, "Orange"),
+        new Keyvalue(RADIX_COLORS.brown, "Brown"),
+        new Keyvalue(RADIX_COLORS.slate, "Slate"),
+        new Keyvalue(RADIX_COLORS.sage, "Sage"),
+        new Keyvalue(RADIX_COLORS.olive, "Olive"),
+        new Keyvalue(RADIX_COLORS.tomato, "Tomato"),
+        new Keyvalue(RADIX_COLORS.ruby, "Ruby"),
+        new Keyvalue(RADIX_COLORS.crimson, "Crimson"),
+        new Keyvalue(RADIX_COLORS.plum, "Plum"),    
+        new Keyvalue(RADIX_COLORS.violet, "Violet"),
+        new Keyvalue(RADIX_COLORS.iris, "Iris"),
+        new Keyvalue(RADIX_COLORS.indigo, "Indigo"),
+        new Keyvalue(RADIX_COLORS.cyan, "Cyan"),
+        new Keyvalue(RADIX_COLORS.teal, "Teal"),
+        new Keyvalue(RADIX_COLORS.jade, "Jade"),
+        new Keyvalue(RADIX_COLORS.grass, "Grass"),
+        new Keyvalue(RADIX_COLORS.lime, "Lime"),
+        new Keyvalue(RADIX_COLORS.sand, "Sand"),
+        new Keyvalue(RADIX_COLORS.sky, "Sky"),
+    ];
+    
+}//end class
 
 
 /**
@@ -86,8 +123,7 @@ export class ButtonsStyle {
 
     
     public static readonly COLOR_ADD        = RADIX_COLORS.crimson;
-    public static readonly COLOR_OPEN       = RADIX_COLORS.blue;
-    
+    public static readonly COLOR_OPEN       = RADIX_COLORS.blue;    
     public static readonly COLOR_DELETE     = RADIX_COLORS.yellow;
     public static readonly COLOR_CLEAR      = RADIX_COLORS.yellow;
     public static readonly COLOR_SAVE       = RADIX_COLORS.green;
@@ -98,8 +134,9 @@ export class ButtonsStyle {
     public static readonly COLOR_CLOSE      = RADIX_COLORS.jade;
     public static readonly COLOR_MOVEUP     = RADIX_COLORS.mauve;
     public static readonly COLOR_MOVEDOWN   = RADIX_COLORS.indigo;
-    public static readonly COLOR_RESET   = RADIX_COLORS.plum;
-}
+    public static readonly COLOR_RESET      = RADIX_COLORS.plum;
+
+};//end
 
 /**
  * class ThemeCompStyle.CONT_CSS_STYLE
@@ -166,7 +203,7 @@ export class DataStyle {
 
     public static readonly  TABLE_DEF_SIZE: any = RadixConf.SIZES.size_2;
 
-}
+}//end class
 
 /**
  * class ThemeMenusStyle.OPT_SIZE

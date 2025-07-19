@@ -91,9 +91,6 @@ export function TypeScriptManager({ onresult }: CompProps) {
     //................................................................................   
     const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
 
-    const onGroupSelected = (index: number) => {
-        alert("onGroupSelected: " + index);
-    };//end
     const onTsOpSelected = (index: number, name?: string) => {
         setViewerActTab(CgDataProcessor.WTEMPLATE);
         setOpGroup(name!);
@@ -108,10 +105,18 @@ export function TypeScriptManager({ onresult }: CompProps) {
         setCode(" ");
     };//end 
 
+    const onGroupSelected = (group: string) => {
+        if(group === TsOps.MOD_ID)       {onTsOpSelected(0,TsOps.MOD_ID); }
+        else if(group === JsxOps.MOD_ID) {onJsxOpSelected(0,JsxOps.MOD_ID);}
+  
+    };//end
+
+
     const runOperation = () => {
         const result:string =  CgDataProcessor.executeOperation(template, paramsValues);
         setViewerActTab(CgDataProcessor.WCODE);
         setCode(result);
+        alert("Operation finish.");
     };//end
 
     // renders 
@@ -200,21 +205,25 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end  
 
     return (
+        //onClick={(e) => onGroupSelected(e.currentTarget.tabIndex)}
 
         <Flex height="auto" width="100%" direction="row" gridColumn="1" gridRow="1" >
 
             <Box width="20%" >
-                <Tabs.Root defaultValue={TsOps.MOD_ID}>
-                    <Tabs.List onClick={(e) => onGroupSelected(e.currentTarget.tabIndex)}>
-                        <Tabs.Trigger value={TsOps.MOD_ID}>{TsOps.MOD_ID}</Tabs.Trigger>
-                        <Tabs.Trigger value={JsxOps.MOD_ID}>JsxOps.MOD_ID</Tabs.Trigger>
+                <Tabs.Root defaultValue={TsOps.MOD_ID} 
+                            onValueChange={(value) => onGroupSelected(value)} >
+                    <Tabs.List >
+                        <Tabs.Trigger value={TsOps.MOD_ID} >
+                            {TsOps.MOD_ID}
+                        </Tabs.Trigger>
+                        <Tabs.Trigger value={JsxOps.MOD_ID}>{JsxOps.MOD_ID}</Tabs.Trigger>
                         <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
                     </Tabs.List>
                     <Box pt="3">
-                        <Tabs.Content value="typescript">
+                        <Tabs.Content value={TsOps.MOD_ID}>
                             {renderBasicContent()}
                         </Tabs.Content>
-                        <Tabs.Content value="jsx">
+                        <Tabs.Content value={JsxOps.MOD_ID}>
                             {renderJsxContent()}
                             
                         </Tabs.Content>
@@ -293,4 +302,3 @@ export function TypeScriptManager({ onresult }: CompProps) {
     )
 
 }//end comp
-

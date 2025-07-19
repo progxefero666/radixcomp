@@ -1,13 +1,14 @@
 
 import { useEffect, useRef, useState } from "react";
-import { Box, Flex, Text, Grid, Button, IconButton, Tabs } from "@radix-ui/themes";
+import { Flex, Box, Text, Button, IconButton } from "@radix-ui/themes";
 import { TOption } from "@/radix/radixtypes";
 import { Accordion } from "radix-ui";
 import { ChevronDownIcon, } from "@radix-ui/themes";
-import { COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { ButtonsStyle, COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion';
 import React from 'react';
 import { SeparatorH } from "@/radix/container/separatorh";
+import { TrashIcon } from "@radix-ui/react-icons";
 
 
 // template component
@@ -28,9 +29,20 @@ export default function TemplateComp({name, inline, callback }: CompProps) {
         setReady(true);
     }, []);
 
+
+    const runCommand = (commId:string) => {
+
+    };//end
+
     return (
         <Flex width="100%" direction="column" px="2" py="1" align="center" justify="center">
-            <p>template</p>
+            <Button size={ButtonsStyle.BTN_DEF_SIZE}
+                    radius={ButtonsStyle.BTN_DEF_RADIUS}
+                    color={ButtonsStyle.COLOR_CLEAR} 
+                    onClick={() => runCommand("clear")}>
+                <TrashIcon />
+                <Text size="3">clear</Text>
+            </Button>
         </Flex>
     )
 };//end component

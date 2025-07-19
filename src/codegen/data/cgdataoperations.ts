@@ -61,6 +61,7 @@ export class JsxOps {
 
     public static BASIC: Keyvalue[] = [        
         new Keyvalue("component",        JsxTemplates.component),
+        new Keyvalue("use_effect",           JsxTemplates.use_effect),
         new Keyvalue("button",           JsxTemplates.component),
         new Keyvalue("iconbutton",       "JsxTemplates.icon_button"),
         new Keyvalue("function",         "JsxTemplates.function"),
