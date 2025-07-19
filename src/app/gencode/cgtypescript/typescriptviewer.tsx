@@ -73,10 +73,10 @@ export function TypeScriptViewer({activetab,template,code}: CompProps) {
                 </Tabs.List>
                 <Box pt="3">
                     <Tabs.Content value={CgDataProcessor.WCODE}>
-                        <CardCode code={code} /> 
+                        <CardCode key={code} code={code} /> 
                     </Tabs.Content>                    
                     <Tabs.Content value={CgDataProcessor.WTEMPLATE}>                           
-                        <CardCode code={template} />  
+                        <CardCode key={template}  code={template} />  
                     </Tabs.Content>
                 </Box>
             </Tabs.Root>            

@@ -6,7 +6,7 @@ import { JsxTemplates } from "./templates/jsx/jsxtemplates";
 
 
 /**
- *  class TsOps.getColl_BASIC
+ *  class TsOps.MOD_ID
  */
 export class TsOps {
 
@@ -53,7 +53,7 @@ export class TsOps {
 
 
 /**
- * class JsxOps.OPS_BASIC
+ * class JsxOps.MOD_ID
  */
 export class JsxOps {
 

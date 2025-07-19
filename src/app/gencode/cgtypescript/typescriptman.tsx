@@ -90,16 +90,22 @@ export function TypeScriptManager({ onresult }: CompProps) {
     // operation 
     //................................................................................   
     const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
+
+    const onGroupSelected = (index: number) => {
+        alert("onGroupSelected: " + index);
+    };//end
     const onTsOpSelected = (index: number, name?: string) => {
         setViewerActTab(CgDataProcessor.WTEMPLATE);
         setOpGroup(name!);
         setTemplate(TsOps.getTemplate(TsOps.BASIC[index].key));
+        setCode(" ");
     };//end 
 
     const onJsxOpSelected = (index: number, name?: string) => {
         setViewerActTab(CgDataProcessor.WTEMPLATE);
         setOpGroup(name!);       
         setTemplate(JsxOps.getTemplate(JsxOps.BASIC[index].key));
+        setCode(" ");
     };//end 
 
     const runOperation = () => {
@@ -198,14 +204,14 @@ export function TypeScriptManager({ onresult }: CompProps) {
         <Flex height="auto" width="100%" direction="row" gridColumn="1" gridRow="1" >
 
             <Box width="20%" >
-                <Tabs.Root defaultValue="basic">
-                    <Tabs.List>
-                        <Tabs.Trigger value="basic">Basic</Tabs.Trigger>
-                        <Tabs.Trigger value="jsx">Jsx</Tabs.Trigger>
+                <Tabs.Root defaultValue={TsOps.MOD_ID}>
+                    <Tabs.List onClick={(e) => onGroupSelected(e.currentTarget.tabIndex)}>
+                        <Tabs.Trigger value={TsOps.MOD_ID}>{TsOps.MOD_ID}</Tabs.Trigger>
+                        <Tabs.Trigger value={JsxOps.MOD_ID}>JsxOps.MOD_ID</Tabs.Trigger>
                         <Tabs.Trigger value="advanced">Advanced</Tabs.Trigger>
                     </Tabs.List>
                     <Box pt="3">
-                        <Tabs.Content value="basic">
+                        <Tabs.Content value="typescript">
                             {renderBasicContent()}
                         </Tabs.Content>
                         <Tabs.Content value="jsx">
@@ -277,7 +283,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
             </Box>
 
             <Box width="44%" >
-                <TypeScriptViewer key={viewerActTab}
+                <TypeScriptViewer key={viewerActTab+opGroup+template}
                                   activetab={viewerActTab}
                                   template={template}
                                   code={code} />
