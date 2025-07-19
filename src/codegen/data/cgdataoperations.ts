@@ -46,7 +46,7 @@ export class TsOps {
         return index;
     };
 
-    public static getTsTemplate(opId: string): string {
+    public static getTemplate(opId: string): string {
          const operationIndex: number = TsOps.getOperationIndex(opId);
         return JsxOps.OPS_BASIC[operationIndex].value;
     };//end
@@ -61,35 +61,21 @@ export class JsxOps {
 
     public static readonly MOD_ID: string = "typescript_jsx";
 
-    
-    public static readonly OP_FUNC_JSX: string          = "function";
-    public static readonly OP_COMPONENT: string         = "component";
-    public static readonly OP_COMPONENT_REF: string     = "component_ref";
-    public static readonly OP_BUTTONS: string           = "buttons";
-    public static readonly OP_ICON_BUTTONS: string      = "iconbuttons";
-    public static readonly OP_GRID: string              = "iconbuttons";
-
-    public static readonly OP_PAGE: string              = "page_geader";
-    public static readonly OP_PAGE_HEADER: string       = "page_geader";
-    public static readonly OP_PAGE_PRIMARY_BAR: string  = "page_primary_bar";
-    public static readonly OP_PAGE_SECOND_BAR: string   = "page_main_content";
-    public static readonly OP_PAGE_MAINCONTENT: string  = "page_main_content";
-
     public static OPS_BASIC: Keyvalue[] = [
-        new Keyvalue(JsxOps.OP_FUNC_JSX,         "function"),
-        new Keyvalue(JsxOps.OP_COMPONENT,        "component"),
-        new Keyvalue(JsxOps.OP_COMPONENT_REF,    "component ref"),
-        new Keyvalue(JsxOps.OP_BUTTONS,          "buttons"),
-        new Keyvalue(JsxOps.OP_ICON_BUTTONS,     "icon buttons"),
-        new Keyvalue(JsxOps.OP_GRID,             "grids"),
-        new Keyvalue(JsxOps.OP_PAGE,             "page"),
-        new Keyvalue(JsxOps.OP_PAGE_HEADER,      "page header"),
-        new Keyvalue(JsxOps.OP_PAGE_PRIMARY_BAR, "page primary bar"),
-        new Keyvalue(JsxOps.OP_PAGE_SECOND_BAR,  "page second bar"),
-        new Keyvalue(JsxOps.OP_PAGE_MAINCONTENT, "page main content"),
+        new Keyvalue("function",         "t_function"),
+        new Keyvalue("component",        "t_component"),
+        new Keyvalue("component_ref",    "t_component ref"),
+        new Keyvalue("button",           "t_button"),
+        new Keyvalue("iconbutton",       "t_icon_button"),
+        new Keyvalue("grid",             "t_grid"),
+        new Keyvalue("page",             "t_page"),
+        new Keyvalue("page_header",      "t_page_header"),
+        new Keyvalue("page_primary bar", "t_page_primary bar"),
+        new Keyvalue("page_second bar",  "t_page_second bar"),
+        new Keyvalue("page_main content","t_page_main content"),
     ];
 
-    public static getTsTemplate(opId: string): string {
+    public static getTemplate(opId: string): string {
         const operationIndex: number = JsxOps.getOperationIndex(opId);
         return JsxOps.OPS_BASIC[operationIndex].value;
     };

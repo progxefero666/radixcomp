@@ -1,14 +1,12 @@
 //src\app\gencode\cgtypescript\typescriptman.tsx
-import classNames from "classnames";
+
 import Image from 'next/image'
 import { useState, useEffect, useRef } from "react";
 import { TypeScriptViewer } from "@/app/gencode/cgtypescript/typescriptviewer";
-import { Accordion } from "radix-ui";
 import { Box, Grid, Flex, Text, Button, Tabs, TextField, Separator, Slider, ChevronDownIcon, } from "@radix-ui/themes";
 import { COMP_BORDER_STYLE, ButtonsStyle } from "@/radix/radixtheme";
 import { JsxOps, TsOps } from "@/codegen/data/cgdataoperations";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
-import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
 import CardInputParam from '../cards/cardinputparam';
 import { InputPattern } from '@/codegen/data/model/inputpattern';
 import { RADIX_COLORS } from '@/radix/radixconstants';
@@ -18,11 +16,8 @@ import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';
 import { RadixConf } from '@/radix/radixconf';
 import { CgDataConst, CgDataProcessor } from '@/codegen/data/cgdatakernel';
 import { Keyvalue } from '@/common/model/keyvalue';
-import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion';
 import React from 'react';
 import { SeparatorH } from "@/radix/container/separatorh";
-import { CgDataTsFunctions } from "@/codegen/data/cgdatafunction";
-import { set } from "date-fns";
 
 
 const LAYOUT_STYLE = {
@@ -105,7 +100,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const onTsOpSelected = (index: number, name?: string) => {
         setOpGroup(name!);
-        setTemplate(TsOps.getTsTemplate(TsOps.BASIC[index].key));
+        setTemplate(TsOps.getTemplate(TsOps.BASIC[index].key));
     };//end 
 
     const onJsxOpSelected = (index: number, name?: string) => {
