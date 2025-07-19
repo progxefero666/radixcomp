@@ -199,9 +199,13 @@ export function WorkflowEditor({ workflow }: WorkflowEditorProps) {
         <Flex width="100%" direction="column" px="3" py="3" gapY="2" style={mainContentStyle} >
             <WorkflowEditorHeader onsave={onSaveWorkflow}/>
             <CardWorkflowMain workflow={workflow} openinit={mainOpen} />
-            {renderMainCommands()}
-            {renderTasks()}
+
         </Flex>
     );
 
 };//end component
+
+/*
+            {renderMainCommands()}
+            {renderTasks()}
+*/

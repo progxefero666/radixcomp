@@ -43,7 +43,8 @@ interface CompProps {
 export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
 
     let initialized: boolean = false;
-    const [open, setOpen] = React.useState(openinit);
+    const [ready, setReady] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(openinit);
     
     const nameRef        = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
@@ -51,13 +52,14 @@ export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
     const contextRef = useRef<HTMLInputElement>(null);
     const fpathRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {          
+    useEffect(() => {   
+        if(ready) { return; }    
         const init = async () => {
             if(workflow.description === null) {workflow.description = "";}
             if(workflow.application === null) {workflow.application = "";}
             if(workflow.context     === null) {workflow.context = "";}
             if(workflow.fpath === null)       {workflow.fpath = "";}                        
-            initialized = true;
+            setReady(true);
         };
         init();
     }, []);
@@ -74,7 +76,7 @@ export function CardWorkflowMain({workflow,openinit,onsave}:CompProps) {
         console.log("import description");
     };
 
-    if(!initialized) {
+    if(!ready) {
         return (
             <InfoNotdata message="loading Workflow main" />
         );

@@ -43,8 +43,9 @@ export default function WorkflowEditorPage() {
     return (
         <Grid height="100vh" rows="auto 1fr" columns="20% 50% 30%" style={layoutStyle} >   
 
-            <Flex gridColumn="1/4" gridRow="1" ><WorkflowHeader />
-                <WorkflowEditor workflow={workflow} />
+            
+            <Flex gridColumn="1/4" gridRow="1" >
+                <WorkflowHeader />
             </Flex>
 
             <Flex gridColumn="1" gridRow="2" >            
