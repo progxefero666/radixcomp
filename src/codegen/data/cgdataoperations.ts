@@ -1,8 +1,8 @@
 //src\codegen\data\cgdata.ts
 
 import { Keyvalue } from "@/common/model/keyvalue";
-import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
-import { JsxTemplates } from "../templates/jsx/jsxtemplates";
+import { TsTemplates } from "@/codegen/data/templates/typescript/tstemplates";
+import { JsxTemplates } from "./templates/jsx/jsxtemplates";
 
 
 /**

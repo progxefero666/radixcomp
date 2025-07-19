@@ -6,10 +6,11 @@ import { Pattern } from "@/codegen/data/model/pattern";
 import { TextHelper } from "@/common/helper/texthelper";
 
 /**
- * class CgDataPatterns.PATTERNS
+ * class CgDataPatterns.VARNAME_v0v7
  */
 export class CgDataPatterns {
 
+    public static readonly VARNAME_v0v7: string = "v";
    
     public static readonly PATTERNS: Pattern[] = [
         new Pattern("^%","%^","/icons/uno"),  
@@ -37,16 +38,16 @@ export class CgDataPatterns {
         for (let idx=0;idx<CgDataPatterns.MAX_PARAMETERS;idx++) {
            this.inputs_basic.push(
                 new InputPattern(idx,CgDataPatterns.PATTERNS[idx].start, 
-                                   CgDataPatterns.PATTERNS[idx].end,null)
+                                   CgDataPatterns.PATTERNS[idx].end,null,null)
            );
         }        
     };//end
 
     public genPatterns_v0v7 = () => {
         for (let idx=0;idx<CgDataPatterns.MAX_PARAMETERS;idx++) {
-            const variable = "v" + idx;
+            const variable = CgDataPatterns.VARNAME_v0v7 + idx;
             const input = new InputPattern(idx,CgDataPatterns.PATTERNS[idx].start, 
-                                   CgDataPatterns.PATTERNS[idx].end,variable)
+                                   CgDataPatterns.PATTERNS[idx].end,variable,null)
             this.inputs_v0v7.push(input);
         }        
     };//end
