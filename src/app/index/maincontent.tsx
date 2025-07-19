@@ -5,7 +5,7 @@ import { Flex} from "@radix-ui/themes";
 
 import { AppConfig } from "@/app/index/appconfig";
 import { Codelang } from "@/db/model/codelang";
-import { insertCodelang } from "@/db/services/crud/srvcrudcodelang";
+//import { insertCodelang } from "@/db/services/crud/srvcrudcodelang";
 
 
 const mainContentStyle = {
@@ -26,8 +26,8 @@ export default function MainContent({module}: CompProps) {
     useEffect(() => {
         if(ready) {return;} 
         const init = async () => {              
-            const newRow:Codelang = new Codelang(10, "csharp", "csharp");       
-            const response = await insertCodelang(JSON.stringify(newRow));  
+            //const newRow:Codelang = new Codelang(10, "csharp", "csharp");       
+            //const response = await insertCodelang(JSON.stringify(newRow));  
             setReady(true);
         };
         init();
