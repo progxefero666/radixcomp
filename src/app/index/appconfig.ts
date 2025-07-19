@@ -18,8 +18,6 @@ export class AppConfig {
     public static readonly MOD_GENCODE: Option 
         = new Option("./gencode","Code Generator",null,null,null);
 
-    public static readonly MOD_WORKFLOWS: Option 
-        = new Option("./workflows","WorkFlows",null,null,null);
 
     public static readonly MOD_APPLICATIONS: Option 
         = new Option("./applications","Applications",null,null,null);
@@ -28,8 +26,7 @@ export class AppConfig {
         = new Option("./platform","Pc Platform",null,null,null);
 
     public static readonly MODULES: Option[] = [
-        AppConfig.MOD_GENCODE, 
-        AppConfig.MOD_WORKFLOWS,        
+        AppConfig.MOD_GENCODE,        
         AppConfig.MOD_APPLICATIONS,        
         AppConfig.MOD_PLATFORM        
     ]

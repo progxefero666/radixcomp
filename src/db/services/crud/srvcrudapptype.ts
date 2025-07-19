@@ -2,9 +2,9 @@
 "use server";
 
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { Apptype, PrismaClient } from "@generated/prisma";
+import { PrismaClient } from "@generated/prisma";
 import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
-
+import { Apptype } from "@/db/model/apptype";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
@@ -20,7 +20,7 @@ export async function insert(item_serial:string): Promise<string> {
     const prisma = new PrismaClient();
     let result: object|null = null;
     try {
-        result = await prisma.apptype.create({data:item});
+        result = await prisma.apptype.create({data:item as any});
         if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.apptype));
@@ -42,7 +42,7 @@ export async function update(item:Apptype): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.apptype.update({where:{id:item.id!},data:item!});        
+        result = await prisma.apptype.update({where:{id:item.id!},data:item! as any});        
         if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.apptype));

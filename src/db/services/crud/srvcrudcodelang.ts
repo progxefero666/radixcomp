@@ -2,12 +2,12 @@
 "use server";
 
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { Codelang, PrismaClient } from "@generated/prisma";
+import { PrismaClient } from "@generated/prisma";
 import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
 
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
-
+import { Codelang } from "@/db/model/codelang";
 
 
 /**
@@ -21,7 +21,7 @@ export async function insert(item_serial:string): Promise<string> {
     const prisma = new PrismaClient();
     let result: object|null = null;
     try {
-        result = await prisma.codelang.create({data:item});
+        result = await prisma.codelang.create({data:item as any});
         if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.codelang));
@@ -43,7 +43,7 @@ export async function update(item:Codelang): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.codelang.update({where:{id:item.id!},data:item!});        
+        result = await prisma.codelang.update({where:{id:item.id!},data:item! as any});        
         if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.codelang));

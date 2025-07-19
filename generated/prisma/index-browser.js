@@ -126,43 +126,6 @@ exports.Prisma.CodelangScalarFieldEnum = {
   description: 'description'
 };
 
-exports.Prisma.TasktypeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description'
-};
-
-exports.Prisma.WorkflowScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  context: 'context',
-  description: 'description',
-  application: 'application',
-  fpath: 'fpath',
-  updated: 'updated'
-};
-
-exports.Prisma.TaskcategoryScalarFieldEnum = {
-  id: 'id',
-  workflowId: 'workflowId',
-  name: 'name',
-  description: 'description'
-};
-
-exports.Prisma.TaskScalarFieldEnum = {
-  id: 'id',
-  tasktypeId: 'tasktypeId',
-  codelangId: 'codelangId',
-  workflowId: 'workflowId',
-  taskcategoryId: 'taskcategoryId',
-  orden: 'orden',
-  name: 'name',
-  tkgroup: 'tkgroup',
-  description: 'description',
-  files: 'files',
-  folders: 'folders'
-};
-
 exports.Prisma.ApptypeScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -211,10 +174,6 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Codelang: 'Codelang',
-  Tasktype: 'Tasktype',
-  Workflow: 'Workflow',
-  Taskcategory: 'Taskcategory',
-  Task: 'Task',
   Apptype: 'Apptype',
   Application: 'Application'
 };

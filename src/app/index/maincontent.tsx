@@ -46,7 +46,7 @@ export default function MainContent({module}: CompProps) {
 
     return (
             <Flex width="100%" direction="column" gapY="2" style={mainContentStyle} >
-                {module === AppConfig.MOD_WORKFLOWS.id?   renderModWorkFlows():null}
+
                 {module === AppConfig.MOD_APPLICATIONS.id?renderModApplications():null}
                 {module === AppConfig.MOD_PLATFORM.id?    renderModPlatform() : null}
             </Flex>

@@ -9,7 +9,7 @@ import { DbTables } from "@/db/dbcatalog";
 import { Codelang } from "@/db/model/codelang";
 import { Tasktype } from "@/db/model/tasktype";
 import { Taskcategory } from "@/db/model/taskcategory";
-
+import { Workflow } from "@/db/model/workflow";
 import { Task } from "@/db/model/task";
 import { getCountAllRows } from "@/db/services/generic/serviceread";
 import { getAllTasktypes } from "@/db/services/read/srvmantasktypes";
@@ -21,7 +21,6 @@ import { getWorkflow } from "@/db/services/read/srvworkflow";
 import { getAllTaskcategory } from "@/db/services/read/srvtaskcategories";
 import { ManagerCollectionById } from "@/common/manager/mancollection";
 import { DB_COLL_CMD, DB_ITEM_CMD } from "@/common/database/dbkernel";
-import { Workflow } from "@generated/prisma";
 
 export const WK_EDITOR_VIEWS = {
     EDITOR_VIEW_DEFAULT: new Option("default", "Workflow", null),
@@ -96,7 +95,7 @@ export class AppWorkflows {
     public static readonly TASKCAT_DEF_NAME: string = "default";    
     public static readonly TASKCAT_DEF_DESC: string = "default task category";
     public static readonly FIRST_TASK_NAME: string = "first task";
-    public static readonly FIRST_TASK_DESC: string = "asdasd ";
+    public static readonly FIRST_TASK_DESC: string = "";
 
     // application forms definitions
     //......................................................................................................    
@@ -107,6 +106,7 @@ export class AppWorkflows {
     ]
 
     public static readonly NEW_WK: Workflow = new Workflow(
+        null,
         DB_CONSTANTS.NOT_DEF, 
         null,"", null, null);        
 
@@ -157,15 +157,14 @@ export class AppWorkflowsCreator {
         
         // 1. insert workflow
         const workflowId:number|null = await AppWorkflowsCrud.insert_workflow(name, AppWorkflows.FIRST_TASK_DESC); 
-        if(workflowId === null) {
-            alert("Error creating workflow.");
-            return null;
-        }
+        console.log("workflowId: ", workflowId);
+        if(workflowId === null) {return null;}
 
         // 2. insert default task category
         const taskcategoryId:number|null = await AppWorkflowsCrud.insert_taskcategory
                 (workflowId!,AppWorkflows.TASKCAT_DEF_NAME, AppWorkflows.TASKCAT_DEF_DESC);
         if(taskcategoryId === null) {return null;}
+
 
         // 3. insert first task
         const taskId:number|null = await AppWorkflowsCrud.insert_task(
@@ -247,8 +246,7 @@ export class AppWorkflowsCrud {
     };//end
 
     public static insert_workflow = async (name:string,description:string): Promise<number|null> => {
-        alert(description);
-        const workflow: Workflow = new Workflow(name, null,description, null, null);
+        const workflow: Workflow = new Workflow(null,name, null,description, null, null);
         const response = await insertWorkflow(JSON.stringify(workflow));
         if(response === null) {return null;}
         const responseObj:JsonResponse = JSON.parse(response) as JsonResponse;        

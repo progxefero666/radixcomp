@@ -4,9 +4,9 @@
 "use server";
 
 import { JsonResponse } from "@/common/model/jsonreponse";
-import { Application, PrismaClient } from "@generated/prisma";
+import { PrismaClient } from "@generated/prisma";
 import { DB_ERROR, DbOps, DpOpsUtil } from "@/common/database/dbkernel";
-
+import { Application } from "@/db/model/application";
 import { parseItem } from "@/common/parsers/javascriptparser";
 import { DbTables } from "@/db/dbcatalog";
 
@@ -44,7 +44,7 @@ export async function update(item:Application): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.application.update({where:{id:item.id!},data:item!});        
+        result = await prisma.application.update({where:{id:item.id!},data:item! as any});        
         if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.application));
