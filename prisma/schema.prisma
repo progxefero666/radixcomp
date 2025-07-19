@@ -34,7 +34,7 @@ model Workflow {
     description String?    @default("undefined") @db.Text
     application String?    @db.VarChar(50)
     fpath       String?    @db.VarChar(500)
-    updated     DateTime
+    updated     DateTime   @updatedAt
     tasks       Task[]
     taskcategorys  Taskcategory[]
     @@map("workflow")

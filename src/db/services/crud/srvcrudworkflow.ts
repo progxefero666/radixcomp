@@ -22,12 +22,13 @@ export async function insertWorkflow(item_serial:string): Promise<string> {
     let result: Workflow|null = null;
     try {
         result = await prisma.workflow.create({data:item});
-        if (result === null) {
+        /*if (result === null) {
             return JsonResponse.ERROR
                 (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.workflow));
-        }
+        }*/
     }
     catch (error) {
+        console.log(error);
         return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {

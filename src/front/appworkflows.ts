@@ -95,7 +95,7 @@ export class AppWorkflows {
     public static readonly TASKCAT_DEF_NAME: string = "default";    
     public static readonly TASKCAT_DEF_DESC: string = "default task category";
     public static readonly FIRST_TASK_NAME: string = "first task";
-    public static readonly FIRST_TASK_DESC: string = "";
+    public static readonly FIRST_TASK_DESC: string = "asdasd ";
 
     // application forms definitions
     //......................................................................................................    
@@ -157,7 +157,10 @@ export class AppWorkflowsCreator {
         
         // 1. insert workflow
         const workflowId:number|null = await AppWorkflowsCrud.insert_workflow(name, AppWorkflows.FIRST_TASK_DESC); 
-        if(workflowId === null) {return null;}
+        if(workflowId === null) {
+            alert("Error creating workflow.");
+            return null;
+        }
 
         // 2. insert default task category
         const taskcategoryId:number|null = await AppWorkflowsCrud.insert_taskcategory
@@ -244,6 +247,7 @@ export class AppWorkflowsCrud {
     };//end
 
     public static insert_workflow = async (name:string,description:string): Promise<number|null> => {
+        alert(description);
         const workflow: Workflow = new Workflow(null,name, null,description, null, null);
         const response = await insertWorkflow(JSON.stringify(workflow));
         if(response === null) {return null;}
