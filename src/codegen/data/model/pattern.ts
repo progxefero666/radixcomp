@@ -1,7 +1,9 @@
 //src\codegen\data\model\pattern.ts
 
 
-
+/**
+ * class Pattern
+ */
 export class Pattern {
 
     public start:   string;

@@ -25,7 +25,7 @@ export class CgDataPatterns {
     public static readonly PATT_7: Pattern = new Pattern("^:",":^",null, "/icons/ocho.png");
 
 
-    public static readonly LIST_PATTERNS: Pattern[] = [
+    public static readonly PATTERNS: Pattern[] = [
         CgDataPatterns.PATT_0,  
         CgDataPatterns.PATT_1,
         CgDataPatterns.PATT_2,
@@ -36,16 +36,15 @@ export class CgDataPatterns {
         CgDataPatterns.PATT_7
     ];
 
-    public static LIST_PARAMS: InputPattern[] = [
-        new InputPattern(0,CgDataPatterns.PATT_0.start, CgDataPatterns.PATT_0.end),
-        new InputPattern(0,CgDataPatterns.PATT_1.start, CgDataPatterns.PATT_1.end),
-        new InputPattern(0,CgDataPatterns.PATT_2.start, CgDataPatterns.PATT_2.end),
-        new InputPattern(0,CgDataPatterns.PATT_3.start, CgDataPatterns.PATT_3.end),
-        new InputPattern(0,CgDataPatterns.PATT_4.start, CgDataPatterns.PATT_4.end),
-        new InputPattern(0,CgDataPatterns.PATT_5.start, CgDataPatterns.PATT_5.end),
-        new InputPattern(0,CgDataPatterns.PATT_6.start, CgDataPatterns.PATT_6.end),
-        new InputPattern(0,CgDataPatterns.PATT_7.start, CgDataPatterns.PATT_7.end),
-
+    public static PARAMS_EMPTY: InputPattern[] = [
+        new InputPattern(0,CgDataPatterns.PATT_0.start, CgDataPatterns.PATT_0.end,null),
+        new InputPattern(1,CgDataPatterns.PATT_1.start, CgDataPatterns.PATT_1.end,null),
+        new InputPattern(2,CgDataPatterns.PATT_2.start, CgDataPatterns.PATT_2.end,null),
+        new InputPattern(3,CgDataPatterns.PATT_3.start, CgDataPatterns.PATT_3.end,null),
+        new InputPattern(4,CgDataPatterns.PATT_4.start, CgDataPatterns.PATT_4.end,null),
+        new InputPattern(5,CgDataPatterns.PATT_5.start, CgDataPatterns.PATT_5.end,null),
+        new InputPattern(6,CgDataPatterns.PATT_6.start, CgDataPatterns.PATT_6.end,null),
+        new InputPattern(7,CgDataPatterns.PATT_7.start, CgDataPatterns.PATT_7.end,null),
     ]
 
 };//end class

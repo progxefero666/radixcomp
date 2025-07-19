@@ -11,10 +11,12 @@ export class InputPattern  {
     public variable:    string|null = null;
     public label:       string|null;
 
-    constructor(id: number,patternStart:string,patternEnd:string) {
+    constructor(id: number,patternStart:string,patternEnd:string,variable:string|null) {
         this.id = id;
         this.patternStart = patternStart;
         this.patternEnd = patternEnd;
+        this.variable = variable;
+        
         this.label = "Parameter " + id;
     };//end
 
