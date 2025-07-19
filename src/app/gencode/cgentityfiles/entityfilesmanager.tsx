@@ -102,7 +102,8 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     const runTest = () => {
 
-          XFormsGen.generateForm(jsonTemplate);
+          const codecont:string = XFormsGen.generateForm(jsonTemplate);
+          onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform",codecont!)); 
     };//end
 
     const runOperation = async () => {

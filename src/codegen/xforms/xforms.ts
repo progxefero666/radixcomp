@@ -16,7 +16,7 @@ export class XForms {
 
     public static FT_TEXT: string       = "text";
     public static FT_TEXTAREA: string   = "textarea";
-    public static FT_CHECK: string      = "check";
+    public static FT_CHECK: string      = "boolean";
     public static FT_NUMBER: string     = "number";
     public static FT_DECIMAL: string    = "decimal";
     public static FT_COLLECTION: string = "collection";
@@ -51,10 +51,10 @@ export class XForms {
     public static t_attr_default: string    = `default={^%v%^}`;
     public static t_attr_maxlen: string     = `maxlen={^%v%^}`;
     public static t_attr_disabled: string   = `disabled={^%v%^}`;
-    public static t_attr_inline: string     = `inline={^%v%^}`;
+    
     public static t_attr_autocommit: string = `default={^%v%^}`;
 
-
+    public static attr_inline: string     = `inline={true}`;
 
     /*    
         <XInputText
@@ -108,8 +108,9 @@ export class XFormsGen {
                     result += XForms.tc_collection;
                 }
                 else {
+                    console.log(jsonApp.fields[idx].type);
                     if (jsonApp.fields[idx].type === XForms.FT_TEXT) {
-
+                        result += XForms.tc_text;
                     }
                     else if (jsonApp.fields[idx].type === XForms.FT_TEXTAREA) {
                         result += XForms.tc_textarea;
@@ -133,10 +134,11 @@ export class XFormsGen {
                         result += XForms.tc_file;
                     }
                 }
+                result += CgConfig.CHAR_SPACE +XForms.t_tag_close+ CgConfig.RET; 
             }
         }//end for
-
-        return result + CgConfig.CHAR_SPACE;
+        
+        return result;// + CgConfig.CHAR_SPACE;
     };//end 
 
     public static genDefault(fieldType: any): string {
@@ -150,7 +152,9 @@ export class XFormsGen {
         let result: string = "";
         result += XFormsGen.genRefs(jsonTable) + CgConfig.RETx2;
         result += XFormsGen.genInitTags(jsonTable) + CgConfig.RETx2;
+
         //............................................................................
+        
         const jsonApp = JSON.parse(jsonTable);
         
         for (let idx = 0; idx < jsonApp.fields.length; idx++) {
@@ -161,6 +165,7 @@ export class XFormsGen {
                 result += XForms.t_attr_ref
                     .replace(XForms.PATTERN, jsonApp.fields[idx].name)+ CgConfig.RET;
 
+                /*    
                 //tempAttr_name
                 result += XForms.t_attr_name
                     .replace(XForms.PATTERN, jsonApp.fields[idx].name)+ CgConfig.RET;
@@ -190,15 +195,14 @@ export class XFormsGen {
                             result += '"'+ XForms.t_attr_default.replace
                                 (XForms.PATTERN,jsonApp.fields[idx].default)+'"'+ CgConfig.RET; 
                         }    
-                        if(jsonApp.fields[idx].type === XForms.FT_DATE ||
+                        else if(jsonApp.fields[idx].type === XForms.FT_DATE ||
                             jsonApp.fields[idx].type === XForms.FT_DATETIME) {
                             if(!CodeGenHelper.isGeneratedDate(jsonApp.fields[idx].default)) {   
                                 result += '"'+ XForms.t_attr_default.replace
                                     (XForms.PATTERN,jsonApp.fields[idx].default)+'"'+ CgConfig.RET;                                 
                             }                            
                         } 
-
-                        if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
+                        else if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
                                 jsonApp.fields[idx].type === XForms.FT_DECIMAL ||
                                 jsonApp.fields[idx].type === XForms.FT_CHECK) {
                             result += XForms.t_attr_default.replace
@@ -208,8 +212,24 @@ export class XFormsGen {
                         }                                         
                     }                    
                 }
-            }
-        }//end for 
+                
+                //XForms.tempAttr_inline  
+                if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
+                   jsonApp.fields[idx].type === XForms.FT_DECIMAL ||
+                   jsonApp.fields[idx].type === XForms.FT_CHECK||
+                   jsonApp.fields[idx].type === XForms.FT_FILE) {
+                    result += XForms.attr_inline + CgConfig.RET;       
+                }
+                 */
+                    
+                result += XForms.t_tag_close+ CgConfig.RET; 
+
+            }//end if pk
+
+        }//end for
+        
+       
+        //............................................................................
 
         return result;
     }//end
@@ -217,10 +237,8 @@ export class XFormsGen {
 
 };//end class
 
-       //XForms.tempAttr_readonly 
-        //XForms.tempAttr_disabled        
-        //XForms.tempAttr_inline        
-        //XForms.tempAttr_autocommit  
+
+         
 
 
 export const jsonTemplate: string =
@@ -286,7 +304,7 @@ export const jsonTemplate: string =
         }, 
         {
             "name": "repository",
-            "type": "url",
+            "type": "text",
             "required": false,
             "generated": false,
             "default": null,
@@ -299,7 +317,7 @@ export const jsonTemplate: string =
         }, 
         {
             "name": "author",
-            "type": "password",
+            "type": "text",
             "required": false,
             "generated": false,
             "default": null,
@@ -312,7 +330,7 @@ export const jsonTemplate: string =
         }, 
         {
             "name": "version",
-            "type": "decimal",
+            "type": "number",
             "required": false,
             "generated": false,
             "default": 0.0,
@@ -324,21 +342,8 @@ export const jsonTemplate: string =
             "relations": null
         }, 
         {
-            "name": "telephone",
-            "type": "tel",
-            "required": false,
-            "generated": false,
-            "default": null,
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 500,
-            "relations": null
-        }, 
-        {
             "name": "email",
-            "type": "email",
+            "type": "text",
             "required": false,
             "generated": false,
             "default": null,
