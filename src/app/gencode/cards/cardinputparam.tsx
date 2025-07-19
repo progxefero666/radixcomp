@@ -48,9 +48,9 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
 
 
     const onHandlerOnClick = (index: number) => {
-        input.pattern.start = patterns[index].patt.start;
-        input.pattern.end = patterns[index].patt.end;
-        const new_pattern: string = input.pattern.start + variable + input.pattern.end;
+        input.patternStart = patterns[index].start;
+        input.patternEnd = patterns[index].end;
+        const new_pattern: string = input.patternStart + variable + input.patternEnd;
         setPattindex(index);
         setPattern(new_pattern);
     };
@@ -64,7 +64,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
     };
 
     const onchangeVarValue = (varvalue: string) => {
-        const new_pattern: string = input.pattern.start + varvalue + input.pattern.end;
+        const new_pattern: string = input.patternStart + varvalue + input.patternEnd;
         setVariable(varvalue);
         setPattern(new_pattern);
         if (onchange) {
@@ -143,7 +143,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
                                 radius="medium" />
                         </Table.Cell>
                         <Table.Cell>
-                            cl
+                           
                         </Table.Cell>
                     </Table.Row>
 
@@ -163,7 +163,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
                                 radius="medium" />
                         </Table.Cell>
                         <Table.Cell>
-                            cl
+                            
                         </Table.Cell>
                     </Table.Row>
 

@@ -45,20 +45,15 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const [params, setParams]
         = useState<InputPattern[]>(CgDataPatterns.LIST_PARAMS.slice(0, 4));
 
-    const sliderParamsValueInit = CgDataPatterns.COUNT_PARAMETERS_DEF *
-        CgDataPatterns.FACTOR_INC_PARAMETERS;
-
-    const [sliderParamsValue, setSliderParamsValue] = useState<number>(sliderParamsValueInit);
-
-    const execListParamsCommand = (id: string) => {
-
+    const onchange = (index: number, pattern: string, value: string) => {
+        const params_values: Keyvalue[] = paramsValues;
+        params_values[index] = new Keyvalue(pattern, value);
+        setParamsValues(params_values);
     };//end
 
-    const onChangeCountParams = (value: number[]) => {
-        const count: number = Math.floor(value[0] / CgDataPatterns.FACTOR_INC_PARAMETERS);
+    const onChangeCountParams = (count: number) => {
         setCountParams(count);
         setParams(CgDataPatterns.LIST_PARAMS.slice(0, count + 1));
-        setSliderParamsValue(count * CgDataPatterns.FACTOR_INC_PARAMETERS);
         updateListParams(count);
     };//end
 
@@ -72,7 +67,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
         }
         setParamsValues(params_values);
     };//end
-    //................................................................................
+
     // viewer content
     //................................................................................     
     const [template, setTemplate] = useState<string>("");
@@ -88,31 +83,22 @@ export function TypeScriptManager({ onresult }: CompProps) {
         setParamsValues(params_values);
     }, []);
 
-    const onchange = (index: number, pattern: string, value: string) => {
-        const params_values: Keyvalue[] = paramsValues;
-        params_values[index] = new Keyvalue(pattern, value);
-        setParamsValues(params_values);
-    };//end
+    const execListParamsCommand = (commandId:string) => {
+    };
+    
 
-    //................................................................................
-    // operation selected 
-    //................................................................................    
+
+    // operation 
+    //................................................................................   
     const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
-
     const onTsOpSelected = (index: number, name?: string) => {
         setOpGroup(name!);
         setTemplate(TsOps.getTemplate(TsOps.BASIC[index].key));
     };//end 
 
     const onJsxOpSelected = (index: number, name?: string) => {
-        setOpGroup(name!);
-       
+        setOpGroup(name!);       
     };//end 
-
-
-    //................................................................................
-    // run operation 
-    //................................................................................
 
     const runOperation = () => {
         if (opGroup == TsOps.MOD_ID) {
@@ -124,6 +110,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
            alert("run jsx operation");
         }
     };//end
+
+    // renders 
+    //................................................................................
 
     const renderAdvancedContent = () => {
         return (
@@ -171,9 +160,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                     </Box>
                     <Box width="50%">
                         {/*
-                        <Slider defaultValue={[sliderParamsValue]} 
-                                step={CgDataConst.FACTOR_INC_PARAMETERS}
-                                onValueChange={onChangeCountParams}   />                         
+      
                         */}
                     </Box>
                 </Flex>
@@ -287,13 +274,13 @@ export function TypeScriptManager({ onresult }: CompProps) {
                         buttontext={OpConstants.OP_TEXT_DELETE}
                         message="confirm delete?"
                         title="delete parameter"
-                        onconfirm={() => execListParamsCommand(OpConstants.OP_DELETE)} />
+                        onconfirm={() => (execListParamsCommand(OpConstants.OP_DELETE))} />
                 </Flex>
             </Box>
 
             <Box width="44%" >
                 <TypeScriptViewer key={template}
-                                  activetab={CgDataProcessor.WTEMPLATE}
+                                  activetab={viewerActTab}
                                   template={template}
                                   code={code} />
             </Box>

@@ -1,22 +1,21 @@
 //src\codegen\data\model\pattern.ts
 
-export type TPattern = {
-    start: string;
-    end: string;
-};
+
 
 export class Pattern {
 
-    public patt:        TPattern;
+    public start:   string;
+    public end:     string;   
+    public varname: string | null = null;  
     public defIcon: string;
     public actIcon: string;
 
-    public varname: string | null = null;    
-
-    constructor(patt:TPattern,defIcon:string,actIcon:string) {
-        this.patt    = patt;
+    constructor(start:string,end:string,varname:string|null,defIcon:string) {
+        this.start    = start;
+        this.end      = end;
+        this.varname = varname;
         this.defIcon = defIcon;
-        this.actIcon = actIcon;
+        this.actIcon = this.defIcon.concat("_active");
     };//end
 
 };//end class

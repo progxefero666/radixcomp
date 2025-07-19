@@ -14,12 +14,12 @@ export class CgDataProcessor {
     public static readonly MAX_LENGTH_DEF: number = 50;
 
     public static executeOperation(template:string,params:Keyvalue[]): string {
-        console.log(params);
+        //console.log(params);
         let code: string = template;
         params.forEach((item) => {
             code =TextHelper.replaceAll(code, item.key, item.value);
         });
-        console.log(code);
+        //console.log(code);
         return code;
     }//end 
         
