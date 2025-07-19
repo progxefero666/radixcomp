@@ -16,12 +16,13 @@ import { PlayIcon, ReloadIcon, TextAlignTopIcon, TrashIcon } from '@radix-ui/rea
 import { OpConstants } from '@/common/constants';
 import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';
 import { RadixConf } from '@/radix/radixconf';
-import { CgDataConst } from '@/codegen/data/cgdataconfig';
+import { CgDataConst, CgDataProcessor } from '@/codegen/data/cgdatakernel';
 import { Keyvalue } from '@/common/model/keyvalue';
 import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion';
 import React from 'react';
 import { SeparatorH } from "@/radix/container/separatorh";
 import { CgDataTsFunctions } from "@/codegen/data/cgdatafunction";
+import { set } from "date-fns";
 
 
 const LAYOUT_STYLE = {
@@ -38,7 +39,7 @@ interface CompProps {
 }
 export function TypeScriptManager({ onresult }: CompProps) {
 
-
+    const [viewerActTab, setViewerActTab] = useState<string>(CgDataConst.WTEMPLATE);
     const [paramsValues, setParamsValues] = useState<Keyvalue[]>([]);
 
     //................................................................................
@@ -92,7 +93,6 @@ export function TypeScriptManager({ onresult }: CompProps) {
     }, []);
 
     const onchange = (index: number, pattern: string, value: string) => {
-        //console.log(index.toString() + ":" + pattern + ":" + value);
         const params_values: Keyvalue[] = paramsValues;
         params_values[index] = new Keyvalue(pattern, value);
         setParamsValues(params_values);
@@ -102,18 +102,15 @@ export function TypeScriptManager({ onresult }: CompProps) {
     // operation selected 
     //................................................................................    
     const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
-    const [operation, setOperation] = useState<string>(TsOps.BASIC[0].key);
+
     const onTsOpSelected = (index: number, name?: string) => {
         setOpGroup(name!);
-        setOperation(TsOps.BASIC[index].key);
-        if (TsOps.BASIC[index].key === TsOps.OP_CLASS) {
-            setTemplate(TsTemplates.t_class);
-        }
+        setTemplate(TsOps.getTsTemplate(TsOps.BASIC[index].key));
     };//end 
 
     const onJsxOpSelected = (index: number, name?: string) => {
         setOpGroup(name!);
-        setOperation(JsxOps.BASIC[index].key);
+       
     };//end 
 
 
@@ -123,24 +120,14 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const runOperation = () => {
         if (opGroup == TsOps.MOD_ID) {
-            execTsOperation(0, TsOps.BASIC[0].key);
+            const result:string =  CgDataProcessor.executeOperation(template, paramsValues);
+            setViewerActTab(CgDataConst.WCODE);
+            setCode(result);
         }
         else if (opGroup == JsxOps.MOD_ID) {
-            execJsxOperation(0, JsxOps.BASIC[0].key);
+           alert("run jsx operation");
         }
     };//end
-
-    const execTsOperation = (index: number, name?: string) => {
-        alert("run TsOperation");
-        const result:string =  CgDataTsFunctions.executeOperation(template, paramsValues);
-        setCode(result);
-    };//end 
-
-    const execJsxOperation = (index: number, name?: string) => {
-        if (JsxOps.BASIC[index].key === JsxOps.OP_BUTTONS) {
-            alert("run buttons operation");
-        }
-    };//end 
 
     const renderAdvancedContent = () => {
         return (
@@ -155,9 +142,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
             <Flex width="100%" direction="row" px="4" >
                 <XRadioGroup
                     name={JsxOps.MOD_ID}
-                    collection={JsxOps.BASIC}
+                    collection={JsxOps.OPS_BASIC}
                     label="Jsx Operations"
-                    value={JsxOps.BASIC[0].key}
+                    value={JsxOps.OPS_BASIC[0].key}
                     onselect={onJsxOpSelected} />
             </Flex>
         );
@@ -310,8 +297,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
             <Box width="44%" >
                 <TypeScriptViewer key={template}
-                    template={template}
-                    code={code} />
+                                  activetab={CgDataConst.WTEMPLATE}
+                                  template={template}
+                                  code={code} />
             </Box>
 
         </Flex>

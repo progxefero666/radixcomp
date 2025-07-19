@@ -3,10 +3,11 @@
 import { Keyvalue } from "@/common/model/keyvalue";
 import { InputPattern } from "@/codegen/data/model/inputpattern";
 import { Pattern } from "@/codegen/data/model/pattern";
+import { TextHelper } from "@/common/helper/texthelper";
 
 
 /**
- * class CgDataConst
+ * class CgDataConst.WTEMPLATE
  */
 export class CgDataConst {
 
@@ -53,4 +54,22 @@ export class CgDataConst {
         new InputPattern(7,CgDataConst.PATT_7.patt),  
     ]
 
+};//end class
+
+
+/**
+ * class CgDataProcessor
+ */
+export class CgDataProcessor {
+
+    public static executeOperation(template:string,params:Keyvalue[]): string {
+        console.log(params);
+        let code: string = template;
+        params.forEach((item) => {
+            code =TextHelper.replaceAll(code, item.key, item.value);
+        });
+        console.log(code);
+        return code;
+    }//end 
+        
 };//end class

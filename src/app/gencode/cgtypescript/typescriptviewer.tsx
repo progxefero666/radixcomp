@@ -8,17 +8,18 @@ import { OpConstants } from "@/common/constants";
 import { FileCode } from "@/filesystem/fsmodels";
 import { ButtonsStyle } from "@/radix/radixtheme";
 import { Link2Icon, PlayIcon, Share2Icon } from "@radix-ui/react-icons";
-import { CgDataConst } from "@/codegen/data/cgdataconfig";
+import { CgDataConst } from "@/codegen/data/cgdatakernel";
 
 
 /**
  * Component TypeScript Viewer 
  */
 interface CompProps {
+    activetab: string;
     template: string;
     code: string;
 }
-export function TypeScriptViewer({template,code}: CompProps) {
+export function TypeScriptViewer({activetab,template,code}: CompProps) {
 
     const onClick = (opId?: string) => {
 

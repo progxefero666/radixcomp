@@ -1,6 +1,8 @@
 //src\codegen\data\cgdata.ts
 
 import { Keyvalue } from "@/common/model/keyvalue";
+import { TsTemplates } from "@/codegen/templates/typescript/tstemplates";
+import { JsxTemplates } from "../templates/jsx/jsxtemplates";
 
 
 /**
@@ -21,7 +23,7 @@ export class TsOps {
 
 
     public static BASIC: Keyvalue[] = [
-        new Keyvalue(TsOps.OP_CLASS,         "class"),
+        new Keyvalue(TsOps.OP_CLASS,         TsTemplates.t_class),
         new Keyvalue(TsOps.OP_FUNCT,         "const function"),
         new Keyvalue(TsOps.OP_FUNCT_STATIC,  "static function"),
         new Keyvalue(TsOps.OP_FUNCT_ASYNC,   "async function"),
@@ -33,16 +35,37 @@ export class TsOps {
         new Keyvalue(TsOps.OP_USE_EFFECT,    "Use Effect"),
     ];
 
+    public static getOperationIndex(opId: string): number {
+        let index: number = -1;
+        for (let idx:number=0;idx<JsxOps.OPS_BASIC.length;idx++) {
+            if (JsxOps.OPS_BASIC[idx].key === opId) {
+                index = idx;
+                break;
+            }
+        }
+        return index;
+    };
+
+    public static getTsTemplate(opId: string): string {
+         const operationIndex: number = TsOps.getOperationIndex(opId);
+        return JsxOps.OPS_BASIC[operationIndex].value;
+    };//end
+
 };//end class
+
+
+/**
+ * class JsxOps.OPS_BASIC
+ */
 export class JsxOps {
 
     public static readonly MOD_ID: string = "typescript_jsx";
 
-    public static readonly OP_BUTTONS: string           = "buttons";
-    public static readonly OP_FUNC_JSX: string          = "func_jsx";
+    
+    public static readonly OP_FUNC_JSX: string          = "function";
     public static readonly OP_COMPONENT: string         = "component";
     public static readonly OP_COMPONENT_REF: string     = "component_ref";
-
+    public static readonly OP_BUTTONS: string           = "buttons";
     public static readonly OP_ICON_BUTTONS: string      = "iconbuttons";
     public static readonly OP_GRID: string              = "iconbuttons";
 
@@ -52,8 +75,8 @@ export class JsxOps {
     public static readonly OP_PAGE_SECOND_BAR: string   = "page_main_content";
     public static readonly OP_PAGE_MAINCONTENT: string  = "page_main_content";
 
-    public static BASIC: Keyvalue[] = [
-        new Keyvalue(JsxOps.OP_FUNC_JSX,         "func_jsx"),
+    public static OPS_BASIC: Keyvalue[] = [
+        new Keyvalue(JsxOps.OP_FUNC_JSX,         "function"),
         new Keyvalue(JsxOps.OP_COMPONENT,        "component"),
         new Keyvalue(JsxOps.OP_COMPONENT_REF,    "component ref"),
         new Keyvalue(JsxOps.OP_BUTTONS,          "buttons"),
@@ -66,11 +89,21 @@ export class JsxOps {
         new Keyvalue(JsxOps.OP_PAGE_MAINCONTENT, "page main content"),
     ];
 
-};//end class
+    public static getTsTemplate(opId: string): string {
+        const operationIndex: number = JsxOps.getOperationIndex(opId);
+        return JsxOps.OPS_BASIC[operationIndex].value;
+    };
 
-export class TypeScriptStyleModule {
+    public static getOperationIndex(opId: string): number {
+        let index: number = -1;
+        for (let idx:number=0;idx<JsxOps.OPS_BASIC.length;idx++) {
+            if (JsxOps.OPS_BASIC[idx].key === opId) {
+                index = idx;
+                break;
+            }
+        }
+        return index;
+    };
 
-    public static readonly OP_OBJ: string = "func_def";
-    public static readonly OP_THEME: string = "func_def";
 
-};//end class
+}//end class

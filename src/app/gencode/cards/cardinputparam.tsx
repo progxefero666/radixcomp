@@ -12,7 +12,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { XInputCheck } from "@/radix/input/inputcheck";
 import { XInputText } from "@/radix/input/inptext";
 import { Pattern } from "@/codegen/data/model/pattern";
-import { CgDataConst } from "@/codegen/data/cgdataconfig";
+import { CgDataConst } from "@/codegen/data/cgdatakernel";
 
 const compStyle = {
     background: 'rgb(35, 35, 39)',
