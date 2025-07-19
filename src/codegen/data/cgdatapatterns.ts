@@ -5,47 +5,80 @@ import { InputPattern } from "@/codegen/data/model/inputpattern";
 import { Pattern } from "@/codegen/data/model/pattern";
 import { TextHelper } from "@/common/helper/texthelper";
 
-
 /**
- * class CgDataPatterns
+ * class CgDataPatterns.PATTERNS
  */
 export class CgDataPatterns {
 
-    public static readonly COUNT_PARAMETERS_DEF: number = 1;
-    public static readonly MAX_COUNT_PARAMETERS: number = 8;
-    public static readonly FACTOR_INC_PARAMETERS: number = 12; // 12, 24, 36, 48, 60, 72, 84, 96
+    public static INSTANCE: CgDataPatterns = new CgDataPatterns();
+    public static readonly PATTERNS: Pattern[] = [
+        new Pattern("^%","%^","/icons/uno.png"),  
+        new Pattern("^¡","¡^","/icons/dos.png"),
+        new Pattern("^<",">^","/icons/tres.png"),
+        new Pattern("^[","]^","/icons/cuatro.png"),
+        new Pattern("^+","+^","/icons/cinco.png"),
+        new Pattern("*^","*^","/icons/seis.png"),        
+        new Pattern("^-","^-","/icons/siete.png"),
+        new Pattern("^:",":^","/icons/ocho.png")
+    ];
 
-    public static readonly PATT_0: Pattern = new Pattern("^%","%^",null,"/icons/uno.png");
-    public static readonly PATT_1: Pattern = new Pattern("^¡","¡^",null, "/icons/dos.png");
-    public static readonly PATT_2: Pattern = new Pattern("^<",">^",null, "/icons/tres.png");
-    public static readonly PATT_3: Pattern = new Pattern("^[","]^",null, "/icons/cuatro.png");
-    public static readonly PATT_4: Pattern = new Pattern("^+","+^",null, "/icons/cinco.png");
-    public static readonly PATT_5: Pattern = new Pattern("*^","*^",null, "/icons/seis.png");
-    public static readonly PATT_6: Pattern = new Pattern("^-","^-",null, "/icons/siete.png");
-    public static readonly PATT_7: Pattern = new Pattern("^:",":^",null, "/icons/ocho.png");
+    public static readonly COUNT_PARAMETERS_DEF: number = 1;
+    public static readonly MAX_PARAMETERS: number = 8;
+
+    public inputs_basic:InputPattern[] = [];
+    public inputs_v0v7:InputPattern[] = [];
+
+    constructor() {
+        this.genInputPatts_basic();
+    };//end
+
+    public genInputPatts_basic = () => {
+        for (let idx=0;idx<CgDataPatterns.MAX_PARAMETERS;idx++) {
+           this.inputs_basic.push(
+                new InputPattern(idx,CgDataPatternsOld.PATT_0.start, 
+                                   CgDataPatternsOld.PATT_0.end,null)
+           );
+        }        
+    };//end
+
+    public genPatterns_v0v7 = () => {
+        for (let idx=0;idx<CgDataPatterns.MAX_PARAMETERS;idx++) {
+            const variable = "v" + idx;
+            const input = new InputPattern(idx,CgDataPatternsOld.PATT_0.start, 
+                                   CgDataPatternsOld.PATT_0.end,variable)
+            this.inputs_v0v7.push(input);
+        }        
+    };//end
+
+}//end class
+
+
+export class CgDataPatternsOld {
+
+
+    public static readonly PATT_0: Pattern = new Pattern("^%","%^","/icons/uno.png");
+    public static readonly PATT_1: Pattern = new Pattern("^¡","¡^", "/icons/dos.png");
+    public static readonly PATT_2: Pattern = new Pattern("^<",">^", "/icons/tres.png");
+    public static readonly PATT_3: Pattern = new Pattern("^[","]^", "/icons/cuatro.png");
+    public static readonly PATT_4: Pattern = new Pattern("^+","+^", "/icons/cinco.png");
+    public static readonly PATT_5: Pattern = new Pattern("*^","*^", "/icons/seis.png");
+    public static readonly PATT_6: Pattern = new Pattern("^-","^-", "/icons/siete.png");
+    public static readonly PATT_7: Pattern = new Pattern("^:",":^", "/icons/ocho.png");
 
 
     public static readonly PATTERNS: Pattern[] = [
-        CgDataPatterns.PATT_0,  
-        CgDataPatterns.PATT_1,
-        CgDataPatterns.PATT_2,
-        CgDataPatterns.PATT_3,
-        CgDataPatterns.PATT_4,
-        CgDataPatterns.PATT_5,        
-        CgDataPatterns.PATT_6,
-        CgDataPatterns.PATT_7
+        new Pattern("^%","%^","/icons/uno.png"),  
+        new Pattern("^¡","¡^","/icons/dos.png"),
+        new Pattern("^<",">^","/icons/tres.png"),
+        new Pattern("^[","]^","/icons/cuatro.png"),
+        new Pattern("^+","+^","/icons/cinco.png"),
+        new Pattern("*^","*^","/icons/seis.png"),        
+        new Pattern("^-","^-","/icons/siete.png"),
+        new Pattern("^:",":^","/icons/ocho.png")
     ];
 
-    public static PARAMS_EMPTY: InputPattern[] = [
-        new InputPattern(0,CgDataPatterns.PATT_0.start, CgDataPatterns.PATT_0.end,null),
-        new InputPattern(1,CgDataPatterns.PATT_1.start, CgDataPatterns.PATT_1.end,null),
-        new InputPattern(2,CgDataPatterns.PATT_2.start, CgDataPatterns.PATT_2.end,null),
-        new InputPattern(3,CgDataPatterns.PATT_3.start, CgDataPatterns.PATT_3.end,null),
-        new InputPattern(4,CgDataPatterns.PATT_4.start, CgDataPatterns.PATT_4.end,null),
-        new InputPattern(5,CgDataPatterns.PATT_5.start, CgDataPatterns.PATT_5.end,null),
-        new InputPattern(6,CgDataPatterns.PATT_6.start, CgDataPatterns.PATT_6.end,null),
-        new InputPattern(7,CgDataPatterns.PATT_7.start, CgDataPatterns.PATT_7.end,null),
-    ]
 
+
+  
 };//end class
 

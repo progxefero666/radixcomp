@@ -43,7 +43,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     //................................................................................  
     const [countParams, setCountParams] = useState<number>(4);
     const [params, setParams]
-        = useState<InputPattern[]>(CgDataPatterns.PARAMS_EMPTY.slice(0, 4));
+        = useState<InputPattern[]>(CgDataPatterns.INSTANCE.inputs_basic.slice(0, 4));
 
     const onchange = (index: number, pattern: string, value: string) => {
         const params_values: Keyvalue[] = paramsValues;
@@ -53,7 +53,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const onChangeCountParams = (count: number) => {
         setCountParams(count);
-        setParams(CgDataPatterns.PARAMS_EMPTY.slice(0, count + 1));
+        setParams(CgDataPatterns.INSTANCE.inputs_basic.slice(0, count + 1));
         updateListParams(count);
     };//end
 
@@ -182,7 +182,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                             <Box key={index.toString()}>
                                 <CardInputParam pattindexInit={index}
                                         patterns={CgDataPatterns.PATTERNS}
-                                        input={CgDataPatterns.PARAMS_EMPTY[index]}
+                                        input={CgDataPatterns.INSTANCE.inputs_basic[index]}
                                         onchange={onchange} />
 
                             </Box>
