@@ -11,11 +11,11 @@ export class Pattern {
     public defIcon: string;
     public actIcon: string;
 
-    constructor(start:string,end:string,defIcon:string) {
+    constructor(start:string,end:string,icon:string) {
         this.start    = start;
         this.end      = end;
-        this.defIcon = defIcon;
-        this.actIcon = this.defIcon.concat("_active");
+        this.defIcon = icon+ ".png";
+        this.actIcon = icon.concat("_active.png");
     };//end
 
 };//end class

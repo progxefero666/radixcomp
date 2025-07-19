@@ -46,7 +46,11 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
 
     useEffect(() => {
         if(input.variable !== null) {
+            alert("Variable: " + input.variable);
             setVariable(input.variable);
+        }
+        else {
+            alert("Variable null");
         }
     }, []);
 

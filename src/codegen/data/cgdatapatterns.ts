@@ -12,14 +12,14 @@ export class CgDataPatterns {
 
    
     public static readonly PATTERNS: Pattern[] = [
-        new Pattern("^%","%^","/icons/uno.png"),  
-        new Pattern("^¡","¡^","/icons/dos.png"),
-        new Pattern("^<",">^","/icons/tres.png"),
-        new Pattern("^[","]^","/icons/cuatro.png"),
-        new Pattern("^+","+^","/icons/cinco.png"),
-        new Pattern("*^","*^","/icons/seis.png"),        
-        new Pattern("^-","^-","/icons/siete.png"),
-        new Pattern("^:",":^","/icons/ocho.png")
+        new Pattern("^%","%^","/icons/uno"),  
+        new Pattern("^¡","¡^","/icons/dos"),
+        new Pattern("^<",">^","/icons/tres."),
+        new Pattern("^[","]^","/icons/cuatro"),
+        new Pattern("^+","+^","/icons/cinco"),
+        new Pattern("*^","*^","/icons/seis"),        
+        new Pattern("^-","^-","/icons/siete"),
+        new Pattern("^:",":^","/icons/ocho")
     ];
 
     public static readonly COUNT_PARAMETERS_DEF: number = 1;

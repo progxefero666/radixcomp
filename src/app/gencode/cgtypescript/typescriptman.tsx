@@ -182,7 +182,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                             <Box key={index.toString()}>
                                 <CardInputParam pattindexInit={index}
                                         patterns={CgDataPatterns.PATTERNS}
-                                        input={cgDataPatters.inputs_basic[index]}
+                                        input={cgDataPatters.inputs_v0v7[index]}
                                         onchange={onchange} />
 
                             </Box>
