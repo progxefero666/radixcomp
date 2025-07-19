@@ -38,7 +38,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const [value, setValue] = useState<string|null>(defaul ?? "");
     const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
-    const radius  = CompStyle.CONT_RADIUS;
+    const radius  = CompStyle.RADIUS;
     const variant = RadixConf.VARIANTS.surface;
 
     const showInline: boolean = inline ?? false;
