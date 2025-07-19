@@ -173,7 +173,7 @@ export function WorkflowsManager({ section,viewworkflow: chargeworkflow,editwork
                                      item={AppWorkflows.DLG_WK_NAME_INPUT} onsave={execNew}/>
                     
                     <Button variant="solid" color={ButtonsStyle.COLOR_IMPORT}
-                        size={ButtonsStyle.BTN_DEF_SIZE} onClick={() => execImport()}  >
+                        size={ButtonsStyle.DEF_SIZE} onClick={() => execImport()}  >
                         {DB_ITEM_CMD_TEXT.IMPORT}
                     </Button>
 

@@ -161,13 +161,13 @@ export function WorkflowEditor({ workflow }: WorkflowEditorProps) {
                 px="3" py="1" gapX="2" style={COMP_BORDER_STYLE} >
 
                 <Button variant="solid" color={RADIX_COLORS.green}
-                    size={ButtonsStyle.BTN_DEF_SIZE}
+                    size={ButtonsStyle.DEF_SIZE}
                     onClick={() => execTaskCommand(WorkflowActions.ADD_TASK,index)} >
                     add task
                 </Button>
 
                 <Button variant="solid" color={RADIX_COLORS.blue}
-                    size={ButtonsStyle.BTN_DEF_SIZE}
+                    size={ButtonsStyle.DEF_SIZE}
                     onClick={() => createNewGroup(index)} >
                     new group
                 </Button>

@@ -39,20 +39,20 @@ export function TypeScriptViewer({activetab,template,code}: CompProps) {
         return (
             <Flex width="100%" direction="row" gapX="2" align="center" justify="end" pr="4" >
                 <Button color={ButtonsStyle.COLOR_COPY} 
-                        size={ButtonsStyle.BTN_DEF_SIZE}
-                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        size={ButtonsStyle.DEF_SIZE}
+                        radius={ButtonsStyle.DEF_RADIUS}
                         onClick={() => onClick(OpConstants.OP_COPY)}>
                     <Link2Icon  />
-                    <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
+                    <Text size={ButtonsStyle.TEXT_SIZE}>
                         {OpConstants.OP_TEXT_COPY}
                     </Text>
                 </Button>      
                 <Button color={ButtonsStyle.COLOR_EXPORT} 
-                        size={ButtonsStyle.BTN_DEF_SIZE}
-                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        size={ButtonsStyle.DEF_SIZE}
+                        radius={ButtonsStyle.DEF_RADIUS}
                         onClick={() => onClick(OpConstants.OP_EXPORT)}>
                     <Share2Icon  />
-                    <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
+                    <Text size={ButtonsStyle.TEXT_SIZE}>
                         {OpConstants.OP_TEXT_EXPORT}
                     </Text>
                 </Button>                                   

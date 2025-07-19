@@ -19,6 +19,7 @@ import { Keyvalue } from '@/common/model/keyvalue';
 import React from 'react';
 import { SeparatorH } from "@/radix/container/separatorh";
 import { CgDataPatterns } from '@/codegen/data/cgdatapatterns';
+import { renderButton } from '@/radix/renders/renderbuttons';
 
 
 const LAYOUT_STYLE = {
@@ -237,33 +238,38 @@ export function TypeScriptManager({ onresult }: CompProps) {
             <Box width="36%" pr="3" >
                 <Flex width="100%" direction="row" py="1" justify="center" gapX="2" >
                     <Button color={ButtonsStyle.COLOR_RUN} 
-                        size={ButtonsStyle.BTN_DEF_SIZE}
-                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        size={ButtonsStyle.DEF_SIZE}
+                        radius={ButtonsStyle.DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <PlayIcon />
                         <Text size="3">execute</Text>
                     </Button>
                     <Button color={ButtonsStyle.COLOR_CLEAR} 
-                        size={ButtonsStyle.BTN_DEF_SIZE}
-                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        size={ButtonsStyle.DEF_SIZE}
+                        radius={ButtonsStyle.DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <TrashIcon />
                         <Text size="3">clear</Text>
                     </Button>                
                     <Button color={ButtonsStyle.COLOR_CLOSE} 
-                        size={ButtonsStyle.BTN_DEF_SIZE}
-                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        size={ButtonsStyle.DEF_SIZE}
+                        radius={ButtonsStyle.DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <TextAlignTopIcon />
                         <Text size="3">close all</Text>
                     </Button>   
+                    {/*
                     <Button color={ButtonsStyle.COLOR_RESET} 
-                        size={ButtonsStyle.BTN_DEF_SIZE}
-                        radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        size={ButtonsStyle.DEF_SIZE}
+                        radius={ButtonsStyle.DEF_RADIUS}
                         onClick={() => runOperation()}>
                         <ReloadIcon />
                         <Text size="3">init</Text>
-                    </Button>                                           
+                    </Button>                    
+                    */}
+   
+                    {renderButton("Init",ButtonsStyle.COLOR_RESET,
+                                 <TrashIcon />,"init",runOperation)}
                 </Flex>
                 <Separator size="4" />
 

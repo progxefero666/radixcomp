@@ -19,9 +19,9 @@ export const renderHomeButton = (isPageIndex:boolean) => {
             <Button
                 variant={isPageIndex ? RadixConf.VARIANTS.solid :
                                         RadixConf.VARIANTS.soft}
-                color={ButtonsStyle.BTN_HOME_COLOR}
-                className={ButtonsStyle.BTN_HOME_STYLE}
-                size={ButtonsStyle.BTN_DEF_SIZE} >
+                color={ButtonsStyle.HOME_COLOR}
+                className={ButtonsStyle.HOME_STYLE}
+                size={ButtonsStyle.DEF_SIZE} >
                 Home
             </Button>
         </Link>

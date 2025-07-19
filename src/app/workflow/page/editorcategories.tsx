@@ -117,8 +117,8 @@ export const PanelWfTaskcategories = ({ workflowid }: PanelWfTaskcategoriesProps
                             onsave={onSaveNewItem} />
 
                 <Button color={ButtonsStyle.COLOR_ADD} 
-                        size={ButtonsStyle.BTN_DEF_SIZE}
-                         radius={ButtonsStyle.BTN_DEF_RADIUS}
+                        size={ButtonsStyle.DEF_SIZE}
+                         radius={ButtonsStyle.DEF_RADIUS}
                         onClick={() => clearCategories()}>
                     <CrossCircledIcon />
                     clear

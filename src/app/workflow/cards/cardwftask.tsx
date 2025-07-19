@@ -229,7 +229,7 @@ export function CardTask({ taskscount,task, codelangs, tasktypes, taskcategories
                             <Flex pl="2" justify="end" mt="6">
                                 <Button variant="solid" 
                                         color={ButtonsStyle.COLOR_IMPORT}
-                                        size={ButtonsStyle.BTN_DEF_SIZE}
+                                        size={ButtonsStyle.DEF_SIZE}
                                         onClick={importDescription}  >
                                     {DB_ITEM_CMD_TEXT.IMPORT}        
                                 </Button>        

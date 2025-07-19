@@ -73,20 +73,20 @@ export function GenCodeViewer({singlecode,multiplecode,
                 {/* onclick={onClick} */}
                 <Flex direction="row" gapX="2" align="center" justify="center">
                     <Button color={ButtonsStyle.COLOR_COPY} 
-                            size={ButtonsStyle.BTN_DEF_SIZE}
-                            radius={ButtonsStyle.BTN_DEF_RADIUS}
+                            size={ButtonsStyle.DEF_SIZE}
+                            radius={ButtonsStyle.DEF_RADIUS}
                             onClick={() => onClick(OpConstants.OP_COPY)}>
                         <Link2Icon  />
-                        <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
+                        <Text size={ButtonsStyle.TEXT_SIZE}>
                             {OpConstants.OP_TEXT_COPY}
                         </Text>
                     </Button>      
                     <Button color={ButtonsStyle.COLOR_EXPORT} 
-                            size={ButtonsStyle.BTN_DEF_SIZE}
-                            radius={ButtonsStyle.BTN_DEF_RADIUS}
+                            size={ButtonsStyle.DEF_SIZE}
+                            radius={ButtonsStyle.DEF_RADIUS}
                             onClick={() => onClick(OpConstants.OP_EXPORT)}>
                         <Share2Icon  />
-                        <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
+                        <Text size={ButtonsStyle.TEXT_SIZE}>
                             {OpConstants.OP_TEXT_EXPORT}
                         </Text>
                     </Button>                                   

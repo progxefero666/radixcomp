@@ -36,8 +36,8 @@ export default function TemplateComp({name, inline, callback }: CompProps) {
 
     return (
         <Flex width="100%" direction="column" px="2" py="1" align="center" justify="center">
-            <Button size={ButtonsStyle.BTN_DEF_SIZE}
-                    radius={ButtonsStyle.BTN_DEF_RADIUS}
+            <Button size={ButtonsStyle.DEF_SIZE}
+                    radius={ButtonsStyle.DEF_RADIUS}
                     color={ButtonsStyle.COLOR_CLEAR} 
                     onClick={() => runCommand("clear")}>
                 <TrashIcon />

@@ -34,10 +34,10 @@ export const DialogFieldText = ({ buttontext, title, item, onsave }: CompProps) 
         <Dialog.Root>
 
             <Dialog.Trigger>
-                <Button size={ButtonsStyle.BTN_DEF_SIZE}>
+                <Button size={ButtonsStyle.DEF_SIZE}>
                     <FilePlusIcon width={IconsStyle.DEF_HEIGHT}
                                             height={IconsStyle.DEF_WIDTH} />
-                    <Text size={ButtonsStyle.BTN_TEXT_SIZE}>
+                    <Text size={ButtonsStyle.TEXT_SIZE}>
                         {buttontext}
                     </Text>
                 </Button>
@@ -62,13 +62,13 @@ export const DialogFieldText = ({ buttontext, title, item, onsave }: CompProps) 
                         <Flex width="100%" direction="row" justify="center" gapX="2" mt="2">
                             <Button type="submit"
                                 color={ButtonsStyle.COLOR_SAVE}
-                                size={ButtonsStyle.BTN_DEF_SIZE}>
+                                size={ButtonsStyle.DEF_SIZE}>
                                 {RadixOpsText.OK}
                                 <CheckIcon width={IconsStyle.DEF_HEIGHT}
                                                         height={IconsStyle.DEF_WIDTH} />
                             </Button>
                             <Button color={ButtonsStyle.COLOR_CLOSE}
-                                size={ButtonsStyle.BTN_DEF_SIZE} >
+                                size={ButtonsStyle.DEF_SIZE} >
                                 {RadixOpsText.CANCEL}
                                 <Cross2Icon width={IconsStyle.DEF_HEIGHT}
                                                         height={IconsStyle.DEF_WIDTH} />

@@ -107,21 +107,22 @@ export class IconsStyle {
 }//end class
 
 /**
- * class ButtonsStyle.COLOR_CLEAR
+ * class ButtonsStyle.DEF_TEXT_COLOR
  */
 export class ButtonsStyle {
 
-    public static readonly BTN_DEF_SIZE: any = RadixConf.SIZES.size_2;
-    public static readonly BTN_DEF_VAR: any = RadixConf.VARIANTS.soft;
-    public static readonly BTN_DEF_RADIUS: any = RADIX_RADIUS.medium;
+    public static readonly DEF_SIZE: any = RadixConf.SIZES.size_2;
+    public static readonly DEF_VAR: any = RadixConf.VARIANTS.soft;
+    public static readonly DEF_RADIUS: any = RADIX_RADIUS.medium;
     public static readonly BTN_DEF_COLOR: any = "gray";
 
-    public static readonly BTN_TEXT_SIZE: any = RadixConf.SIZES.size_2;
+    public static readonly TEXT_SIZE: any = RadixConf.SIZES.size_3;
+    public static readonly DEF_TEXT_COLOR: any = "#EEEEEE";
 
-    public static readonly BTN_HOME_COLOR: any = "gray";
-    public static readonly BTN_HOME_STYLE: any = "w-full justify-start";
+    public static readonly HOME_COLOR: any = "gray";
+    public static readonly HOME_STYLE: any = "w-full justify-start";
 
-    public static readonly BTN_DEF_STYLE = {borderRadius: "var(--blue-9)"    };
+    public static readonly DEF_STYLE = {borderRadius: "var(--blue-9)"    };
 
     
     public static readonly COLOR_ADD        = RADIX_COLORS.crimson;

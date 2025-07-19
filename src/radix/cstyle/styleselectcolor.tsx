@@ -12,8 +12,8 @@ import { CompStyle, RadixTheme } from "src/radix/radixtheme";
  * class XSelect
  */
 interface CompProps {    
-    disabled?:  boolean;
-    onchange:   (value:any,name?:string) => void;
+    disabled?: boolean;
+    onchange:  (value:any,name?:string) => void;
 };
 export function StyleSelectColor({ onchange, disabled}: CompProps) {
 
@@ -52,8 +52,8 @@ export function StyleSelectColor({ onchange, disabled}: CompProps) {
 }//end component
 
 
-/*static getAsKeyvalueArray(list:string[]): Keyvalue[]{
-    const result: Keyvalue[] = [];
+/*static getAsArray(list:string[]): Stylevalue[]{
+    const result: Stylevalue[] = [];
     for (let idx=0;idx<list.length;idx++) {
         result.push(new Keyvalue(idx.toString(),list[idx]));
     }

@@ -16,14 +16,14 @@ export interface BarButtonsProp {
 }
 export default function BarButtons({barconfig, onclick}: BarButtonsProp) {
 
-    const size: any = ButtonsStyle.BTN_DEF_SIZE;
+    const size: any = ButtonsStyle.DEF_SIZE;
 
     const renderMainContent = () => {
         return (
             <>
                 {barconfig.operations.map((operation, index) => (
                     <Button key={operation}
-                        variant={ButtonsStyle.BTN_DEF_VAR}
+                        variant={ButtonsStyle.DEF_VAR}
                         color={barconfig.color[index]!}
                         size={size}
                         onClick={() => onclick(operation)}>
