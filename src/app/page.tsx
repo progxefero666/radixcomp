@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Box,  Flex, Text, Button, Link, Grid } from "@radix-ui/themes";
 import { AppIndex } from "@/app/index/kernel/appindex";
 import { AppMemmory } from "@/front/appmemory";
-import { GenCodeControl } from "@/app/gencode/cgentityfiles/entityfilesmanager";
+
 import { GenCodeViewer } from "@/app/gencode/cgentityfiles/entityfilesviewer";
 
 
@@ -19,6 +19,7 @@ import { FileCode } from "@/filesystem/fsmodels";
 import { CodeGenModules } from "@/codegen/cgoperations";
 
 import { TypeScriptManager } from "./gencode/cgtypescript/typescriptman";
+import { GenCodeControl } from "./gencode/cgentityfiles/entityfilesmanager";
 
 
 //const router = useRouter();

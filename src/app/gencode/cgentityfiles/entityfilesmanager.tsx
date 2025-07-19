@@ -25,6 +25,7 @@ import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
 import jsonApp from "@/db/modeljson/application.json";
 import { InputField } from "@/common/model/inputfield";
+import { jsonTemplate, XFormsGenerator } from "@/codegen/xforms/xforms";
 
 
 //---------------------------------------------------------------------------------------
@@ -101,35 +102,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     const runTest = () => {
 
-        const formFields:InputField[] = [];
-
-        for(let idx=0; idx < jsonApp.fields.length; idx++) {
-
-            console.log("...........................................");
-            console.log("type:", jsonApp.fields[idx].type);
-            if(jsonApp.fields[idx].pk){
-                console.log("pk :", jsonApp.fields[idx].name);
-            } 
-            else if(jsonApp.fields[idx].fk) {
-                console.log("fKey:", jsonApp.fields[idx].name);
-            }
-            else {
-                if(jsonApp.fields[idx].type === "text"){
-
-                }
-                else if(jsonApp.fields[idx].type === "number"){
-                    
-                }   
-                else if(jsonApp.fields[idx].type === "boolean"){
-                    
-                }
-                else if(jsonApp.fields[idx].type === "date"){
-                    
-                }                                              jsonAppjsonAppjsonAppjsonAppjsonApp
-                console.log("default:", jsonApp.fields[idx].name);
-            }     
-        }//end for
-          
+          XFormsGenerator.generateForm(jsonTemplate);
     };//end
 
     const runOperation = async () => {
