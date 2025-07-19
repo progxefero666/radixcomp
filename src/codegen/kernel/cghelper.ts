@@ -24,6 +24,7 @@ export class CodeGenHelper {
     }//end
 
 
+    /*
     public static getDefaultValue(field: ModelField, tsType: string): string {    
         if (field.pk) {return 'null';}        
         if (tsType.includes('number')) {return 'null';}
@@ -33,6 +34,7 @@ export class CodeGenHelper {
         if (tsType === 'string')  {return '"undefined"'; }        
         return 'null';
     }//end
+    */
 
     public static getClassType(tableModel: ModelTable): string {
         const className = CodeGenHelper.capitalize(tableModel.name);

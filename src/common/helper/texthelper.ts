@@ -2,7 +2,7 @@
 
 
 /**
- * class TextHelper
+ * class TextHelper.capitalize
  */
 export class TextHelper {
     /**

@@ -2,6 +2,7 @@
 
 import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "../kernel/cghelper";
+import { TextHelper } from "@/common/helper/texthelper";
 
 
 
@@ -45,7 +46,7 @@ export class XForms {
     public static t_refSelect: string = `const ^%v%^Ref = useRef<HTMLSelectElement>(null);`;
 
     public static t_attr_ref: string = `ref={^%v%^Ref}`;
-    public static t_attr_name: string = `name="^%v%^"`;
+    public static t_attr_name: string = `name=\"^%v%^\"`;
     public static t_attr_label: string = `label="^%v%^"`;
     public static t_attr_collection: string = `collection={^%v%^}`;
     public static t_attr_default: string = `default={^%v%^}`;
@@ -102,7 +103,6 @@ export class XFormsGen {
             result += XForms.tc_collection;
         }
         else {
-            console.log(field.type);
             if (field.type === XForms.FT_TEXT) {
                 result += XForms.tc_text;
             }
@@ -142,8 +142,6 @@ export class XFormsGen {
 
         let result: string = "";
         result += XFormsGen.genRefs(jsonTable) + CgConfig.RETx2;
-       
-
         //............................................................................
 
         const jsonObj = JSON.parse(jsonTable);
@@ -158,59 +156,61 @@ export class XFormsGen {
                 result += XForms.t_attr_ref
                     .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
 
-                /*    
+                console.log(jsonObj.fields[idx].name);  
                 //tempAttr_name
                 result += XForms.t_attr_name
-                    .replace(XForms.PATTERN, jsonApp.fields[idx].name)+ CgConfig.RET;
+                    .replace(XForms.PATTERN,jsonObj.fields[idx].name) + CgConfig.RET;
     
                 //tempAttr_label
-                result += XForms.t_attr_name
-                    .replace(XForms.PATTERN, jsonApp.fields[idx].label)+ CgConfig.RET;
+                const label = TextHelper.capitalize(jsonObj.fields[idx].name);
+                result += XForms.t_attr_label.replace(XForms.PATTERN,label) + CgConfig.RET;
 
                 //tempAttr_maxlen         
-                if (jsonApp.fields[idx].type === XForms.FT_TEXT && 
-                    jsonApp.fields[idx].maxlen !== null) { 
+                if (jsonObj.fields[idx].type === XForms.FT_TEXT && 
+                    jsonObj.fields[idx].maxlen !== null) { 
                     result += XForms.t_attr_maxlen
-                        .replace(XForms.PATTERN, jsonApp.fields[idx].maxlen)+ CgConfig.RET;                     
+                        .replace(XForms.PATTERN, jsonObj.fields[idx].maxlen)+ CgConfig.RET;                     
                 }
                 
+                
                 //collection for fks
-                if (jsonApp.fields[idx].fk) {    
+                if (jsonObj.fields[idx].fk) {    
                     result +=  XForms.t_attr_collection
                         .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
                     result += XForms.t_attr_default
                         .replace(XForms.PATTERN, "collection[0]")+ CgConfig.RET;                     
                 }
                 else {
-                    if(XForms.PATTERN, jsonApp.fields[idx].default!== null) {                     
-                        if(jsonApp.fields[idx].type === XForms.FT_TEXT||
-                            jsonApp.fields[idx].type === XForms.FT_TEXTAREA)  {
+                    if(XForms.PATTERN, jsonObj.fields[idx].default!== null) {                     
+                        if(jsonObj.fields[idx].type === XForms.FT_TEXT||
+                            jsonObj.fields[idx].type === XForms.FT_TEXTAREA)  {
                             result += '"'+ XForms.t_attr_default.replace
-                                (XForms.PATTERN,jsonApp.fields[idx].default)+'"'+ CgConfig.RET; 
+                                (XForms.PATTERN,jsonObj.fields[idx].default)+'"'+ CgConfig.RET; 
                         }    
-                        else if(jsonApp.fields[idx].type === XForms.FT_DATE ||
-                            jsonApp.fields[idx].type === XForms.FT_DATETIME) {
-                            if(!CodeGenHelper.isGeneratedDate(jsonApp.fields[idx].default)) {   
+                        else if(jsonObj.fields[idx].type === XForms.FT_DATE ||
+                            jsonObj.fields[idx].type === XForms.FT_DATETIME) {
+                            if(!CodeGenHelper.isGeneratedDate(jsonObj.fields[idx].default)) {   
                                 result += '"'+ XForms.t_attr_default.replace
-                                    (XForms.PATTERN,jsonApp.fields[idx].default)+'"'+ CgConfig.RET;                                 
+                                    (XForms.PATTERN,jsonObj.fields[idx].default)+'"'+ CgConfig.RET;                                 
                             }                            
                         } 
-                        else if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
-                                jsonApp.fields[idx].type === XForms.FT_DECIMAL ||
-                                jsonApp.fields[idx].type === XForms.FT_CHECK) {
+                        else if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
+                                jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
+                                jsonObj.fields[idx].type === XForms.FT_CHECK) {
                             result += XForms.t_attr_default.replace
-                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET;       
+                                (XForms.PATTERN,jsonObj.fields[idx].default)+ CgConfig.RET;       
                             result += XForms.t_attr_default.replace
-                                (XForms.PATTERN,jsonApp.fields[idx].default)+ CgConfig.RET;                                                              
+                                (XForms.PATTERN,jsonObj.fields[idx].default)+ CgConfig.RET;                                                              
                         }                                         
                     }                    
                 }
                 
+                /*
                 //XForms.tempAttr_inline  
-                if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
-                   jsonApp.fields[idx].type === XForms.FT_DECIMAL ||
-                   jsonApp.fields[idx].type === XForms.FT_CHECK||
-                   jsonApp.fields[idx].type === XForms.FT_FILE) {
+                if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
+                   jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
+                   jsonObj.fields[idx].type === XForms.FT_CHECK||
+                   jsonObj.fields[idx].type === XForms.FT_FILE) {
                     result += XForms.attr_inline + CgConfig.RET;       
                 }
                  */
