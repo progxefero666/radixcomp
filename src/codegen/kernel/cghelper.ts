@@ -117,6 +117,15 @@ export class CodeGenHelper {
         return CgConfig.TAB_4.repeat(countTabs);
     }
 
+    //single quotes
+    public static getIntoSingleQuotes(str: string): string {
+        return `"` + str + `"`;
+    }
+
+    public static getIntoKeys(str: string): string {
+        return `{` + str + `}`;
+    }
+
     public static applyTabsToStringBlock(text:string,countTabs:number): string {
 
         //calculate total identation characters

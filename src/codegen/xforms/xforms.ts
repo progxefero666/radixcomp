@@ -49,7 +49,7 @@ export class XForms {
     public static t_attr_name: string = `name=\"^%v%^\"`;
     public static t_attr_label: string = `label="^%v%^"`;
     public static t_attr_collection: string = `collection={^%v%^}`;
-    public static t_attr_default: string = `default={^%v%^}`;
+    public static t_attr_default: string = `default=^%v%^`;
     public static t_attr_maxlen: string = `maxlen={^%v%^}`;
     public static t_attr_disabled: string = `disabled={^%v%^}`;
 
@@ -153,68 +153,73 @@ export class XFormsGen {
                 result += XFormsGen.genInitTag(jsonObj.fields[idx]) ;
 
                 //tempAttr_ref
-                result += XForms.t_attr_ref
+                result += CgConfig.TAB_4 + XForms.t_attr_ref
                     .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
 
-                console.log(jsonObj.fields[idx].name);  
                 //tempAttr_name
-                result += XForms.t_attr_name
+                result += CgConfig.TAB_4 + XForms.t_attr_name
                     .replace(XForms.PATTERN,jsonObj.fields[idx].name) + CgConfig.RET;
     
                 //tempAttr_label
                 const label = TextHelper.capitalize(jsonObj.fields[idx].name);
-                result += XForms.t_attr_label.replace(XForms.PATTERN,label) + CgConfig.RET;
+                result += CgConfig.TAB_4 +  XForms.t_attr_label.replace(XForms.PATTERN,label);
 
                 //tempAttr_maxlen         
                 if (jsonObj.fields[idx].type === XForms.FT_TEXT && 
                     jsonObj.fields[idx].maxlen !== null) { 
-                    result += XForms.t_attr_maxlen
-                        .replace(XForms.PATTERN, jsonObj.fields[idx].maxlen)+ CgConfig.RET;                     
+                    result += CgConfig.RET;
+                    result +=  CgConfig.TAB_4 + XForms.t_attr_maxlen
+                        .replace(XForms.PATTERN, jsonObj.fields[idx].maxlen);                     
                 }
                 
-                
-                //collection for fks
-                if (jsonObj.fields[idx].fk) {    
-                    result +=  XForms.t_attr_collection
-                        .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
-                    result += XForms.t_attr_default
-                        .replace(XForms.PATTERN, "collection[0]")+ CgConfig.RET;                     
-                }
-                else {
-                    if(XForms.PATTERN, jsonObj.fields[idx].default!== null) {                     
-                        if(jsonObj.fields[idx].type === XForms.FT_TEXT||
-                            jsonObj.fields[idx].type === XForms.FT_TEXTAREA)  {
-                            result += '"'+ XForms.t_attr_default.replace
-                                (XForms.PATTERN,jsonObj.fields[idx].default)+'"'+ CgConfig.RET; 
-                        }    
-                        else if(jsonObj.fields[idx].type === XForms.FT_DATE ||
-                            jsonObj.fields[idx].type === XForms.FT_DATETIME) {
-                            if(!CodeGenHelper.isGeneratedDate(jsonObj.fields[idx].default)) {   
-                                result += '"'+ XForms.t_attr_default.replace
-                                    (XForms.PATTERN,jsonObj.fields[idx].default)+'"'+ CgConfig.RET;                                 
-                            }                            
-                        } 
-                        else if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
-                                jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
-                                jsonObj.fields[idx].type === XForms.FT_CHECK) {
-                            result += XForms.t_attr_default.replace
-                                (XForms.PATTERN,jsonObj.fields[idx].default)+ CgConfig.RET;       
-                            result += XForms.t_attr_default.replace
-                                (XForms.PATTERN,jsonObj.fields[idx].default)+ CgConfig.RET;                                                              
-                        }                                         
-                    }                    
-                }
-                
-                /*
                 //XForms.tempAttr_inline  
                 if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
                    jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
                    jsonObj.fields[idx].type === XForms.FT_CHECK||
                    jsonObj.fields[idx].type === XForms.FT_FILE) {
-                    result += XForms.attr_inline + CgConfig.RET;       
-                }
-                 */
+                    result += CgConfig.RET;
+                    result +=  CgConfig.TAB_4 + XForms.attr_inline;       
+                }     
 
+                // default value
+                if (jsonObj.fields[idx].fk) {    
+                    result += XForms.t_attr_collection
+                        .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
+                    result += CgConfig.TAB_4 + XForms.t_attr_default
+                        .replace(XForms.PATTERN, "collection[0]");                     
+                }
+                else {
+                    if(XForms.PATTERN, jsonObj.fields[idx].default!== null) {                     
+                        if(jsonObj.fields[idx].type === XForms.FT_TEXT||                            
+                            jsonObj.fields[idx].type === XForms.FT_TEXTAREA)  {
+                            const defaultValue = CodeGenHelper
+                                .getIntoSingleQuotes(jsonObj.fields[idx].default);    
+                            result += CgConfig.RET;    
+                            result +=  CgConfig.TAB_4 + XForms.t_attr_default.replace
+                                (XForms.PATTERN,defaultValue); 
+                        }    
+                        else if(jsonObj.fields[idx].type === XForms.FT_DATE ||
+                            jsonObj.fields[idx].type === XForms.FT_DATETIME) {
+                            const defaultValue = CodeGenHelper
+                                .getIntoSingleQuotes(jsonObj.fields[idx].default);                                   
+                            result += CgConfig.RET;    
+                            if(CodeGenHelper.isGeneratedDate(jsonObj.fields[idx].default)) {   
+                                result += XForms.t_attr_default
+                                    .replace(XForms.PATTERN,defaultValue);                                 
+                            }                            
+                        } 
+                        else if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
+                                jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
+                                jsonObj.fields[idx].type === XForms.FT_CHECK) {  
+                            const defaultValue = CodeGenHelper
+                                .getIntoKeys(jsonObj.fields[idx].default);                                     
+                            result += CgConfig.RET;        
+                            result += XForms.t_attr_default
+                                .replace(XForms.PATTERN,defaultValue);                                                              
+                        }                                         
+                    }                    
+                }
+                
                 result += XForms.t_tag_close + CgConfig.RET;
 
             }//end if pk
@@ -274,7 +279,7 @@ export const jsonTemplate: string =
             "type": "text",
             "required": true,
             "generated": false,
-            "default": null,
+            "default": "nachete",
             "format": null,
             "pk": false,
             "fk": false,
