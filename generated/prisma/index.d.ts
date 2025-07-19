@@ -4973,19 +4973,21 @@ export namespace Prisma {
   }
 
   export type CodelangCreateInput = {
+    id: number
     name: string
     description: string
     applications?: ApplicationCreateNestedManyWithoutCodelangInput
   }
 
   export type CodelangUncheckedCreateInput = {
-    id?: number
+    id: number
     name: string
     description: string
     applications?: ApplicationUncheckedCreateNestedManyWithoutCodelangInput
   }
 
   export type CodelangUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     applications?: ApplicationUpdateManyWithoutCodelangNestedInput
@@ -4999,12 +5001,13 @@ export namespace Prisma {
   }
 
   export type CodelangCreateManyInput = {
-    id?: number
+    id: number
     name: string
     description: string
   }
 
   export type CodelangUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
@@ -5016,19 +5019,21 @@ export namespace Prisma {
   }
 
   export type ApptypeCreateInput = {
+    id: number
     name: string
     description?: string | null
     applications?: ApplicationCreateNestedManyWithoutApptypeInput
   }
 
   export type ApptypeUncheckedCreateInput = {
-    id?: number
+    id: number
     name: string
     description?: string | null
     applications?: ApplicationUncheckedCreateNestedManyWithoutApptypeInput
   }
 
   export type ApptypeUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     applications?: ApplicationUpdateManyWithoutApptypeNestedInput
@@ -5042,12 +5047,13 @@ export namespace Prisma {
   }
 
   export type ApptypeCreateManyInput = {
-    id?: number
+    id: number
     name: string
     description?: string | null
   }
 
   export type ApptypeUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -5059,6 +5065,7 @@ export namespace Prisma {
   }
 
   export type ApplicationCreateInput = {
+    id: number
     name: string
     description?: string | null
     repository?: string | null
@@ -5082,7 +5089,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUncheckedCreateInput = {
-    id?: number
+    id: number
     apptypeId: number
     codelangId: number
     name: string
@@ -5106,6 +5113,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     repository?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5153,7 +5161,7 @@ export namespace Prisma {
   }
 
   export type ApplicationCreateManyInput = {
-    id?: number
+    id: number
     apptypeId: number
     codelangId: number
     name: string
@@ -5177,6 +5185,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     repository?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5527,6 +5536,14 @@ export namespace Prisma {
     connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -5543,14 +5560,6 @@ export namespace Prisma {
     update?: ApplicationUpdateWithWhereUniqueWithoutCodelangInput | ApplicationUpdateWithWhereUniqueWithoutCodelangInput[]
     updateMany?: ApplicationUpdateManyWithWhereWithoutCodelangInput | ApplicationUpdateManyWithWhereWithoutCodelangInput[]
     deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type ApplicationUncheckedUpdateManyWithoutCodelangNestedInput = {
@@ -5799,6 +5808,7 @@ export namespace Prisma {
   }
 
   export type ApplicationCreateWithoutCodelangInput = {
+    id: number
     name: string
     description?: string | null
     repository?: string | null
@@ -5821,7 +5831,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUncheckedCreateWithoutCodelangInput = {
-    id?: number
+    id: number
     apptypeId: number
     name: string
     description?: string | null
@@ -5897,6 +5907,7 @@ export namespace Prisma {
   }
 
   export type ApplicationCreateWithoutApptypeInput = {
+    id: number
     name: string
     description?: string | null
     repository?: string | null
@@ -5919,7 +5930,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUncheckedCreateWithoutApptypeInput = {
-    id?: number
+    id: number
     codelangId: number
     name: string
     description?: string | null
@@ -5968,12 +5979,13 @@ export namespace Prisma {
   }
 
   export type ApptypeCreateWithoutApplicationsInput = {
+    id: number
     name: string
     description?: string | null
   }
 
   export type ApptypeUncheckedCreateWithoutApplicationsInput = {
-    id?: number
+    id: number
     name: string
     description?: string | null
   }
@@ -5984,12 +5996,13 @@ export namespace Prisma {
   }
 
   export type CodelangCreateWithoutApplicationsInput = {
+    id: number
     name: string
     description: string
   }
 
   export type CodelangUncheckedCreateWithoutApplicationsInput = {
-    id?: number
+    id: number
     name: string
     description: string
   }
@@ -6011,6 +6024,7 @@ export namespace Prisma {
   }
 
   export type ApptypeUpdateWithoutApplicationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -6033,6 +6047,7 @@ export namespace Prisma {
   }
 
   export type CodelangUpdateWithoutApplicationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
@@ -6044,7 +6059,7 @@ export namespace Prisma {
   }
 
   export type ApplicationCreateManyCodelangInput = {
-    id?: number
+    id: number
     apptypeId: number
     name: string
     description?: string | null
@@ -6067,6 +6082,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateWithoutCodelangInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     repository?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6135,7 +6151,7 @@ export namespace Prisma {
   }
 
   export type ApplicationCreateManyApptypeInput = {
-    id?: number
+    id: number
     codelangId: number
     name: string
     description?: string | null
@@ -6158,6 +6174,7 @@ export namespace Prisma {
   }
 
   export type ApplicationUpdateWithoutApptypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     repository?: NullableStringFieldUpdateOperationsInput | string | null

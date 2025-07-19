@@ -1,9 +1,11 @@
 //src\app\index\maincontent.tsx
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Flex} from "@radix-ui/themes";
 
 import { AppConfig } from "@/app/index/appconfig";
+import { Codelang } from "@/db/model/codelang";
+import { insertCodelang } from "@/db/services/crud/srvcrudcodelang";
 
 
 const mainContentStyle = {
@@ -19,7 +21,18 @@ interface CompProps {
     module:string;
 }
 export default function MainContent({module}: CompProps) {
-
+    const [ready, setReady] = useState<boolean>(false);
+    
+    useEffect(() => {
+        if(ready) {return;} 
+        const init = async () => {              
+            const newRow:Codelang = new Codelang(10, "csharp", "csharp");       
+            const response = await insertCodelang(JSON.stringify(newRow));  
+            setReady(true);
+        };
+        init();
+    }, []);
+        
     const renderModPlatform = () => {
         return (
             <p>FSDFSDFSDFSDFSSDFSDF

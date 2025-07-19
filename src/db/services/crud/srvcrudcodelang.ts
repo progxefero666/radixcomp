@@ -13,7 +13,7 @@ import { Codelang } from "@/db/model/codelang";
 /**
  * __table__ insert
  */
-export async function insert(item_serial:string): Promise<string> {
+export async function insertCodelang(item_serial:string): Promise<string> {
     
     const item: Codelang|null = parseItem<Codelang>(item_serial);
     if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
@@ -22,10 +22,6 @@ export async function insert(item_serial:string): Promise<string> {
     let result: object|null = null;
     try {
         result = await prisma.codelang.create({data:item as any});
-        if (result === null) {
-            return JsonResponse.ERROR
-                (DpOpsUtil.getErrNotFoundMessage(DbOps.INSERT, DbTables.codelang));
-        }
     }
     catch (error) {
         return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));

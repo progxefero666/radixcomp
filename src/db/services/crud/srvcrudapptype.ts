@@ -42,11 +42,7 @@ export async function update(item:Apptype): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
-        result = await prisma.apptype.update({where:{id:item.id!},data:item! as any});        
-        if (result === null) {
-            return JsonResponse.ERROR
-                (DpOpsUtil.getErrNotFoundMessage(DbOps.UPDATE, DbTables.apptype));
-        }        
+        result = await prisma.apptype.update({where:{id:item.id!},data:item! as any});            
     }
     catch (error) {
         return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));

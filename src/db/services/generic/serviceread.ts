@@ -15,12 +15,6 @@ export async function getCountAllRows(table: string,rowName:string): Promise<str
         if (table === DbTables.codelang) {
             count = await prisma.codelang.count({where:{name:rowName}});
         }        
-        else if (table === DbTables.tasktype) {
-            count = await prisma.tasktype.count({where:{name:rowName}});
-        }     
-        else if (table === DbTables.workflow) {
-            count = await prisma.workflow.count({where:{name:rowName}});
-        }  
         else if (table === DbTables.apptype) {
             count = await prisma.apptype.count({where:{name:rowName}});
         }     
@@ -52,26 +46,11 @@ export async function getAllRows(table: string): Promise<string> {
         if (table === DbTables.codelang) {
             result = await prisma.codelang.findMany();
         }
-        else if (table === DbTables.tasktype) {
-            result = await prisma.tasktype.findMany();
-        }
-        else if (table === DbTables.workflow) {
-            result = await prisma.workflow.findMany();
-        }
-        else if (table === DbTables.taskcategory) {
-            result = await prisma.taskcategory.findMany();
-        }
-        else if (table === DbTables.task) {
-            result = await prisma.task.findMany();
-        }
         else if (table === DbTables.apptype) {
             result = await prisma.apptype.findMany();
         }
         else if (table === DbTables.application) {
             result = await prisma.application.findMany();
-        }
-        else {
-            //throw new Error(OpUtil.getErrNotFoundMessage(table,DbOps.TYPE_TABLE));
         }
     }
     catch (error) {

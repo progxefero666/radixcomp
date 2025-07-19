@@ -11,7 +11,7 @@ datasource db {
 // ----------------- MODELS -----------------
 
 model Codelang {
-  id           Int           @id @default(autoincrement())
+  id           Int           @id
   name         String        @unique @db.VarChar(20)
   description  String        @db.VarChar(150)
   applications Application[]
@@ -20,7 +20,7 @@ model Codelang {
 }
 
 model Apptype {
-  id           Int           @id @default(autoincrement())
+  id           Int           @id
   name         String        @unique @db.VarChar(50)
   description  String?       @default("undefined") @db.VarChar(255)
   applications Application[]
@@ -29,7 +29,7 @@ model Apptype {
 }
 
 model Application {
-  id           Int      @id @default(autoincrement())
+  id           Int      @id
   apptype      Apptype  @relation(fields: [apptypeId], references: [id], onDelete: Cascade)
   apptypeId    Int
   codelang     Codelang @relation(fields: [codelangId], references: [id], onDelete: Cascade)
