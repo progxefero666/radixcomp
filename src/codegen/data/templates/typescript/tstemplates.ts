@@ -51,14 +51,14 @@ export class ^%v0%^ {
     
     public static readonly DEF: string = "n";
 
-    public ^¡v1¡^: number;
-    public ^<v2>^: string;
-    public ^[v3]^: boolean;
+    public ^%v1%^: number;
+    public ^%v2%^: string;
+    public ^%v3%^: boolean;
 
-    constructor(^¡v1¡^: number, ^<v2>^: string, ^[v3]^: boolean) {
-        this.^¡v1¡^ = ^¡v1¡^;
-        this.^<v2>^ = ^<v2>^;
-        this.^[v3]^ = ^[v3]^;
+    constructor(^%v1%^: number, ^%v2%^: string, ^%v3%^: boolean) {
+        this.^%v1%^ = ^%v1%^;
+        this.^%v2%^ = ^%v2%^;
+        this.^%v3%^ = ^%v3%^;
     };//end
 
     public toJsonString(): string {

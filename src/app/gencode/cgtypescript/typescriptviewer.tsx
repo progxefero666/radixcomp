@@ -62,7 +62,7 @@ export function TypeScriptViewer({activetab,template,code}: CompProps) {
         <Flex className="h-full" direction="column" >
 
                   
-            <Tabs.Root defaultValue={CgDataProcessor.WTEMPLATE}>
+            <Tabs.Root defaultValue={activetab}>
                 <Tabs.List>
                     <Tabs.Trigger value={CgDataProcessor.WTEMPLATE}>Template</Tabs.Trigger>
                     <Tabs.Trigger value={CgDataProcessor.WCODE}>Code</Tabs.Trigger>
