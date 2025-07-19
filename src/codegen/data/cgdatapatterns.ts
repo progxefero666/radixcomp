@@ -14,7 +14,7 @@ export class CgDataPatterns {
     public static readonly PATTERNS: Pattern[] = [
         new Pattern("^%","%^","/icons/uno"),  
         new Pattern("^¡","¡^","/icons/dos"),
-        new Pattern("^<",">^","/icons/tres."),
+        new Pattern("^<",">^","/icons/tres"),
         new Pattern("^[","]^","/icons/cuatro"),
         new Pattern("^+","+^","/icons/cinco"),
         new Pattern("*^","*^","/icons/seis"),        
