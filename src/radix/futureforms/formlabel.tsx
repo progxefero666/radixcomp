@@ -5,10 +5,10 @@ import { Label as LabelPrimitive, LabelProps } from '@radix-ui/react-label';
 import { FormLabelProps } from '@radix-ui/react-form';
 
 // Import util functions
-import {getValidAttribute,getInvalidAttribute } from '@/radix/forms/formutil';
-import {ScopedProps, FormLabelElement} from '@/radix/forms/formtypes';
-import { _validityMatchers, FORM_CONST_ELEMS } from '@/radix/forms/formconst';
-import { useFormFieldContext, useValidationContext } from '@/radix/forms/form';
+import {getValidAttribute,getInvalidAttribute } from '@/radix/futureforms/formutil';
+import {ScopedProps, FormLabelElement} from '@/radix/futureforms/formtypes';
+import { _validityMatchers, FORM_CONST_ELEMS } from '@/radix/futureforms/formconst';
+import { useFormFieldContext, useValidationContext } from '@/radix/futureforms/form';
 
 
 export const FormLabel = React.forwardRef<FormLabelElement, FormLabelProps>(

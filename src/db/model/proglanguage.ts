@@ -1,5 +1,7 @@
 //src\db\model\proglanguage.ts
 
+import { Template } from "./template";
+
 /**
  * Db Table Entity Class Proglanguage
  */
@@ -8,11 +10,13 @@ export class Proglanguage {
     public id: string;
     public name: string;
 
-    constructor(id: string,name:string) {
+    public templates?: Template[]=[];
 
-        this.id = id;
-        this.name = name;
-    }
+    constructor(id: string,name:string,templates?:Template[]) {
+        this.id     = id;
+        this.name   = name;
+        if(templates) {this.templates = templates;}
+    };//
 
     /**
      * Returns the minimum length of the field.
