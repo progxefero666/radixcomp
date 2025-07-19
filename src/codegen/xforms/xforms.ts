@@ -7,7 +7,7 @@ import { TextHelper } from "@/common/helper/texthelper";
 
 
 /**
- * XForms.FT_TEXT
+ * XForms.import_form_inputs
  */
 export class XForms {
 
@@ -57,15 +57,17 @@ export class XForms {
 
     public static attr_inline: string = `inline={true}`;
 
-    /*    
-        <XInputText
-        name="opsystem"jsonApp
-        ref={osystemRef}
-        label="system"
-        default={item.osystem}
-        maxlen={AppDef.OSSYSTEM_MAXLEN}
-        readonly={readonly}
-        disabled={disabled} />  */
+    //import { InputValue } from "@/common/model/inputvalue";
+
+    public static t_import_form_inputs: string 
+        = `import { InputValue } from "@/common/model/inputvalue";`;
+        
+    public static t_form_inputs: string 
+        = `const [formInputs,setFormInputs] = useState<InputValue[]>([]);`;
+
+    public static t_useEffect_start: string = "useEffect(() => {";
+    public static t_useEffect_end: string = "}, []);";
+    
 };//end class
 
 export class XFormsGen {
@@ -73,6 +75,33 @@ export class XFormsGen {
     public static gen_FT_TEXT(field: any): string {
         let result: string = "";
 
+        return result;
+    };//
+
+    public static genImports(): string {
+        let result: string = "";
+        result += XForms.t_import_form_inputs + CgConfig.RETx2;
+        return result;
+    };//
+
+    public static genInputValues(jsonTable: string): string {
+        const jsonCollection = JSON.parse(jsonTable);
+
+        let result: string = XForms.t_form_inputs + CgConfig.RET;
+
+        result += XForms.t_useEffect_start + CgConfig.RET;
+
+        let array_result = "setFormInputs(["+ CgConfig.RET;
+        for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
+            array_result +=  CgConfig.TAB_4 +`new InputValue("` + jsonCollection.fields[idx].name + `", null)`;
+            array_result += CgConfig.RET;
+        }
+        array_result += "]);" + CgConfig.RET;
+        array_result += CodeGenHelper.applyTabsToStringBlock(array_result, 1);
+        
+        result+= array_result;
+        result+= XForms.t_useEffect_end + CgConfig.RETx2;
+        result+= CodeGenHelper.applyTabsToStringBlock(result, 1);
         return result;
     };//
 
@@ -139,6 +168,11 @@ export class XFormsGen {
     };//end 
 
     public static generateForm(jsonTable: string): string {
+
+        //............................................................................
+        let resultImports: string = XFormsGen.genImports();
+        let resultInputs: string = XFormsGen.genInputValues(jsonTable);
+        //............................................................................
 
         //............................................................................
         let resultRefs: string = "";
@@ -231,7 +265,7 @@ export class XFormsGen {
         resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2);
         //............................................................................        
 
-        let result:string = resultRefs + resultFields;
+        let result:string = resultImports + resultInputs + resultRefs + resultFields;
         return result;
     }//end
 

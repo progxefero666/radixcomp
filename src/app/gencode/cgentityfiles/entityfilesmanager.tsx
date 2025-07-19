@@ -26,6 +26,7 @@ import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import jsonApp from "@/db/modeljson/application.json";
 import { InputField } from "@/common/model/inputfield";
 import { jsonTemplate, XFormsGen } from "@/codegen/xforms/xforms";
+import { InputValue } from "@/common/model/inputvalue";
 
 
 //---------------------------------------------------------------------------------------
@@ -42,8 +43,8 @@ interface CompProps {
 export function GenCodeControl({ section, onsingleresult, onmultipleresult }: CompProps) {
 
     const [initialized, setInitialized] = useState<boolean>(false);
-    
-    const dbSquemaControl       = useRef<CodeGenSquema | null>(null);
+
+    const dbSquemaControl = useRef<CodeGenSquema | null>(null);
     const clientTScriptEntities = useRef<ServClientEntities>(null);
     const [jsonTables, setJsonTables] = useState<string[]>([]);
 
@@ -56,7 +57,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     useEffect(() => {
         if (initialized) { return; }
-        
+
         const dbSquema = AppMemmory.readDbSquema();
         setJsonTables(CodeGenJson.getAllJsonTables(dbSquema));
         //const tables = CodeGenSql.getEsquemaTables(dbSquema);     
@@ -77,7 +78,6 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     const onOptMultipleChange = (value: boolean, compName?: string) => {
         setOptMultDisabled(value);
     };//end
-
 
     const onOpSelected = (operationId: string) => {
         if (operationId == "get_def_class" ||
@@ -100,22 +100,27 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         setOperationId(operationId);
     };//end
 
+    /* 
+    const [formInputs,setFormInputs] = useState<InputValue[]>([]);
     const validate = (): boolean => {
         return true;
     };//end
-
     const onSubmit = () => {
-        const validation:boolean = validate();
+        const validation: boolean = validate();
         if (!validation) {
             alert("Validation error");
             return;
-        }        
+        }
     };//end
+    */
 
     const runTest = () => {
-
-          const codecont:string = XFormsGen.generateForm(jsonTemplate);
-          onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform",codecont!)); 
+        const formInputs: InputValue[] = [
+            new InputValue("name", "Test Name"),
+            new InputValue("email", "email")
+        ];
+        const codecont: string = XFormsGen.generateForm(jsonTemplate);
+        onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform", codecont!));
     };//end
 
     const runOperation = async () => {
@@ -131,21 +136,21 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         else if (format === DocFormats.FORMAT_JSX.key ) {}        
         else if (format === DocFormats.FORMAT_PYTHON.key ) {}       
         else if (format === DocFormats.FORMAT_MARKDOWN.key ) {}  
-        */         
+        */
     };//end
 
     const runTypeScriptOperation = async () => {
 
         // for single entity file
         //...............................................................................
-        if (operationId ===CgEntityOperations.OP_DEF_CLASS || 
+        if (operationId === CgEntityOperations.OP_DEF_CLASS ||
             operationId === CgEntityOperations.OP_ENTITY_CLASS) {
             let codecont: string | null = null;
             codecont = await clientTScriptEntities.current!
                 .execItemTsOperation(operationId, dbSquemaControl.current!.activeTableName);
             const filecode: FileCode = CgFileFunctions
-                .getTypeScriptFileCode(dbSquemaControl.current!.activeTableName,codecont!);
-            
+                .getTypeScriptFileCode(dbSquemaControl.current!.activeTableName, codecont!);
+
             if (codecont !== null) { onsingleresult(filecode); }
         }
         else {
@@ -155,35 +160,35 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                 let listCode: string[] | null = null;
                 let filescode: FileCode[] = [];
 
-                if( operationId === CgEntityOperations.OP_LIST_DEF_CLASS ||
+                if (operationId === CgEntityOperations.OP_LIST_DEF_CLASS ||
                     operationId === CgEntityOperations.OP_LIST_ENTITY_CLASS) {
                     listCode = await clientTScriptEntities.current!
                         .execMultipleTsOperation(operationId, dbSquemaControl.current!.toptions);
-                    
-                    const tableIds:string[] = CollectionHelper
+
+                    const tableIds: string[] = CollectionHelper
                         .getTOptionsNames(dbSquemaControl.current!.toptions);
 
                     if (listCode != null) {
-                        filescode= CgFileFunctions.getTypeScriptArrayFilesCode(tableIds,listCode);
+                        filescode = CgFileFunctions.getTypeScriptArrayFilesCode(tableIds, listCode);
                     }
                 }
-                else if(operationId === CgEntityOperations.OP_ALL_DEF_CLASS ||
-                        operationId === CgEntityOperations.OP_ALL_ENTITY_CLASS){  
-                    const tableIds:string[] = CollectionHelper
-                        .getKeyvaluesIds(dbSquemaControl.current!.tcollection);         
+                else if (operationId === CgEntityOperations.OP_ALL_DEF_CLASS ||
+                    operationId === CgEntityOperations.OP_ALL_ENTITY_CLASS) {
+                    const tableIds: string[] = CollectionHelper
+                        .getKeyvaluesIds(dbSquemaControl.current!.tcollection);
                     if (listCode != null) {
-                        filescode= CgFileFunctions.getTypeScriptArrayFilesCode(tableIds,listCode);
-                    }                                         
+                        filescode = CgFileFunctions.getTypeScriptArrayFilesCode(tableIds, listCode);
+                    }
                 }
-                if (listCode != null) {onmultipleresult(filescode);}
+                if (listCode != null) { onmultipleresult(filescode); }
             }
             // for multiple single file
             //...............................................................................            
             else {
                 let codecont = await clientTScriptEntities
                     .current!.execAllListTsOperation(operationId);
-                if (codecont !== null) { 
-                    onsingleresult(CgFileFunctions.getTypeScriptFileCode("list_tables",codecont!)); 
+                if (codecont !== null) {
+                    onsingleresult(CgFileFunctions.getTypeScriptFileCode("list_tables", codecont!));
                 }
             }
         }
@@ -191,10 +196,10 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
 
     const runJsonOperation = async () => {
-        
+
         // for single file
         //...............................................................................
-        if (operationId === CgEntityOperations.OP_DEF_CLASS) {           
+        if (operationId === CgEntityOperations.OP_DEF_CLASS) {
             onsingleresult(CgFileFunctions.getJsonFileCode(
                 dbSquemaControl.current!.activeTableName,
                 dbSquemaControl.current!.getActiveJson()));
@@ -208,14 +213,14 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
             if (operationId === CgEntityOperations.OP_LIST_DEF_CLASS) {
                 filesCode = CgFileFunctions.getJsonArrayFilesCode(
                     CollectionHelper.getTOptionsNames(dbSquemaControl.current!.toptions),
-                    dbSquemaControl.current!.getSelectedJsonTables() );                                             
+                    dbSquemaControl.current!.getSelectedJsonTables());
             }
-            else {                  
+            else {
                 filesCode = CgFileFunctions.getJsonArrayFilesCode(
                     CollectionHelper.getKeyvaluesIds(dbSquemaControl.current!.tcollection),
-                    dbSquemaControl.current!.jsontables );                
-            }           
-           onmultipleresult(filesCode);    
+                    dbSquemaControl.current!.jsontables);
+            }
+            onmultipleresult(filesCode);
         }//end if
 
     };//end
@@ -235,10 +240,10 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
                     </Box>
                     <Box pt="1">
                         <XInputCheck label="Multiple files"
-                                     inline={true}
-                                     value={false}
-                                     name="option_multiple"                           
-                                     onchange={onOptMultipleChange} />
+                            inline={true}
+                            value={false}
+                            name="option_multiple"
+                            onchange={onOptMultipleChange} />
                     </Box>
                 </Flex>
                 <Button onClick={runOperation} color="green">

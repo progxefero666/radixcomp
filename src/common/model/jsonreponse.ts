@@ -10,7 +10,6 @@ import { DB_CONSTANTS } from "@/common/database/dbkernel";
  */
 export class JsonResponse {
     
-    public static readonly TAB: number = 4;
 
     public result: string;
     public message: string | null = null;
@@ -23,7 +22,7 @@ export class JsonResponse {
     }
 
     public toJson(): string {
-        return JSON.stringify(this,null,JsonResponse.TAB);
+        return JSON.stringify(this,null,4);
     }
 
     public isSuccess(): boolean {
