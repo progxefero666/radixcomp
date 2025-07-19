@@ -23,6 +23,8 @@ import { XInputCheck } from "@/radix/input/inputcheck";
 import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
+import jsonApp from "@/db/modeljson/application.json";
+
 
 //---------------------------------------------------------------------------------------
 /**
@@ -96,7 +98,27 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         setOperationId(operationId);
     };//end
 
+    const runTest = () => {
+
+        for(let idx=0; idx < jsonApp.fields.length; idx++) {
+
+            console.log("...........................................");
+            if(jsonApp.fields[idx].pk){
+                console.log("pk :", jsonApp.fields[idx].name);
+            } 
+            else if(jsonApp.fields[idx].fk) {
+                console.log("fKey:", jsonApp.fields[idx].name);
+            }
+            else {
+                console.log("type:", jsonApp.fields[idx].type);
+            }     
+        }
+          
+    };//end
+
     const runOperation = async () => {
+        runTest();
+        /*
         if (format === DocFormats.FORMAT_TYPESCRIPT.key) {
             runTypeScriptOperation();
         }
@@ -106,7 +128,8 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         else if (format === DocFormats.FORMAT_SQL.key ) {}
         else if (format === DocFormats.FORMAT_JSX.key ) {}        
         else if (format === DocFormats.FORMAT_PYTHON.key ) {}       
-        else if (format === DocFormats.FORMAT_MARKDOWN.key ) {}           
+        else if (format === DocFormats.FORMAT_MARKDOWN.key ) {}  
+        */         
     };//end
 
     const runTypeScriptOperation = async () => {

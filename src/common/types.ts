@@ -5,8 +5,7 @@ export type TKeyvalue = {
     value: any;
 }
 
-export type TypeInput = "number" | "search" | "time" | "text" | "hidden" | 
-                        "date" | "datetime-local" | "email" | "month" | "password" |
-                        "tel" | "url" | "week" | undefined;
+export type TypeInput = "text" | "check"    | "number" | "collection" | "password" | "url"  |
+                        "date" | "datetime" | "email"  | "password"   | "tel"  | "hidden";
 
                         

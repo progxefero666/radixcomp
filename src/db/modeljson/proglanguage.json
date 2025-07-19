@@ -1,0 +1,31 @@
+{
+    "name": "proglanguage",
+    "fields":[
+        {
+            "name": "id",
+            "type": "text",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": true,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 16,
+            "relations": null
+        }, 
+        {
+            "name": "name",
+            "type": "text",
+            "required": true,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 16,
+            "relations": null
+        }
+    ]
+}
