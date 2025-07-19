@@ -33,20 +33,22 @@ const iconStyle = {
 interface CompProps {
     patterns: Pattern[];
     input: InputPattern;
-    pattindexInit: number;
+    pattindexInit?: number;
     onchange?: (id: number, pattern: string, value: string) => void;
 }
-export default function CardInputParam({input,patterns,pattindexInit,onchange}:CompProps) {
+export default function CardInputParam({input,patterns,onchange}:CompProps) {
 
     const [useVariable, setUseVariable] = useState<boolean>(true);
     const [variable, setVariable] = useState<string>("");
-    const [pattindex, setPattindex] = useState<number>(pattindexInit);
+    const [pattindex, setPattindex] = useState<number>(0);
     const [pattern, setPattern] = useState<string>(input.getValue());
     const [value, setValue] = useState<string>("");
 
     useEffect(() => {
         if(input.variable !== null) {
+            const new_pattern: string = input.patternStart + input.variable + input.patternEnd;
             setVariable(input.variable);
+            setPattern(new_pattern);
         }
     }, []);
 

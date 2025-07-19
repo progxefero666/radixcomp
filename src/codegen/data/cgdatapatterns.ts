@@ -37,8 +37,8 @@ export class CgDataPatterns {
     public genInputPatts_basic = () => {
         for (let idx=0;idx<CgDataPatterns.MAX_PARAMETERS;idx++) {
            this.inputs_basic.push(
-                new InputPattern(idx,CgDataPatterns.PATTERNS[idx].start, 
-                                   CgDataPatterns.PATTERNS[idx].end,null,null)
+                new InputPattern(idx,CgDataPatterns.PATTERNS[0].start, 
+                                   CgDataPatterns.PATTERNS[0].end,null,null)
            );
         }        
     };//end
@@ -46,8 +46,8 @@ export class CgDataPatterns {
     public genPatterns_v0v7 = () => {
         for (let idx=0;idx<CgDataPatterns.MAX_PARAMETERS;idx++) {
             const variable = CgDataPatterns.VARNAME_v0v7 + idx;
-            const input = new InputPattern(idx,CgDataPatterns.PATTERNS[idx].start, 
-                                   CgDataPatterns.PATTERNS[idx].end,variable,null)
+            const input = new InputPattern(idx,CgDataPatterns.PATTERNS[0].start, 
+                                   CgDataPatterns.PATTERNS[0].end,variable,null)
             this.inputs_v0v7.push(input);
         }        
     };//end

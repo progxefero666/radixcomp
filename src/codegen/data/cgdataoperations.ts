@@ -45,7 +45,8 @@ export class TsOps {
     };
 
     public static getTemplate(opId: string): string {
-         const operationIndex: number = TsOps.getOperationIndex(opId);
+        const operationIndex: number = TsOps.getOperationIndex(opId);
+        alert(operationIndex);
         return TsOps.BASIC[operationIndex].value;
     };//end
 

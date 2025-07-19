@@ -180,7 +180,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                             </Flex>                                            
                             <SeparatorH />                      
                             <Box key={index.toString()}>
-                                <CardInputParam pattindexInit={index}
+                                <CardInputParam 
                                         patterns={CgDataPatterns.PATTERNS}
                                         input={cgDataPatters.inputs_v0v7[index]}
                                         onchange={onchange} />
