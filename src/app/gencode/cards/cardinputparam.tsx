@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from 'next/image'
 import { Box, Text, Flex, IconButton, TextField, Link, ScrollArea, Table, Checkbox } from "@radix-ui/themes";
 
@@ -38,14 +38,17 @@ interface CompProps {
 }
 export default function CardInputParam({input,patterns,pattindexInit,onchange}:CompProps) {
 
-
     const [useVariable, setUseVariable] = useState<boolean>(true);
-    const [variableInit, setVariableInit] = useState<string>("");
     const [variable, setVariable] = useState<string>("");
     const [pattindex, setPattindex] = useState<number>(pattindexInit);
     const [pattern, setPattern] = useState<string>(input.getValue());
     const [value, setValue] = useState<string>("");
 
+    useEffect(() => {
+        if(input.variable !== null) {
+            setVariable(input.variable);
+        }
+    }, []);
 
     const onHandlerOnClick = (index: number) => {
         input.patternStart = patterns[index].start;
@@ -58,7 +61,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
     const onChangeUseVariable = () => {
         const useOstias: boolean = !useVariable;
         if (!useOstias) {
-            setVariableInit(" ");
+            setVariable(" ");
         }
         setUseVariable(useOstias);
     };
@@ -114,7 +117,7 @@ export default function CardInputParam({input,patterns,pattindexInit,onchange}:C
                         </Table.Cell>
                         <Table.Cell>
                             <XInputText inline={true} autocommit={true} autofocus={true}
-                                defaul={variableInit}
+                                defaul={variable}
                                 onchange={onchangeVarValue}
                                 disabled={!useVariable} />
                         </Table.Cell>

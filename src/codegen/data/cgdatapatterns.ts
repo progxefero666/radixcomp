@@ -10,7 +10,7 @@ import { TextHelper } from "@/common/helper/texthelper";
  */
 export class CgDataPatterns {
 
-    public static INSTANCE: CgDataPatterns = new CgDataPatterns();
+   
     public static readonly PATTERNS: Pattern[] = [
         new Pattern("^%","%^","/icons/uno.png"),  
         new Pattern("^¡","¡^","/icons/dos.png"),
@@ -30,6 +30,7 @@ export class CgDataPatterns {
 
     constructor() {
         this.genInputPatts_basic();
+        this.genPatterns_v0v7();
     };//end
 
     public genInputPatts_basic = () => {

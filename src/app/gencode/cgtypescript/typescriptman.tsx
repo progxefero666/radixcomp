@@ -38,12 +38,13 @@ export function TypeScriptManager({ onresult }: CompProps) {
     const [viewerActTab, setViewerActTab] = useState<string>(CgDataProcessor.WTEMPLATE);
     const [paramsValues, setParamsValues] = useState<Keyvalue[]>([]);
 
+    const cgDataPatters:CgDataPatterns = new CgDataPatterns();
     //................................................................................
     // array parameters
     //................................................................................  
     const [countParams, setCountParams] = useState<number>(4);
     const [params, setParams]
-        = useState<InputPattern[]>(CgDataPatterns.INSTANCE.inputs_basic.slice(0, 4));
+        = useState<InputPattern[]>(cgDataPatters.inputs_v0v7.slice(0, 4));
 
     const onchange = (index: number, pattern: string, value: string) => {
         const params_values: Keyvalue[] = paramsValues;
@@ -53,7 +54,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const onChangeCountParams = (count: number) => {
         setCountParams(count);
-        setParams(CgDataPatterns.INSTANCE.inputs_basic.slice(0, count + 1));
+        setParams(cgDataPatters.inputs_basic.slice(0, count + 1));
         updateListParams(count);
     };//end
 
@@ -85,8 +86,6 @@ export function TypeScriptManager({ onresult }: CompProps) {
 
     const execListParamsCommand = (commandId:string) => {
     };
-    
-
 
     // operation 
     //................................................................................   
@@ -127,9 +126,9 @@ export function TypeScriptManager({ onresult }: CompProps) {
             <Flex width="100%" direction="row" px="4" >
                 <XRadioGroup
                     name={JsxOps.MOD_ID}
-                    collection={JsxOps.OPS_BASIC}
+                    collection={JsxOps.getColl_BASIC()}
                     label="Jsx Operations"
-                    value={JsxOps.OPS_BASIC[0].key}
+                    value={JsxOps.BASIC[0].key}
                     onselect={onJsxOpSelected} />
             </Flex>
         );
@@ -150,6 +149,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
     };//end
 
     const renderParameters = () => {
+    
         return (
             <>
                 <Flex direction="row" justify="between" px="2" py="1" align="center" mb="2" 
@@ -182,7 +182,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
                             <Box key={index.toString()}>
                                 <CardInputParam pattindexInit={index}
                                         patterns={CgDataPatterns.PATTERNS}
-                                        input={CgDataPatterns.INSTANCE.inputs_basic[index]}
+                                        input={cgDataPatters.inputs_basic[index]}
                                         onchange={onchange} />
 
                             </Box>

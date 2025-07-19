@@ -58,7 +58,7 @@ export class JsxOps {
 
     public static readonly MOD_ID: string = "typescript_jsx";
 
-    public static OPS_BASIC: Keyvalue[] = [        
+    public static BASIC: Keyvalue[] = [        
         new Keyvalue("component",        JsxTemplates.component),
         new Keyvalue("function",         "JsxTemplates.function"),
         new Keyvalue("component_ref",    "JsxTemplates.component ref"),
@@ -74,13 +74,21 @@ export class JsxOps {
 
     public static getTemplate(opId: string): string {
         const operationIndex: number = JsxOps.getOperationIndex(opId);
-        return JsxOps.OPS_BASIC[operationIndex].value;
+        return JsxOps.BASIC[operationIndex].value;
     };
+
+    public static getColl_BASIC(): Keyvalue[] {
+        const coll: Keyvalue[] = [];
+        for (let idx:number=0;idx<JsxOps.BASIC.length;idx++) {            
+            coll.push(new Keyvalue(JsxOps.BASIC[idx].key,JsxOps.BASIC[idx].key));            
+        }
+        return coll;
+    };    
 
     public static getOperationIndex(opId: string): number {
         let index: number = -1;
-        for (let idx:number=0;idx<JsxOps.OPS_BASIC.length;idx++) {
-            if (JsxOps.OPS_BASIC[idx].key === opId) {
+        for (let idx:number=0;idx<JsxOps.BASIC.length;idx++) {
+            if (JsxOps.BASIC[idx].key === opId) {
                 index = idx;
                 break;
             }
