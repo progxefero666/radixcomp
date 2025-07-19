@@ -61,3 +61,39 @@ export async function getAllCodelang(): Promise<string> {
     return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.codeLang, "GET_ALL"), result);
 
 } //end function
+
+// Método 1: Usando aggregate (MÁS EFICIENTE)
+export async function getMaxCodelangId(): Promise<number> {
+    const prisma = new PrismaClient();    
+    try {
+        const result = await prisma.codelang.aggregate({_max: {id: true}});        
+        return result._max.id ?? 0; // Si tabla vacía devuelve 0
+    }
+    catch (error) {
+        console.error('Error getting max ID:', error);
+        throw error;
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+};//end function
+
+// Función para obtener siguiente ID disponible
+export async function getNextCodelangId(): Promise<number> {
+    let nextId:number = 0;
+    const prisma = new PrismaClient();
+    try {
+        const result = await prisma.codelang.aggregate({_max: {id: true}});        
+        const maxId:number = result._max.id ?? 0;
+        nextId = maxId + 1;
+    }
+    catch (error) {
+        console.error('Error getting max ID:', error);
+        throw error;
+    }
+    finally {
+        await prisma.$disconnect();
+    }    
+    return nextId;
+};//end function
+
