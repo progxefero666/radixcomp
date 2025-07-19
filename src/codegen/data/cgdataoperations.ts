@@ -6,7 +6,7 @@ import { JsxTemplates } from "../templates/jsx/jsxtemplates";
 
 
 /**
- * 
+ *  class TsOps.getColl_BASIC
  */
 export class TsOps {
 
@@ -21,14 +21,21 @@ export class TsOps {
         new Keyvalue("function_async",  "TsTemplates.function_async"),       
         new Keyvalue("interface",       "TsTemplates.interface"),        
         new Keyvalue("use_state",       "TsTemplates.use_state"),
-        new Keyvalue("use_effect",      "TsTemplates.use_effect"),
-        
+        new Keyvalue("use_effect",      "TsTemplates.use_effect"),        
     ];
+
+    public static getColl_BASIC(): Keyvalue[] {
+        const coll: Keyvalue[] = [];
+        for (let idx:number=0;idx<TsOps.BASIC.length;idx++) {            
+            coll.push(new Keyvalue(TsOps.BASIC[idx].key,TsOps.BASIC[idx].key));            
+        }
+        return coll;
+    };
 
     public static getOperationIndex(opId: string): number {
         let index: number = -1;
-        for (let idx:number=0;idx<JsxOps.OPS_BASIC.length;idx++) {
-            if (JsxOps.OPS_BASIC[idx].key === opId) {
+        for (let idx:number=0;idx<TsOps.BASIC.length;idx++) {
+            if (TsOps.BASIC[idx].key === opId) {
                 index = idx;
                 break;
             }
@@ -38,7 +45,7 @@ export class TsOps {
 
     public static getTemplate(opId: string): string {
          const operationIndex: number = TsOps.getOperationIndex(opId);
-        return JsxOps.OPS_BASIC[operationIndex].value;
+        return TsOps.BASIC[operationIndex].value;
     };//end
 
 };//end class

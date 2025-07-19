@@ -140,7 +140,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
             <Flex width="100%" direction="row" px="4" >
                 <XRadioGroup
                     name={TsOps.MOD_ID}
-                    collection={TsOps.BASIC}
+                    collection={TsOps.getColl_BASIC()}
                     label="Operations"
                     value={TsOps.BASIC[0].key}
                     autofocus={true}
