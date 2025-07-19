@@ -12,29 +12,29 @@ export class JsxTemplates {
 //..................................................................................
 
 public static component: string = 
-   `import { useEffect, useRef, useState } from "react";
-    import { Box,Flex,Text,Grid,Button,IconButton,Tabs} from "@radix-ui/themes";
+`export interface CompProps {
+    ^%v1%^: string;
+    ^%v2%^?: boolean;
+    ^%v3%^: (value: string) => void;
+}
+export default function ^%v0%^({^%v1%^, ^%v2%^, ^%v3%^ }: CompProps) {
 
-    export interface CompProps {
-        name:       string;    
-        inline?:    boolean;
-        callback:   (value:string) => void;
-    }
-    export default function TemplateComp({ callback }: CompProps) {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [ready, setReady] = useState<boolean>(false);
 
-        const inputRef = useRef<HTMLInputElement>(null);
-        const [ready, setReady] = useState<boolean>(false);
+    useEffect(() => {
+        if(ready) {return;}
+        
+        setReady(true);
+    }, []);
+
+    return (
+        <Flex width="100%" direction="column" px="2" py="1" align="center" justify="center">
+            <Box width="100%">
                 
-        useEffect(() => {
-
-        }, []);
-
-        return(
-            <Flex width="100%" direction="column" px="2" py="1" align="center" justify="center">
-                <p>template</p>
-            </Flex>
-        )
-
-    };`;
+            </Box>
+        </Flex>
+    )
+};//end component`;
 
 };//end class

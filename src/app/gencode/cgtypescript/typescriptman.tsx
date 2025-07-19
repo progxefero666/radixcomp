@@ -91,23 +91,21 @@ export function TypeScriptManager({ onresult }: CompProps) {
     //................................................................................   
     const [opGroup, setOpGroup] = useState<string>(TsOps.MOD_ID);
     const onTsOpSelected = (index: number, name?: string) => {
+        setViewerActTab(CgDataProcessor.WTEMPLATE);
         setOpGroup(name!);
         setTemplate(TsOps.getTemplate(TsOps.BASIC[index].key));
     };//end 
 
     const onJsxOpSelected = (index: number, name?: string) => {
+        setViewerActTab(CgDataProcessor.WTEMPLATE);
         setOpGroup(name!);       
+        setTemplate(JsxOps.getTemplate(JsxOps.BASIC[index].key));
     };//end 
 
     const runOperation = () => {
-        if (opGroup == TsOps.MOD_ID) {
-            const result:string =  CgDataProcessor.executeOperation(template, paramsValues);
-            setViewerActTab(CgDataProcessor.WCODE);
-            setCode(result);
-        }
-        else if (opGroup == JsxOps.MOD_ID) {
-           alert("run jsx operation");
-        }
+        const result:string =  CgDataProcessor.executeOperation(template, paramsValues);
+        setViewerActTab(CgDataProcessor.WCODE);
+        setCode(result);
     };//end
 
     // renders 
@@ -279,7 +277,7 @@ export function TypeScriptManager({ onresult }: CompProps) {
             </Box>
 
             <Box width="44%" >
-                <TypeScriptViewer key={template}
+                <TypeScriptViewer key={viewerActTab}
                                   activetab={viewerActTab}
                                   template={template}
                                   code={code} />

@@ -61,10 +61,10 @@ export class JsxOps {
 
     public static BASIC: Keyvalue[] = [        
         new Keyvalue("component",        JsxTemplates.component),
+        new Keyvalue("button",           JsxTemplates.component),
+        new Keyvalue("iconbutton",       "JsxTemplates.icon_button"),
         new Keyvalue("function",         "JsxTemplates.function"),
         new Keyvalue("component_ref",    "JsxTemplates.component ref"),
-        new Keyvalue("button",           "JsxTemplates.button"),
-        new Keyvalue("iconbutton",       "JsxTemplates.icon_button"),
         new Keyvalue("grid",             "JsxTemplates.grid"),
         new Keyvalue("page",             "JsxTemplates.page"),
         new Keyvalue("page_header",      "JsxTemplates.page_header"),

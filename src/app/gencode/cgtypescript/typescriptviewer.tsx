@@ -22,6 +22,8 @@ interface CompProps {
 }
 export function TypeScriptViewer({activetab,template,code}: CompProps) {
 
+    console.log(activetab);     
+     
     const onClick = (opId?: string) => {
 
         if (opId==OpConstants.OP_COPY) {
@@ -64,17 +66,17 @@ export function TypeScriptViewer({activetab,template,code}: CompProps) {
                   
             <Tabs.Root defaultValue={activetab}>
                 <Tabs.List>
-                    <Tabs.Trigger value={CgDataProcessor.WTEMPLATE}>Template</Tabs.Trigger>
+                    
                     <Tabs.Trigger value={CgDataProcessor.WCODE}>Code</Tabs.Trigger>
+                    <Tabs.Trigger value={CgDataProcessor.WTEMPLATE}>Template</Tabs.Trigger>
                     {renderBarButtons()}
                 </Tabs.List>
                 <Box pt="3">
-                    <Tabs.Content value={CgDataProcessor.WTEMPLATE}>                           
-                        <CardCode code={template} />  
-                    </Tabs.Content>
-
                     <Tabs.Content value={CgDataProcessor.WCODE}>
                         <CardCode code={code} /> 
+                    </Tabs.Content>                    
+                    <Tabs.Content value={CgDataProcessor.WTEMPLATE}>                           
+                        <CardCode code={template} />  
                     </Tabs.Content>
                 </Box>
             </Tabs.Root>            

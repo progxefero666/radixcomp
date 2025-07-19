@@ -17,13 +17,15 @@ export interface CompProps {
     inline?: boolean;
     callback: (value: string) => void;
 }
-export default function TemplateComp({ callback }: CompProps) {
+export default function TemplateComp({name, inline, callback }: CompProps) {
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [ready, setReady] = useState<boolean>(false);
 
     useEffect(() => {
-
+        if(ready) {return;}
+        
+        setReady(true);
     }, []);
 
     return (
@@ -31,8 +33,7 @@ export default function TemplateComp({ callback }: CompProps) {
             <p>template</p>
         </Flex>
     )
-
-};
+};//end component
 
 /**
  * Accordion template
