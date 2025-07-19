@@ -7,11 +7,21 @@ import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CgConfig } from "../cgconfig";
 
 /**
- * CodeGenHelper.uncapitalize
- * CodeGenHelper.capitalize
- * class CodeGenHelper.getSelectModelTables(modelTables:ModelTable[],names:string[])
+ * CodeGenHelper.isGeneratedDate
  */
 export class CodeGenHelper {
+
+    //
+    public static isGeneratedDate(field: ModelField): boolean {
+        if (field.default==null) {return false;}
+
+        if (field.default === 'CURRENT_DATE' || 
+            field.default === 'CURRENT_TIMESTAMP' || 
+            field.default === 'NOW()') {
+            return true;
+        }
+        return false;
+    }//end
 
 
     public static getDefaultValue(field: ModelField, tsType: string): string {    

@@ -1,6 +1,7 @@
 //src\radix\xforms\xforms.ts
 
 import { CgConfig } from "@/codegen/cgconfig";
+import { CodeGenHelper } from "../kernel/cghelper";
 
 
 
@@ -49,7 +50,6 @@ export class XForms {
     public static t_attr_collection: string = `collection={^%v%^}`;
     public static t_attr_default: string    = `default={^%v%^}`;
     public static t_attr_maxlen: string     = `maxlen={^%v%^}`;
-    public static t_attr_readonly: string   = `readonly={^%v%^}`;
     public static t_attr_disabled: string   = `disabled={^%v%^}`;
     public static t_attr_inline: string     = `inline={^%v%^}`;
     public static t_attr_autocommit: string = `default={^%v%^}`;
@@ -186,12 +186,18 @@ export class XFormsGen {
                 else {
                     if(XForms.PATTERN, jsonApp.fields[idx].default!== null) {                     
                         if(jsonApp.fields[idx].type === XForms.FT_TEXT||
-                            jsonApp.fields[idx].type === XForms.FT_TEXTAREA ||
-                            jsonApp.fields[idx].type === XForms.FT_DATE ||
-                            jsonApp.fields[idx].type === XForms.FT_DATETIME) {
+                            jsonApp.fields[idx].type === XForms.FT_TEXTAREA)  {
                             result += '"'+ XForms.t_attr_default.replace
                                 (XForms.PATTERN,jsonApp.fields[idx].default)+'"'+ CgConfig.RET; 
                         }    
+                        if(jsonApp.fields[idx].type === XForms.FT_DATE ||
+                            jsonApp.fields[idx].type === XForms.FT_DATETIME) {
+                            if(!CodeGenHelper.isGeneratedDate(jsonApp.fields[idx].default)) {   
+                                result += '"'+ XForms.t_attr_default.replace
+                                    (XForms.PATTERN,jsonApp.fields[idx].default)+'"'+ CgConfig.RET;                                 
+                            }                            
+                        } 
+
                         if(jsonApp.fields[idx].type === XForms.FT_NUMBER ||
                                 jsonApp.fields[idx].type === XForms.FT_DECIMAL ||
                                 jsonApp.fields[idx].type === XForms.FT_CHECK) {
@@ -203,7 +209,7 @@ export class XFormsGen {
                     }                    
                 }
             }
-        }//end for
+        }//end for 
 
         return result;
     }//end

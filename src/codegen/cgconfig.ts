@@ -10,12 +10,14 @@
  */
 export class CgConfig {
 
-    public static readonly DEF_FILE_ID:string = "default";
-    public static readonly DEF_CLASS_NAMEADD: string = "Def"
-    public static readonly CHAR_SPACE:string = " ";
-    public static readonly TAB_4:string = "    ";
-    public static readonly RET:string = "\n";
-    public static readonly RETx2:string = "\n\n";
+    public static DEF_FILE_ID:string = "default";
+    public static DEF_CLASS_NAMEADD: string = "Def"
+    public static CHAR_SPACE:string = " ";
+    public static TAB_4:string = "    ";
+    public static RET:string = "\n";
+    public static RETx2:string = "\n\n";
+
+    public static DATE_GEN_VALUES:string[] =["CURRENT_DATE", "CURRENT_TIMESTAMP", "NOW()"];  
 
     public static readonly CODEGEN_LIB_PATH: string 
         = "@/codegen/kernel/cgmodel"
