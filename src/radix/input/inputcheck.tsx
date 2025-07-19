@@ -3,7 +3,7 @@
 
 import { forwardRef } from "react";
 import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
-import { CompStyleOld } from "@/radix/radixtheme";
+import { CompStyleOld, TextStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { radixTypeComp } from "../radixtypes";
 import { RADIX_COLORS, RADIX_SIZES } from "../radixconstants";
@@ -41,7 +41,7 @@ export const XInputCheck = forwardRef<HTMLInputElement, CompProps>(({
         if(direction === "row") {
             return (
                 <Flex width="100" direction="row" gapX="2" align="center" justify="center">
-                    <Box pt={"1"}><Text size="2">{label}</Text></Box>
+                    <Text size={TextStyle.SIZE_DEF}>{label}</Text>
                     <Checkbox                
                         defaultChecked={value}
                         variant={variant}

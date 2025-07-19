@@ -35,7 +35,7 @@ export const DialogForm = ({ buttontext, title, items, onsave }: CompProps) => {
         return (
             <fieldset>
                 <Label.Root>{input.label}</Label.Root>
-                <TextField.Root name={input.id}
+                <TextField.Root name={input.id} type="text"
                     placeholder={input.placeholder}
                     radius="small" />
             </fieldset>

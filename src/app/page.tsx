@@ -142,7 +142,7 @@ export default function PageGenCode() {
                 </Box>
                 <Box width="50%" style={boxStyle}>
                     { (fileCode!==null ) ? 
-                    <GenCodeViewer singlecode={fileCode} 
+                    <GenCodeViewer singlecode={fileCode} key={fileCode.id}
                                     exportsinglecode={exportFileCode} 
                                     exportmultiplecode={exportFileCode}/>:null}                                
                     { (listFileCode!==null ) ? 

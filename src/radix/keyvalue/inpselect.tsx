@@ -6,6 +6,7 @@ import { RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS } from "../radixconstants";
 import { ModelHelper } from "@/common/helper/modelhelper";
 import { Label } from "@radix-ui/react-label";
+import { TextStyle } from "../radixtheme";
 
 
 /**
@@ -36,7 +37,7 @@ export function XSelect({name,onchange,collection,values,label,disabled}:CompPro
     return (
         <Flex width="100%" direction={"row"} gap="2" >
 
-            {label?<Box pt={"1"}><Text size="2">{label}</Text></Box>:null}
+            {label?<Box pt={"1"}><Text size={TextStyle.SIZE_DEF}>{label}</Text></Box>:null}
    
             <Select.Root
                 defaultValue={inp_collection[0].key}
