@@ -128,8 +128,8 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
 
     const runOperation = async () => {
-        runTest();
-        /*
+        //runTest();
+        
         if (format === DocFormats.FORMAT_TYPESCRIPT.key) {
             runTypeScriptOperation();
         }
@@ -140,7 +140,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         else if (format === DocFormats.FORMAT_JSX.key ) {}        
         else if (format === DocFormats.FORMAT_PYTHON.key ) {}       
         else if (format === DocFormats.FORMAT_MARKDOWN.key ) {}  
-        */
+    
     };//end
 
     const runTypeScriptOperation = async () => {

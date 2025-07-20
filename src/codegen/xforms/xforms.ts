@@ -95,7 +95,7 @@ export class XFormsGen {
     public static genUseEffect(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
 
-        let array_result =  "const map = new Map<string, any>();"+ CgConfig.RET;
+        let array_result =  CgConfig.TAB_4 +"const map = new Map<string, any>();"+ CgConfig.RET;
         for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
             if(!jsonCollection.fields[idx].pk) {
                 let value: string = "";
@@ -118,11 +118,11 @@ export class XFormsGen {
                 array_result += CgConfig.RET;
             }
         }
-        array_result += `setInputValues(map);`;
-        array_result = CodeGenHelper.applyTabsToStringBlock(array_result, 1);
+        array_result += CgConfig.TAB_4 +`setInputValues(map);`;
+
              
         let result =  XForms.t_useEffect_start + CgConfig.RET;
-        result += array_result;
+        result += array_result+ CgConfig.RET;
         result += XForms.t_useEffect_end + CgConfig.RET;        
         return CodeGenHelper.applyTabsToStringBlock(result,1);
     };//end

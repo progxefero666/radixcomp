@@ -15,6 +15,18 @@ import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 
 export class CodeGenTsMotor {
 
+    public static getListAttributes(tableModel: ModelTable):string {
+        let result: string = ""; 
+
+        for (const field of tableModel.fields) {
+            if(field.pk) {
+                
+            }
+        }//end for
+
+        return result;
+    };//end 
+
     public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
         let content: string = "";      
         
@@ -34,7 +46,7 @@ export class CodeGenTsMotor {
         content += ` **/`+CgConfig.RET;
         content += `export class ${className} {\n\n`;        
 
-        //CodeGenConfig.TAB_4
+
         // Generate properties
         for (const field of tableModel.fields) {
             const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);    
@@ -55,9 +67,9 @@ export class CodeGenTsMotor {
                 else{
                     content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
                 }  
-            }
-    
-        }        
+            }    
+        }    
+
         // Constructor
         content += `\n    constructor(`;
         const constructorParams: string[] = [];

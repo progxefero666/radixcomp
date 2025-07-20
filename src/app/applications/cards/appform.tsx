@@ -95,8 +95,32 @@ export function AppForm({ item, apptypes,}: AppFormProps) {
 
     }, []);
 
-    /*
+    const valideInput = (inputName:string) => {
+        
+    };
+
+    const validation = () => {
+    };
+
     const onSubmit = () => {
+        inputValues.get("name") == nameRef.current?.value;
+        inputValues.get("apptype_id") == apptypesRef.current?.value;
+        inputValues.get("author") == authorRef.current?.value;
+        inputValues.get("repository") == repositoryRef.current?.value;
+        inputValues.get("description") == descriptionRef.current?.value;
+        inputValues.get("url") == urlRef.current?.value;
+        inputValues.get("osystem") == osystemRef.current?.value;
+        inputValues.get("localdev") == localdevRef.current?.checked;
+        inputValues.get("usedocker") == usedockerRef.current?.checked;
+        inputValues.get("controlusers") == controlusersRef.current?.checked;
+        inputValues.get("useui") == useuiRef.current?.checked;
+        inputValues.get("useagents") == useagentsRef.current?.checked;
+        inputValues.get("consumedb") == consumedbRef.current?.checked;
+        inputValues.get("inputdate") == dateRef.current?.value;
+    };//end
+
+    /*
+
         const nameRef = useRef<HTMLInputElement>(null);        
         for(let idx = 0; idx < inputValues.length; idx++) {
             formData[idx].value = nameRef.current?.value || null;
@@ -107,7 +131,7 @@ export function AppForm({ item, apptypes,}: AppFormProps) {
             alert("Validation error");
             return;
         }
-    };//end    
+        
     */
 
     return (
