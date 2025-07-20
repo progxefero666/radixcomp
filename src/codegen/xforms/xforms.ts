@@ -103,6 +103,16 @@ export class XFormsGen {
         return CodeGenHelper.applyTabsToStringBlock(result,1);
     };//
 
+    public static getVarRefs(jsonTable: string): string {
+        const varRefs : string[] = [];
+        const jsonCollection = JSON.parse(jsonTable);
+        for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
+            //varRefs().push(jsonCollectionname.fields[idx]this.name.concat);   
+            console.log(jsonCollection.fields[idx].name);  
+        }
+        return "";
+    };//
+
     public static genRefs(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
         let result: string = "";
@@ -164,6 +174,14 @@ export class XFormsGen {
 
         return result;
     };//end 
+
+    public static genFuncValidation(): string {
+        return "";
+    };//end
+
+    public static genFuncSubmit(): string {
+        return "";
+    };//end
 
     public static generateForm(jsonTable: string): string {
 
