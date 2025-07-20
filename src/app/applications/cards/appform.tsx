@@ -46,19 +46,18 @@ export class AppDef {
 
 /**
  * class AppForm
+ *  format(new Date(), "yyyy/MM/dd");
  */
 interface AppFormProps {
     apptypes: string[];
     item: Application;
-    readonly?: boolean;
-    disabled?: boolean
 }
-export function AppForm({ item, apptypes, disabled, readonly }: AppFormProps) {
+export function AppForm({ item, apptypes,}: AppFormProps) {
+
+    const [inputValues, setInputValues] = 
+        useState<Map<string,any>>(new Map<string,any>());
 
 
-    const [inputValues, setInputValues] = useState<Map<string,any>>(new Map<string,any>());
-
-    //const item_date: string = format(new Date(), "yyyy/MM/dd");
     const item_date: Date = new Date();
 
     const apptypesRef = useRef<HTMLSelectElement>(null);
@@ -81,10 +80,8 @@ export function AppForm({ item, apptypes, disabled, readonly }: AppFormProps) {
     useEffect(() => {
         const map = new Map<string, any>();
         map.set("name",         item.name        || null);
-        map.set("author",       item.author      || null);
-        
+        map.set("author",       item.author      || null);        
         map.set("apptype_id",   item.apptype_id  || null);
-
         map.set("repository",   item.repository  || null);
         map.set("description",  item.description || null);
         map.set("url",          item.appurl      || null); 
@@ -122,9 +119,7 @@ export function AppForm({ item, apptypes, disabled, readonly }: AppFormProps) {
                 label="Name"
                 ref={nameRef}                
                 defaul={item.name}
-                maxlen={5}
-                readonly={readonly} 
-                disabled={disabled} />
+                maxlen={5} />
 
             {/*
             <XInputSelect
@@ -143,36 +138,28 @@ export function AppForm({ item, apptypes, disabled, readonly }: AppFormProps) {
                 ref={authorRef} 
                 label="Auhor"
                 defaul={item.author!}
-                maxlen={AppDef.AUTHOR_MAXLEN}
-                readonly={readonly}
-                disabled={disabled} />
+                maxlen={AppDef.AUTHOR_MAXLEN} />
 
             <XInputText
                 name="repository"
                 ref={repositoryRef}
                 label="repository"
                 defaul={item.repository!}
-                maxlen={AppDef.REFERENCE_MAXLEN}
-                readonly={readonly}
-                disabled={disabled} />
+                maxlen={AppDef.REFERENCE_MAXLEN}/>
 
             <XInputText
                 name="description"
                 ref={descriptionRef}
                 label="Description"
                 defaul={item.description!}
-                maxlen={AppDef.DESCRIPTION_MAXLEN}
-                readonly={readonly}
-                disabled={disabled} />
+                maxlen={AppDef.DESCRIPTION_MAXLEN} />
 
             <XInputText 
                 name="url" 
                 ref={urlRef} 
                 label="url"
                 defaul={item.appurl!} 
-                maxlen={AppDef.URL_MAXLEN}
-                readonly={readonly} 
-                disabled={disabled} />
+                maxlen={AppDef.URL_MAXLEN} />
 
 
             <XInputTextArea
@@ -180,72 +167,58 @@ export function AppForm({ item, apptypes, disabled, readonly }: AppFormProps) {
                 ref={osystemRef}
                 label="system"
                 defaul={item.osystem!}
-                maxlen={AppDef.OSSYSTEM_MAXLEN}
-                readonly={readonly}
-                disabled={disabled} />
+                maxlen={AppDef.OSSYSTEM_MAXLEN} />
 
             <XInputNumber
                 name="opsystem"
                 ref={osystemRef}
                 label="system"
                 value={item.osystem!}
-                step={1}
-                readonly={readonly}
-                disabled={disabled} />
+                step={1}/>
 
             <XInputDate
                 name="inputdate"
                 ref={dateRef}
                 label="creation date"
-                value={item_date}
-                readonly={readonly}
-                disabled={disabled} />
+                value={item_date} />
 
             <XInputCheck
                 name="localdev"
                 ref={localdevRef}
                 label="local dev"
-                value={item.localdev!}
-                readonly={readonly}
-                disabled={disabled} />
+                value={item.localdev!} />
 
             <XInputCheck
                 name="usedocker"
                 ref={usedockerRef}
                 label="use docker"
-                value={item.usedocker!}
-                readonly={readonly}
-                disabled={disabled} />
+                value={item.usedocker!} />
 
             <XInputCheck
-                name="controlusers"
                 ref={controlusersRef!}
+                name="controlusers"                
                 label="control users"
-                value={item.controluser!}
-                readonly={readonly}
-                disabled={disabled} />
+                value={item.controluser!} />
 
             <XInputCheck
-                name="useui"
                 ref={useuiRef}
+                name="useui"                
                 label="use ui"
-                value={item.useui!}
-                readonly={readonly}
-                disabled={disabled} />
+                value={item.useui!} />
 
             <XInputCheck
-                name="useagents"
                 ref={useagentsRef}
+                name="useagents"                
+                inline={true}
                 label="use agents"
-                value={item.useagents!}
-                readonly={readonly}
-                disabled={disabled} />
+                value={item.useagents!} />
 
             <XInputCheck
-                name="consumedb" ref={consumedbRef}
+                ref={consumedbRef}
+                inline={true}
+                name="consumedb" 
                 label="consume db"
-                value={item.consumedb!}
-                readonly={readonly} disabled={disabled} />
+                value={item.consumedb!}/>
 
         </Flex>
 

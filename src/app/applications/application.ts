@@ -45,7 +45,6 @@ export class Application {
         this.author = author;
         this.osystem = osystem;
         this.appurl = appurl;
-        this.apppath = apppath;
         this.localdev = localdev;
         this.usedocker = usedocker;
         this.controluser = controluser;

@@ -77,13 +77,20 @@ export class XFormsGen {
         let result: string = "";
 
         return result;
-    };//
+    };//end
 
     public static genImports(): string {
         let result: string = "";
         result += XForms.t_import_form_inputs + CgConfig.RETx2;
         return result;
-    };//
+    };//end
+
+    public static genStates(): string {
+        let result: string = `const [inputValues, setInputValues] = \n` +
+                CgConfig.TAB_4 + "useState<Map<string,any>>(new Map<string,any>());";
+        result += CgConfig.RETx2;
+        return result;
+    };//end
 
     public static genUseEffect(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
@@ -106,9 +113,7 @@ export class XFormsGen {
         result += array_result;
         result += XForms.t_useEffect_end + CgConfig.RET;        
         return CodeGenHelper.applyTabsToStringBlock(result,1);
-    };//
-
-
+    };//end
 
     //const validate = (formData:InputValue[]): boolean => {
     public static functValidate(formData:InputValue[]): string {
@@ -119,7 +124,7 @@ export class XFormsGen {
         }
         result += "}";
         return result;
-    };
+    };//end
 
     public static genFuncValidation(): string {
         return "";
@@ -129,6 +134,7 @@ export class XFormsGen {
         return "";
     };//end
     
+    // generate
     public static genRefs(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
         let result: string = "";
@@ -189,7 +195,8 @@ export class XFormsGen {
 
         //............................................................................
         let resultImports: string = XFormsGen.genImports();
-        let resultInputs: string  = XFormsGen.genUseEffect(jsonTable);
+        let resultStates: string = XFormsGen.genStates();
+        let resultUseEffect: string  = XFormsGen.genUseEffect(jsonTable);
         let resultRefs: string = XFormsGen.genRefs(jsonTable);
         //............................................................................
 
@@ -278,7 +285,8 @@ export class XFormsGen {
         resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2)+ CgConfig.RET;;
         //............................................................................        
 
-        let result:string = resultImports + resultInputs + resultRefs + resultFields;
+        let result:string = resultImports + resultStates + 
+                            resultUseEffect  + resultRefs + resultFields;
         return result;
     }//end
 
