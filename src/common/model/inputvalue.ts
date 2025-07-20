@@ -1,5 +1,6 @@
 //src\common\model\inputvalue.ts
 
+import { FieldType } from "@/codegen/xforms/xformstypes";
 import { Validation } from "@/common/model/validation";
 
 /**
@@ -9,10 +10,12 @@ import { Validation } from "@/common/model/validation";
 export class InputValue {
 
     public name:       string;
+    public itype:      FieldType;
     public value:      any|null;
     public validation: Validation = Validation.DEFAULT;
 
-    constructor(name:string,value:any|null,validation?:Validation) {
+    constructor(itype:FieldType,name:string,value:any|null,validation?:Validation) {
+        this.itype = itype;
         this.name  = name;
         this.value = value;
         if(validation) {this.validation = validation;}
@@ -24,7 +27,7 @@ export class InputValue {
 
     public static build(jsonString: string): InputValue {
         const obj = JSON.parse(jsonString);
-        return new InputValue(obj.id, obj.value);
+        return new InputValue(obj.id,obj.itype, obj.value);
     }
 
 }//end class

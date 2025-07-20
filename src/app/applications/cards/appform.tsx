@@ -1,6 +1,6 @@
 //src\app_front\editapplication\form\appform.tsx
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Flex } from "@radix-ui/themes";
 import { format, addDays, differenceInDays } from "date-fns";
 
@@ -13,6 +13,7 @@ import { XInputDate } from "@/radix/input/inpdate";
 
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { Application } from "../application";
+import { InputValue } from "@/common/model/inputvalue";
 
 
 
@@ -55,6 +56,9 @@ interface AppFormProps {
 }
 export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: AppFormProps) {
 
+
+    const [inputValues, setInputValues] = useState<Map<string,any>>(new Map<string,any>());
+
     //const item_date: string = format(new Date(), "yyyy/MM/dd");
     const item_date: Date = new Date();
 
@@ -79,6 +83,38 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
     const exposedbRef = useRef<HTMLInputElement>(null);
     const exposeapiRef = useRef<HTMLInputElement>(null);
 
+    useEffect(() => {
+        const map = new Map<string, any>();
+        map.set("name",         item.name        || null);
+        map.set("author",       item.author      || null);
+        map.set("repository",   item.repository  || null);
+        map.set("description",  item.description || null);
+        map.set("url",          item.appurl      || null);
+        map.set("path",         item.apppath     || null);  
+        map.set("osystem",      item.osystem     || null);
+        map.set("localdev",     item.localdev    || false);
+        map.set("usedocker",    item.usedocker   || false);    
+        map.set("useui",        item.useui || false);
+        map.set("useagents",    item.useagents || false);
+        map.set("consumedb",    item.consumedb || false);
+        setInputValues(map);
+
+    }, []);
+
+    /*
+    const onSubmit = () => {
+        const nameRef = useRef<HTMLInputElement>(null);        
+        for(let idx = 0; idx < inputValues.length; idx++) {
+            formData[idx].value = nameRef.current?.value || null;
+            `new InputValue("name", null)`
+        }
+        const validation: boolean = true; //validate(formData);
+        if (!validation) {
+            alert("Validation error");
+            return;
+        }
+    };//end    
+    */
 
     return (
 

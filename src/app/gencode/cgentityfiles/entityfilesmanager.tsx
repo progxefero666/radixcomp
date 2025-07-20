@@ -111,7 +111,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         const nameRef = useRef<HTMLInputElement>(null);
         
         for(let idx = 0; idx < formInputs.length; idx++) {
-            formData[idx].value = nameRef.current?.value;
+            formData[idx].value = nameRef.current?.value || null;
         }
         const validation: boolean = validate(formData);
         if (!validation) {

@@ -85,19 +85,20 @@ export class XFormsGen {
         return result;
     };//
 
-    public static genInputValues(jsonTable: string): string {
+    public static genUseEffect(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
 
         let array_result =  "setFormInputs(["+ CgConfig.RET;
         for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
-            array_result +=   CgConfig.TAB_4 +`new InputValue("` + jsonCollection.fields[idx].name + `", null)`;
-            if( idx < jsonCollection.fields.length - 1) {
-                array_result += CgConfig.CHAR_COMMA;            
+            if(!jsonCollection.fields[idx].pk) {
+                array_result += CgConfig.TAB_4 +`new InputValue("` + jsonCollection.fields[idx].name + `", null)`;
+                if( idx < jsonCollection.fields.length - 1) {
+                    array_result += CgConfig.CHAR_COMMA;            
+                }
+                array_result += CgConfig.RET;
             }
-            array_result += CgConfig.RET;
         }
         array_result +=  "]);";
-
         array_result = CodeGenHelper.applyTabsToStringBlock(array_result, 2);
              
         let result: string = XForms.t_form_inputs + CgConfig.RET;
@@ -107,27 +108,27 @@ export class XFormsGen {
         return CodeGenHelper.applyTabsToStringBlock(result,1);
     };//
 
-    public static getVarRefs(jsonTable: string): string {
-        const varRefs : string[] = [];
-        const jsonCollection = JSON.parse(jsonTable);
-        for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
-            //varRefs().push(jsonCollectionname.fields[idx]this.name.concat);   
-            console.log(jsonCollection.fields[idx].name);  
-        }
-        return "";
-    };//
+
 
     //const validate = (formData:InputValue[]): boolean => {
     public static functValidate(formData:InputValue[]): string {
         let result: string = "const validate = (formData:InputValue[]): boolean => {";
         
         for (let idx = 0; idx < formData.length; idx++) {
-            
+
         }
         result += "}";
         return result;
     };
 
+    public static genFuncValidation(): string {
+        return "";
+    };//end
+
+    public static genFuncSubmit(): string {
+        return "";
+    };//end
+    
     public static genRefs(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
         let result: string = "";
@@ -184,25 +185,11 @@ export class XFormsGen {
         return result + CgConfig.CHAR_SPACE;
     };//end 
 
-    public static genDefault(fieldType: any): string {
-        let result: string = "";
-
-        return result;
-    };//end 
-
-    public static genFuncValidation(): string {
-        return "";
-    };//end
-
-    public static genFuncSubmit(): string {
-        return "";
-    };//end
-
     public static generateForm(jsonTable: string): string {
 
         //............................................................................
         let resultImports: string = XFormsGen.genImports();
-        let resultInputs: string  = XFormsGen.genInputValues(jsonTable);
+        let resultInputs: string  = XFormsGen.genUseEffect(jsonTable);
         let resultRefs: string = XFormsGen.genRefs(jsonTable);
         //............................................................................
 
@@ -302,11 +289,9 @@ export class XFormsGen {
 
 
 /*
-
     const validate = (): boolean => {
         return true;
     };//end
-
     const onSubmit = () => {
 
     };//end

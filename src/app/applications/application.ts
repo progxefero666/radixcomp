@@ -17,14 +17,10 @@ export class Application {
     public apppath:     string|null = null;
     public localdev:    boolean = true;
     public usedocker:   boolean = false;
-    public controlusers:boolean = false;
+    public controluser:boolean = false;
     public useui:       boolean = false;
     public useagents:   boolean = false;
     public consumedb:   boolean = false;
-    public consumeapi:  boolean = false;
-    public consumeai:   boolean = false;
-    public exposedb:    boolean = false;
-    public exposeapi:   boolean = false;
     public updated:     Date;
 
     constructor(id:number|null,
@@ -34,13 +30,12 @@ export class Application {
                 description:string|null,
                 repository:string|null,
                 author:string|null,
-                osystem:string|null,
+                osystem:string|null,    
                 appurl:string|null,
                 apppath:string|null,
-                localdev:boolean,usedocker:boolean,controlusers:boolean,
+                localdev:boolean,usedocker:boolean,controluser:boolean,
                 useui:boolean,useagents:boolean,consumedb:boolean,
-                consumeapi:boolean,consumeai:boolean,exposedb:boolean,
-                exposeapi:boolean, updated:Date ) {
+                updated:Date ) {
 
         this.id = id;
         this.apptype_id = apptype_id;
@@ -54,14 +49,10 @@ export class Application {
         this.apppath = apppath;
         this.localdev = localdev;
         this.usedocker = usedocker;
-        this.controlusers = controlusers;
+        this.controluser = controluser;
         this.useui = useui;
         this.useagents = useagents;
         this.consumedb = consumedb;
-        this.consumeapi = consumeapi;
-        this.consumeai = consumeai;
-        this.exposedb = exposedb;
-        this.exposeapi = exposeapi;
         this.updated = updated;
     }
 
