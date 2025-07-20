@@ -14,10 +14,9 @@ export class Application {
     public author:      string|null = null;
     public osystem:     string|null = null;
     public appurl:      string|null = null;
-    public apppath:     string|null = null;
     public localdev:    boolean = true;
     public usedocker:   boolean = false;
-    public controluser:boolean = false;
+    public controluser: boolean = false;
     public useui:       boolean = false;
     public useagents:   boolean = false;
     public consumedb:   boolean = false;

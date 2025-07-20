@@ -48,13 +48,12 @@ export class AppDef {
  * class AppForm
  */
 interface AppFormProps {
-    proglanguages: string[];
     apptypes: string[];
     item: Application;
     readonly?: boolean;
     disabled?: boolean
 }
-export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: AppFormProps) {
+export function AppForm({ item, apptypes, disabled, readonly }: AppFormProps) {
 
 
     const [inputValues, setInputValues] = useState<Map<string,any>>(new Map<string,any>());
@@ -62,7 +61,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
     //const item_date: string = format(new Date(), "yyyy/MM/dd");
     const item_date: Date = new Date();
 
-    const proglanguageRef = useRef<HTMLSelectElement>(null);
+    const apptypesRef = useRef<HTMLSelectElement>(null);
 
     const nameRef = useRef<HTMLInputElement>(null);
     const osystemRef = useRef<HTMLInputElement>(null);
@@ -70,7 +69,6 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
     const repositoryRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const urlRef = useRef<HTMLInputElement>(null);
-    const pathRef = useRef<HTMLInputElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
     const localdevRef = useRef<HTMLInputElement>(null);
     const usedockerRef = useRef<HTMLInputElement>(null);
@@ -78,25 +76,24 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
     const useuiRef = useRef<HTMLInputElement>(null);
     const useagentsRef = useRef<HTMLInputElement>(null);
     const consumedbRef = useRef<HTMLInputElement>(null);
-    const consumeapiRef = useRef<HTMLInputElement>(null);
-    const consumeaiRef = useRef<HTMLInputElement>(null);
-    const exposedbRef = useRef<HTMLInputElement>(null);
-    const exposeapiRef = useRef<HTMLInputElement>(null);
+  
 
     useEffect(() => {
         const map = new Map<string, any>();
         map.set("name",         item.name        || null);
         map.set("author",       item.author      || null);
+        
+        map.set("apptype_id",   item.apptype_id  || null);
+
         map.set("repository",   item.repository  || null);
         map.set("description",  item.description || null);
-        map.set("url",          item.appurl      || null);
-        map.set("path",         item.apppath     || null);  
+        map.set("url",          item.appurl      || null); 
         map.set("osystem",      item.osystem     || null);
         map.set("localdev",     item.localdev    || false);
         map.set("usedocker",    item.usedocker   || false);    
-        map.set("useui",        item.useui || false);
-        map.set("useagents",    item.useagents || false);
-        map.set("consumedb",    item.consumedb || false);
+        map.set("useui",        item.useui       || false);
+        map.set("useagents",    item.useagents   || false);
+        map.set("consumedb",    item.consumedb   || false);
         setInputValues(map);
 
     }, []);
@@ -128,6 +125,18 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 maxlen={5}
                 readonly={readonly} 
                 disabled={disabled} />
+
+            {/*
+            <XInputSelect
+                name="type"
+                ref={typeRef}
+                inline={true}
+                label="Type"
+                collection={apptypes}
+                default={item.apptype}
+                readonly={readonly}
+                disabled={disabled} />
+            */}
 
             <XInputText
                 name="author"
@@ -165,26 +174,6 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 readonly={readonly} 
                 disabled={disabled} />
 
-            <XInputText
-                name="path"
-                ref={pathRef}
-                label="path"
-                defaul={item.apppath!}
-                maxlen={AppDef.PATH_MAXLEN}
-                readonly={readonly}
-                disabled={disabled} />
-
-            {/*
-            <XInputSelect
-                name="type"
-                ref={typeRef}
-                inline={true}
-                label="Type"
-                collection={apptypes}
-                default={item.apptype}
-                readonly={readonly}
-                disabled={disabled} />
-            */}
 
             <XInputTextArea
                 name="opsystem"
@@ -232,7 +221,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="controlusers"
                 ref={controlusersRef!}
                 label="control users"
-                value={item.controlusers!}
+                value={item.controluser!}
                 readonly={readonly}
                 disabled={disabled} />
 
@@ -256,26 +245,6 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 name="consumedb" ref={consumedbRef}
                 label="consume db"
                 value={item.consumedb!}
-                readonly={readonly} disabled={disabled} />
-
-            <XInputCheck name="consumeapi" ref={consumeapiRef}
-                label="consume api"
-                value={item.consumeapi!}
-                readonly={readonly} disabled={disabled} />
-
-            <XInputCheck name="consumeai" ref={consumeaiRef}
-                label="consume ai"
-                value={item.consumeai!}
-                readonly={readonly} disabled={disabled} />
-
-            <XInputCheck name="exposedb" ref={exposedbRef}
-                label="expose db"
-                value={item.exposedb!}
-                readonly={readonly} disabled={disabled} />
-
-            <XInputCheck name="exposeapi" ref={exposeapiRef}
-                label="expose api"
-                value={item.exposeapi!}
                 readonly={readonly} disabled={disabled} />
 
         </Flex>
