@@ -3,6 +3,7 @@
 import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "../kernel/cghelper";
 import { TextHelper } from "@/common/helper/texthelper";
+import { InputValue } from "@/common/model/inputvalue";
 
 
 
@@ -90,6 +91,9 @@ export class XFormsGen {
         let array_result =  "setFormInputs(["+ CgConfig.RET;
         for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
             array_result +=   CgConfig.TAB_4 +`new InputValue("` + jsonCollection.fields[idx].name + `", null)`;
+            if( idx < jsonCollection.fields.length - 1) {
+                array_result += CgConfig.CHAR_COMMA;            
+            }
             array_result += CgConfig.RET;
         }
         array_result +=  "]);";
@@ -112,6 +116,17 @@ export class XFormsGen {
         }
         return "";
     };//
+
+    //const validate = (formData:InputValue[]): boolean => {
+    public static functValidate(formData:InputValue[]): string {
+        let result: string = "const validate = (formData:InputValue[]): boolean => {";
+        
+        for (let idx = 0; idx < formData.length; idx++) {
+            
+        }
+        result += "}";
+        return result;
+    };
 
     public static genRefs(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);

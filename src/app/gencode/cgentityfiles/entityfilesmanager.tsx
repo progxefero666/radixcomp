@@ -108,8 +108,10 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
     const onSubmit = () => {
         const formData:InputValue[] = formInputs;
+        const nameRef = useRef<HTMLInputElement>(null);
+        
         for(let idx = 0; idx < formInputs.length; idx++) {
-            formData[idx].value = ""; //const nameRef = useRef<HTMLInputElement>(null);
+            formData[idx].value = nameRef.current?.value;
         }
         const validation: boolean = validate(formData);
         if (!validation) {

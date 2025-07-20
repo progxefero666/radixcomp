@@ -12,7 +12,7 @@ import { XInputDate } from "@/radix/input/inpdate";
 
 
 import { XInputTextArea } from "@/radix/input/inptextarea";
-import { Application } from "@/db/model/application";
+import { Application } from "../application";
 
 
 
@@ -67,7 +67,7 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
     const descriptionRef = useRef<HTMLInputElement>(null);
     const urlRef = useRef<HTMLInputElement>(null);
     const pathRef = useRef<HTMLInputElement>(null);
-
+    const dateRef = useRef<HTMLInputElement>(null);
     const localdevRef = useRef<HTMLInputElement>(null);
     const usedockerRef = useRef<HTMLInputElement>(null);
     const controlusersRef = useRef<HTMLInputElement>(null);
@@ -148,24 +148,6 @@ export function AppForm({ item, proglanguages, apptypes, disabled, readonly }: A
                 default={item.apptype}
                 readonly={readonly}
                 disabled={disabled} />
-
-            <XInputSelect
-                name="proglanguage"
-                ref={proglanguageRef}
-                label="code lang"
-                collection={proglanguages}
-                default={item.proglanguage!}
-                readonly={readonly}
-                disabled={disabled} />
-
-            <XInputText
-                name="opsystem"
-                ref={osystemRef}
-                label="system"
-                default={item.osystem}
-                maxlen={AppDef.OSSYSTEM_MAXLEN}
-                readonly={readonly}
-                disabled={disabled} /> 
             */}
 
             <XInputTextArea

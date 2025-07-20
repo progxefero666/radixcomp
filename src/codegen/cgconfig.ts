@@ -6,13 +6,14 @@
 
 
 /**
- * class CgConfig.TAB_4
+ * class CgConfig.CHAR_COMMA
  */
 export class CgConfig {
 
     public static DEF_FILE_ID:string = "default";
     public static DEF_CLASS_NAMEADD: string = "Def"
     public static CHAR_SPACE:string = " ";
+    public static CHAR_COMMA:string = ",";
     public static TAB_4:string = "    ";
     public static RET:string = "\n";
     public static RETx2:string = "\n\n";
