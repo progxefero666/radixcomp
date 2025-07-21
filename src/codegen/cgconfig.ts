@@ -6,7 +6,7 @@
 
 
 /**
- * class CgConfig.CHAR_COMMA
+ * class CgConfig.RET
  */
 export class CgConfig {
 

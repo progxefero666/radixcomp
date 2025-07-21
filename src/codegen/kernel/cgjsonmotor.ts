@@ -8,37 +8,29 @@ import { CodeGenHelper } from "./cghelper";
 import { CodeGenSql } from "./cgsqlmotor";
 
 /**
- * Class CodeGenJson.getAllJsonTables
+ * Class CodeGenJson.LINE_VALIDATION
  */
 export class CodeGenJson {
 
-    public static getJsonEntDef(table: ModelTable): string {
-        let code = "{" + CgConfig.RET;    
-        code += CgConfig.TAB_4 + "\"name\": \"" + table.name + "\"," + CgConfig.RET;
-        code += CgConfig.TAB_4 + "\"fields\":[" + CgConfig.RET;
-        for (let idx = 0; idx < table.fields.length; idx++) {
-            code += CgConfig.TAB_4 + CodeGenJson.getJsonEntDefField(table.fields[idx]);
-            if (idx<table.fields.length-1) {code+= `, `;}
-            code += CgConfig.RET;
-        }
-        code += CgConfig.TAB_4 + `]` + CgConfig.RET;
-        code += `}`;
-        return code;
-    }//end
+    public static LINE_VALIDATION: string = `"validation":{"result":true,"message":null}`;
+    
+
+
 
     public static getJsonEntDefField(field: ModelField): string {
         
         //attrs Block 
-        let attrsBlock = `"name": "${field.name}",\n`;
-        attrsBlock  += `"type": "${field.type}",\n`;
-        attrsBlock += `"required": ${field.required},\n`;
-        attrsBlock += `"generated": ${field.generated},\n`;
-        attrsBlock += `"default": ${field.default !== null ? `"${field.default}"` : null},\n`;
-        attrsBlock += `"format": ${field.format !== null ? `"${field.format}"` : null},\n`;
-        attrsBlock += `"pk": ${field.pk},\n`;
-        attrsBlock += `"fk": ${field.fk},\n`;
-        attrsBlock += `"minlen": ${field.minlen !== null ? field.minlen : null},\n`;
-        attrsBlock += `"maxlen": ${field.maxlen !== null ? field.maxlen : null},\n`;
+        let attrsBlock   = `"name": "${field.name}",` + CgConfig.RET;
+        attrsBlock      += `"type": "${field.type}",` + CgConfig.RET;
+        attrsBlock      += `"required": ${field.required},` + CgConfig.RET;
+        attrsBlock      += `"generated": ${field.generated},` + CgConfig.RET;
+        attrsBlock      += `"default": ${field.default !== null ? `"${field.default}"` : null},` + CgConfig.RET;
+        attrsBlock      += `"format": ${field.format !== null ? `"${field.format}"` : null},` + CgConfig.RET;
+        attrsBlock      += `"pk": ${field.pk},` + CgConfig.RET;
+        attrsBlock      += `"fk": ${field.fk},` + CgConfig.RET;
+        attrsBlock      += `"minlen": ${field.minlen !== null ? field.minlen : null}` + CgConfig.RET;
+        attrsBlock      += `"maxlen": ${field.maxlen !== null ? field.maxlen : null}` + CgConfig.RET;
+        attrsBlock      += CodeGenJson.LINE_VALIDATION+ CgConfig.RET;
 
         //applyTabsToStringBlock 3
         let attrsBlockIndent = CodeGenHelper.applyTabsToStringBlock(attrsBlock,3);
@@ -71,6 +63,20 @@ export class CodeGenJson {
         code += `]` + CgConfig.RET;
         return code;
     }//end 
+    
+    public static getJsonEntDef(table: ModelTable): string {
+        let code = "{" + CgConfig.RET;    
+        code += CgConfig.TAB_4 + "\"name\": \"" + table.name + "\"," + CgConfig.RET;
+        code += CgConfig.TAB_4 + "\"fields\":[" + CgConfig.RET;
+        for (let idx = 0; idx < table.fields.length; idx++) {
+            code += CgConfig.TAB_4 + CodeGenJson.getJsonEntDefField(table.fields[idx]);
+            if (idx<table.fields.length-1) {code+= `, `;}
+            code += CgConfig.RET;
+        }
+        code += CgConfig.TAB_4 + `]` + CgConfig.RET;
+        code += `}`;
+        return code;
+    }//end
 
     //code += CodeGenJson.getJsonEntDef(table);
     public static getJsonArrayEntDef(tables: ModelTable[]): string {
