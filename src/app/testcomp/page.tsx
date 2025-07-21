@@ -11,7 +11,7 @@ import { SeparatorH } from "@/radix/container/separatorh";
 import {PrimaryBar} from "@/app/testcomp/testprimarybar";
 import {TestHeader} from "@/app/testcomp/testheader";
 import {TestSecondBar} from "@/app/testcomp/testsecondbar";
-import { TestPlayground } from "@/app/testcomp/playground";
+import { Playground } from "@/app/testcomp/playground";
 import { SeparatorV } from "@/radix/container/separatorv";
 
 
@@ -48,7 +48,7 @@ export default function PageTest() {
                 </Flex>    
             
                 <Flex width="68%" style={{ flex: '1 1 68%', minHeight: '100%' }}>
-                    <TestPlayground />
+                    <Playground />
                 </Flex>
 
                 <Flex width="16%" style={{ flex: '0 0 16%', minHeight: '100%' }}>                    

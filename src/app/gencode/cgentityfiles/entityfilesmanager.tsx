@@ -23,11 +23,8 @@ import { XInputCheck } from "@/radix/input/inputcheck";
 import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
-import jsonApp from "@/db/modeljson/application.json";
-import { InputField } from "@/common/model/inputfield";
 import { jsonTemplate, XFormsGen } from "@/codegen/forms/xforms";
-import { InputValue } from "@/common/model/inputvalue";
-import { Validation } from "@/common/model/validation";
+
 
 
 //---------------------------------------------------------------------------------------
@@ -101,13 +98,13 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
 
 
-    const runOperation = () => {
+    const runOperationTest = () => {
 
         const codecont: string = XFormsGen.generateForm(jsonTemplate);
         onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform", codecont!));
     };//end
 
-    const runOperationO = async () => {
+    const runOperation = async () => {
         
         if (format === DocFormats.FORMAT_TYPESCRIPT.key) {
             runTypeScriptOperation();

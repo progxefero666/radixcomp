@@ -1,5 +1,5 @@
 {
-    "name": "proglanguage",
+    "name": "tasktype",
     "fields":[
         {
             "name": "id",
@@ -25,7 +25,21 @@
             "pk": false,
             "fk": false,
             "minlen": null,
-            "maxlen": 16,
+            "maxlen": 50,
+            "validation":{"result":true,"message":null},
+            "relations": null
+        },
+        {
+            "name": "description",
+            "type": "text",
+            "required": false,
+            "generated": false,
+            "default": null,
+            "format": null,
+            "pk": false,
+            "fk": false,
+            "minlen": null,
+            "maxlen": 100,
             "validation":{"result":true,"message":null},
             "relations": null
         }

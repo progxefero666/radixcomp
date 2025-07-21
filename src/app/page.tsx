@@ -38,8 +38,8 @@ export default function PageGenCode() {
 
 
     const [ready, setReady] = useState<boolean>(false);
-    const [layoutColsWidth, setlayoutColsWidth] = useState<string[]>(["14%","82%","4%"]); 
-    const [collapsePrimaryBar, setCollapsePrimaryBar] = useState<boolean>(false);
+    const [layoutColsWidth, setlayoutColsWidth] = useState<string[]>(["4%","92%","4%"]); 
+    const [collapsePrimaryBar, setCollapsePrimaryBar] = useState<boolean>(true);
 
     const [section, setSection] = useState<string>(CodeGenModules.MODULES[0].id);
     const [fileCode,setFileCode]   = useState<FileCode|null>(null);
@@ -135,13 +135,13 @@ export default function PageGenCode() {
     const renderSectionEntityFiles = () => {
         return (            
             <Flex  direction={"row"} width={layoutColsWidth[1]} style={boxStyle}> 
-                <Box  width="50%" style={boxStyle}> 
+                <Box  width="40%" style={boxStyle}> 
                     {ready ? 
                     <GenCodeControl key={section}  section={section}  
                                     onsingleresult={chargeFileCode}
                                     onmultipleresult={chargeMultipleFileCode}/>:null}
                 </Box>
-                <Box width="50%" style={boxStyle}>
+                <Box width="60%" style={boxStyle}>
                     { (fileCode!==null ) ? 
                     <GenCodeViewer singlecode={fileCode} key={fileCode.id}
                                     exportsinglecode={exportFileCode} 
