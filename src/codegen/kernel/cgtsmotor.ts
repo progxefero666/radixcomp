@@ -159,7 +159,7 @@ export class CodeGenTsMotor {
 
         });//end forEach
      
-        content += '\n'; 
+        content += CgConfig.RET; 
         return content;
     };//end 
 
@@ -202,92 +202,66 @@ export class CodeGenTsMotor {
         return content;
     };//end 
 
-    public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
-        //if(includeDef){content +=  CodeGenTsMotor.getEntityDefClass(tableModel);}
-       
-        // header class
-        let content = CodeGenTsMotor.getClassHeader(tableModel.name);        
-
-        // Generate properties
-        content += CodeGenTsMotor.getListAttributes(tableModel.fields);
-
-        //...................................................................................        
-        // Constructor
-        //...................................................................................
-        content += `\n    constructor(`;
-        const constructorParams: string[] = [];
-        for (const field of tableModel.fields) {
-            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
-            if(!field.required ){
-                if(tsType === 'boolean'){
-                    constructorParams.push(`${field.name}: ${tsType}`);
-                }
-                else {
-                    constructorParams.push(`${field.name}: ${tsType} | null`);
-                }                 
-            }
-            else {
-                constructorParams.push(`${field.name}: ${tsType}`);
-            }           
-        }        
-        content += constructorParams.join(',\n                ');
-        content += `) {\n\n`;        
-        // Constructor assignments
-        for (const field of tableModel.fields) {
-            content += `        this.${field.name} = ${field.name};`+CgConfig.RET;
-        }        
-        content += `    }\n\n`;
-        
-        //...................................................................................
-        // Generate minlen function
-        content += `    /**\n`;
-        content += `     * Returns the minimum length of the field.\n`;
-        content += `     * @param fieldName The name of the field.\n`;
-        content += `     * @returns The minimum length of the field or null if not applicable.\n`;
-        content += `     */\n`;
-        content += `    public minlen(fieldName: string): number | null {\n`;        
-        for (const field of tableModel.fields) {
+    public static getFunctiontMinLen(fields: ModelField[]):string {
+    
+        let fieldContent = "";  
+        for (const field of fields) {
             if (field.minlen !== null) {
-                content += `        if (fieldName === "${field.name}") {\n`;
-                content += `            return ${field.minlen};\n`;
-                content += `        }\n`;
+                fieldContent += `if (fieldName === "${field.name}") {` + CgConfig.RET;
+                fieldContent += CgConfig.TAB_4 + `return ${field.minlen};` + CgConfig.RET;
+                fieldContent += `}`+ CgConfig.RET;
             }
         }
-        content += `        return 0;\n`;
-        content += `    }\n\n`;
-        
-        // Generate maxlen function
-        content += `    /**\n`;
-        content += `     * Returns the max length of the field.\n`;
-        content += `     * Returns -1 if has unlimited length.\n`;
-        content += `     * @param fieldName The name of the field.\n`;
-        content += `     * @returns The maximum length of the field or null if not applicable.\n`;
-        content += `     */\n`;
-        content += `    public maxlen(fieldName: string): number | null {\n`;        
-        for (const field of tableModel.fields) {
+        fieldContent = CodeGenHelper.applyTabsToStringBlock(fieldContent, 1);
+
+        let content = `public minlen(fieldName: string): number | null {`+ CgConfig.RET;
+        content += fieldContent;
+        content += `}`;
+        content = CodeGenHelper.applyTabsToStringBlock(content, 1);
+        content += CgConfig.RET; 
+        return content;
+    };//end
+
+    public static getFunctiontMaxLen(fields: ModelField[]):string {
+        let fieldsContent = "";
+        for (const field of fields) {
             if (field.maxlen !== null) {
-                // Campo con longitud específica definida
-                content += `        if (fieldName === "${field.name}") {\n`;
-                content += `            return ${field.maxlen};\n`;
-                content += `        }\n`;
-            } else if (field.type.toLowerCase().includes('text') && field.maxlen === null) {
-                // Campos TEXT sin límite específico
-                content += `        if (fieldName === "${field.name}") {\n`;
-                content += `            return -1; // unlimited length\n`;
-                content += `        }\n`;
-            } else if (CodeGenSqlHelper.isNumericType(field.type)) {
-                // Campos numéricos: calcular dígitos máximos según el tipo
+                fieldsContent += `if (fieldName === "${field.name}") {`+ CgConfig.RET;
+                fieldsContent += CgConfig.TAB_4 + `return ${field.maxlen};`+ CgConfig.RET;
+                fieldsContent += `}`+ CgConfig.RET;
+            } 
+            else if (field.type.toLowerCase().includes('text') && field.maxlen === null) {
+                
+                fieldsContent += `if (fieldName === "${field.name}") {`+ CgConfig.RET;
+                fieldsContent += CgConfig.TAB_4 + `return -1;`+ CgConfig.RET;
+                fieldsContent += `}`+ CgConfig.RET;
+            } 
+            else if (CodeGenSqlHelper.isNumericType(field.type)) {                
                 const maxDigits = CodeGenSqlHelper.getMaxDigitsForNumericType(field.type);
-                content += `        if (fieldName === "${field.name}") {\n`;
-                content += `            return ${maxDigits}; // max digits for ${field.type}\n`;
-                content += `        }\n`;
+                fieldsContent += `if (fieldName === "${field.name}") {`+ CgConfig.RET;
+                fieldsContent += CgConfig.TAB_4 + `return ${maxDigits};`+ CgConfig.RET;
+                fieldsContent += `}`+ CgConfig.RET;
             }
         }
-        content += `        return 0;\n`;
-        content += `    }\n\n`;        
-        content += `}//end class\n\n`;        
-        // Add type definition based on the class        
-        content += CodeGenHelper.getClassType(tableModel);        
+        fieldsContent += `return null;`+ CgConfig.RET;
+        fieldsContent = CodeGenHelper.applyTabsToStringBlock(fieldsContent, 1);
+
+        let content = `public maxlen(fieldName: string): number | null {`+ CgConfig.RET;
+        content += fieldsContent;
+        content += `}`+ CgConfig.RETx2;
+        content = CodeGenHelper.applyTabsToStringBlock(content, 1);          
+        return content;
+    };//end
+
+    public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
+        //if(includeDef){content +=  CodeGenTsMotor.getEntityDefClass(tableModel);}       
+        let content  = CodeGenTsMotor.getClassHeader(tableModel.name);        
+        content     += CodeGenTsMotor.getListAttributes(tableModel.fields);
+        content     += CodeGenTsMotor.getConstructor(tableModel.fields);
+        content     += CodeGenTsMotor.getFunctiontMinLen(tableModel.fields);
+        content     += CodeGenTsMotor.getFunctiontMaxLen(tableModel.fields);
+        content     += `}//end class`+ CgConfig.RETx2;            
+        content     += CodeGenHelper.getClassType(tableModel);        
         return content;
     };//end
     
