@@ -49,7 +49,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     const clientTScriptEntities = useRef<ServClientEntities>(null);
     const [jsonTables, setJsonTables] = useState<string[]>([]);
 
-    const [format, setFormat] = useState<string>(DocFormats.FORMAT_TYPESCRIPT.key);
+    const [format, setFormat] = useState<string>(DocFormats.FORMAT_JSON.key);
     const [optMultDisabled, setOptMultDisabled] = useState<boolean>(false);
     const [operationId, setOperationId] = useState<string>("undefined");
     const [showRadioList, setShowRadioList] = useState<boolean>(true);

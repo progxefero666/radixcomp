@@ -39,9 +39,11 @@ export class CodeGenSquema{
     };//end
 
     private loadJsonTables() {
+        //alert("loadJsonTables");
         this.tables.forEach((table) => {
             this.jsontables.push(CodeGenJson.getJsonEntDef(table));
         });
+        //console.log(this.jsontables[1]);
     };//end
 
     public setActiveTable(tableName: string) {
