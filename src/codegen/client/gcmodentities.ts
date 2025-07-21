@@ -5,9 +5,10 @@ import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { TOption } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
-import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/server/xeferodb/tsclasses";
+
 import { CodeGenJson } from "@/codegen/kernel/cgjsonmotor";
 import {Keyvalue} from "@/common/model/keyvalue";
+import { getTypeScriptArrayTableContent, getTypeScriptTableContent } from "@/server/xeferodb/tsclasses";
 
 export class GenCodeModuleControl {
 

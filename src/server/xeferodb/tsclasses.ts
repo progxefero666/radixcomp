@@ -6,7 +6,7 @@ import { ModelTable } from "@/codegen/kernel/cgmodel";
 
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
-import { readDbSchemaFromFile } from "../../src/db/services/readschema";
+import { readDbSchemaFromFile } from "../../db/services/readschema";
 
 
 /* ........................................................................................

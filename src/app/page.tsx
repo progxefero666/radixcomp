@@ -58,7 +58,12 @@ export default function PageGenCode() {
                 return;
             }
             const resultDbInit = await initDatabase();
-            
+            if(resultDbInit == true){
+                alert
+            }
+            else {
+                alert("Error initializing database");
+            }
 
             if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                              
             setReady(true);
