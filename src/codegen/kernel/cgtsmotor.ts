@@ -96,11 +96,15 @@ export class CodeGenTsMotor {
             }//end else
             content += CgConfig.CHAR_KEY_CLOSE + '\n';
 
+            //...................................................................................
             // step 2: create fieldValue
+            //...................................................................................
 
+            //...................................................................................
             // step 3: create attribute
+            //...................................................................................
             if (field.pk || field.fk ) { 
-                content += `public ${field.name}: ${tsType} | null = null;\n`;
+                content += `public ${field.name}: ${tsType} | null = null;`;
             }
             else {
                 switch(field.type){
@@ -108,53 +112,76 @@ export class CodeGenTsMotor {
                     case "textarea":
                         if(field.required){
                             if(field.default!=null){
-                                content += `public ${field.name}: ${tsType}= "${field.default}";\n`; 
+                                content += `public ${field.name}: ${tsType}= "${field.default}";`; 
                             }
                             else {
-                                content += `public ${field.name}: ${tsType};\n`; 
+                                content += `public ${field.name}: ${tsType};`; 
                             }                            
                         }
                         else {
-                            content += `public ${field.name}: ${tsType} | null = null;\n`;
+                            content += `public ${field.name}: ${tsType} | null = null;`;
                         }
                         break;              
                     case "number":
                     case "decimal":    
                         if(field.default!=null){
-                            content += `public ${field.name}: ${tsType}= ${field.default};\n`; 
+                            content += `public ${field.name}: ${tsType}= ${field.default};`; 
                         }
                         else {
-                            content += `public ${field.name}: ${tsType};\n`; 
+                            if(field.required){
+                                content += `public ${field.name}: ${tsType};`; 
+                            }
+                            else {
+                               content += `public ${field.name}: ${tsType} = null;`; 
+                            }                            
                         }
                         break;
                     case "check":
                         if(field.default!=null){
-                            content += `public ${field.name}: ${tsType} = ${field.default};\n`; 
+                            content += `public ${field.name}: ${tsType} = ${field.default};`; 
                         }
                         else {
                             if(field.required){
-                                content += `public ${field.name}: ${tsType};\n`; 
+                                content += `public ${field.name}: ${tsType};`; 
                             }
                             else {
-                                content += `public ${field.name}: ${tsType} = false;\n`; 
+                                content += `public ${field.name}: ${tsType} = false;`; 
                             }                            
-                        }    
+                        }  
+                        break;  
                     case "date":
                     case "datetime":   
                         if(field.default!=null){
+                            content += `public ${field.name}: ${tsType}= "${field.default}";`; 
                         }    
+                        else {
+                            if(field.required){
+                                content += `public ${field.name}: ${tsType};`; 
+                            }
+                            else {
+                                content += `public ${field.name}: ${tsType}= null;`; 
+                            }
+                        }
+                        break;
+                    case "file":    
+                        content += `public ${field.name}: ${tsType}= null;`;
+                        break;
+                    case "hidden":    
+                        if(field.default!=null){
+                            content += `public ${field.name}: ${tsType} = "${field.default}";`; 
+                        }
+                        else {
+                            content += `public ${field.name}: ${tsType} = null;`; 
+                        }  
+                        break;
                 }//end switch
 
-                if(field.default!=null){
-                    content += `public ${field.name}: ${tsType} = ${field.default};\n`;               
-                }
-                else{
-                    content += `public ${field.name}: ${tsType};\n`;
-                }  
             }  
-            content += CgConfig.DEC_FIELD_END + '\n';  
-        });
-        //CgConfig.TAB_4
+            content += '\n';  
+            //...................................................................................
+
+        });//end forEach
+     
         return content;
     };//end 
 

@@ -6,7 +6,7 @@
 
 
 /**
- * class CgConfig.CHAR_KEY_CLOSE
+ * class CgConfig.DEC_DEFAULT_START
  */
 export class CgConfig {
 
@@ -25,6 +25,10 @@ export class CgConfig {
 
     public static DEC_FIELD_START:string = "@field({";
     public static DEC_FIELD_END:string = "})";
+
+
+    public static DEC_DEFAULT_START:string = "@defaultValue(";
+    public static DEC_DEFAULT_END:string = ")";
 
     public static readonly CODEGEN_LIB_PATH: string 
         = "@/codegen/kernel/cgmodel"
