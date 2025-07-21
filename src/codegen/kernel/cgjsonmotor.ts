@@ -17,15 +17,17 @@ export class CodeGenJson {
     public static getJsonEntDefFieldRelations(relations: Relation[]): string {        
        
         let content = ``; 
-        for (let idx = 0; idx < relations.length; idx++) {            
+        for (let idx = 0; idx < relations.length; idx++) {     
+       
             content += `{`+ CgConfig.RET;
             content += CgConfig.TAB_4 + `"table": "${relations[idx].table}",`+ CgConfig.RET;
             content += CgConfig.TAB_4 + `"field": "${relations[idx].field}"`+ CgConfig.RET;
             content +=  `}`;            
             if (idx < relations.length - 1) {
                 content += `, `;
+                content += CgConfig.RET;
             }
-            content += CgConfig.RET;
+            
         }
         content = CodeGenHelper.applyTabsToStringBlock(content,1);
 
@@ -59,7 +61,7 @@ export class CodeGenJson {
 
         let code = "{" + CgConfig.RET;
         code += content;        
-        code += "}";        
+        code += "}";
         return code;
     }//end 
 
@@ -69,15 +71,15 @@ export class CodeGenJson {
         for (let idx = 0; idx < table.fields.length; idx++) {
             content += CodeGenJson.getJsonEntDefField(table.fields[idx]);
             if (idx<table.fields.length-1) {
-                content+= ", ";
+                content+= ","+ CgConfig.RET;;
             }
         }
-        content = CodeGenHelper.applyTabsToStringBlock(content,1)+ CgConfig.RET;
+        content = CodeGenHelper.applyTabsToStringBlock(content,1);
    
-        let code = '"name": "application",';
+        let code = '"name": "application",'+ CgConfig.RET;
         code    += '"fields":[' + CgConfig.RET;
         code    += content;
-        code    +=  "]" + CgConfig.RET;  
+        code    +=  "]";  
         code     = CodeGenHelper.applyTabsToStringBlock(code,1);
 
         let result = "{" + CgConfig.RET;  

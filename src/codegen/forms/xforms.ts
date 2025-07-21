@@ -380,185 +380,59 @@ export class XFormsGen {
 
 
 export const jsonTemplate: string =
-    `{
+`{
     "name": "application",
     "fields":[
         {
             "name": "id",
-            "type": "number",
+            "type": "text",
             "required": true,
             "generated": false,
             "default": null,
-            "format": "5:0",
+            "format": null,
             "pk": true,
             "fk": false,
             "minlen": null,
-            "maxlen": null,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "codelang_id",
-            "type": "number",
-            "required": true,
-            "generated": false,
-            "default": null,
-            "format": "5:0",
-            "pk": false,
-            "fk": true,
-            "minlen": null,
-            "maxlen": null,
-            "relations": [
-                {
-                    "table": "codelang",
-                    "field": "id"
-                }
-            ],
-            "validation": {"result":true,"message":null}
-        },  
+            "maxlen": 16,
+            "validation":{"result":true,"message":null},
+            "relations": null
+        },
         {
             "name": "name",
             "type": "text",
             "required": true,
             "generated": false,
-            "default": "nachete",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 50,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "description",
-            "type": "text",
-            "required": false,
-            "generated": false,
-            "default": null,
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 255,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "repository",
-            "type": "text",
-            "required": false,
-            "generated": false,
-            "default": null,
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 250,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "author",
-            "type": "text",
-            "required": false,
-            "generated": false,
             "default": null,
             "format": null,
             "pk": false,
             "fk": false,
             "minlen": null,
             "maxlen": 100,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
+            "validation":{"result":true,"message":null},
+            "relations": null
+        },
         {
-            "name": "version",
-            "type": "number",
-            "required": false,
-            "generated": false,
-            "default": 0.0,
-            "format": "6:3",
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 100,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "email",
+            "name": "proglanguage_id",
             "type": "text",
-            "required": false,
+            "required": true,
             "generated": false,
             "default": null,
             "format": null,
             "pk": false,
-            "fk": false,
+            "fk": true,
             "minlen": null,
-            "maxlen": 500,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
+            "maxlen": 16,
+            "validation":{"result":true,"message":null},
+            "relations": [
+                {
+                    "table": "proglanguage",
+                    "field": "id"
+                }
+            ]
+        },
         {
-            "name": "usedocker",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "controlusers",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "consumedb",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "consumeapi",
-            "type": "boolean",
-            "required": true,
-            "generated": false,
-            "default": "false",
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": null,
-            "relations": null,
-            "validation": {"result":true,"message":null}
-        }, 
-        {
-            "name": "updated",
-            "type": "date",
+            "name": "datacode",
+            "type": "text",
             "required": true,
             "generated": false,
             "default": null,
@@ -567,9 +441,9 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": null,
-            "relations": null,
-            "validation": {"result":true,"message":null}
+            "validation":{"result":true,"message":null},
+            "relations": null
         }
     ]
-}`;
-
+}
+`;
