@@ -15,34 +15,6 @@ import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 
 export class CodeGenTsMotor {
 
-    /*
-    public static getListAttributesOld(fields: ModelField[]):string {
-        let content: string = ""; 
-
-        fields.forEach((field) => {
-            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
-            if(!field.required ){
-                if(tsType === 'boolean'){
-                    content += CgConfig.TAB_4 +
-                               `public ${field.name}: ${tsType};\n`;
-                }
-                else {
-                    content += CgConfig.TAB_4 +
-                              `public ${field.name}: ${tsType} | null = null;\n`;
-                }
-            }
-            else {
-                if(field.default!=null){
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
-                }
-                else{
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
-                }  
-            }    
-        });
-        return content;
-    };//end 
-    */
 
     public static getListAttributes(fields: ModelField[]):string {
         let content: string = ""; 
@@ -50,7 +22,9 @@ export class CodeGenTsMotor {
         fields.forEach((field) => {
             const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
 
+            //...................................................................................
             // step 1: create decorator 
+            //...................................................................................
             content += CgConfig.DEC_FIELD_START;
             content += `ftype:"${field.type}"` + CgConfig.CHAR_COMMA;
             content += `name:"${field.name}"` + CgConfig.CHAR_COMMA;
@@ -185,17 +159,20 @@ export class CodeGenTsMotor {
 
         });//end forEach
      
+        content += '\n'; 
         return content;
     };//end 
 
     public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
-        let content: string = "";      
+        //if(includeDef){content +=  CodeGenTsMotor.getEntityDefClass(tableModel);}
+       
+        let content: string = "";       
         
-        let applyIncludeDef:boolean = includeDef ?? false;
 
-        if(applyIncludeDef){
-            content +=  CodeGenTsMotor.getEntityDefClass(tableModel);
-        }
+        //...................................................................................
+        // header class
+        //...................................................................................
+        
 
         const className = CodeGenHelper.capitalize(tableModel.name);
         const fileName = `table_${tableModel.name.toLowerCase()}.ts`;        
@@ -206,11 +183,16 @@ export class CodeGenTsMotor {
         content += ` * Db Table Entity Class ${className}\n\n`;
         content += ` **/`+CgConfig.RET;
         content += `export class ${className} {\n\n`;        
+        //...................................................................................
 
+        //...................................................................................
         // Generate properties
         content += CodeGenTsMotor.getListAttributes(tableModel.fields);
+        //...................................................................................
 
+        //...................................................................................        
         // Constructor
+        //...................................................................................
         content += `\n    constructor(`;
         const constructorParams: string[] = [];
         for (const field of tableModel.fields) {
@@ -285,7 +267,7 @@ export class CodeGenTsMotor {
         // Add type definition based on the class        
         content += CodeGenHelper.getClassType(tableModel);        
         return content;
-    }
+    };//end
     
     public static getArrayEntityClass(tableModel: ModelTable[],includeDef?:boolean): string {
         let content: string = "";
@@ -325,7 +307,7 @@ export class CodeGenTsMotor {
         }
         
         return content;
-    }//end
+    };//end
 
     public static getEntityDefClassFieldLine(field: ModelField): string {
         let optionalParams = "";
@@ -420,3 +402,34 @@ export class CodeGenTsMotor {
 
 }//end class ModelUtil
 
+
+
+
+    /*
+    public static getListAttributesOld(fields: ModelField[]):string {
+        let content: string = ""; 
+
+        fields.forEach((field) => {
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
+            if(!field.required ){
+                if(tsType === 'boolean'){
+                    content += CgConfig.TAB_4 +
+                               `public ${field.name}: ${tsType};\n`;
+                }
+                else {
+                    content += CgConfig.TAB_4 +
+                              `public ${field.name}: ${tsType} | null = null;\n`;
+                }
+            }
+            else {
+                if(field.default!=null){
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
+                }
+                else{
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
+                }  
+            }    
+        });
+        return content;
+    };//end 
+    */
