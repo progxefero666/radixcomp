@@ -3,7 +3,7 @@
 import { randomBytes } from 'crypto';
 
 /**
- * 
+ * class GenerateKeys.genAlphaNum16
  */
 export class GenerateKeys {
 

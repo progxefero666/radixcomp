@@ -10,6 +10,7 @@ import { Validation } from "@/common/model/validation";
 
 import jsonObj from "@/db/modeljson/tascategory.json";
 import { Taskcategory } from "@/db/model/taskcategory";
+import { GenerateKeys } from "@/common/helper/generatekeys";
 
 //const jsonObj:any = JSON.parse(jsonTable.toString());
 
@@ -34,6 +35,8 @@ export function PgForms({ mode }: CompProps) {
     useEffect(() => {
         //const sss:Taskcategory 
         //const codecont: string = XFormsGen.generateForm(jsonTemplate);
+        const itemId:string = GenerateKeys.genAlphaNum16(); 
+        //const taskcategory:Taskcategory;
         console.log(jsonObj);
     }, []);
 
