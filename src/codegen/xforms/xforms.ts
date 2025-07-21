@@ -199,20 +199,20 @@ export class XFormsGen {
                 }
             } 
 
-            const fieldName: string = jsonObj.fields[idx].name;
+            const fieldName: string = jsonObj.fields[idx].name + " incorrect."
             content += "if(!validateItem("+jsonObj.fields[idx].type + CgConfig.CHAR_COMMA;            
             content += "format:"+format + CgConfig.CHAR_COMMA +"min:" + min;
             content += CgConfig.CHAR_COMMA + "max:" + max + CgConfig.CHAR_COMMA;
             content += ")) {" +CgConfig.RET
             content += CgConfig.TAB_4 + `alert(`+ CodeGenHelper.getIntoSingleQuotes(fieldName);
-            content +=  + ` incorrect.);` +CgConfig.RET;
+            content += `);` +CgConfig.RET;
             content += CgConfig.TAB_4 + `return false;` + CgConfig.RET;
-            content += `}`            
-            content = CodeGenHelper.applyTabsToStringBlock(content,1) + CgConfig.RETx2;
+            content += `}`+ CgConfig.RETx2;            
+            //content = CodeGenHelper.applyTabsToStringBlock(content,1) + CgConfig.RETx2;
 
         }//end for
 
-        content = CodeGenHelper.applyTabsToStringBlock(content,1) + CgConfig.RET;
+        content = CodeGenHelper.applyTabsToStringBlock(content,1);
 
         let result: string = "const validate = (): boolean => {"+ CgConfig.RET;
         result += content;
