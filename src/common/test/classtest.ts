@@ -14,11 +14,13 @@ export class Test {
     @field({ftype:"number",name:"codelang_id",fk:true,fxattrs:{table:"codelang"}})
     public codelang_id: number;
 
-    @field({name:"name",ftype:"text",required: true})
+    @field({ftype:"text",name:"name",required:true})
     public name:        string;
 
-    @field({name:"description",ftype: "text"})
-    public description: string|null = null;
+    @field({ftype:"text",name:"description",required:true,length:{min:0,max:255}})
+    public description: string;
+
+    @field({ftype:"numeric",name:"description",required:true,length:{min:0,max:255}})
     public osystem:     number|null = null;
     public appurl:      string|null = null;
     public localdev:    boolean = true;
@@ -29,7 +31,7 @@ export class Test {
     constructor(id:number|null,
                 codelang_id:number,
                 name:string,
-                description:string|null,
+                description:string,
                 osystem:number|null,    
                 appurl:string|null,
                 localdev:boolean,
