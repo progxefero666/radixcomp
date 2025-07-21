@@ -14,7 +14,7 @@ export class CodeGenJson {
 
     public static LINE_VALIDATION: string = `"validation":{"result":true,"message":null}`;
     
-        public static getJsonEntDefFieldRelations(relations: Relation[]): string {        
+    public static getJsonEntDefFieldRelations(relations: Relation[]): string {        
        
         let content = ``; 
         for (let idx = 0; idx < relations.length; idx++) {            
@@ -64,19 +64,28 @@ export class CodeGenJson {
     }//end 
 
 
-
     public static getJsonEntDef(table: ModelTable): string {
-        let code = "";    
+        let content:string = "";
         for (let idx = 0; idx < table.fields.length; idx++) {
-            code += CodeGenJson.getJsonEntDefField(table.fields[idx]);
-            if (idx<table.fields.length-1) {code+= `, `;}
-            code += CgConfig.RET;
-        }        
-        return code;
+            content += CodeGenJson.getJsonEntDefField(table.fields[idx]);
+            if (idx<table.fields.length-1) {
+                content+= ", ";
+            }
+        }
+        content = CodeGenHelper.applyTabsToStringBlock(content,1)+ CgConfig.RET;
+   
+        let code = '"name": "application",';
+        code    += '"fields":[' + CgConfig.RET;
+        code    += content;
+        code    +=  "]" + CgConfig.RET;  
+        code     = CodeGenHelper.applyTabsToStringBlock(code,1);
+
+        let result = "{" + CgConfig.RET;  
+        result +=  code;
+        result +=  "}" + CgConfig.RET; 
+        return result;
     }//end
 
-
-    //code += CodeGenJson.getJsonEntDef(table);
     public static getJsonArrayEntDef(tables: ModelTable[]): string {
         let code = "[" + CgConfig.RET;            
         for (let idx = 0; idx < tables.length; idx++) {
