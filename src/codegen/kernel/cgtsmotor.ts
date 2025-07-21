@@ -99,6 +99,9 @@ export class CodeGenTsMotor {
             //...................................................................................
             // step 2: create fieldValue
             //...................................................................................
+            content += CgConfig.CHAR_KEY_CLOSE +CgConfig.DEC_DEFAULT_START;
+
+            content += CgConfig.CHAR_KEY_CLOSE +CgConfig.DEC_DEFAULT_END + CgConfig.RET;
 
             //...................................................................................
             // step 3: create attribute
