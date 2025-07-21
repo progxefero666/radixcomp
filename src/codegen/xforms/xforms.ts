@@ -9,36 +9,6 @@ import { Validation } from "@/common/model/validation";
 import { Application } from "@/app/applications/application";
 
 
-
-const [application, setApplication] = useState<InputValue>(new InputValue("text","application","nacho"));
-
-const [Validations, setValidations] = useState<Validation[]>([]);
-
-const validateItem = (ftype:string,value:any,format:any|null,min?:number,max?:number): boolean => {    
-    return true;
-};//end
-
-const validate = (): boolean => {
-        
-    if(!validateItem("text",application.name,null,5,50)) {
-        alert("Name incorrect.");
-        return false;
-    }
-
-    if(!validateItem("number",application.version,null)) {
-        alert("version incorrect.");
-        return false;
-    }    
-    
-    if(!validateItem("date",application.updated,null)) {
-        alert("updated incorrect.");
-        return false;
-    }       
-    
-    return true;
-
-};//end
-
 /**
  * XForms.import_form_inputs
  */
@@ -218,23 +188,6 @@ export class XFormsGen {
         return result;
     };//end
 
-
-    public static genFuncSubmit(): string {
-        let content:string ="";
-
-        const inputValues = new Map<string, any>();
-        inputValues.set("id", 1);
-        inputValues.set("codelang_id",null);
-        inputValues.set("commentarios",null);
-        inputValues.set("usedocker", false);
-        inputValues.set("importe",null);
-        inputValues.set("updated",null);
-
-        let result: string = "const onSubmit = () => {";
-        result += "};//end"+ CgConfig.RET;
-        return "";
-    };//end
-    
     public static genInitTag(field: any): string {
 
         let result: string =  XForms.t_tag_open;
@@ -271,7 +224,6 @@ export class XFormsGen {
 
         return result + CgConfig.CHAR_SPACE;
     };//end 
-
 
     public static genFormFields(jsonObj: any): string {
         let result: string = "";
@@ -347,19 +299,48 @@ export class XFormsGen {
         return result;     
     };//end
 
+    public static genFuncSubmit(jsonObj: any): string {        
+        const entityName: string = TextHelper.uncapitalize(jsonObj.name);
+        let content:string ="";
+        for (let idx=1;idx<jsonObj.fields.length;idx++) { 
+            const fieldRefName: string = jsonObj.fields[idx].name + "Ref";
+            if(!jsonObj.fields[idx].generated && jsonObj.fields[idx].type !== "hidden") {
+                content+= entityName + "." + jsonObj.fields[idx].name + " = " + 
+                          fieldRefName + ".current.";                                        
+                if(jsonObj.fields[idx].type === XForms.FT_CHECK) {
+                    content += "checked;" + CgConfig.RET;
+                }
+                else {
+                    content += "value;" + CgConfig.RET;
+                }                           
+            }          
+        }//end for
+        content += CgConfig.RET;
+        content += "if(!validate()) {return;}" + CgConfig.RET;
+        content = CodeGenHelper.applyTabsToStringBlock(content,1)+ CgConfig.RET;
+
+        let result: string = "const onSubmit = () => {"+ CgConfig.RET;
+        result += content;
+        result += "};//end"+ CgConfig.RET;
+        result =CodeGenHelper.applyTabsToStringBlock(result,1)+ CgConfig.RET;
+        return result;
+    };//end
+
     public static generateForm(jsonTable: string): string {
 
         const jsonObj = JSON.parse(jsonTable);
   
-        let resultImports: string = XFormsGen.genImports();
-        let resultStates: string = XFormsGen.genStates(jsonObj.name);
-        let resultRefs: string = XFormsGen.genRefs(jsonObj);
-        let resultFunctValidateItem: string = XFormsGen.genFuncValidateItem();
-        let resultFunctValidation: string = XFormsGen.genFuncValidation(jsonObj);
-        let resultFields: string = XFormsGen.genFormFields(jsonObj);
+        let resImports: string      = XFormsGen.genImports();
+        let resStates: string       = XFormsGen.genStates(jsonObj.name);
+        let resRefs: string         = XFormsGen.genRefs(jsonObj);
+        let resFunctValItem: string = XFormsGen.genFuncValidateItem();
+        let resFunctValForm: string = XFormsGen.genFuncValidation(jsonObj);
+        let resFunctSubmit: string  = XFormsGen.genFuncSubmit(jsonObj);
+        let resFields: string       = XFormsGen.genFormFields(jsonObj);
       
-        let result:string = resultImports + resultStates + 
-                             resultRefs + resultFields;
+        let result:string = resImports + resStates + resRefs +
+                            resFunctValItem + resFunctValForm +
+                            resFunctSubmit;// + resFields;
         return result;
     }//end
 
