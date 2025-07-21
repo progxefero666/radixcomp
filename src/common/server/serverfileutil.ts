@@ -1,6 +1,5 @@
 //src\app_server\serverfileutil.ts
 
-import { MMBase } from "@/common/mmedia/objtypes";
 import * as fs from "fs/promises";
 
 
@@ -66,6 +65,7 @@ export class ServerFileUtil {
         }
     }
 
+    /*
     public static async readImageFileBlob(filePath: string): Promise<Blob> {
         try {
             await fs.access(filePath, fs.constants.F_OK);
@@ -77,7 +77,7 @@ export class ServerFileUtil {
             console.error(`Error al leer el archivo de imagen "${filePath}":`, error);
             throw error;
         }
-    }
+    }*/
 
     public static async readAudioFile(filePath: string): Promise<Blob> {
         try {
@@ -178,3 +178,19 @@ export class ServerFileUtil {
     }
 
 }//end class
+
+/*
+
+import path from "path";
+import { ServerFileUtil } from "../../common/server/serverfileutil";
+
+export async function getTextFile(fname: string): Promise<string> {
+
+    const filePath: string = path
+        .join("C:\\claudeapps\\nextapps\\aigenerator\\public", fname);
+
+    console.log("getTextFile: ", filePath);
+    const fileContent: string = await ServerFileUtil.readFile(filePath);
+    return fileContent;
+}//end action
+*/
