@@ -132,6 +132,43 @@ exports.Prisma.TemplateScalarFieldEnum = {
   datacode: 'datacode'
 };
 
+exports.Prisma.TaskScalarFieldEnum = {
+  id: 'id',
+  proglanguage_id: 'proglanguage_id',
+  tasktype_id: 'tasktype_id',
+  workflow_id: 'workflow_id',
+  taskcategory_id: 'taskcategory_id',
+  orden: 'orden',
+  name: 'name',
+  tkgroup: 'tkgroup',
+  description: 'description',
+  files: 'files',
+  folders: 'folders'
+};
+
+exports.Prisma.TaskcategoryScalarFieldEnum = {
+  id: 'id',
+  workflow_id: 'workflow_id',
+  name: 'name',
+  description: 'description'
+};
+
+exports.Prisma.TasktypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+};
+
+exports.Prisma.WorkflowScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  context: 'context',
+  application: 'application',
+  fpath: 'fpath',
+  updated: 'updated'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -142,10 +179,19 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  proglanguage: 'proglanguage',
-  template: 'template'
+  Proglanguage: 'Proglanguage',
+  Template: 'Template',
+  Task: 'Task',
+  Taskcategory: 'Taskcategory',
+  Tasktype: 'Tasktype',
+  Workflow: 'Workflow'
 };
 
 /**

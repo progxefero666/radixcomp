@@ -8,18 +8,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model proglanguage {
-  id       String     @id @db.Char(16)
-  name     String     @db.VarChar(16)
-  templates template[]
+model Proglanguage {
+  id        String     @id @db.Char(16)
+  name      String     @db.VarChar(16)
+  task      Task[]
+  templates Template[]
   @@map("proglanguage")
 }
 
-model template {
+model Template {
   id              String       @id @db.Char(16)
   name            String       @db.VarChar(100)
   proglanguage_id String       @db.Char(16)
   datacode        String
-  proglanguage    proglanguage @relation(fields: [proglanguage_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  proglanguage    Proglanguage @relation(fields: [proglanguage_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
   @@map("template")
+}
+
+model Task {
+  id              String       @id @db.Char(16)
+  proglanguage_id String       @db.Char(16)
+  tasktype_id     String       @db.Char(16)
+  workflow_id     String       @db.Char(16)
+  taskcategory_id Int
+  orden           Int
+  name            String       @db.VarChar(255)
+  tkgroup         Int
+  description     String?
+  files           String?
+  folders         String?
+  proglanguage    Proglanguage @relation(fields: [proglanguage_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tasktype        Tasktype     @relation(fields: [tasktype_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  workflow        Workflow     @relation(fields: [workflow_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+   @@map("task")
+}
+
+model Taskcategory {
+  id          String   @id @db.Char(16)
+  workflow_id String   @db.Char(16)
+  name        String   @db.VarChar(100)
+  description String?  @db.VarChar(100)
+  workflow    Workflow @relation(fields: [workflow_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  @@map("taskcategory")
+}
+
+model Tasktype {
+  id          String  @id @db.Char(16)
+  name        String  @db.VarChar(50)
+  description String? @db.VarChar(100)
+  task        Task[]
+  @@map("tasktype")
+}
+
+model Workflow {
+  id           String         @id @db.Char(16)
+  name         String         @db.VarChar(100)
+  description  String?
+  context      String?
+  application  String?        @db.VarChar(50)
+  fpath        String?        @db.VarChar(500)
+  updated      DateTime       @default(dbgenerated("CURRENT_DATE")) @db.Date
+  task         Task[]
+  taskcategory Taskcategory[]
+  @@map("workflow")
 }

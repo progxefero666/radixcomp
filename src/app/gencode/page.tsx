@@ -12,7 +12,7 @@ import { GenCodeViewer } from "@/app/gencode/cgentityfiles/entityfilesviewer";
 
 import { PrimaryBar } from "@/app/gencode/gcprimarybar";
 import { PageHeader } from "@/app/gencode/gcheader";
-import { readDbSqlScript, readDbSqlScriptFile } from "@/server/xeferodb/sqlscripts";
+
 
 import { FsFunctions } from "@/filesystem/fsfunctions";
 import { FileCode } from "@/filesystem/fsmodels";
@@ -20,6 +20,7 @@ import { CodeGenModules } from "@/codegen/cgoperations";
 
 import { TypeScriptManager } from "./cgtypescript/typescriptman";
 import { GenCodeControl } from "./cgentityfiles/entityfilesmanager";
+import { readDbSchemaFromFile, readDbConnectionSchema } from "@/server/database/readschema";
 
 
 //const router = useRouter();
@@ -49,7 +50,7 @@ export default function PageGenCode() {
         if(ready) {return;} 
         const init = async () => {            
             //const dbSquema = await readDbSqlScriptFile("dbsquema");
-            const dbSquema = await readDbSqlScript();
+            const dbSquema = await readDbConnectionSchema();
             if(dbSquema === null) {
                 alert("Error reading database schema");
                 return;
@@ -205,3 +206,4 @@ function SecondBar({actsection}: SecondBarProps) {
     );
 
 };//end PrimaryBar
+
