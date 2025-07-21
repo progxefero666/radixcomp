@@ -1,7 +1,7 @@
 //src\common\model\inputvalue.ts
-
-import { FieldType } from "@/codegen/xforms/xformstypes";
+;
 import { Validation } from "@/common/model/validation";
+import { FieldType } from "@/common/types";
 
 /**
  * class InputValue

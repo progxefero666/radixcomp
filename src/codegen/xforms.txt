@@ -79,15 +79,20 @@ export class XFormsGen {
         return result;
     };//end
 
+    public static genImports(): string {
+        let result: string = "";
+        result += XForms.t_import_form_inputs + CgConfig.RETx2;
+        return result;
+    };//end
 
-    public static genStatesOld(): string {
+    public static genStates(): string {
         let result: string = `const [inputValues, setInputValues] = \n` +
                 CgConfig.TAB_4 + "useState<Map<string,any>>(new Map<string,any>());";
         result += CgConfig.RETx2;
         return result;
     };//end
 
-    public static genUseEffectOld(jsonTable: string): string {
+    public static genUseEffect(jsonTable: string): string {
         const jsonCollection = JSON.parse(jsonTable);
 
         let array_result =  CgConfig.TAB_4 +"const map = new Map<string, any>();"+ CgConfig.RET;
@@ -136,6 +141,7 @@ export class XFormsGen {
     };//end
 
 
+
     public static genFuncSubmit(): string {
         let content:string ="";
 
@@ -171,24 +177,6 @@ export class XFormsGen {
 
         return CodeGenHelper.applyTabsToStringBlock(result,1);
     };//end 
-
-    //..................................................................................
-
-    public static genImports(): string {
-        let result: string = "";
-        result += XForms.t_import_form_inputs + CgConfig.RETx2;
-        return result;
-    };//end
-
-
-    public static genStates(entityName:string): string {
-        let template: string = `const [^%v1%^, set^%v2%^] = useState<^%v2%^>(new ^%v2%^());`;
-        template.replace("^%v1%^", (TextHelper.uncapitalize(entityName)));
-        TextHelper.replaceAll(template,"<^%v2%^>",TextHelper.capitalize(entityName));//capitalize no necessary
-        let result = template + CgConfig.RET;
-        return result;
-    };//end
-
 
     public static genInitTag(field: any): string {
 
@@ -229,17 +217,15 @@ export class XFormsGen {
 
     public static generateForm(jsonTable: string): string {
 
-        const jsonObj = JSON.parse(jsonTable);
-
         //............................................................................
         let resultImports: string = XFormsGen.genImports();
-        let resultStates: string = XFormsGen.genStates(jsonObj.name);
-        //let resultUseEffect: string  = XFormsGen.genUseEffect(jsonTable);
+        let resultStates: string = XFormsGen.genStates();
+        let resultUseEffect: string  = XFormsGen.genUseEffect(jsonTable);
         let resultRefs: string = XFormsGen.genRefs(jsonTable);
         //............................................................................
 
         //............................................................................
-        
+        const jsonObj = JSON.parse(jsonTable);
         let resultFields: string = "";
         for (let idx = 0; idx < jsonObj.fields.length; idx++) {
 
@@ -324,7 +310,7 @@ export class XFormsGen {
         //............................................................................        
 
         let result:string = resultImports + resultStates + 
-                             resultRefs + resultFields;
+                            resultUseEffect  + resultRefs + resultFields;
         return result;
     }//end
 

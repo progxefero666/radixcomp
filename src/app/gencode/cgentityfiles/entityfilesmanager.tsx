@@ -121,14 +121,13 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
     
 
-    const runTest = () => {
+    const runOperation = () => {
 
         const codecont: string = XFormsGen.generateForm(jsonTemplate);
         onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform", codecont!));
     };//end
 
-    const runOperation = async () => {
-        //runTest();
+    const runOperationOld = async () => {
         
         if (format === DocFormats.FORMAT_TYPESCRIPT.key) {
             runTypeScriptOperation();
