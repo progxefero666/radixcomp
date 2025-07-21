@@ -11,7 +11,7 @@ export class Test {
     @field({ftype:"number",name:"id",pk:true})
     public id:number|null = null;
 
-    @field({ftype:"number",name:"codelang_id",fk:true,fxattrs:{table:"codelang"}})
+    @field({ftype:"number",name:"codelang_id",fk:true,fxattrs:{table:"codelang",id:"id",name:"name" }})
     public codelang_id: number;
 
     @field({ftype:"text",name:"name",required:true})
@@ -31,7 +31,7 @@ export class Test {
     
     @field({ftype:"check",name:"localdev"})
     @defaultValue(false)
-    public localdev: boolean = true;
+    public localdev: boolean;
 
     @field({ftype:"date",name:"updated",required:true})
     public updated: Date;

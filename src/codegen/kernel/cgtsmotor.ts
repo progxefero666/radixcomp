@@ -59,10 +59,24 @@ export class CodeGenTsMotor {
             }
             else if(field.fk) {
                 content += `fk:true` + CgConfig.CHAR_COMMA;
-                //content += 'fxattrs:{table:' + field.relations?.[Symbol] + field.fxattrs?.table;
+                content += 'fxattrs:{table:' + 
+                                field.relations?.[0].table + CgConfig.CHAR_QUOTE + 
+                                CgConfig.CHAR_COMMA+'id:'+ field.relations?.[0].field + CgConfig.CHAR_QUOTE + 
+                                CgConfig.CHAR_COMMA + 'name:' + field.relations?.[0].field + CgConfig.CHAR_QUOTE +
+                                CgConfig.CHAR_KEY_CLOSE + "\n";
             }  
-            //name:"id"
-            //pk:true
+            else {
+                 switch(field.type){
+                    case "text":
+                        if(field.minlen){
+                            content += "length:{min:" + field.minlen + CgConfig.CHAR_COMMA;                            
+                            //length:{min:
+                        }
+                        break;
+                    default:                        
+                        break;
+                 }//end switch
+            }
             //required:true
             //length:{min:0,max:255}
             //format:{cntint:10,cntdec:2}
@@ -70,6 +84,34 @@ export class CodeGenTsMotor {
             CgConfig.DEC_FIELD_END + '\n';
 
             // step 2: create attribute
+            /*@field({ftype:"number",name:"id",pk:true})
+            public id:number|null = null;
+
+            @field({ftype:"number",name:"codelang_id",fk:true,fxattrs:{table:"codelang",id:"id",name:"name" }})
+            public codelang_id: number;
+
+            @field({ftype:"text",name:"name",required:true})
+            public name: string;
+
+            @field({ftype:"text",name:"description",required:true,length:{min:0,max:255}})
+            public description: string;
+
+            @field({ftype:"decimal",name:"importe",format:{cntint:10,cntdec:2}})
+            public importe: number|null = null;
+
+            @field({ftype:"number",name:"version",required:true,length:{min:0,max:255}})
+            public version: number|null = null;
+
+            @field({ftype:"text",name:"appurl",required:false,length:{min:19,max:500}})
+            public appurl: string|null = null;
+            
+            @field({ftype:"check",name:"localdev"})
+            @defaultValue(false)
+            public localdev: boolean;
+
+            @field({ftype:"date",name:"updated",required:true})
+    public updated: Date;            
+            */    
             if(!field.required ){
                 if(tsType === 'boolean'){
                     content += `public ${field.name}: ${tsType};\n`;
@@ -85,7 +127,8 @@ export class CodeGenTsMotor {
                 else{
                     content += `public ${field.name}: ${tsType};\n`;
                 }  
-            }    
+            }  
+            content += CgConfig.DEC_FIELD_END + '\n';  
         });
         //CgConfig.TAB_4
         return content;
@@ -112,7 +155,7 @@ export class CodeGenTsMotor {
 
         // Generate properties
         content += CodeGenTsMotor.getListAttributes(tableModel.fields);
-        
+
         // Constructor
         content += `\n    constructor(`;
         const constructorParams: string[] = [];
