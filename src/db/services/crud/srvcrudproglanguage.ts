@@ -13,7 +13,7 @@ import { DbTables } from "@/db/dbcatalog";
 /**
  * __table__ insert
  */
-export async function insert(item_serial:string): Promise<string> {
+export async function insertProglanguage(item_serial:string): Promise<string> {
     
     const item: Proglanguage|null = parseItem<Proglanguage>(item_serial);
     if(item===null){return JsonResponse.ERROR(DB_ERROR.BAD_FORMAT);}
@@ -39,7 +39,7 @@ export async function insert(item_serial:string): Promise<string> {
 /**
  * __table__ update
  */
-export async function update(item:Proglanguage): Promise<string> { 
+export async function updateProglanguage(item:Proglanguage): Promise<string> { 
     const prisma = new PrismaClient();
     let result = null;
     try {
@@ -60,7 +60,7 @@ export async function update(item:Proglanguage): Promise<string> {
 /**
  * __table__ delete
  */
-export async function delette(id: string): Promise<string> {
+export async function deleteProglanguage(id: string): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
@@ -80,7 +80,7 @@ export async function delette(id: string): Promise<string> {
 /**
  * __table__ delete all
  */
-export async function deleteAll(): Promise<string> {
+export async function deleteAllProglanguage(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
