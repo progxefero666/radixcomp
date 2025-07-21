@@ -5,16 +5,25 @@ import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 
-
 /**
- * CodeGenTsMotor.getArrayEntityClass(tableModel: ModelTable[],includeDef:boolean):
- * class CodeGen TypeScript Entity Files Content
- *     for store in typescript file .ts
+ * class CodeGenTsMotor
  */
-
-
 export class CodeGenTsMotor {
 
+    public static getClassHeader(tableName:string): string {
+        //top comment path
+        const className = CodeGenHelper.capitalize(tableName);
+        const fileName = `table_${tableName.toLowerCase()}.ts`;  
+        let content: string = `//${fileName}` + CgConfig.RETx2;
+
+        // Class info
+        content += `/**\n`;
+        content += ` * Entity Class ${className}` + CgConfig.RET;
+        content += ` */`+CgConfig.RET;
+        content += `export class ${className} {`; 
+        content += CgConfig.RETx2; 
+        return content;
+    };//end 
 
     public static getListAttributes(fields: ModelField[]):string {
         let content: string = ""; 
@@ -163,22 +172,6 @@ export class CodeGenTsMotor {
         return content;
     };//end 
 
-    public static getClassHeader(tableName:string): string {
-
-        //top comment path
-        const className = CodeGenHelper.capitalize(tableName);
-        const fileName = `table_${tableName.toLowerCase()}.ts`;  
-        let content: string = `//${fileName}` + CgConfig.RETx2;
-
-        // Class info
-        content += `/**\n`;
-        content += ` * Entity Class ${className}` + CgConfig.RET;
-        content += ` */`+CgConfig.RET;
-        content += `export class ${className} {`; 
-        content += CgConfig.RETx2; 
-        return content;
-    };//end 
-
     public static getConstructor(fields: ModelField[]):string {
         let content = `constructor(`;
         const constructorParams: string[] = [];
@@ -258,50 +251,28 @@ export class CodeGenTsMotor {
         let content  = CodeGenTsMotor.getClassHeader(tableModel.name);        
         content     += CodeGenTsMotor.getListAttributes(tableModel.fields);
         content     += CodeGenTsMotor.getConstructor(tableModel.fields);
-        content     += CodeGenTsMotor.getFunctiontMinLen(tableModel.fields);
-        content     += CodeGenTsMotor.getFunctiontMaxLen(tableModel.fields);
+        //content     += CodeGenTsMotor.getFunctiontMinLen(tableModel.fields);
+        //content     += CodeGenTsMotor.getFunctiontMaxLen(tableModel.fields);
         content     += `}//end class`+ CgConfig.RETx2;            
         content     += CodeGenHelper.getClassType(tableModel);        
         return content;
     };//end
     
     public static getArrayEntityClass(tableModel: ModelTable[],includeDef?:boolean): string {
-        let content: string = "";
-        
-        let applyIncludeDef:boolean = includeDef ?? false;
-        // 1. Imports una sola vez al principio
-        content += CgConfig.getKernelImports();
-        
-        // 2. Para cada tabla, los 3 bloques
-        for (let i = 0; i < tableModel.length; i++) {
-            const table = tableModel[i];
-            
-            // Bloque 1: Clase Def (sin imports)
-            content += CodeGenTsMotor.getEntityDefClassData(table);
-            content += `\n`;
-            
-            // Bloque 2: Clase normal (extraer solo la parte sin imports ni Def)
-            const fullClassContent = CodeGenTsMotor.getEntityClass(table,applyIncludeDef);
-            // Quitar la parte de imports y Def, quedarnos solo con la clase y tipo
-            const lines = fullClassContent.split('\n');
+        let content: string = CgConfig.getKernelImports();
+        for (let i = 0; i < tableModel.length; i++) {                       
+            const fullClassContent = CodeGenTsMotor.getEntityClass(tableModel[i],false);
+            const lines = fullClassContent.split(CgConfig.RET);
             let startIndex = -1;
             for (let j = 0; j < lines.length; j++) {
-                if (lines[j].includes('//table_')) {
-                    startIndex = j;
-                    break;
-                }
+                if (lines[j].includes('//table_')) {startIndex = j;break;}
             }
             if (startIndex >= 0) {
                 const classAndTypeContent = lines.slice(startIndex).join('\n');
                 content += classAndTypeContent;
             }
-            
-            // Separador entre tablas (excepto la última)
-            if (i < tableModel.length - 1) {
-                content += `\n`;
-            }
-        }
-        
+            if (i < tableModel.length - 1) {content += `\n`;}
+        }        
         return content;
     };//end
 
