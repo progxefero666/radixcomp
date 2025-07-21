@@ -4,6 +4,8 @@ import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "../kernel/cghelper";
 import { TextHelper } from "@/common/helper/texthelper";
 import { InputValue } from "@/common/model/inputvalue";
+import { useState } from "react";
+import { Validation } from "@/common/model/validation";
 
 
 
@@ -174,18 +176,21 @@ export class XFormsGen {
 
     //..................................................................................
 
+
     public static genImports(): string {
-        let result: string = "";
-        result += XForms.t_import_form_inputs + CgConfig.RETx2;
+        let result: string = `import { useState, useEffect, useRef } from "react";`+ CgConfig.RET;
+        result += `import { Validation } from "@/common/model/validation";` + CgConfig.RETx2;
         return result;
     };//end
 
 
+    // capitalize no necessary v2 if entityName begins with a capital letter
     public static genStates(entityName:string): string {
         let template: string = `const [^%v1%^, set^%v2%^] = useState<^%v2%^>(new ^%v2%^());`;
         template.replace("^%v1%^", (TextHelper.uncapitalize(entityName)));
-        TextHelper.replaceAll(template,"<^%v2%^>",TextHelper.capitalize(entityName));//capitalize no necessary
+        TextHelper.replaceAll(template,"<^%v2%^>",TextHelper.capitalize(entityName));//
         let result = template + CgConfig.RET;
+        result += `const [validations,setValidations] = useState<Validation[]>([]);` + CgConfig.RET;
         return result;
     };//end
 
@@ -231,16 +236,13 @@ export class XFormsGen {
 
         const jsonObj = JSON.parse(jsonTable);
 
-        //............................................................................
         let resultImports: string = XFormsGen.genImports();
         let resultStates: string = XFormsGen.genStates(jsonObj.name);
-        //let resultUseEffect: string  = XFormsGen.genUseEffect(jsonTable);
         let resultRefs: string = XFormsGen.genRefs(jsonTable);
-        //............................................................................
 
-        //............................................................................
-        
+        //............................................................................        
         let resultFields: string = "";
+        /*
         for (let idx = 0; idx < jsonObj.fields.length; idx++) {
 
             if (!jsonObj.fields[idx].pk) {
@@ -320,7 +322,8 @@ export class XFormsGen {
             }//end if pk
 
         }//end for
-        resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2)+ CgConfig.RET;;
+        resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2)+ CgConfig.RET;
+        */
         //............................................................................        
 
         let result:string = resultImports + resultStates + 

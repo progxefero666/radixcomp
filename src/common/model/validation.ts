@@ -9,11 +9,15 @@ import { DB_CONSTANTS } from "@/common/database/dbkernel";
  */
 export class Validation {
     
-    public static readonly DEFAULT: Validation = new Validation(true, null);
+    public static readonly DEFAULT: Validation 
+        = new Validation("undefined",false,"Validation error");
+
+    public field: string;
     public result: boolean;
     public message: string | null = null;
 
-    constructor(result:boolean,message:string|null) {
+    constructor(field: string,result:boolean,message:string|null) {
+        this.field = field;
         this.result = result;
         if(message !== null) {this.message = message;}
     }

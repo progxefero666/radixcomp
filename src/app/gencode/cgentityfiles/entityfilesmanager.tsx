@@ -27,6 +27,7 @@ import jsonApp from "@/db/modeljson/application.json";
 import { InputField } from "@/common/model/inputfield";
 import { jsonTemplate, XFormsGen } from "@/codegen/xforms/xforms";
 import { InputValue } from "@/common/model/inputvalue";
+import { Validation } from "@/common/model/validation";
 
 
 //---------------------------------------------------------------------------------------
@@ -54,6 +55,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
     const [showCheckList, setShowCheckList] = useState<boolean>(false);
 
+    const [validations, setValidations] = useState<Validation[]>([]);
 
     useEffect(() => {
         if (initialized) { return; }
