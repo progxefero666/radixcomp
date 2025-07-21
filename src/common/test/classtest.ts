@@ -1,52 +1,61 @@
 
 //table_application.ts
 
-import { field } from "src/common/decorators";
-import { TFieldDecorator } from "src/common/types";
+import { defaultValue, field } from "@/common/decorators";
+import { TFieldDecorator } from "@/common/types";
 /**
  * Db Table Entity Class Application
  **/
 export class Test {
 
-    @field({ftype:"number",pk: true,name:"id",required:true})
+    @field({ftype:"number",name:"id",pk:true})
     public id:number|null = null;
 
     @field({ftype:"number",name:"codelang_id",fk:true,fxattrs:{table:"codelang"}})
     public codelang_id: number;
 
     @field({ftype:"text",name:"name",required:true})
-    public name:        string;
+    public name: string;
 
     @field({ftype:"text",name:"description",required:true,length:{min:0,max:255}})
     public description: string;
 
-    @field({ftype:"numeric",name:"description",required:true,length:{min:0,max:255}})
-    public osystem:     number|null = null;
-    public appurl:      string|null = null;
-    public localdev:    boolean = true;
-    public usedocker:   boolean = false;
-    public controluser: boolean = false;
-    public updated:     Date;//generated
+    @field({ftype:"decimal",name:"importe",format:{cntint:10,cntdec:2}})
+    public importe: number|null = null;
+
+    @field({ftype:"number",name:"version",required:true,length:{min:0,max:255}})
+    public version: number|null = null;
+
+    @field({ftype:"text",name:"appurl",required:false,length:{min:19,max:500}})
+    public appurl: string|null = null;
+    
+    @field({ftype:"check",name:"localdev"})
+    @defaultValue(false)
+    public localdev: boolean = true;
+
+    @field({ftype:"date",name:"updated",required:true})
+    public updated: Date;
 
     constructor(id:number|null,
                 codelang_id:number,
                 name:string,
                 description:string,
-                osystem:number|null,    
+                importe:number|null,  
+                version:number|null,  
                 appurl:string|null,
                 localdev:boolean,
                 updated:Date ) {
 
-        this.id = id;
+        this.id          = id;
         this.codelang_id = codelang_id;
-        this.name = name;
+        this.name        = name;
         this.description = description;
-        this.osystem = osystem;
-        this.appurl = appurl;
-        this.localdev = localdev;
- 
-        this.updated = updated;
-    }
+        this.importe     = importe;
+        this.version     = version; 
+        this.appurl      = appurl;
+        this.localdev    = localdev;
+        this.updated     = updated;
+    }//end constructor
 
 
   

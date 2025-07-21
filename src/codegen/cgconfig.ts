@@ -20,6 +20,9 @@ export class CgConfig {
 
     public static DATE_GEN_VALUES:string[] =["CURRENT_DATE", "CURRENT_TIMESTAMP", "NOW()"];  
 
+    public static DEC_FIELD_START:string = "@field({";
+    public static DEC_FIELD_END:string = "})";
+
     public static readonly CODEGEN_LIB_PATH: string 
         = "@/codegen/kernel/cgmodel"
 

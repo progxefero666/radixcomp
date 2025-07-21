@@ -119,7 +119,7 @@ export class CodeGenHelper {
 
     //single quotes
     public static getIntoSingleQuotes(str: string): string {
-        return `"` + str + `"`;
+        return `'` + str + `'`;
     }
 
     public static getIntoKeys(str: string): string {

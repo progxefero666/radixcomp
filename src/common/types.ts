@@ -3,7 +3,7 @@
 
 export type FieldType = "text" |"textarea" | "check"    | "number" | "collection" | "url" | "decimal" | 
                         "date" | "datetime" | "email"  | "password" | "file"  | "tel"  | "hidden";
-                        
+
 export type TKeyvalue = {
     key: string;
     value: any;
@@ -16,7 +16,6 @@ export type TLengthRange = {
 }
 
 export type TNumeric = {
-    type: string;
     cntint: number;
     cntdec: number;
 }
@@ -33,7 +32,7 @@ export type TFieldDecorator = {
     generated?: boolean;
     required?: boolean;
 	length?: TLengthRange, //!!!!!!
-    numeric?:TNumeric,
+    format?:TNumeric,
     pk?: boolean,
     fk?: boolean,
     fxattrs?:TFxDecorator;

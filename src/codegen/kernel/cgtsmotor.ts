@@ -15,16 +15,80 @@ import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 
 export class CodeGenTsMotor {
 
-    public static getListAttributes(tableModel: ModelTable):string {
-        let result: string = ""; 
+    /*
+    public static getListAttributesOld(fields: ModelField[]):string {
+        let content: string = ""; 
 
-        for (const field of tableModel.fields) {
-            if(field.pk) {
-                
+        fields.forEach((field) => {
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
+            if(!field.required ){
+                if(tsType === 'boolean'){
+                    content += CgConfig.TAB_4 +
+                               `public ${field.name}: ${tsType};\n`;
+                }
+                else {
+                    content += CgConfig.TAB_4 +
+                              `public ${field.name}: ${tsType} | null = null;\n`;
+                }
             }
-        }//end for
+            else {
+                if(field.default!=null){
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
+                }
+                else{
+                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
+                }  
+            }    
+        });
+        return content;
+    };//end 
+    */
 
-        return result;
+    public static getListAttributes(fields: ModelField[]):string {
+        let content: string = ""; 
+
+        fields.forEach((field) => {
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
+
+            // step 1: create decorator 
+            content += CgConfig.DEC_FIELD_START;
+            content += `ftype:"${field.type}"` + CgConfig.CHAR_COMMA;
+            content += `name:"${field.name}"` + CgConfig.CHAR_COMMA;
+            if (field.pk) {
+                content += `pk:true` + CgConfig.CHAR_COMMA;
+            }
+            else if(field.fk) {
+                content += `fk:true` + CgConfig.CHAR_COMMA;
+                //content += 'fxattrs:{table:' + field.relations?.[Symbol] + field.fxattrs?.table;
+            }  
+            //name:"id"
+            //pk:true
+            //required:true
+            //length:{min:0,max:255}
+            //format:{cntint:10,cntdec:2}
+
+            CgConfig.DEC_FIELD_END + '\n';
+
+            // step 2: create attribute
+            if(!field.required ){
+                if(tsType === 'boolean'){
+                    content += `public ${field.name}: ${tsType};\n`;
+                }
+                else {
+                    content += `public ${field.name}: ${tsType} | null = null;\n`;
+                }
+            }
+            else {
+                if(field.default!=null){
+                    content += `public ${field.name}: ${tsType} = ${field.default};\n`;               
+                }
+                else{
+                    content += `public ${field.name}: ${tsType};\n`;
+                }  
+            }    
+        });
+        //CgConfig.TAB_4
+        return content;
     };//end 
 
     public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
@@ -46,30 +110,9 @@ export class CodeGenTsMotor {
         content += ` **/`+CgConfig.RET;
         content += `export class ${className} {\n\n`;        
 
-
         // Generate properties
-        for (const field of tableModel.fields) {
-            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);    
-            if(!field.required ){
-                if(tsType === 'boolean'){
-                    content += CgConfig.TAB_4 +
-                               `public ${field.name}: ${tsType};\n`;
-                }
-                else {
-                    content += CgConfig.TAB_4 +
-                              `public ${field.name}: ${tsType} | null = null;\n`;
-                }
-            }
-            else {
-                if(field.default!=null){
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
-                }
-                else{
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
-                }  
-            }    
-        }    
-
+        content += CodeGenTsMotor.getListAttributes(tableModel.fields);
+        
         // Constructor
         content += `\n    constructor(`;
         const constructorParams: string[] = [];
