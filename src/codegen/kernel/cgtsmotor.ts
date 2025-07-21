@@ -55,74 +55,96 @@ export class CodeGenTsMotor {
             content += `ftype:"${field.type}"` + CgConfig.CHAR_COMMA;
             content += `name:"${field.name}"` + CgConfig.CHAR_COMMA;
             if (field.pk) {
-                content += `pk:true` + CgConfig.CHAR_COMMA;
+                content += `pk:true`;
             }
             else if(field.fk) {
                 content += `fk:true` + CgConfig.CHAR_COMMA;
-                content += 'fxattrs:{table:' + 
+                content += 'fxattrs:{table:"' + 
                                 field.relations?.[0].table + CgConfig.CHAR_QUOTE + 
-                                CgConfig.CHAR_COMMA+'id:'+ field.relations?.[0].field + CgConfig.CHAR_QUOTE + 
-                                CgConfig.CHAR_COMMA + 'name:' + field.relations?.[0].field + CgConfig.CHAR_QUOTE;
+                                CgConfig.CHAR_COMMA+'"id:'+ field.relations?.[0].field + CgConfig.CHAR_QUOTE + 
+                                CgConfig.CHAR_COMMA + 'name":' + field.relations?.[0].field + CgConfig.CHAR_QUOTE;
             }  
             else {
                  switch(field.type){
                     case "text":
-                        if(field.minlen || field.maxlen){
-                            if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
+                    case "textarea":
+                        if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
+                        if(field.minlen || field.maxlen){                            
                             content += "length:{min:" + (field.minlen??0) + CgConfig.CHAR_COMMA;                          
                             content += "max:" + (field.maxlen??-1) + CgConfig.CHAR_KEY_CLOSE + "\n";
                         }
+                        content += `fk:true` + CgConfig.CHAR_COMMA;
                         break;
+                    //case "check": break;
                     case "number":
-                        if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
+                        if(field.required){content += `required:true`; }
                         break;
                     case "decimal":
                         if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
-                            const numberFormat = field.format?.split(':')!;
-                            content += "format:{cntint:" + (numberFormat[0].toString()) + CgConfig.CHAR_COMMA;                          
-                            content += "cntdec:" + (numberFormat[1].toString()) ;                        
-                        break;                        
+                        const numberFormat = field.format?.split(':')!;
+                        content += "format:{cntint:" + (numberFormat[0].toString()) + CgConfig.CHAR_COMMA;                          
+                        content += "cntdec:" + (numberFormat[1].toString()) ;                        
+                        break;    
+                    case "date":
+                    case "datetime":
+                        if(field.required){content += `required:true`}
+                        break;   
+                    case "file":
+                        if(field.required){content += `required:true` }  
+                        break;
                  }//end switch
-            }
-    
+            }//end else
             content += CgConfig.CHAR_KEY_CLOSE + '\n';
 
-            // step 2: create attribute
-            /*
-            @field({ftype:"number",name:"codelang_id",fk:true,fxattrs:{table:"codelang",id:"id",name:"name" }})
-            public codelang_id: number;
+            // step 2: create fieldValue
 
-            @field({ftype:"text",name:"name",required:true})
-            public name: string;
-
-            @field({ftype:"text",name:"description",required:true,length:{min:0,max:255}})
-            public description: string;
-
-            @field({ftype:"decimal",name:"importe",format:{cntint:10,cntdec:2}})
-            public importe: number|null = null;
-
-            @field({ftype:"number",name:"version",required:true,length:{min:0,max:255}})
-            public version: number|null = null;
-
-            @field({ftype:"text",name:"appurl",required:false,length:{min:19,max:500}})
-            public appurl: string|null = null;
-            
-            @field({ftype:"check",name:"localdev"})
-            @defaultValue(false)
-            public localdev: boolean;
-
-            @field({ftype:"date",name:"updated",required:true})
-    public updated: Date;            
-            */    
-            if(!field.required ){
-                if(tsType === 'boolean'){
-                    content += `public ${field.name}: ${tsType};\n`;
-                }
-                else {
-                    content += `public ${field.name}: ${tsType} | null = null;\n`;
-                }
+            // step 3: create attribute
+            if (field.pk || field.fk ) { 
+                content += `public ${field.name}: ${tsType} | null = null;\n`;
             }
             else {
+                switch(field.type){
+                    case "text":
+                    case "textarea":
+                        if(field.required){
+                            if(field.default!=null){
+                                content += `public ${field.name}: ${tsType}= "${field.default}";\n`; 
+                            }
+                            else {
+                                content += `public ${field.name}: ${tsType};\n`; 
+                            }                            
+                        }
+                        else {
+                            content += `public ${field.name}: ${tsType} | null = null;\n`;
+                        }
+                        break;              
+                    case "number":
+                    case "decimal":    
+                        if(field.default!=null){
+                            content += `public ${field.name}: ${tsType}= ${field.default};\n`; 
+                        }
+                        else {
+                            content += `public ${field.name}: ${tsType};\n`; 
+                        }
+                        break;
+                    case "check":
+                        if(field.default!=null){
+                            content += `public ${field.name}: ${tsType} = ${field.default};\n`; 
+                        }
+                        else {
+                            if(field.required){
+                                content += `public ${field.name}: ${tsType};\n`; 
+                            }
+                            else {
+                                content += `public ${field.name}: ${tsType} = false;\n`; 
+                            }                            
+                        }    
+                    case "date":
+                    case "datetime":   
+                        if(field.default!=null){
+                        }    
+                }//end switch
+
                 if(field.default!=null){
                     content += `public ${field.name}: ${tsType} = ${field.default};\n`;               
                 }

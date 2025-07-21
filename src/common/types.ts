@@ -1,8 +1,10 @@
 //src\common\types.ts
 
 
-export type FieldType = "text" |"textarea" | "check"    | "number" | "collection" | "url" | "decimal" | 
-                        "date" | "datetime" | "email"  | "password" | "file"  | "tel"  | "hidden";
+export type FieldType = "text" |"textarea" | "check" | "number" | "decimal" | 
+                        "date" | "datetime" | "collection" | "hidden" |  "file";
+                        
+//"url" | "email"  | "password" | "tel"  
 
 export type TKeyvalue = {
     key: string;
