@@ -14,7 +14,7 @@ export class CgConfig {
     public static DEF_CLASS_NAMEADD: string = "Def"
     public static CHAR_SPACE:string = " ";
     public static CHAR_COMMA:string = ",";
-    public static CHAR_KEY_OPEN:string = "}";
+    public static CHAR_KEY_OPEN:string = "{";
     public static CHAR_KEY_CLOSE:string = "}";
     public static CHAR_QUOTE:string = ",";
     public static TAB_4:string = "    ";

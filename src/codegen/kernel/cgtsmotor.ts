@@ -62,31 +62,33 @@ export class CodeGenTsMotor {
                 content += 'fxattrs:{table:' + 
                                 field.relations?.[0].table + CgConfig.CHAR_QUOTE + 
                                 CgConfig.CHAR_COMMA+'id:'+ field.relations?.[0].field + CgConfig.CHAR_QUOTE + 
-                                CgConfig.CHAR_COMMA + 'name:' + field.relations?.[0].field + CgConfig.CHAR_QUOTE +
-                                CgConfig.CHAR_KEY_CLOSE + "\n";
+                                CgConfig.CHAR_COMMA + 'name:' + field.relations?.[0].field + CgConfig.CHAR_QUOTE;
             }  
             else {
                  switch(field.type){
                     case "text":
-                        if(field.minlen){
-                            content += "length:{min:" + field.minlen + CgConfig.CHAR_COMMA;                            
-                            //length:{min:
+                        if(field.minlen || field.maxlen){
+                            if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
+                            content += "length:{min:" + (field.minlen??0) + CgConfig.CHAR_COMMA;                          
+                            content += "max:" + (field.maxlen??-1) + CgConfig.CHAR_KEY_CLOSE + "\n";
                         }
                         break;
-                    default:                        
+                    case "number":
+                        if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
                         break;
+                    case "decimal":
+                        if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
+                            const numberFormat = field.format?.split(':')!;
+                            content += "format:{cntint:" + (numberFormat[0].toString()) + CgConfig.CHAR_COMMA;                          
+                            content += "cntdec:" + (numberFormat[1].toString()) ;                        
+                        break;                        
                  }//end switch
             }
-            //required:true
-            //length:{min:0,max:255}
-            //format:{cntint:10,cntdec:2}
-
-            CgConfig.DEC_FIELD_END + '\n';
+    
+            content += CgConfig.CHAR_KEY_CLOSE + '\n';
 
             // step 2: create attribute
-            /*@field({ftype:"number",name:"id",pk:true})
-            public id:number|null = null;
-
+            /*
             @field({ftype:"number",name:"codelang_id",fk:true,fxattrs:{table:"codelang",id:"id",name:"name" }})
             public codelang_id: number;
 
