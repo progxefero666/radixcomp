@@ -102,34 +102,14 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         setOperationId(operationId);
     };//end
 
-    
-    const [formInputs,setFormInputs] = useState<InputValue[]>([]);
 
-    const validate = (formData:InputValue[]): boolean => {
-        return true;
-    };//end
-    const onSubmit = () => {
-        const formData:InputValue[] = formInputs;
-        const nameRef = useRef<HTMLInputElement>(null);
-        
-        for(let idx = 0; idx < formInputs.length; idx++) {
-            formData[idx].value = nameRef.current?.value || null;
-        }
-        const validation: boolean = validate(formData);
-        if (!validation) {
-            alert("Validation error");
-            return;
-        }
-    };//end
-    
-
-    const runOperation = () => {
+    const runOperationForm = () => {
 
         const codecont: string = XFormsGen.generateForm(jsonTemplate);
         onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform", codecont!));
     };//end
 
-    const runOperationOld = async () => {
+    const runOperation = async () => {
         
         if (format === DocFormats.FORMAT_TYPESCRIPT.key) {
             runTypeScriptOperation();

@@ -170,15 +170,11 @@ export class XFormsGen {
     };//end
 
     public static genFuncValidation(jsonObj: any): string {
-
         //const validations:Validation[] = [];
-
         let content:string = "const validations:Validation[] = [];" + CgConfig.RETx2;
 
         for(let idx=1;idx<jsonObj.fields.length; idx++) {
-            //if(jsonObj.fields[idx].type === XForms) {continue;}
-
-            
+            //if(jsonObj.fields[idx].type === XForms) {continue;}            
             //format
             let format:string|null = null;
             if(jsonObj.fields[idx].type === XForms.FT_NUMBER || 
@@ -199,16 +195,14 @@ export class XFormsGen {
                 }
             } 
 
-            const fieldName: string = jsonObj.fields[idx].name + " incorrect."
+            const fieldNameIncorrect: string = jsonObj.fields[idx].name + " incorrect."
             content += "if(!validateItem("+jsonObj.fields[idx].type + CgConfig.CHAR_COMMA;            
             content += "format:"+format + CgConfig.CHAR_COMMA +"min:" + min;
-            content += CgConfig.CHAR_COMMA + "max:" + max + CgConfig.CHAR_COMMA;
-            content += ")) {" +CgConfig.RET
-            content += CgConfig.TAB_4 + `alert(`+ CodeGenHelper.getIntoSingleQuotes(fieldName);
+            content += CgConfig.CHAR_COMMA + "max:" + max + ")) {" +CgConfig.RET
+            content += CgConfig.TAB_4 + `alert(`+ CodeGenHelper.getIntoSingleQuotes(fieldNameIncorrect);
             content += `);` +CgConfig.RET;
             content += CgConfig.TAB_4 + `return false;` + CgConfig.RET;
-            content += `}`+ CgConfig.RETx2;            
-            //content = CodeGenHelper.applyTabsToStringBlock(content,1) + CgConfig.RETx2;
+            content += `}`+ CgConfig.RET;            
 
         }//end for
 
@@ -351,13 +345,13 @@ export class XFormsGen {
         }//end for
         content += CgConfig.RET;
         content += "if(!validate()) {return;}" + CgConfig.RET;
-        content = CodeGenHelper.applyTabsToStringBlock(content,1)+ CgConfig.RET;
+        content = CodeGenHelper.applyTabsToStringBlock(content,1);
 
         let result: string = "const onSubmit = () => {"+ CgConfig.RET;
         result += content;
-        result += "};//end"+ CgConfig.RET;
-        result =CodeGenHelper.applyTabsToStringBlock(result,1)+ CgConfig.RET;
-        return result;
+        result += "};//end";
+        result =CodeGenHelper.applyTabsToStringBlock(result,1);
+        return result+ CgConfig.RET;
     };//end
 
     public static generateForm(jsonTable: string): string {
@@ -373,8 +367,8 @@ export class XFormsGen {
         let resFields: string       = XFormsGen.genFormFields(jsonObj);
       
         let result:string = resImports + resStates + resRefs +
-                            resFunctValItem + resFunctValForm;
-                            //+ resFunctSubmit + resFields;
+                            resFunctValItem + resFunctValForm + 
+                            resFunctSubmit + resFields;
         return result;
     }//end
 
