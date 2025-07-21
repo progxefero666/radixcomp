@@ -163,32 +163,53 @@ export class CodeGenTsMotor {
         return content;
     };//end 
 
+    public static getClassHeader(tableName:string): string {
+
+        //top comment path
+        const className = CodeGenHelper.capitalize(tableName);
+        const fileName = `table_${tableName.toLowerCase()}.ts`;  
+        let content: string = `//${fileName}` + CgConfig.RETx2;
+
+        // Class info
+        content += `/**\n`;
+        content += ` * Entity Class ${className}` + CgConfig.RET;
+        content += ` */`+CgConfig.RET;
+        content += `export class ${className} {`; 
+        content += CgConfig.RETx2; 
+        return content;
+    };//end 
+
+    public static getConstructor(fields: ModelField[]):string {
+        let content = `constructor(`;
+        const constructorParams: string[] = [];
+        for (let idx=0;idx<fields.length;idx++) {
+            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(fields[idx].type);
+            if(!fields[idx].required ){
+                if(tsType === 'boolean'){
+                    content += `${fields[idx].name}: ${tsType}`;
+                }
+                else {
+                    content += `${fields[idx].name}: ${tsType} | null`;
+                }                 
+            }
+            else {
+                content += `${fields[idx].name}: ${tsType}`;
+            }
+            if(idx<fields.length-1) {content += CgConfig.CHAR_COMMA;}
+                       
+        }//end for 
+        content += `) {` + CgConfig.RET; 
+        return content;
+    };//end 
+
     public static getEntityClass(tableModel: ModelTable,includeDef:boolean): string {
         //if(includeDef){content +=  CodeGenTsMotor.getEntityDefClass(tableModel);}
        
-        let content: string = "";       
-        
-
-        //...................................................................................
         // header class
-        //...................................................................................
-        
+        let content = CodeGenTsMotor.getClassHeader(tableModel.name);        
 
-        const className = CodeGenHelper.capitalize(tableModel.name);
-        const fileName = `table_${tableModel.name.toLowerCase()}.ts`;        
-        content += `//${fileName}` + CgConfig.RETx2;
-        
-        // Class info
-        content += `/**\n`;
-        content += ` * Db Table Entity Class ${className}\n\n`;
-        content += ` **/`+CgConfig.RET;
-        content += `export class ${className} {\n\n`;        
-        //...................................................................................
-
-        //...................................................................................
         // Generate properties
         content += CodeGenTsMotor.getListAttributes(tableModel.fields);
-        //...................................................................................
 
         //...................................................................................        
         // Constructor
@@ -217,6 +238,7 @@ export class CodeGenTsMotor {
         }        
         content += `    }\n\n`;
         
+        //...................................................................................
         // Generate minlen function
         content += `    /**\n`;
         content += `     * Returns the minimum length of the field.\n`;
@@ -403,33 +425,55 @@ export class CodeGenTsMotor {
 }//end class ModelUtil
 
 
+/* Constructor
+content += `\n    constructor(`;
+const constructorParams: string[] = [];
+for (const field of tableModel.fields) {
+    const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
+    if(!field.required ){
+        if(tsType === 'boolean'){
+            constructorParams.push(`${field.name}: ${tsType}`);
+        }
+        else {
+            constructorParams.push(`${field.name}: ${tsType} | null`);
+        }                 
+    }
+    else {
+        constructorParams.push(`${field.name}: ${tsType}`);
+    }           
+}        
+content += constructorParams.join(',\n                ');
+content += `) {\n\n`;        
+// Constructor assignments
+for (const field of tableModel.fields) {
+    content += `        this.${field.name} = ${field.name};`+CgConfig.RET;
+}        
 
 
-    /*
-    public static getListAttributesOld(fields: ModelField[]):string {
-        let content: string = ""; 
+public static getListAttributesOld(fields: ModelField[]):string {
+let content: string = ""; 
 
-        fields.forEach((field) => {
-            const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
-            if(!field.required ){
-                if(tsType === 'boolean'){
-                    content += CgConfig.TAB_4 +
-                               `public ${field.name}: ${tsType};\n`;
-                }
-                else {
-                    content += CgConfig.TAB_4 +
-                              `public ${field.name}: ${tsType} | null = null;\n`;
-                }
-            }
-            else {
-                if(field.default!=null){
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
-                }
-                else{
-                    content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
-                }  
-            }    
-        });
-        return content;
-    };//end 
-    */
+fields.forEach((field) => {
+    const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
+    if(!field.required ){
+        if(tsType === 'boolean'){
+            content += CgConfig.TAB_4 +
+                        `public ${field.name}: ${tsType};\n`;
+        }
+        else {
+            content += CgConfig.TAB_4 +
+                        `public ${field.name}: ${tsType} | null = null;\n`;
+        }
+    }
+    else {
+        if(field.default!=null){
+            content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
+        }
+        else{
+            content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
+        }  
+    }    
+});
+return content;
+};//end 
+*/

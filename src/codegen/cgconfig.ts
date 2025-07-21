@@ -6,7 +6,7 @@
 
 
 /**
- * class CgConfig.DEC_DEFAULT_START
+ * class CgConfig.CHAR_COMMA
  */
 export class CgConfig {
 
