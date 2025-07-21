@@ -14,55 +14,56 @@ export class CodeGenJson {
 
     public static LINE_VALIDATION: string = `"validation":{"result":true,"message":null}`;
     
+        public static getJsonEntDefFieldRelations(relations: Relation[]): string {        
+       
+        let content = ``; 
+        for (let idx = 0; idx < relations.length; idx++) {            
+            content += `{`+ CgConfig.RET;
+            content += CgConfig.TAB_4 + `"table": "${relations[idx].table}",`+ CgConfig.RET;
+            content += CgConfig.TAB_4 + `"field": "${relations[idx].field}"`+ CgConfig.RET;
+            content +=  `}`;            
+            if (idx < relations.length - 1) {
+                content += `, `;
+            }
+            content += CgConfig.RET;
+        }
+        content = CodeGenHelper.applyTabsToStringBlock(content,1);
+
+        let result = `"relations": [` + CgConfig.RET;
+        result += content +`]`;
+
+        return result;
+    }//end 
 
     public static getJsonEntDefField(field: ModelField): string {
         
         //attrs Block 
-        let attrsBlock   = `"name": "${field.name}",` + CgConfig.RET;
-        attrsBlock      += `"type": "${field.type}",` + CgConfig.RET;
-        attrsBlock      += `"required": ${field.required},` + CgConfig.RET;
-        attrsBlock      += `"generated": ${field.generated},` + CgConfig.RET;
-        attrsBlock      += `"default": ${field.default !== null ? `"${field.default}"` : null},` + CgConfig.RET;
-        attrsBlock      += `"format": ${field.format !== null ? `"${field.format}"` : null},` + CgConfig.RET;
-        attrsBlock      += `"pk": ${field.pk},` + CgConfig.RET;
-        attrsBlock      += `"fk": ${field.fk},` + CgConfig.RET;
-        attrsBlock      += `"minlen": ${field.minlen !== null ? field.minlen : null},` + CgConfig.RET;
-        attrsBlock      += `"maxlen": ${field.maxlen !== null ? field.maxlen : null},` + CgConfig.RET;
-        attrsBlock      += CodeGenJson.LINE_VALIDATION + CgConfig.CHAR_COMMA + CgConfig.RET;
-
-        //applyTabsToStringBlock 3
-        //let attrsBlockIndent = CodeGenHelper.applyTabsToStringBlock(attrsBlock,3);
-
-        //let code = CodeGenHelper.getTabsSpace(1) + "{" + CgConfig.RET;
-        //code += attrsBlockIndent;
-        /*
+        let content   = `"name": "${field.name}",` + CgConfig.RET;
+        content      += `"type": "${field.type}",` + CgConfig.RET;
+        content      += `"required": ${field.required},` + CgConfig.RET;
+        content      += `"generated": ${field.generated},` + CgConfig.RET;
+        content      += `"default": ${field.default !== null ? `"${field.default}"` : null},` + CgConfig.RET;
+        content      += `"format": ${field.format !== null ? `"${field.format}"` : null},` + CgConfig.RET;
+        content      += `"pk": ${field.pk},` + CgConfig.RET;
+        content      += `"fk": ${field.fk},` + CgConfig.RET;
+        content      += `"minlen": ${field.minlen !== null ? field.minlen : null},` + CgConfig.RET;
+        content      += `"maxlen": ${field.maxlen !== null ? field.maxlen : null},` + CgConfig.RET;
+        content      += CodeGenJson.LINE_VALIDATION+CgConfig.CHAR_COMMA + CgConfig.RET;
         if (field.relations && field.relations.length > 0) {
-            //applyTabsToStringBlock 3
-            const relationssBlock = CodeGenJson.getJsonEntDefFieldRelations(field.relations);
-            code = CodeGenHelper.applyTabsToStringBlock(relationssBlock,3);
+            content += CodeGenJson.getJsonEntDefFieldRelations(field.relations);
         }
-        else {code += `"relations": null`+CgConfig.RET;}
-        code += CodeGenHelper.getTabsSpace(2) + "}";        
-        */
-        return attrsBlock;
-    }//end 
+        else {
+            content += `"relations": null`;
+        }
+        content = CodeGenHelper.applyTabsToStringBlock(content,1);
 
-    public static getJsonEntDefFieldRelations(relations: Relation[]): string {        
-        const tabspace:string = CodeGenHelper.getTabsSpace(2);
-        let code = `"relations": [` + CgConfig.RET;
-        for (let idx = 0; idx < relations.length; idx++) {            
-            code += CgConfig.TAB_4 + `{`+ CgConfig.RET;
-            code += tabspace + `"table": "${relations[idx].table}",`+ CgConfig.RET;
-            code += tabspace + `"field": "${relations[idx].field}"`+ CgConfig.RET;
-            code += CgConfig.TAB_4 + `}`;            
-            if (idx < relations.length - 1) {
-                code += `, `;
-            }
-            code += CgConfig.RET;
-        }
-        code += `]` + CgConfig.RET;
+        let code = "{" + CgConfig.RET;
+        code += content;        
+        code += "}";        
         return code;
     }//end 
+
+
 
     public static getJsonEntDef(table: ModelTable): string {
         let code = "";    
@@ -74,19 +75,6 @@ export class CodeGenJson {
         return code;
     }//end
 
-    public static getJsonEntDefOld(table: ModelTable): string {
-        let code = "{" + CgConfig.RET;    
-        code += CgConfig.TAB_4 + "\"name\": \"" + table.name + "\"," + CgConfig.RET;
-        code += CgConfig.TAB_4 + "\"fields\":[" + CgConfig.RET;
-        for (let idx = 0; idx < table.fields.length; idx++) {
-            code += CgConfig.TAB_4 + CodeGenJson.getJsonEntDefField(table.fields[idx]);
-            if (idx<table.fields.length-1) {code+= `, `;}
-            code += CgConfig.RET;
-        }
-        code += CgConfig.TAB_4 + `]` + CgConfig.RET;
-        code += `}`;
-        return code;
-    }//end
 
     //code += CodeGenJson.getJsonEntDef(table);
     public static getJsonArrayEntDef(tables: ModelTable[]): string {
