@@ -160,31 +160,65 @@ export class XFormsGen {
     };//end 
 
     public static genFuncValidateItem(): string {
+        let params: string = "(ftype:string,value:any,format:any|null,min:number|null,max:number|null)"; 
         let result: string = 
-            `const validateItem = (ftype:string,value:any,format:any|null,min?:number,max?:number): boolean => {    
-                return true;
-        };//end`;
+            "const validateItem =" + params + ": boolean => {" + CgConfig.RET;
+        result += CgConfig.TAB_4 + "return true;"+ CgConfig.RET;
+        result += "};//end"+ CgConfig.RET;    
+        result = CodeGenHelper.applyTabsToStringBlock(result,1) + CgConfig.RET;
         return result;
     };//end
 
     public static genFuncValidation(jsonObj: any): string {
-        /*
-        let content:string ="";        
-        content +=  + `if(!validateItem("text",application.name,null,5,50)) {` + CgConfig.RET;
-        content += CgConfig.TAB_4 + `alert("Name incorrect.");` +CgConfig.RET
-        content += CgConfig.TAB_4 + `return false;` + CgConfig.RET;
-        content += `}` + CgConfig.RET;
-        */
-        const validations:Validation[] = [];
 
-        let content:string = "const validations:Validation[] = [];" + CgConfig.RET;
+        //const validations:Validation[] = [];
+
+        let content:string = "const validations:Validation[] = [];" + CgConfig.RETx2;
 
         for(let idx=1;idx<jsonObj.fields.length; idx++) {
-        
-        }
+            //if(jsonObj.fields[idx].type === XForms) {continue;}
+
+            
+            //format
+            let format:string|null = null;
+            if(jsonObj.fields[idx].type === XForms.FT_NUMBER || 
+                jsonObj.fields[idx].type === XForms.FT_DECIMAL) {
+                format = jsonObj.fields[idx].format;
+            }
+         
+            //min and max
+            let min:string|null = null;
+            let max:string|null = null;
+            if(jsonObj.fields[idx].type === XForms.FT_TEXT || 
+               jsonObj.fields[idx].type === XForms.FT_TEXTAREA) {
+                if(jsonObj.fields[idx].minlen !== null) {
+                    min = jsonObj.fields[idx].minlen.toString();
+                }
+                if(jsonObj.fields[idx].maxlen !== null) {
+                    max = jsonObj.fields[idx].maxlen.toString();
+                }
+            } 
+
+            const fieldName: string = jsonObj.fields[idx].name;
+            content += "if(!validateItem("+jsonObj.fields[idx].type + CgConfig.CHAR_COMMA;            
+            content += "format:"+format + CgConfig.CHAR_COMMA +"min:" + min;
+            content += CgConfig.CHAR_COMMA + "max:" + max + CgConfig.CHAR_COMMA;
+            content += ")) {" +CgConfig.RET
+            content += CgConfig.TAB_4 + `alert(`+ CodeGenHelper.getIntoSingleQuotes(fieldName);
+            content +=  + ` incorrect.);` +CgConfig.RET;
+            content += CgConfig.TAB_4 + `return false;` + CgConfig.RET;
+            content += `}`            
+            content = CodeGenHelper.applyTabsToStringBlock(content,1) + CgConfig.RETx2;
+
+        }//end for
+
+        content = CodeGenHelper.applyTabsToStringBlock(content,1) + CgConfig.RET;
+
         let result: string = "const validate = (): boolean => {"+ CgConfig.RET;
         result += content;
-        result += "true"+ CgConfig.RET + "}"+ CgConfig.RET;
+        result += "    return true;" + CgConfig.RET;
+        result += "};//end";
+        result = CodeGenHelper.applyTabsToStringBlock(result,1) + CgConfig.RET;
         return result;
     };//end
 
@@ -339,8 +373,8 @@ export class XFormsGen {
         let resFields: string       = XFormsGen.genFormFields(jsonObj);
       
         let result:string = resImports + resStates + resRefs +
-                            resFunctValItem + resFunctValForm +
-                            resFunctSubmit;// + resFields;
+                            resFunctValItem + resFunctValForm;
+                            //+ resFunctSubmit + resFields;
         return result;
     }//end
 
@@ -349,39 +383,6 @@ export class XFormsGen {
 
 };//end class
 
-
-/*
-    const validate = (): boolean => {
-        return true;
-    };//end
-    const onSubmit = () => {
-
-    };//end
-    
-    public static genUseEffectOld(jsonTable: string): string {
-        const jsonCollection = JSON.parse(jsonTable);
-
-        let array_result =  "setFormInputs(["+ CgConfig.RET;
-        for (let idx = 0; idx < jsonCollection.fields.length;idx++) {
-            if(!jsonCollection.fields[idx].pk) {
-                array_result += CgConfig.TAB_4 +`new InputValue("` + jsonCollection.fields[idx].name + `", null)`;
-                if( idx < jsonCollection.fields.length - 1) {
-                    array_result += CgConfig.CHAR_COMMA;            
-                }
-                array_result += CgConfig.RET;
-            }
-        }
-        array_result +=  "]);";
-        array_result = CodeGenHelper.applyTabsToStringBlock(array_result, 2);
-             
-        let result: string = XForms.t_form_inputs + CgConfig.RET;
-        result +=  XForms.t_useEffect_start + CgConfig.RET;
-        result += array_result;
-        result += XForms.t_useEffect_end + CgConfig.RET;        
-        return CodeGenHelper.applyTabsToStringBlock(result,1);
-    };//end
-    
-*/
 
 
 export const jsonTemplate: string =
@@ -400,7 +401,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": null,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "codelang_id",
@@ -418,8 +419,8 @@ export const jsonTemplate: string =
                     "table": "codelang",
                     "field": "id"
                 }
-            ]
-            "validation": {result: true, message: null}
+            ],
+            "validation": {"result":true,"message":null}
         },  
         {
             "name": "name",
@@ -433,7 +434,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": 50,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "description",
@@ -447,7 +448,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": 255,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "repository",
@@ -461,7 +462,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": 250,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "author",
@@ -475,7 +476,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": 100,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "version",
@@ -489,7 +490,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": 100,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "email",
@@ -503,7 +504,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": 500,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "usedocker",
@@ -517,7 +518,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": null,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "controlusers",
@@ -531,7 +532,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": null,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "consumedb",
@@ -545,7 +546,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": null,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "consumeapi",
@@ -559,7 +560,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": null,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }, 
         {
             "name": "updated",
@@ -573,7 +574,7 @@ export const jsonTemplate: string =
             "minlen": null,
             "maxlen": null,
             "relations": null,
-            "validation": {result: true, message: null}
+            "validation": {"result":true,"message":null}
         }
     ]
 }`;

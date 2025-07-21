@@ -7,7 +7,7 @@ import { CodeGenSqlHelper } from "./cgsqlhelper";
 import { CgConfig } from "../cgconfig";
 
 /**
- * CodeGenHelper.applyTabsToStringBlock
+ * CodeGenHelper.getIntoSingleQuotes
  */
 export class CodeGenHelper {
 
@@ -119,6 +119,9 @@ export class CodeGenHelper {
 
     //single quotes
     public static getIntoSingleQuotes(str: string): string {
+        return `'` + str + `'`;
+    }
+    public static getIntoDoubleQuotes(str: string): string {
         return `'` + str + `'`;
     }
 
