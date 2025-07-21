@@ -6,8 +6,38 @@ import { TextHelper } from "@/common/helper/texthelper";
 import { InputValue } from "@/common/model/inputvalue";
 import { useState } from "react";
 import { Validation } from "@/common/model/validation";
+import { Application } from "@/app/applications/application";
 
 
+
+const [application, setApplication] = useState<InputValue>(new InputValue("text","application","nacho"));
+
+const [Validations, setValidations] = useState<Validation[]>([]);
+
+const validateItem = (ftype:string,value:any,format:any|null,min?:number,max?:number): boolean => {    
+    return true;
+};//end
+
+const validate = (): boolean => {
+        
+    if(!validateItem("text",application.name,null,5,50)) {
+        alert("Name incorrect.");
+        return false;
+    }
+
+    if(!validateItem("number",application.version,null)) {
+        alert("version incorrect.");
+        return false;
+    }    
+    
+    if(!validateItem("date",application.updated,null)) {
+        alert("updated incorrect.");
+        return false;
+    }       
+    
+    return true;
+
+};//end
 
 /**
  * XForms.import_form_inputs
@@ -123,17 +153,68 @@ export class XFormsGen {
         result += XForms.t_useEffect_end + CgConfig.RET;        
         return CodeGenHelper.applyTabsToStringBlock(result,1);
     };//end
+    //............................................................................
 
-    //const validate = (formData:InputValue[]): boolean => {
-    public static genFuncValidation(formData:InputValue[]): string {
+    public static genImports(): string {
+        let result: string = `import { useState, useEffect, useRef } from "react";`+ CgConfig.RET;
+        result += `import { Validation } from "@/common/model/validation";` + CgConfig.RETx2;
+        return result;
+    };//end
 
-        let content:string ="";        
-        for (let idx = 0; idx < formData.length; idx++) {
+    // capitalize no necessary v2 if entityName begins with a capital letter
+    public static genStates(entityName:string): string {
+        let template: string = `const [^%v1%^, set^%v2%^] = useState<^%v2%^>(new ^%v2%^());`;
+        template = template.replace("^%v1%^", (TextHelper.uncapitalize(entityName)));
+        template = TextHelper.replaceAll(template,"^%v2%^",TextHelper.capitalize(entityName));//
+        let result = template + CgConfig.RET;
+        result += `const [validations,setValidations] = useState<Validation[]>([]);` ;
+        result =CodeGenHelper.applyTabsToStringBlock(result,1);
+        return result+ CgConfig.RET;
+    };//end
 
+    public static genRefs(jsonObj: any): string {
+       
+        let result: string = "";
+        for (let idx = 1; idx < jsonObj.fields.length; idx++) {           
+            if (jsonObj.fields[idx].fk) {
+                result += XForms.t_refSelect
+                    .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
+            }
+            else {
+                result += XForms
+                    .t_refInput.replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
+            }            
         }//end for
 
-        let result: string = "const validate = (): boolean => {";
-        result += "}"+ CgConfig.RET;
+        return CodeGenHelper.applyTabsToStringBlock(result,1);
+    };//end 
+
+    public static genFuncValidateItem(): string {
+        let result: string = 
+            `const validateItem = (ftype:string,value:any,format:any|null,min?:number,max?:number): boolean => {    
+                return true;
+        };//end`;
+        return result;
+    };//end
+
+    public static genFuncValidation(jsonObj: any): string {
+        /*
+        let content:string ="";        
+        content +=  + `if(!validateItem("text",application.name,null,5,50)) {` + CgConfig.RET;
+        content += CgConfig.TAB_4 + `alert("Name incorrect.");` +CgConfig.RET
+        content += CgConfig.TAB_4 + `return false;` + CgConfig.RET;
+        content += `}` + CgConfig.RET;
+        */
+        const validations:Validation[] = [];
+
+        let content:string = "const validations:Validation[] = [];" + CgConfig.RET;
+
+        for(let idx=1;idx<jsonObj.fields.length; idx++) {
+        
+        }
+        let result: string = "const validate = (): boolean => {"+ CgConfig.RET;
+        result += content;
+        result += "true"+ CgConfig.RET + "}"+ CgConfig.RET;
         return result;
     };//end
 
@@ -154,47 +235,6 @@ export class XFormsGen {
         return "";
     };//end
     
-    // generate
-    public static genRefs(jsonTable: string): string {
-        const jsonCollection = JSON.parse(jsonTable);
-        let result: string = "";
-        for (let idx = 0; idx < jsonCollection.fields.length; idx++) {
-            if (!jsonCollection.fields[idx].pk) {
-                if (jsonCollection.fields[idx].fk) {
-                    result += XForms.t_refSelect
-                        .replace(XForms.PATTERN, jsonCollection.fields[idx].name) + CgConfig.RET;
-                }
-                else {
-                    result += XForms
-                        .t_refInput.replace(XForms.PATTERN, jsonCollection.fields[idx].name) + CgConfig.RET;
-                }
-            }
-        }//end for
-
-        return CodeGenHelper.applyTabsToStringBlock(result,1);
-    };//end 
-
-    //..................................................................................
-
-
-    public static genImports(): string {
-        let result: string = `import { useState, useEffect, useRef } from "react";`+ CgConfig.RET;
-        result += `import { Validation } from "@/common/model/validation";` + CgConfig.RETx2;
-        return result;
-    };//end
-
-
-    // capitalize no necessary v2 if entityName begins with a capital letter
-    public static genStates(entityName:string): string {
-        let template: string = `const [^%v1%^, set^%v2%^] = useState<^%v2%^>(new ^%v2%^());`;
-        template.replace("^%v1%^", (TextHelper.uncapitalize(entityName)));
-        TextHelper.replaceAll(template,"<^%v2%^>",TextHelper.capitalize(entityName));//
-        let result = template + CgConfig.RET;
-        result += `const [validations,setValidations] = useState<Validation[]>([]);` + CgConfig.RET;
-        return result;
-    };//end
-
-
     public static genInitTag(field: any): string {
 
         let result: string =  XForms.t_tag_open;
@@ -232,100 +272,92 @@ export class XFormsGen {
         return result + CgConfig.CHAR_SPACE;
     };//end 
 
+
+    public static genFormFields(jsonObj: any): string {
+        let result: string = "";
+        for (let idx = 1; idx < jsonObj.fields.length; idx++) {
+
+            result += XFormsGen.genInitTag(jsonObj.fields[idx]) + CgConfig.RET;
+            //tempAttr_ref
+            result += CgConfig.TAB_4 + XForms.t_attr_ref
+                .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
+            //tempAttr_name
+            result += CgConfig.TAB_4 + XForms.t_attr_name
+                .replace(XForms.PATTERN,jsonObj.fields[idx].name) + CgConfig.RET;
+            //tempAttr_label
+            const label = TextHelper.capitalize(jsonObj.fields[idx].name);
+            result += CgConfig.TAB_4 +  XForms.t_attr_label.replace(XForms.PATTERN,label);
+            //tempAttr_maxlen         
+            if (jsonObj.fields[idx].type === XForms.FT_TEXT && 
+                jsonObj.fields[idx].maxlen !== null) { 
+                result += CgConfig.RET;
+                result +=  CgConfig.TAB_4 + XForms.t_attr_maxlen
+                    .replace(XForms.PATTERN, jsonObj.fields[idx].maxlen);                     
+            }
+            //XForms.tempAttr_inline  
+            if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
+                jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
+                jsonObj.fields[idx].type === XForms.FT_CHECK||
+                jsonObj.fields[idx].type === XForms.FT_FILE) {
+                result += CgConfig.RET;
+                result +=  CgConfig.TAB_4 + XForms.attr_inline;       
+            }     
+            // default value
+            if (jsonObj.fields[idx].fk) {    
+                result += XForms.t_attr_collection
+                    .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
+                result += CgConfig.TAB_4 + XForms.t_attr_default
+                    .replace(XForms.PATTERN, "collection[0]");                     
+            }
+            else {
+                if(XForms.PATTERN, jsonObj.fields[idx].default!== null) {                     
+                    if(jsonObj.fields[idx].type === XForms.FT_TEXT||                            
+                        jsonObj.fields[idx].type === XForms.FT_TEXTAREA)  {
+                        const defaultValue = CodeGenHelper
+                            .getIntoSingleQuotes(jsonObj.fields[idx].default);    
+                        result += CgConfig.RET;    
+                        result +=  CgConfig.TAB_4 + XForms.t_attr_default.replace
+                            (XForms.PATTERN,defaultValue); 
+                    }    
+                    else if(jsonObj.fields[idx].type === XForms.FT_DATE ||
+                        jsonObj.fields[idx].type === XForms.FT_DATETIME) {
+                        const defaultValue = CodeGenHelper
+                            .getIntoSingleQuotes(jsonObj.fields[idx].default);                                   
+                        result += CgConfig.RET;    
+                        if(CodeGenHelper.isGeneratedDate(jsonObj.fields[idx].default)) {   
+                            result += XForms.t_attr_default
+                                .replace(XForms.PATTERN,defaultValue);                                 
+                        }                            
+                    } 
+                    else if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
+                            jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
+                            jsonObj.fields[idx].type === XForms.FT_CHECK) {  
+                        const defaultValue = CodeGenHelper
+                            .getIntoKeys(jsonObj.fields[idx].default);                                     
+                        result += CgConfig.RET;        
+                        result += CgConfig.TAB_4 + XForms.t_attr_default
+                            .replace(XForms.PATTERN,defaultValue);                                                              
+                    }                                         
+                }                    
+            }
+            result += XForms.t_tag_close + CgConfig.RET;
+        }//end for
+        result = CodeGenHelper
+            .applyTabsToStringBlock(result,2)+ CgConfig.RET;
+        return result;     
+    };//end
+
     public static generateForm(jsonTable: string): string {
 
         const jsonObj = JSON.parse(jsonTable);
-
+  
         let resultImports: string = XFormsGen.genImports();
         let resultStates: string = XFormsGen.genStates(jsonObj.name);
-        let resultRefs: string = XFormsGen.genRefs(jsonTable);
-
-        //............................................................................        
-        let resultFields: string = "";
-        /*
-        for (let idx = 0; idx < jsonObj.fields.length; idx++) {
-
-            if (!jsonObj.fields[idx].pk) {
-
-                resultFields += XFormsGen.genInitTag(jsonObj.fields[idx]) + CgConfig.RET;
-
-                //tempAttr_ref
-                resultFields += CgConfig.TAB_4 + XForms.t_attr_ref
-                    .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
-
-                //tempAttr_name
-                resultFields += CgConfig.TAB_4 + XForms.t_attr_name
-                    .replace(XForms.PATTERN,jsonObj.fields[idx].name) + CgConfig.RET;
-    
-                //tempAttr_label
-                const label = TextHelper.capitalize(jsonObj.fields[idx].name);
-                resultFields += CgConfig.TAB_4 +  XForms.t_attr_label.replace(XForms.PATTERN,label);
-
-                //tempAttr_maxlen         
-                if (jsonObj.fields[idx].type === XForms.FT_TEXT && 
-                    jsonObj.fields[idx].maxlen !== null) { 
-                    resultFields += CgConfig.RET;
-                    resultFields +=  CgConfig.TAB_4 + XForms.t_attr_maxlen
-                        .replace(XForms.PATTERN, jsonObj.fields[idx].maxlen);                     
-                }
-                
-                //XForms.tempAttr_inline  
-                if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
-                   jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
-                   jsonObj.fields[idx].type === XForms.FT_CHECK||
-                   jsonObj.fields[idx].type === XForms.FT_FILE) {
-                    resultFields += CgConfig.RET;
-                    resultFields +=  CgConfig.TAB_4 + XForms.attr_inline;       
-                }     
-
-                // default value
-                if (jsonObj.fields[idx].fk) {    
-                    resultFields += XForms.t_attr_collection
-                        .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
-                    resultFields += CgConfig.TAB_4 + XForms.t_attr_default
-                        .replace(XForms.PATTERN, "collection[0]");                     
-                }
-                else {
-                    if(XForms.PATTERN, jsonObj.fields[idx].default!== null) {                     
-                        if(jsonObj.fields[idx].type === XForms.FT_TEXT||                            
-                            jsonObj.fields[idx].type === XForms.FT_TEXTAREA)  {
-                            const defaultValue = CodeGenHelper
-                                .getIntoSingleQuotes(jsonObj.fields[idx].default);    
-                            resultFields += CgConfig.RET;    
-                            resultFields +=  CgConfig.TAB_4 + XForms.t_attr_default.replace
-                                (XForms.PATTERN,defaultValue); 
-                        }    
-                        else if(jsonObj.fields[idx].type === XForms.FT_DATE ||
-                            jsonObj.fields[idx].type === XForms.FT_DATETIME) {
-                            const defaultValue = CodeGenHelper
-                                .getIntoSingleQuotes(jsonObj.fields[idx].default);                                   
-                            resultFields += CgConfig.RET;    
-                            if(CodeGenHelper.isGeneratedDate(jsonObj.fields[idx].default)) {   
-                                resultFields += XForms.t_attr_default
-                                    .replace(XForms.PATTERN,defaultValue);                                 
-                            }                            
-                        } 
-                        else if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
-                                jsonObj.fields[idx].type === XForms.FT_DECIMAL ||
-                                jsonObj.fields[idx].type === XForms.FT_CHECK) {  
-                            const defaultValue = CodeGenHelper
-                                .getIntoKeys(jsonObj.fields[idx].default);                                     
-                            resultFields += CgConfig.RET;        
-                            resultFields += CgConfig.TAB_4 + XForms.t_attr_default
-                                .replace(XForms.PATTERN,defaultValue);                                                              
-                        }                                         
-                    }                    
-                }
-                
-                resultFields += XForms.t_tag_close + CgConfig.RET;
-
-            }//end if pk
-
-        }//end for
-        resultFields = CodeGenHelper.applyTabsToStringBlock(resultFields,2)+ CgConfig.RET;
-        */
-        //............................................................................        
-
+        let resultRefs: string = XFormsGen.genRefs(jsonObj);
+        let resultFunctValidateItem: string = XFormsGen.genFuncValidateItem();
+        let resultFunctValidation: string = XFormsGen.genFuncValidation(jsonObj);
+        let resultFields: string = XFormsGen.genFormFields(jsonObj);
+      
         let result:string = resultImports + resultStates + 
                              resultRefs + resultFields;
         return result;
@@ -386,7 +418,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": null,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "codelang_id",
@@ -399,13 +432,14 @@ export const jsonTemplate: string =
             "fk": true,
             "minlen": null,
             "maxlen": null,
-                        "relations": [
+            "relations": [
                 {
                     "table": "codelang",
                     "field": "id"
                 }
             ]
-                    }, 
+            "validation": {result: true, message: null}
+        },  
         {
             "name": "name",
             "type": "text",
@@ -417,7 +451,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": 50,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "description",
@@ -430,7 +465,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": 255,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "repository",
@@ -443,7 +479,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": 250,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "author",
@@ -456,7 +493,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": 100,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "version",
@@ -469,7 +507,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": 100,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "email",
@@ -482,7 +521,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": 500,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "usedocker",
@@ -495,7 +535,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": null,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "controlusers",
@@ -508,7 +549,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": null,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "consumedb",
@@ -521,7 +563,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": null,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "consumeapi",
@@ -534,7 +577,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": null,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }, 
         {
             "name": "updated",
@@ -547,7 +591,8 @@ export const jsonTemplate: string =
             "fk": false,
             "minlen": null,
             "maxlen": null,
-            "relations": null
+            "relations": null,
+            "validation": {result: true, message: null}
         }
     ]
 }`;

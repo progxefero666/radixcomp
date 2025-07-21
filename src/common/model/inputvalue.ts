@@ -14,6 +14,9 @@ export class InputValue {
     public value:      any|null;
     public validation: Validation = Validation.DEFAULT;
 
+    public version: number = 10;
+    public updated: Date = new Date();
+    
     constructor(itype:FieldType,name:string,value:any|null,validation?:Validation) {
         this.itype = itype;
         this.name  = name;

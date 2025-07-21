@@ -3,7 +3,8 @@
 
 import { Option } from "@/common/model/option";
 import { TRange } from "@/radix/radixtypes";
-import { FieldType } from "@/codegen/xforms/xformstypes";
+import { FieldType } from "../types";
+
 
 
 export class InputField {
