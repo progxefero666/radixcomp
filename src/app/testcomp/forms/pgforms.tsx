@@ -8,9 +8,10 @@ import { TextHelper } from "@/common/helper/texthelper";
 import { InputValue } from "@/common/model/inputvalue";
 import { Validation } from "@/common/model/validation";
 
-import jsonTable from "@/db/modeljson/tascategory.json";
+import jsonObj from "@/db/modeljson/tascategory.json";
+import { Taskcategory } from "@/db/model/taskcategory";
 
-const jsonObj:any = JSON.parse(jsonTable.toString());
+//const jsonObj:any = JSON.parse(jsonTable.toString());
 
 export const layoutStyle = {
     background: 'rgb(7, 7, 7)',
@@ -19,17 +20,19 @@ export const layoutStyle = {
 };
 
 /**
- * Template - Page Header
+ * Desktop Forms test
+ * const [validations,setValidations] = useState<Validation[]>([]);
  */
 interface CompProps { mode?: string; }
 
 export function PgForms({ mode }: CompProps) {
   
-    //const [validations,setValidations] = useState<Validation[]>([]);
-    //const [inputValues, setInputValues] = useState<InputValue[]>([]);
-    //const jsonObj = JSON.parse(jsonTable);
+    //
+    const [taskcategory, setTaskcategory] = useState<Taskcategory|null>(null);
+
 
     useEffect(() => {
+        //const sss:Taskcategory 
         //const codecont: string = XFormsGen.generateForm(jsonTemplate);
         console.log(jsonObj);
     }, []);
