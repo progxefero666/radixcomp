@@ -6,26 +6,19 @@ import { TextHelper } from "@/common/helper/texthelper";
 import { useState } from "react";
 import { Validation } from "@/common/model/validation";
 import { Constants } from "@/common/constants";
+import { XForms } from "@/common/forms/xforms";
 
 
 /**
  * XForms.FT_TEXT
  */
-export class XForms {
+export class XFormsTemp {
 
     public static PATTERN: string = "^%v%^";
     public static t_tag_open: string = `<`;
     public static t_tag_close: string = ` />\n`;
 
-    public static FT_TEXT: string = "text";
-    public static FT_TEXTAREA: string = "textarea";
-    public static FT_CHECK: string = "boolean";
-    public static FT_NUMBER: string = "number";
-    public static FT_DECIMAL: string = "decimal";
-    public static FT_COLLECTION: string = "collection";
-    public static FT_DATE: string = "date";
-    public static FT_DATETIME: string = "datetime";
-    public static FT_FILE: string = "file";
+
 
     public static tc_text: string = `XInputText`;
     public static tc_check: string = `XInputCheck`;
@@ -37,12 +30,6 @@ export class XForms {
     public static tc_file: string = `XInputFile`;
     public static tc_datetime: string = `XInputDateTime`;
 
-    public static TT_DEFAULT: string = "text";
-    public static TT_URL: string = "url";
-    public static TT_EMAIL: string = "email";
-    public static TT_PASSWORD: string = "password";
-    public static TT_TEL: string = "telephone";
-    public static TT_HIDDEN: string = "hidden";
 
     public static t_refInput: string  = `const ^%v%^Ref = useRef<HTMLInputElement>(null);`;
     public static t_refSelect: string = `const ^%v%^Ref = useRef<HTMLSelectElement>(null);`;
@@ -99,12 +86,12 @@ export class XFormsGenerator {
         let result: string = "";
         for (let idx = 1; idx < jsonObj.fields.length; idx++) {           
             if (jsonObj.fields[idx].fk) {
-                result += XForms.t_refSelect
-                    .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
+                result += XFormsTemp.t_refSelect
+                    .replace(XFormsTemp.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
             }
             else {
-                result += XForms
-                    .t_refInput.replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
+                result += XFormsTemp
+                    .t_refInput.replace(XFormsTemp.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
             }            
         }//end for
 
@@ -170,35 +157,35 @@ export class XFormsGenerator {
 
     public static genInitTag(field: any): string {
 
-        let result: string =  XForms.t_tag_open;
+        let result: string =  XFormsTemp.t_tag_open;
 
         if (field.fk) {
-            result += XForms.tc_collection;
+            result += XFormsTemp.tc_collection;
         }
         else {
             if (field.type === XForms.FT_TEXT) {
-                result += XForms.tc_text;
+                result += XFormsTemp.tc_text;
             }
             else if (field.type === XForms.FT_TEXTAREA) {
-                result += XForms.tc_textarea;
+                result += XFormsTemp.tc_textarea;
             }
             else if (field.type === XForms.FT_NUMBER) {
                 if (field.format.split(":")[1] == "0") {
-                    result += XForms.tc_number;
+                    result += XFormsTemp.tc_number;
                 }
-                else { result += XForms.tc_decimal; }
+                else { result += XFormsTemp.tc_decimal; }
             }
             else if (field.type === XForms.FT_CHECK) {
-                result += XForms.tc_check;
+                result += XFormsTemp.tc_check;
             }
             else if (field.type === XForms.FT_DATE) {
-                result += XForms.tc_date;
+                result += XFormsTemp.tc_date;
             }
             else if (field.type === XForms.FT_DATETIME) {
-                result += XForms.tc_datetime;
+                result += XFormsTemp.tc_datetime;
             }
             else if (field.type === XForms.FT_FILE) {
-                result += XForms.tc_file;
+                result += XFormsTemp.tc_file;
             }
         }
 
@@ -211,20 +198,20 @@ export class XFormsGenerator {
 
             result += XFormsGenerator.genInitTag(jsonObj.fields[idx]) + CgConfig.RET;
             //tempAttr_ref
-            result += CgConfig.TAB_4 + XForms.t_attr_ref
-                .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
+            result += CgConfig.TAB_4 + XFormsTemp.t_attr_ref
+                .replace(XFormsTemp.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
             //tempAttr_name
-            result += CgConfig.TAB_4 + XForms.t_attr_name
-                .replace(XForms.PATTERN,jsonObj.fields[idx].name) + CgConfig.RET;
+            result += CgConfig.TAB_4 + XFormsTemp.t_attr_name
+                .replace(XFormsTemp.PATTERN,jsonObj.fields[idx].name) + CgConfig.RET;
             //tempAttr_label
             const label = TextHelper.capitalize(jsonObj.fields[idx].name);
-            result += CgConfig.TAB_4 +  XForms.t_attr_label.replace(XForms.PATTERN,label);
+            result += CgConfig.TAB_4 +  XFormsTemp.t_attr_label.replace(XFormsTemp.PATTERN,label);
             //tempAttr_maxlen         
             if (jsonObj.fields[idx].type === XForms.FT_TEXT && 
                 jsonObj.fields[idx].maxlen !== null) { 
                 result += CgConfig.RET;
-                result +=  CgConfig.TAB_4 + XForms.t_attr_maxlen
-                    .replace(XForms.PATTERN, jsonObj.fields[idx].maxlen);                     
+                result +=  CgConfig.TAB_4 + XFormsTemp.t_attr_maxlen
+                    .replace(XFormsTemp.PATTERN, jsonObj.fields[idx].maxlen);                     
             }
             //XForms.tempAttr_inline  
             if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
@@ -232,24 +219,24 @@ export class XFormsGenerator {
                 jsonObj.fields[idx].type === XForms.FT_CHECK||
                 jsonObj.fields[idx].type === XForms.FT_FILE) {
                 result += CgConfig.RET;
-                result +=  CgConfig.TAB_4 + XForms.attr_inline;       
+                result +=  CgConfig.TAB_4 + XFormsTemp.attr_inline;       
             }     
             // default value
             if (jsonObj.fields[idx].fk) {    
-                result += XForms.t_attr_collection
-                    .replace(XForms.PATTERN, "collection")+ CgConfig.RET;
-                result += CgConfig.TAB_4 + XForms.t_attr_default
-                    .replace(XForms.PATTERN, "collection[0]");                     
+                result += XFormsTemp.t_attr_collection
+                    .replace(XFormsTemp.PATTERN, "collection")+ CgConfig.RET;
+                result += CgConfig.TAB_4 + XFormsTemp.t_attr_default
+                    .replace(XFormsTemp.PATTERN, "collection[0]");                     
             }
             else {
-                if(XForms.PATTERN, jsonObj.fields[idx].default!== null) {                     
+                if(XFormsTemp.PATTERN, jsonObj.fields[idx].default!== null) {                     
                     if(jsonObj.fields[idx].type === XForms.FT_TEXT||                            
                         jsonObj.fields[idx].type === XForms.FT_TEXTAREA)  {
                         const defaultValue = CodeGenHelper
                             .getIntoSingleQuotes(jsonObj.fields[idx].default);    
                         result += CgConfig.RET;    
-                        result +=  CgConfig.TAB_4 + XForms.t_attr_default.replace
-                            (XForms.PATTERN,defaultValue); 
+                        result +=  CgConfig.TAB_4 + XFormsTemp.t_attr_default.replace
+                            (XFormsTemp.PATTERN,defaultValue); 
                     }    
                     else if(jsonObj.fields[idx].type === XForms.FT_DATE ||
                         jsonObj.fields[idx].type === XForms.FT_DATETIME) {
@@ -257,8 +244,8 @@ export class XFormsGenerator {
                             .getIntoSingleQuotes(jsonObj.fields[idx].default);                                   
                         result += CgConfig.RET;    
                         if(CodeGenHelper.isGeneratedDate(jsonObj.fields[idx].default)) {   
-                            result += XForms.t_attr_default
-                                .replace(XForms.PATTERN,defaultValue);                                 
+                            result += XFormsTemp.t_attr_default
+                                .replace(XFormsTemp.PATTERN,defaultValue);                                 
                         }                            
                     } 
                     else if(jsonObj.fields[idx].type === XForms.FT_NUMBER ||
@@ -267,12 +254,12 @@ export class XFormsGenerator {
                         const defaultValue = CodeGenHelper
                             .getIntoKeys(jsonObj.fields[idx].default);                                     
                         result += CgConfig.RET;        
-                        result += CgConfig.TAB_4 + XForms.t_attr_default
-                            .replace(XForms.PATTERN,defaultValue);                                                              
+                        result += CgConfig.TAB_4 + XFormsTemp.t_attr_default
+                            .replace(XFormsTemp.PATTERN,defaultValue);                                                              
                     }                                         
                 }                    
             }
-            result += XForms.t_tag_close + CgConfig.RET;
+            result += XFormsTemp.t_tag_close + CgConfig.RET;
         }//end for
         result = CodeGenHelper
             .applyTabsToStringBlock(result,2)+ CgConfig.RET;

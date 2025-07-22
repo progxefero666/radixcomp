@@ -9,13 +9,14 @@ import { AppMemmory } from "@/front/appmemory";
 import { Validation } from "@/common/model/validation";
 import { Validator } from "@/common/forms/validator";
 import { TextStyle } from "@/radix/radixtheme";
-import { XForms } from "@/codegen/forms/cgforms";
+import { XFormsTemp } from "@/codegen/forms/cgforms";
 import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { XInputText } from "@/radix/input/inptext";
 import { XInputSelect } from "@/radix/input/inpselect";
 import { XInputTextArea } from "@/radix/input/inptextarea";
 
 import { Template } from "@/db/model/template";
+import { XForms } from "@/common/forms/xforms";
 
 const componentStyle = {
     background: 'rgb(30, 40, 63)',
