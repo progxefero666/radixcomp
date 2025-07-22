@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes";
+import { Link, Flex, Text, Button, Box, Container, Grid, Separator } from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
 import { Validation } from "@/common/model/validation";
 
@@ -18,9 +18,15 @@ import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { OpConstants } from "@/common/constants";
 
 
+
 export const layoutStyle = {
-    background: 'rgb(7, 7, 7)',
+    background: 'rgba(32, 32, 32, 1)',
     border: '2px solidrgb(98, 97, 98)'
+};
+
+export const barStyle = {
+    borderBottom: '1px solid rgb(98, 97, 98)',
+    borderTop: '1px solid rgb(98, 97, 98)',
 };
 
 /**
@@ -51,13 +57,15 @@ export function PgForms({ template_id }: CompProps) {
     };//end
 
     return (
-        <Box width="100%" p="2" style={layoutStyle} >
+        <Box width="100%" py="2" px="4" style={layoutStyle} >
   
-            <Flex width="100%" direction="row" style={layoutStyle} >
+            <Flex width="100%" direction="row" pb="1" style={layoutStyle}  >
                 <Text size="3" style={{ color: 'white' }}>Template Form</Text>
             </Flex>
+            
+            <Separator orientation="horizontal" size="4" />
 
-            <Flex width="100%" direction="column" gapY="1" style={layoutStyle} >
+            <Flex width="100%" direction="column" gapY="2" pt="2" mb="2" style={layoutStyle} >
   
                 <XInputText 
                     ref={nameRef}
@@ -81,11 +89,11 @@ export function PgForms({ template_id }: CompProps) {
                     label="Data code"
                     placeholder="template data code"
                     minlen={5} />
-
+ 
             </Flex>
+
             
-            <Flex direction="row" justify="center" align="center" gapX="2" 
-                  style={COMP_BORDER_STYLE} >
+            <Flex direction="row" justify="center" align="center" py="2" gapX="2" mt="2" style={barStyle} >
 
                 <Button color={ButtonsStyle.COLOR_SAVE}
                         radius={ButtonsStyle.DEF_RADIUS}                        

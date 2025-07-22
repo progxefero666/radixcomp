@@ -19,7 +19,7 @@ import { AppGenerator } from "@/front/app";
 
 export const pageStyle = {
   
-    background: '#000000'
+    background: '#1e1a24ff'
 };
 
 export const columnStyle = {
@@ -46,26 +46,27 @@ export default function PageTest() {
     const workflow_id:string = GenerateKeys.genAlphaNum16();
 
     return (
-        <Flex direction="column" style={{ minHeight: '100vh', ...pageStyle }}>
+
+        <Flex width="100%" direction="column" style={pageStyle} >
 
             { /* Header */}
             <TestHeader  />
             <SeparatorH />
-
             
             { /* Main content */}
-            <Flex width="100%"  direction="row" style={{ flex: 1 }}>
-                <Flex width="16%" style={{ flex: '0 0 16%', minHeight: '100%' }}>
-                    <PrimaryBar  />
-                </Flex>    
-            
-                <Flex width="68%" style={{ flex: '1 1 68%', minHeight: '100%' }}>
-                    {ready ? <PgForms  template_id={workflow_id} /> : null}                    
-                </Flex>
+            <Flex width="100%"  direction="row" >
 
-                <Flex width="16%" style={{ flex: '0 0 16%', minHeight: '100%' }}>                    
+                <Box width="16%" >
+                    <PrimaryBar  />
+                </Box>    
+            
+                <Box width="68%" >
+                    {ready ? <PgForms  template_id={workflow_id} /> : null}                    
+                </Box>
+
+                <Box width="16%">                    
                     <TestSecondBar  />
-                </Flex>                
+                </Box>                
             </Flex> 
 
         </Flex>
