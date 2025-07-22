@@ -1,8 +1,6 @@
 //src\radix\keyvalue\inpselect.tsx
 
 import { Box, Text, Flex, Select } from "@radix-ui/themes";
-import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS } from "../radixconstants";
 import { Label } from "@radix-ui/react-label";
 import { Stylevalue } from "../models/stylevalue";
 import { CompStyle, RadixTheme } from "src/radix/radixtheme";

@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import { Checkbox, Flex, Text, Box } from "@radix-ui/themes";
 import { TextStyle } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS } from "../radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 
 interface CompProps {
     autocommit?: boolean;

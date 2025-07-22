@@ -3,7 +3,7 @@
 import { Box, Text, Flex, Select } from "@radix-ui/themes";
 import { Keyvalue } from "@/common/model/keyvalue";
 import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS } from "../radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 import { ModelHelper } from "@/common/helper/modelhelper";
 import { Label } from "@radix-ui/react-label";
 import { TextStyle } from "../radixtheme";

@@ -6,7 +6,7 @@ import { Box, Flex, TextField } from "@radix-ui/themes";
 import { CompStyle, CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { INPUT_TEXT_TYPES, RadixConf, RadixConstants } from "@/radix/radixconf";
-import { RADIX_COLORS } from "src/radix/radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 
 
 /**

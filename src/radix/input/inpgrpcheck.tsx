@@ -8,7 +8,7 @@ import { TRadixComponent } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { RadixUtil } from "../radixutil";
 import { TOption, TSelected, TSelection } from "@/radix/radixtypes";
-import { RADIX_COLORS } from "../radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 
 /*
 <CheckboxGroup.Root defaultValue={["1"]} name="example">

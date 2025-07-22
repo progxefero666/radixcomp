@@ -9,7 +9,8 @@ import { JsxOps, TsOps } from "@/codegen/data/cgdataoperations";
 import { XRadioGroup } from "@/radix/keyvalue/inpgrpradio";
 import CardInputParam from '../cards/cardinputparam';
 import { InputPattern } from '@/codegen/data/model/inputpattern';
-import { RADIX_COLORS } from '@/radix/radixconstants';
+
+import {RADIX_COLORS} from '@/radix/radixconf';
 import { PlayIcon, ReloadIcon, TextAlignTopIcon, TrashIcon } from '@radix-ui/react-icons';
 import { OpConstants } from '@/common/constants';
 import { DlgBtnDeleteConfirm } from '@/radix/dialog/dlgbtndelete';

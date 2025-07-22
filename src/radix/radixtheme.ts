@@ -2,7 +2,7 @@
 
 import { RadixConf } from "@/radix/radixconf";
 import { TRadixComponent } from "@/radix/radixtypes";
-import { RADIX_COLORS } from "@/radix/radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 import { Keyvalue } from "@/common/model/keyvalue";
 import { Stylevalue } from "./models/stylevalue";
 

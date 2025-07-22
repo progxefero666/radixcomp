@@ -7,7 +7,7 @@ import React from "react";
 import { Select } from "@radix-ui/themes";
 import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS } from "../radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 
 /*
 <Flex direction="column" gap="4">

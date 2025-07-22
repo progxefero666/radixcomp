@@ -2,7 +2,7 @@
 
 import { Box, Text, Flex, Select } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS } from "../radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 import { Label } from "@radix-ui/react-label";
 import { Stylevalue } from "../models/stylevalue";
 

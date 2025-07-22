@@ -14,7 +14,7 @@ import { RadixConf } from "@/radix/radixconf";
 
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { es } from 'date-fns/locale/es';
-import { RADIX_COLORS } from "@/radix/radixconstants";
+import {RADIX_COLORS} from '@/radix/radixconf';
 
 registerLocale('es', es);
 
