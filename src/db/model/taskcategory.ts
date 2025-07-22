@@ -9,11 +9,11 @@ export class Taskcategory {
 
     public id: string;
     public workflow_id: string;
-    public name: string;
+    public name: string|null;
     public description: string|null;
     //public tasks?:Task[];
     
-    constructor(id:string,workflow_id:string,name:string,description:string|null) {//,tasks?:Task[]
+    constructor(id:string,workflow_id:string,name:string|null,description:string|null) {//,tasks?:Task[]
         this.id          = id;
         this.workflow_id = workflow_id;
         this.name        = name;

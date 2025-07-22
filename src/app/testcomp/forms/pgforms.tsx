@@ -1,6 +1,6 @@
 //src\app\testcomp\playground.tsx
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes";
 import { CgConfig } from "@/codegen/cgconfig";
@@ -17,27 +17,29 @@ import { GenerateKeys } from "@/common/helper/generatekeys";
 export const layoutStyle = {
     background: 'rgb(7, 7, 7)',
     border: '2px solidrgb(98, 97, 98)',
-    padding: 'var(--space-2)',
+    padding: 'var(--space-2)'
 };
+
 
 /**
  * Desktop Forms test
  * const [validations,setValidations] = useState<Validation[]>([]);
  */
-interface CompProps { mode?: string; }
+interface CompProps { workflow_id: string; }
 
-export function PgForms({ mode }: CompProps) {
-  
-    //
-    const [taskcategory, setTaskcategory] = useState<Taskcategory|null>(null);
+export function PgForms({ workflow_id }: CompProps) {
 
+    const [validations,setValidations] = useState<Validation[]>([]);
+    const newItemId = GenerateKeys.genAlphaNum16();
+    const [taskcategory, setTaskcategory] = useState<Taskcategory>
+        (new Taskcategory(newItemId,workflow_id,null,null));
+
+    const workflowRef    = useRef<HTMLSelectElement>(null);
+    const nameRef        = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        //const sss:Taskcategory 
-        //const codecont: string = XFormsGen.generateForm(jsonTemplate);
-        const itemId:string = GenerateKeys.genAlphaNum16(); 
-        //const taskcategory:Taskcategory;
-        console.log(jsonObj);
+        //const itemId:string = GenerateKeys.genAlphaNum16(); 
     }, []);
 
 

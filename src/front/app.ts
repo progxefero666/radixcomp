@@ -1,8 +1,10 @@
 //src\front\app.ts
 
 import { JsonResponse } from "@/common/model/jsonreponse";
+import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { initDatabase } from "@/db/services/databaseinit";
 import { Proglanguage } from "@generated/prisma";
+import { AppMemmory } from "./appmemory";
 
 
 /**
@@ -16,15 +18,15 @@ export class AppGenerator {
         return result;
     };//end
 
-    public static async readProglanguages(): Promise<string | null> {
+    public static async saveInMemoryProglanguages(): Promise<void> {
         const response = await fetch("/api/proglanguages");
         if (!response.ok) {
             console.error("Failed to fetch programming languages");
-            return new JsonResponse("ERROR", "Programming languages read failed.", null).toJson();
+            return;
         }
         const data = await response.json();
-        return new JsonResponse("SUCCESS", "Programming languages read success.", data).toJson();
-    
+        const proglanguages: Proglanguage[]|null = await parseResponseCollection<Proglanguage>(data);
+        AppMemmory.saveProglanguages(JSON.stringify(proglanguages));    
     };//end
 
 }//end class

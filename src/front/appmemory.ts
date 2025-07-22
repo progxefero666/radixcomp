@@ -9,14 +9,14 @@ import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 
 
 /**
- * class AppMemmory.
+ * class AppMemmory.saveProglanguages
  */
 
 export class AppMemmory {
 
     static NOT_FOUND:string  = "not_found";
     static DB_ESQUEMA:string  = "dbsquema";
-    static PROGLANGUAGES:string  = "proglanguage";
+    static PROGLANGUAGES:string  = "proglanguages";
 
     
     public static saveDbSquema(sql_script: string): void {
@@ -30,7 +30,16 @@ export class AppMemmory {
         return StorageService.read(AppMemmory.DB_ESQUEMA)!;
     }
 
+    public static saveProglanguages(proglanguages:string): void {
+        StorageService.save(AppMemmory.PROGLANGUAGES,proglanguages);
+    }
 
+    public static readCProglanguages(): string|null {
+        if(!StorageService.exist(AppMemmory.PROGLANGUAGES)){
+            return null; 
+        }
+        return StorageService.read(AppMemmory.PROGLANGUAGES)!;
+    }
 } //end class
 
 /*
