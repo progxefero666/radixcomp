@@ -54,21 +54,6 @@ export class RadixConstants {
 
 }//end class 
 
-export enum RADIX_SIZES {
-    size_1= "1",
-    size_2= "2",
-    size_3= "3",
-    size_4= "4",
-};
-
-/*
-export enum RADIX_RADIUS  {
-    none    = "none",
-    small   = "small",
-    medium  = "medium",
-    large   = "large",
-    full    = "full"
-};*/
 
 export enum RADIX_COLORS {
     gray= "gray",

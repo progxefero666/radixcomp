@@ -39,7 +39,7 @@ export const getInputTextIcon = (inputType: any) => {
     }
 };
 /**
- * RadixConf.RADIUS
+ * RadixConf.SIZES
  */
 export class RadixConf {
 
