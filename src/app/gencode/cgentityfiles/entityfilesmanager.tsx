@@ -4,7 +4,6 @@
 import { useState, useEffect, useRef } from "react";
 
 import { Box, Grid, Flex, Text, Button, } from "@radix-ui/themes";
-import { ThemePagesStyles } from "@/radix/radixtheme";
 import { SeparatorH } from "@/radix/container/separatorh";
 import { AppMemmory } from "@/front/appmemory";
 import { XCheckGroup } from "@/radix/input/inpgrpcheck";
@@ -253,7 +252,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     };//end
 
     return (
-        <Flex width="100%" direction="column" pt="2" style={ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE} >
+        <Flex width="100%" direction="column" pt="2" px="4"  >
             {initialized ?
                 <>
                     <CardDatabase initsquemapath={AppConfig.DBSQUEMA_FPATH} />

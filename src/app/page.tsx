@@ -12,12 +12,7 @@ import { PgForms } from "@/app/testcomp/forms/pgforms";
 import { GenerateKeys } from "@/common/helper/generatekeys";
 import { AppGenerator } from "@/front/app";
 import { Template } from "@/db/model/template";
-
-
-const layoutStyle = {
-    background: 'rgb(153, 17, 62)',
-    padding: '0',
-};
+import { PagesStyles } from "@/radix/radixtheme";
 
 export const columnStyle = {
     borderColor: 'rgb(98, 97, 98)',
@@ -56,7 +51,7 @@ export default function PageTest() {
     // component render
     //.......................................................................................
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
+        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={PagesStyles.GC_CONTROL_LAYOUT_STYLE} >
             
             <Flex gridColumn="1/4" gridRow="1" >
                  <TestHeader  />  

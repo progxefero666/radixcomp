@@ -3,7 +3,6 @@
 import { RadixConf } from "@/radix/radixconf";
 import { TRadixComponent } from "@/radix/radixtypes";
 import {RADIX_COLORS} from '@/radix/radixconf';
-import { Keyvalue } from "@/common/model/keyvalue";
 import { Stylevalue } from "./models/stylevalue";
 
 /**
@@ -43,6 +42,14 @@ export class RadixTheme {
 
 }//end class
 
+/**
+ * class PagesStyles.GC_CONTROL_LAYOUT_STYLE
+ */
+export class PagesStyles {
+    public static readonly  GC_CONTROL_LAYOUT_STYLE = {
+        background: 'rgb(153, 17, 62)'
+    };
+}//end class
 
 /**
  * class TextStyle.SIZE_MEDIUM
@@ -81,7 +88,6 @@ export class ThemeStyle {
         border: '1px solid rgb(167, 176, 188)'
     };
 
-
 }//end class
 
 /**
@@ -105,12 +111,6 @@ export class CompStyle {
         borderRadius: "var(--radius-3)",
     };
 
-}//end class
-
-export class ThemePagesStyles {
-    public static readonly  GC_CONTROL_LAYOUT_STYLE = {
-        padding: '6px 8px 0px 8px'
-    };
 }//end class
 
 export class IconsStyle {

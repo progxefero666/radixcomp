@@ -8,12 +8,7 @@ import { Header } from "./page/header";
 import { MainBar } from "./page/mainbar";
 import { MainContent } from "./page/maincontent";
 import { SecondContent } from "./page/secondcontent";
-
-
-const layoutStyle = {
-    background: 'rgb(153, 17, 62)',
-    padding: '0',
-};
+import { PagesStyles } from "@/radix/radixtheme";
 
 export default function PageDiagrams() {
 
@@ -28,7 +23,7 @@ export default function PageDiagrams() {
     };
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={layoutStyle} >
+        <Grid height="100vh" rows="auto 1fr" columns="14% 41% 41% 4%" style={PagesStyles.GC_CONTROL_LAYOUT_STYLE} >
 
             <Flex gridColumn="1/5" gridRow="1" >
                 <Header section={actsection} />

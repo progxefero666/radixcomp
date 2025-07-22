@@ -62,8 +62,6 @@ export class XFormsGenerator {
         return result;
     };//end
 
-
-
     public static genImports(): string {
         let result: string = `import { useState, useEffect, useRef } from "react";`+ CgConfig.RET;
         result += `import { Validation } from "@/common/model/validation";` + CgConfig.RETx2;

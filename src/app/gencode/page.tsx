@@ -25,6 +25,7 @@ import { initDatabase } from "@/db/services/databaseinit";
 import { AppGenerator } from "@/front/app";
 import { Proglanguage } from "@/db/model/proglanguage";
 import { parseResponseCollection } from "@/common/parsers/javascriptparser";
+import { PagesStyles } from "@/radix/radixtheme";
 
 
 //const router = useRouter();
@@ -168,7 +169,7 @@ export default function PageGenCode() {
     // jsx
     //...............................................................................    
     return (
-        <Flex direction="column" height="auto">
+        <Flex direction="column" height="auto" style={PagesStyles.GC_CONTROL_LAYOUT_STYLE}>
 
             <PageHeader />
             

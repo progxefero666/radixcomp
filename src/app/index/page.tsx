@@ -9,12 +9,8 @@ import PrimaryBar from "@/app/index/primarybar";
 import SecondBar from "@/app/index/secondbar";
 import MainContent from "@/app/index/maincontent";
 import { AppConfig } from "@/app/index/appconfig";
+import { PagesStyles } from "@/radix/radixtheme";
 
-
-const layoutStyle = {
-    background: 'rgb(153, 17, 62)',
-    padding: '0',
-};
 
 /**
  * Application Main page 
@@ -31,7 +27,7 @@ export default function Home() {
 
 
     return (
-        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
+        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={PagesStyles.GC_CONTROL_LAYOUT_STYLE} >
             
             <Flex gridColumn="1/4" gridRow="1" >
                 <Header module={actmodRef.current} />    

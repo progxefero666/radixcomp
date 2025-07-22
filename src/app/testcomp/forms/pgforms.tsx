@@ -33,18 +33,17 @@ export const styleBar = {
 };
 
 
-
+/**
+ * Component Playground test XForms
+ */
 interface CompProps { 
     itemId: string; 
     title:string;
     onSubmit:(entity:Template)=>void;
     onCancel?:()=>void;
 };
+
 export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
-
-    const execAllValidations:boolean = false;
-
-    const [validations,setValidations] = useState<Validation[]>([]);    
 
     // entity
     //.......................................................................................
@@ -56,6 +55,8 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
 
     // validations
     //.......................................................................................    
+    const execAllValidations:boolean = false;
+    const [validations,setValidations] = useState<Validation[]>([]);        
     const validate = (): boolean => {
 
         let result: boolean = true;
