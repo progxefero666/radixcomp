@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { Link, Flex, Text, Button, Box, Container, Grid, Separator } from "@radix-ui/themes";
+import { Flex, Text, Button, Box, Grid, Separator } from "@radix-ui/themes";
 import { Option } from "@/common/model/option";
 import { Validation } from "@/common/model/validation";
 
@@ -13,7 +13,6 @@ import { Template } from "@/db/model/template";
 import { AppMemmory } from "@/front/appmemory";
 import { XInputTextArea } from "@/radix/input/inptextarea";
 import { ButtonsStyle, COMP_BORDER_STYLE } from "@/radix/radixtheme";
-import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
 import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { Constants, OpConstants } from "@/common/constants";
 import { XForms } from "@/codegen/forms/xforms";
@@ -39,7 +38,6 @@ interface CompProps { template_id: string; }
 export function PgForms({ template_id }: CompProps) {
 
     const [ready, setReady] = useState<boolean>(false);
-
     const [validations,setValidations] = useState<Validation[]>([]);    
     const [templates, setTemplates] = useState<Template>(new Template(template_id,null,null,null));
 
@@ -53,24 +51,12 @@ export function PgForms({ template_id }: CompProps) {
         //const itemId:string = GenerateKeys.genAlphaNum16(); 
     }, []);
 
-    const validateItem = (ftype:string,value:any,format:any|null,min:number|null,max:number|null):Validation => {
-        
-        const validation:Validation = new Validation(ftype,Constants.SUCCESS);
-        
-        switch(ftype) {
-            case XForms.FT_TEXT: break;
-            case XForms.FT_TEXTAREA: break;
-            case XForms.FT_NUMBER: break;
-            case XForms.FT_DECIMAL: break;
-            case XForms.FT_COLLECTION: break;                
-            case XForms.FT_DATE: break;
-            case XForms.FT_DATETIME: break;
-        }//end switch
 
-        return validation;
+    const onFormSubmit = () => {
+
     };//end
 
-    const onSubmit = (commandId: string) => {
+    const onFormCancel = () => {
 
     };//end
 
@@ -116,14 +102,14 @@ export function PgForms({ template_id }: CompProps) {
                 <Button color={ButtonsStyle.COLOR_SAVE}
                         radius={ButtonsStyle.DEF_RADIUS}                        
                         size={ButtonsStyle.DEF_SIZE}
-                        onClick={() => onSubmit(OpConstants.OP_SAVE)} >
+                        onClick={() => onFormSubmit()} >
                     {DB_ITEM_CMD_TEXT.SAVE}
                 </Button>
 
                 <Button color={ButtonsStyle.COLOR_SAVE}
                         radius={ButtonsStyle.DEF_RADIUS}                        
                         size={ButtonsStyle.DEF_SIZE}
-                        onClick={() => onSubmit(OpConstants.OP_CANCEL)} >
+                        onClick={() => onFormCancel()} >
                     {DB_ITEM_CMD_TEXT.CANCEL}
                 </Button>
 
