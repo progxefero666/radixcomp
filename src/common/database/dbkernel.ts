@@ -6,7 +6,7 @@ export enum DB_ITEM_CMD {
     OPEN    = "open",
     UPDATE  = "update",
     DELETE  = "delete",
-    CANCEL    = "cancel",
+    CANCEL   = "cancel",
     SELECT  = "select",
     MOVEUP  = "moveup",
     MOVEDOWN= "movedown",    
@@ -17,7 +17,9 @@ export enum DB_ITEM_CMD {
 
 export enum DB_ITEM_CMD_TEXT {   
     INSERT    = "new", 
-    UPDATE    = "Save",
+    SAVE    = "Save",
+    CANCEL    = "Cancel",
+    UPDATE    = "Update",
     OPEN    = "open",
     DELETE  = "delete",
     SELECT  = "select",

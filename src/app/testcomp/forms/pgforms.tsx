@@ -3,28 +3,26 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Link, Flex, Text, Button, Box, Container, Grid } from "@radix-ui/themes";
-import { CgConfig } from "@/codegen/cgconfig";
-import { TextHelper } from "@/common/helper/texthelper";
-import { InputValue } from "@/common/model/inputvalue";
+import { Option } from "@/common/model/option";
 import { Validation } from "@/common/model/validation";
 
-import jsonObj from "@/db/modeljson/tascategory.json";
-import { Taskcategory } from "@/db/model/taskcategory";
-import { GenerateKeys } from "@/common/helper/generatekeys";
-import { Template } from "@/db/model/template";
 import { XInputText } from "@/radix/input/inptext";
 import { XInputSelect } from "@/radix/input/inpselect";
-import { AppMemmory } from "@/front/appmemory";
-import { Proglanguage } from "@/db/model/proglanguage";
 
-//const jsonObj:any = JSON.parse(jsonTable.toString());
+import { Template } from "@/db/model/template";
+import { AppMemmory } from "@/front/appmemory";
+import { XInputTextArea } from "@/radix/input/inptextarea";
+import { ButtonsStyle, COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
+import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
+import { OpConstants } from "@/common/constants";
+
 
 export const layoutStyle = {
     background: 'rgb(7, 7, 7)',
     border: '2px solidrgb(98, 97, 98)',
     padding: 'var(--space-2)'
 };
-
 
 /**
  * Desktop Forms test
@@ -35,18 +33,21 @@ interface CompProps { template_id: string; }
 export function PgForms({ template_id }: CompProps) {
 
     const [validations,setValidations] = useState<Validation[]>([]);    
-    const [taskcategory, setTaskcategory] = useState<Template>(new Template(template_id,null,null,null));
+    const [templates, setTemplates] = useState<Template>(new Template(template_id,null,null,null));
 
     const proglanguageRef = useRef<HTMLSelectElement>(null);
     const nameRef         = useRef<HTMLInputElement>(null);
     const datacodeRef     = useRef<HTMLInputElement>(null);
 
-    const proglanguages:Proglanguage[] = AppMemmory.readProglanguages();
+    const proglanguages:Option[] = AppMemmory.readProglanguages();
 
     useEffect(() => {
         //const itemId:string = GenerateKeys.genAlphaNum16(); 
     }, []);
 
+    const onSubmit = (commandId: string) => {
+
+    };//end
 
     return (
         <Box width="100%" p="2" style={layoutStyle} >
@@ -55,7 +56,7 @@ export function PgForms({ template_id }: CompProps) {
                 <Text size="3" style={{ color: 'white' }}>Template Form</Text>
             </Flex>
 
-            <Flex width="100%" direction="column" p="2" style={layoutStyle} >
+            <Flex width="100%" direction="column" gapY="1" style={layoutStyle} >
   
                 <XInputText 
                     ref={nameRef}
@@ -70,8 +71,35 @@ export function PgForms({ template_id }: CompProps) {
                     ref={proglanguageRef} 
                     name="Code language"
                     label="Code language"
-                    collection={[]} 
-                    defaul="typescript" />    
+                    collection={proglanguages} 
+                    defaul={proglanguages[0].id} />    
+
+                <XInputTextArea 
+                    ref={datacodeRef}
+                    name="datacode"
+                    label="Data code"
+                    placeholder="template data code"
+                    minlen={5} />
+
+            </Flex>
+            
+            <Flex direction="row" justify="center" align="center" gapX="2" 
+                  style={COMP_BORDER_STYLE} >
+
+                <Button color={ButtonsStyle.COLOR_SAVE}
+                        radius={ButtonsStyle.DEF_RADIUS}                        
+                        size={ButtonsStyle.DEF_SIZE}
+                        onClick={() => onSubmit(OpConstants.OP_SAVE)} >
+                    {DB_ITEM_CMD_TEXT.SAVE}
+                </Button>
+
+                <Button color={ButtonsStyle.COLOR_SAVE}
+                        radius={ButtonsStyle.DEF_RADIUS}                        
+                        size={ButtonsStyle.DEF_SIZE}
+                        onClick={() => onSubmit(OpConstants.OP_CANCEL)} >
+                    {DB_ITEM_CMD_TEXT.CANCEL}
+                </Button>
+
             </Flex>
 
         </Box>

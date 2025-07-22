@@ -1,11 +1,10 @@
 // File: src/app/appstorage.service.ts
 
 import { StorageService } from "@/common/storage";
-import { DbTables } from "@/db/dbcatalog";
-
-
+import { Option } from "@/common/model/option";
 import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { Proglanguage } from "@/db/model/proglanguage";
+import { getProglanguagesAsOptions } from "@/db/services/util/dbutil";
 
 
 
@@ -36,18 +35,19 @@ export class AppMemmory {
     }
 
 
-    public static readProglanguages(): Proglanguage[]  {
+    public static readProglanguages(): Option[]  {
         if(!StorageService.exist(AppMemmory.PROGLANGUAGES)){
             return []; 
         }
         const json = StorageService.read(AppMemmory.PROGLANGUAGES);
-        return parseResponseCollection<Proglanguage>(json)!;
+        const proglanguages:Proglanguage[] = parseResponseCollection<Proglanguage>(json)!;
+        return getProglanguagesAsOptions(proglanguages);
     }   
 
 } //end class
 
 /*
-
+Option[]
     public static readProglanguages(): string|null {
         if(!StorageService.exist(AppMemmory.PROGLANGUAGES)){
             return null; 
