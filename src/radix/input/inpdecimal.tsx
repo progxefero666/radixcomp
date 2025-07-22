@@ -7,8 +7,8 @@ import { forwardRef } from "react";
 import { Box, Flex,TextField } from "@radix-ui/themes";
 import { CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
-import { RadixConf } from "@/radix/radixconf";
-import { RadixKeys } from "@/radix/radixconstants";
+import { RadixConf, RadixConstants } from "@/radix/radixconf";
+
 
 /**
  * InputTextComponent
@@ -93,7 +93,7 @@ export const XInputDecimal = forwardRef<HTMLInputElement,CompProps>
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === RadixKeys.KEY_INTRO) {
+        if (e.key === RadixConstants.KEY_INTRO) {
             triggerOnSubmit(internalValue);
         }
     };

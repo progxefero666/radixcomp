@@ -1,5 +1,4 @@
-// File: src\radix\radixconstants.ts
-import { Keyvalue } from "@/common/model/keyvalue";
+
 
 
 export enum CONTROL_TYPES {
@@ -15,44 +14,6 @@ export enum CONTROL_TYPES {
     SEARCH   = "search",
     FILE     = "file"   
 }
-
-/*
-- FormControl` es un wrapper sobre el elemento nativo `<input>`, 
-        soporta todos los atributos HTML estándar como:
-- `required` 
-- `disabled` 
-- `readOnly` 
-- `placeholder` 
-- `maxLength`
-- `minLength`
-- `min`
-- `max`
-- `step` 
-- `pattern` 
-- `accept`
-- `multiple`
-*/
-
-
-/**
- * class RadixConstants.ITEM_CHECKED RadixConstants.ITEM_UNCHECKED
- *  
- */
-export class RadixConstants {   
-
-    public static readonly RADIX_VERSION: string = "0.1.0";
-    public static readonly RADIX_NAME: string = "Radix UI";
-    public static readonly RADIX_AUTHOR: string = "NextApps";
-    public static readonly RADIX_URL: string = "https://nextapps.dev/radixui";
-    public static readonly RADIX_LICENSE: string = "MIT License";
-
-    public static readonly RADIX_THEME_LIGHT: string = "light";
-    public static readonly RADIX_THEME_DARK: string = "dark";
-
-    public static readonly ITEM_CHECKED: string = "1";
-    public static readonly ITEM_UNCHECKED: string = "2";
-
-}//end class 
 
 
 export enum RADIX_COLORS {
@@ -92,29 +53,3 @@ export class RadixOpsText{
     public static readonly CANCEL: string = "Cancel";
 }
 
-/**
- * class RadixKeys.KEY_INTRO
- */
-export class RadixKeys {   
-    public static readonly KEY_INTRO: string = "Enter";
-}//end class 
-
-export class RadixKeyvalue {
-
-    public key: string;
-    public value: string;
-
-    constructor(key: string, value: string) {
-        this.key = key;
-        this.value = value;
-    }
-
-    public toJsonString(): string {
-        return JSON.stringify(this, null, 4);
-    }
-
-    public static build(jsonString: string): RadixKeyvalue {
-        const obj = JSON.parse(jsonString);
-        return new RadixKeyvalue(obj.key, obj.value);
-    }
-}//end class

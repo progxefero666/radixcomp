@@ -5,8 +5,8 @@ import { forwardRef } from "react";
 import { Box, Flex, TextField } from "@radix-ui/themes";
 import { CompStyle, CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
-import { INPUT_TEXT_TYPES, RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS, RadixKeys } from "src/radix/radixconstants";
+import { INPUT_TEXT_TYPES, RadixConf, RadixConstants } from "@/radix/radixconf";
+import { RADIX_COLORS } from "src/radix/radixconstants";
 
 
 /**
@@ -52,7 +52,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     };//end
 
     const handleOnSubmmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === RadixKeys.KEY_INTRO) {
+        if (e.key === RadixConstants.KEY_INTRO) {
             if (onsubmit) {
                 if (name !== null) {onsubmit(defaultValue, name);}
                 else {onsubmit(defaultValue);}

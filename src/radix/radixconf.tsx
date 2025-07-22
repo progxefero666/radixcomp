@@ -38,6 +38,29 @@ export const getInputTextIcon = (inputType: any) => {
             return null;
     }
 };
+
+/**
+ * RadixConstants.KEY_INTRO
+ */
+export class RadixConstants {   
+
+    public static readonly RADIX_VERSION: string = "0.1.0";
+    public static readonly RADIX_NAME: string = "Radix UI";
+    public static readonly RADIX_AUTHOR: string = "NextApps";
+    public static readonly RADIX_URL: string = "https://nextapps.dev/radixui";
+    public static readonly RADIX_LICENSE: string = "MIT License";
+
+    public static readonly RADIX_THEME_LIGHT: string = "light";
+    public static readonly RADIX_THEME_DARK: string = "dark";
+
+    public static readonly ITEM_CHECKED: string = "1";
+    public static readonly ITEM_UNCHECKED: string = "2";
+
+     public static readonly KEY_INTRO: string = "Enter";
+
+}//end class 
+
+
 /**
  * RadixConf.SIZES
  */

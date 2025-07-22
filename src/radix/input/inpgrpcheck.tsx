@@ -2,13 +2,13 @@
 
 import { forwardRef, useEffect, useState } from "react";
 import { Flex, Text, RadioGroup, CheckboxGroup, Box } from "@radix-ui/themes";
-import { RadixConf } from "@/radix/radixconf";
+import { RadixConf, RadixConstants } from "@/radix/radixconf";
 import { TRadixComponent } from "@/radix/radixtypes";
 
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { RadixUtil } from "../radixutil";
 import { TOption, TSelected, TSelection } from "@/radix/radixtypes";
-import { RADIX_COLORS, RadixConstants } from "../radixconstants";
+import { RADIX_COLORS } from "../radixconstants";
 
 /*
 <CheckboxGroup.Root defaultValue={["1"]} name="example">
