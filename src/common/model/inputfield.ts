@@ -35,7 +35,7 @@ export class InputField {
 
     public static build(jsonString: string): Option {
         const obj = JSON.parse(jsonString);
-        return new Option(obj.name, obj.title, obj.icon, null, null);
+        return new Option(obj.name, obj.title, obj.icon);
     }
 
 }//end class

@@ -7,14 +7,11 @@ import { Option } from "@/common/model/option";
  */
 export class AppEditorCfg {
 
-    public static readonly SECTION_MAIN: Option = new Option
-        ("main", "Main", null,null,null);
+    public static readonly SECTION_MAIN: Option = new Option("main", "Main");
 
-    public static readonly SECTION_DOCS: Option = new Option
-        ("docs", "Documents",  null,null,null);
+    public static readonly SECTION_DOCS: Option = new Option("docs", "Documents");
 
-    public static readonly SECTION_TASKS: Option
-        = new Option("task", "Tasks",  null,null,null);
+    public static readonly SECTION_TASKS: Option= new Option("task", "Tasks");
 
     public static readonly SECTIONS: Option[]=[
         AppEditorCfg.SECTION_MAIN,

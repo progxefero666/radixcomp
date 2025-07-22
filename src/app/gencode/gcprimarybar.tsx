@@ -1,15 +1,10 @@
 //src\app\gencode\pagecomp\gcprimarybar.tsx
 
 import { useState, useEffect, useRef } from "react";
-import { Option } from "@/common/model/option";
 import { Box, Grid, Separator, Flex, Text, Button, Link, IconButton } from "@radix-ui/themes";
-
-
 import MenuButtons from "@/radix/cbars/btmenu";
-
 import { CodeGenModules } from "@/codegen/cgoperations";
 import { COMP_BORDER_STYLE, IconsStyle } from "@/radix/radixtheme";
-import { DB_ITEM_CMD } from "@/common/database/dbkernel";
 import { ArrowLeftIcon, ArrowRightIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 

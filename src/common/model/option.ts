@@ -9,16 +9,11 @@ export class Option {
     public id: string;
     public text: string;
     public icon: string | null = null;
-    public path: string | null = null;
-    public url: string | null = null;
 
-    constructor(name: string, text: string,
-        icon: string | null, path?: string | null, url?: string | null) {
+    constructor(name:string,text:string,icon?:string) {
         this.id = name;
         this.text = text;
-        this.icon = icon;
-        this.path = path ?? null;
-        this.url = url ?? null;
+        this.icon = icon ?? null;
     }
 
     public toJsonString(): string {
@@ -27,7 +22,7 @@ export class Option {
 
     public static build(jsonString: string): Option {
         const obj = JSON.parse(jsonString);
-        return new Option(obj.name, obj.title, obj.icon, null, null);
+        return new Option(obj.name, obj.title, obj.icon);
     }
 
 }//end class

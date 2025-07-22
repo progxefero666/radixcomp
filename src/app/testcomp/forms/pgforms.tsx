@@ -11,6 +11,11 @@ import { Validation } from "@/common/model/validation";
 import jsonObj from "@/db/modeljson/tascategory.json";
 import { Taskcategory } from "@/db/model/taskcategory";
 import { GenerateKeys } from "@/common/helper/generatekeys";
+import { Template } from "@/db/model/template";
+import { XInputText } from "@/radix/input/inptext";
+import { XInputSelect } from "@/radix/input/inpselect";
+import { AppMemmory } from "@/front/appmemory";
+import { Proglanguage } from "@/db/model/proglanguage";
 
 //const jsonObj:any = JSON.parse(jsonTable.toString());
 
@@ -25,18 +30,18 @@ export const layoutStyle = {
  * Desktop Forms test
  * const [validations,setValidations] = useState<Validation[]>([]);
  */
-interface CompProps { workflow_id: string; }
+interface CompProps { template_id: string; }
 
-export function PgForms({ workflow_id }: CompProps) {
+export function PgForms({ template_id }: CompProps) {
 
-    const [validations,setValidations] = useState<Validation[]>([]);
-    const newItemId = GenerateKeys.genAlphaNum16();
-    const [taskcategory, setTaskcategory] = useState<Taskcategory>
-        (new Taskcategory(newItemId,workflow_id,null,null));
+    const [validations,setValidations] = useState<Validation[]>([]);    
+    const [taskcategory, setTaskcategory] = useState<Template>(new Template(template_id,null,null,null));
 
-    const workflowRef    = useRef<HTMLSelectElement>(null);
-    const nameRef        = useRef<HTMLInputElement>(null);
-    const descriptionRef = useRef<HTMLInputElement>(null);
+    const proglanguageRef = useRef<HTMLSelectElement>(null);
+    const nameRef         = useRef<HTMLInputElement>(null);
+    const datacodeRef     = useRef<HTMLInputElement>(null);
+
+    const proglanguages:Proglanguage[] = AppMemmory.readProglanguages();
 
     useEffect(() => {
         //const itemId:string = GenerateKeys.genAlphaNum16(); 
@@ -44,79 +49,71 @@ export function PgForms({ workflow_id }: CompProps) {
 
 
     return (
-        <Flex width="100%" direction="column" style={layoutStyle} >
+        <Box width="100%" p="2" style={layoutStyle} >
   
-        </Flex>
+            <Flex width="100%" direction="row" style={layoutStyle} >
+                <Text size="3" style={{ color: 'white' }}>Template Form</Text>
+            </Flex>
+
+            <Flex width="100%" direction="column" p="2" style={layoutStyle} >
+  
+                <XInputText 
+                    ref={nameRef}
+                    name="name"
+                    label="Name"
+                    autofocus={true}
+                    placeholder="template name"
+                    minlen={5}
+                    maxlen={100} />
+
+                <XInputSelect 
+                    ref={proglanguageRef} 
+                    name="Code language"
+                    label="Code language"
+                    collection={[]} 
+                    defaul="typescript" />    
+            </Flex>
+
+        </Box>
     );
 
 }//end component
 
 
 export const jsonTemplate: string =
-`{
-    "name": "taskcategory",
-    "fields":[
-        {
-            "name": "id",
-            "type": "text",
-            "required": true,
-            "generated": false,
-            "default": null,
-            "format": null,
-            "pk": true,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 16,
-            "validation":{"result":true,"message":null},
-            "relations": null
-        },
-        {
-            "name": "workflow_id",
-            "type": "text",
-            "required": true,
-            "generated": false,
-            "default": null,
-            "format": null,
-            "pk": false,
-            "fk": true,
-            "minlen": null,
-            "maxlen": 16,
-            "validation":{"result":true,"message":null},
-            "relations": [
-                {
-                    "table": "workflow",
-                    "field": "id"
-                }
-            ]
-        },
-        {
-            "name": "name",
-            "type": "text",
-            "required": true,
-            "generated": false,
-            "default": null,
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 100,
-            "validation":{"result":true,"message":null},
-            "relations": null
-        },
-        {
-            "name": "description",
-            "type": "text",
-            "required": false,
-            "generated": false,
-            "default": null,
-            "format": null,
-            "pk": false,
-            "fk": false,
-            "minlen": null,
-            "maxlen": 100,
-            "validation":{"result":true,"message":null},
-            "relations": null
+`export class Template {
+
+    public id: string;
+    public name: string|null;
+    public proglanguage_id: string|null;
+    public datacode: string|null;
+
+    constructor(id:string,name:string|null,proglanguage_id:string|null,datacode: string|null) {
+        this.id = id;
+        this.name = name;
+        this.proglanguage_id = proglanguage_id;
+        this.datacode = datacode;
+    };//end
+
+
+    public minlen(fieldName: string): number | null {
+        return 0;
+     };//end
+
+    public maxlen(fieldName: string): number | null {
+        if (fieldName === "id") {
+            return 16;
         }
-    ]
-}
-`;
+        if (fieldName === "name") {
+            return 100;
+        }
+        if (fieldName === "proglanguage_id") {
+            return 16;
+        }
+        if (fieldName === "datacode") {
+            return -1; // unlimited length
+        }
+        return 0;
+     };//end
+
+}`;

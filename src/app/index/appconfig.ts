@@ -12,18 +12,12 @@ export class AppConfig {
     public static readonly DBSQUEMA_FPATH: string 
         = "C:\claudeapps\nextapps\aigenerator\public\data\dbsquema.sql";
 
-    public static readonly INDEX: Option = new Option("./","Home",null,null,null);
+    public static readonly INDEX: Option = new Option("./","Home");
 
     // list modules
-    public static readonly MOD_GENCODE: Option 
-        = new Option("./gencode","Code Generator",null,null,null);
-
-
-    public static readonly MOD_APPLICATIONS: Option 
-        = new Option("./applications","Applications",null,null,null);
-
-    public static readonly MOD_PLATFORM: Option 
-        = new Option("./platform","Pc Platform",null,null,null);
+    public static readonly MOD_GENCODE: Option = new Option("./gencode","Code Generator");
+    public static readonly MOD_APPLICATIONS: Option = new Option("./applications","Applications");
+    public static readonly MOD_PLATFORM: Option = new Option("./platform","Pc Platform");
 
     public static readonly MODULES: Option[] = [
         AppConfig.MOD_GENCODE,        

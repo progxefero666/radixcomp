@@ -5,6 +5,7 @@ import { DbTables } from "@/db/dbcatalog";
 
 
 import { parseResponseCollection } from "@/common/parsers/javascriptparser";
+import { Proglanguage } from "@/db/model/proglanguage";
 
 
 
@@ -34,35 +35,24 @@ export class AppMemmory {
         StorageService.save(AppMemmory.PROGLANGUAGES,proglanguages);
     }
 
-    public static readCProglanguages(): string|null {
+
+    public static readProglanguages(): Proglanguage[]  {
+        if(!StorageService.exist(AppMemmory.PROGLANGUAGES)){
+            return []; 
+        }
+        const json = StorageService.read(AppMemmory.PROGLANGUAGES);
+        return parseResponseCollection<Proglanguage>(json)!;
+    }   
+
+} //end class
+
+/*
+
+    public static readProglanguages(): string|null {
         if(!StorageService.exist(AppMemmory.PROGLANGUAGES)){
             return null; 
         }
         return StorageService.read(AppMemmory.PROGLANGUAGES)!;
     }
-} //end class
 
-/*
-
-    public static saveCodelangs(codelangs:string): void {
-        StorageService.save(AppMemmory.CODELANGS,codelangs);
-    }
-
-    public static readCodelangs(): string|null {
-        if(!StorageService.exist(AppMemmory.CODELANGS)){
-            return null; 
-        }
-        return StorageService.read(AppMemmory.CODELANGS)!;
-    }
-export  async function saveMemmoryCodelangs(): Promise<void>  {
-    const response = await getAllRows(DbTables.codelang);
-    if (response === null) {return;}
-    const collection: Codelang[] | null = parseResponseCollection<Codelang>(response);
-    AppMemmory.saveCodelangs(JSON.stringify(collection, null, 4)); 
-}
-
-export function readMemmoryCodelangs(): Codelang[]  {
-    const codelangsJson = AppMemmory.readCodelangs();
-    return parseResponseCollection<Codelang>(codelangsJson)!;
-}
 */

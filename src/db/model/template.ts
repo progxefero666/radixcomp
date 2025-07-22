@@ -6,32 +6,22 @@
 export class Template {
 
     public id: string;
-    public name: string;
-    public proglanguage_id: string;
-    public datacode: string;
+    public name: string|null;
+    public proglanguage_id: string|null;
+    public datacode: string|null;
 
-    constructor(id:string,name:string,proglanguage_id:string,datacode: string) {
+    constructor(id:string,name:string|null,proglanguage_id:string|null,datacode: string|null) {
         this.id = id;
         this.name = name;
         this.proglanguage_id = proglanguage_id;
         this.datacode = datacode;
     };//end
 
-    /**
-     * Returns the minimum length of the field.
-     * @param fieldName The name of the field.
-     * @returns The minimum length of the field or null if not applicable.
-     */
+
     public minlen(fieldName: string): number | null {
         return 0;
      };//end
 
-    /**
-     * Returns the max length of the field.
-     * Returns -1 if has unlimited length.
-     * @param fieldName The name of the field.
-     * @returns The maximum length of the field or null if not applicable.
-     */
     public maxlen(fieldName: string): number | null {
         if (fieldName === "id") {
             return 16;

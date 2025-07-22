@@ -49,7 +49,7 @@ export default function PageTest() {
                 </Flex>    
             
                 <Flex width="68%" style={{ flex: '1 1 68%', minHeight: '100%' }}>
-                    <PgForms  workflow_id={workflow_id} />
+                    <PgForms  template_id={workflow_id} />
                 </Flex>
 
                 <Flex width="16%" style={{ flex: '0 0 16%', minHeight: '100%' }}>                    

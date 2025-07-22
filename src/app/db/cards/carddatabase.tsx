@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { Option } from "@/common/model/option";
 import { Box,Text, Flex, Select, TextField, Button } from "@radix-ui/themes";
-import { RadixConf } from "@/radix/radixconf";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 import { BARCFG_EXPORT } from "../../../radix/appbars";
 import ContCollapsible from "@/radix/container/collap";

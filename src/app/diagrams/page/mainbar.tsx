@@ -13,8 +13,8 @@ const primaryBarStyle = {
 };
 
 const MODULE_SECTIONS: Option[] = [
-    new Option("section_1", "Section 1",null),
-    new Option("section_2", "Section 2",null),
+    new Option("section_1", "Section 1"),
+    new Option("section_2", "Section 2"),
 ];
 
 interface CompProps {    

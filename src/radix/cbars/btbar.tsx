@@ -1,9 +1,7 @@
 //src\radix\cbars\btbar.tsx
 
-import { radixTypeComp } from "../radixtypes";
-import { Option } from "@/common/model/option";
+
 import { Flex, Button, } from "@radix-ui/themes";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { ButtonsStyle } from "../radixtheme";
 import { BarButtonsCfg } from "@/radix/models/barbuttonscfg";
 
