@@ -52,17 +52,11 @@ export default function PageGenCode() {
         const init = async () => {            
             //const dbSquema = await readDbSqlScriptFile("dbsquema");
             const dbSquema = await readDbConnectionSchema();
+            //AppGenerator.initDatabase();
             //const jsontables: string[] =CodeGenJson.getAllJsonTables(dbSquema!);
             if(dbSquema === null) {
                 alert("Error reading database schema");
                 return;
-            }
-            const resultDbInit = await initDatabase();
-            if(resultDbInit == true){
-                alert
-            }
-            else {
-                alert("Error initializing database");
             }
 
             if(dbSquema!== null) {AppMemmory.saveDbSquema(dbSquema);}                              

@@ -38,7 +38,7 @@ export async function insertTask(item_serial:string): Promise<string> {
 /**
  * __table__ update
  */
-export async function update(item:Task): Promise<string> { 
+export async function updateTask(item:Task): Promise<string> { 
     const prisma = new PrismaClient();
     let result = null;
     try {
@@ -59,7 +59,7 @@ export async function update(item:Task): Promise<string> {
 /**
  * __table__ delete
  */
-export async function delette(id: string): Promise<string> {
+export async function deleteTask(id: string): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {
@@ -79,7 +79,7 @@ export async function delette(id: string): Promise<string> {
 /**
  * __table__ delete all
  */
-export async function deleteAll(): Promise<string> {
+export async function deleteAllTask(): Promise<string> {
     const prisma = new PrismaClient();
     let result = null;
     try {

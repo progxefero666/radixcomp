@@ -1,16 +1,18 @@
 //src\front\app.ts
 
+import { initDatabase } from "@/db/services/databaseinit";
 
 
-    /**
-     * Main application
-     */
-    export class AppGenerator {
-    
-        public static initDatabase(): boolean {
-            let result: boolean = false;
 
-            return result;
-        };//end
+/**
+ * Main AppGenerator.initDatabase();
+ */
+export class AppGenerator {
 
-    }//end class
+    public static async initDatabase(): Promise<boolean> {
+        const result = await initDatabase();
+        if(result == false){alert}
+        return result;
+    };//end
+
+}//end class
