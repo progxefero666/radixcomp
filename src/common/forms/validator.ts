@@ -7,7 +7,7 @@ import { XForms } from "@/codegen/forms/xforms";
 
 
 /**
- * Validator class for form validation
+ * Validator.showErrorMessage
  */
 export class Validator {
 
@@ -27,6 +27,11 @@ export class Validator {
 
         return validation;
     };//end
+
+    public static showErrorMessage(fieldName: string, errorMessage: string): boolean {
+        alert(`Error in field "${fieldName}": ${errorMessage}`);
+        return true;
+    }
 
     public static validateForm(formData: any): boolean {
         // Implement form validation logic here

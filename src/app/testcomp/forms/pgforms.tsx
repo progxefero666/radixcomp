@@ -18,6 +18,7 @@ import { Constants, OpConstants } from "@/common/constants";
 import { XForms } from "@/codegen/forms/xforms";
 import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { set } from "date-fns";
+import { Validator } from "@/common/forms/validator";
 
 
 
@@ -53,11 +54,12 @@ interface CompProps {
     onSubmit:(entity:Template)=>void;
     onCancel?:()=>void;
 };
-export function PgForms({ itemId: template_id, title, onSubmit, onCancel }: CompProps) {
+export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
 
-    
+    const execAllValidations:boolean = false;
+
     const [validations,setValidations] = useState<Validation[]>([]);    
-    const [entity, setEntity] = useState<Template>(new Template(template_id,null,null,null));
+    const [entity, setEntity] = useState<Template>(new Template(itemId,null,null,null));
 
     const proglanguageRef = useRef<HTMLSelectElement>(null);
     const nameRef         = useRef<HTMLInputElement>(null);
@@ -67,13 +69,58 @@ export function PgForms({ itemId: template_id, title, onSubmit, onCancel }: Comp
 
 
     const validate = (): boolean => {
-        return true;
+
+        let result: boolean = true;
+        const validations: Validation[] = [];
+
+        // validate field: "name" "datacode"
+        let validation: Validation = Validator.ValidateItem(
+            XForms.FT_TEXT,
+            nameRef.current?.value,
+            null,
+            entity.minlen("name"),
+            entity.maxlen("name") );
+
+        if (validation.result !== Constants.SUCCESS) {
+            Validator.showErrorMessage("name", validation.message!);
+            if(!execAllValidations) {return result;}
+            else {
+                result = false;
+                validations.push(validation);
+            }
+        }
+
+        // validate field: "datacode"
+        validation = Validator.ValidateItem(
+            XForms.FT_TEXTAREA,
+            datacodeRef.current?.value,
+            null,
+            entity.minlen("datacode"),
+            entity.maxlen("datacode") );
+
+        if (validation.result !== Constants.SUCCESS) {
+            Validator.showErrorMessage("datacode", validation.message!);
+            if(!execAllValidations) {return result;}
+            else {
+                result = false;
+                validations.push(validation);
+            }
+        }
+
+        if(!result){setValidations(validations);}
+        return result;
     };//end
 
     const onFormSubmit = () => {
-        if (!validate()) {            
-            return;
-        }
+        let valid: boolean = validate();
+        if (!valid) {return;}
+
+        // set entity values
+        entity.id              = itemId;
+        entity.name            = nameRef.current!.value;
+        entity.proglanguage_id = proglanguageRef.current!.value;
+        entity.datacode        = datacodeRef.current!.value;
+        
         onSubmit(entity);
     };//end
 

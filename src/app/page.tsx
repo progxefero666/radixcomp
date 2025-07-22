@@ -48,12 +48,12 @@ export default function PageTest() {
     const item_id:string = GenerateKeys.genAlphaNum16();
 
     const onSubmit = (entity:Template)=>{
-        console.log(entity.toJsonString());
-        
+        alert("Form Submitted");
+        console.log(entity.toJsonString());        
     };//end
 
     const onCancel = () => {
-        //console.log("Cancelled");
+        alert("Form Cancelled");
     };//end
     
     return (
@@ -73,13 +73,10 @@ export default function PageTest() {
             
                 <Box width="68%" >
                     {ready ? 
-                    <PgForms  itemId={item_id}
-                     title="New Template"
-                     onSubmit={(item) => { console.log(item); }}
-                     onCancel={() => { console.log("Cancelled"); }}
-                    /> 
-
-                    : null}                    
+                        <PgForms itemId={item_id}
+                                 title="New Template"
+                                 onSubmit={onSubmit}
+                                 onCancel={onCancel} />:null}                    
                 </Box>
 
                 <Box width="16%">                    
