@@ -62,18 +62,12 @@ export class XForms {
     public static readonly VALIDATION_DEF: Validation 
             = new Validation(XForms.FT_TEXT,Constants.SUCCESS);
 
-    public static t_import_form_inputs: string 
-        = `import { InputValue } from "@/common/model/inputvalue";`;
-        
-    public static t_form_inputs: string 
-        = `const [formInputs,setFormInputs] = useState<InputValue[]>([]);`;
-
     public static t_useEffect_start: string = "useEffect(() => {";
     public static t_useEffect_end: string = "}, []);";
     
 };//end class
 
-export class XFormsGen {
+export class XFormsGenerator {
 
     public static gen_FT_TEXT(field: any): string {
         let result: string = "";
@@ -215,7 +209,7 @@ export class XFormsGen {
         let result: string = "";
         for (let idx = 1; idx < jsonObj.fields.length; idx++) {
 
-            result += XFormsGen.genInitTag(jsonObj.fields[idx]) + CgConfig.RET;
+            result += XFormsGenerator.genInitTag(jsonObj.fields[idx]) + CgConfig.RET;
             //tempAttr_ref
             result += CgConfig.TAB_4 + XForms.t_attr_ref
                 .replace(XForms.PATTERN, jsonObj.fields[idx].name) + CgConfig.RET;
@@ -316,13 +310,13 @@ export class XFormsGen {
 
         const jsonObj = JSON.parse(jsonTable);
   
-        let resImports: string      = XFormsGen.genImports();
-        let resStates: string       = XFormsGen.genStates(jsonObj.name);
-        let resRefs: string         = XFormsGen.genRefs(jsonObj);
-        let resFunctValItem: string = XFormsGen.genFuncValidateItem();
-        let resFunctValForm: string = XFormsGen.genFuncValidation(jsonObj);
-        let resFunctSubmit: string  = XFormsGen.genFuncSubmit(jsonObj);
-        let resFields: string       = XFormsGen.genFormFields(jsonObj);
+        let resImports: string      = XFormsGenerator.genImports();
+        let resStates: string       = XFormsGenerator.genStates(jsonObj.name);
+        let resRefs: string         = XFormsGenerator.genRefs(jsonObj);
+        let resFunctValItem: string = XFormsGenerator.genFuncValidateItem();
+        let resFunctValForm: string = XFormsGenerator.genFuncValidation(jsonObj);
+        let resFunctSubmit: string  = XFormsGenerator.genFuncSubmit(jsonObj);
+        let resFields: string       = XFormsGenerator.genFormFields(jsonObj);
       
         let result:string = resImports + resStates + resRefs +
                             resFunctValItem + resFunctValForm + 

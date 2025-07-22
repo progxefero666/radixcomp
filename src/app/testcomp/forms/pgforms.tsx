@@ -9,7 +9,7 @@ import { AppMemmory } from "@/front/appmemory";
 import { Validation } from "@/common/model/validation";
 import { Validator } from "@/common/forms/validator";
 import { TextStyle } from "@/radix/radixtheme";
-import { XForms } from "@/codegen/forms/xforms";
+import { XForms } from "@/codegen/forms/cgforms";
 import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { XInputText } from "@/radix/input/inptext";
 import { XInputSelect } from "@/radix/input/inpselect";

@@ -23,7 +23,7 @@ import { XInputCheck } from "@/radix/input/inputcheck";
 import { CgFileFunctions } from "@/codegen/kernel/cgfilefunctions";
 import { CodeGenSql } from "@/codegen/kernel/cgsqlmotor";
 
-import { jsonTemplate, XFormsGen } from "@/codegen/forms/xforms";
+import { jsonTemplate, XFormsGenerator } from "@/codegen/forms/cgforms";
 
 
 
@@ -100,7 +100,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
 
     const runOperationTest = () => {
 
-        const codecont: string = XFormsGen.generateForm(jsonTemplate);
+        const codecont: string = XFormsGenerator.generateForm(jsonTemplate);
         onsingleresult(CgFileFunctions.getTypeScriptFileCode("xform", codecont!));
     };//end
 
