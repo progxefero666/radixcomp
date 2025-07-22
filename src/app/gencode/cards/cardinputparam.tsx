@@ -119,7 +119,7 @@ export default function CardInputParam({input,patterns,onchange}:CompProps) {
                         </Table.Cell>
                         <Table.Cell>
                             <XInputText inline={true} autocommit={true} autofocus={true}
-                                defaul={variable}
+                                value={variable}
                                 onchange={onchangeVarValue}
                                 disabled={!useVariable} />
                         </Table.Cell>

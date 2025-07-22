@@ -142,7 +142,7 @@ export function AppForm({ item, apptypes,}: AppFormProps) {
                 name="name"
                 label="Name"
                 ref={nameRef}                
-                defaul={item.name}
+                value={item.name}
                 maxlen={5} />
 
             {/*
@@ -152,7 +152,7 @@ export function AppForm({ item, apptypes,}: AppFormProps) {
                 inline={true}
                 label="Type"
                 collection={apptypes}
-                default={item.apptype}
+                value={item.apptype}
                 readonly={readonly}
                 disabled={disabled} />
             */}
@@ -161,28 +161,28 @@ export function AppForm({ item, apptypes,}: AppFormProps) {
                 name="author"
                 ref={authorRef} 
                 label="Auhor"
-                defaul={item.author!}
+                value={item.author!}
                 maxlen={AppDef.AUTHOR_MAXLEN} />
 
             <XInputText
                 name="repository"
                 ref={repositoryRef}
                 label="repository"
-                defaul={item.repository!}
+                value={item.repository!}
                 maxlen={AppDef.REFERENCE_MAXLEN}/>
 
             <XInputText
                 name="description"
                 ref={descriptionRef}
                 label="Description"
-                defaul={item.description!}
+                value={item.description!}
                 maxlen={AppDef.DESCRIPTION_MAXLEN} />
 
             <XInputText 
                 name="url" 
                 ref={urlRef} 
                 label="url"
-                defaul={item.appurl!} 
+                value={item.appurl!} 
                 maxlen={AppDef.URL_MAXLEN} />
 
 

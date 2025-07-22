@@ -19,7 +19,7 @@ interface InputTextProps {
     label?: string;
     readonly?: boolean;
     disabled?: boolean
-    defaul?: string;
+    value?: string;
     onchange?: (value:string,name?: string) => void;
     onsubmit?: (value:string|null,name?: string) => void;
     type?: any;
@@ -30,12 +30,12 @@ interface InputTextProps {
     maxlen?: number;
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
-    name, defaul, maxlen,autocommit,autofocus,type, inline, 
+    name, value, maxlen,autocommit,autofocus,type, inline, 
     label, placeholder, onchange,onsubmit, icon, readonly, disabled }, ref) => {
 
-    if(disabled) {defaul=" ";}
+    if(disabled) {value=" ";}
 
-    const [value, setValue] = useState<string|null>(defaul ?? "");
+    const [defaultValue, setDefaultValue] = useState<string|null>(value ?? "");
     const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
     const radius  = RADIX_RADIUS.medium;
@@ -48,7 +48,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
      const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         
-        setValue(event.target.value);
+        setDefaultValue(event.target.value);
         if (autocommit) {
             if (onchange) {
                 if (name !== null) {onchange(event.target.value, name);}
@@ -60,8 +60,8 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const handleOnSubmmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === RadixKeys.KEY_INTRO) {
             if (onsubmit) {
-                if (name !== null) {onsubmit(value, name);}
-                else {onsubmit(value);}
+                if (name !== null) {onsubmit(defaultValue, name);}
+                else {onsubmit(defaultValue);}
             }
         }
     };
@@ -70,7 +70,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
         return (
             <TextField.Root type={input_type}
-                value={defaul}
+                value={value}
                 variant={variant}
                 size={size}
                 color={color}
@@ -84,7 +84,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     const renderEditComp = () => {
         
         // apply placeholder
-        if(value === null){
+        if(defaultValue === null){
             return (
                 <TextField.Root type={input_type}
                     placeholder={placeholder}
@@ -104,7 +104,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
             
             return (
                 <TextField.Root type={input_type}
-                    defaultValue={defaul}
+                    defaultValue={value}
                     onChange={handleOnChange}
                     variant={variant}
                     size={size} color={color}

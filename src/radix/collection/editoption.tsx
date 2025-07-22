@@ -2,7 +2,6 @@
 
 import { ArrowDownIcon, ArrowUpIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Flex, Box, Text, IconButton } from "@radix-ui/themes";
-import { useState } from "react";
 import { XInputText } from "../input/inptext";
 import { COMP_BORDER_STYLE } from "../radixtheme";
 import { DB_ITEM_CMD } from "@/common/database/dbkernel";
@@ -42,7 +41,7 @@ export const EditOptionId = ({ disabled, option, onclick }: CompProps) => {
             </Box>
 
             <Flex width="146px" direction="row" gap="2" >
-                <XInputText inline={true} defaul={option.value}/>
+                <XInputText inline={true} value={option.value}/>
             </Flex>
 
             {!isDisabled ?
