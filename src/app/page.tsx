@@ -18,9 +18,9 @@ import { AppGenerator } from "@/front/app";
 import { Template } from "@/db/model/template";
 
 
-export const pageStyle = {
-  
-    background: '#1e1a24ff'
+const layoutStyle = {
+    background: 'rgb(153, 17, 62)',
+    padding: '0',
 };
 
 export const columnStyle = {
@@ -55,35 +55,43 @@ export default function PageTest() {
         alert("Form Cancelled");
     };//end
     
+    /*
     return (
-
-        <Flex width="100%" direction="column" style={pageStyle} >
-
-            { /* Header */}
+        <Flex width="100%" direction="column" style={layoutStyle} >
             <TestHeader  />
             <SeparatorH />
-            
-            { /* Main content */}
-            <Flex height="100vh" width="100%"  direction="row" >
-
-                <Box width="16%" >
-                    <PrimaryBar  />
-                </Box>    
-            
-                <Box width="68%" >
-                    {ready ? 
-                        <PgForms itemId={item_id}
-                                 title="New Template"
-                                 onSubmit={onSubmit}
-                                 onCancel={onCancel} />:null}                    
-                </Box>
-
-                <Box width="16%">                    
-                    <TestSecondBar  />
-                </Box>                
+            <Flex width="100%"  direction="row" >
+                
             </Flex> 
-
         </Flex>
     );
+    */
+
+    return (
+        <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
+            
+            <Flex gridColumn="1/4" gridRow="1" >
+                 <TestHeader  />  
+            </Flex>
+
+            <Flex gridColumn="1" gridRow="2" >
+                <PrimaryBar  />
+            </Flex>
+
+            <Flex gridColumn="2" direction="column" gridRow="2" > 
+                {ready ? 
+                    <PgForms itemId={item_id}
+                                title="New Template"
+                                onSubmit={onSubmit}
+                                onCancel={onCancel} />:null}      
+            </Flex>
+            
+            <Flex gridColumn="3" gridRow="2" >
+                <TestSecondBar  />
+            </Flex>
+
+        </Grid>
+    );
+
 
 }//end class

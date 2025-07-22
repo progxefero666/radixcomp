@@ -8,11 +8,9 @@ import { AppConfig } from "@/app/index/appconfig";
 import { Option } from "@/common/model/option";
 
 
-export const layoutStyle = {
-    padding: '8px',
-    background: '#0000ff'
+const primaryBarStyle = {
+    background: 'rgb(24, 24, 27)',
 };
-
 
 interface PrimaryBarProps {
     section?: string;
@@ -21,7 +19,7 @@ interface PrimaryBarProps {
 export function PrimaryBar({onselection,section}: PrimaryBarProps) {
 
     return (
-        <Flex width="100%" direction="column" style={layoutStyle} >
+        <Flex width="100%" direction="column" style={primaryBarStyle} >
             Primary Bar
         </Flex>
     );

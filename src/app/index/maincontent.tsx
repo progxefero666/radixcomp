@@ -2,11 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Flex} from "@radix-ui/themes";
-
 import { AppConfig } from "@/app/index/appconfig";
-import { Codelang } from "@/db/model/codelang";
-//import { insertCodelang } from "@/db/services/crud/srvcrudcodelang";
-
 
 const mainContentStyle = {
     background: 'rgb(30, 40, 63)',
@@ -15,7 +11,6 @@ const mainContentStyle = {
     borderLeft: '1px solid rgb(167, 176, 188)', 
     borderRight: '1px solid rgb(125, 134, 145)',
 };
-
 
 interface CompProps {
     module:string;

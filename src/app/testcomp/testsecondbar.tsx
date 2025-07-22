@@ -4,9 +4,9 @@ import React from "react";
 import { Flex, Separator } from "@radix-ui/themes";
 
 
-export const layoutStyle = {
-    padding: '8px',
-    background: '#00ff00'
+
+const secondBarStyle = {
+    background: 'rgb(24, 24, 27)',
 };
 
 interface CompProps {
@@ -18,7 +18,7 @@ export function TestSecondBar({value}: CompProps) {
     }
 
     return (
-        <Flex width="100%" direction="column" style={layoutStyle}>
+        <Flex width="100%" direction="column" style={secondBarStyle}>
             <p>Second Bar</p>
         </Flex>
     );

@@ -22,9 +22,13 @@ import { Validator } from "@/common/forms/validator";
 
 
 
-export const styleComponent = {
-    background: 'rgba(32, 32, 32, 1)',
-    border: '2px solidrgb(98, 97, 98)'
+
+const mainContentStyle = {
+    background: 'rgb(30, 40, 63)',
+    borderTop: 'none',    
+    borderBottom: 'none',   
+    borderLeft: '1px solid rgb(167, 176, 188)', 
+    borderRight: '1px solid rgb(125, 134, 145)',
 };
 
 export const headerStyle = {
@@ -120,7 +124,7 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
         entity.name            = nameRef.current!.value;
         entity.proglanguage_id = proglanguageRef.current!.value;
         entity.datacode        = datacodeRef.current!.value;
-        
+
         onSubmit(entity);
     };//end
 
@@ -129,7 +133,7 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
     };//end
 
     return (
-        <Box width="100%" py="2" px="4" style={styleComponent} >
+        <Box width="100%" py="2" px="4" style={mainContentStyle} >
   
             {/* Header */}
             <Flex width="100%" direction="row" pb="1" style={headerStyle}  >
