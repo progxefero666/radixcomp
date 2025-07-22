@@ -1,21 +1,5 @@
 
 
-
-export enum CONTROL_TYPES {
-    TEXT     = "text",
-    CHECKBOX = "checkbox",
-    EMAIL    = "email",
-    NUMBER   = "number",
-    DATE     = "date",    
-    RANGE    = "range",
-    URL      = "url",
-    COLOR    = "color",
-    PASSWORD = "password",    
-    SEARCH   = "search",
-    FILE     = "file"   
-}
-
-
 export enum RADIX_COLORS {
     gray= "gray",
     mauve= "mauve" ,
@@ -46,10 +30,3 @@ export enum RADIX_COLORS {
     brown= "brown" ,
     sky= "sky" , 
 };
-
-export class RadixOpsText{
-
-    public static readonly OK: string = "Ok";
-    public static readonly CANCEL: string = "Cancel";
-}
-

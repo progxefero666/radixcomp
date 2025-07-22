@@ -1,4 +1,4 @@
-//src\radix\radixconf.ts
+//src\radix\radixconf.tsx
 
 import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react-icons";
 
@@ -9,6 +9,37 @@ import { MagnifyingGlassIcon, PersonIcon, LockClosedIcon } from "@radix-ui/react
 | "2"  | mediano (default)    | \~14px font, \~8px padding    |
 | "3"  | grande               | \~16px font, \~12px padding   |
 | "4"  | XL (solo en algunos) | \~18px+ font                  |*/
+
+export enum RADIX_COLORS {
+    gray= "gray",
+    mauve= "mauve" ,
+    slate= "slate" ,
+    sage= "sage" ,
+    olive= "olive" ,
+    sand= "sand" ,
+    tomato= "tomato" ,
+    red= "red" ,
+    ruby= "ruby" ,
+    crimson= "crimson" ,
+    pink= "pink" ,
+    plum= "plum" ,
+    purple= "purple" ,
+    violet= "violet" ,
+    iris= "iris" ,
+    indigo= "indigo" ,
+    blue= "blue" ,
+    cyan= "cyan" ,
+    teal= "teal" ,
+    jade= "jade" ,
+    green= "green" ,
+    grass= "grass" ,
+    lime= "lime" ,
+    yellow= "yellow" ,
+    amber= "amber" ,
+    orange= "orange" ,
+    brown= "brown" ,
+    sky= "sky" , 
+};
 
 export enum INPUT_TEXT_TYPES {
     text = "text" as any,
@@ -108,14 +139,4 @@ export class RadixConf {
     public static readonly ICON_EXPORT: string = "ti-export";
     public static readonly ICON_COPY: string = "ti-save";
 
-}//end class
-
-/**
- * RadixConfTexts
- * Contiene textos y mensajes comunes para la aplicación.
- */
-export class RadixConfTexts {
-
-    public static readonly TEXT_DEF_SIZE: any = RadixConf.SIZES.size_2;
-
-}//end class
+};//end class

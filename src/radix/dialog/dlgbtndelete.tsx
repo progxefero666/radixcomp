@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Flex, Text, Dialog } from "@radix-ui/themes";
 import { ButtonsStyle, IconsStyle, TextStyle } from '@/radix/radixtheme';
 import { CheckIcon, Cross2Icon, TrashIcon } from "@radix-ui/react-icons";
-import { RadixOpsText } from "../radixconstants";
+
 
 
 /**
@@ -53,13 +53,13 @@ export const DlgBtnDeleteConfirm = ({ buttontext, title, message, onconfirm }: C
                             color={ButtonsStyle.COLOR_SAVE}
                             size={ButtonsStyle.DEF_SIZE}
                             onClick={onconfirm} >
-                            {RadixOpsText.OK}
+                            "Ok"
                             <CheckIcon width={IconsStyle.DEF_HEIGHT}
                                 height={IconsStyle.DEF_WIDTH} />
                         </Button>
                         <Button color={ButtonsStyle.COLOR_CLOSE}
                             size={ButtonsStyle.DEF_SIZE} >
-                            {RadixOpsText.CANCEL}
+                            "Cancel"
                             <Cross2Icon width={IconsStyle.DEF_HEIGHT}
                                 height={IconsStyle.DEF_WIDTH} />
                         </Button>

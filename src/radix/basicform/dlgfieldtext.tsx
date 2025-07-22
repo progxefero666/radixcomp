@@ -3,14 +3,9 @@
 import React from "react";
 import { Label } from "radix-ui";
 import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
-
 import { ButtonsStyle, IconsStyle, TextStyle } from '@/radix/radixtheme';
-
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 import { InputField } from "@/common/model/inputfield";
-
-import { RadixOpsText } from "../radixconstants";
-
 import { TKeyvalue } from "@/common/types";
 
 
@@ -63,13 +58,13 @@ export const DialogFieldText = ({ buttontext, title, item, onsave }: CompProps) 
                             <Button type="submit"
                                 color={ButtonsStyle.COLOR_SAVE}
                                 size={ButtonsStyle.DEF_SIZE}>
-                                {RadixOpsText.OK}
+                                "Ok"
                                 <CheckIcon width={IconsStyle.DEF_HEIGHT}
                                                         height={IconsStyle.DEF_WIDTH} />
                             </Button>
                             <Button color={ButtonsStyle.COLOR_CLOSE}
                                 size={ButtonsStyle.DEF_SIZE} >
-                                {RadixOpsText.CANCEL}
+                                "Cancel"
                                 <Cross2Icon width={IconsStyle.DEF_HEIGHT}
                                                         height={IconsStyle.DEF_WIDTH} />
                             </Button>
