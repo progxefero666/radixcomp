@@ -23,15 +23,6 @@ import { CgDataPatterns } from '@/codegen/data/cgdatapatterns';
 import { renderButton } from '@/radix/renders/renderbuttons';
 
 
-const LAYOUT_STYLE = {
-    background: 'rgba(33, 33, 33, 1)',
-};
-
-const buttonBarStyle = {
-    minWidth: '100px',
-};
-
-
 interface CompProps {
     onresult?: (code: String) => void;
 }

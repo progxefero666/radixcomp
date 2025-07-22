@@ -10,7 +10,7 @@ export class Template {
     public proglanguage_id: string | null;
     public datacode: string | null;
 
-    constructor(id: string, name: string | null, proglanguage_id: string | null, datacode: string | null) {
+    constructor(id:string, name:string|null, proglanguage_id:string|null, datacode:string|null) {
         this.id = id;
         this.name = name;
         this.proglanguage_id = proglanguage_id;

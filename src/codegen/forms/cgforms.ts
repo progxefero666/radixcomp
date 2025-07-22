@@ -38,7 +38,6 @@ export class XFormsGenerator {
 
     public static gen_FT_TEXT(field: any): string {
         let result: string = "";
-
         return result;
     };//end
 
@@ -253,8 +252,6 @@ export class XFormsGenerator {
         return result;
     }//end
 
-    //ouputFormatRef.current!.value
-    //applyTransRef.current!.checked
 
 };//end class
 

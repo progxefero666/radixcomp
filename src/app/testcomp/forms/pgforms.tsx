@@ -146,7 +146,7 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
 
                 <XInputSelect 
                     ref={proglanguageRef} 
-                    name="Code language"
+                    name="proglanguage"
                     label="Code language"
                     collection={proglanguages} 
                     defaul={proglanguages[0].id} />    
