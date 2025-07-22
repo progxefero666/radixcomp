@@ -5,6 +5,7 @@ import { parseResponseCollection } from "@/common/parsers/javascriptparser";
 import { initDatabase } from "@/db/services/databaseinit";
 import { Proglanguage } from "@generated/prisma";
 import { AppMemmory } from "./appmemory";
+import { getAllProglanguage } from "@/db/services/read/srvproglanguage";
 
 
 /**
@@ -19,14 +20,14 @@ export class AppGenerator {
     };//end
 
     public static async saveInMemoryProglanguages(): Promise<void> {
-        const response = await fetch("/api/proglanguages");
-        if (!response.ok) {
+        const response = await getAllProglanguage();
+        if (response==null) {
             console.error("Failed to fetch programming languages");
             return;
         }
-        const data = await response.json();
-        const proglanguages: Proglanguage[]|null = await parseResponseCollection<Proglanguage>(data);
-        AppMemmory.saveProglanguages(JSON.stringify(proglanguages));    
+        //const proglanguages: Proglanguage[]|null = parseResponseCollection<Proglanguage>(response);
+        //console.log( proglanguages);
+        AppMemmory.saveProglanguages(response);    
     };//end
 
 }//end class

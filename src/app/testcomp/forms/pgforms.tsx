@@ -20,8 +20,7 @@ import { OpConstants } from "@/common/constants";
 
 export const layoutStyle = {
     background: 'rgb(7, 7, 7)',
-    border: '2px solidrgb(98, 97, 98)',
-    padding: 'var(--space-2)'
+    border: '2px solidrgb(98, 97, 98)'
 };
 
 /**

@@ -7,7 +7,6 @@ import { Proglanguage } from "@/db/model/proglanguage";
 import { getProglanguagesAsOptions } from "@/db/services/util/dbutil";
 
 
-
 /**
  * class AppMemmory.saveProglanguages
  */
