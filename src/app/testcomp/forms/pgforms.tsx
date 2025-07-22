@@ -32,6 +32,8 @@ interface CompProps { template_id: string; }
 
 export function PgForms({ template_id }: CompProps) {
 
+    const [ready, setReady] = useState<boolean>(false);
+
     const [validations,setValidations] = useState<Validation[]>([]);    
     const [templates, setTemplates] = useState<Template>(new Template(template_id,null,null,null));
 
