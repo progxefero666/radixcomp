@@ -53,7 +53,13 @@ export default function PageGenCode() {
         const init = async () => {            
             //const dbSquema = await readDbSqlScriptFile("dbsquema");
             const dbSquema = await readDbConnectionSchema();
-            AppGenerator.initDatabase();
+            //AppGenerator.initDatabase();
+            const respRead = await AppGenerator.readProglanguages();
+            if (respRead === null) {
+                alert("Error reading programming languages");
+                return;
+            }
+            
             //const jsontables: string[] =CodeGenJson.getAllJsonTables(dbSquema!);
             if(dbSquema === null) {
                 alert("Error reading database schema");

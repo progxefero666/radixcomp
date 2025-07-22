@@ -1,30 +1,29 @@
 //src\db\dbcatalog.ts
+
+//.................................................................................................
+// Database Catalog
+//.................................................................................................
+
 export enum DbTables {
-    codelang    = "codelang",
-    tasktype    = "tasktype",
-    workflow    = "workflow",
-    taskcategory  = "taskcategory",
-    task        = "task",
-    apptype     = "apptype",
-    application = "application"
+    proglanguage    = "proglanguage",
+    tasktype        = "tasktype",
+    workflow        = "workflow",
+    taskcategory    = "taskcategory",
+    task            = "task"
 }
 
 export type TypeTableMap = {
-    codeLang:   DbTables.codelang;
+    proglanguage:   DbTables.proglanguage;
     tasktype:   DbTables.tasktype;
     workflow:   DbTables.workflow;
     taskgroup: DbTables.taskcategory;
     task:       DbTables.task;
-    apptype:    DbTables.apptype;
-    application:DbTables.application;
 };
 
 export const DB_TABLES: TypeTableMap = {
-    codeLang:   DbTables.codelang,
+    proglanguage:   DbTables.proglanguage,
     tasktype:   DbTables.tasktype,
     workflow:   DbTables.workflow,
     taskgroup: DbTables.taskcategory,
-    task:       DbTables.task,
-    apptype:    DbTables.apptype,
-    application:DbTables.application,
+    task:       DbTables.task
 };

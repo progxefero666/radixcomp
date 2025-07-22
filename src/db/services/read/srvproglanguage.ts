@@ -9,16 +9,7 @@ import { DpOpsUtil } from "@/common/database/dbkernel";
 
 
 
-/**
- * Server Action: get -> by id
-    include: {
-        tasktype: true,
-        workflow: true,
-        codelang: true,
-    },
- *    
- */
-export async function getCodelang(id:string): Promise<string> {
+export async function getProglanguage(id:string): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
@@ -30,13 +21,13 @@ export async function getCodelang(id:string): Promise<string> {
         );
     }
     catch (error) {
-        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName(DB_TABLES.codeLang,"GET_BY_ID"));
+        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName("Proglanguage","GET_BY_ID"));
         return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.codeLang, "GET_BY_ID"), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("Proglanguage", "GET_BY_ID"), result);
 
 } //end function
 
@@ -44,7 +35,7 @@ export async function getCodelang(id:string): Promise<string> {
  * Server Action: Get All TaskTypesS
  *    desc: read all rows in table tasktypes
  */
-export async function getAllCodelang(): Promise<string> {
+export async function getAllProglanguage(): Promise<string> {
 
     const prisma = new PrismaClient();
     let result = null;
@@ -52,12 +43,12 @@ export async function getAllCodelang(): Promise<string> {
         result = await prisma.proglanguage.findMany();
     }
     catch (error) {
-        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName(DB_TABLES.codeLang, "GET_ALL"));
+        DpOpsUtil.consoleErr(error, DpOpsUtil.getOpName("Proglanguages", "GET_ALL"));
         return JsonResponse.ERROR(DpOpsUtil.getErrMessage(error));
     }
     finally {
         await prisma.$disconnect();
     }
-    return JsonResponse.SUCCESS(DpOpsUtil.getOpName(DB_TABLES.codeLang, "GET_ALL"), result);
+    return JsonResponse.SUCCESS(DpOpsUtil.getOpName("Proglanguage", "GET_ALL"), result);
 
 } //end function
