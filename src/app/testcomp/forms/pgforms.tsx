@@ -15,7 +15,8 @@ import { XInputTextArea } from "@/radix/input/inptextarea";
 import { ButtonsStyle, COMP_BORDER_STYLE } from "@/radix/radixtheme";
 import { DlgBtnDeleteConfirm } from "@/radix/dialog/dlgbtndelete";
 import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
-import { OpConstants } from "@/common/constants";
+import { Constants, OpConstants } from "@/common/constants";
+import { XForms } from "@/codegen/forms/xforms";
 
 
 
@@ -51,6 +52,23 @@ export function PgForms({ template_id }: CompProps) {
     useEffect(() => {
         //const itemId:string = GenerateKeys.genAlphaNum16(); 
     }, []);
+
+    const validateItem = (ftype:string,value:any,format:any|null,min:number|null,max:number|null):Validation => {
+        
+        const validation:Validation = new Validation(ftype,Constants.SUCCESS);
+        
+        switch(ftype) {
+            case XForms.FT_TEXT: break;
+            case XForms.FT_TEXTAREA: break;
+            case XForms.FT_NUMBER: break;
+            case XForms.FT_DECIMAL: break;
+            case XForms.FT_COLLECTION: break;                
+            case XForms.FT_DATE: break;
+            case XForms.FT_DATETIME: break;
+        }//end switch
+
+        return validation;
+    };//end
 
     const onSubmit = (commandId: string) => {
 

@@ -1,6 +1,17 @@
 //src\common\constants.ts
 
 
+
+/**
+ * class Constants.SUCCESS
+ */
+export class Constants{
+    
+    public static readonly SUCCESS: string = "success";
+    public static readonly ERROR: string = "error";
+
+};//end class
+
 /**
  * class HttpConst
  */
@@ -25,7 +36,7 @@ export class DataConstants{
 
 
 /**
- * class OpConstants.OP_TEXT_DELETE
+ * class OpConstants.OP_SAVE
  */
 export class OpConstants{
     

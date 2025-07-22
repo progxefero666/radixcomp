@@ -1,6 +1,8 @@
 //src\common\model\validation.ts
 
 import { DB_CONSTANTS } from "@/common/database/dbkernel";
+import { Constants } from "../constants";
+import { XForms } from "@/codegen/forms/xforms";
 
 
 
@@ -9,17 +11,16 @@ import { DB_CONSTANTS } from "@/common/database/dbkernel";
  */
 export class Validation {
     
-    public static readonly DEFAULT: Validation 
-        = new Validation("undefined",false,"Validation error");
+    public static readonly DEFAULT: Validation = XForms.VALIDATION_DEF;
 
     public field: string;
-    public result: boolean;
+    public result: string;
     public message: string | null = null;
 
-    constructor(field: string,result:boolean,message:string|null) {
+    constructor(field: string,result:string,message?:string) {
         this.field = field;
         this.result = result;
-        if(message !== null) {this.message = message;}
+        this.message = message ?? null;
     }
 
     public toJson(): string {
