@@ -15,6 +15,7 @@ import { PgForms } from "@/app/testcomp/forms/pgforms";
 import { SeparatorV } from "@/radix/container/separatorv";
 import { GenerateKeys } from "@/common/helper/generatekeys";
 import { AppGenerator } from "@/front/app";
+import { Template } from "@/db/model/template";
 
 
 export const pageStyle = {
@@ -43,8 +44,18 @@ export default function PageTest() {
         };
         init();
     }, []);
-    const workflow_id:string = GenerateKeys.genAlphaNum16();
 
+    const item_id:string = GenerateKeys.genAlphaNum16();
+
+    const onSubmit = (item:Template)=>{
+        console.log(item.toJsonString());
+        
+    };//end
+
+    const onCancel = () => {
+        //console.log("Cancelled");
+    };//end
+    
     return (
 
         <Flex width="100%" direction="column" style={pageStyle} >
@@ -61,7 +72,14 @@ export default function PageTest() {
                 </Box>    
             
                 <Box width="68%" >
-                    {ready ? <PgForms  template_id={workflow_id} /> : null}                    
+                    {ready ? 
+                    <PgForms  itemId={item_id}
+                     title="New Template"
+                     onSubmit={(item) => { console.log(item); }}
+                     onCancel={() => { console.log("Cancelled"); }}
+                    /> 
+
+                    : null}                    
                 </Box>
 
                 <Box width="16%">                    

@@ -12,19 +12,24 @@ import { XInputSelect } from "@/radix/input/inpselect";
 import { Template } from "@/db/model/template";
 import { AppMemmory } from "@/front/appmemory";
 import { XInputTextArea } from "@/radix/input/inptextarea";
-import { ButtonsStyle, COMP_BORDER_STYLE } from "@/radix/radixtheme";
+import { ButtonsStyle, COMP_BORDER_STYLE, TextStyle } from "@/radix/radixtheme";
 import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { Constants, OpConstants } from "@/common/constants";
 import { XForms } from "@/codegen/forms/xforms";
+import { BarSubmit } from "@/radix/cbars/barsubmit";
 
 
 
-export const layoutStyle = {
+export const styleComponent = {
     background: 'rgba(32, 32, 32, 1)',
     border: '2px solidrgb(98, 97, 98)'
 };
 
-export const barStyle = {
+export const headerStyle = {
+    borderBottom: '1px solid rgb(98, 97, 98)',
+};
+
+export const styleBbar = {
     borderBottom: '1px solid rgb(98, 97, 98)',
     borderTop: '1px solid rgb(98, 97, 98)',
 };
@@ -33,13 +38,18 @@ export const barStyle = {
  * Desktop Forms test
  * const [validations,setValidations] = useState<Validation[]>([]);
  */
-interface CompProps { template_id: string; }
+interface CompProps { 
+    itemId: string; 
+    title:string;
+    onSubmit:(item:Template)=>void;
+    onCancel?:()=>void;
+}
 
-export function PgForms({ template_id }: CompProps) {
+export function PgForms({ itemId: template_id, title, onSubmit, onCancel }: CompProps) {
 
     const [ready, setReady] = useState<boolean>(false);
     const [validations,setValidations] = useState<Validation[]>([]);    
-    const [templates, setTemplates] = useState<Template>(new Template(template_id,null,null,null));
+    const [template, setTemplate] = useState<Template>(new Template(template_id,null,null,null));
 
     const proglanguageRef = useRef<HTMLSelectElement>(null);
     const nameRef         = useRef<HTMLInputElement>(null);
@@ -48,28 +58,33 @@ export function PgForms({ template_id }: CompProps) {
     const proglanguages:Option[] = AppMemmory.readProglanguages();
 
     useEffect(() => {
-        //const itemId:string = GenerateKeys.genAlphaNum16(); 
+        //load related collections
     }, []);
 
 
     const onFormSubmit = () => {
 
+        onSubmit(template);
     };//end
 
     const onFormCancel = () => {
-
+        if (onCancel) {onCancel();}
     };//end
 
     return (
-        <Box width="100%" py="2" px="4" style={layoutStyle} >
+        <Box width="100%" py="2" px="4" style={styleComponent} >
   
-            <Flex width="100%" direction="row" pb="1" style={layoutStyle}  >
-                <Text size="3" style={{ color: 'white' }}>Template Form</Text>
+            {/* Header */}
+            <Flex width="100%" direction="row" pb="1" style={headerStyle}  >
+                <Text size={TextStyle.SIZE_MEDIUM} 
+                      color={TextStyle.COLOR_HEADER}>
+                    {title}
+                </Text>
             </Flex>
             
-            <Separator orientation="horizontal" size="4" />
 
-            <Flex width="100%" direction="column" gapY="2" pt="2" mb="2" style={layoutStyle} >
+            {/* Form Fields */}
+            <Flex width="100%" direction="column" gapY="2" pt="2" mb="2" >
   
                 <XInputText 
                     ref={nameRef}
@@ -96,24 +111,9 @@ export function PgForms({ template_id }: CompProps) {
  
             </Flex>
 
-            
-            <Flex direction="row" justify="center" align="center" py="2" gapX="2" mt="2" style={barStyle} >
-
-                <Button color={ButtonsStyle.COLOR_SAVE}
-                        radius={ButtonsStyle.DEF_RADIUS}                        
-                        size={ButtonsStyle.DEF_SIZE}
-                        onClick={() => onFormSubmit()} >
-                    {DB_ITEM_CMD_TEXT.SAVE}
-                </Button>
-
-                <Button color={ButtonsStyle.COLOR_SAVE}
-                        radius={ButtonsStyle.DEF_RADIUS}                        
-                        size={ButtonsStyle.DEF_SIZE}
-                        onClick={() => onFormCancel()} >
-                    {DB_ITEM_CMD_TEXT.CANCEL}
-                </Button>
-
-            </Flex>
+            {/* Submit Bar */}
+            <BarSubmit onSubmit={onFormSubmit}
+                       onCancel={onFormCancel} />
 
         </Box>
     );

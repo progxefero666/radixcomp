@@ -45,7 +45,7 @@ export class RadixTheme {
 
 
 /**
- * class TextStyle.SIZE_DEF
+ * class TextStyle.SIZE_MEDIUM
  */
 export class TextStyle {
     
@@ -55,6 +55,7 @@ export class TextStyle {
     public static readonly  SIZE_TITLE_DIALOG: any = RadixConf.SIZES.size_2;
 
     public static readonly  COLOR_DEF: any = "#EEEEEE";
+    public static readonly  COLOR_HEADER: any = "#ffffffff";
     public static readonly  COLOR_SPECIAL = {color:"#d9ff00ff"};
 };//end class
 
@@ -121,7 +122,7 @@ export class IconsStyle {
 }//end class
 
 /**
- * class ButtonsStyle.DEF_TEXT_COLOR
+ * class ButtonsStyle.TEXT_SIZE
  */
 export class ButtonsStyle {
 
