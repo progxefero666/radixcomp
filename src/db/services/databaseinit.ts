@@ -6,10 +6,13 @@ import path from "path";
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { insertProglanguage } from "@/db/services/crud/srvcrudproglanguage";
-import { GenerateKeys } from "@/common/helper/generatekeys";
-import { Tasktype } from "@generated/prisma";
-import { insertTasktype } from "@/db/services/crud/srvcrudtasktype";
+
+import { GenerateKeys }       from "@/common/helper/generatekeys";
+import { Tasktype }           from "@generated/prisma";
+import { insertProglanguage } from "@/db/services/crud/srvcrudproglanguage";1
+import { insertTasktype }     from "@/db/services/crud/srvcrudtasktype";
+import { insertWorkflow }     from "@/db/services/crud/srvcrudworkflow";
+import { insertTaskcategory } from "./crud/srvcrudtaskcategory";
 
 
 
@@ -40,15 +43,22 @@ const workflows = [
     { id: GenerateKeys.genAlphaNum16(), name: "Workflow 3", description: "Third workflow" }
 ];
 
+const taskcategories = [
+    { id: GenerateKeys.genAlphaNum16(), workflow_id:"8l5irVS0IFwAzyAQ" ,name: "default", description: "First category" },
+    { id: GenerateKeys.genAlphaNum16(), workflow_id:"gAZR3EaUWkibYqB8" ,name: "default", description: "Second category" },
+    { id: GenerateKeys.genAlphaNum16(), workflow_id:"ieGutaNNYCIedTEW" ,name: "default", description: "Third category" }
+];
+
 /**
  * Action Server Init Database.
  *  - Excute al start session
  */
 export async function initDatabase(): Promise<boolean> {
 
-    let res_proglanguages:boolean = await load_proglanguages();
-    let res_tasktype:boolean      = await load_tasktype();
-
+    //let res_proglanguages:boolean = await load_proglanguages();
+    //let res_tasktype:boolean      = await load_tasktype();
+    //let res_workflows:boolean    = await load_workflows();
+    let res_taskcategories:boolean = await load_taskcategories();
     return true;
 };//end
 
@@ -63,7 +73,7 @@ export async function load_proglanguages(): Promise<boolean> {
     }
     catch (error) {result = false;}
     if(!result) {
-        console.error("Database initialization failed.");
+        console.error("load_tasktype failed.");
     }
     return result;
 };//
@@ -78,7 +88,7 @@ export async function load_tasktype(): Promise<boolean> {
     }    
     catch (error) {result = false;}
     if (!result) {
-        console.error("Database initialization failed.");
+        console.error("load_tasktype failed.");
     }
     return result;
 };//end
@@ -86,14 +96,35 @@ export async function load_tasktype(): Promise<boolean> {
 export async function load_workflows(): Promise<boolean> {
     let result:boolean = true;
     try {
-        for (const tasktype of tasktypes) {
-            const resultInsert = await insertTasktype(JSON.stringify(tasktype));
+        for (const workflow of workflows) {
+            const resultInsert = await insertWorkflow(JSON.stringify(workflow));
             if (resultInsert == null) {result=false;break;}
         }
     }    
     catch (error) {result = false;}
     if (!result) {
-        console.error("Database initialization failed.");
+        console.error("load_workflows failed.");
+    }
+    return result;
+};//end
+
+export async function load_taskcategories(): Promise<boolean> {
+    let result:boolean = true;
+    try {
+        for (const taskcategory of taskcategories) {
+            const resultInsert = await insertTaskcategory(JSON.stringify(taskcategory));
+            if (resultInsert == null) {
+                console.log("resultInsert failed.");
+                result=false;break;
+            }
+        }
+    }    
+    catch (error) {result = false;}
+    if (!result) {
+        console.log("load_taskcategories failed.");
+    }
+    else{
+        console.log("load_taskcategories success.");
     }
     return result;
 };//end

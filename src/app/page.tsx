@@ -22,6 +22,7 @@ import { TypeScriptManager } from "./gencode/cgtypescript/typescriptman";
 import { GenCodeControl } from "./gencode/cgentityfiles/entityfilesmanager";
 import { readDbSchemaFromFile, readDbConnectionSchema } from "@/db/services/readschema";
 import { initDatabase } from "@/db/services/databaseinit";
+import { AppGenerator } from "@/front/app";
 
 
 //const router = useRouter();
@@ -52,7 +53,7 @@ export default function PageGenCode() {
         const init = async () => {            
             //const dbSquema = await readDbSqlScriptFile("dbsquema");
             const dbSquema = await readDbConnectionSchema();
-            //AppGenerator.initDatabase();
+            AppGenerator.initDatabase();
             //const jsontables: string[] =CodeGenJson.getAllJsonTables(dbSquema!);
             if(dbSquema === null) {
                 alert("Error reading database schema");
