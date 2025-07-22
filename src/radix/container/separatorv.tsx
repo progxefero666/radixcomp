@@ -3,7 +3,6 @@
 
 import { Separator } from "@radix-ui/themes";
 import { ThemeStyle } from "@/radix/radixtheme";
-import { radixTypeComp } from "../radixtypes";
 
 export function SeparatorV() {
     return (

@@ -8,7 +8,6 @@ import { Box, Flex,TextField } from "@radix-ui/themes";
 import { CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "../radixtypes";
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
 /**
  * InputTextComponent

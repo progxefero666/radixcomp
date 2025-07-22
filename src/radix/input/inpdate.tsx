@@ -11,7 +11,7 @@ import { Flex, Text, Box } from "@radix-ui/themes";
 import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 
-import { radixTypeComp } from "../radixtypes";
+
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { es } from 'date-fns/locale/es';
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS, RadixConstants } from "../radixconstants";

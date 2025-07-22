@@ -28,11 +28,6 @@ export type TOption = {
     selected: boolean
 };
 
-export type TMenu = {
-    name?: string,
-    items: TOption[]
-};
-
 
 type FlexProps = ComponentProps<typeof Flex>;
 export type radixTypeDirection = FlexProps['direction'];
@@ -47,12 +42,4 @@ export type radixTypeComp = {
 export type TRange = {
     min: number;
     max: number;
-}
-export type TInputText ={
-    id: string;
-    length?: TRange;
-    placeholder?: string;
-    value?:string|null;
-    label?: string;    
-    //onsubmit: (value:string,id?:string) => void;
 }

@@ -3,10 +3,8 @@
 
 import { forwardRef, useEffect, useState } from "react";
 
-import { radixTypeComp } from "../radixtypes";
 import React from "react";
 import { Select } from "@radix-ui/themes";
-import { TextField } from "@radix-ui/themes";
 import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
 import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";

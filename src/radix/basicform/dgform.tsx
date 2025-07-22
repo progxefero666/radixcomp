@@ -5,7 +5,6 @@ import { Label } from "radix-ui";
 import { Button, Box, Flex, Text, Dialog, TextField } from "@radix-ui/themes";
 
 import { ButtonsStyle, IconsStyle, TextStyle } from '@/radix/radixtheme';
-import { BarSubmit } from "@/radix/cbars/barsubmit";
 import { CheckIcon, Cross2Icon, FilePlusIcon } from "@radix-ui/react-icons";
 import { InputField } from "@/common/model/inputfield";
 

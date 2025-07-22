@@ -17,13 +17,12 @@ interface InputTextProps {
     inline?: boolean;
     name?: string;
     label?: string;
-    readonly?: boolean;
     disabled?: boolean
+    placeholder?: string;
     value?: string;
     onchange?: (value:string,name?: string) => void;
     onsubmit?: (value:string|null,name?: string) => void;
-    type?: any;
-    placeholder?: string;
+    type?: any;    
     icon?: any | null;
     autofocus?: boolean;
     minlen?: number;
@@ -31,23 +30,18 @@ interface InputTextProps {
 }
 export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
     name, value, maxlen,autocommit,autofocus,type, inline, 
-    label, placeholder, onchange,onsubmit, icon, readonly, disabled }, ref) => {
+    label, placeholder, onchange,onsubmit, icon, disabled }, ref) => {
 
-    if(disabled) {value=" ";}
+    const input_type = type ?? INPUT_TEXT_TYPES.text;    
 
     const [defaultValue, setDefaultValue] = useState<string|null>(value ?? "");
+
     const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
     const radius  = RADIX_RADIUS.medium;
     const variant = RadixConf.VARIANTS.surface;
 
-    const showInline: boolean = inline ?? false;
-    const input_type = type ?? INPUT_TEXT_TYPES.text;
-    const input_readonly = readonly ?? false;
-    const input_disabled = disabled ?? false;
-
-     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDefaultValue(event.target.value);
         if (autocommit) {
             if (onchange) {
@@ -66,105 +60,56 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
         }
     };
  
-    const renderReadComp = () => {
-
-        return (
-            <TextField.Root type={input_type}
-                value={value}
-                variant={variant}
-                size={size}
-                color={color}
-                radius={radius}
-                disabled={true} >
-                {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
-            </TextField.Root>
-        )
-    };//end
-
-    const renderEditComp = () => {
-        
-        // apply placeholder
-        if(defaultValue === null){
+    const renderComponent = () => {
+        if(placeholder){
             return (
                 <TextField.Root type={input_type}
                     placeholder={placeholder}
                     onChange={handleOnChange}
                     variant={variant}
-                    size={size} color={color}
+                    size={size} 
+                    color={color}
                     radius={radius}
                     onKeyDown={handleOnSubmmit}
-                    disabled={input_disabled} 
+                    disabled={disabled ?? false} 
                     autoFocus={autofocus ?? false}>
                     {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
                 </TextField.Root>
             )
         }
         // apply default value
-        else {
-            
+        else {            
             return (
                 <TextField.Root type={input_type}
                     defaultValue={value}
                     onChange={handleOnChange}
                     variant={variant}
-                    size={size} color={color}
+                    size={size} 
+                    color={color}
                     radius={radius}
                     onKeyDown={handleOnSubmmit}
-                    disabled={input_disabled} 
+                    disabled={disabled ?? false} 
                     autoFocus={autofocus ?? false}>
                     {icon ? <TextField.Slot>{icon}</TextField.Slot> : null}
                 </TextField.Root>
             )
         }
-
-    };//end
-
-    const renderRowSimpleContent = () => {
-
-        return (
-            <Box className={CompStyleOld.C_CELL_STYLE}>
-                {input_readonly ? renderReadComp() :
-                    renderEditComp()}
-            </Box>
-        )
-    };//end
-
-    const renderColSimpleContent = () => {
-        return (
-            <Box>
-                {input_readonly ? renderReadComp() :
-                    renderEditComp()}
-            </Box>
-        )
-    };//end
-
-    const renderRowLabelContent = () => {
-   
-        return (
-            <Flex gapX="2">
-                <Label.Root>{label}</Label.Root>
-                {renderRowSimpleContent()}
-            </Flex>
-        )
-    };//end
-
-    const renderColLabelContent = () => {
-        return (
-            <Flex direction="column" gap="1">
-                <Label.Root>{label}</Label.Root>
-                {renderColSimpleContent()}
-            </Flex>
-        )
     };//end
 
     return (
         <>
-            {showInline ?
-                label ? renderRowLabelContent() :
-                    renderRowSimpleContent()
+            { (inline !== null && inline === true) ?
+                <Flex direction="row" gapX="2">
+                    {label ? <Label.Root>{label}</Label.Root> : null}
+                    <Box className={CompStyleOld.C_CELL_STYLE}>
+                        {renderComponent()}
+                    </Box>
+                </Flex>
                 :
-                label ? renderColLabelContent() :
-                    renderColSimpleContent()
+                <Flex direction="column" gapY="2">
+                    {label ? <Label.Root>{label}</Label.Root> : null}
+                    {renderComponent()}
+                </Flex>
             }
         </>
     )

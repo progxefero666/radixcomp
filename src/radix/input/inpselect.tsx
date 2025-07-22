@@ -6,11 +6,9 @@ import { forwardRef, useEffect, useState } from "react";
 import { Option } from "@/common/model/option";
 import React from "react";
 import { Box,Text, Flex, Select } from "@radix-ui/themes";
-import { TextField } from "@radix-ui/themes";
 import { CompStyleOld } from "@/radix/radixtheme";
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "../radixtypes";
-import { RADIX_COLORS, RadixKeys,RADIX_SIZES } from "../radixconstants";
+import { RADIX_COLORS } from "../radixconstants";
 
 //only collection required
 interface CompProps {

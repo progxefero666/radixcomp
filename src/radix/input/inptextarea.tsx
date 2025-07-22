@@ -6,8 +6,6 @@ import { Box, Flex,TextArea } from "@radix-ui/themes";
 import { CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS, RADIX_SIZES } from "../radixconstants";
-import { radixTypeComp } from "../radixtypes";
 
 const areaStyle = {
     width: '100%',   
