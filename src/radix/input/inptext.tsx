@@ -6,7 +6,7 @@ import { Box, Flex, TextField } from "@radix-ui/themes";
 import { CompStyle, CompStyleOld } from "@/radix/radixtheme";
 import { Label } from "radix-ui";
 import { INPUT_TEXT_TYPES, RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS } from "src/radix/radixconstants";
+import { RADIX_COLORS, RadixKeys } from "src/radix/radixconstants";
 
 
 /**
@@ -38,7 +38,7 @@ export const XInputText = forwardRef<HTMLInputElement, InputTextProps>(({
 
     const color   = RADIX_COLORS.gray;
     const size    = RadixConf.SIZES.size_2;
-    const radius  = RADIX_RADIUS.medium;
+    const radius  = RadixConf.RADIUS.medium;
     const variant = RadixConf.VARIANTS.surface;
 
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {

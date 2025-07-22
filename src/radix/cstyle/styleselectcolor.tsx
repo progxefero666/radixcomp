@@ -36,8 +36,8 @@ export function StyleSelectColor({ onchange, disabled}: CompProps) {
                 defaultValue={collection[0].key}
                 onValueChange={handleOnChange}
                 disabled={disabled}
-                size={CompStyle.DEF_SIZE}  >
-                <Select.Trigger variant={CompStyle.DEF_VARIANT} />
+                size={CompStyle.SIZE_DEF}  >
+                <Select.Trigger variant={CompStyle.VARIANT_DEF} />
                 <Select.Content>
                     {collection.map((item, index) => (
                         <Select.Item key={index} value={item.key}>

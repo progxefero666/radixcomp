@@ -4,7 +4,7 @@ import React from "react";
 import { Box, Flex,Text,TextArea  } from "@radix-ui/themes";
 import { Label } from "radix-ui";
 import { RadixConf } from "@/radix/radixconf";
-import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS, RadixConstants } from "../radixconstants";
+import { RADIX_COLORS} from "../radixconstants";
 
 const labelBoxStyle = {
     borderBottom: '1px solid rgba(54, 56, 54, 0.9)',

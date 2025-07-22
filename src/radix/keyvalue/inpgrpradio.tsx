@@ -4,9 +4,9 @@
 import { Flex, Text, RadioGroup } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
 
-import { radixTypeComp } from "@/radix/radixtypes";
+import { TRadixComponent } from "@/radix/radixtypes";
 import { CollectionHelper } from "@/common/helper/collhelper";
-import { RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
+import { RADIX_COLORS } from "@/radix/radixconstants";
 import { Keyvalue } from "@/common/model/keyvalue";
 import { TextStyle } from "@/radix/radixtheme";
 
@@ -27,11 +27,11 @@ export function XRadioGroup({collection, name, label, value, autofocus, onselect
     const def_value:string = value || collection[0].key;
 
 
-    const compStyle: radixTypeComp = {
+    const compStyle: TRadixComponent = {
         color: RADIX_COLORS.gray,
         size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
-        radius: RADIX_RADIUS.medium
+        radius: RadixConf.RADIUS.medium
     };//end
         
     const onSelect = (value:string) => {

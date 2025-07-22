@@ -61,13 +61,14 @@ export enum RADIX_SIZES {
     size_4= "4",
 };
 
+/*
 export enum RADIX_RADIUS  {
     none    = "none",
     small   = "small",
     medium  = "medium",
     large   = "large",
     full    = "full"
-};
+};*/
 
 export enum RADIX_COLORS {
     gray= "gray",

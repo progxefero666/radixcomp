@@ -3,12 +3,6 @@
 import { Box, Grid, Flex, Text } from "@radix-ui/themes";
 
 import { RadixConf } from "@/radix/radixconf";
-import { CompStyle } from "@/radix/radixtheme";
-import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS, RadixConstants } from "../radixconstants";
-//import { TValueProps } from "@/radix/radixtypes";
-//cstyle?: React.CSSProperties;
-//color: 'white'   
-//padding: '0px 0px 0px 0px ', 
 
 /*
  const compStyle={

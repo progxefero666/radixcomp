@@ -39,7 +39,7 @@ export const getInputTextIcon = (inputType: any) => {
     }
 };
 /**
- * RadixConf.ICON_DELETE
+ * RadixConf.RADIUS
  */
 export class RadixConf {
 
@@ -50,7 +50,14 @@ export class RadixConf {
         size_4: "4" as any,
     };
 
-    //variant="plain"
+    public static readonly RADIUS = {
+        none:    "none" as any,
+        small:   "small" as any,
+        medium:  "medium" as any,
+        large:   "large" as any,
+        full:    "full" as any
+    };
+    
     public static readonly VARIANTS = {
         plain: "plain" as any,
         classic: "classic" as any,

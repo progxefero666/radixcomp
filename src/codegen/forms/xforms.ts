@@ -3,10 +3,8 @@
 import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "../kernel/cghelper";
 import { TextHelper } from "@/common/helper/texthelper";
-import { InputValue } from "@/common/model/inputvalue";
 import { useState } from "react";
 import { Validation } from "@/common/model/validation";
-import { Application } from "@/app/applications/application";
 import { Constants } from "@/common/constants";
 
 

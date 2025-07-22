@@ -3,12 +3,12 @@
 import { forwardRef, useEffect, useState } from "react";
 import { Flex, Text, RadioGroup, CheckboxGroup, Box } from "@radix-ui/themes";
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "@/radix/radixtypes";
+import { TRadixComponent } from "@/radix/radixtypes";
 
 import { CollectionHelper } from "@/common/helper/collhelper";
 import { RadixUtil } from "../radixutil";
 import { TOption, TSelected, TSelection } from "@/radix/radixtypes";
-import { RADIX_COLORS, RadixKeys,RADIX_SIZES, RADIX_RADIUS, RadixConstants } from "../radixconstants";
+import { RADIX_COLORS, RadixConstants } from "../radixconstants";
 
 /*
 <CheckboxGroup.Root defaultValue={["1"]} name="example">
@@ -45,11 +45,11 @@ export const XCheckGroup = forwardRef<HTMLInputElement, CompProps>(({
     let compDirection: any = "column";
     if(inline) {compDirection = "row";}
 
-    const compStyle: radixTypeComp = {
+    const compStyle: TRadixComponent = {
         color: RADIX_COLORS.gray,
         size: RadixConf.SIZES.size_3,
         variant: RadixConf.VARIANTS.surface,
-        radius: RADIX_RADIUS.medium
+        radius: RadixConf.RADIUS.medium
     }
     
     useEffect(() => {      

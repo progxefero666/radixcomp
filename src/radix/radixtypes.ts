@@ -32,7 +32,7 @@ export type TOption = {
 type FlexProps = ComponentProps<typeof Flex>;
 export type radixTypeDirection = FlexProps['direction'];
 
-export type radixTypeComp = {
+export type TRadixComponent = {
     color: any; 
     size: any;
     variant: any;

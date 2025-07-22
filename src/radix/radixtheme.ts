@@ -1,8 +1,8 @@
 //src\radix\radixcolors.ts
 
 import { RadixConf } from "@/radix/radixconf";
-import { radixTypeComp } from "@/radix/radixtypes";
-import { RADIX_SIZES,RADIX_COLORS, RADIX_RADIUS } from "@/radix/radixconstants";
+import { TRadixComponent } from "@/radix/radixtypes";
+import { RADIX_SIZES,RADIX_COLORS } from "@/radix/radixconstants";
 import { Keyvalue } from "@/common/model/keyvalue";
 import { Stylevalue } from "./models/stylevalue";
 
@@ -84,25 +84,39 @@ export class ThemeStyle {
 }//end class
 
 /**
- * class ThemePagesStyles.GC_CONTROL_LAYOUT_STYLE
+ * class CompStyle
  */
+export class CompStyle {
+
+    public static readonly  SIZE_DEF:    any = RadixConf.SIZES.size_2;
+    public static readonly  RADIUS_DEF:  any = RadixConf.RADIUS.medium;
+    public static readonly  VARIANT_DEF: any = RadixConf.VARIANTS.soft;
+    public static readonly  COLOR_DEF:   any = RADIX_COLORS.gray;
+
+    public static readonly  DEFAULT: TRadixComponent = {
+        size: CompStyle.SIZE_DEF,
+        radius: CompStyle.RADIUS_DEF,
+        variant: CompStyle.VARIANT_DEF,
+        color: CompStyle.COLOR_DEF
+    };
+
+    public static readonly  CONT_CSS_STYLE = {
+        borderRadius: "var(--radius-3)",
+    };
+
+}//end class
+
 export class ThemePagesStyles {
     public static readonly  GC_CONTROL_LAYOUT_STYLE = {
         padding: '6px 8px 0px 8px'
     };
 }//end class
 
-
-/**
- * class ThemeIconsStyle.DEF_WIDTH
- * class ThemeIconsStyle.DEF_HEIGHT
- */
 export class IconsStyle {
 
     public static readonly  DEF_WIDTH = "20px";
     public static readonly  DEF_HEIGHT = "20px";    
     public static readonly  DEF_SIZE = RadixConf.SIZES.size_2;
-
 
 }//end class
 
@@ -113,7 +127,7 @@ export class ButtonsStyle {
 
     public static readonly DEF_SIZE: any = RadixConf.SIZES.size_2;
     public static readonly DEF_VAR: any = RadixConf.VARIANTS.soft;
-    public static readonly DEF_RADIUS: any = RADIX_RADIUS.medium;
+    public static readonly DEF_RADIUS: any = RadixConf.RADIUS.medium;
     public static readonly BTN_DEF_COLOR: any = "gray";
 
     public static readonly TEXT_SIZE: any = RadixConf.SIZES.size_3;
@@ -140,36 +154,6 @@ export class ButtonsStyle {
     public static readonly COLOR_RESET      = RADIX_COLORS.plum;
 
 };//end
-
-/**
- * class ThemeCompStyle.CONT_CSS_STYLE
- */
-export class CompStyle {
-
-    public static readonly  DEF_SIZE: any = RadixConf.SIZES.size_2;
-    public static readonly  DEF_RADIUS: any = RADIX_RADIUS.medium;
-    public static readonly  DEF_VARIANT: any = RadixConf.VARIANTS.soft;
-    public static readonly  DEF_COLOR: any = RADIX_COLORS.gray;
-
-    public static readonly  CONT_STYLE: radixTypeComp = {
-        size: CompStyle.DEF_SIZE,
-        radius: CompStyle.DEF_RADIUS,
-        variant: CompStyle.DEF_VARIANT,
-        color: CompStyle.DEF_COLOR
-    };
-
-    /*
-        backgroundColor: 'var(--gray-a2)',    
-        border: '2px solid var(--blue-7)',
-        padding: '0px 8px',
-        boxShadow: '0px 0px 5px rgba(222, 251, 137, 0.9)'     
-    */
-    public static readonly  CONT_CSS_STYLE = {
-        borderRadius: "var(--radius-3)",
-    };
-
-}//end class
-
 
 /**
  * class ThemeCompStyleOld
