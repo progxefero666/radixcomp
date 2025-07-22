@@ -54,11 +54,9 @@ export class CodeGenTsMotor {
                         if(field.required){content += `required:true`+ CgConfig.CHAR_COMMA }
                         if(field.minlen || field.maxlen){                            
                             content += "length:{min:" + (field.minlen??0) + CgConfig.CHAR_COMMA;                          
-                            content += "max:" + (field.maxlen??-1) + CgConfig.CHAR_KEY_CLOSE + "\n";
-                        }
-                        content += `fk:true` + CgConfig.CHAR_COMMA;
+                            content += "max:" + (field.maxlen??-1) + CgConfig.CHAR_KEY_CLOSE ;
+                        }                      
                         break;
-                    //case "check": break;
                     case "number":
                         if(field.required){content += `required:true`; }
                         break;
@@ -77,12 +75,12 @@ export class CodeGenTsMotor {
                         break;
                  }//end switch
             }//end else
-            content += CgConfig.CHAR_KEY_CLOSE + '\n';
+            content += CgConfig.CHAR_KEY_CLOSE + CgConfig.RET;
 
             //...................................................................................
             // step 2: create fieldValue
             //...................................................................................
-            content += CgConfig.CHAR_KEY_CLOSE +CgConfig.DEC_DEFAULT_START;
+            content += CgConfig.DEC_DEFAULT_START;
 
             content += CgConfig.CHAR_KEY_CLOSE +CgConfig.DEC_DEFAULT_END + CgConfig.RET;
 

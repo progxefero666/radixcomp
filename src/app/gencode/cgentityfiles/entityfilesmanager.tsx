@@ -45,7 +45,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
     const clientTScriptEntities = useRef<ServClientEntities>(null);
     const [jsonTables, setJsonTables] = useState<string[]>([]);
 
-    const [format, setFormat] = useState<string>(DocFormats.FORMAT_JSON.key);
+    const [format, setFormat] = useState<string>(DocFormats.FORMAT_TYPESCRIPT.key);
     const [optMultDisabled, setOptMultDisabled] = useState<boolean>(false);
     const [operationId, setOperationId] = useState<string>("undefined");
     const [showRadioList, setShowRadioList] = useState<boolean>(true);
@@ -59,7 +59,7 @@ export function GenCodeControl({ section, onsingleresult, onmultipleresult }: Co
         //const tables = CodeGenSql.getEsquemaTables(dbSquema);     
         dbSquemaControl.current = new CodeGenSquema(dbSquema);
         clientTScriptEntities.current = new ServClientEntities(dbSquemaControl.current.squema);
-        onOpSelected("get_def_class");
+        onOpSelected("get_entity_class");
         setInitialized(true);
     }, []);
 

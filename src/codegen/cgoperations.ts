@@ -10,9 +10,9 @@ import { Keyvalue } from "@/common/model/keyvalue";
 export class CodeGenModules {
 
     public static readonly MODULES: Option[] = [
-        new Option("entity_files", "Entities files",null),
-        new Option("typescript_code", "Typescript Code",null),
-        new Option("database_config", "Database Man.",null),   
+        new Option("entity_files", "Entities files"),
+        new Option("typescript_code", "Typescript Code"),
+        new Option("database_config", "Database Man."),   
     ]
 
 }//end class
@@ -30,8 +30,8 @@ export class CgEntityOperations {
     public static readonly OP_LIST_ENTITY_CLASS:string  = "get_list_entity_class"; 
 
     public static OPS_ENTITIES: Keyvalue[] = [
-        new Keyvalue(CgEntityOperations.OP_DEF_CLASS,        "Get Def. Class"),
         new Keyvalue(CgEntityOperations.OP_ENTITY_CLASS,     "Get Entity Class"),
+        new Keyvalue(CgEntityOperations.OP_DEF_CLASS,        "Get Def. Class"),        
         new Keyvalue(CgEntityOperations.OP_ALL_DEF_CLASS,    "Get All Def. Class"),
         new Keyvalue(CgEntityOperations.OP_ALL_ENTITY_CLASS, "Get All Entity Class"),
         new Keyvalue(CgEntityOperations.OP_LIST_DEF_CLASS,   "Get List Def. Class"),

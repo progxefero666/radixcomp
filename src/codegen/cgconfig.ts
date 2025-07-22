@@ -6,7 +6,7 @@
 
 
 /**
- * class CgConfig.TAB_4
+ * class CgConfig.RET
  */
 export class CgConfig {
 
