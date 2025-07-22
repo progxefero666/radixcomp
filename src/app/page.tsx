@@ -2,17 +2,13 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Box, Separator, Flex, Text, Button, Link, Grid, Container } from "@radix-ui/themes";
-import { Option } from "@/common/model/option";
-
-import { SeparatorH } from "@/radix/container/separatorh";
+import { Box, Separator, Flex, Text, Button, Grid } from "@radix-ui/themes";
 import {PrimaryBar} from "@/app/testcomp/testprimarybar";
 import {TestHeader} from "@/app/testcomp/testheader";
 import {TestSecondBar} from "@/app/testcomp/testsecondbar";
 import { PgForms } from "@/app/testcomp/forms/pgforms";
-import { SeparatorV } from "@/radix/container/separatorv";
 import { GenerateKeys } from "@/common/helper/generatekeys";
 import { AppGenerator } from "@/front/app";
 import { Template } from "@/db/model/template";
@@ -44,6 +40,8 @@ export default function PageTest() {
         init();
     }, []);
 
+    // entity form
+    //.......................................................................................
     const item_id:string = GenerateKeys.genAlphaNum16();
 
     const onSubmit = (entity:Template)=>{
@@ -55,18 +53,8 @@ export default function PageTest() {
         alert("Form Cancelled");
     };//end
     
-    /*
-    return (
-        <Flex width="100%" direction="column" style={layoutStyle} >
-            <TestHeader  />
-            <SeparatorH />
-            <Flex width="100%"  direction="row" >
-                
-            </Flex> 
-        </Flex>
-    );
-    */
-
+    // component render
+    //.......................................................................................
     return (
         <Grid height="100vh" rows="auto 1fr" columns="16% 68% 16%" style={layoutStyle} >
             
@@ -78,7 +66,7 @@ export default function PageTest() {
                 <PrimaryBar  />
             </Flex>
 
-            <Flex gridColumn="2" direction="column" gridRow="2" > 
+            <Flex gridColumn="2" direction="column" gridRow="2" p="3" > 
                 {ready ? 
                     <PgForms itemId={item_id}
                                 title="New Template"

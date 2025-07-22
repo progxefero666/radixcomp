@@ -3,54 +3,35 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Flex, Text, Button, Box, Grid, Separator } from "@radix-ui/themes";
+import { Constants } from "@/common/constants";
 import { Option } from "@/common/model/option";
-import { Validation } from "@/common/model/validation";
-
-import { XInputText } from "@/radix/input/inptext";
-import { XInputSelect } from "@/radix/input/inpselect";
-
-import { Template } from "@/db/model/template";
 import { AppMemmory } from "@/front/appmemory";
-import { XInputTextArea } from "@/radix/input/inptextarea";
-import { ButtonsStyle, COMP_BORDER_STYLE, TextStyle } from "@/radix/radixtheme";
-import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
-import { Constants, OpConstants } from "@/common/constants";
+import { Validation } from "@/common/model/validation";
+import { Validator } from "@/common/forms/validator";
+import { TextStyle } from "@/radix/radixtheme";
 import { XForms } from "@/codegen/forms/xforms";
 import { BarSubmit } from "@/radix/cbars/barsubmit";
-import { set } from "date-fns";
-import { Validator } from "@/common/forms/validator";
+import { XInputText } from "@/radix/input/inptext";
+import { XInputSelect } from "@/radix/input/inpselect";
+import { XInputTextArea } from "@/radix/input/inptextarea";
 
+import { Template } from "@/db/model/template";
 
-
-
-const mainContentStyle = {
+const componentStyle = {
     background: 'rgb(30, 40, 63)',
-    borderTop: 'none',    
-    borderBottom: 'none',   
-    borderLeft: '1px solid rgb(167, 176, 188)', 
-    borderRight: '1px solid rgb(125, 134, 145)',
+    border: '1px solid rgb(125, 134, 145)',
 };
 
 export const headerStyle = {
     borderBottom: '1px solid rgb(98, 97, 98)',
 };
 
-export const styleBbar = {
+export const styleBar = {
     borderBottom: '1px solid rgb(98, 97, 98)',
     borderTop: '1px solid rgb(98, 97, 98)',
 };
 
-/*
-    const [ready, setReady] = useState<boolean>(false);
-    const init = async () => {        
-        //load related collections             
-        setReady(true);
-    };
-    useEffect(() => {
-        if (ready) {return;}
-        init();
-    }, []);
-*/
+
 
 interface CompProps { 
     itemId: string; 
@@ -63,15 +44,17 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
     const execAllValidations:boolean = false;
 
     const [validations,setValidations] = useState<Validation[]>([]);    
-    const [entity, setEntity] = useState<Template>(new Template(itemId,null,null,null));
 
+    // entity
+    //.......................................................................................
+    const [entity, setEntity] = useState<Template>(new Template(itemId,null,null,null));
     const proglanguageRef = useRef<HTMLSelectElement>(null);
     const nameRef         = useRef<HTMLInputElement>(null);
     const datacodeRef     = useRef<HTMLInputElement>(null);
-
     const proglanguages:Option[] = AppMemmory.readProglanguages();
 
-
+    // validations
+    //.......................................................................................    
     const validate = (): boolean => {
 
         let result: boolean = true;
@@ -115,6 +98,8 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
         return result;
     };//end
 
+    // form submission
+    //.......................................................................................
     const onFormSubmit = () => {
         let valid: boolean = validate();
         if (!valid) {return;}
@@ -132,20 +117,21 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
         if (onCancel) {onCancel();}
     };//end
 
+    // component render
+    //.......................................................................................
     return (
-        <Box width="100%" py="2" px="4" style={mainContentStyle} >
+        <Box  py="2" px="4" style={componentStyle} >
   
             {/* Header */}
-            <Flex width="100%" direction="row" pb="1" style={headerStyle}  >
+            <Flex direction="row" pb="1" style={headerStyle}  >
                 <Text size={TextStyle.SIZE_MEDIUM} 
                       color={TextStyle.COLOR_HEADER}>
                     {title}
                 </Text>
             </Flex>
             
-
             {/* Form Fields */}
-            <Flex width="100%" direction="column" gapY="2" pt="2" mb="2" >
+            <Flex direction="column" gapY="2" pt="2" mb="2" >
   
                 <XInputText 
                     ref={nameRef}
@@ -181,41 +167,8 @@ export function PgForms({ itemId, title, onSubmit, onCancel }: CompProps) {
 
 }//end component
 
-
-export const jsonTemplate: string =
-`export class Template {
-
-    public id: string;
-    public name: string|null;
-    public proglanguage_id: string|null;
-    public datacode: string|null;
-
-    constructor(id:string,name:string|null,proglanguage_id:string|null,datacode: string|null) {
-        this.id = id;
-        this.name = name;
-        this.proglanguage_id = proglanguage_id;
-        this.datacode = datacode;
-    };//end
-
-
-    public minlen(fieldName: string): number | null {
-        return 0;
-     };//end
-
-    public maxlen(fieldName: string): number | null {
-        if (fieldName === "id") {
-            return 16;
-        }
-        if (fieldName === "name") {
-            return 100;
-        }
-        if (fieldName === "proglanguage_id") {
-            return 16;
-        }
-        if (fieldName === "datacode") {
-            return -1; // unlimited length
-        }
-        return 0;
-     };//end
-
-}`;
+/*
+    const [ready, setReady] = useState<boolean>(false);
+    const init = async () => {setReady(true);};
+    useEffect(() => {if (ready) {return;}init();}, []);
+*/
