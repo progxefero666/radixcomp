@@ -17,6 +17,7 @@ import { DB_ITEM_CMD_TEXT } from "@/common/database/dbkernel";
 import { Constants, OpConstants } from "@/common/constants";
 import { XForms } from "@/codegen/forms/xforms";
 import { BarSubmit } from "@/radix/cbars/barsubmit";
+import { set } from "date-fns";
 
 
 
@@ -34,22 +35,29 @@ export const styleBbar = {
     borderTop: '1px solid rgb(98, 97, 98)',
 };
 
-/**
- * Desktop Forms test
- * const [validations,setValidations] = useState<Validation[]>([]);
- */
+/*
+    const [ready, setReady] = useState<boolean>(false);
+    const init = async () => {        
+        //load related collections             
+        setReady(true);
+    };
+    useEffect(() => {
+        if (ready) {return;}
+        init();
+    }, []);
+*/
+
 interface CompProps { 
     itemId: string; 
     title:string;
-    onSubmit:(item:Template)=>void;
+    onSubmit:(entity:Template)=>void;
     onCancel?:()=>void;
-}
-
+};
 export function PgForms({ itemId: template_id, title, onSubmit, onCancel }: CompProps) {
 
-    const [ready, setReady] = useState<boolean>(false);
+    
     const [validations,setValidations] = useState<Validation[]>([]);    
-    const [template, setTemplate] = useState<Template>(new Template(template_id,null,null,null));
+    const [entity, setEntity] = useState<Template>(new Template(template_id,null,null,null));
 
     const proglanguageRef = useRef<HTMLSelectElement>(null);
     const nameRef         = useRef<HTMLInputElement>(null);
@@ -57,14 +65,16 @@ export function PgForms({ itemId: template_id, title, onSubmit, onCancel }: Comp
 
     const proglanguages:Option[] = AppMemmory.readProglanguages();
 
-    useEffect(() => {
-        //load related collections
-    }, []);
 
+    const validate = (): boolean => {
+        return true;
+    };//end
 
     const onFormSubmit = () => {
-
-        onSubmit(template);
+        if (!validate()) {            
+            return;
+        }
+        onSubmit(entity);
     };//end
 
     const onFormCancel = () => {

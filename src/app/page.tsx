@@ -47,8 +47,8 @@ export default function PageTest() {
 
     const item_id:string = GenerateKeys.genAlphaNum16();
 
-    const onSubmit = (item:Template)=>{
-        console.log(item.toJsonString());
+    const onSubmit = (entity:Template)=>{
+        console.log(entity.toJsonString());
         
     };//end
 
