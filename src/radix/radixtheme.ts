@@ -144,6 +144,7 @@ export class ButtonsStyle {
     public static readonly COLOR_OPEN       = RADIX_COLORS.blue;    
     public static readonly COLOR_DELETE     = RADIX_COLORS.yellow;
     public static readonly COLOR_CLEAR      = RADIX_COLORS.yellow;
+    public static readonly COLOR_CANCEL     = RADIX_COLORS.yellow;
     public static readonly COLOR_SAVE       = RADIX_COLORS.green;
     public static readonly COLOR_IMPORT     = RADIX_COLORS.ruby;
     public static readonly COLOR_EXPORT     = RADIX_COLORS.iris;

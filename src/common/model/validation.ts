@@ -10,8 +10,6 @@ import { XForms } from "@/codegen/forms/xforms";
  * Validation.DEFAULT
  */
 export class Validation {
-    
-    public static readonly DEFAULT: Validation = XForms.VALIDATION_DEF;
 
     public field: string;
     public result: string;

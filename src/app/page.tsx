@@ -37,8 +37,7 @@ export default function PageTest() {
 
     useEffect(() => {
         if(ready) {return;} 
-        const init = async () => {            
-
+        const init = async () => { 
             await AppGenerator.saveInMemoryProglanguages();                         
             setReady(true);
         };
@@ -65,7 +64,7 @@ export default function PageTest() {
             <SeparatorH />
             
             { /* Main content */}
-            <Flex width="100%"  direction="row" >
+            <Flex height="100vh" width="100%"  direction="row" >
 
                 <Box width="16%" >
                     <PrimaryBar  />
