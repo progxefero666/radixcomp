@@ -87,7 +87,6 @@ export class CodeGenSql {
                     }
                 }
 
-
                 // Determine format for numeric types using the JSON
                 let format: string | null = null;
                 const numericType = numericTypesData.types.find((t: any) => 
@@ -162,9 +161,6 @@ export class CodeGenSql {
         return Array.from(tablesMap.values());
     }//end method getEsquemaTables
 
-    public static getEsquemaSelectTables(sqlScript:string,tableNames:string[]): ModelTable|null {
-        return null;
-    }
 
     public static getEsquemaTable(sqlScript:string,tableName:string): ModelTable|null {
         //temp code
