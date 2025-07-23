@@ -294,7 +294,7 @@ export class CodeGenTsFunctions {
 
         let content = `public maxlen(fieldName: string): number | null {`+ CgConfig.RET;
         content += fieldsContent;
-        content += `}`+ CgConfig.RET;
+        content += `};//end`+ CgConfig.RET;
         content = CodeGenHelper.applyTabsToStringBlock(content, 1);          
         return content;
     };//end

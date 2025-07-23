@@ -27,7 +27,8 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.proglanguage (
     id character(16) NOT NULL,
-    name character varying(16) NOT NULL
+    name character varying(16) NOT NULL,
+    CONSTRAINT proglanguage_name_minlength CHECK ((length((name)::text) >= 2))
 );
 
 
@@ -48,7 +49,8 @@ CREATE TABLE public.task (
     tkgroup integer NOT NULL,
     description text,
     files text,
-    folders text
+    folders text,
+    CONSTRAINT task_name_minlength CHECK ((length((name)::text) >= 3))
 );
 
 
@@ -62,7 +64,8 @@ CREATE TABLE public.taskcategory (
     id character(16) NOT NULL,
     workflow_id character(16) NOT NULL,
     name character varying(100) NOT NULL,
-    description character varying(100)
+    description character varying(100),
+    CONSTRAINT taskcategory_name_minlength CHECK ((length((name)::text) >= 3))
 );
 
 
@@ -75,7 +78,8 @@ ALTER TABLE public.taskcategory OWNER TO postgres;
 CREATE TABLE public.tasktype (
     id character(16) NOT NULL,
     name character varying(50) NOT NULL,
-    description character varying(100)
+    description character varying(100),
+    CONSTRAINT tasktype_name_minlength CHECK ((length((name)::text) >= 3))
 );
 
 
@@ -89,7 +93,9 @@ CREATE TABLE public.template (
     id character(16) NOT NULL,
     name character varying(100) NOT NULL,
     proglanguage_id character(16) NOT NULL,
-    datacode text NOT NULL
+    datacode text NOT NULL,
+    CONSTRAINT proglanguage_datacode_minlength CHECK ((length(datacode) >= 3)),
+    CONSTRAINT proglanguage_name_minlength CHECK ((length((name)::text) >= 3))
 );
 
 
@@ -106,7 +112,8 @@ CREATE TABLE public.workflow (
     context text,
     application character varying(50),
     fpath character varying(500),
-    updated date DEFAULT CURRENT_DATE NOT NULL
+    updated date DEFAULT CURRENT_DATE NOT NULL,
+    CONSTRAINT workflow_name_minlength CHECK ((length((name)::text) >= 3))
 );
 
 
