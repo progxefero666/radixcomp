@@ -40,7 +40,7 @@ export class Template {
 
     public toJsonString(): string {
         return JSON.stringify(this, null, 4);
-    }
+    };//end
 
 }//end class
 

@@ -6,6 +6,7 @@ import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
 import { XForms } from "@/common/forms/xforms";
 import { CodeGenTsFunctions } from "@/codegen/kernel/cgtsfunctions";
+import { XFormsTemp } from "../forms/cgforms";
 
 /**
  * class CodeGenTsMotor
@@ -17,8 +18,9 @@ export class CodeGenTsMotor {
         let content  = CodeGenTsFunctions.getClassHeader(tableModel.name);        
         content     += CodeGenTsFunctions.getListAttributes(tableModel.fields);
         content     += CodeGenTsFunctions.getConstructor(tableModel.fields);
-        //content     += CodeGenTsFunctions.getFunctiontMinLen(tableModel.fields);
-        //content     += CodeGenTsFunctions.getFunctiontMaxLen(tableModel.fields);
+        content     += CodeGenTsFunctions.getFunctiontMinLen(tableModel.fields);
+        content     += CodeGenTsFunctions.getFunctiontMaxLen(tableModel.fields);
+        content     += CodeGenHelper.applyTabsToStringBlock(XFormsTemp.function_json, 1)+ CgConfig.RET;
         content     += `}//end class`+ CgConfig.RETx2;            
         content     += CodeGenHelper.getClassType(tableModel);        
         return content;

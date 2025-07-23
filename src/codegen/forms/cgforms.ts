@@ -10,7 +10,7 @@ import { XForms, XFormsUtil } from "@/common/forms/xforms";
 
 
 /**
- * XForms.FT_TEXT
+ * XFormsTemp.function_json
  */
 export class XFormsTemp {
 
@@ -32,6 +32,8 @@ export class XFormsTemp {
     public static t_attr_autocommit: string = `default={^%v%^}`;
     public static t_attr_inline: string = `inline={true}`;
     
+    public static function_json: string = 
+        `public toJsonString(): string {return JSON.stringify(this, null, 4);};//end`;
 };//end class
 
 export class XFormsGenerator {

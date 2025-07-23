@@ -215,9 +215,6 @@ export class CodeGenTsFunctions {
 
     public static getConstructorCode(fields: ModelField[]):string {
         let content: string = ""; 
-        fields.forEach((field) => {
-            content += `this.${field.name} = ${field.name};` + CgConfig.RET;
-        });//end forEach
         for (let idx=0;idx<fields.length;idx++) {
             content += `this.${fields[idx].name} = ${fields[idx].name};`;
             if(idx<fields.length-1) {content += CgConfig.RET;}
@@ -246,7 +243,7 @@ export class CodeGenTsFunctions {
         }//end for 
         result += `) {` + CgConfig.RET; 
         result += CodeGenTsFunctions.getConstructorCode(fields);
-        result += `}` + CgConfig.RET;
+        result += `};//end` + CgConfig.RET;
         result = CodeGenHelper.applyTabsToStringBlock(result, 1);
         return result;
     };//end 
@@ -292,12 +289,12 @@ export class CodeGenTsFunctions {
                 fieldsContent += `}`+ CgConfig.RET;
             }
         }
-        fieldsContent += `return null;`+ CgConfig.RET;
+        fieldsContent += `return null;`;
         fieldsContent = CodeGenHelper.applyTabsToStringBlock(fieldsContent, 1);
 
         let content = `public maxlen(fieldName: string): number | null {`+ CgConfig.RET;
         content += fieldsContent;
-        content += `}`+ CgConfig.RETx2;
+        content += `}`+ CgConfig.RET;
         content = CodeGenHelper.applyTabsToStringBlock(content, 1);          
         return content;
     };//end
