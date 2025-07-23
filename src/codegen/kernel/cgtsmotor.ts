@@ -4,6 +4,7 @@ import { ModelTable, ModelField, Relation } from "@/codegen/kernel/cgmodel";
 import { CgConfig } from "@/codegen/cgconfig";
 import { CodeGenHelper } from "@/codegen/kernel/cghelper";
 import { CodeGenSqlHelper } from "@/codegen/kernel/cgsqlhelper";
+import { XForms } from "@/common/forms/xforms";
 
 /**
  * class CodeGenTsMotor
@@ -24,6 +25,37 @@ export class CodeGenTsMotor {
         content += CgConfig.RETx2; 
         return content;
     };//end 
+
+    public static getDefaultValue(field: ModelField):string {
+        if(field.pk || field.fk ) { return "";}
+        if(field.default === null) { return "";}
+        if(field.type === XForms.FT_FILE) { return "";}
+
+        let defaultValue: string = ""; 
+        switch(field.type){
+            case "text":
+            case "textarea":
+            case "hidden":    
+                defaultValue = `"${field.default}"`;
+                break;
+            case "number":
+            case "decimal":
+            case "check":    
+                defaultValue = field.default.toString();
+                break;
+            case "date":
+            case "datetime":
+                if (!field.generated) {defaultValue = `"${field.default}"`;} 
+                else {defaultValue = '"CURRENT_DATE"';}
+                break;
+            default:
+                return "";
+        }//end switch
+
+        let result: string = CgConfig.DEC_DEFAULT_START+ defaultValue + 
+                             CgConfig.DEC_DEFAULT_END + CgConfig.RET;
+        return result;
+    };//end
 
     public static getListAttributes(fields: ModelField[]):string {
         let content: string = ""; 
@@ -46,6 +78,7 @@ export class CodeGenTsMotor {
                                 field.relations?.[0].table + CgConfig.CHAR_QUOTE + 
                                 CgConfig.CHAR_COMMA+'"id:'+ field.relations?.[0].field + CgConfig.CHAR_QUOTE + 
                                 CgConfig.CHAR_COMMA + 'name":' + field.relations?.[0].field + CgConfig.CHAR_QUOTE;
+                content += CgConfig.CHAR_KEY_CLOSE;                
             }  
             else {
                  switch(field.type){
@@ -80,9 +113,8 @@ export class CodeGenTsMotor {
             //...................................................................................
             // step 2: create fieldValue
             //...................................................................................
-            content += CgConfig.DEC_DEFAULT_START;
+            content += CodeGenTsMotor.getDefaultValue(field);
 
-            content += CgConfig.CHAR_KEY_CLOSE +CgConfig.DEC_DEFAULT_END + CgConfig.RET;
 
             //...................................................................................
             // step 3: create attribute
@@ -161,12 +193,11 @@ export class CodeGenTsMotor {
                 }//end switch
 
             }  
-            content += '\n';  
+            content += CgConfig.RETx2;  
             //...................................................................................
 
         });//end forEach
      
-        content += CgConfig.RET; 
         return content;
     };//end 
 
@@ -366,57 +397,3 @@ export class CodeGenTsMotor {
 
 
 }//end class ModelUtil
-
-
-/* Constructor
-content += `\n    constructor(`;
-const constructorParams: string[] = [];
-for (const field of tableModel.fields) {
-    const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type);
-    if(!field.required ){
-        if(tsType === 'boolean'){
-            constructorParams.push(`${field.name}: ${tsType}`);
-        }
-        else {
-            constructorParams.push(`${field.name}: ${tsType} | null`);
-        }                 
-    }
-    else {
-        constructorParams.push(`${field.name}: ${tsType}`);
-    }           
-}        
-content += constructorParams.join(',\n                ');
-content += `) {\n\n`;        
-// Constructor assignments
-for (const field of tableModel.fields) {
-    content += `        this.${field.name} = ${field.name};`+CgConfig.RET;
-}        
-
-
-public static getListAttributesOld(fields: ModelField[]):string {
-let content: string = ""; 
-
-fields.forEach((field) => {
-    const tsType = CodeGenSqlHelper.mapSqlTypeToTypeScript(field.type); 
-    if(!field.required ){
-        if(tsType === 'boolean'){
-            content += CgConfig.TAB_4 +
-                        `public ${field.name}: ${tsType};\n`;
-        }
-        else {
-            content += CgConfig.TAB_4 +
-                        `public ${field.name}: ${tsType} | null = null;\n`;
-        }
-    }
-    else {
-        if(field.default!=null){
-            content += CgConfig.TAB_4 + `public ${field.name}: ${tsType} = ${field.default};\n`;               
-        }
-        else{
-            content += CgConfig.TAB_4 + `public ${field.name}: ${tsType};\n`;
-        }  
-    }    
-});
-return content;
-};//end 
-*/

@@ -6,7 +6,7 @@ import { Constants } from "@/common/constants";
 
 
 /**
- * class XForms
+ * class XForms.FT_FILE
  */
 export class XForms {
 
